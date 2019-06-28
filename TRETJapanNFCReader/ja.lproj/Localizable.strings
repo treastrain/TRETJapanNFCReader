@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  TRETJapanNFCReader
+
+  Created by treastrain on 2019/06/28.
+  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
+*/
+
+"nfcReadingUnavailableAlertTitle" = "読み取りを開始できません";
+"nfcReadingUnavailableAlertMessage" = "この端末ではNFCのスキャンや検出をすることができません。";

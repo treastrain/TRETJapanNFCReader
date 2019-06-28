@@ -11,13 +11,18 @@ import TRETJapanNFCReader
 
 class ViewController: UIViewController {
     
+    var reader: DriversLicenseReader!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.reader = DriversLicenseReader(self)
     }
     
     @IBAction func beginScanning() {
+        reader.beginScanning()
     }
     
     
 }
+
 
