@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TRETJapaneseNFCReader
+import TRETJapanNFCReader
 
 class ViewController: UIViewController {
     
