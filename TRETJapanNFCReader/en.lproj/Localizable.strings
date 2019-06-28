@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  TRETJapanNFCReader
+
+  Created by treastrain on 2019/06/28.
+  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
+*/
+
+"nfcReadingUnavailableAlertTitle" = "Scanning Not Supported";
+"nfcReadingUnavailableAlertMessage" = "This device doesn't support NFC scanning.";
+"nfcReaderSessionAlertMessage" = "Rest your iPhone on the bottom half of the driver's license card.";
+"nfcTagReaderSessionDidInvalidateWithErrorAlertTitle" = "The session has been invalidated";

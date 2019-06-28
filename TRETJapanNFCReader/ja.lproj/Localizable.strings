@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  TRETJapanNFCReader
+
+  Created by treastrain on 2019/06/28.
+  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
+*/
+
+"nfcReadingUnavailableAlertTitle" = "読み取りを開始できません";
+"nfcReadingUnavailableAlertMessage" = "この端末ではNFCのスキャンや検出をすることができません。";
+"nfcReaderSessionAlertMessage" = "運転免許証の下半分を隠すように iPhone の上部をその上に置いてください。";
+"nfcTagReaderSessionDidInvalidateWithErrorAlertTitle" = "セッションが無効になりました";
