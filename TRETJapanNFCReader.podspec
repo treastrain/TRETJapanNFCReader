@@ -13,10 +13,11 @@ Pod::Spec.new do |spec|
   spec.social_media_url   = "https://twitter.com/treastrain"
 
   spec.platform     = :ios, "13.0"
+  spec.swift_version  = "5.0"
 
   spec.source       = { :git => "https://github.com/treastrain/TRETJapanNFCReader.git", :tag => "#{spec.version}" }
 
-  s.source_files = 'TRETJapanNFCReader/*.swift'
+  spec.source_files = 'TRETJapanNFCReader/*.swift'
 
   spec.requires_arc = true
 end
