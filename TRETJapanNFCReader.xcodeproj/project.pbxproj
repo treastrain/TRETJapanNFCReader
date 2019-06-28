@@ -19,6 +19,9 @@
 		CD5D2D7E22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
 		CD5D2D7F22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD5D2D8522C5F3EB004330F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD5D2D8722C5F3EB004330F3 /* InfoPlist.strings */; };
+		CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */; };
+		CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */; };
+		CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD79369C22C6300200E5AC2E /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		CD5D2D7422C5E977004330F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD5D2D7B22C5EA6B004330F3 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		CD5D2D8622C5F3EB004330F3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReader.swift; sourceTree = "<group>"; };
+		CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReader.swift; sourceTree = "<group>"; };
+		CD79369B22C6300200E5AC2E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,8 @@
 			children = (
 				CD5D2D7322C5E977004330F3 /* TRETJapanNFCReader.h */,
 				CD5D2D7422C5E977004330F3 /* Info.plist */,
+				CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */,
+				CD79369C22C6300200E5AC2E /* Localizable.strings */,
 				CD5D2D7A22C5EA25004330F3 /* DriversLicense */,
 			);
 			path = TRETJapanNFCReader;
@@ -144,6 +152,7 @@
 		CD5D2D7A22C5EA25004330F3 /* DriversLicense */ = {
 			isa = PBXGroup;
 			children = (
+				CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */,
 				CD5D2D7B22C5EA6B004330F3 /* Status.swift */,
 			);
 			path = DriversLicense;
@@ -221,10 +230,9 @@
 			};
 			buildConfigurationList = CD5D2D3822C5DF36004330F3 /* Build configuration list for PBXProject "TRETJapanNFCReader" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				ja,
 			);
@@ -255,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +284,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
+				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +324,14 @@
 				CD5D2D8622C5F3EB004330F3 /* ja */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CD79369C22C6300200E5AC2E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD79369B22C6300200E5AC2E /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
