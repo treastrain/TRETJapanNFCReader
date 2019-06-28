@@ -16,10 +16,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reader = DriversLicenseReader(self)
+        self.beginScanning()
     }
     
     @IBAction func beginScanning() {
         reader.beginScanning()
+        self.reader.beginScanning()
     }
     
     

@@ -49,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversLicenseReader.entitlements; sourceTree = "<group>"; };
 		CD5D2D4D22C5E2F7004330F3 /* DriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		CD5D2D3422C5DF36004330F3 = {
 			isa = PBXGroup;
 			children = (
+				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
 				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
 				CD5D2D6322C5E47F004330F3 /* Examples */,
 				CD5D2D3F22C5DF36004330F3 /* Products */,
@@ -466,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/DriversLicenseReader/Info.plist;
@@ -484,6 +487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/DriversLicenseReader/Info.plist;
