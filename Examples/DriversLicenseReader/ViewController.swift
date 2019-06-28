@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func beginScanning() {
-        reader.beginScanning()
         self.reader.beginScanning()
     }
     
