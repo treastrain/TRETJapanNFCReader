@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  TRETJapanNFCReader
+
+  Created by treastrain on 2019/06/30.
+  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
+*/
+
+"specificationVersionNumber" = "Specification Version Number";
+"issuanceDate" = "Issuance Date";
+"expirationDate" = "Expiration Date";
+"cardManufacturerIdentifier" = "Card Manufacturer Identifier";
+"cryptographicFunctionIdentifier" = "Cryptographic Function Identifier";

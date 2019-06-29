@@ -8,27 +8,29 @@
 
 import CoreNFC
 
+/// 日本の運転免許証から読み取ることができるデータの種別
 public enum DriversLicenseCardItems {
     case commonData
 }
 
 /// 日本の運転免許証
-struct DriversLicenseCard {
-    internal var tag: NFCISO7816Tag
+public struct DriversLicenseCard {
+    internal var tag: DriversLicenseCardTag
     
     /// MF/EF01 にある共通データ要素
-    struct CommonData {
-        /// 警察庁交通局運転免許課のによる「ICカード免許証及び運転免許証作成システム等仕様書」の仕様書バージョン番号
-        var specificationVersionNumber: String
+    public struct CommonData {
+        /// 警察庁交通局運転免許課による「ICカード免許証及び運転免許証作成システム等仕様書」の仕様書バージョン番号
+        public var specificationVersionNumber: String
         /// 交付年月日
-        var issuanceDate: Date
+        public var issuanceDate: Date
         /// 有効期間の末日
-        var expirationDate: Date
+        public var expirationDate: Date
         /// カード製造業者識別子
-        var cardManufacturerIdentifier: UInt8
+        public var cardManufacturerIdentifier: UInt8
         /// 暗号関数識別子
-        var cryptographicFunctionIdentifier: UInt8
+        public var cryptographicFunctionIdentifier: UInt8
     }
+    public var commonData: CommonData?
     
     /*
     // MF/EF02 暗証番号(PIN)設定
@@ -151,4 +153,40 @@ struct DriversLicenseCard {
     
     // DF3/EF01 RFU
     */
+}
+
+public extension Optional where Wrapped == Date {
+    func toString() -> String? {
+        let formatter = DateFormatter()
+        
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "MM/dd HH:mm"
+        
+        if self == nil {
+            return nil
+        } else {
+            return formatter.string(from: self!)
+        }
+    }
+}
+
+public extension UInt8 {
+    func toString() -> String {
+        var str = String(self, radix: 16).uppercased()
+        if str.count == 1 {
+            str = "0" + str
+        }
+        str = "0x\(str)"
+        return str
+    }
+}
+
+public extension Optional where Wrapped == UInt8 {
+    func toString() -> String? {
+        if self == nil {
+            return nil
+        } else {
+            return self!.toString()
+        }
+    }
 }

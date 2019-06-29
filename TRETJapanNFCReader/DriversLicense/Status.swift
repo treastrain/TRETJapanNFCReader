@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension String {
-    
-    init(hexByte: UInt8) {
-        self.init(hexByte, radix: 16)
-        self = self.uppercased()
-        if self.count == 1 {
-            self = "0" + self
-        }
-        self = "0x\(self)"
-    }
-}
-
 public enum Status: String {
     case x9000 // "正常終了"
     case x6283 // "DFが閉塞している"

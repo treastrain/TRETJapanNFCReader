@@ -10,9 +10,31 @@ import Foundation
 import UIKit
 import CoreNFC
 
+public typealias DriversLicenseReaderViewController = UIViewController & DriversLicenseReaderSessionDelegate
+
+internal typealias DriversLicenseCardTag = NFCISO7816Tag
+
 public class DriversLicenseReader: JapanNFCReader {
     
-    public func beginScanning() {
+    private var delegate: DriversLicenseReaderSessionDelegate?
+    private var driversLicenseCardItems: [DriversLicenseCardItems] = []
+    
+    /// DriversLicenseReader を初期化する。
+    /// - Parameter viewController: DriversLicenseReaderSessionDelegate を適用した UIViewController
+    public init(_ viewController: DriversLicenseReaderViewController) {
+        super.init(viewController)
+        self.delegate = viewController
+    }
+    
+    /// 運転免許証からデータを読み取る
+    /// - Parameter items: 運転免許証から読み取りたいデータ
+    public func get(items: [DriversLicenseCardItems]) {
+        self.delegate = self.viewController as? DriversLicenseReaderSessionDelegate
+        self.driversLicenseCardItems = items
+        self.beginScanning()
+    }
+    
+    private func beginScanning() {
         guard self.checkReadingAvailable() else {
             print("""
                 ------------------------------------------------------------
@@ -27,7 +49,7 @@ public class DriversLicenseReader: JapanNFCReader {
         }
         
         self.session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self)
-        self.session?.alertMessage = NSLocalizedString("nfcReaderSessionAlertMessage", bundle: Bundle(for: type(of: self)), comment: "")
+        self.session?.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
         self.session?.begin()
     }
     
@@ -47,7 +69,124 @@ public class DriversLicenseReader: JapanNFCReader {
                 """)
             }
         }
+        self.delegate?.driversLicenseReaderSession(didInvalidateWithError: error)
     }
     
+    public override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+        
+        if tags.count > 1 {
+            let retryInterval = DispatchTimeInterval.milliseconds(1000)
+            let alertedMessage = session.alertMessage
+            session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage")
+            DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
+                session.restartPolling()
+                session.alertMessage = alertedMessage
+            })
+            return
+        }
+        
+        let tag = tags.first!
+        
+        session.connect(to: tag) { (error) in
+            if nil != error {
+                session.invalidate(errorMessage: self.localizedString(key: "nfcTagReaderSessionConnectErrorMessage"))
+                return
+            }
+            
+            guard case NFCTag.iso7816(let driversLicenseCardTag) = tag else {
+                let retryInterval = DispatchTimeInterval.milliseconds(1000)
+                let alertedMessage = session.alertMessage
+                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
+                DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
+                    session.restartPolling()
+                    session.alertMessage = alertedMessage
+                })
+                return
+            }
+            
+            session.alertMessage = self.localizedString(key: "nfcTagReaderSessionReadingMessage")
+            
+            let driversLicenseCard = DriversLicenseCard(tag: driversLicenseCardTag)
+            
+            self.getItems(session, driversLicenseCard) { (driversLicenseCard) in
+                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
+                session.invalidate()
+                
+                self.delegate?.driversLicenseReaderSession(didRead: driversLicenseCard)
+            }
+        }
+    }
+    
+    private func getItems(_ session: NFCTagReaderSession, _ driversLicenseCard: DriversLicenseCard, completion: @escaping (DriversLicenseCard) -> Void) {
+        var driversLicenseCard = driversLicenseCard
+        DispatchQueue(label: "TRETJPNRDriversLicenseReader", qos: .default).async {
+            for item in self.driversLicenseCardItems {
+                switch item {
+                case .commonData:
+                    driversLicenseCard = self.readCommonData(session, driversLicenseCard)
+                }
+            }
+            completion(driversLicenseCard)
+        }
+    }
+    
+    private func readCommonData(_ session: NFCTagReaderSession, _ driversLicenseCard: DriversLicenseCard) -> DriversLicenseCard {
+        let semaphore = DispatchSemaphore(value: 0)
+        var driversLicenseCard = driversLicenseCard
+        let tag = driversLicenseCard.tag
+        
+        self.selectMF(tag: tag) { (responseData, sw1, sw2, error) in
+            self.printData(responseData, sw1, sw2)
+            
+            if let error = error {
+                print(error.localizedDescription)
+                session.invalidate(errorMessage: "SELECT FILE MF\n\(error.localizedDescription)")
+                return
+            }
+            
+            if sw1 != 0x90 {
+                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                return
+            }
+            
+            self.selectEF(tag: tag, data: [0x2F, 0x01]) { (responseData, sw1, sw2, error) in
+                self.printData(responseData, sw1, sw2)
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: "SELECT FILE EF\n\(error.localizedDescription)")
+                    return
+                }
+                
+                if sw1 != 0x90 {
+                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    return
+                }
+                
+                self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 30) { (responseData, sw1, sw2, error) in
+                    self.printData(responseData, sw1, sw2)
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        session.invalidate(errorMessage: "READ BINARY\n\(error.localizedDescription)")
+                    }
+                    
+                    if sw1 != 0x90 {
+                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                        return
+                    }
+                    
+                    // デコード
+                    
+                    driversLicenseCard.commonData = DriversLicenseCard.CommonData(specificationVersionNumber: "005", issuanceDate: Date(), expirationDate: Date(), cardManufacturerIdentifier: 0x00, cryptographicFunctionIdentifier: 0x00)
+                    
+                    semaphore.signal()
+                }
+            }
+        }
+        
+        semaphore.wait()
+        return driversLicenseCard
+    }
     
 }

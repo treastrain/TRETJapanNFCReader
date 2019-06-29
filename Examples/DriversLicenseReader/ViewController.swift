@@ -9,18 +9,16 @@
 import UIKit
 import TRETJapanNFCReader
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
     
     var reader: DriversLicenseReader!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.reader = DriversLicenseReader(self)
-        self.beginScanning()
     }
     
-    @IBAction func beginScanning() {
-        self.reader.beginScanning()
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "DriversLicenseReader - TRETJapanNFCReader"
     }
     
     

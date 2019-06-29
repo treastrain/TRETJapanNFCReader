@@ -11,18 +11,18 @@ import CoreNFC
 
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
-    private let viewController: UIViewController
+    internal let viewController: UIViewController
     internal var session: NFCTagReaderSession?
     
-    public init(_ viewController: UIViewController) {
+    internal init(_ viewController: UIViewController) {
         self.viewController = viewController
     }
     
     internal func checkReadingAvailable() -> Bool {
         guard NFCTagReaderSession.readingAvailable else {
             let alertController = UIAlertController(
-                title: NSLocalizedString("nfcReadingUnavailableAlertTitle", bundle: Bundle(for: type(of: self)), comment: ""),
-                message: NSLocalizedString("nfcReadingUnavailableAlertMessage", bundle: Bundle(for: type(of: self)), comment: ""),
+                title: self.localizedString(key: "nfcReadingUnavailableAlertTitle"),
+                message: self.localizedString(key: "nfcReadingUnavailableAlertMessage"),
                 preferredStyle: .alert
             )
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -53,7 +53,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
                 let alertController = UIAlertController(
-                    title: NSLocalizedString("nfcTagReaderSessionDidInvalidateWithErrorAlertTitle", bundle: Bundle(for: type(of: self)), comment: ""),
+                    title: self.localizedString(key: "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle"),
                     message: readerError.localizedDescription,
                     preferredStyle: .alert
                 )
@@ -70,6 +70,10 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     public func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         print("tagReaderSession(_:didDetect:)")
         session.invalidate()
+    }
+    
+    func localizedString(key: String) -> String {
+        return NSLocalizedString(key, bundle: Bundle(for: type(of: self)), comment: "")
     }
 }
 

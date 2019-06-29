@@ -1,3 +1,8 @@
+/* Class = "UINavigationItem"; title = "Driver's License Reader"; ObjectID = "0b8-HF-veV"; */
+"0b8-HF-veV.title" = "運転免許証リーダー";
 
-/* Class = "UIButton"; normalTitle = "Scan the Driver's License"; ObjectID = "dPb-fI-iSf"; */
-"dPb-fI-iSf.normalTitle" = "運転免許証を読み取る";
+/* Class = "UILabel"; text = "Common Data Elements"; ObjectID = "H9O-Bh-h1n"; */
+"H9O-Bh-h1n.text" = "共通データ要素";
+
+/* Class = "UINavigationItem"; title = "Common Data Elements"; ObjectID = "ZHu-ec-wtf"; */
+"ZHu-ec-wtf.title" = "共通データ要素";

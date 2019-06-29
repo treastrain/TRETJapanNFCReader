@@ -8,7 +8,11 @@
 
 "nfcReadingUnavailableAlertTitle" = "Scanning Not Supported";
 "nfcReadingUnavailableAlertMessage" = "This device doesn't support NFC scanning.";
-"nfcReaderSessionAlertMessage" = "Rest your iPhone on the bottom half of the driver's license card.";
+"nfcReaderSessionAlertMessage" = "Rest your iPhone on the bottom half of the Driver's License Card.";
 "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle" = "The session has been invalidated";
 "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage" = "More than 1 card is detected. Please remove all cards and try again.";
 "nfcTagReaderSessionConnectErrorMessage" = "Connection error. Please try again.";
+"nfcTagReaderSessionDifferentTagTypeErrorMessage" = "A card that is not to read is detected, please try again.";
+"nfcTagReaderSessionReadingMessage" = "Reading…\n Keep your iPhone resting on the card.";
+
+"nfcTagReaderSessionDoneMessage" = "Done!";
