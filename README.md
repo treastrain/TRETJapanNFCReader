@@ -12,12 +12,15 @@
 ## 対応予定の NFC カード
 ### NFC-B (Type-B)
 - [x] 運転免許証
+    - 共通データ取得まで実装済み
+    
 ### NFC-F (Type-F)
 - [ ] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
 
 ## 対応 OS
 - iOS 13.0
+
   ※ iOS 13.0 beta 1 では NFC-B (Type-B) を正常に読み書きできない事象を確認。iOS 13.0 beta 2 で解消。
 
 ## 使い方
