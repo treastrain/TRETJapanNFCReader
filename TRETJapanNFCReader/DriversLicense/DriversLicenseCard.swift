@@ -8,16 +8,29 @@
 
 import CoreNFC
 
+public enum DriversLicenseCardItems {
+    case commonData
+}
+
+/// 日本の運転免許証
 struct DriversLicenseCard {
-    var tag: NFCISO7816Tag
+    internal var tag: NFCISO7816Tag
     
-    // MF/EF01 共通データ要素
-    var 仕様書バージョン番号: String
-    var 交付年月日: Date
-    var 有効期間の末日: Date
-    var カード製造業者識別子: UInt8
-    var 暗号関数識別子: UInt8
+    /// MF/EF01 にある共通データ要素
+    struct CommonData {
+        /// 警察庁交通局運転免許課のによる「ICカード免許証及び運転免許証作成システム等仕様書」の仕様書バージョン番号
+        var specificationVersionNumber: String
+        /// 交付年月日
+        var issuanceDate: Date
+        /// 有効期間の末日
+        var expirationDate: Date
+        /// カード製造業者識別子
+        var cardManufacturerIdentifier: UInt8
+        /// 暗号関数識別子
+        var cryptographicFunctionIdentifier: UInt8
+    }
     
+    /*
     // MF/EF02 暗証番号(PIN)設定
     var 暗証番号設定: Bool
     
@@ -137,4 +150,5 @@ struct DriversLicenseCard {
     var 写真: Data
     
     // DF3/EF01 RFU
+    */
 }
