@@ -3,6 +3,9 @@
 # TRETJapanNFCReader
 日本のNFCカード向けリーダーライブラリ（iOS 13.0 以降）
 
+日本語・英語に対応  
+Japanese & English Support!
+
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/treastrain/TRETJapanNFCReader/blob/master/LICENSE)
 ![Swift: 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
 ![Platform: iOS](https://img.shields.io/badge/platform-ios-lightgrey.svg)
