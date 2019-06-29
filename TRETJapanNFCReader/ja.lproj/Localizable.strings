@@ -8,7 +8,7 @@
 
 "nfcReadingUnavailableAlertTitle" = "読み取りを開始できません";
 "nfcReadingUnavailableAlertMessage" = "この端末ではNFCのスキャンや検出をすることができません。";
-"nfcReaderSessionAlertMessage" = "運転免許証の下半分を隠すように iPhone の上部をその上に置いてください。";
+"nfcReaderSessionAlertMessage" = "上図に表示されている通りに、運転免許証の下半分を隠すように iPhone をその上に置いてください。";
 "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle" = "セッションが無効になりました";
 "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage" = "複数のカードが検出されました。すべてのカードを取り除いてもう一度やり直してください。";
 "nfcTagReaderSessionConnectErrorMessage" = "接続エラーです。もう一度やり直してください。";

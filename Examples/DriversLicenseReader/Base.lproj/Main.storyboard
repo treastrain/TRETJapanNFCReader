@@ -44,7 +44,7 @@
                             <outlet property="delegate" destination="b5k-kY-h1G" id="f4o-LK-Wgt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Driver's License Reader" id="0b8-HF-veV"/>
+                    <navigationItem key="navigationItem" title="Driver's License Reader" largeTitleDisplayMode="always" id="0b8-HF-veV"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9Y-r7-cgK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -88,7 +88,7 @@
                             <outlet property="delegate" destination="OlO-CO-16m" id="l16-17-Ub9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Common Data Elements" id="ZHu-ec-wtf">
+                    <navigationItem key="navigationItem" title="Common Data Elements" largeTitleDisplayMode="always" id="ZHu-ec-wtf">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="eSY-RA-NZJ">
                             <connections>
                                 <action selector="reread" destination="OlO-CO-16m" id="ne1-IQ-w5C"/>
