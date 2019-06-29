@@ -10,3 +10,4 @@
 "nfcReadingUnavailableAlertMessage" = "This device doesn't support NFC scanning.";
 "nfcReaderSessionAlertMessage" = "Rest your iPhone on the bottom half of the driver's license card.";
 "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle" = "The session has been invalidated";
+"nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage" = "More than 1 card is detected. Please remove all cards and try again.";

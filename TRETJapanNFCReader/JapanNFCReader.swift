@@ -9,16 +9,16 @@
 import UIKit
 import CoreNFC
 
-public class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
+open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
     private let viewController: UIViewController
-    var session: NFCTagReaderSession?
+    internal var session: NFCTagReaderSession?
     
     public init(_ viewController: UIViewController) {
         self.viewController = viewController
     }
     
-    public func checkReadingAvailable() -> Bool {
+    internal func checkReadingAvailable() -> Bool {
         guard NFCTagReaderSession.readingAvailable else {
             let alertController = UIAlertController(
                 title: NSLocalizedString("nfcReadingUnavailableAlertTitle", bundle: Bundle(for: type(of: self)), comment: ""),
