@@ -15,7 +15,7 @@ class CommonDataElementsViewController: UITableViewController, DriversLicenseRea
     var reader: DriversLicenseReader!
     var driversLicenseCard: DriversLicenseCard?
     
-    var headerTitle: String?
+    var footerTitle: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +28,13 @@ class CommonDataElementsViewController: UITableViewController, DriversLicenseRea
     }
     
     func driversLicenseReaderSession(didInvalidateWithError error: Error) {
-        self.headerTitle = nil
+        self.footerTitle = nil
         
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
                 self.driversLicenseCard = nil
-                self.headerTitle = error.localizedDescription
+                self.footerTitle = error.localizedDescription
             }
         }
         
@@ -54,40 +54,68 @@ class CommonDataElementsViewController: UITableViewController, DriversLicenseRea
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if section == 0 {
+            return 3
+        } else {
+            return 2
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.headerTitle
+        if section == 0 {
+            return NSLocalizedString("cardIssuerData", bundle: Bundle(for: type(of: self)), comment: "")
+        } else if section == 1 {
+            return NSLocalizedString("preIssuanceData", bundle: Bundle(for: type(of: self)), comment: "")
+        }
+        
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 1 {
+            return self.footerTitle
+        }
+        
+        return nil
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        switch indexPath.row {
+        switch indexPath.section {
         case 0:
-            cell.textLabel?.text = NSLocalizedString("specificationVersionNumber", bundle: Bundle(for: type(of: self)), comment: "")
-            cell.detailTextLabel?.text = self.driversLicenseCard?.commonData?.specificationVersionNumber
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = NSLocalizedString("specificationVersionNumber", bundle: Bundle(for: type(of: self)), comment: "")
+                cell.detailTextLabel?.text = self.driversLicenseCard?.commonData?.specificationVersionNumber
+            case 1:
+                cell.textLabel?.text = NSLocalizedString("issuanceDate", bundle: Bundle(for: type(of: self)), comment: "")
+                let issuanceDate = self.driversLicenseCard?.commonData?.issuanceDate
+                cell.detailTextLabel?.text = issuanceDate.toString()
+            case 2:
+                cell.textLabel?.text = NSLocalizedString("expirationDate", bundle: Bundle(for: type(of: self)), comment: "")
+                let expirationDate = self.driversLicenseCard?.commonData?.expirationDate
+                cell.detailTextLabel?.text = expirationDate.toString()
+            default:
+                break
+            }
         case 1:
-            cell.textLabel?.text = NSLocalizedString("issuanceDate", bundle: Bundle(for: type(of: self)), comment: "")
-            let issuanceDate = self.driversLicenseCard?.commonData?.issuanceDate
-            cell.detailTextLabel?.text = issuanceDate.toString()
-        case 2:
-            cell.textLabel?.text = NSLocalizedString("expirationDate", bundle: Bundle(for: type(of: self)), comment: "")
-            let expirationDate = self.driversLicenseCard?.commonData?.expirationDate
-            cell.detailTextLabel?.text = expirationDate.toString()
-        case 3:
-            cell.textLabel?.text = NSLocalizedString("cardManufacturerIdentifier", bundle: Bundle(for: type(of: self)), comment: "")
-            let cardManufacturerIdentifier = self.driversLicenseCard?.commonData?.cardManufacturerIdentifier
-            cell.detailTextLabel?.text = cardManufacturerIdentifier.toString()
-        case 4:
-            cell.textLabel?.text = NSLocalizedString("cryptographicFunctionIdentifier", bundle: Bundle(for: type(of: self)), comment: "")
-            let cryptographicFunctionIdentifier = self.driversLicenseCard?.commonData?.cryptographicFunctionIdentifier
-            cell.detailTextLabel?.text = cryptographicFunctionIdentifier.toString()
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = NSLocalizedString("cardManufacturerIdentifier", bundle: Bundle(for: type(of: self)), comment: "")
+                let cardManufacturerIdentifier = self.driversLicenseCard?.commonData?.cardManufacturerIdentifier
+                cell.detailTextLabel?.text = cardManufacturerIdentifier.toString()
+            case 1:
+                cell.textLabel?.text = NSLocalizedString("cryptographicFunctionIdentifier", bundle: Bundle(for: type(of: self)), comment: "")
+                let cryptographicFunctionIdentifier = self.driversLicenseCard?.commonData?.cryptographicFunctionIdentifier
+                cell.detailTextLabel?.text = cryptographicFunctionIdentifier.toString()
+            default:
+                break
+            }
         default:
             break
         }

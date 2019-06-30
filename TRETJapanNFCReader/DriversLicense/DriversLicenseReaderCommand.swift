@@ -29,7 +29,7 @@ extension DriversLicenseReader {
     }
     
     internal func printData(_ responseData: Data, _ sw1: UInt8, _ sw2: UInt8) {
-        var printString = "----------\nレスポンスデータ\n"
+        var printString = "--------------------\nレスポンスデータ\n"
         printString += "ステータス: \(Status(sw1: sw1, sw2: sw2).description) sw1: \(sw1.toString()), sw2: \(sw2.toString())\n"
         
         let responseData = [UInt8](responseData)
@@ -46,6 +46,9 @@ extension DriversLicenseReader {
                 //                responseString.append(String(bytes: [byte], encoding: String.Encoding.shiftJIS) ?? String(hexByte: byte))
             }
         }
+        
+        printString += "--------------------"
+//        print(printString)
         
         print("responseCount: \(responseString.count), response: \(responseString), sw1: \(sw1.toString()), sw2: \(sw2.toString()), ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
     }

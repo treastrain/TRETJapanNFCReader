@@ -6,8 +6,10 @@
   Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 */
 
+"cardIssuerData" = "カード発行者データ";
 "specificationVersionNumber" = "仕様書バージョン番号";
 "issuanceDate" = "交付年月日";
 "expirationDate" = "有効期間の末日";
+"preIssuanceData" = "発行前データ";
 "cardManufacturerIdentifier" = "カード製造業者識別子";
 "cryptographicFunctionIdentifier" = "暗号関数識別子";
