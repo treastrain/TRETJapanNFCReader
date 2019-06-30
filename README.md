@@ -18,7 +18,7 @@ Japanese & English Support!
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
-- 共通データ取得まで実装済み（![Tag: 0.0.2](https://github.com/treastrain/TRETJapanNFCReader/releases/tag/0.0.2)）
+- 共通データ取得まで実装済み（[Tag: 0.0.2](https://github.com/treastrain/TRETJapanNFCReader/releases/tag/0.0.2)）
 
 ### NFC-F (Type-F)
 - [ ] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
@@ -48,17 +48,17 @@ import UIKit
 import TRETJapanNFCReader
 class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
 
-var reader: DriversLicenseReader!
+    var reader: DriversLicenseReader!
 
-override func viewDidLoad() {
-super.viewDidLoad()
-self.reader = DriversLicenseReader(self)
-self.reader.get(items: [.commonData])
-}
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.reader = DriversLicenseReader(self)
+        self.reader.get(items: [.commonData])
+    }
 
-func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
-// driversLicenseCard に読み取った運転免許証の情報が格納されている
-}
+    func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
+        // driversLicenseCard に読み取った運転免許証の情報が格納されている
+    }
 }
 ```
 
