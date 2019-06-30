@@ -158,10 +158,10 @@ public struct DriversLicenseCard {
 }
 
 public extension Optional where Wrapped == Date {
-    func toString() -> String? {
+    func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
         let formatter = DateFormatter()
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
+        formatter.dateStyle = dateStyle
+        formatter.timeStyle = timeStyle
         if self == nil {
             return nil
         } else {
