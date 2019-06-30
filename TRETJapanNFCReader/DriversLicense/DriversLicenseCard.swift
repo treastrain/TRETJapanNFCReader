@@ -30,6 +30,7 @@ public struct DriversLicenseCard {
         /// 暗号関数識別子
         public var cryptographicFunctionIdentifier: UInt8
     }
+    /// MF/EF01 にある共通データ要素
     public var commonData: CommonData?
     
     /*

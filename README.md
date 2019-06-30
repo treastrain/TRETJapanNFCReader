@@ -17,9 +17,9 @@ Japanese & English Support!
 ## 対応予定の NFC カード
 ### NFC-B (Type-B)
 - [x] 運転免許証
-    - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
-    - 共通データ取得まで実装済み
-    
+- 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
+- 共通データ取得まで実装済み（![Tag: 0.0.2](https://github.com/treastrain/TRETJapanNFCReader/releases/tag/0.0.2)）
+
 ### NFC-F (Type-F)
 - [ ] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
@@ -27,7 +27,7 @@ Japanese & English Support!
 ## 対応 OS
 - iOS 13.0
 
-  ※ iOS 13.0 beta 1 では NFC-B (Type-B) を正常に読み書きできない事象を確認。iOS 13.0 beta 2 で解消。
+※ iOS 13.0 beta 1 では NFC-B (Type-B) を正常に読み書きできない事象を確認。iOS 13.0 beta 2 で解消。
 
 ## 使い方
 ### 全 NFC カード共通
@@ -38,15 +38,28 @@ Japanese & English Support!
 ### NFC-B (Type-B)
 #### 運転免許証の場合
 1. 運転免許証を読み取るには、開発している iOS Application の Info.plist に "ISO7816 application identifiers for NFC Tag Reader Session (com.apple.developer.nfc.readersession.iso7816.select-identifiers)" を追加する。ISO7816 application identifiers for NFC Tag Reader Session には以下を含める必要がある。
-  - Item 0: A0000002310100000000000000000000
-  - Item 1: A0000002310200000000000000000000
-  - Item 2: A0000002480300000000000000000000
+- Item 0: A0000002310100000000000000000000
+- Item 1: A0000002310200000000000000000000
+- Item 2: A0000002480300000000000000000000
 
 2. ライブラリをインポートし、`DriversLicenseReader` を初期化した後でスキャンを開始する。
 ```swift
+import UIKit
 import TRETJapanNFCReader
-let reader = DriversLicenseReader(self)
-reader.beginScanning()
+class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
+
+var reader: DriversLicenseReader!
+
+override func viewDidLoad() {
+super.viewDidLoad()
+self.reader = DriversLicenseReader(self)
+self.reader.get(items: [.commonData])
+}
+
+func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
+// driversLicenseCard に読み取った運転免許証の情報が格納されている
+}
+}
 ```
 
 ### NFC-F (Type-F)
