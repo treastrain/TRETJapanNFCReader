@@ -19,7 +19,7 @@ public struct DriversLicenseCard {
     
     /// MF/EF01 にある共通データ要素
     public struct CommonData {
-        /// 警察庁交通局運転免許課による「ICカード免許証及び運転免許証作成システム等仕様書」の仕様書バージョン番号
+        /// 仕様書バージョン番号
         public var specificationVersionNumber: String
         /// 交付年月日
         public var issuanceDate: Date
@@ -77,6 +77,7 @@ public struct DriversLicenseCard {
     var 免許の年月日（け引二）: Date
     var 免許の年月日（中型）: Date
     var 免許の年月日（中二）: Date
+    var 免許の年月日（準中型）: Date
     
     // DF1/EF02 記載事項(本籍)
     var 本籍: String
