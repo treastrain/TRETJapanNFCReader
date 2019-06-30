@@ -108,11 +108,11 @@ class CommonDataElementsViewController: UITableViewController, DriversLicenseRea
             case 0:
                 cell.textLabel?.text = NSLocalizedString("cardManufacturerIdentifier", bundle: Bundle(for: type(of: self)), comment: "")
                 let cardManufacturerIdentifier = self.driversLicenseCard?.commonData?.cardManufacturerIdentifier
-                cell.detailTextLabel?.text = cardManufacturerIdentifier.toString()
+                cell.detailTextLabel?.text = cardManufacturerIdentifier.toHexString()
             case 1:
                 cell.textLabel?.text = NSLocalizedString("cryptographicFunctionIdentifier", bundle: Bundle(for: type(of: self)), comment: "")
                 let cryptographicFunctionIdentifier = self.driversLicenseCard?.commonData?.cryptographicFunctionIdentifier
-                cell.detailTextLabel?.text = cryptographicFunctionIdentifier.toString()
+                cell.detailTextLabel?.text = cryptographicFunctionIdentifier.toHexString()
             default:
                 break
             }

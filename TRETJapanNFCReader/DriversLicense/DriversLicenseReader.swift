@@ -177,8 +177,34 @@ public class DriversLicenseReader: JapanNFCReader {
                     }
                     
                     // デコード
+                    let responseData = [UInt8](responseData)
                     
-                    driversLicenseCard.commonData = DriversLicenseCard.CommonData(specificationVersionNumber: "005", issuanceDate: Date(), expirationDate: Date(), cardManufacturerIdentifier: 0x00, cryptographicFunctionIdentifier: 0x00)
+                    let cardIssuerDataTag = responseData[0]
+                    let cardIssuerDataLength = responseData[1]
+                    let specificationVersionNumberData = responseData[2...4]
+                    let issuanceDateData = responseData[5...8]
+                    let expirationDateData = responseData[9...12]
+                    
+                    let preIssuanceDataTag = responseData[13]
+                    let preIssuanceDataLength = responseData[14]
+                    let cardManufacturerIdentifierData = responseData[15]
+                    let cryptographicFunctionIdentifierData = responseData[16]
+                    
+                    let formatter = DateFormatter()
+                    formatter.locale = Locale(identifier: "en_US_POSIX")
+                    formatter.dateFormat = "yyyyMMdd"
+                    
+                    let specificationVersionNumber = String(data: Data(specificationVersionNumberData), encoding: .shiftJIS) ?? "nil"
+                    let issuanceDateString = issuanceDateData.map { (data) -> String in
+                        return data.toString()
+                        }.joined()
+                    let issuanceDate = formatter.date(from: issuanceDateString)!
+                    let expirationDateString = expirationDateData.map { (data) -> String in
+                        return data.toString()
+                        }.joined()
+                    let expirationDate = formatter.date(from: expirationDateString)!
+                    
+                    driversLicenseCard.commonData = DriversLicenseCard.CommonData(specificationVersionNumber: specificationVersionNumber, issuanceDate: issuanceDate, expirationDate: expirationDate, cardManufacturerIdentifier: cardManufacturerIdentifierData, cryptographicFunctionIdentifier: cryptographicFunctionIdentifierData)
                     
                     semaphore.signal()
                 }

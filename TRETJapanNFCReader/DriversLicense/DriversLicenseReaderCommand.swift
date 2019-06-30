@@ -30,19 +30,19 @@ extension DriversLicenseReader {
     
     internal func printData(_ responseData: Data, _ sw1: UInt8, _ sw2: UInt8) {
         var printString = "--------------------\nレスポンスデータ\n"
-        printString += "ステータス: \(Status(sw1: sw1, sw2: sw2).description) sw1: \(sw1.toString()), sw2: \(sw2.toString())\n"
+        printString += "ステータス: \(Status(sw1: sw1, sw2: sw2).description) sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString())\n"
         
         let responseData = [UInt8](responseData)
         var responseString: [String] = []
         for (i, byte) in zip(responseData.indices, responseData) {
             if i == 0 {
-                printString += "T(タグ): \(byte.toString())\n"
+                printString += "T(タグ): \(byte.toHexString())\n"
                 // TODO: DF2/EF01 のみ 2バイト
             } else if i == 1 {
-                printString += "L(長さ): \(byte.toString())\n"
+                printString += "L(長さ): \(byte.toHexString())\n"
                 // TODO: 0x82 は
             } else {
-                responseString.append(byte.toString())
+                responseString.append(byte.toHexString())
                 //                responseString.append(String(bytes: [byte], encoding: String.Encoding.shiftJIS) ?? String(hexByte: byte))
             }
         }
@@ -50,7 +50,7 @@ extension DriversLicenseReader {
         printString += "--------------------"
 //        print(printString)
         
-        print("responseCount: \(responseString.count), response: \(responseString), sw1: \(sw1.toString()), sw2: \(sw2.toString()), ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+        print("responseCount: \(responseString.count), response: \(responseString), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
     }
     
 }
