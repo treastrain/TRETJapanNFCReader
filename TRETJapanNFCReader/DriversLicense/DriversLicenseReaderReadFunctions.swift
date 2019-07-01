@@ -43,7 +43,7 @@ extension DriversLicenseReader {
                     return
                 }
                 
-                self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 30) { (responseData, sw1, sw2, error) in
+                self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 17) { (responseData, sw1, sw2, error) in
                     self.printData(responseData, sw1, sw2)
                     
                     if let error = error {
@@ -56,7 +56,6 @@ extension DriversLicenseReader {
                         return
                     }
                     
-                    // デコード
                     let responseData = [UInt8](responseData)
                     
                     let cardIssuerDataTag = responseData[0]
@@ -85,6 +84,78 @@ extension DriversLicenseReader {
                     let expirationDate = formatter.date(from: expirationDateString)!
                     
                     driversLicenseCard.commonData = DriversLicenseCard.CommonData(specificationVersionNumber: specificationVersionNumber, issuanceDate: issuanceDate, expirationDate: expirationDate, cardManufacturerIdentifier: cardManufacturerIdentifierData, cryptographicFunctionIdentifier: cryptographicFunctionIdentifierData)
+                    
+                    semaphore.signal()
+                }
+            }
+        }
+        
+        semaphore.wait()
+        return driversLicenseCard
+    }
+    
+    internal func readPINSetting(_ session: NFCTagReaderSession, _ driversLicenseCard: DriversLicenseCard) -> DriversLicenseCard {
+        let semaphore = DispatchSemaphore(value: 0)
+        var driversLicenseCard = driversLicenseCard
+        let tag = driversLicenseCard.tag
+        
+        self.selectMF(tag: tag) { (responseData, sw1, sw2, error) in
+            self.printData(responseData, sw1, sw2)
+            
+            if let error = error {
+                print(error.localizedDescription)
+                session.invalidate(errorMessage: "SELECT FILE MF\n\(error.localizedDescription)")
+                return
+            }
+            
+            if sw1 != 0x90 {
+                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                return
+            }
+            
+            self.selectEF(tag: tag, data: [0x00, 0x0A]) { (responseData, sw1, sw2, error) in
+                self.printData(responseData, sw1, sw2)
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: "SELECT FILE EF\n\(error.localizedDescription)")
+                    return
+                }
+                
+                if sw1 != 0x90 {
+                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    return
+                }
+                
+                self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 3) { (responseData, sw1, sw2, error) in
+                    self.printData(responseData, sw1, sw2)
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        session.invalidate(errorMessage: "READ BINARY\n\(error.localizedDescription)")
+                    }
+                    
+                    if sw1 != 0x90 {
+                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                        return
+                    }
+                    
+                    let responseData = [UInt8](responseData)
+                    
+                    let pinSettingDataTag = responseData[0]
+                    let pinSettingDataLength = responseData[1]
+                    let pinSettingData = responseData[2]
+                    
+                    var pinSetting: Bool {
+                        if pinSettingData == 0x01 {
+                            return true
+                        } else if pinSettingData == 0x00 {
+                            return false
+                        }
+                        return false
+                    }
+                    
+                    driversLicenseCard.pinSetting = DriversLicenseCard.PINSetting(pinSetting: pinSetting)
                     
                     semaphore.signal()
                 }

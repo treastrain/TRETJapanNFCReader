@@ -25,6 +25,8 @@
 		CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD79369C22C6300200E5AC2E /* Localizable.strings */; };
 		CD7936E022C6492B00E5AC2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7936DE22C6492B00E5AC2E /* Main.storyboard */; };
 		CD8B7B6922CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B7B6822CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift */; };
+		CD8B7B6E22CA5D680027E1ED /* PINSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B7B6D22CA5D680027E1ED /* PINSettingViewController.swift */; };
+		CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */; };
 		CD996F7622C79FEC00193E7A /* CommonDataElementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */; };
 		CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */; };
 		CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */; };
@@ -56,7 +58,6 @@
 
 /* Begin PBXFileReference section */
 		CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversLicenseReader.entitlements; sourceTree = "<group>"; };
-		CD15F81022C7B43A00201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -79,6 +80,9 @@
 		CD7936EE22C64AB600E5AC2E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseCard.swift; sourceTree = "<group>"; };
 		CD8B7B6822CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderReadFunctions.swift; sourceTree = "<group>"; };
+		CD8B7B6D22CA5D680027E1ED /* PINSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PINSettingViewController.swift; sourceTree = "<group>"; };
+		CD8B7B7022CA66CF0027E1ED /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,7 +134,9 @@
 				CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */,
 				CD7936DE22C6492B00E5AC2E /* Main.storyboard */,
 				CD5D2D5322C5E2F7004330F3 /* ViewController.swift */,
+				CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */,
 				CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */,
+				CD8B7B6D22CA5D680027E1ED /* PINSettingViewController.swift */,
 				CD5D2D5822C5E2FA004330F3 /* Assets.xcassets */,
 				CD5D2D5A22C5E2FA004330F3 /* LaunchScreen.storyboard */,
 				CD5D2D5D22C5E2FA004330F3 /* Info.plist */,
@@ -299,8 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD996F7622C79FEC00193E7A /* CommonDataElementsViewController.swift in Sources */,
+				CD8B7B6E22CA5D680027E1ED /* PINSettingViewController.swift in Sources */,
 				CD5D2D5422C5E2F7004330F3 /* ViewController.swift in Sources */,
 				CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */,
+				CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */,
 				CD5D2D5222C5E2F7004330F3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,7 +376,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CD7936DF22C6492B00E5AC2E /* Base */,
-				CD15F81022C7B43A00201FAB /* ja */,
+				CD8B7B7022CA66CF0027E1ED /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

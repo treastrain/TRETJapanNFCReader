@@ -9,15 +9,18 @@
 import CoreNFC
 
 /// 日本の運転免許証から読み取ることができるデータの種別
-public enum DriversLicenseCardItems {
+public enum DriversLicenseCardItems: CaseIterable {
+    /// MF/EF01 共通データ要素
     case commonData
+    /// MF/EF02 暗証番号(PIN)設定
+    case pinSetting
 }
 
 /// 日本の運転免許証
 public struct DriversLicenseCard {
     internal var tag: DriversLicenseCardTag
     
-    /// MF/EF01 にある共通データ要素
+    /// MF/EF01 共通データ要素
     public struct CommonData {
         /// 仕様書バージョン番号
         public var specificationVersionNumber: String
@@ -30,12 +33,18 @@ public struct DriversLicenseCard {
         /// 暗号関数識別子
         public var cryptographicFunctionIdentifier: UInt8
     }
-    /// MF/EF01 にある共通データ要素
+    /// MF/EF01 共通データ要素
     public var commonData: CommonData?
     
+    /// MF/EF02 暗証番号(PIN)設定
+    public struct PINSetting {
+        /// 暗証番号(PIN)設定
+        public var pinSetting: Bool
+    }
+    /// MF/EF02 暗証番号(PIN)設定
+    public var pinSetting: PINSetting?
+    
     /*
-    // MF/EF02 暗証番号(PIN)設定
-    var 暗証番号設定: Bool
     
     // MF/IEF01 暗証番号1(PIN 1)
     var 暗証番号1: Int

@@ -124,6 +124,8 @@ public class DriversLicenseReader: JapanNFCReader {
                 switch item {
                 case .commonData:
                     driversLicenseCard = self.readCommonData(session, driversLicenseCard)
+                case .pinSetting:
+                    driversLicenseCard = self.readPINSetting(session, driversLicenseCard)
                 }
             }
             completion(driversLicenseCard)

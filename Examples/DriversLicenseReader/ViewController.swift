@@ -18,7 +18,11 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "DriversLicenseReader - TRETJapanNFCReader"
+        if section == 1 {
+            return "DriversLicenseReader - TRETJapanNFCReader"
+        }
+        
+        return nil
     }
     
     

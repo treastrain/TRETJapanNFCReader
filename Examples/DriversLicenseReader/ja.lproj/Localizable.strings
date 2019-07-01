@@ -13,3 +13,7 @@
 "preIssuanceData" = "発行前データ";
 "cardManufacturerIdentifier" = "カード製造業者識別子";
 "cryptographicFunctionIdentifier" = "暗号関数識別子";
+
+"pinSetting" = "暗証番号(PIN)設定";
+"pinSettingTrue" = "設定する";
+"pinSettingFalse" = "設定しない";

@@ -1,8 +1,20 @@
 /* Class = "UINavigationItem"; title = "Driver's License Reader"; ObjectID = "0b8-HF-veV"; */
 "0b8-HF-veV.title" = "運転免許証リーダー";
 
-/* Class = "UILabel"; text = "Common Data Elements"; ObjectID = "H9O-Bh-h1n"; */
-"H9O-Bh-h1n.text" = "共通データ要素";
+/* Class = "UILabel"; text = "All Files"; ObjectID = "H9O-Bh-h1n"; */
+"H9O-Bh-h1n.text" = "すべてのファイル";
+
+/* Class = "UINavigationItem"; title = " All Files"; ObjectID = "aUk-pg-2xd"; */
+"aUk-pg-2xd.title" = "すべてのファイル";
+
+/* Class = "UILabel"; text = "Common Data Elements"; ObjectID = "cvL-7d-SiW"; */
+"cvL-7d-SiW.text" = "共通データ要素";
 
 /* Class = "UINavigationItem"; title = "Common Data Elements"; ObjectID = "ZHu-ec-wtf"; */
 "ZHu-ec-wtf.title" = "共通データ要素";
+
+/* Class = "UILabel"; text = "PIN Setting"; ObjectID = "VZH-mN-cnR"; */
+"VZH-mN-cnR.text" = "暗証番号(PIN)設定";
+
+/* Class = "UINavigationItem"; title = "PIN Setting"; ObjectID = "eQw-at-PGX"; */
+"eQw-at-PGX.title" = "暗証番号(PIN)設定";

@@ -13,3 +13,7 @@
 "preIssuanceData" = "Pre-issuance Data";
 "cardManufacturerIdentifier" = "Card Manufacturer Identifier";
 "cryptographicFunctionIdentifier" = "Cryptographic Function Identifier";
+
+"pinSetting" = "PIN Setting";
+"pinSettingTrue" = "Set";
+"pinSettingFalse" = "Not set";
