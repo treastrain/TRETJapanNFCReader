@@ -1,5 +1,5 @@
 //
-//  DriversLicenseReaderCommand.swift
+//  DriversLicenseReaderCommands.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/06/30.
