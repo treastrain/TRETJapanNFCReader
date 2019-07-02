@@ -10,7 +10,12 @@ import CoreNFC
 
 extension DriversLicenseReader {
     
-    typealias DriversLicenseReaderCompletionHandler = (Data, UInt8, UInt8, Error?) -> Void
+    /// オペレーションが完了した後にセッションが呼び出す handler。
+    /// - Parameter responseData: レスポンスデータ。オペレーションが正常に完了したときでも空である場合がある。
+    /// - Parameter sw1: ステータスバイト1。
+    /// - Parameter sw2: ステータスバイト2。
+    /// - Parameter error: オペレーションが正常に完了した場合はnil。 運転免許証との通信に問題があるときはNSError。
+    typealias DriversLicenseReaderCompletionHandler = (_ responseData: Data, _ sw1: UInt8, _ sw2: UInt8, _ error: Error?) -> Void
     
     internal func selectMF(tag: DriversLicenseCardTag, completionHandler: @escaping DriversLicenseReaderCompletionHandler) {
         let adpu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xA4, p1Parameter: 0x00, p2Parameter: 0x00, data: Data([]), expectedResponseLength: -1)
