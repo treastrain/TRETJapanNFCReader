@@ -126,6 +126,8 @@ public class DriversLicenseReader: JapanNFCReader {
                     driversLicenseCard = self.readCommonData(session, driversLicenseCard)
                 case .pinSetting:
                     driversLicenseCard = self.readPINSetting(session, driversLicenseCard)
+                case .matters:
+                    driversLicenseCard = self.readMatters(session, driversLicenseCard)
                 }
             }
             completion(driversLicenseCard)

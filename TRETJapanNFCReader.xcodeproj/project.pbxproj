@@ -20,6 +20,7 @@
 		CD5D2D7E22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
 		CD5D2D7F22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD5D2D8522C5F3EB004330F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD5D2D8722C5F3EB004330F3 /* InfoPlist.strings */; };
+		CD68FAD022CB9ABD004ABCAF /* MattersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */; };
 		CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */; };
 		CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */; };
 		CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD79369C22C6300200E5AC2E /* Localizable.strings */; };
@@ -72,6 +73,7 @@
 		CD5D2D7422C5E977004330F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD5D2D7B22C5EA6B004330F3 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		CD5D2D8622C5F3EB004330F3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MattersViewController.swift; sourceTree = "<group>"; };
 		CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReader.swift; sourceTree = "<group>"; };
 		CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReader.swift; sourceTree = "<group>"; };
 		CD79369B22C6300200E5AC2E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */,
 				CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */,
 				CD8B7B6D22CA5D680027E1ED /* PINSettingViewController.swift */,
+				CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */,
 				CD5D2D5822C5E2FA004330F3 /* Assets.xcassets */,
 				CD5D2D5A22C5E2FA004330F3 /* LaunchScreen.storyboard */,
 				CD5D2D5D22C5E2FA004330F3 /* Info.plist */,
@@ -310,6 +313,7 @@
 				CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */,
 				CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */,
 				CD5D2D5222C5E2F7004330F3 /* SceneDelegate.swift in Sources */,
+				CD68FAD022CB9ABD004ABCAF /* MattersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

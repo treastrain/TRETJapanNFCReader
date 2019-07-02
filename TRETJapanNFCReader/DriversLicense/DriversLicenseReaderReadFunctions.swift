@@ -58,14 +58,14 @@ extension DriversLicenseReader {
                     
                     let responseData = [UInt8](responseData)
                     
-                    let cardIssuerDataTag = responseData[0]
-                    let cardIssuerDataLength = responseData[1]
+                    // let cardIssuerDataTag = responseData[0]
+                    // let cardIssuerDataLength = responseData[1]
                     let specificationVersionNumberData = responseData[2...4]
                     let issuanceDateData = responseData[5...8]
                     let expirationDateData = responseData[9...12]
                     
-                    let preIssuanceDataTag = responseData[13]
-                    let preIssuanceDataLength = responseData[14]
+                    // let preIssuanceDataTag = responseData[13]
+                    // let preIssuanceDataLength = responseData[14]
                     let cardManufacturerIdentifierData = responseData[15]
                     let cryptographicFunctionIdentifierData = responseData[16]
                     

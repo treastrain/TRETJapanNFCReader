@@ -14,6 +14,8 @@ public enum DriversLicenseCardItems: CaseIterable {
     case commonData
     /// MF/EF02 暗証番号(PIN)設定
     case pinSetting
+    /// DF1/EF01 記載事項(本籍除く)
+    case matters
 }
 
 /// 日本の運転免許証
