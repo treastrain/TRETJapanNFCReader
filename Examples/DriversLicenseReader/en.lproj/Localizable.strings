@@ -17,3 +17,10 @@
 "pinSetting" = "PIN Setting";
 "pinSettingTrue" = "Set";
 "pinSettingFalse" = "Not set";
+
+"enterPIN1Title" = "Enter PIN 1";
+"enterPIN1Message" = "If you have not set a PIN 1, tap \"Next\" without entering anything.";
+"enterPIN1TextFieldPlaceholder" = "PIN 1";
+"next" = "Next";
+"cancel" = "Cancel";
+"incorrectPIN" = "PIN is wrong";

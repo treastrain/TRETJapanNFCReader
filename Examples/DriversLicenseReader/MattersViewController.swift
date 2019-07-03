@@ -31,7 +31,23 @@ class MattersViewController: UITableViewController, DriversLicenseReaderSessionD
     }
     
     @IBAction func reread() {
-        self.reader.get(items: [.matters])
+        let alertController = UIAlertController(title: NSLocalizedString("enterPIN1Title", bundle: Bundle(for: type(of: self)), comment: ""), message: NSLocalizedString("enterPIN1Message", bundle: Bundle(for: type(of: self)), comment: ""), preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = NSLocalizedString("enterPIN1TextFieldPlaceholder", bundle: Bundle(for: type(of: self)), comment: "")
+            textField.keyboardType = .numberPad
+        }
+        let nextAction = UIAlertAction(title: NSLocalizedString("next", bundle: Bundle(for: type(of: self)), comment: ""), style: .default) { (action) in
+            guard let textFields = alertController.textFields, !textFields.isEmpty, let textField = textFields.first, let enteredPIN1 = textField.text else {
+                return
+            }
+            
+            self.reader.get(items: [.matters], pin1: enteredPIN1)
+        }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", bundle: Bundle(for: type(of: self)), comment: ""), style: .cancel, handler: nil)
+        alertController.addAction(nextAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func driversLicenseReaderSession(didInvalidateWithError error: Error) {
@@ -48,6 +64,24 @@ class MattersViewController: UITableViewController, DriversLicenseReaderSessionD
         DispatchQueue.main.async {
             self.navigationItem.prompt = prompt
             self.tableView.reloadData()
+        }
+        
+        if let driversLicenseReaderError = error as? DriversLicenseReaderError {
+            self.driversLicenseCard = nil
+            switch driversLicenseReaderError {
+            case .incorrectPIN:
+                let alertController = UIAlertController(
+                    title: NSLocalizedString("incorrectPIN", bundle: Bundle(for: type(of: self)), comment: ""),
+                    message: driversLicenseReaderError.errorDescription,
+                    preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            default:
+                break
+            }
         }
     }
     

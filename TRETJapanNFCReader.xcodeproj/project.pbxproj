@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
+		CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */; };
+		CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */; };
 		CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */; };
 		CD5D2D5222C5E2F7004330F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */; };
 		CD5D2D5422C5E2F7004330F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D5322C5E2F7004330F3 /* ViewController.swift */; };
@@ -62,6 +64,8 @@
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderError.swift; sourceTree = "<group>"; };
+		CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderExtensions.swift; sourceTree = "<group>"; };
 		CD5D2D4D22C5E2F7004330F3 /* DriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 			children = (
 				CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */,
 				CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */,
+				CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */,
+				CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */,
 				CD8B7B6822CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift */,
 				CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */,
 				CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */,
@@ -322,6 +328,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
+				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
+				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,

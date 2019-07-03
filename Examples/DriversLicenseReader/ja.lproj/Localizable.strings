@@ -17,3 +17,10 @@
 "pinSetting" = "暗証番号(PIN)設定";
 "pinSettingTrue" = "設定する";
 "pinSettingFalse" = "設定しない";
+
+"enterPIN1Title" = "暗証番号1を入力";
+"enterPIN1Message" = "暗証番号を設定していない場合は何も入力せずに「次へ」をタップしてください。";
+"enterPIN1TextFieldPlaceholder" = "暗証番号1";
+"next" = "次へ";
+"cancel" = "キャンセル";
+"incorrectPIN" = "暗証番号が違います";

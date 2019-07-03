@@ -16,8 +16,11 @@ internal typealias DriversLicenseCardTag = NFCISO7816Tag
 
 public class DriversLicenseReader: JapanNFCReader {
     
-    private var delegate: DriversLicenseReaderSessionDelegate?
+    internal var delegate: DriversLicenseReaderSessionDelegate?
     private var driversLicenseCardItems: [DriversLicenseCardItems] = []
+    
+    private var pin1: [UInt8] = []
+    private var pin2: [UInt8] = []
     
     /// DriversLicenseReader を初期化する。
     /// - Parameter viewController: DriversLicenseReaderSessionDelegate を適用した UIViewController
@@ -28,8 +31,16 @@ public class DriversLicenseReader: JapanNFCReader {
     
     /// 運転免許証からデータを読み取る
     /// - Parameter items: 運転免許証から読み取りたいデータ
-    public func get(items: [DriversLicenseCardItems]) {
+    public func get(items: [DriversLicenseCardItems], pin1: String = "", pin2: String = "") {
         self.delegate = self.viewController as? DriversLicenseReaderSessionDelegate
+        if items.contains(.matters) {
+            if let pin = convertPINStringToJISX0201(pin1) {
+                self.pin1 = pin
+            } else {
+                self.delegate?.driversLicenseReaderSession(didInvalidateWithError: DriversLicenseReaderError.incorrectPINFormat)
+                return
+            }
+        }
         self.driversLicenseCardItems = items
         self.beginScanning()
     }
@@ -127,9 +138,11 @@ public class DriversLicenseReader: JapanNFCReader {
                 case .pinSetting:
                     driversLicenseCard = self.readPINSetting(session, driversLicenseCard)
                 case .matters:
-                    driversLicenseCard = self.readMatters(session, driversLicenseCard)
+                    driversLicenseCard = self.readMatters(session, driversLicenseCard, pin1: self.pin1)
                 }
             }
+            self.pin1 = []
+            self.pin2 = []
             completion(driversLicenseCard)
         }
     }
