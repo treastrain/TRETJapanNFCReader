@@ -2,6 +2,7 @@
 
 # TRETJapanNFCReader
 日本のNFCカード向けリーダーライブラリ（iOS 13.0 以降）
+Suica、PASMOなどの交通系ICカード、運転免許証の読み取り
 
 日本語・英語に対応  
 Japanese & English Support!
@@ -18,10 +19,11 @@ Japanese & English Support!
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
-- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取りまで実装済み（[Tag: 0.0.3](https://github.com/treastrain/TRETJapanNFCReader/releases/tag/0.0.3)）
+- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証まで実装済み
 
 ### NFC-F (Type-F)
-- [ ] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
+- [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
+    - IDm と System Code の表示
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
 
 ## 対応 OS
@@ -67,6 +69,24 @@ class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
 
 #### 交通系ICカードの場合
 - 0003
+```swift
+import UIKit
+import TRETJapanNFCReader
+class ViewController: UIViewController, TransitICReaderSessionDelegate {
+
+    var reader: TransitICReader!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.reader = TransitICReader(self)
+        self.reader.get(items: TransitICCardItems.allCases)
+    }
+
+    func transitICReaderSession(didRead transitICCard: TransitICCard) {
+        // transitICCard に読み取った交通系ICカードの情報が格納されている
+    }
+}
+```
 
 #### 大学生協プリペイドカード（大学 学生証）の場合
 - FE00

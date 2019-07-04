@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD06199222CE3517000EB026 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B7722CE2B66000E88B4 /* InfoPlist.strings */; };
+		CD06199422CE3694000EB026 /* TransitICReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */; };
+		CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */; };
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
 		CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */; };
@@ -33,6 +36,17 @@
 		CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */; };
 		CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */; };
 		CD9EBF0E22CDF1A7005D17CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7936DE22C6492B00E5AC2E /* Main.storyboard */; };
+		CDFC3B5D22CE2AD2000E88B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */; };
+		CDFC3B5F22CE2AD2000E88B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */; };
+		CDFC3B6122CE2AD2000E88B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B6022CE2AD2000E88B4 /* ViewController.swift */; };
+		CDFC3B6422CE2AD2000E88B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B6222CE2AD2000E88B4 /* Main.storyboard */; };
+		CDFC3B6622CE2AD2000E88B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B6522CE2AD2000E88B4 /* Assets.xcassets */; };
+		CDFC3B6922CE2AD2000E88B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B6722CE2AD2000E88B4 /* LaunchScreen.storyboard */; };
+		CDFC3B6E22CE2B05000E88B4 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
+		CDFC3B6F22CE2B05000E88B4 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CDFC3B7B22CE2C84000E88B4 /* TransitICReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */; };
+		CDFC3B7F22CE2D46000E88B4 /* TransitICCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */; };
+		CDFC3B8122CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B8022CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +56,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = CD5D2D7022C5E977004330F3;
 			remoteInfo = TRETJapaneseNFCReader;
+		};
+		CDFC3B7022CE2B05000E88B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD5D2D7022C5E977004330F3;
+			remoteInfo = TRETJapanNFCReader;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -57,9 +78,22 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDFC3B7222CE2B06000E88B4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CDFC3B6F22CE2B05000E88B4 /* TRETJapanNFCReader.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderReadFunctions.swift; sourceTree = "<group>"; };
+		CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderCommands.swift; sourceTree = "<group>"; };
 		CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversLicenseReader.entitlements; sourceTree = "<group>"; };
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -91,6 +125,19 @@
 		CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
+		CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitICReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CDFC3B6022CE2AD2000E88B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CDFC3B6322CE2AD2000E88B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CDFC3B6522CE2AD2000E88B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CDFC3B6822CE2AD2000E88B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CDFC3B6A22CE2AD2000E88B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TransitICReader.entitlements; sourceTree = "<group>"; };
+		CDFC3B7822CE2B6F000E88B4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReader.swift; sourceTree = "<group>"; };
+		CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICCard.swift; sourceTree = "<group>"; };
+		CDFC3B8022CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,12 +157,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDFC3B5722CE2AD2000E88B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDFC3B6E22CE2B05000E88B4 /* TRETJapanNFCReader.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		CD5D2D3422C5DF36004330F3 = {
 			isa = PBXGroup;
 			children = (
+				CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */,
 				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
 				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
 				CD5D2D6322C5E47F004330F3 /* Examples */,
@@ -129,6 +185,7 @@
 			children = (
 				CD5D2D4D22C5E2F7004330F3 /* DriversLicenseReader.app */,
 				CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */,
+				CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				CD5D2D4E22C5E2F7004330F3 /* DriversLicenseReader */,
+				CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -176,6 +234,7 @@
 				CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */,
 				CD79369C22C6300200E5AC2E /* Localizable.strings */,
 				CD5D2D7A22C5EA25004330F3 /* DriversLicense */,
+				CDFC3B7922CE2C52000E88B4 /* TransitIC */,
 			);
 			path = TRETJapanNFCReader;
 			sourceTree = "<group>";
@@ -193,6 +252,33 @@
 				CD5D2D7B22C5EA6B004330F3 /* Status.swift */,
 			);
 			path = DriversLicense;
+			sourceTree = "<group>";
+		};
+		CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */ = {
+			isa = PBXGroup;
+			children = (
+				CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */,
+				CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */,
+				CDFC3B6022CE2AD2000E88B4 /* ViewController.swift */,
+				CDFC3B6222CE2AD2000E88B4 /* Main.storyboard */,
+				CDFC3B6522CE2AD2000E88B4 /* Assets.xcassets */,
+				CDFC3B6722CE2AD2000E88B4 /* LaunchScreen.storyboard */,
+				CDFC3B6A22CE2AD2000E88B4 /* Info.plist */,
+				CDFC3B7722CE2B66000E88B4 /* InfoPlist.strings */,
+			);
+			path = TransitICReader;
+			sourceTree = "<group>";
+		};
+		CDFC3B7922CE2C52000E88B4 /* TransitIC */ = {
+			isa = PBXGroup;
+			children = (
+				CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */,
+				CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */,
+				CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */,
+				CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */,
+				CDFC3B8022CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift */,
+			);
+			path = TransitIC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +332,25 @@
 			productReference = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CDFC3B5922CE2AD2000E88B4 /* TransitICReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDFC3B6B22CE2AD2000E88B4 /* Build configuration list for PBXNativeTarget "TransitICReader" */;
+			buildPhases = (
+				CDFC3B5622CE2AD2000E88B4 /* Sources */,
+				CDFC3B5722CE2AD2000E88B4 /* Frameworks */,
+				CDFC3B5822CE2AD2000E88B4 /* Resources */,
+				CDFC3B7222CE2B06000E88B4 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDFC3B7122CE2B05000E88B4 /* PBXTargetDependency */,
+			);
+			name = TransitICReader;
+			productName = TransitICReader;
+			productReference = CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -262,6 +367,9 @@
 					CD5D2D7022C5E977004330F3 = {
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1100;
+					};
+					CDFC3B5922CE2AD2000E88B4 = {
+						CreatedOnToolsVersion = 11.0;
 					};
 				};
 			};
@@ -281,6 +389,7 @@
 			targets = (
 				CD5D2D4C22C5E2F7004330F3 /* DriversLicenseReader */,
 				CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader */,
+				CDFC3B5922CE2AD2000E88B4 /* TransitICReader */,
 			);
 		};
 /* End PBXProject section */
@@ -303,6 +412,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDFC3B5822CE2AD2000E88B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDFC3B6922CE2AD2000E88B4 /* LaunchScreen.storyboard in Resources */,
+				CD06199222CE3517000EB026 /* InfoPlist.strings in Resources */,
+				CDFC3B6622CE2AD2000E88B4 /* Assets.xcassets in Resources */,
+				CDFC3B6422CE2AD2000E88B4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,13 +449,28 @@
 			files = (
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
 				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
+				CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
+				CD06199422CE3694000EB026 /* TransitICReaderReadFunctions.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
+				CDFC3B8122CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift in Sources */,
+				CDFC3B7B22CE2C84000E88B4 /* TransitICReader.swift in Sources */,
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
+				CDFC3B7F22CE2D46000E88B4 /* TransitICCard.swift in Sources */,
 				CD8B7B6922CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDFC3B5622CE2AD2000E88B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDFC3B6122CE2AD2000E88B4 /* ViewController.swift in Sources */,
+				CDFC3B5D22CE2AD2000E88B4 /* AppDelegate.swift in Sources */,
+				CDFC3B5F22CE2AD2000E88B4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +481,11 @@
 			isa = PBXTargetDependency;
 			target = CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader */;
 			targetProxy = CD5D2D8022C5EFE8004330F3 /* PBXContainerItemProxy */;
+		};
+		CDFC3B7122CE2B05000E88B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader */;
+			targetProxy = CDFC3B7022CE2B05000E88B4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -391,6 +531,30 @@
 				CD8B7B7022CA66CF0027E1ED /* ja */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CDFC3B6222CE2AD2000E88B4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDFC3B6322CE2AD2000E88B4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CDFC3B6722CE2AD2000E88B4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDFC3B6822CE2AD2000E88B4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CDFC3B7722CE2B66000E88B4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDFC3B7822CE2B6F000E88B4 /* ja */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -611,6 +775,44 @@
 			};
 			name = Release;
 		};
+		CDFC3B6C22CE2AD2000E88B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TransitICReader.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9TWATL5SE8;
+				INFOPLIST_FILE = Examples/TransitICReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TransitICReader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CDFC3B6D22CE2AD2000E88B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TransitICReader.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9TWATL5SE8;
+				INFOPLIST_FILE = Examples/TransitICReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TransitICReader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -637,6 +839,15 @@
 			buildConfigurations = (
 				CD5D2D7722C5E977004330F3 /* Debug */,
 				CD5D2D7822C5E977004330F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDFC3B6B22CE2AD2000E88B4 /* Build configuration list for PBXNativeTarget "TransitICReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDFC3B6C22CE2AD2000E88B4 /* Debug */,
+				CDFC3B6D22CE2AD2000E88B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
