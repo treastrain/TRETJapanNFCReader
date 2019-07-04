@@ -9,7 +9,7 @@
 import CoreNFC
 
 /// 日本の運転免許証から読み取ることができるデータの種別
-public enum DriversLicenseCardItems: CaseIterable {
+public enum DriversLicenseCardItem: CaseIterable {
     /// MF/EF01 共通データ要素
     case commonData
     /// MF/EF02 暗証番号(PIN)設定
@@ -202,7 +202,7 @@ public struct DriversLicenseCard {
     
     typealias TLVField = (tag: UInt8, length: UInt8, value: [UInt8])
     
-    internal func convert(items: DriversLicenseCardItems, from data: [UInt8]) -> DriversLicenseCard {
+    internal func convert(items: DriversLicenseCardItem, from data: [UInt8]) -> DriversLicenseCard {
         var driversLicenseCard = self
         var fields: [TLVField] = []
         

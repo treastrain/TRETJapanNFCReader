@@ -17,7 +17,7 @@ internal typealias DriversLicenseCardTag = NFCISO7816Tag
 public class DriversLicenseReader: JapanNFCReader {
     
     internal var delegate: DriversLicenseReaderSessionDelegate?
-    private var driversLicenseCardItems: [DriversLicenseCardItems] = []
+    private var driversLicenseCardItems: [DriversLicenseCardItem] = []
     
     private var pin1: [UInt8] = []
     private var pin2: [UInt8] = []
@@ -31,7 +31,7 @@ public class DriversLicenseReader: JapanNFCReader {
     
     /// 運転免許証からデータを読み取る
     /// - Parameter items: 運転免許証から読み取りたいデータ
-    public func get(items: [DriversLicenseCardItems], pin1: String = "", pin2: String = "") {
+    public func get(items: [DriversLicenseCardItem], pin1: String = "", pin2: String = "") {
         self.delegate = self.viewController as? DriversLicenseReaderSessionDelegate
         if items.contains(.matters) {
             if let pin = convertPINStringToJISX0201(pin1) {
