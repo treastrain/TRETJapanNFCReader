@@ -63,4 +63,57 @@ extension DriversLicenseReader {
         }
     }
     
+    internal func printData(_ responseData: Data, isPrintData: Bool = false, _ sw1: UInt8, _ sw2: UInt8) {
+        let responseData = [UInt8](responseData)
+        let responseString = responseData.map({ (byte) -> String in
+            return byte.toHexString()
+        })
+        
+        if isPrintData {
+            print("responseCount: \(responseString.count), response: \(responseString), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+        } else {
+            print("responseCount: \(responseString.count), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+        }
+    }
+    
 }
+
+public extension Optional where Wrapped == Date {
+    func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = dateStyle
+        formatter.timeStyle = timeStyle
+        if self == nil {
+            return nil
+        } else {
+            return formatter.string(from: self!)
+        }
+    }
+}
+
+public extension UInt8 {
+    func toString() -> String{
+        var str = String(self, radix: 16).uppercased()
+        if str.count == 1 {
+            str = "0" + str
+        }
+        return str
+    }
+    
+    func toHexString() -> String {
+        var str = self.toString()
+        str = "0x\(str)"
+        return str
+    }
+}
+
+public extension Optional where Wrapped == UInt8 {
+    func toHexString() -> String? {
+        if self == nil {
+            return nil
+        } else {
+            return self!.toHexString()
+        }
+    }
+}
+

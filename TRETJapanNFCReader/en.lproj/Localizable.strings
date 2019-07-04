@@ -16,3 +16,5 @@
 "nfcTagReaderSessionReadingMessage" = "Reading…\n Keep your iPhone resting on the card.";
 
 "nfcTagReaderSessionDoneMessage" = "Done!";
+
+"pinRequired" = "PIN required.";

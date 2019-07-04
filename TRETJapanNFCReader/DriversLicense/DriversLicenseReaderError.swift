@@ -18,6 +18,7 @@ import Foundation
 //}
 
 public enum DriversLicenseReaderError: Error {
+    case needPIN
     case incorrectPIN(Int)
     case incorrectPINFormat
     case enteredPINWasIgnored
@@ -26,6 +27,8 @@ public enum DriversLicenseReaderError: Error {
 extension DriversLicenseReaderError: LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .needPIN:
+            return "暗証番号の入力が必要です"
         case .incorrectPIN(let remaining):
             return "暗証番号が違います（残りの試行可能回数: \(remaining)）"
         case .incorrectPINFormat:

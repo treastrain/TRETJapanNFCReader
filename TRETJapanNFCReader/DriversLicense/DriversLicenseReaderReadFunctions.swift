@@ -128,7 +128,7 @@ extension DriversLicenseReader {
                 }
                 
                 self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 3) { (responseData, sw1, sw2, error) in
-                    self.printData(responseData, sw1, sw2)
+                    self.printData(responseData, isPrintData: true, sw1, sw2)
                     
                     if let error = error {
                         print(error.localizedDescription)
@@ -171,7 +171,13 @@ extension DriversLicenseReader {
         
         if let pinSetting = driversLicenseCard.pinSetting {
             var pin1 = pin1
-            if !pinSetting.pinSetting {
+            if pinSetting.pinSetting {
+                if pin1 == [0x2A, 0x2A, 0x2A, 0x2A] {
+                    self.delegate?.driversLicenseReaderSession(didInvalidateWithError: DriversLicenseReaderError.needPIN)
+                    session.invalidate(errorMessage: self.localizedString(key: "pinRequired"))
+                    return driversLicenseCard
+                }
+            } else {
                 self.delegate?.driversLicenseReaderSession(didInvalidateWithError: DriversLicenseReaderError.enteredPINWasIgnored)
                 pin1 = [0x2A, 0x2A, 0x2A, 0x2A]
             }
@@ -207,7 +213,6 @@ extension DriversLicenseReader {
                         return
                     }
                     
-                    //  PIN1の照合
                     self.verify(tag: tag, pin: pin1) { (responseData, sw1, sw2, error) in
                         self.printData(responseData, sw1, sw2)
                         
@@ -239,8 +244,54 @@ extension DriversLicenseReader {
                         }
                         
                         // データの読み取り
-                        
-                        semaphore.signal()
+                        self.selectDF1(tag: tag) { (responseData, sw1, sw2, error) in
+                            self.printData(responseData, sw1, sw2)
+                            
+                            if let error = error {
+                                print(error.localizedDescription)
+                                session.invalidate(errorMessage: "SELECT FILE DF1\n\(error.localizedDescription)")
+                                return
+                            }
+                            
+                            if sw1 != 0x90 {
+                                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                return
+                            }
+                            
+                            self.selectEF(tag: tag, data: [0x00, 0x01]) { (responseData, sw1, sw2, error) in
+                                self.printData(responseData, sw1, sw2)
+                                
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                    session.invalidate(errorMessage: "SELECT FILE EF\n\(error.localizedDescription)")
+                                    return
+                                }
+                                
+                                if sw1 != 0x90 {
+                                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                    return
+                                }
+                                
+                                self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 880) { (responseData, sw1, sw2, error) in
+                                    self.printData(responseData, sw1, sw2)
+                                    
+                                    if let error = error {
+                                        print(error.localizedDescription)
+                                        session.invalidate(errorMessage: "READ BINARY\n\(error.localizedDescription)")
+                                    }
+                                    
+                                    if sw1 != 0x90 {
+                                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                        return
+                                    }
+                                    
+                                    let responseData = [UInt8](responseData)
+                                    
+                                    driversLicenseCard = driversLicenseCard.convert(items: .matters, from: responseData)
+                                    semaphore.signal()
+                                }
+                            }
+                        }
                     }
                 }
             }

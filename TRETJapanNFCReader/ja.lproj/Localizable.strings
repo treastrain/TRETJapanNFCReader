@@ -16,3 +16,5 @@
 "nfcTagReaderSessionReadingMessage" = "読み取り中…\n カードを iPhone から離さないでください。";
 
 "nfcTagReaderSessionDoneMessage" = "完了";
+
+"pinRequired" = "暗証番号の入力が必要です";
