@@ -46,50 +46,83 @@ public struct DriversLicenseCard {
     /// MF/EF02 暗証番号(PIN)設定
     public var pinSetting: PINSetting?
     
+    /// DF1/EF01 記載事項(本籍除く)
+    public struct Matters {
+        /// JISX0208制定年番号
+        public var jisX0208EstablishmentYearNumber: String
+        /// 氏名
+        public var name: String
+        /// 呼び名(カナ)
+        public var nickname: String
+        /// 通称名
+        public var commonName: String?
+        /// 統一氏名(カナ)
+        public var uniformName: String
+        /// 生年月日
+        public var birthdate: Date
+        /// 住所
+        public var address: String
+        /// 交付年月日
+        public var issuanceDate: Date
+        /// 照会番号
+        public var referenceNumber: String
+        /// 免許証の色区分(優良・新規・その他)
+        public var color: String
+        /// 有効期間の末日
+        public var expirationDate: Date
+        /// 免許の条件1
+        public var condition1: String?
+        /// 免許の条件2
+        public var condition2: String?
+        /// 免許の条件3
+        public var condition3: String?
+        /// 免許の条件4
+        public var condition4: String?
+        /// 公安委員会名
+        public var issuingAuthority: String
+        /// 免許証の番号
+        public var number: String
+        /// 免許の年月日(二・小・原)
+        public var motorcycleLicenceDate: Date?
+        /// 免許の年月日(他)
+        public var otherLicenceDate: Date?
+        /// 免許の年月日(二種)
+        public var class2LicenceDate: Date?
+        /// 免許の年月日(大型)
+        public var heavyVehicleLicenceDate: Date?
+        /// 免許の年月日(普通)
+        public var ordinaryVehicleLicenceDate: Date?
+        /// 免許の年月日(大特)
+        public var heavySpecialVehicleLicenceDate: Date?
+        /// 免許の年月日(大自二)
+        public var heavyMotorcycleLicenceDate: Date?
+        /// 免許の年月日(普自二)
+        public var ordinaryMotorcycleLicenceDate: Date?
+        /// 免許の年月日(小特)
+        public var smallSpecialVehicleLicenceDate: Date?
+        /// 免許の年月日(原付)
+        public var mopedLicenceDate: Date?
+        /// 免許の年月日(け引)
+        public var trailerLicenceDate: Date?
+        /// 免許の年月日(大二)
+        public var class2HeavyVehicleLicenceDate: Date?
+        /// 免許の年月日(普二)
+        public var class2OrdinaryVehicleLicenceDate: Date?
+        /// 免許の年月日(大特二)
+        public var class2HeavySpecialVehicleLicenceDate: Date?
+        /// 免許の年月日(け引二)
+        public var class2TrailerLicenceDate: Date?
+        /// 免許の年月日(中型)
+        public var mediumVehicleLicenceDate: Date?
+        /// 免許の年月日(中二)
+        public var class2MediumVehicleLicenceDate: Date?
+        /// 免許の年月日(準中型)
+        public var semiMediumVehicleLicenceDate: Date?
+    }
+    /// DF1/EF01 記載事項(本籍除く)
+    public var matters: Matters?
+    
     /*
-    
-    // MF/IEF01 暗証番号1(PIN 1)
-    var 暗証番号1: Int
-    
-    // MF/IEF02 暗証番号2(PIN 2)
-    var 暗証番号2: Int
-    
-    // DF1/EF01 記載事項(本籍除く)
-    var JISX0208制定年番号: Int
-    var 氏名: String
-    var 呼び名（カナ）: String
-    var 通称名: String
-    var 統一氏名: String
-    var 生年月日: Date
-    var 住所: String
-    var 交付年月日: Date
-    var 照会番号: Int
-    var 免許証の色区分（優良・新規・その他）: String
-    var 有効期間の末日: Date
-    var 免許の条件1: String
-    var 免許の条件2: String
-    var 免許の条件3: String
-    var 免許の条件4: String
-    var 公安委員会名: String
-    var 免許証の番号: String
-    var 免許の年月日（二・小・原）: Date
-    var 免許の年月日（他）: Date
-    var 免許の年月日（二種）: Date
-    var 免許の年月日（大型）: Date
-    var 免許の年月日（普通）: Date
-    var 免許の年月日（大特）: Date
-    var 免許の年月日（大自二）: Date
-    var 免許の年月日（普自二）: Date
-    var 免許の年月日（小特）: Date
-    var 免許の年月日（原付）: Date
-    var 免許の年月日（け引）: Date
-    var 免許の年月日（大二）: Date
-    var 免許の年月日（普二）: Date
-    var 免許の年月日（大特二）: Date
-    var 免許の年月日（け引二）: Date
-    var 免許の年月日（中型）: Date
-    var 免許の年月日（中二）: Date
-    var 免許の年月日（準中型）: Date
     
     // DF1/EF02 記載事項(本籍)
     var 本籍: String
@@ -166,43 +199,45 @@ public struct DriversLicenseCard {
     
     // DF3/EF01 RFU
     */
-}
-
-public extension Optional where Wrapped == Date {
-    func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateStyle = dateStyle
-        formatter.timeStyle = timeStyle
-        if self == nil {
-            return nil
-        } else {
-            return formatter.string(from: self!)
-        }
-    }
-}
-
-public extension UInt8 {
-    func toString() -> String{
-        var str = String(self, radix: 16).uppercased()
-        if str.count == 1 {
-            str = "0" + str
-        }
-        return str
-    }
     
-    func toHexString() -> String {
-        var str = self.toString()
-        str = "0x\(str)"
-        return str
+    typealias TLVField = (tag: UInt8, length: UInt8, value: [UInt8])
+    
+    internal func convert(items: DriversLicenseCardItems, from data: [UInt8]) -> DriversLicenseCard {
+        var driversLicenseCard = self
+        var fields: [TLVField] = []
+        
+        var i = 0
+        while i < data.count {
+            let tag = data[i]
+            if tag == 0xFF {
+                break
+            }
+            i += 1
+            let length = data[i]
+            if length == 0 {
+                i += 1
+                continue
+            }
+            i += 1
+            let endIndex = Int(length) + i - 1
+            let value = data[i...endIndex].map {$0}
+            i = endIndex + 1
+            
+            let valueString = value.map { (u) -> String in u.toHexString() }
+            print("タグ: \(tag.toHexString()), 長さ: \(length), 値: \(valueString)")
+            
+            fields.append((tag: tag, length: length, value: value))
+        }
+        
+        switch items {
+        case .matters:
+            // self.convertToMatters(fields: fields)
+            break
+        default:
+            break
+        }
+        
+        return driversLicenseCard
     }
 }
 
-public extension Optional where Wrapped == UInt8 {
-    func toHexString() -> String? {
-        if self == nil {
-            return nil
-        } else {
-            return self!.toHexString()
-        }
-    }
-}
