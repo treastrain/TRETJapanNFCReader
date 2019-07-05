@@ -15,35 +15,23 @@ extension TransitICReader {
         var transitICCard = transitICCard
         let tag = transitICCard.tag
         
-        tag.polling(systemCode: tag.currentSystemCode, requestCode: .systemCode, timeSlot: .max1) { (pmm, responseData, error) in
+        let serviceCodeList: [Data] = [
+            UInt16(0x090F).data
+        ]
+        tag.polling(systemCode: tag.currentSystemCode, requestCode: .systemCode, timeSlot: .max16) { (pmm, requestData, error) in
             let pmm = pmm.map { String(format: "%.2hhx", $0) }.joined()
-            let responseData = responseData.map { String(format: "%.2hhx", $0) }.joined()
-            print(pmm, responseData, error)
+            let requestData = requestData.map { String(format: "%.2hhx", $0) }.joined()
+            print(pmm, requestData, error)
             
-            let nodeCodeList: [Data] = [
-                tag.currentSystemCode,
-                Data([UInt8(0x09), UInt8(0x0f)])
-            ]
-            tag.requestService(nodeCodeList: nodeCodeList) { (data, error) in
-                if data.count > 1 {
-                    let data1 = data[0].map { String(format: "%.2hhx", $0) }.joined()
-                    print(data1, " ", terminator: "")
-                }
-                if data.count > 2 {
-                    let data2 = data[1].map { String(format: "%.2hhx", $0) }.joined()
-                    print(data2, " ", terminator: "")
-                }
-                print(error)
+            tag.requestService(nodeCodeList: serviceCodeList) { (nodeKeyVersionList, error) in
+                print(nodeKeyVersionList, error)
                 
-                let serviceCodeList = [
-                    Data([UInt8(0x09), UInt8(0x0f)])
+                let blockList: [Data] = [
+                    UInt16(0x10).data,
+                    UInt16(0x11).data
                 ]
-                
-                let blockList = [
-                    Data([UInt8(0x10), UInt8(0x11)])
-                ]
-                tag.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (int1, int2, dataArray, error) in
-                    print(int1, int2, dataArray, error)
+                tag.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (status1, status2, blockData, error) in
+                    print(status1, status2, blockData, error)
                     semaphore.signal()
                 }
             }
