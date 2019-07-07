@@ -15,26 +15,51 @@ extension TransitICReader {
         var transitICCard = transitICCard
         let tag = transitICCard.tag
         
-        let serviceCodeList: [Data] = [
-            UInt16(0x090F).data
-        ]
         tag.polling(systemCode: tag.currentSystemCode, requestCode: .systemCode, timeSlot: .max16) { (pmm, requestData, error) in
             let pmm = pmm.map { String(format: "%.2hhx", $0) }.joined()
             let requestData = requestData.map { String(format: "%.2hhx", $0) }.joined()
             print(pmm, requestData, error)
             
-            tag.requestService(nodeCodeList: serviceCodeList) { (nodeKeyVersionList, error) in
-                print(nodeKeyVersionList, error)
+            let serviceCodeList: [Data] = [
+                UInt16(0x008B).data
+            ]
+            let blockList: [Data] = [
+//                UInt16(0x00).data
+            ]
+            tag.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (status1, status2, blockData, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("status1:", UInt8(status1).toHexString(), "status2:", UInt8(status2).toHexString(), blockData)
+                }
                 
-                let blockList: [Data] = [
-                    UInt16(0x10).data,
-                    UInt16(0x11).data
-                ]
+                semaphore.signal()
+            }
+//            tag.requestService(nodeCodeList: serviceCodeList) { (nodeKeyVersionList, error) in
+//                // print(nodeKeyVersionList, error)
+//                if nodeKeyVersionList.count > 1 {
+//                    let data1 = nodeKeyVersionList[0].map { String(format: "%.2hhx", $0) }.joined()
+//                    print("data1: \(data1)", " ", terminator: "")
+//                }
+//                if nodeKeyVersionList.count > 2 {
+//                    let data2 = nodeKeyVersionList[1].map { String(format: "%.2hhx", $0) }.joined()
+//                    print("data2: \(data2)", " ", terminator: "")
+//                }
+//                print(error)
+                
+//                let blockList: [Data] = [
+//                    UInt16(0x00).data
+//                ]
                 tag.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (status1, status2, blockData, error) in
-                    print(status1, status2, blockData, error)
+                    if let error = error {
+                        print(error)
+                    } else {
+                        print("status1:", UInt8(status1).toHexString(), "status2:", UInt8(status2).toHexString(), blockData)
+                    }
+                    
                     semaphore.signal()
                 }
-            }
+//            }
         }
         
         semaphore.wait()

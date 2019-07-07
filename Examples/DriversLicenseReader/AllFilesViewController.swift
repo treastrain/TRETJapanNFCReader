@@ -31,7 +31,7 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
     }
     
     @IBAction func reread() {
-        self.reader.get(items: DriversLicenseCardItems.allCases)
+        self.reader.get(items: DriversLicenseCardItem.allCases)
     }
     
     func driversLicenseReaderSession(didInvalidateWithError error: Error) {

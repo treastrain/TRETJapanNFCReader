@@ -230,11 +230,144 @@ public struct DriversLicenseCard {
         }
         
         switch items {
+        case .commonData:
+            driversLicenseCard = self.convertToCommonData(fields: fields)
+        case .pinSetting:
+            driversLicenseCard = self.convertToPinSetting(fields: fields)
         case .matters:
-            // self.convertToMatters(fields: fields)
-            break
-        default:
-            break
+            driversLicenseCard = self.convertToMatters(fields: fields)
+        }
+        
+        return driversLicenseCard
+    }
+    
+    private func convertToCommonData(fields: [TLVField]) -> DriversLicenseCard {
+        var driversLicenseCard = self
+        
+        var specificationVersionNumber: String?
+        var issuanceDate: Date?
+        var expirationDate: Date?
+        var cardManufacturerIdentifier: UInt8?
+        var cryptographicFunctionIdentifier: UInt8?
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyyMMdd"
+        
+        for field in fields {
+            switch field.tag {
+            case 0x45:
+                specificationVersionNumber = String(data: Data(field.value[0...2]), encoding: .shiftJIS)
+                let issuanceDateString = field.value[3...6].map { (data) -> String in
+                    return data.toString()
+                }.joined()
+                issuanceDate = formatter.date(from: issuanceDateString)
+                let expirationDateString = field.value[7...10].map { (data) -> String in
+                    return data.toString()
+                }.joined()
+                expirationDate = formatter.date(from: expirationDateString)
+            case 0x46:
+                cardManufacturerIdentifier = field.value[0]
+                cryptographicFunctionIdentifier = field.value[1]
+            default:
+                break
+            }
+        }
+        
+        if let specificationVersionNumber = specificationVersionNumber,
+           let issuanceDate = issuanceDate,
+           let expirationDate = expirationDate,
+           let cardManufacturerIdentifier = cardManufacturerIdentifier,
+           let cryptographicFunctionIdentifier = cryptographicFunctionIdentifier {
+            driversLicenseCard.commonData = DriversLicenseCard.CommonData(specificationVersionNumber: specificationVersionNumber, issuanceDate: issuanceDate, expirationDate: expirationDate, cardManufacturerIdentifier: cardManufacturerIdentifier, cryptographicFunctionIdentifier: cryptographicFunctionIdentifier)
+        }
+        
+        return driversLicenseCard
+    }
+    
+    private func convertToPinSetting(fields: [TLVField]) -> DriversLicenseCard {
+        var driversLicenseCard = self
+        
+        let pinSettingData = fields.first?.value.first!
+        var pinSetting: Bool {
+            if pinSettingData == 0x01 {
+                return true
+            } else if pinSettingData == 0x00 {
+                return false
+            }
+            return false
+        }
+        
+        driversLicenseCard.pinSetting = DriversLicenseCard.PINSetting(pinSetting: pinSetting)
+        
+        return driversLicenseCard
+    }
+    
+    private func convertToMatters(fields: [TLVField]) -> DriversLicenseCard {
+        var driversLicenseCard = self
+        
+        var jisX0208EstablishmentYearNumber: String?
+        var name: String?
+        var nickname: String?
+        var commonName: String?
+        var uniformName: String?
+        var birthdate: Date?
+        var address: String?
+        var issuanceDate: Date?
+        var referenceNumber: String?
+        var color: String?
+        var expirationDate: Date?
+        var condition1: String?
+        var condition2: String?
+        var condition3: String?
+        var condition4: String?
+        var issuingAuthority: String?
+        var number: String?
+        var motorcycleLicenceDate: Date?
+        var otherLicenceDate: Date?
+        var class2LicenceDate: Date?
+        var heavyVehicleLicenceDate: Date?
+        var ordinaryVehicleLicenceDate: Date?
+        var heavySpecialVehicleLicenceDate: Date?
+        var heavyMotorcycleLicenceDate: Date?
+        var ordinaryMotorcycleLicenceDate: Date?
+        var smallSpecialVehicleLicenceDate: Date?
+        var mopedLicenceDate: Date?
+        var trailerLicenceDate: Date?
+        var class2HeavyVehicleLicenceDate: Date?
+        var class2OrdinaryVehicleLicenceDate: Date?
+        var class2HeavySpecialVehicleLicenceDate: Date?
+        var class2TrailerLicenceDate: Date?
+        var mediumVehicleLicenceDate: Date?
+        var class2MediumVehicleLicenceDate: Date?
+        var semiMediumVehicleLicenceDate: Date?
+        
+        for field in fields {
+            switch field.tag {
+            case 0x11:
+                jisX0208EstablishmentYearNumber = field.value.first?.toString()
+            case 0x12:
+                let nameData = field.value.split(count: 2)
+                name = String?(jisX0208Data: nameData)
+                print(name)
+            default:
+                break
+            }
+        }
+        
+        if let jisX0208EstablishmentYearNumber = jisX0208EstablishmentYearNumber,
+           let name = name,
+           let nickname = nickname,
+           let uniformName = uniformName,
+           let birthdate = birthdate,
+           let address = address,
+           let issuanceDate = issuanceDate,
+           let referenceNumber = referenceNumber,
+           let color = color,
+           let expirationDate = expirationDate,
+           let issuingAuthority = issuingAuthority,
+           let number = number {
+            driversLicenseCard.matters = DriversLicenseCard.Matters(jisX0208EstablishmentYearNumber: jisX0208EstablishmentYearNumber, name: name, nickname: nickname, commonName: commonName, uniformName: uniformName, birthdate: birthdate, address: address, issuanceDate: issuanceDate, referenceNumber: referenceNumber, color: color, expirationDate: expirationDate, condition1: condition1, condition2: condition2, condition3: condition3, condition4: condition4, issuingAuthority: issuingAuthority, number: number, motorcycleLicenceDate: motorcycleLicenceDate, otherLicenceDate: otherLicenceDate, class2LicenceDate: class2LicenceDate, heavyVehicleLicenceDate: heavyVehicleLicenceDate, ordinaryVehicleLicenceDate: ordinaryVehicleLicenceDate, heavySpecialVehicleLicenceDate: heavySpecialVehicleLicenceDate, heavyMotorcycleLicenceDate: heavyMotorcycleLicenceDate, ordinaryMotorcycleLicenceDate: ordinaryMotorcycleLicenceDate, smallSpecialVehicleLicenceDate: smallSpecialVehicleLicenceDate, mopedLicenceDate: mopedLicenceDate, trailerLicenceDate: trailerLicenceDate, class2HeavyVehicleLicenceDate: class2HeavyVehicleLicenceDate, class2OrdinaryVehicleLicenceDate: class2OrdinaryVehicleLicenceDate, class2HeavySpecialVehicleLicenceDate: class2HeavySpecialVehicleLicenceDate, class2TrailerLicenceDate: class2TrailerLicenceDate, mediumVehicleLicenceDate: mediumVehicleLicenceDate, class2MediumVehicleLicenceDate: class2MediumVehicleLicenceDate, semiMediumVehicleLicenceDate: semiMediumVehicleLicenceDate)
         }
         
         return driversLicenseCard

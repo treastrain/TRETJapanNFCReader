@@ -11,10 +11,13 @@ import CoreNFC
 
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
+    internal static var bundle: Bundle!
+    
     internal let viewController: UIViewController
     internal var session: NFCTagReaderSession?
     
     internal init(_ viewController: UIViewController) {
+        JapanNFCReader.bundle = Bundle(for: type(of: self))
         self.viewController = viewController
     }
     
