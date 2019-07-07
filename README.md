@@ -2,6 +2,7 @@
 
 # TRETJapanNFCReader
 日本のNFCカード向けリーダーライブラリ（iOS 13.0 以降）
+
 Suica、PASMOなどの交通系ICカード、運転免許証の読み取り
 
 日本語・英語に対応  
@@ -19,7 +20,7 @@ Japanese & English Support!
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
-- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証まで実装済み
+- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）まで実装済み
 
 ### NFC-F (Type-F)
 - [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
@@ -55,7 +56,7 @@ class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reader = DriversLicenseReader(self)
-        self.reader.get(items: DriversLicenseCardItems.allCases)
+        self.reader.get(items: DriversLicenseCardItems.allCases, pin1: "暗証番号1")
     }
 
     func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
@@ -90,3 +91,8 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
 
 #### 大学生協プリペイドカード（大学 学生証）の場合
 - FE00
+
+## 謝辞 Acknowledgments
+### 運転免許証 `TRETJapanNFCReader/DriversLicense` 
+- `JIS0208.TXT`
+    - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)

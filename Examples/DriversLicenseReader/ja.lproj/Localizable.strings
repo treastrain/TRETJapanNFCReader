@@ -6,6 +6,9 @@
   Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 */
 
+"allFiles" = "すべてのファイル";
+
+"commonDataElements" = "共通データ要素";
 "cardIssuerData" = "カード発行者データ";
 "specificationVersionNumber" = "仕様書バージョン番号";
 "issuanceDate" = "交付年月日";
@@ -17,6 +20,8 @@
 "pinSetting" = "暗証番号(PIN)設定";
 "pinSettingTrue" = "設定する";
 "pinSettingFalse" = "設定しない";
+
+"matters" = "記載事項(本籍除く)";
 
 "enterPIN1Title" = "暗証番号1を入力";
 "enterPIN1Message" = "暗証番号を設定していない場合は何も入力せずに「次へ」をタップしてください。";

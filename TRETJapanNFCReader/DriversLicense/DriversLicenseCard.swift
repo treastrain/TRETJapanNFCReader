@@ -223,8 +223,8 @@ public struct DriversLicenseCard {
             let value = data[i...endIndex].map {$0}
             i = endIndex + 1
             
-            let valueString = value.map { (u) -> String in u.toHexString() }
-            print("タグ: \(tag.toHexString()), 長さ: \(length), 値: \(valueString)")
+            // let valueString = value.map { (u) -> String in u.toHexString() }
+            // print("タグ: \(tag.toHexString()), 長さ: \(length), 値: \(valueString)")
             
             fields.append((tag: tag, length: length, value: value))
         }
@@ -252,6 +252,7 @@ public struct DriversLicenseCard {
         
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
         formatter.dateFormat = "yyyyMMdd"
         
         for field in fields {
@@ -349,7 +350,82 @@ public struct DriversLicenseCard {
             case 0x12:
                 let nameData = field.value.split(count: 2)
                 name = String?(jisX0208Data: nameData)
-                print(name)
+            case 0x13:
+                let nicknameData = field.value.split(count: 2)
+                nickname = String?(jisX0208Data: nicknameData)
+            case 0x14:
+                let commonNameData = field.value.split(count: 2)
+                commonName = String?(jisX0208Data: commonNameData)
+            case 0x15:
+                let uniformNameData = field.value.split(count: 2)
+                uniformName = String?.init(jisX0208Data: uniformNameData)
+            case 0x16:
+                birthdate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x17:
+                let addressData = field.value.split(count: 2)
+                address = String?.init(jisX0208Data: addressData)
+            case 0x18:
+                issuanceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x19:
+                referenceNumber = String(data: Data(field.value), encoding: .shiftJIS)
+            case 0x1A:
+                let colorData = field.value.split(count: 2)
+                color = String?.init(jisX0208Data: colorData)
+            case 0x1B:
+                expirationDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x1C:
+                let condition1Data = field.value.split(count: 2)
+                condition1 = String?.init(jisX0208Data: condition1Data)
+            case 0x1D:
+                let condition2Data = field.value.split(count: 2)
+                condition2 = String?.init(jisX0208Data: condition2Data)
+            case 0x1E:
+                let condition3Data = field.value.split(count: 2)
+                condition3 = String?.init(jisX0208Data: condition3Data)
+            case 0x1F:
+                let condition4Data = field.value.split(count: 2)
+                condition4 = String?.init(jisX0208Data: condition4Data)
+            case 0x20:
+                let issuingAuthorityData = field.value.split(count: 2)
+                issuingAuthority = String?.init(jisX0208Data: issuingAuthorityData)
+            case 0x21:
+                number = String(data: Data(field.value), encoding: .shiftJIS)
+            case 0x22:
+                motorcycleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x23:
+                otherLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x24:
+                class2LicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x25:
+                heavyVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x26:
+                ordinaryVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x27:
+                heavySpecialVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x28:
+                heavyMotorcycleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x29:
+                ordinaryMotorcycleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x2A:
+                smallSpecialVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x2B:
+                mopedLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x2C:
+                trailerLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x2D:
+                class2HeavyVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x2E:
+                class2OrdinaryVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x2F:
+                class2HeavySpecialVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x30:
+                class2TrailerLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x31:
+                mediumVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x32:
+                class2MediumVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
+            case 0x33:
+                semiMediumVehicleLicenceDate = String(data: Data(field.value), encoding: .shiftJIS).toDateFromJapanese()
             default:
                 break
             }

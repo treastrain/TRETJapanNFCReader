@@ -6,6 +6,9 @@
   Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 */
 
+"allFiles" = "All Files";
+
+"commonDataElements" = "Common Data Elements";
 "cardIssuerData" = "Card Issuer Data";
 "specificationVersionNumber" = "Specification Version Number";
 "issuanceDate" = "Issuance Date";
@@ -17,6 +20,8 @@
 "pinSetting" = "PIN Setting";
 "pinSettingTrue" = "Set";
 "pinSettingFalse" = "Not set";
+
+"matters" = "Matters (except Registered Domicile)";
 
 "enterPIN1Title" = "Enter PIN 1";
 "enterPIN1Message" = "If you have not set a PIN 1, tap \"Next\" without entering anything.";
