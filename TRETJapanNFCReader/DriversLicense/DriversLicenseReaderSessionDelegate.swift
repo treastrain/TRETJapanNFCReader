@@ -8,8 +8,7 @@
 
 import CoreNFC
 
-public protocol DriversLicenseReaderSessionDelegate {
-    func driversLicenseReaderSession(didInvalidateWithError error: Error)
+public protocol DriversLicenseReaderSessionDelegate: JapanNFCReaderSessionDelegate {
     func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard)
 }
 

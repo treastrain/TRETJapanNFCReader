@@ -9,27 +9,35 @@
 import UIKit
 import CoreNFC
 
+public typealias JapanNFCReaderViewController = UIViewController & JapanNFCReaderSessionDelegate
+
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
     internal static var bundle: Bundle!
     
-    internal let viewController: UIViewController
+    internal let viewController: UIViewController?
+    internal let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
     internal var session: NFCTagReaderSession?
     
-    internal init(_ viewController: UIViewController) {
-        JapanNFCReader.bundle = Bundle(for: type(of: self))
-        self.viewController = viewController
+    private override init() {
+        self.viewController = nil
+        self.japanNFCReaderSessionDelegate = nil
     }
     
-    internal func checkReadingAvailable() -> Bool {
+    public init(delegate: JapanNFCReaderSessionDelegate) {
+        JapanNFCReader.bundle = Bundle(for: type(of: self))
+        self.viewController = nil
+        self.japanNFCReaderSessionDelegate = delegate
+    }
+    
+    public init(viewController: JapanNFCReaderViewController) {
+        JapanNFCReader.bundle = Bundle(for: type(of: self))
+        self.viewController = viewController
+        self.japanNFCReaderSessionDelegate = viewController
+    }
+    
+    public func checkReadingAvailable() -> Bool {
         guard NFCTagReaderSession.readingAvailable else {
-            let alertController = UIAlertController(
-                title: self.localizedString(key: "nfcReadingUnavailableAlertTitle"),
-                message: self.localizedString(key: "nfcReadingUnavailableAlertMessage"),
-                preferredStyle: .alert
-            )
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.viewController.present(alertController, animated: true, completion: nil)
             print("""
                 ------------------------------------------------------------
                 NFC のスキャンを開始することができませんでした。NFC の検出をサポートしている端末かどうか確認してください。
@@ -40,6 +48,19 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
                 \t• 開発している iOS Application の Info.plist に "Privacy - NFC Scan Usage Description (NFCReaderUsageDescription)" を追加してください。これを追加していない場合は実行時に signal SIGABRT エラーとなります。
                 ------------------------------------------------------------
             """)
+            
+            if let viewController = self.viewController {
+                let alertController = UIAlertController(
+                    title: self.localizedString(key: "nfcReadingUnavailableAlertTitle"),
+                    message: self.localizedString(key: "nfcReadingUnavailableAlertMessage"),
+                    preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                viewController.present(alertController, animated: true, completion: nil)
+            } else {
+                self.japanNFCReaderSessionDelegate?.japanNFCReaderSession(didInvalidateWithError: JapanNFCReaderError.nfcReadingUnavailable)
+            }
+            
             return false
         }
         
@@ -55,14 +76,18 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
-                let alertController = UIAlertController(
-                    title: self.localizedString(key: "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle"),
-                    message: readerError.localizedDescription,
-                    preferredStyle: .alert
-                )
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                DispatchQueue.main.async {
-                    self.viewController.present(alertController, animated: true, completion: nil)
+                if let viewController = self.viewController {
+                    let alertController = UIAlertController(
+                        title: self.localizedString(key: "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle"),
+                        message: readerError.localizedDescription,
+                        preferredStyle: .alert
+                    )
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    DispatchQueue.main.async {
+                        viewController.present(alertController, animated: true, completion: nil)
+                    }
+                } else {
+                    self.japanNFCReaderSessionDelegate?.japanNFCReaderSession(didInvalidateWithError: JapanNFCReaderError.nfcTagReaderSessionDidInvalidate)
                 }
             }
         }

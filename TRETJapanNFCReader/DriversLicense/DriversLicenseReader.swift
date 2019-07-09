@@ -6,7 +6,6 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreNFC
 
@@ -16,28 +15,38 @@ internal typealias DriversLicenseCardTag = NFCISO7816Tag
 
 public class DriversLicenseReader: JapanNFCReader {
     
-    internal var delegate: DriversLicenseReaderSessionDelegate?
+    internal let delegate: DriversLicenseReaderSessionDelegate?
     private var driversLicenseCardItems: [DriversLicenseCardItem] = []
     
     private var pin1: [UInt8] = []
     private var pin2: [UInt8] = []
     
+    private init() {
+        fatalError()
+    }
+    
+    /// DriversLicenseReader を初期化する。
+    /// - Parameter delegate: DriversLicenseReaderSessionDelegate
+    public init(delegate: DriversLicenseReaderSessionDelegate) {
+        self.delegate = delegate
+        super.init(delegate: delegate)
+    }
+    
     /// DriversLicenseReader を初期化する。
     /// - Parameter viewController: DriversLicenseReaderSessionDelegate を適用した UIViewController
     public init(_ viewController: DriversLicenseReaderViewController) {
-        super.init(viewController)
         self.delegate = viewController
+        super.init(viewController: viewController)
     }
     
     /// 運転免許証からデータを読み取る
     /// - Parameter items: 運転免許証から読み取りたいデータ
     public func get(items: [DriversLicenseCardItem], pin1: String = "", pin2: String = "") {
-        self.delegate = self.viewController as? DriversLicenseReaderSessionDelegate
         if items.contains(.matters) {
             if let pin = convertPINStringToJISX0201(pin1) {
                 self.pin1 = pin
             } else {
-                self.delegate?.driversLicenseReaderSession(didInvalidateWithError: DriversLicenseReaderError.incorrectPINFormat)
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.incorrectPINFormat)
                 return
             }
         }
@@ -80,7 +89,7 @@ public class DriversLicenseReader: JapanNFCReader {
                 """)
             }
         }
-        self.delegate?.driversLicenseReaderSession(didInvalidateWithError: error)
+        self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
     }
     
     public override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {

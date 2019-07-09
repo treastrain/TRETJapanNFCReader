@@ -8,7 +8,6 @@
 
 import Foundation
 
-public protocol TransitICReaderSessionDelegate {
-    func transitICReaderSession(didInvalidateWithError error: Error)
+public protocol TransitICReaderSessionDelegate: JapanNFCReaderSessionDelegate {
     func transitICReaderSession(didRead transitICCard: TransitICCard)
 }

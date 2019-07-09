@@ -135,12 +135,12 @@ extension DriversLicenseReader {
             var pin1 = pin1
             if pinSetting.pinSetting {
                 if pin1 == [0x2A, 0x2A, 0x2A, 0x2A] {
-                    self.delegate?.driversLicenseReaderSession(didInvalidateWithError: DriversLicenseReaderError.needPIN)
+                    self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.needPIN)
                     session.invalidate(errorMessage: self.localizedString(key: "pinRequired"))
                     return driversLicenseCard
                 }
             } else {
-                self.delegate?.driversLicenseReaderSession(didInvalidateWithError: DriversLicenseReaderError.enteredPINWasIgnored)
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.enteredPINWasIgnored)
                 pin1 = [0x2A, 0x2A, 0x2A, 0x2A]
             }
             
@@ -199,7 +199,7 @@ extension DriversLicenseReader {
                                     break
                                 }
                                 
-                                self.delegate?.driversLicenseReaderSession(didInvalidateWithError: error)
+                                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                             }
                             session.invalidate(errorMessage: "エラー: ステータス: \(status.description)")
                             return

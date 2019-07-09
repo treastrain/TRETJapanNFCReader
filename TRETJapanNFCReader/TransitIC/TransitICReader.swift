@@ -6,7 +6,6 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreNFC
 
@@ -16,21 +15,30 @@ internal typealias TransitICCardTag = NFCFeliCaTag
 
 public class TransitICReader: JapanNFCReader {
     
-    internal var delegate: TransitICReaderSessionDelegate?
+    internal let delegate: TransitICReaderSessionDelegate?
     private var transitICCardItems: [TransitICCardItem] = []
+    
+    private init() {
+        fatalError()
+    }
+    
+    /// TransitICReader を初期化する。
+    /// - Parameter delegate: TransitICReaderSessionDelegate
+    public init(delegate: TransitICReaderSessionDelegate) {
+        self.delegate = delegate
+        super.init(delegate: delegate)
+    }
     
     /// TransitICReader を初期化する。
     /// - Parameter viewController: TransitICReaderSessionDelegate を適用した UIViewController
-    public init(_ viewController: TransitICReaderViewController) {
-        super.init(viewController)
+    public init(viewController: TransitICReaderViewController) {
         self.delegate = viewController
+        super.init(viewController: viewController)
     }
     
     /// 交通系ICカードからデータを読み取る
     /// - Parameter items: 交通系ICカードから読み取りたいデータ
     public func get(items: [TransitICCardItem]) {
-        self.delegate = self.viewController as? TransitICReaderSessionDelegate
-        
         self.transitICCardItems = items
         self.beginScanning()
     }
@@ -66,7 +74,7 @@ public class TransitICReader: JapanNFCReader {
                 """)
             }
         }
-        self.delegate?.transitICReaderSession(didInvalidateWithError: error)
+        self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
     }
     
     public override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
