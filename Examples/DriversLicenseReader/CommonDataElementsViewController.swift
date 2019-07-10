@@ -17,7 +17,7 @@ class CommonDataElementsViewController: UITableViewController, DriversLicenseRea
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.reader = DriversLicenseReader(self)
+        self.reader = DriversLicenseReader(viewController: self)
         self.reread()
     }
     
@@ -25,7 +25,7 @@ class CommonDataElementsViewController: UITableViewController, DriversLicenseRea
         self.reader.get(items: [.commonData])
     }
     
-    func driversLicenseReaderSession(didInvalidateWithError error: Error) {
+    func japanNFCReaderSession(didInvalidateWithError error: Error)  {
         var prompt: String? = nil
         
         if let readerError = error as? NFCReaderError {

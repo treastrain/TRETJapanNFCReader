@@ -34,7 +34,7 @@ public class DriversLicenseReader: JapanNFCReader {
     
     /// DriversLicenseReader を初期化する。
     /// - Parameter viewController: DriversLicenseReaderSessionDelegate を適用した UIViewController
-    public init(_ viewController: DriversLicenseReaderViewController) {
+    public init(viewController: DriversLicenseReaderViewController) {
         self.delegate = viewController
         super.init(viewController: viewController)
     }

@@ -22,7 +22,7 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.reader = TransitICReader(self)
+        self.reader = TransitICReader(viewController: self)
         self.reread()
     }
     
@@ -30,7 +30,7 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
         self.reader.get(items: [.balance])
     }
     
-    func transitICReaderSession(didInvalidateWithError error: Error) {
+    func japanNFCReaderSession(didInvalidateWithError error: Error) {
         
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)

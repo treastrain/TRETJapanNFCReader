@@ -19,7 +19,7 @@ class MattersViewController: UITableViewController, DriversLicenseReaderSessionD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.reader = DriversLicenseReader(self)
+        self.reader = DriversLicenseReader(viewController: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class MattersViewController: UITableViewController, DriversLicenseReaderSessionD
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func driversLicenseReaderSession(didInvalidateWithError error: Error) {
+    func japanNFCReaderSession(didInvalidateWithError error: Error) {
         var prompt: String? = nil
         
         if let readerError = error as? NFCReaderError {
