@@ -1,7 +1,7 @@
 ![](TRETJapanNFCReader.png)
 
 # TRETJapanNFCReader
-日本のNFCカード向けリーダーライブラリ（iOS 13.0 以降）
+日本のNFCカード向けリーダーライブラリ（iOS 9.3 以降、NFCカードの読み取りは iOS 13.0 以降）
 
 Suica、PASMOなどの交通系ICカード、運転免許証の読み取り
 
@@ -29,8 +29,9 @@ Japanese & English Support!
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
 
 ## 対応 OS
-- iOS 13.0
+- iOS 9.3 以降
 
+※ NFCカードの読み取りは iOS 13.0 以降で対応するデバイスで使用可能。
 ※ iOS 13.0 beta 1 では NFC-B (Type-B) を正常に読み書きできない事象を確認。iOS 13.0 beta 2 で解消。
 
 ## 使い方
