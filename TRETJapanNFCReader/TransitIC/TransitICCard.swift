@@ -20,4 +20,5 @@ public struct TransitICCard {
     
     public let idm: String
     public let systemCode: String
+    public var balance: Int?
 }

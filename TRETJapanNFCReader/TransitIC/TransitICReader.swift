@@ -130,7 +130,7 @@ public class TransitICReader: JapanNFCReader {
             for item in self.transitICCardItems {
                 switch item {
                 case .balance:
-                    self.readBalance(session, transitICCard)
+                    transitICCard = self.readBalance(session, transitICCard)
                     break
                 }
                 completion(transitICCard)

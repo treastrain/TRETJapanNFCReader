@@ -64,3 +64,9 @@
 "mediumVehicle" = "中型";
 "class2MediumVehicle" = "中二";
 "semiMediumVehicle" = "準中型";
+
+"matters_registeredDomicile" = "記載事項(本籍)";
+"registeredDomicile" = "本籍";
+"enterPINsTitle" = "暗証番号1・2を入力";
+"enterPINsMessage" = "暗証番号を設定していない場合は何も入力せずに「次へ」をタップしてください。";
+"enterPIN2TextFieldPlaceholder" = "暗証番号2";

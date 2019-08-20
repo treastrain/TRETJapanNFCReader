@@ -63,3 +63,9 @@
 "mediumVehicle" = "Medium Vehicle";
 "class2MediumVehicle" = "Class 2 Medium Vehicle";
 "semiMediumVehicle" = "Semi Medium Vehicle";
+
+"matters_registeredDomicile" = "Matters (Registered Domicile)";
+"registeredDomicile" = "Registered Domicile";
+"enterPINsTitle" = "Enter PIN 1, PIN 2";
+"enterPINsMessage" = "If you have not set a PINs, tap \"Next\" without entering anything.";
+"enterPIN2TextFieldPlaceholder" = "PIN 2";

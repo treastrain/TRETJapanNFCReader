@@ -15,51 +15,47 @@ extension TransitICReader {
         var transitICCard = transitICCard
         let tag = transitICCard.tag
         
-        tag.polling(systemCode: tag.currentSystemCode, requestCode: .systemCode, timeSlot: .max16) { (pmm, requestData, error) in
-            let pmm = pmm.map { String(format: "%.2hhx", $0) }.joined()
-            let requestData = requestData.map { String(format: "%.2hhx", $0) }.joined()
-            print(pmm, requestData, error)
+        let nodeCode = Data([0x09, 0x0f].reversed())
+        tag.requestService(nodeCodeList: [nodeCode]) { (nodesData, error) in
             
-            let serviceCodeList: [Data] = [
-                UInt16(0x008B).data
-            ]
-            let blockList: [Data] = [
-//                UInt16(0x00).data
-            ]
-            tag.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (status1, status2, blockData, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                session.invalidate(errorMessage: error.localizedDescription)
+                return
+            }
+            
+            guard let nodeData = nodesData.first, nodeData != Data([0xFF, 0xFF]) else {
+                print("選択された node のサービスが存在しません")
+                session.invalidate(errorMessage: "選択された node のサービスが存在しません")
+                return
+            }
+            
+            let blockList = (0..<12).map { (block) -> Data in
+                Data([0x80, UInt8(block)])
+            }
+            
+            tag.readWithoutEncryption(serviceCodeList: [nodeCode], blockList: blockList) { (status1, status2, blockData, error) in
+                
                 if let error = error {
-                    print(error)
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: error.localizedDescription)
+                    return
                 } else {
                     print("status1:", UInt8(status1).toHexString(), "status2:", UInt8(status2).toHexString(), blockData)
                 }
                 
+                guard status1 == 0x00, status2 == 0x00 else {
+                    print("ステータスフラグがエラーを示しています")
+                    session.invalidate(errorMessage: "ステータスフラグがエラーを示しています")
+                    return
+                }
+                
+                let data = blockData.first!
+                let balance = Int(data[10]) + Int(data[11]) << 8
+                transitICCard.balance = balance
+                
                 semaphore.signal()
             }
-//            tag.requestService(nodeCodeList: serviceCodeList) { (nodeKeyVersionList, error) in
-//                // print(nodeKeyVersionList, error)
-//                if nodeKeyVersionList.count > 1 {
-//                    let data1 = nodeKeyVersionList[0].map { String(format: "%.2hhx", $0) }.joined()
-//                    print("data1: \(data1)", " ", terminator: "")
-//                }
-//                if nodeKeyVersionList.count > 2 {
-//                    let data2 = nodeKeyVersionList[1].map { String(format: "%.2hhx", $0) }.joined()
-//                    print("data2: \(data2)", " ", terminator: "")
-//                }
-//                print(error)
-                
-//                let blockList: [Data] = [
-//                    UInt16(0x00).data
-//                ]
-                tag.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (status1, status2, blockData, error) in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        print("status1:", UInt8(status1).toHexString(), "status2:", UInt8(status2).toHexString(), blockData)
-                    }
-                    
-                    semaphore.signal()
-                }
-//            }
         }
         
         semaphore.wait()

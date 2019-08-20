@@ -43,7 +43,7 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
                 alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 DispatchQueue.main.async {
                     self.present(alertController, animated: true, completion: nil)
-                    self.balanceLabel.text = "¥ ----"
+                    self.balanceLabel.text = "¥ -----"
                     self.idmLabel.text = "IDm: "
                     self.systemCodeLabel.text = "System Code: "
                 }
@@ -57,6 +57,11 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
         self.transitICCard = transitICCard
         
         DispatchQueue.main.async {
+            if let balance = transitICCard.balance {
+                self.balanceLabel.text = "¥ \(balance)"
+            } else {
+                self.balanceLabel.text = "¥ -----"
+            }
             self.idmLabel.text = "IDm: \(transitICCard.idm)"
             self.systemCodeLabel.text = "System Code: \(transitICCard.systemCode)"
         }
