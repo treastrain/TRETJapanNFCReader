@@ -44,6 +44,7 @@
                         <segue destination="OlO-CO-16m" kind="show" identifier="toCommonDataElementsVC" id="N6s-C7-UB3"/>
                         <segue destination="V48-Ad-Ajk" kind="show" identifier="toPINSettingVC" id="MHg-Lu-qHL"/>
                         <segue destination="fyD-Hh-tvH" kind="show" identifier="toMattersVC" id="MpV-Qs-gwB"/>
+                        <segue destination="MgZ-1k-RX4" kind="show" identifier="toRegisteredDomicileVC" id="TBn-Cb-mKj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9Y-r7-cgK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -98,7 +99,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0UU-8j-CfA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2012" y="-627"/>
+            <point key="canvasLocation" x="2019" y="-1027"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TXy-r0-cIn">
@@ -166,7 +167,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6h-Yx-En7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2012" y="126"/>
+            <point key="canvasLocation" x="2019" y="-275"/>
         </scene>
         <!--All Files-->
         <scene sceneID="Nbb-lg-QcT">
@@ -266,7 +267,59 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7R-jX-WzH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2012" y="870"/>
+            <point key="canvasLocation" x="2019" y="469"/>
+        </scene>
+        <!--Matters (Registered Domicile)-->
+        <scene sceneID="Feq-xG-aJU">
+            <objects>
+                <tableViewController id="MgZ-1k-RX4" customClass="RegisteredDomicileViewController" customModule="DriversLicenseReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rQE-Vt-3py">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="pV8-5W-fgs" detailTextLabel="GJ5-2Q-jOz" style="IBUITableViewCellStyleValue1" id="Vc0-hs-F2g">
+                                <rect key="frame" x="20" y="55.333332061767578" width="374" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vc0-hs-F2g" id="20g-o4-ywI">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="pV8-5W-fgs">
+                                            <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="33.333333333333343" height="20.333333333333329"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="GJ5-2Q-jOz">
+                                            <rect key="frame" x="312.33333333333331" y="12.999999999999998" width="41.666666666666686" height="19.333333333333329"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MgZ-1k-RX4" id="J2P-YU-TUi"/>
+                            <outlet property="delegate" destination="MgZ-1k-RX4" id="JHW-JS-cy1"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Matters (Registered Domicile)" id="yp1-cj-0X8">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="t3x-Ao-91h">
+                            <connections>
+                                <action selector="reread" destination="MgZ-1k-RX4" id="66z-gx-Poe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WG8-xQ-eF9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2019" y="1238"/>
         </scene>
     </scenes>
 </document>

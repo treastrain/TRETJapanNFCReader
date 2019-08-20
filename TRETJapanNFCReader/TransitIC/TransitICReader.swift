@@ -9,10 +9,13 @@
 import UIKit
 import CoreNFC
 
+@available(iOS 13.0, *)
 public typealias TransitICReaderViewController = UIViewController & TransitICReaderSessionDelegate
 
+@available(iOS 13.0, *)
 internal typealias TransitICCardTag = NFCFeliCaTag
 
+@available(iOS 13.0, *)
 public class TransitICReader: JapanNFCReader {
     
     internal let delegate: TransitICReaderSessionDelegate?

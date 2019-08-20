@@ -28,7 +28,7 @@ class DriversLicenseViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return 3
+            return 4
         default:
             return 0
         }
@@ -55,6 +55,8 @@ class DriversLicenseViewController: UITableViewController {
                 cell.textLabel?.text = NSLocalizedString("pinSetting", bundle: Bundle(for: type(of: self)), comment: "")
             case 2:
                 cell.textLabel?.text = NSLocalizedString("matters", bundle: Bundle(for: type(of: self)), comment: "")
+            case 3:
+                cell.textLabel?.text = NSLocalizedString("matters_registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
             default:
                 break
             }
@@ -77,6 +79,8 @@ class DriversLicenseViewController: UITableViewController {
                 self.performSegue(withIdentifier: "toPINSettingVC", sender: nil)
             case 2:
                 self.performSegue(withIdentifier: "toMattersVC", sender: nil)
+            case 3:
+                self.performSegue(withIdentifier: "toRegisteredDomicileVC", sender: nil)
             default:
                 break
             }

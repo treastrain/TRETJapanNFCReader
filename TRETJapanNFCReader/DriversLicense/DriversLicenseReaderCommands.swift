@@ -8,6 +8,7 @@
 
 import CoreNFC
 
+@available(iOS 13.0, *)
 extension DriversLicenseReader {
     
     /// オペレーションが完了した後にセッションが呼び出す handler。

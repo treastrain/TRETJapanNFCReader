@@ -8,6 +8,7 @@
 
 import CoreNFC
 
+@available(iOS 13.0, *)
 extension TransitICReader {
     
     

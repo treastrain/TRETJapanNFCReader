@@ -16,9 +16,12 @@ public enum DriversLicenseCardItem: CaseIterable {
     case pinSetting
     /// DF1/EF01 記載事項(本籍除く)
     case matters
+    /// DF1/EF02 記載事項(本籍)
+    case registeredDomicile
 }
 
 /// 日本の運転免許証
+@available(iOS 13.0, *)
 public struct DriversLicenseCard {
     internal var tag: DriversLicenseCardTag
     
@@ -122,11 +125,15 @@ public struct DriversLicenseCard {
     /// DF1/EF01 記載事項(本籍除く)
     public var matters: Matters?
     
+    /// DF1/EF02 記載事項(本籍)
+    public struct RegisteredDomicile {
+        /// 本籍
+        public var registeredDomicile: String
+    }
+    /// DF1/EF02 記載事項(本籍)
+    public var registeredDomicile: RegisteredDomicile?
+    
     /*
-    
-    // DF1/EF02 記載事項(本籍)
-    var 本籍: String
-    
     // DF1/EF03 外字
     var 文字構成1: Int
     var 外字1: Data
@@ -236,6 +243,8 @@ public struct DriversLicenseCard {
             driversLicenseCard = self.convertToPinSetting(fields: fields)
         case .matters:
             driversLicenseCard = self.convertToMatters(fields: fields)
+        case .registeredDomicile:
+            driversLicenseCard = self.convertToRegisteredDomicile(fields: fields)
         }
         
         return driversLicenseCard
@@ -444,6 +453,16 @@ public struct DriversLicenseCard {
            let issuingAuthority = issuingAuthority,
            let number = number {
             driversLicenseCard.matters = DriversLicenseCard.Matters(jisX0208EstablishmentYearNumber: jisX0208EstablishmentYearNumber, name: name, nickname: nickname, commonName: commonName, uniformName: uniformName, birthdate: birthdate, address: address, issuanceDate: issuanceDate, referenceNumber: referenceNumber, color: color, expirationDate: expirationDate, condition1: condition1, condition2: condition2, condition3: condition3, condition4: condition4, issuingAuthority: issuingAuthority, number: number, motorcycleLicenceDate: motorcycleLicenceDate, otherLicenceDate: otherLicenceDate, class2LicenceDate: class2LicenceDate, heavyVehicleLicenceDate: heavyVehicleLicenceDate, ordinaryVehicleLicenceDate: ordinaryVehicleLicenceDate, heavySpecialVehicleLicenceDate: heavySpecialVehicleLicenceDate, heavyMotorcycleLicenceDate: heavyMotorcycleLicenceDate, ordinaryMotorcycleLicenceDate: ordinaryMotorcycleLicenceDate, smallSpecialVehicleLicenceDate: smallSpecialVehicleLicenceDate, mopedLicenceDate: mopedLicenceDate, trailerLicenceDate: trailerLicenceDate, class2HeavyVehicleLicenceDate: class2HeavyVehicleLicenceDate, class2OrdinaryVehicleLicenceDate: class2OrdinaryVehicleLicenceDate, class2HeavySpecialVehicleLicenceDate: class2HeavySpecialVehicleLicenceDate, class2TrailerLicenceDate: class2TrailerLicenceDate, mediumVehicleLicenceDate: mediumVehicleLicenceDate, class2MediumVehicleLicenceDate: class2MediumVehicleLicenceDate, semiMediumVehicleLicenceDate: semiMediumVehicleLicenceDate)
+        }
+        
+        return driversLicenseCard
+    }
+    
+    private func convertToRegisteredDomicile(fields: [TLVField]) -> DriversLicenseCard {
+        var driversLicenseCard = self
+        
+        if let registeredDomicileData = fields.first?.value.split(count: 2), let registeredDomicile = String?(jisX0208Data: registeredDomicileData) {
+            driversLicenseCard.registeredDomicile = DriversLicenseCard.RegisteredDomicile(registeredDomicile: registeredDomicile)
         }
         
         return driversLicenseCard

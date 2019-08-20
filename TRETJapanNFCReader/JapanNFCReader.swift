@@ -11,6 +11,7 @@ import CoreNFC
 
 public typealias JapanNFCReaderViewController = UIViewController & JapanNFCReaderSessionDelegate
 
+@available(iOS 13.0, *)
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
     internal static var bundle: Bundle!

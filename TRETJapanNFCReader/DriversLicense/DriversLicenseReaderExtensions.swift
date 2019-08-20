@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(iOS 13.0, *)
 extension DriversLicenseReader {
     
     public func convertPINStringToJISX0201(_ pinString: String) -> [UInt8]? {

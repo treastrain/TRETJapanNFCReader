@@ -63,6 +63,27 @@
 			remoteGlobalIDString = CD5D2D7022C5E977004330F3;
 			remoteInfo = TRETJapaneseNFCReader;
 		};
+		CDB55B80230C0BA30015BE2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDB55AC7230BECEF0015BE2F;
+			remoteInfo = japanNFCReader;
+		};
+		CDB55B82230C0BA30015BE2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDB55ADB230BECF10015BE2F;
+			remoteInfo = "japanNFCReader WatchKit App";
+		};
+		CDB55B84230C0BA30015BE2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDB55AEA230BECF20015BE2F;
+			remoteInfo = "japanNFCReader WatchKit Extension";
+		};
 		CDFC3B7022CE2B05000E88B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
@@ -137,6 +158,7 @@
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CDB3AD4B22CFAEC10069AB7F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = japanNFCReader.xcodeproj; path = japanNFCReader/japanNFCReader.xcodeproj; sourceTree = "<group>"; };
 		CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitICReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,6 +205,7 @@
 		CD5D2D3422C5DF36004330F3 = {
 			isa = PBXGroup;
 			children = (
+				CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */,
 				CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */,
 				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
 				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
@@ -270,6 +293,16 @@
 				CD8FC6ED22D111F0007ECC1C /* JIS0208.TXT */,
 			);
 			path = DriversLicense;
+			sourceTree = "<group>";
+		};
+		CDB55B7B230C0BA30015BE2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDB55B81230C0BA30015BE2F /* Japan NFC Reader.app */,
+				CDB55B83230C0BA30015BE2F /* Japan NFC Reader.app */,
+				CDB55B85230C0BA30015BE2F /* Japan NFC Reader.appex */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */ = {
@@ -403,6 +436,12 @@
 			mainGroup = CD5D2D3422C5DF36004330F3;
 			productRefGroup = CD5D2D3F22C5DF36004330F3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CDB55B7B230C0BA30015BE2F /* Products */;
+					ProjectRef = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CD5D2D4C22C5E2F7004330F3 /* DriversLicenseReader */,
@@ -411,6 +450,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CDB55B81230C0BA30015BE2F /* Japan NFC Reader.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Japan NFC Reader.app";
+			remoteRef = CDB55B80230C0BA30015BE2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDB55B83230C0BA30015BE2F /* Japan NFC Reader.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Japan NFC Reader.app";
+			remoteRef = CDB55B82230C0BA30015BE2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDB55B85230C0BA30015BE2F /* Japan NFC Reader.appex */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.app-extension";
+			path = "Japan NFC Reader.appex";
+			remoteRef = CDB55B84230C0BA30015BE2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CD5D2D4B22C5E2F7004330F3 /* Resources */ = {
@@ -636,7 +699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -694,7 +757,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

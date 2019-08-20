@@ -9,10 +9,13 @@
 import UIKit
 import CoreNFC
 
+@available(iOS 13.0, *)
 public typealias DriversLicenseReaderViewController = UIViewController & DriversLicenseReaderSessionDelegate
 
+@available(iOS 13.0, *)
 internal typealias DriversLicenseCardTag = NFCISO7816Tag
 
+@available(iOS 13.0, *)
 public class DriversLicenseReader: JapanNFCReader {
     
     internal let delegate: DriversLicenseReaderSessionDelegate?
@@ -42,7 +45,7 @@ public class DriversLicenseReader: JapanNFCReader {
     /// 運転免許証からデータを読み取る
     /// - Parameter items: 運転免許証から読み取りたいデータ
     public func get(items: [DriversLicenseCardItem], pin1: String = "", pin2: String = "") {
-        if items.contains(.matters) {
+        if items.contains(.matters) || items.contains(.registeredDomicile) {
             if let pin = convertPINStringToJISX0201(pin1) {
                 self.pin1 = pin
             } else {
@@ -50,6 +53,16 @@ public class DriversLicenseReader: JapanNFCReader {
                 return
             }
         }
+        
+        if items.contains(.registeredDomicile) {
+            if let pin = convertPINStringToJISX0201(pin2) {
+                self.pin2 = pin
+            } else {
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.incorrectPINFormat)
+                return
+            }
+        }
+        
         self.driversLicenseCardItems = items
         self.beginScanning()
     }
@@ -148,6 +161,8 @@ public class DriversLicenseReader: JapanNFCReader {
                     driversLicenseCard = self.readPINSetting(session, driversLicenseCard)
                 case .matters:
                     driversLicenseCard = self.readMatters(session, driversLicenseCard, pin1: self.pin1)
+                case .registeredDomicile:
+                    driversLicenseCard = self.readRegisteredDomicile(session, driversLicenseCard, pin1: self.pin1, pin2: self.pin2)
                 }
             }
             self.pin1 = []
