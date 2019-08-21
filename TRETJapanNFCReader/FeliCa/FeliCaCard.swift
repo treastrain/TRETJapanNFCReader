@@ -16,8 +16,6 @@ public protocol FeliCaCard {
     
     var idm: String { get }
     var systemCode: FeliCaSystemCode { get }
-    
-    func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, items: [FeliCaCardItem], completion: @escaping (FeliCaCard) -> Void)
 }
 
 public protocol FeliCaCardItem {
