@@ -9,6 +9,5 @@
 import Foundation
 
 @available(iOS 13.0, *)
-public protocol TransitICReaderSessionDelegate: JapanNFCReaderSessionDelegate {
-    func transitICReaderSession(didRead transitICCard: TransitICCard)
+public protocol TransitICReaderSessionDelegate: FeliCaReaderSessionDelegate {
 }

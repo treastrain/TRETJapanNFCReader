@@ -53,8 +53,8 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
         }
     }
     
-    func transitICReaderSession(didRead transitICCard: TransitICCard) {
-        self.transitICCard = transitICCard
+    func feliCaReaderSession(didRead feliCaCard: FeliCaCard) {
+        let transitICCard = feliCaCard as! TransitICCard
         
         DispatchQueue.main.async {
             if let balance = transitICCard.balance {
@@ -63,8 +63,10 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
                 self.balanceLabel.text = "¥ -----"
             }
             self.idmLabel.text = "IDm: \(transitICCard.idm)"
-            self.systemCodeLabel.text = "System Code: \(transitICCard.systemCode)"
+            self.systemCodeLabel.text = "System Code: \(transitICCard.systemCode.string)"
         }
+        
+        self.transitICCard = transitICCard
     }
 
 

@@ -41,6 +41,9 @@
 		CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */; };
 		CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */; };
 		CD9EBF0E22CDF1A7005D17CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7936DE22C6492B00E5AC2E /* Main.storyboard */; };
+		CDAC056B230D2C9D00E1DDCF /* FeliCaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */; };
+		CDAC056D230D2D9400E1DDCF /* FeliCaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */; };
+		CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */; };
 		CDB3AD4C22CFAEC20069AB7F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3AD4B22CFAEC10069AB7F /* Extensions.swift */; };
 		CDFC3B5D22CE2AD2000E88B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */; };
 		CDFC3B5F22CE2AD2000E88B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */; };
@@ -157,6 +160,9 @@
 		CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileViewController.swift; sourceTree = "<group>"; };
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
+		CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaCard.swift; sourceTree = "<group>"; };
+		CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReader.swift; sourceTree = "<group>"; };
+		CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CDB3AD4B22CFAEC10069AB7F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = japanNFCReader.xcodeproj; path = japanNFCReader/japanNFCReader.xcodeproj; sourceTree = "<group>"; };
 		CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitICReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,7 +279,7 @@
 				CDB3AD4B22CFAEC10069AB7F /* Extensions.swift */,
 				CD79369C22C6300200E5AC2E /* Localizable.strings */,
 				CD5D2D7A22C5EA25004330F3 /* DriversLicense */,
-				CDFC3B7922CE2C52000E88B4 /* TransitIC */,
+				CDAC0566230D2C7D00E1DDCF /* FeliCa */,
 			);
 			path = TRETJapanNFCReader;
 			sourceTree = "<group>";
@@ -293,6 +299,17 @@
 				CD8FC6ED22D111F0007ECC1C /* JIS0208.TXT */,
 			);
 			path = DriversLicense;
+			sourceTree = "<group>";
+		};
+		CDAC0566230D2C7D00E1DDCF /* FeliCa */ = {
+			isa = PBXGroup;
+			children = (
+				CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */,
+				CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */,
+				CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */,
+				CDFC3B7922CE2C52000E88B4 /* TransitIC */,
+			);
+			path = FeliCa;
 			sourceTree = "<group>";
 		};
 		CDB55B7B230C0BA30015BE2F /* Products */ = {
@@ -534,10 +551,12 @@
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
 				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */,
+				CDAC056D230D2D9400E1DDCF /* FeliCaReader.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
+				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CD06199422CE3694000EB026 /* TransitICReaderReadFunctions.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
 				CDFC3B8122CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift in Sources */,
@@ -547,6 +566,7 @@
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
 				CDFC3B7F22CE2D46000E88B4 /* TransitICCard.swift in Sources */,
 				CD8B7B6922CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift in Sources */,
+				CDAC056B230D2C9D00E1DDCF /* FeliCaCard.swift in Sources */,
 				CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +890,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/TransitICReader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -889,6 +910,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/TransitICReader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

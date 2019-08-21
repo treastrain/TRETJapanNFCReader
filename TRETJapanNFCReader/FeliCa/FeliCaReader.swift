@@ -1,8 +1,8 @@
 //
-//  TransitICReader.swift
+//  FeliCaReader.swift
 //  TRETJapanNFCReader
 //
-//  Created by treastrain on 2019/07/04.
+//  Created by treastrain on 2019/08/21.
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
@@ -10,49 +10,44 @@ import UIKit
 import CoreNFC
 
 @available(iOS 13.0, *)
-public typealias TransitICReaderViewController = UIViewController & TransitICReaderSessionDelegate
+public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSessionDelegate
 
 @available(iOS 13.0, *)
-internal typealias TransitICCardTag = NFCFeliCaTag
-
-@available(iOS 13.0, *)
-public class TransitICReader: JapanNFCReader {
+public class FeliCaReader: JapanNFCReader {
     
-    internal let delegate: TransitICReaderSessionDelegate?
-    private var transitICCardItems: [TransitICCardItem] = []
+    internal let delegate: FeliCaReaderSessionDelegate?
     
     private init() {
         fatalError()
     }
     
-    /// TransitICReader を初期化する。
-    /// - Parameter delegate: TransitICReaderSessionDelegate
-    public init(delegate: TransitICReaderSessionDelegate) {
+    /// FeliCaReader を初期化する
+    /// - Parameter delegate: FeliCaReaderSessionDelegate
+    public init(delegate: FeliCaReaderSessionDelegate) {
         self.delegate = delegate
         super.init(delegate: delegate)
     }
     
-    /// TransitICReader を初期化する。
-    /// - Parameter viewController: TransitICReaderSessionDelegate を適用した UIViewController
-    public init(viewController: TransitICReaderViewController) {
+    /// FeliCaReader を初期化する
+    /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
+    public init(viewController: FeliCaReaderViewController) {
         self.delegate = viewController
         super.init(viewController: viewController)
     }
     
-    /// 交通系ICカードからデータを読み取る
-    /// - Parameter items: 交通系ICカードから読み取りたいデータ
-    public func get(items: [TransitICCardItem]) {
-        self.transitICCardItems = items
-        self.beginScanning()
-    }
+    /// FeliCa カードからデータを読み取る
+    /// - Parameter items: FeliCa カードから読み取りたいデータ
+//    public func get(items: [FeliCaCardItem]) {
+//        self.feliCaCardItems = items
+//        self.beginScanning()
+//    }
     
-    private func beginScanning() {
+    internal func beginScanning() {
         guard self.checkReadingAvailable() else {
             print("""
                 ------------------------------------------------------------
-                【交通系ICカードを読み取るには】
-                交通系ICカード（Suica、PASMO など）を読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加します。ワイルドカードは使用できません。ISO18092 system codes for NFC Tag Reader Session には以下を含める必要があります。
-                \t• Item 0: 0003
+                【FeliCa カードを読み取るには】
+                FeliCa カードを読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加します。ワイルドカードは使用できません。ISO18092 system codes for NFC Tag Reader Session にシステムコードを追加します。
                 ------------------------------------------------------------
             """)
             return
@@ -64,15 +59,13 @@ public class TransitICReader: JapanNFCReader {
     }
     
     public override func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
-        super.tagReaderSession(session, didInvalidateWithError: error)
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
                 print("""
                     ------------------------------------------------------------
-                    【交通系ICカードを読み取るには】
-                    交通系ICカード（Suica、PASMO など）を読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加します。ワイルドカードは使用できません。ISO18092 system codes for NFC Tag Reader Session には以下を含める必要があります。
-                    \t• Item 0: 0003
+                    【FeliCa カードを読み取るには】
+                    FeliCa カードを読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加します。ワイルドカードは使用できません。ISO18092 system codes for NFC Tag Reader Session にシステムコードを追加します。
                     ------------------------------------------------------------
                 """)
             }
@@ -81,7 +74,6 @@ public class TransitICReader: JapanNFCReader {
     }
     
     public override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
-        
         if tags.count > 1 {
             let retryInterval = DispatchTimeInterval.milliseconds(1000)
             let alertedMessage = session.alertMessage
@@ -101,7 +93,7 @@ public class TransitICReader: JapanNFCReader {
                 return
             }
             
-            guard case NFCTag.feliCa(let transitICCardTag) = tag else {
+            guard case NFCTag.feliCa(let feliCaCardTag) = tag else {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
                 let alertedMessage = session.alertMessage
                 session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
@@ -114,30 +106,31 @@ public class TransitICReader: JapanNFCReader {
             
             session.alertMessage = self.localizedString(key: "nfcTagReaderSessionReadingMessage")
             
-            let idm = transitICCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
-            let systemCode = transitICCardTag.currentSystemCode.map { String(format: "%.2hhx", $0) }.joined()
-            let transitICCard = TransitICCard(tag: transitICCardTag, idm: idm, systemCode: systemCode)
+            let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
+            guard let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode) else {
+                // systemCode がこのライブラリでは対応していない場合
+                return
+            }
             
-            self.getItems(session, transitICCard) { (transitICCard) in
+            var feliCaCard: FeliCaCard!
+            switch systemCode {
+            case .transitIC:
+                feliCaCard = TransitICCard(tag: feliCaCardTag, idm: idm, systemCode: systemCode)
+            case .univCoopICPrepaid:
+                print()
+            }
+            
+            self.getItems(session, feliCaCard) { (feliCaCard) in
                 session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
                 session.invalidate()
                 
-                self.delegate?.transitICReaderSession(didRead: transitICCard)
+                self.delegate?.feliCaReaderSession(didRead: feliCaCard)
             }
         }
     }
     
-    private func getItems(_ session: NFCTagReaderSession, _ transitICCard: TransitICCard, completion: @escaping (TransitICCard) ->  Void) {
-        var transitICCard = transitICCard
-        DispatchQueue(label: " TRETJPNRTransitICReader", qos: .default).async {
-            for item in self.transitICCardItems {
-                switch item {
-                case .balance:
-                    transitICCard = self.readBalance(session, transitICCard)
-                    break
-                }
-                completion(transitICCard)
-            }
-        }
+    internal func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
+        
     }
+    
 }

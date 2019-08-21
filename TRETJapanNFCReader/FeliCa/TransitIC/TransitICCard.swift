@@ -16,10 +16,10 @@ public enum TransitICCardItem: CaseIterable {
 
 /// 交通系ICカード
 @available(iOS 13.0, *)
-public struct TransitICCard {
-    internal let tag: TransitICCardTag
-    
+public struct TransitICCard: FeliCaCard {
+    public let tag: TransitICCardTag
     public let idm: String
-    public let systemCode: String
+    public let systemCode: FeliCaSystemCode
+    
     public var balance: Int?
 }
