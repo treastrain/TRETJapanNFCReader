@@ -27,6 +27,8 @@ Japanese & English Support!
     - IDm と System Code の表示
     - 残高の読み取りと表示
 - [ ] FE00: 楽天Edy
+- [ ] FE00: nanaco
+- [ ] FE00: WAON
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
 
 ## 対応 OS

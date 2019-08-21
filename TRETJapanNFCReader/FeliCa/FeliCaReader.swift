@@ -16,7 +16,7 @@ public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSes
 public class FeliCaReader: JapanNFCReader {
     
     internal let delegate: FeliCaReaderSessionDelegate?
-    private var feliCaCardItems: [FeliCaSystemCode : [FeliCaCardItem]] = [:]
+    private var feliCaCardItems: [FeliCaCardType : [FeliCaCardItem]] = [:]
     
     private init() {
         fatalError()
@@ -38,7 +38,7 @@ public class FeliCaReader: JapanNFCReader {
     
     /// FeliCa カードからデータを読み取る
     /// - Parameter cardItems: FeliCa カードのシステムコードと読み取りたいデータのペア
-    public func get(cardItems: [FeliCaSystemCode : [FeliCaCardItem]]) {
+    public func get(cardItems: [FeliCaCardType : [FeliCaCardItem]]) {
         self.feliCaCardItems = cardItems
         self.beginScanning()
     }
@@ -110,6 +110,7 @@ public class FeliCaReader: JapanNFCReader {
             let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
             guard let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode) else {
                 // systemCode がこのライブラリでは対応していない場合
+                session.invalidate(errorMessage: "非対応のカードです")
                 return
             }
             
@@ -118,6 +119,7 @@ public class FeliCaReader: JapanNFCReader {
             case .japanRailwayCybernetics:
                 feliCaCard = TransitICCard(tag: feliCaCardTag, idm: idm, systemCode: systemCode)
             case .common:
+                feliCaCard = CommonCard(tag: feliCaCardTag, type: .unknown, idm: idm, systemCode: systemCode)
                 break
             }
             
@@ -132,22 +134,21 @@ public class FeliCaReader: JapanNFCReader {
     
     internal func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         DispatchQueue(label: "TRETJPNRFeliCaReader", qos: .default).async {
-            if let items = self.feliCaCardItems[feliCaCard.systemCode] {
-                switch feliCaCard.systemCode {
-                case .japanRailwayCybernetics:
-                    let items = items as! [TransitICCardItem]
-                    var transitICCard = feliCaCard as! TransitICCard
-                    for item in items {
-                        switch item {
-                        case .balance:
-                            transitICCard = TransitICReader(feliCaReader: self).readBalance(session, transitICCard)
-                        }
+            switch feliCaCard.systemCode {
+            case .japanRailwayCybernetics:
+                let items = self.feliCaCardItems[feliCaCard.type] as? [TransitICCardItem] ?? []
+                var transitICCard = feliCaCard as! TransitICCard
+                for item in items {
+                    switch item {
+                    case .balance:
+                        transitICCard = TransitICReader(feliCaReader: self).readBalance(session, transitICCard)
                     }
-                    completion(transitICCard)
-                case .common:
-                    break
                 }
-            } else {
+                completion(transitICCard)
+            case .common:
+                let commonReader = CommonReader(feliCaReader: self)
+                var feliCaCard = commonReader.detectCardType(session, feliCaCard)
+                
                 completion(feliCaCard)
             }
         }

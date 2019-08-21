@@ -18,6 +18,7 @@ public enum RakutenEdyCardItem: CaseIterable, FeliCaCardItem {
 @available(iOS 13.0, *)
 public struct RakutenEdyCard: FeliCaCard {
     public var tag: RakutenEdyCardTag
+    public let type: FeliCaCardType = .rakutenEdy
     public var idm: String
     public var systemCode: FeliCaSystemCode
     

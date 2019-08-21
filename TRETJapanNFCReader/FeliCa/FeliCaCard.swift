@@ -14,6 +14,8 @@ import CoreNFC
 public protocol FeliCaCard {
     var tag: NFCFeliCaTag { get }
     
+    var type: FeliCaCardType { get }
+    
     var idm: String { get }
     var systemCode: FeliCaSystemCode { get }
 }
@@ -31,7 +33,7 @@ public enum FeliCaSystemCode {
         switch systemCode {
         case "0003":
             self = .japanRailwayCybernetics
-        case "FE00":
+        case "fe00":
             self = .common
         default:
             return nil
@@ -43,7 +45,7 @@ public enum FeliCaSystemCode {
         case .japanRailwayCybernetics:
             return "0003"
         case .common:
-            return "FE00"
+            return "fe00"
         }
     }
 }
@@ -56,4 +58,7 @@ public enum FeliCaCardType {
     case rakutenEdy
     /// 大学生協ICプリペイドカード
     case univCoopICPrepaid
+    
+    
+    case unknown
 }

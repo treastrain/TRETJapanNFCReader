@@ -18,6 +18,7 @@ public enum TransitICCardItem: CaseIterable, FeliCaCardItem {
 @available(iOS 13.0, *)
 public struct TransitICCard: FeliCaCard {
     public let tag: TransitICCardTag
+    public let type: FeliCaCardType = .transitIC
     public let idm: String
     public let systemCode: FeliCaSystemCode
     
