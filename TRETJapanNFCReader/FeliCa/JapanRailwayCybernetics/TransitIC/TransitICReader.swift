@@ -24,6 +24,10 @@ public class TransitICReader: FeliCaReader {
         fatalError()
     }
     
+    internal init(feliCaReader: FeliCaReader) {
+        super.init(delegate: feliCaReader.delegate!)
+    }
+    
     /// TransitICReader を初期化する。
     /// - Parameter delegate: TransitICReaderSessionDelegate
     public init(delegate: TransitICReaderSessionDelegate) {
@@ -52,15 +56,8 @@ public class TransitICReader: FeliCaReader {
                     transitICCard = self.readBalance(session, transitICCard)
                     break
                 }
-                completion(transitICCard)
             }
+            completion(transitICCard)
         }
-    }
-}
-
-@available(iOS 13.0, *)
-extension TransitICCard {
-    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, items: [FeliCaCardItem], completion: @escaping (FeliCaCard) -> Void) {
-        
     }
 }

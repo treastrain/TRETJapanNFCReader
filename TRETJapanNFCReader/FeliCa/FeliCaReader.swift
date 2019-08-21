@@ -16,6 +16,7 @@ public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSes
 public class FeliCaReader: JapanNFCReader {
     
     internal let delegate: FeliCaReaderSessionDelegate?
+    private var feliCaCardItems: [FeliCaSystemCode : [FeliCaCardItem]] = [:]
     
     private init() {
         fatalError()
@@ -36,11 +37,11 @@ public class FeliCaReader: JapanNFCReader {
     }
     
     /// FeliCa カードからデータを読み取る
-    /// - Parameter items: FeliCa カードから読み取りたいデータ
-//    public func get(items: [FeliCaCardItem]) {
-//        self.feliCaCardItems = items
-//        self.beginScanning()
-//    }
+    /// - Parameter cardItems: FeliCa カードのシステムコードと読み取りたいデータのペア
+    public func get(cardItems: [FeliCaSystemCode : [FeliCaCardItem]]) {
+        self.feliCaCardItems = cardItems
+        self.beginScanning()
+    }
     
     internal func beginScanning() {
         guard self.checkReadingAvailable() else {
@@ -114,10 +115,10 @@ public class FeliCaReader: JapanNFCReader {
             
             var feliCaCard: FeliCaCard!
             switch systemCode {
-            case .transitIC:
+            case .japanRailwayCybernetics:
                 feliCaCard = TransitICCard(tag: feliCaCardTag, idm: idm, systemCode: systemCode)
-            case .univCoopICPrepaid:
-                print()
+            case .common:
+                break
             }
             
             self.getItems(session, feliCaCard) { (feliCaCard) in
@@ -130,7 +131,26 @@ public class FeliCaReader: JapanNFCReader {
     }
     
     internal func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        
+        DispatchQueue(label: "TRETJPNRFeliCaReader", qos: .default).async {
+            if let items = self.feliCaCardItems[feliCaCard.systemCode] {
+                switch feliCaCard.systemCode {
+                case .japanRailwayCybernetics:
+                    let items = items as! [TransitICCardItem]
+                    var transitICCard = feliCaCard as! TransitICCard
+                    for item in items {
+                        switch item {
+                        case .balance:
+                            transitICCard = TransitICReader(feliCaReader: self).readBalance(session, transitICCard)
+                        }
+                    }
+                    completion(transitICCard)
+                case .common:
+                    break
+                }
+            } else {
+                completion(feliCaCard)
+            }
+        }
     }
     
 }

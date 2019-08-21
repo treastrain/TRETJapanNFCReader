@@ -9,7 +9,7 @@
 import Foundation
 
 /// 交通系ICカードから読み取ることができるデータの種別
-public enum TransitICCardItem: CaseIterable {
+public enum TransitICCardItem: CaseIterable, FeliCaCardItem {
     /// カード残高
     case balance
 }

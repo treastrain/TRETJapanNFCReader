@@ -23,19 +23,16 @@ public protocol FeliCaCardItem {
 }
 
 public enum FeliCaSystemCode {
-    
-    /// 交通系ICカード
-    case transitIC
-    /// 大学生協ICプリペイドカード
-    case univCoopICPrepaid
+    case japanRailwayCybernetics
+    case common
     
     public init?(from systemCodeData: Data) {
         let systemCode = systemCodeData.map { String(format: "%.2hhx", $0) }.joined()
         switch systemCode {
         case "0003":
-            self = .transitIC
+            self = .japanRailwayCybernetics
         case "FE00":
-            self = .univCoopICPrepaid
+            self = .common
         default:
             return nil
         }
@@ -43,10 +40,20 @@ public enum FeliCaSystemCode {
     
     public var string: String {
         switch self {
-        case .transitIC:
+        case .japanRailwayCybernetics:
             return "0003"
-        case .univCoopICPrepaid:
+        case .common:
             return "FE00"
         }
     }
+}
+
+public enum FeliCaCardType {
+    
+    /// 交通系ICカード
+    case transitIC
+    /// 楽天Edyカード
+    case rakutenEdy
+    /// 大学生協ICプリペイドカード
+    case univCoopICPrepaid
 }

@@ -26,6 +26,7 @@ Japanese & English Support!
 - [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
     - IDm と System Code の表示
     - 残高の読み取りと表示
+- [ ] FE00: 楽天Edy
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
 
 ## 対応 OS
@@ -98,3 +99,6 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
 ### 運転免許証 `TRETJapanNFCReader/DriversLicense` 
 - `JIS0208.TXT`
     - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
+
+
+各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。

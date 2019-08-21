@@ -12,6 +12,9 @@
 		CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */; };
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
+		CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B15230D925200B42E6C /* RakutenEdyCard.swift */; };
+		CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B17230D94F800B42E6C /* RakutenEdyReader.swift */; };
+		CD163B1A230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B19230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift */; };
 		CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */; };
 		CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */; };
 		CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */; };
@@ -128,6 +131,9 @@
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CD163B15230D925200B42E6C /* RakutenEdyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyCard.swift; sourceTree = "<group>"; };
+		CD163B17230D94F800B42E6C /* RakutenEdyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyReader.swift; sourceTree = "<group>"; };
+		CD163B19230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyReaderReadFunctions.swift; sourceTree = "<group>"; };
 		CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderError.swift; sourceTree = "<group>"; };
 		CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderExtensions.swift; sourceTree = "<group>"; };
 		CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderError.swift; sourceTree = "<group>"; };
@@ -214,6 +220,32 @@
 				CD5D2D7A22C5EA25004330F3 /* DriversLicense */,
 			);
 			path = ISO14443;
+			sourceTree = "<group>";
+		};
+		CD163B14230D914B00B42E6C /* RakutenEdy */ = {
+			isa = PBXGroup;
+			children = (
+				CD163B15230D925200B42E6C /* RakutenEdyCard.swift */,
+				CD163B17230D94F800B42E6C /* RakutenEdyReader.swift */,
+				CD163B19230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift */,
+			);
+			path = RakutenEdy;
+			sourceTree = "<group>";
+		};
+		CD163B1B230DA29700B42E6C /* JapanRailwayCybernetics */ = {
+			isa = PBXGroup;
+			children = (
+				CDFC3B7922CE2C52000E88B4 /* TransitIC */,
+			);
+			path = JapanRailwayCybernetics;
+			sourceTree = "<group>";
+		};
+		CD163B1C230DA2C500B42E6C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CD163B14230D914B00B42E6C /* RakutenEdy */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		CD5D2D3422C5DF36004330F3 = {
@@ -315,7 +347,8 @@
 				CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */,
 				CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */,
 				CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */,
-				CDFC3B7922CE2C52000E88B4 /* TransitIC */,
+				CD163B1B230DA29700B42E6C /* JapanRailwayCybernetics */,
+				CD163B1C230DA2C500B42E6C /* Common */,
 			);
 			path = FeliCa;
 			sourceTree = "<group>";
@@ -558,11 +591,14 @@
 				CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */,
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
 				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
+				CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */,
 				CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */,
 				CDAC056D230D2D9400E1DDCF /* FeliCaReader.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */,
+				CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
+				CD163B1A230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
 				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CD06199422CE3694000EB026 /* TransitICReaderReadFunctions.swift in Sources */,
