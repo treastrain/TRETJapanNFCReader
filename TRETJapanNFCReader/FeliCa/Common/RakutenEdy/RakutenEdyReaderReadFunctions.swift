@@ -11,7 +11,7 @@ import CoreNFC
 @available(iOS 13.0, *)
 extension RakutenEdyReader {
     
-    internal func readBalance(_ session: NFCTagReaderSession, _ rakutenEdyCard: RakutenEdyCard) -> RakutenEdyCard {
+    public func readBalance(_ session: NFCTagReaderSession, _ rakutenEdyCard: RakutenEdyCard) -> RakutenEdyCard {
         
         return rakutenEdyCard
     }

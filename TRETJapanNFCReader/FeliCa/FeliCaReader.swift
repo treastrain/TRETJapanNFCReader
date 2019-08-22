@@ -102,7 +102,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
             guard let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode) else {
                 // systemCode がこのライブラリでは対応していない場合
-                session.invalidate(errorMessage: "非対応のカードです")
+                session.invalidate(errorMessage: "非対応のカードです。")
                 return
             }
             

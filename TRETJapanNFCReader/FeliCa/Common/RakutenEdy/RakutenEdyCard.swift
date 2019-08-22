@@ -24,6 +24,12 @@ public struct RakutenEdyCard: FeliCaCard {
     
     public var balance: Int?
     
+    public init(from feliCaCard: FeliCaCard) {
+        self.tag = feliCaCard.tag
+        self.idm = feliCaCard.idm
+        self.systemCode = feliCaCard.systemCode
+    }
+    
     public init(tag: RakutenEdyCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.tag = tag
         self.idm = idm
