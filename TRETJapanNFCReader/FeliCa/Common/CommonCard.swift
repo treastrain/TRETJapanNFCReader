@@ -6,15 +6,12 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import Foundation
+import CoreNFC
 
-/// 共通領域
 @available(iOS 13.0, *)
-public struct CommonCard: FeliCaCard {
-    public var tag: CommonCardTag
+public struct FeliCaCommonCard: FeliCaCard {
+    public var tag: NFCFeliCaTag
     public var type: FeliCaCardType
     public var idm: String
     public var systemCode: FeliCaSystemCode
-    
-    
 }

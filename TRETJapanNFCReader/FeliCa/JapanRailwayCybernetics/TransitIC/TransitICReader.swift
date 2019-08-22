@@ -24,7 +24,9 @@ public class TransitICReader: FeliCaReader {
         fatalError()
     }
     
-    internal init(feliCaReader: FeliCaReader) {
+    /// TransitICReader を初期化する。
+    /// - Parameter feliCaReader: FeliCaReader
+    public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
     
@@ -47,7 +49,7 @@ public class TransitICReader: FeliCaReader {
         self.beginScanning()
     }
     
-    internal override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
+    public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         var transitICCard = feliCaCard as! TransitICCard
         DispatchQueue(label: " TRETJPNRTransitICReader", qos: .default).async {
             for item in self.transitICCardItems {

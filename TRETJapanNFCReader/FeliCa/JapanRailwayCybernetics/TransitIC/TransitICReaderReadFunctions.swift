@@ -11,7 +11,7 @@ import CoreNFC
 @available(iOS 13.0, *)
 extension TransitICReader {
     
-    internal func readBalance(_ session: NFCTagReaderSession, _ transitICCard: TransitICCard) -> TransitICCard {
+    public func readBalance(_ session: NFCTagReaderSession, _ transitICCard: TransitICCard) -> TransitICCard {
         let semaphore = DispatchSemaphore(value: 0)
         var transitICCard = transitICCard
         let tag = transitICCard.tag

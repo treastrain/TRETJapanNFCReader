@@ -21,11 +21,32 @@ public class RakutenEdyReader: FeliCaReader {
         fatalError()
     }
     
-    internal init(feliCaReader: FeliCaReader) {
+    /// RakutenEdyReader を初期化する。
+    /// - Parameter feliCaReader: FeliCaReader
+    public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
     
-    internal override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
+    /// RakutenEdyReader を初期化する。
+    /// - Parameter delegate: FeliCaReaderSessionDelegate
+    public override init(delegate: FeliCaReaderSessionDelegate) {
+        super.init(delegate: delegate)
+    }
+    
+    /// RakutenEdyReader を初期化する。
+    /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
+    public override init(viewController: FeliCaReaderViewController) {
+        super.init(viewController: viewController)
+    }
+    
+    /// 楽天Edyカードからデータを読み取る
+    /// - Parameter items: 楽天Edyカードから読み取りたいデータ
+    public func get(items: [RakutenEdyCardItem]) {
+        self.rakutenEdyCardItems = items
+        self.beginScanning()
+    }
+    
+    public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         var rakutenEdyCard = feliCaCard as! RakutenEdyCard
         DispatchQueue(label: " TRETJPNRTransitICReader", qos: .default).async {
             for item in self.rakutenEdyCardItems {

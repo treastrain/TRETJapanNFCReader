@@ -15,9 +15,6 @@
 		CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B15230D925200B42E6C /* RakutenEdyCard.swift */; };
 		CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B17230D94F800B42E6C /* RakutenEdyReader.swift */; };
 		CD163B1A230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B19230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift */; };
-		CD163B1E230DA39600B42E6C /* CommonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B1D230DA39600B42E6C /* CommonCard.swift */; };
-		CD163B20230DA3A800B42E6C /* CommonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B1F230DA3A800B42E6C /* CommonReader.swift */; };
-		CD163B22230DA3B500B42E6C /* CommonReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B21230DA3B500B42E6C /* CommonReaderReadFunctions.swift */; };
 		CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */; };
 		CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */; };
 		CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */; };
@@ -42,6 +39,8 @@
 		CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */; };
 		CD8FC6EF22D111F0007ECC1C /* JIS0208.TXT in Resources */ = {isa = PBXBuildFile; fileRef = CD8FC6ED22D111F0007ECC1C /* JIS0208.TXT */; };
 		CD8FC6F322D20317007ECC1C /* DriversLicenseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8FC6F222D20317007ECC1C /* DriversLicenseExtensions.swift */; };
+		CD9291CC230E3F0000F576EF /* FeliCaReaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9291CB230E3F0000F576EF /* FeliCaReaderProtocol.swift */; };
+		CD9291CE230E41DF00F576EF /* CommonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9291CD230E41DF00F576EF /* CommonCard.swift */; };
 		CD94050222DBA65200CA9E32 /* RegisteredDomicileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */; };
 		CD996F7622C79FEC00193E7A /* CommonDataElementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */; };
 		CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */; };
@@ -137,9 +136,6 @@
 		CD163B15230D925200B42E6C /* RakutenEdyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyCard.swift; sourceTree = "<group>"; };
 		CD163B17230D94F800B42E6C /* RakutenEdyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyReader.swift; sourceTree = "<group>"; };
 		CD163B19230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyReaderReadFunctions.swift; sourceTree = "<group>"; };
-		CD163B1D230DA39600B42E6C /* CommonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCard.swift; sourceTree = "<group>"; };
-		CD163B1F230DA3A800B42E6C /* CommonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonReader.swift; sourceTree = "<group>"; };
-		CD163B21230DA3B500B42E6C /* CommonReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonReaderReadFunctions.swift; sourceTree = "<group>"; };
 		CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderError.swift; sourceTree = "<group>"; };
 		CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderExtensions.swift; sourceTree = "<group>"; };
 		CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderError.swift; sourceTree = "<group>"; };
@@ -169,6 +165,8 @@
 		CD8FC6ED22D111F0007ECC1C /* JIS0208.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JIS0208.TXT; sourceTree = "<group>"; };
 		CD8FC6F222D20317007ECC1C /* DriversLicenseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseExtensions.swift; sourceTree = "<group>"; };
 		CD8FC6F522D209CF007ECC1C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		CD9291CB230E3F0000F576EF /* FeliCaReaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReaderProtocol.swift; sourceTree = "<group>"; };
+		CD9291CD230E41DF00F576EF /* CommonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCard.swift; sourceTree = "<group>"; };
 		CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileViewController.swift; sourceTree = "<group>"; };
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
@@ -249,9 +247,7 @@
 		CD163B1C230DA2C500B42E6C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CD163B1D230DA39600B42E6C /* CommonCard.swift */,
-				CD163B1F230DA3A800B42E6C /* CommonReader.swift */,
-				CD163B21230DA3B500B42E6C /* CommonReaderReadFunctions.swift */,
+				CD9291CD230E41DF00F576EF /* CommonCard.swift */,
 				CD163B14230D914B00B42E6C /* RakutenEdy */,
 			);
 			path = Common;
@@ -355,6 +351,7 @@
 			children = (
 				CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */,
 				CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */,
+				CD9291CB230E3F0000F576EF /* FeliCaReaderProtocol.swift */,
 				CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */,
 				CD163B1B230DA29700B42E6C /* JapanRailwayCybernetics */,
 				CD163B1C230DA2C500B42E6C /* Common */,
@@ -599,13 +596,12 @@
 			files = (
 				CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */,
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
-				CD163B22230DA3B500B42E6C /* CommonReaderReadFunctions.swift in Sources */,
 				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */,
-				CD163B1E230DA39600B42E6C /* CommonCard.swift in Sources */,
-				CD163B20230DA3A800B42E6C /* CommonReader.swift in Sources */,
+				CD9291CE230E41DF00F576EF /* CommonCard.swift in Sources */,
 				CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */,
 				CDAC056D230D2D9400E1DDCF /* FeliCaReader.swift in Sources */,
+				CD9291CC230E3F0000F576EF /* FeliCaReaderProtocol.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */,

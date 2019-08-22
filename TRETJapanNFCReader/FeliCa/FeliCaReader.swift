@@ -13,10 +13,9 @@ import CoreNFC
 public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSessionDelegate
 
 @available(iOS 13.0, *)
-public class FeliCaReader: JapanNFCReader {
+open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     
     internal let delegate: FeliCaReaderSessionDelegate?
-    private var feliCaCardItems: [FeliCaCardType : [FeliCaCardItem]] = [:]
     
     private init() {
         fatalError()
@@ -36,14 +35,7 @@ public class FeliCaReader: JapanNFCReader {
         super.init(viewController: viewController)
     }
     
-    /// FeliCa カードからデータを読み取る
-    /// - Parameter cardItems: FeliCa カードのシステムコードと読み取りたいデータのペア
-    public func get(cardItems: [FeliCaCardType : [FeliCaCardItem]]) {
-        self.feliCaCardItems = cardItems
-        self.beginScanning()
-    }
-    
-    internal func beginScanning() {
+    public func beginScanning() {
         guard self.checkReadingAvailable() else {
             print("""
                 ------------------------------------------------------------
@@ -119,7 +111,7 @@ public class FeliCaReader: JapanNFCReader {
             case .japanRailwayCybernetics:
                 feliCaCard = TransitICCard(tag: feliCaCardTag, idm: idm, systemCode: systemCode)
             case .common:
-                feliCaCard = CommonCard(tag: feliCaCardTag, type: .unknown, idm: idm, systemCode: systemCode)
+                feliCaCard = FeliCaCommonCard(tag: feliCaCardTag, type: .unknown, idm: idm, systemCode: systemCode)
                 break
             }
             
@@ -132,26 +124,8 @@ public class FeliCaReader: JapanNFCReader {
         }
     }
     
-    internal func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        DispatchQueue(label: "TRETJPNRFeliCaReader", qos: .default).async {
-            switch feliCaCard.systemCode {
-            case .japanRailwayCybernetics:
-                let items = self.feliCaCardItems[feliCaCard.type] as? [TransitICCardItem] ?? []
-                var transitICCard = feliCaCard as! TransitICCard
-                for item in items {
-                    switch item {
-                    case .balance:
-                        transitICCard = TransitICReader(feliCaReader: self).readBalance(session, transitICCard)
-                    }
-                }
-                completion(transitICCard)
-            case .common:
-                let commonReader = CommonReader(feliCaReader: self)
-                var feliCaCard = commonReader.detectCardType(session, feliCaCard)
-                
-                completion(feliCaCard)
-            }
-        }
+    open func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
+        print("FeliCaReader.getItems を override することで読み取る item を指定できます")
+        completion(feliCaCard)
     }
-    
 }
