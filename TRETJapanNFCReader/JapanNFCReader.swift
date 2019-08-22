@@ -14,8 +14,6 @@ public typealias JapanNFCReaderViewController = UIViewController & JapanNFCReade
 @available(iOS 13.0, *)
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
-    internal static var bundle: Bundle!
-    
     internal let viewController: UIViewController?
     internal let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
     internal var session: NFCTagReaderSession?
@@ -26,13 +24,11 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     public init(delegate: JapanNFCReaderSessionDelegate) {
-        JapanNFCReader.bundle = Bundle(for: type(of: self))
         self.viewController = nil
         self.japanNFCReaderSessionDelegate = delegate
     }
     
     public init(viewController: JapanNFCReaderViewController) {
-        JapanNFCReader.bundle = Bundle(for: type(of: self))
         self.viewController = viewController
         self.japanNFCReaderSessionDelegate = viewController
     }
@@ -102,7 +98,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     func localizedString(key: String) -> String {
-        return NSLocalizedString(key, bundle: Bundle(for: type(of: self)), comment: "")
+        return NSLocalizedString(key, bundle: Bundle.current, comment: "")
     }
 }
 

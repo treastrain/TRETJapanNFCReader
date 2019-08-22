@@ -8,6 +8,13 @@
 
 import Foundation
 
+extension Bundle {
+    static var current: Bundle {
+        class C {}
+        return Bundle(for: type(of: C()))
+    }
+}
+
 public extension Optional where Wrapped == Date {
     func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
         let formatter = DateFormatter()

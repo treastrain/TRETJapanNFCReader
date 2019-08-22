@@ -11,7 +11,7 @@ import Foundation
 @available(iOS 13.0, *)
 internal extension Optional where Wrapped == String {
     init(jisX0208Data: [[UInt8]]) {
-        guard let path = JapanNFCReader.bundle.path(forResource: "JIS0208", ofType: "TXT") else {
+        guard let path = Bundle.current.path(forResource: "JIS0208", ofType: "TXT") else {
             self = nil
             return
         }
