@@ -14,4 +14,11 @@ public struct FeliCaCommonCard: FeliCaCard {
     public var type: FeliCaCardType
     public var idm: String
     public var systemCode: FeliCaSystemCode
+    
+    public init(tag: NFCFeliCaTag, type: FeliCaCardType = .unknown, idm: String, systemCode: FeliCaSystemCode) {
+        self.tag = tag
+        self.type = type
+        self.idm = idm
+        self.systemCode = systemCode
+    }
 }

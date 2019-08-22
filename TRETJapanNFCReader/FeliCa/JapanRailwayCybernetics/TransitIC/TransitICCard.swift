@@ -23,4 +23,11 @@ public struct TransitICCard: FeliCaCard {
     public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
+    
+    public init(tag: TransitICCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
+        self.tag = tag
+        self.idm = idm
+        self.systemCode = systemCode
+        self.balance = balance
+    }
 }

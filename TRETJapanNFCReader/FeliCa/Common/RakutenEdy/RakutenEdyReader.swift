@@ -47,7 +47,8 @@ public class RakutenEdyReader: FeliCaReader {
     }
     
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        var rakutenEdyCard = feliCaCard as! RakutenEdyCard
+        let feliCaCard = feliCaCard as! FeliCaCommonCard
+        var rakutenEdyCard = RakutenEdyCard(tag: feliCaCard.tag, idm: feliCaCard.idm, systemCode: feliCaCard.systemCode)
         DispatchQueue(label: " TRETJPNRTransitICReader", qos: .default).async {
             for item in self.rakutenEdyCardItems {
                 switch item {
