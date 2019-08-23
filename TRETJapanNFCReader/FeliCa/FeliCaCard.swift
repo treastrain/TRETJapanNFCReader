@@ -56,6 +56,10 @@ public enum FeliCaCardType {
     case transitIC
     /// 楽天Edyカード
     case rakutenEdy
+    /// nanaco
+    case nanaco
+    /// WAON
+    case waon
     /// 大学生協ICプリペイドカード
     case univCoopICPrepaid
     
