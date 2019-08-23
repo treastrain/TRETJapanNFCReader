@@ -28,11 +28,12 @@ IDm と System Code の表示
     - 残高の読み取りと表示
 - [x] FE00: 楽天Edy
     - 残高の読み取りと表示
+- [x] FE00: 大学生協プリペイドカード（大学 学生証）
+    - 残高の読み取りと表示
 
 ### 今後の対応予定
 - [ ] FE00: nanaco
 - [ ] FE00: WAON
-- [ ] FE00: 大学生協プリペイドカード（大学 学生証）
 
 ## 対応 OS
 - iOS 9.3 以降
@@ -101,9 +102,13 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
 - FE00
 
 ## 謝辞 Acknowledgments
-### 運転免許証 `TRETJapanNFCReader/DriversLicense` 
+### 運転免許証 `TRETJapanNFCReader/ISO14443/DriversLicense` 
 - `JIS0208.TXT`
     - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
 
+### 大学生協ICプリペイド `TRETJapanNFCReader/FeliCa/Common/UnivCoopICPrepaid`
+大学生協ICプリペイドの読み取り実装においては以下に掲載されている仕様を参考にしました。
+- `oboenikui/UnivFeliCa.md`
+    - [大学生協FeliCaの仕様](https://gist.github.com/oboenikui/ee9fb0cb07a6690c410b872f64345120)
 
 各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。
