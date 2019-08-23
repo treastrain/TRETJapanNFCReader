@@ -49,7 +49,7 @@ public class RakutenEdyReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         let feliCaCard = feliCaCard as! FeliCaCommonCard
         var rakutenEdyCard = RakutenEdyCard(from: feliCaCard)
-        DispatchQueue(label: " TRETJPNRTransitICReader", qos: .default).async {
+        DispatchQueue(label: " TRETJPNRRakutenEdyReader", qos: .default).async {
             for item in self.rakutenEdyCardItems {
                 switch item {
                 case .balance:
