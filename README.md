@@ -16,17 +16,20 @@ Japanese & English Support!
 - [treastrain/ios13-felica-reader: Sample project to read FeliCa on iOS 13 and later - GitHub](https://github.com/treastrain/ios13-felica-reader)
 - [iOS 13 で FeliCa (Suica) にアクセス | notes from E](https://notes.tret.jp/ios13-felica-reading/)
 
-## 対応予定の NFC カード
+## 対応 NFC カード
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
 - 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）まで実装済み
 
 ### NFC-F (Type-F)
+IDm と System Code の表示
 - [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
-    - IDm と System Code の表示
     - 残高の読み取りと表示
-- [ ] FE00: 楽天Edy
+- [x] FE00: 楽天Edy
+    - 残高の読み取りと表示
+
+### 今後の対応予定
 - [ ] FE00: nanaco
 - [ ] FE00: WAON
 - [ ] FE00: 大学生協プリペイドカード（大学 学生証）
