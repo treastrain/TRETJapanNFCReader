@@ -101,3 +101,15 @@ internal extension Array {
         return s
     }
 }
+
+public extension Data {
+    func toIntReversed(_ startIndex: Int, _ endIndex: Int) -> Int {
+        var s = 0
+        
+        for (n, index) in (startIndex...endIndex).enumerated() {
+            s += Int(self[index]) << (n * 8)
+        }
+        
+        return s
+    }
+}
