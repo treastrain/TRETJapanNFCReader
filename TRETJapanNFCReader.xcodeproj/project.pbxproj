@@ -48,6 +48,9 @@
 		CD996F7622C79FEC00193E7A /* CommonDataElementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */; };
 		CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F7BD122C748BB0046677C /* DriversLicenseCard.swift */; };
 		CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */; };
+		CD9E273A23118B5F00BBB383 /* WaonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E273923118B5F00BBB383 /* WaonCard.swift */; };
+		CD9E273C23118B6F00BBB383 /* WaonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E273B23118B6F00BBB383 /* WaonReader.swift */; };
+		CD9E273E23118B7C00BBB383 /* WaonReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E273D23118B7C00BBB383 /* WaonReaderReadFunctions.swift */; };
 		CD9EBF0E22CDF1A7005D17CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7936DE22C6492B00E5AC2E /* Main.storyboard */; };
 		CDAC056B230D2C9D00E1DDCF /* FeliCaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */; };
 		CDAC056D230D2D9400E1DDCF /* FeliCaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */; };
@@ -176,6 +179,9 @@
 		CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileViewController.swift; sourceTree = "<group>"; };
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
+		CD9E273923118B5F00BBB383 /* WaonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonCard.swift; sourceTree = "<group>"; };
+		CD9E273B23118B6F00BBB383 /* WaonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonReader.swift; sourceTree = "<group>"; };
+		CD9E273D23118B7C00BBB383 /* WaonReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonReaderReadFunctions.swift; sourceTree = "<group>"; };
 		CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaCard.swift; sourceTree = "<group>"; };
 		CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReader.swift; sourceTree = "<group>"; };
 		CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReaderSessionDelegate.swift; sourceTree = "<group>"; };
@@ -255,6 +261,7 @@
 			children = (
 				CD9291CD230E41DF00F576EF /* CommonCard.swift */,
 				CD163B14230D914B00B42E6C /* RakutenEdy */,
+				CD9E2735231189BB00BBB383 /* Waon */,
 				CD5476CA23105648003E3C62 /* UnivCoopICPrepaid */,
 			);
 			path = Common;
@@ -361,6 +368,16 @@
 				CD8FC6ED22D111F0007ECC1C /* JIS0208.TXT */,
 			);
 			path = DriversLicense;
+			sourceTree = "<group>";
+		};
+		CD9E2735231189BB00BBB383 /* Waon */ = {
+			isa = PBXGroup;
+			children = (
+				CD9E273923118B5F00BBB383 /* WaonCard.swift */,
+				CD9E273B23118B6F00BBB383 /* WaonReader.swift */,
+				CD9E273D23118B7C00BBB383 /* WaonReaderReadFunctions.swift */,
+			);
+			path = Waon;
 			sourceTree = "<group>";
 		};
 		CDAC0566230D2C7D00E1DDCF /* FeliCa */ = {
@@ -632,9 +649,12 @@
 				CD06199422CE3694000EB026 /* TransitICReaderReadFunctions.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
 				CDFC3B8122CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift in Sources */,
+				CD9E273E23118B7C00BBB383 /* WaonReaderReadFunctions.swift in Sources */,
 				CDFC3B7B22CE2C84000E88B4 /* TransitICReader.swift in Sources */,
+				CD9E273A23118B5F00BBB383 /* WaonCard.swift in Sources */,
 				CDB3AD4C22CFAEC20069AB7F /* Extensions.swift in Sources */,
 				CD8FC6F322D20317007ECC1C /* DriversLicenseExtensions.swift in Sources */,
+				CD9E273C23118B6F00BBB383 /* WaonReader.swift in Sources */,
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
 				CDFC3B7F22CE2D46000E88B4 /* TransitICCard.swift in Sources */,
 				CD8B7B6922CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift in Sources */,
