@@ -12,6 +12,8 @@ import Foundation
 public enum TransitICCardItem: CaseIterable, FeliCaCardItem {
     /// カード残高
     case balance
+    /// 取引履歴
+    case transactions
 }
 
 /// 交通系ICカード
@@ -23,6 +25,7 @@ public struct TransitICCard: FeliCaCard {
     public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
+    public var transactionsData: [Data]?
     
     public init(tag: TransitICCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.tag = tag

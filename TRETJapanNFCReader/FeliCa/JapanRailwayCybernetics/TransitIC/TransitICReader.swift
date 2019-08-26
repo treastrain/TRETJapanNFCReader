@@ -57,6 +57,9 @@ public class TransitICReader: FeliCaReader {
                 case .balance:
                     transitICCard = self.readBalance(session, transitICCard)
                     break
+                case .transactions:
+                    transitICCard = self.readTransactionsData(session, transitICCard)
+                    break
                 }
             }
             completion(transitICCard)
