@@ -16,7 +16,7 @@ extension TransitICReader {
         var transitICCard = transitICCard
         let tag = transitICCard.tag
         
-        let nodeCode = Data([0x09, 0x0f].reversed())
+        let nodeCode = Data([0x00, 0x8B].reversed())
         tag.requestService(nodeCodeList: [nodeCode]) { (nodesData, error) in
             
             if let error = error {
@@ -31,9 +31,7 @@ extension TransitICReader {
                 return
             }
             
-            let blockList = (0..<12).map { (block) -> Data in
-                Data([0x80, UInt8(block)])
-            }
+            let blockList = [Data([0x80, 0x00])]
             
             tag.readWithoutEncryption(serviceCodeList: [nodeCode], blockList: blockList) { (status1, status2, blockData, error) in
                 
@@ -52,7 +50,7 @@ extension TransitICReader {
                 }
                 
                 let data = blockData.first!
-                let balance = data.toIntReversed(10, 11)
+                let balance = data.toIntReversed(11, 12)
                 transitICCard.balance = balance
                 
                 semaphore.signal()
