@@ -34,6 +34,9 @@
 		CD5D2D7F22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD5D2D8522C5F3EB004330F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD5D2D8722C5F3EB004330F3 /* InfoPlist.strings */; };
 		CD68FAD022CB9ABD004ABCAF /* MattersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */; };
+		CD7691A123154F310097FC2D /* NanacoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7691A023154F310097FC2D /* NanacoCard.swift */; };
+		CD7691A323154F3B0097FC2D /* NanacoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7691A223154F3B0097FC2D /* NanacoReader.swift */; };
+		CD7691A523154F470097FC2D /* NanacoReaderReadFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7691A423154F470097FC2D /* NanacoReaderReadFunctions.swift */; };
 		CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */; };
 		CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */; };
 		CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD79369C22C6300200E5AC2E /* Localizable.strings */; };
@@ -162,6 +165,9 @@
 		CD5D2D7B22C5EA6B004330F3 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		CD5D2D8622C5F3EB004330F3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MattersViewController.swift; sourceTree = "<group>"; };
+		CD7691A023154F310097FC2D /* NanacoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanacoCard.swift; sourceTree = "<group>"; };
+		CD7691A223154F3B0097FC2D /* NanacoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanacoReader.swift; sourceTree = "<group>"; };
+		CD7691A423154F470097FC2D /* NanacoReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanacoReaderReadFunctions.swift; sourceTree = "<group>"; };
 		CD79369422C62C3400E5AC2E /* DriversLicenseReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReader.swift; sourceTree = "<group>"; };
 		CD79369622C62E7B00E5AC2E /* JapanNFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReader.swift; sourceTree = "<group>"; };
 		CD79369B22C6300200E5AC2E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 			children = (
 				CD9291CD230E41DF00F576EF /* CommonCard.swift */,
 				CD163B14230D914B00B42E6C /* RakutenEdy */,
+				CD76919C23154F0C0097FC2D /* Nanaco */,
 				CD9E2735231189BB00BBB383 /* Waon */,
 				CD5476CA23105648003E3C62 /* UnivCoopICPrepaid */,
 			);
@@ -370,6 +377,16 @@
 				CD8FC6ED22D111F0007ECC1C /* JIS0208.TXT */,
 			);
 			path = DriversLicense;
+			sourceTree = "<group>";
+		};
+		CD76919C23154F0C0097FC2D /* Nanaco */ = {
+			isa = PBXGroup;
+			children = (
+				CD7691A023154F310097FC2D /* NanacoCard.swift */,
+				CD7691A223154F3B0097FC2D /* NanacoReader.swift */,
+				CD7691A423154F470097FC2D /* NanacoReaderReadFunctions.swift */,
+			);
+			path = Nanaco;
 			sourceTree = "<group>";
 		};
 		CD9E2735231189BB00BBB383 /* Waon */ = {
@@ -638,6 +655,7 @@
 				CD9291CE230E41DF00F576EF /* CommonCard.swift in Sources */,
 				CD06199622CE3718000EB026 /* TransitICReaderCommands.swift in Sources */,
 				CDAC056D230D2D9400E1DDCF /* FeliCaReader.swift in Sources */,
+				CD7691A123154F310097FC2D /* NanacoCard.swift in Sources */,
 				CD5476D12310566D003E3C62 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD9291CC230E3F0000F576EF /* FeliCaReaderProtocol.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
@@ -645,8 +663,10 @@
 				CD5476CF23105666003E3C62 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
+				CD7691A323154F3B0097FC2D /* NanacoReader.swift in Sources */,
 				CD163B1A230D98F900B42E6C /* RakutenEdyReaderReadFunctions.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
+				CD7691A523154F470097FC2D /* NanacoReaderReadFunctions.swift in Sources */,
 				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CD5476D323105679003E3C62 /* UnivCoopICPrepaidReaderFunctions.swift in Sources */,
 				CD06199422CE3694000EB026 /* TransitICReaderReadFunctions.swift in Sources */,
