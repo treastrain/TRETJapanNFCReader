@@ -30,7 +30,8 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             "",
             "",
             "",
-            ""
+            "",
+            NSLocalizedString("matters_registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
         ]
     }
     
@@ -44,18 +45,23 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
     }
     
     @IBAction func reread() {
-        let alertController = UIAlertController(title: NSLocalizedString("enterPIN1Title", bundle: Bundle(for: type(of: self)), comment: ""), message: NSLocalizedString("enterPIN1Message", bundle: Bundle(for: type(of: self)), comment: ""), preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("enterPINsTitle", bundle: Bundle(for: type(of: self)), comment: ""), message: NSLocalizedString("enterPINsMessage", bundle: Bundle(for: type(of: self)), comment: ""), preferredStyle: .alert)
         alertController.addTextField { (textField) in
             textField.isSecureTextEntry = true
             textField.placeholder = NSLocalizedString("enterPIN1TextFieldPlaceholder", bundle: Bundle(for: type(of: self)), comment: "")
             textField.keyboardType = .numberPad
         }
+        alertController.addTextField { (textField) in
+            textField.isSecureTextEntry = true
+            textField.placeholder = NSLocalizedString("enterPIN2TextFieldPlaceholder", bundle: Bundle(for: type(of: self)), comment: "")
+            textField.keyboardType = .numberPad
+        }
         let nextAction = UIAlertAction(title: NSLocalizedString("next", bundle: Bundle(for: type(of: self)), comment: ""), style: .default) { (action) in
-            guard let textFields = alertController.textFields, !textFields.isEmpty, let textField = textFields.first, let enteredPIN1 = textField.text else {
+            guard let textFields = alertController.textFields, textFields.count == 2, let enteredPIN1 = textFields[0].text, let enteredPIN2 = textFields[1].text else {
                 return
             }
             
-            self.reader.get(items: DriversLicenseCardItem.allCases, pin1: enteredPIN1)
+            self.reader.get(items: DriversLicenseCardItem.allCases, pin1: enteredPIN1, pin2: enteredPIN2)
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", bundle: Bundle(for: type(of: self)), comment: ""), style: .cancel, handler: nil)
         alertController.addAction(nextAction)
@@ -113,6 +119,8 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             return 2
         case 7: // 記載事項(本籍を除く)
             return 17
+        case 8: // 記載事項(本籍)
+            return 1
         default:
             return 0
         }
@@ -128,6 +136,8 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             return NSLocalizedString("pinSetting", bundle: Bundle(for: type(of: self)), comment: "")
         case 7: // 記載事項(本籍を除く) 免許の年月日
             return NSLocalizedString("dateOfLicense", bundle: Bundle(for: type(of: self)), comment: "")
+        case 8: // 記載事項(本籍)
+            return NSLocalizedString("matters_registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
         default:
             return nil
         }
@@ -312,6 +322,10 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             default:
                 break
             }
+        case 8: // 記載事項(本籍)
+            cell.textLabel?.text = NSLocalizedString("registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
+            cell.detailTextLabel?.text = self.driversLicenseCard?.registeredDomicile?.registeredDomicile
+            break
         default:
             break
         }

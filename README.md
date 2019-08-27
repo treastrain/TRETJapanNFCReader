@@ -80,7 +80,7 @@ class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
 }
 ```
 
-### NFC-F (Type-F)
+### NFC-F (Type-F, FeliCa)
 - FeliCa を読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加する。ワイルドカードは使用できない。
 
 #### 交通系ICカードの場合
