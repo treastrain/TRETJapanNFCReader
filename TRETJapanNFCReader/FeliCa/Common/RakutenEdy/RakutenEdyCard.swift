@@ -17,21 +17,35 @@ public enum RakutenEdyCardItem: CaseIterable, FeliCaCardItem {
 /// 楽天Edyカード
 @available(iOS 13.0, *)
 public struct RakutenEdyCard: FeliCaCard {
-    public var tag: RakutenEdyCardTag
+    public let tag: RakutenEdyCardTag
+    public var data: RakutenEdyCardData
+    
+    public init(from feliCaCommonCard: FeliCaCommonCard) {
+        self.tag = feliCaCommonCard.tag
+        self.data = RakutenEdyCardData(from: feliCaCommonCard.data)
+    }
+    
+    public init(tag: RakutenEdyCardTag, data: RakutenEdyCardData) {
+        self.tag = tag
+        self.data = data
+    }
+}
+
+public struct RakutenEdyCardData: FeliCaCardData {
     public let type: FeliCaCardType = .rakutenEdy
-    public var idm: String
-    public var systemCode: FeliCaSystemCode
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
     
-    public init(from feliCaCard: FeliCaCard) {
-        self.tag = feliCaCard.tag
-        self.idm = feliCaCard.idm
-        self.systemCode = feliCaCard.systemCode
+    @available(iOS 13.0, *)
+    fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
     }
     
-    public init(tag: RakutenEdyCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.tag = tag
+    @available(iOS 13.0, *)
+    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.idm = idm
         self.systemCode = systemCode
         self.balance = balance

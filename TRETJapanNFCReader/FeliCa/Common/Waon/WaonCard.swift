@@ -17,21 +17,35 @@ public enum WaonCardItem: CaseIterable, FeliCaCardItem {
 /// WAONカード
 @available(iOS 13.0, *)
 public struct WaonCard: FeliCaCard {
-    public var tag: WaonCardTag
-    public var type: FeliCaCardType = .waon
-    public var idm: String
-    public var systemCode: FeliCaSystemCode
+    public let tag: WaonCardTag
+    public var data: WaonCardData
+    
+    public init(from feliCaCommonCard: FeliCaCommonCard) {
+        self.tag = feliCaCommonCard.tag
+        self.data = WaonCardData(from: feliCaCommonCard.data)
+    }
+    
+    public init(tag: WaonCardTag, data: WaonCardData) {
+        self.tag = tag
+        self.data = data
+    }
+}
+
+public struct WaonCardData: FeliCaCardData {
+    public let type: FeliCaCardType = .waon
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
     
-    public init(from feliCaCard: FeliCaCard) {
-        self.tag = feliCaCard.tag
-        self.idm = feliCaCard.idm
-        self.systemCode = feliCaCard.systemCode
+    @available(iOS 13.0, *)
+    fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
     }
     
-    public init(tag: WaonCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.tag = tag
+    @available(iOS 13.0, *)
+    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.idm = idm
         self.systemCode = systemCode
         self.balance = balance

@@ -20,6 +20,15 @@ public enum TransitICCardItem: CaseIterable, FeliCaCardItem {
 @available(iOS 13.0, *)
 public struct TransitICCard: FeliCaCard {
     public let tag: TransitICCardTag
+    public var data: TransitICCardData
+    
+    public init(tag: TransitICCardTag, data: TransitICCardData) {
+        self.tag = tag
+        self.data = data
+    }
+}
+
+public struct TransitICCardData: FeliCaCardData {
     public let type: FeliCaCardType = .transitIC
     public let idm: String
     public let systemCode: FeliCaSystemCode
@@ -27,10 +36,11 @@ public struct TransitICCard: FeliCaCard {
     public var balance: Int?
     public var transactionsData: [Data]?
     
-    public init(tag: TransitICCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.tag = tag
+    @available(iOS 13.0, *)
+    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil, transactionsData: [Data]? = nil) {
         self.idm = idm
         self.systemCode = systemCode
         self.balance = balance
+        self.transactionsData = transactionsData
     }
 }

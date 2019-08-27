@@ -36,7 +36,7 @@ extension RakutenEdyReader {
             let data = blockData.first!
             
             let balance = data.toIntReversed(0, 3)
-            rakutenEdyCard.balance = balance
+            rakutenEdyCard.data.balance = balance
             
             semaphore.signal()
         }

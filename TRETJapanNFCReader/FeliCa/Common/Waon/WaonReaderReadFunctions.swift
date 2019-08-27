@@ -40,7 +40,7 @@ extension WaonReader {
             }
             
             let balance = data.toIntReversed(0, 2)
-            waonCard.balance = balance
+            waonCard.data.balance = balance
             
             semaphore.signal()
         }

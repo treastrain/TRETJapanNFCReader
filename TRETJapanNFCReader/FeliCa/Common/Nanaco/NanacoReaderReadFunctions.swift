@@ -36,7 +36,7 @@ extension NanacoReader {
             let data = blockData.first!
             
             let balance = data.toIntReversed(0, 3)
-            nanacoCard.balance = balance
+            nanacoCard.data.balance = balance
             
             semaphore.signal()
         }

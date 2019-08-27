@@ -14,6 +14,9 @@ import CoreNFC
 public protocol FeliCaCard {
     var tag: NFCFeliCaTag { get }
     
+}
+
+public protocol FeliCaCardData: Codable {
     var type: FeliCaCardType { get }
     
     var idm: String { get }
@@ -24,7 +27,7 @@ public protocol FeliCaCardItem {
     
 }
 
-public enum FeliCaSystemCode {
+public enum FeliCaSystemCode: String, Codable {
     case japanRailwayCybernetics
     case common
     
@@ -50,7 +53,7 @@ public enum FeliCaSystemCode {
     }
 }
 
-public enum FeliCaCardType {
+public enum FeliCaCardType: String, Codable {
     
     /// 交通系ICカード
     case transitIC

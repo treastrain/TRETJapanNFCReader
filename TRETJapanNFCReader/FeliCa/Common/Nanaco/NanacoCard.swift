@@ -17,24 +17,38 @@ public enum NanacoCardItem: CaseIterable, FeliCaCardItem {
 /// nanacoカード
 @available(iOS 13.0, *)
 public struct NanacoCard: FeliCaCard {
-    public var tag: NanacoCardTag
-    public var type: FeliCaCardType = .nanaco
-    public var idm: String
-    public var systemCode: FeliCaSystemCode
+    public let tag: NanacoCardTag
+    public var data: NanacoCardData
+    
+    public init(from feliCaCommonCard: FeliCaCommonCard) {
+        self.tag = feliCaCommonCard.tag
+        self.data = NanacoCardData(from: feliCaCommonCard.data)
+    }
+    
+    public init(tag: NanacoCardTag, data: NanacoCardData) {
+        self.tag = tag
+        self.data = data
+    }
+    
+}
+
+public struct NanacoCardData: FeliCaCardData {
+    public let type: FeliCaCardType = .nanaco
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
     
-    public init(from feliCaCard: FeliCaCard) {
-        self.tag = feliCaCard.tag
-        self.idm = feliCaCard.idm
-        self.systemCode = feliCaCard.systemCode
+    @available(iOS 13.0, *)
+    fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
     }
     
-    public init(tag: NanacoCardTag, idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.tag = tag
+    @available(iOS 13.0, *)
+    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.idm = idm
         self.systemCode = systemCode
         self.balance = balance
     }
-    
 }

@@ -36,7 +36,7 @@ extension UnivCoopICPrepaidReader {
             let data = blockData.first!
             
             let balance = data.toIntReversed(0, 3)
-            univCoopICPrepaidCard.balance = balance
+            univCoopICPrepaidCard.data.balance = balance
             
             semaphore.signal()
         }
