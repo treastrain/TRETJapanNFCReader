@@ -103,8 +103,6 @@ extension TransitICReader {
                 }
                 
                 let data = blockData.first!
-                let balance = data.toIntReversed(10, 11)
-                transitICCard.balance = balance
                 transitICCard.transactionsData = blockData
                 
                 semaphore.signal()
