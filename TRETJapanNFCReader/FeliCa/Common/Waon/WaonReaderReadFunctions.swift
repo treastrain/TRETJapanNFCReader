@@ -34,11 +34,6 @@ extension WaonReader {
             }
             
             let data = blockData.first!
-            
-            for (i, data) in data.enumerated() {
-                print(i, data)
-            }
-            
             let balance = data.toIntReversed(0, 2)
             waonCard.data.balance = balance
             
