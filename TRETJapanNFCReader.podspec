@@ -1,9 +1,9 @@
 Pod::Spec.new do |spec|
   spec.name         = "TRETJapanNFCReader"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.6"
   spec.summary      = "日本のNFCカード向けリーダーライブラリ（iOS 13.0 以降）"
   spec.description  = <<-DESC
-			日本のNFCカード向けリーダーライブラリ（iOS 13.0 以降）
+			日本のNFCカード向けリーダーライブラリ（iOS 9.3 以降、NFCカードの読み取りは iOS 13.0 以降）。Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON、運転免許証の読み取り。日本語・英語に対応 Japanese & English Support!
                    DESC
 
   spec.homepage     = "https://github.com/treastrain/TRETJapanNFCReader"
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/treastrain/TRETJapanNFCReader.git", :tag => "#{spec.version}" }
 
-  spec.source_files = 'TRETJapanNFCReader/*.swift'
+  spec.source_files = 'TRETJapanNFCReader/**/*.{swift}'
 
   spec.requires_arc = true
 end
