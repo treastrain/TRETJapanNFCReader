@@ -131,7 +131,7 @@ extension UnivCoopICPrepaidReader {
             }
             
             var transactions: [UnivCoopICPrepaidCardTransaction] = []
-            for (i, data) in blockData.enumerated() {
+            for data in blockData {
                 
                 let dateString = data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString() + data[4].toString() + data[5].toString() + data[6].toString()
                 let formatter = DateFormatter()

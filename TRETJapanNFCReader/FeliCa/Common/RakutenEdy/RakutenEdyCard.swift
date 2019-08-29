@@ -12,6 +12,10 @@ import Foundation
 public enum RakutenEdyCardItem: CaseIterable, FeliCaCardItem {
     /// カード残高
     case balance
+    /// Edy番号
+    case edyNumber
+    /// 利用履歴
+    case transactions
 }
 
 /// 楽天Edyカード
@@ -37,6 +41,8 @@ public struct RakutenEdyCardData: FeliCaCardData {
     public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
+    public var edyNumber: String?
+    public var transactions: [RakutenEdyCardTransaction]?
     
     @available(iOS 13.0, *)
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
@@ -48,6 +54,20 @@ public struct RakutenEdyCardData: FeliCaCardData {
     public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.idm = idm
         self.systemCode = systemCode
+        self.balance = balance
+    }
+}
+
+public struct RakutenEdyCardTransaction: FeliCaCardTransaction {
+    public var date: Date
+    public var type: FeliCaCardTransactionType
+    public var difference: Int
+    public var balance: Int
+    
+    public init(date: Date, type: FeliCaCardTransactionType, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.difference = difference
         self.balance = balance
     }
 }

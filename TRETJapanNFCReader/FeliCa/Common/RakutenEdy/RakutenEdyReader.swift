@@ -55,6 +55,12 @@ public class RakutenEdyReader: FeliCaReader {
                 case .balance:
                     rakutenEdyCard = self.readBalance(session, rakutenEdyCard)
                     break
+                case .edyNumber:
+                    rakutenEdyCard = self.readEdyNumber(session, rakutenEdyCard)
+                    break
+                case .transactions:
+                    rakutenEdyCard = self.readTransactions(session, rakutenEdyCard)
+                    break
                 }
             }
             completion(rakutenEdyCard)
