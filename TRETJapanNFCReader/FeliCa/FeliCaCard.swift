@@ -35,6 +35,8 @@ public enum FeliCaCardTransactionType: String, Codable {
     case purchase
     /// チャージ
     case credit
+    /// 交通機関
+    case transit
     
     
     case unknown
