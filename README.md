@@ -12,6 +12,7 @@ Japanese & English Support!
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/treastrain/TRETJapanNFCReader/blob/master/LICENSE)
 ![Swift: 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
 ![Platform: iOS](https://img.shields.io/badge/platform-ios-lightgrey.svg)
+![CocoaPods](https://img.shields.io/cocoapods/v/TRETJapanNFCReader?label=CocoaPods)
 
 関連するページ
 - [treastrain/ios13-felica-reader: Sample project to read FeliCa on iOS 13 and later - GitHub](https://github.com/treastrain/ios13-felica-reader)
