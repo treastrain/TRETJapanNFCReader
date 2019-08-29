@@ -12,6 +12,8 @@ import Foundation
 public enum UnivCoopICPrepaidItem: CaseIterable, FeliCaCardItem {
     /// カード残高
     case balance
+    /// 大学生協
+    case univCoopInfo
 }
 
 /// 大学生協ICプリペイドカード
@@ -37,6 +39,11 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public var systemCode: FeliCaSystemCode
     
     public var balance: Int?
+    public var membershipNumber: String?
+    public var mealCardUser: Bool?
+    public var mealCardLastUseDate: Date?
+    public var mealCardLastUsageAmount: Int?
+    public var points: Double?
     
     @available(iOS 13.0, *)
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {

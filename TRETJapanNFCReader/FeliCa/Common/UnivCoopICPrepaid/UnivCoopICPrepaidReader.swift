@@ -53,6 +53,8 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
                 case .balance:
                     univCoopICPrepaidCard = self.readBalance(session, univCoopICPrepaidCard)
                     break
+                case .univCoopInfo:
+                    univCoopICPrepaidCard = self.readUnivCoopInfo(session, univCoopICPrepaidCard)
                 }
             }
             completion(univCoopICPrepaidCard)
