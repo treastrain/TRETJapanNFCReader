@@ -23,6 +23,23 @@ public protocol FeliCaCardData: Codable {
     var systemCode: FeliCaSystemCode { get }
 }
 
+public protocol FeliCaCardTransaction: Codable {
+    var date: Date { get }
+    var type: FeliCaCardTransactionType { get }
+    var difference: Int { get }
+    var balance: Int { get }
+}
+
+public enum FeliCaCardTransactionType: String, Codable {
+    /// 支払い
+    case purchase
+    /// チャージ
+    case credit
+    
+    
+    case unknown
+}
+
 public protocol FeliCaCardItem {
     
 }

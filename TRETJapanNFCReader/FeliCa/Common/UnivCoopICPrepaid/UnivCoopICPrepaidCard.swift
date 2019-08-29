@@ -14,6 +14,8 @@ public enum UnivCoopICPrepaidItem: CaseIterable, FeliCaCardItem {
     case balance
     /// 大学生協
     case univCoopInfo
+    /// 利用履歴
+    case transactions
 }
 
 /// 大学生協ICプリペイドカード
@@ -44,6 +46,7 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public var mealCardLastUseDate: Date?
     public var mealCardLastUsageAmount: Int?
     public var points: Double?
+    public var transactions: [UnivCoopICPrepaidCardTransaction]?
     
     @available(iOS 13.0, *)
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
@@ -55,6 +58,20 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
         self.idm = idm
         self.systemCode = systemCode
+        self.balance = balance
+    }
+}
+
+public struct UnivCoopICPrepaidCardTransaction: FeliCaCardTransaction {
+    public let date: Date
+    public let type: FeliCaCardTransactionType
+    public let difference: Int
+    public let balance: Int
+    
+    public init(date: Date, type: FeliCaCardTransactionType, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.difference = difference
         self.balance = balance
     }
 }

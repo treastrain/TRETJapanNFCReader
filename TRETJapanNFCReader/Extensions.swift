@@ -15,6 +15,16 @@ extension Bundle {
     }
 }
 
+public extension Date {
+    func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = dateStyle
+        formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
+        formatter.timeStyle = timeStyle
+        return formatter.string(from: self)
+    }
+}
+
 public extension Optional where Wrapped == Date {
     func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
         let formatter = DateFormatter()
