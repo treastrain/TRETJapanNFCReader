@@ -12,6 +12,12 @@ import Foundation
 public enum WaonCardItem: CaseIterable, FeliCaCardItem {
     /// カード残高
     case balance
+    /// WAON番号
+    case waonNumber
+    /// ポイント
+    case points
+    /// 利用履歴
+    case transactions
 }
 
 /// WAONカード
@@ -37,6 +43,9 @@ public struct WaonCardData: FeliCaCardData {
     public let systemCode: FeliCaSystemCode
     
     public var balance: Int?
+    public var waonNumber: String?
+    public var points: Int?
+    public var transactions: [WaonCardTransaction]?
     
     @available(iOS 13.0, *)
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
@@ -50,4 +59,35 @@ public struct WaonCardData: FeliCaCardData {
         self.systemCode = systemCode
         self.balance = balance
     }
+}
+
+public struct WaonCardTransaction: FeliCaCardTransaction {
+    public let date: Date
+    public let type: FeliCaCardTransactionType
+    public let otherType: WaonCardTransactionType?
+    public let difference: Int
+    public let balance: Int
+    
+    public init(date: Date, type: FeliCaCardTransactionType, otherType: WaonCardTransactionType? = nil, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.otherType = otherType
+        self.difference = difference
+        self.balance = balance
+    }
+}
+
+public enum WaonCardTransactionType: String, Codable {
+    /// 返品
+    case returned
+    /// ポイントダウンロード
+    case pointDownload
+    /// 返金
+    case refunded
+    /// オートチャージ
+    case autoCredit
+    /// 新カードへ移行
+    case moveToNewCard
+    /// ポイント交換
+    case pointExchange
 }

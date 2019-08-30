@@ -137,7 +137,9 @@ extension UnivCoopICPrepaidReader {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyyMMddHHmmss"
                 formatter.locale = Locale(identifier: "en_US_POSIX")
-                let date = formatter.date(from: dateString)
+                guard let date = formatter.date(from: dateString) else {
+                    continue
+                }
                 
                 var type = FeliCaCardTransactionType.unknown
                 if Int(data[7]) == 5 {
@@ -149,7 +151,7 @@ extension UnivCoopICPrepaidReader {
                 let difference = Int(data[8].toString() + data[9].toString() + data[10].toString())
                 let balance = Int(data[11].toString() + data[12].toString() + data[13].toString())
                 
-                if let date = date, let difference = difference, let balance = balance {
+                if let difference = difference, let balance = balance {
                     transactions.append(UnivCoopICPrepaidCardTransaction(date: date, type: type, difference: difference, balance: balance))
                 }
             }

@@ -39,6 +39,8 @@ public enum FeliCaCardTransactionType: String, Codable {
     case transit
     
     
+    /// その他
+    case other
     case unknown
 }
 

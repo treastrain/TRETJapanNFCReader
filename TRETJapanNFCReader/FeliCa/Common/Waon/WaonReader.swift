@@ -55,6 +55,12 @@ public class WaonReader: FeliCaReader {
                 case .balance:
                     waonCard = self.readBalance(session, waonCard)
                     break
+                case .waonNumber:
+                    waonCard = self.readWaonNumber(session, waonCard)
+                case .points:
+                    waonCard = self.readPoints(session, waonCard)
+                case .transactions:
+                    waonCard = self.readTransactions(session, waonCard)
                 }
             }
             completion(waonCard)
