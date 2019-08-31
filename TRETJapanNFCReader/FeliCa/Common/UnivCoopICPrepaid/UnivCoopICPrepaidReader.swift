@@ -15,7 +15,7 @@ public typealias UnivCoopICPrepaidCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class UnivCoopICPrepaidReader: FeliCaReader {
     
-    private var univCoopICPrepaidCardItems: [UnivCoopICPrepaidItem] = []
+    private var univCoopICPrepaidCardItemTypes: [UnivCoopICPrepaidItemType] = []
     
     private init() {
         fatalError()
@@ -39,25 +39,24 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
         super.init(viewController: viewController)
     }
     
-    public func get(items: [UnivCoopICPrepaidItem]) {
-        self.univCoopICPrepaidCardItems = items
+    public func get(itemTypes: [UnivCoopICPrepaidItemType]) {
+        self.univCoopICPrepaidCardItemTypes = itemTypes
         self.beginScanning()
+    }
+    
+    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [UnivCoopICPrepaidItemType], completion: @escaping (FeliCaCard) -> Void) {
+        self.univCoopICPrepaidCardItemTypes = itemTypes
+        self.getItems(session, feliCaCard) { (feliCaCard) in
+            completion(feliCaCard)
+        }
     }
     
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         let feliCaCard = feliCaCard as! FeliCaCommonCard
         var univCoopICPrepaidCard = UnivCoopICPrepaidCard(from: feliCaCard)
-        DispatchQueue(label: " TRETJPNRUnivCoopICPrepaidReader", qos: .default).async {
-            for item in self.univCoopICPrepaidCardItems {
-                switch item {
-                case .balance:
-                    univCoopICPrepaidCard = self.readBalance(session, univCoopICPrepaidCard)
-                    break
-                case .univCoopInfo:
-                    univCoopICPrepaidCard = self.readUnivCoopInfo(session, univCoopICPrepaidCard)
-                case .transactions:
-                    univCoopICPrepaidCard = self.readTransactions(session, univCoopICPrepaidCard)
-                }
+        DispatchQueue(label: "TRETJPNRUnivCoopICPrepaidReader", qos: .default).async {
+            for itemType in self.univCoopICPrepaidCardItemTypes {
+                univCoopICPrepaidCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: univCoopICPrepaidCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
             completion(univCoopICPrepaidCard)
         }

@@ -9,9 +9,24 @@
 import Foundation
 
 /// nanacoカードから読み取ることができるデータの種別
-public enum NanacoCardItem: CaseIterable, FeliCaCardItem {
+public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     /// カード残高
     case balance
+    
+    
+    var serviceCode: FeliCaServiceCode {
+        switch self {
+        case .balance:
+            return 0x5597
+        }
+    }
+    
+    var blocks: Int {
+        switch self {
+        case .balance:
+            return 1
+        }
+    }
 }
 
 /// nanacoカード
@@ -36,6 +51,7 @@ public struct NanacoCardData: FeliCaCardData {
     public let type: FeliCaCardType = .nanaco
     public let idm: String
     public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:]
     
     public var balance: Int?
     
@@ -43,12 +59,13 @@ public struct NanacoCardData: FeliCaCardData {
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
         self.idm = feliCaCommonCardData.idm
         self.systemCode = feliCaCommonCardData.systemCode
+        self.data = feliCaCommonCardData.data
     }
     
-    @available(iOS 13.0, *)
-    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.idm = idm
-        self.systemCode = systemCode
-        self.balance = balance
-    }
+//    @available(iOS 13.0, *)
+//    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
+//        self.idm = idm
+//        self.systemCode = systemCode
+//        self.balance = balance
+//    }
 }

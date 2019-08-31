@@ -18,7 +18,7 @@ public typealias TransitICCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class TransitICReader: FeliCaReader {
     
-    private var transitICCardItems: [TransitICCardItem] = []
+    private var transitICCardItemTypes: [TransitICCardItemType] = []
     
     private init() {
         fatalError()
@@ -44,23 +44,23 @@ public class TransitICReader: FeliCaReader {
     
     /// 交通系ICカードからデータを読み取る
     /// - Parameter items: 交通系ICカードから読み取りたいデータ
-    public func get(items: [TransitICCardItem]) {
-        self.transitICCardItems = items
+    public func get(itemTypes: [TransitICCardItemType]) {
+        self.transitICCardItemTypes = itemTypes
         self.beginScanning()
+    }
+    
+    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [TransitICCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        self.transitICCardItemTypes = itemTypes
+        self.getItems(session, feliCaCard) { (feliCaCard) in
+            completion(feliCaCard)
+        }
     }
     
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         var transitICCard = feliCaCard as! TransitICCard
-        DispatchQueue(label: " TRETJPNRTransitICReader", qos: .default).async {
-            for item in self.transitICCardItems {
-                switch item {
-                case .balance:
-                    transitICCard = self.readBalance(session, transitICCard)
-                    break
-                case .transactions:
-                    transitICCard = self.readTransactionsData(session, transitICCard)
-                    break
-                }
+        DispatchQueue(label: "TRETJPNRTransitICReader", qos: .default).async {
+            for itemType in self.transitICCardItemTypes {
+                transitICCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
             completion(transitICCard)
         }

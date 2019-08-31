@@ -77,6 +77,10 @@ internal extension UInt16 {
         var int16 = self
         return Data(bytes: &int16, count: MemoryLayout<UInt16>.size)
     }
+    
+    var uint8: [UInt8] {
+        return [UInt8(self >> 8), UInt8(self & 0x00ff)]
+    }
 }
 
 internal extension String {

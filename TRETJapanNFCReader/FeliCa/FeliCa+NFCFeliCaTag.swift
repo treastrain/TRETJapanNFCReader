@@ -10,7 +10,6 @@ import CoreNFC
 
 @available(iOS 13.0, *)
 extension NFCFeliCaTag {
-    
     /// FeliCa カードの仕様で定義されている Read Without Encryption コマンドを、blockList の要素数が13~24の場合において継続して処理できるように分けてタグに送信します。
     /// - Parameter serviceCode: サービスコード
     /// - Parameter blockList: ブロックリスト
@@ -46,5 +45,4 @@ extension NFCFeliCaTag {
             }
         }
     }
-    
 }

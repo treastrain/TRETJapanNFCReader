@@ -6,7 +6,6 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import UIKit
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -15,7 +14,7 @@ public typealias NanacoCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class NanacoReader: FeliCaReader {
     
-    private var nanacoCardItems: [NanacoCardItem] = []
+    private var nanacoCardItemTypes: [NanacoCardItemType] = []
     
     private init() {
         fatalError()
@@ -40,22 +39,25 @@ public class NanacoReader: FeliCaReader {
     }
     
     /// nanacoカードからデータを読み取る
-    /// - Parameter items: nanacoカードから読み取りたいデータ
-    public func get(items: [NanacoCardItem]) {
-        self.nanacoCardItems = items
+    /// - Parameter itemTypes: nanacoカードから読み取りたいデータ
+    public func get(itemTypes: [NanacoCardItemType]) {
+        self.nanacoCardItemTypes = itemTypes
         self.beginScanning()
+    }
+    
+    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [NanacoCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        self.nanacoCardItemTypes = itemTypes
+        self.getItems(session, feliCaCard) { (feliCaCard) in
+            completion(feliCaCard)
+        }
     }
     
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         let feliCaCard = feliCaCard as! FeliCaCommonCard
         var nanacoCard = NanacoCard(from: feliCaCard)
-        DispatchQueue(label: " TRETJPNRNanacoReader", qos: .default).async {
-            for item in self.nanacoCardItems {
-                switch item {
-                case .balance:
-                    nanacoCard = self.readBalance(session, nanacoCard)
-                    break
-                }
+        DispatchQueue(label: "TRETJPNRNanacoReader", qos: .default).async {
+            for itemType in self.nanacoCardItemTypes {
+                nanacoCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: nanacoCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
             completion(nanacoCard)
         }

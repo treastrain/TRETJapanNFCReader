@@ -6,7 +6,6 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import UIKit
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -14,8 +13,8 @@ public typealias RakutenEdyCardTag = NFCFeliCaTag
 
 @available(iOS 13.0, *)
 public class RakutenEdyReader: FeliCaReader {
-    
-    private var rakutenEdyCardItems: [RakutenEdyCardItem] = []
+
+    private var rakutenEdyCardItemTypes: [RakutenEdyCardItemType] = []
     
     private init() {
         fatalError()
@@ -40,28 +39,25 @@ public class RakutenEdyReader: FeliCaReader {
     }
     
     /// 楽天Edyカードからデータを読み取る
-    /// - Parameter items: 楽天Edyカードから読み取りたいデータ
-    public func get(items: [RakutenEdyCardItem]) {
-        self.rakutenEdyCardItems = items
+    /// - Parameter itemTypes: 楽天Edyカードから読み取りたいデータのタイプ
+    public func get(itemTypes: [RakutenEdyCardItemType]) {
+        self.rakutenEdyCardItemTypes = itemTypes
         self.beginScanning()
+    }
+    
+    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [RakutenEdyCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        self.rakutenEdyCardItemTypes = itemTypes
+        self.getItems(session, feliCaCard) { (feliCaCard) in
+            completion(feliCaCard)
+        }
     }
     
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         let feliCaCard = feliCaCard as! FeliCaCommonCard
         var rakutenEdyCard = RakutenEdyCard(from: feliCaCard)
-        DispatchQueue(label: " TRETJPNRRakutenEdyReader", qos: .default).async {
-            for item in self.rakutenEdyCardItems {
-                switch item {
-                case .balance:
-                    rakutenEdyCard = self.readBalance(session, rakutenEdyCard)
-                    break
-                case .edyNumber:
-                    rakutenEdyCard = self.readEdyNumber(session, rakutenEdyCard)
-                    break
-                case .transactions:
-                    rakutenEdyCard = self.readTransactions(session, rakutenEdyCard)
-                    break
-                }
+        DispatchQueue(label: "TRETJPNRRakutenEdyReader", qos: .default).async {
+            for itemType in self.rakutenEdyCardItemTypes {
+                rakutenEdyCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: rakutenEdyCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
             completion(rakutenEdyCard)
         }

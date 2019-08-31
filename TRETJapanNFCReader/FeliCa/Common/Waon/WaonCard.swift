@@ -9,7 +9,7 @@
 import Foundation
 
 /// WAONカードから読み取る事ができるデータの種別
-public enum WaonCardItem: CaseIterable, FeliCaCardItem {
+public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {
     /// カード残高
     case balance
     /// WAON番号
@@ -18,6 +18,33 @@ public enum WaonCardItem: CaseIterable, FeliCaCardItem {
     case points
     /// 利用履歴
     case transactions
+    
+    
+    var serviceCode: FeliCaServiceCode {
+        switch self {
+        case .balance:
+            return 0x6817
+        case .waonNumber:
+            return 0x684F
+        case .points:
+            return 0x684B
+        case .transactions:
+            return 0x680B
+        }
+    }
+    
+    var blocks: Int {
+        switch self {
+        case .balance:
+            return 1
+        case .waonNumber:
+            return 1
+        case .points:
+            return 1
+        case .transactions:
+            return 9
+        }
+    }
 }
 
 /// WAONカード
@@ -41,6 +68,7 @@ public struct WaonCardData: FeliCaCardData {
     public let type: FeliCaCardType = .waon
     public let idm: String
     public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:]
     
     public var balance: Int?
     public var waonNumber: String?
@@ -53,12 +81,12 @@ public struct WaonCardData: FeliCaCardData {
         self.systemCode = feliCaCommonCardData.systemCode
     }
     
-    @available(iOS 13.0, *)
-    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.idm = idm
-        self.systemCode = systemCode
-        self.balance = balance
-    }
+//    @available(iOS 13.0, *)
+//    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
+//        self.idm = idm
+//        self.systemCode = systemCode
+//        self.balance = balance
+//    }
 }
 
 public struct WaonCardTransaction: FeliCaCardTransaction {

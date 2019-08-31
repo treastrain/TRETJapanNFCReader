@@ -6,46 +6,36 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import Foundation
 import CoreNFC
 
 /// FeliCaカード
 @available(iOS 13.0, *)
 public protocol FeliCaCard {
     var tag: NFCFeliCaTag { get }
-    
 }
 
 public protocol FeliCaCardData: Codable {
     var type: FeliCaCardType { get }
-    
     var idm: String { get }
     var systemCode: FeliCaSystemCode { get }
+    var data: [FeliCaServiceCode : [Data]] { get }
+    // var items: FeliCaCardItems { get }
 }
 
-public protocol FeliCaCardTransaction: Codable {
-    var date: Date { get }
-    var type: FeliCaCardTransactionType { get }
-    var difference: Int { get }
-    var balance: Int { get }
-}
-
-public enum FeliCaCardTransactionType: String, Codable {
-    /// 支払い
-    case purchase
-    /// チャージ
-    case credit
-    /// 交通機関
-    case transit
+public enum FeliCaCardType: String, Codable {
+    /// 交通系ICカード
+    case transitIC
+    /// 楽天Edyカード
+    case rakutenEdy
+    /// nanaco
+    case nanaco
+    /// WAON
+    case waon
+    /// 大学生協ICプリペイドカード
+    case univCoopICPrepaid
     
     
-    /// その他
-    case other
     case unknown
-}
-
-public protocol FeliCaCardItem {
-    
 }
 
 public enum FeliCaSystemCode: String, Codable {
@@ -74,19 +64,31 @@ public enum FeliCaSystemCode: String, Codable {
     }
 }
 
-public enum FeliCaCardType: String, Codable {
+public typealias FeliCaServiceCode = UInt16
+
+public protocol FeliCaCardItems: Codable {
+}
+
+public protocol FeliCaCardTransaction: Codable {
+    var date: Date { get }
+    var type: FeliCaCardTransactionType { get }
+    var difference: Int { get }
+    var balance: Int { get }
+}
+
+public enum FeliCaCardTransactionType: String, Codable {
+    /// 支払い
+    case purchase
+    /// チャージ
+    case credit
+    /// 交通機関
+    case transit
     
-    /// 交通系ICカード
-    case transitIC
-    /// 楽天Edyカード
-    case rakutenEdy
-    /// nanaco
-    case nanaco
-    /// WAON
-    case waon
-    /// 大学生協ICプリペイドカード
-    case univCoopICPrepaid
     
-    
+    /// その他
+    case other
     case unknown
+}
+
+public protocol FeliCaCardItemType {
 }

@@ -9,13 +9,36 @@
 import Foundation
 
 /// 大学生協ICプリペイドカードから読み取ることができるデータの種別
-public enum UnivCoopICPrepaidItem: CaseIterable, FeliCaCardItem {
+public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
     /// カード残高
     case balance
     /// 大学生協
     case univCoopInfo
     /// 利用履歴
     case transactions
+    
+    
+    var serviceCode: FeliCaServiceCode {
+        switch self {
+        case .balance:
+            return 0x50D7
+        case .univCoopInfo:
+            return 0x50CB
+        case .transactions:
+            return 0x50CF
+        }
+    }
+    
+    var blocks: Int {
+        switch self {
+        case .balance:
+            return 1
+        case .univCoopInfo:
+            return 6
+        case .transactions:
+            return 10
+        }
+    }
 }
 
 /// 大学生協ICプリペイドカード
@@ -36,9 +59,10 @@ public struct UnivCoopICPrepaidCard: FeliCaCard {
 }
 
 public struct UnivCoopICPrepaidCardData: FeliCaCardData {
-    public var type: FeliCaCardType = .univCoopICPrepaid
-    public var idm: String
-    public var systemCode: FeliCaSystemCode
+    public let type: FeliCaCardType = .univCoopICPrepaid
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:]
     
     public var balance: Int?
     public var membershipNumber: String?
@@ -54,12 +78,12 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
         self.systemCode = feliCaCommonCardData.systemCode
     }
     
-    @available(iOS 13.0, *)
-    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-        self.idm = idm
-        self.systemCode = systemCode
-        self.balance = balance
-    }
+//    @available(iOS 13.0, *)
+//    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
+//        self.idm = idm
+//        self.systemCode = systemCode
+//        self.balance = balance
+//    }
 }
 
 public struct UnivCoopICPrepaidCardTransaction: FeliCaCardTransaction {
