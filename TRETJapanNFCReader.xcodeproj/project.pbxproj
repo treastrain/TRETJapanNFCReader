@@ -14,8 +14,6 @@
 		CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B17230D94F800B42E6C /* RakutenEdyReader.swift */; };
 		CD17B131231AC87C00A46679 /* TransitICCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */; };
 		CD17B132231AC87C00A46679 /* TransitICReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */; };
-		CD17B134231AC87C00A46679 /* TransitICReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */; };
-		CD17B135231AC87C00A46679 /* TransitICReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B8022CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift */; };
 		CD17B136231AC87E00A46679 /* CommonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9291CD230E41DF00F576EF /* CommonCard.swift */; };
 		CD17B137231AD48600A46679 /* NanacoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7691A023154F310097FC2D /* NanacoCard.swift */; };
 		CD17B138231AD48600A46679 /* NanacoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7691A223154F3B0097FC2D /* NanacoReader.swift */; };
@@ -133,7 +131,6 @@
 
 /* Begin PBXFileReference section */
 		CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderReadFunctions.swift; sourceTree = "<group>"; };
-		CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderCommands.swift; sourceTree = "<group>"; };
 		CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversLicenseReader.entitlements; sourceTree = "<group>"; };
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -202,7 +199,6 @@
 		CDFC3B7822CE2B6F000E88B4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReader.swift; sourceTree = "<group>"; };
 		CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICCard.swift; sourceTree = "<group>"; };
-		CDFC3B8022CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,8 +435,6 @@
 				CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */,
 				CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */,
 				CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */,
-				CD06199522CE3718000EB026 /* TransitICReaderCommands.swift */,
-				CDFC3B8022CE2E20000E88B4 /* TransitICReaderSessionDelegate.swift */,
 			);
 			path = TransitIC;
 			sourceTree = "<group>";
@@ -658,7 +652,6 @@
 				CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
-				CD17B134231AC87C00A46679 /* TransitICReaderCommands.swift in Sources */,
 				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CD17B13B231AD5D900A46679 /* WaonReader.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
@@ -667,7 +660,6 @@
 				CD17B131231AC87C00A46679 /* TransitICCard.swift in Sources */,
 				CDD2895323143A6300087725 /* FeliCa+NFCFeliCaTag.swift in Sources */,
 				CD17B137231AD48600A46679 /* NanacoCard.swift in Sources */,
-				CD17B135231AC87C00A46679 /* TransitICReaderSessionDelegate.swift in Sources */,
 				CD8FC6F322D20317007ECC1C /* DriversLicenseExtensions.swift in Sources */,
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
 				CD17B13D231AD8A200A46679 /* UnivCoopICPrepaidCard.swift in Sources */,

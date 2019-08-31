@@ -129,14 +129,12 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     }
     
     internal func readWithoutEncryption(session: NFCTagReaderSession, tag: NFCFeliCaTag, serviceCode: FeliCaServiceCode, blocks: Int) -> [Data]? {
+        var data: [Data]? = nil
+        
         let semaphore = DispatchSemaphore(value: 0)
         let serviceCode = Data(serviceCode.uint8.reversed())
-        let blockList = (0..<blocks).map { (block) -> Data in
-            Data([0x80, UInt8(block)])
-        }
         
-        var data: [Data]? = nil
-        tag.readWithoutEncryption24(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
+        tag.requestService(nodeCodeList: [serviceCode]) { (nodesData, error) in
             
             if let error = error {
                 print(error.localizedDescription)
@@ -144,13 +142,33 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
                 return
             }
             
-            guard status1 == 0x00, status2 == 0x00 else {
-                print("ステータスフラグがエラーを示しています", status1, status2)
-                session.invalidate(errorMessage: "ステータスフラグがエラーを示しています")
+            guard let nodeData = nodesData.first, nodeData != Data([0xFF, 0xFF]) else {
+                print("選択された node のサービスが存在しません")
+                session.invalidate(errorMessage: "選択された node のサービスが存在しません")
                 return
             }
             
-            data = blockData
+            let blockList = (0..<blocks).map { (block) -> Data in
+                Data([0x80, UInt8(block)])
+            }
+            
+            tag.readWithoutEncryption24(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: error.localizedDescription)
+                    return
+                }
+                
+                guard status1 == 0x00, status2 == 0x00 else {
+                    print("ステータスフラグがエラーを示しています", status1, status2)
+                    session.invalidate(errorMessage: "ステータスフラグがエラーを示しています")
+                    return
+                }
+                
+                data = blockData
+                semaphore.signal()
+            }
         }
         
         semaphore.wait()

@@ -10,7 +10,7 @@ import UIKit
 import CoreNFC
 import TRETJapanNFCReader
 
-class ViewController: UIViewController, TransitICReaderSessionDelegate {
+class ViewController: UIViewController, FeliCaReaderSessionDelegate {
     
     var reader: TransitICReader!
     var transitICCard: TransitICCard?
@@ -27,7 +27,7 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
     }
     
     @IBAction func reread() {
-        self.reader.get(items: [.balance])
+        self.reader.get(itemTypes: [.balance])
     }
     
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
@@ -57,13 +57,13 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
         let transitICCard = feliCaCard as! TransitICCard
         
         DispatchQueue.main.async {
-            if let balance = transitICCard.balance {
+            if let balance = transitICCard.data.balance {
                 self.balanceLabel.text = "¥ \(balance)"
             } else {
                 self.balanceLabel.text = "¥ -----"
             }
-            self.idmLabel.text = "IDm: \(transitICCard.idm)"
-            self.systemCodeLabel.text = "System Code: \(transitICCard.systemCode.string)"
+            self.idmLabel.text = "IDm: \(transitICCard.data.idm)"
+            self.systemCodeLabel.text = "System Code: \(transitICCard.data.systemCode.string)"
         }
         
         self.transitICCard = transitICCard

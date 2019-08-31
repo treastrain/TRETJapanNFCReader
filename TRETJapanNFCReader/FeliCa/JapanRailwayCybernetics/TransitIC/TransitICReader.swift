@@ -9,8 +9,8 @@
 import UIKit
 import CoreNFC
 
-@available(iOS 13.0, *)
-public typealias TransitICReaderViewController = UIViewController & TransitICReaderSessionDelegate
+//@available(iOS 13.0, *)
+//public typealias TransitICReaderViewController = UIViewController & TransitICReaderSessionDelegate
 
 @available(iOS 13.0, *)
 public typealias TransitICCardTag = NFCFeliCaTag
@@ -31,14 +31,14 @@ public class TransitICReader: FeliCaReader {
     }
     
     /// TransitICReader を初期化する。
-    /// - Parameter delegate: TransitICReaderSessionDelegate
-    public init(delegate: TransitICReaderSessionDelegate) {
+    /// - Parameter delegate: FeliCaReaderSessionDelegate
+    public override init(delegate: FeliCaReaderSessionDelegate) {
         super.init(delegate: delegate)
     }
     
     /// TransitICReader を初期化する。
-    /// - Parameter viewController: TransitICReaderSessionDelegate を適用した UIViewController
-    public init(viewController: TransitICReaderViewController) {
+    /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
+    public override init(viewController: FeliCaReaderViewController) {
         super.init(viewController: viewController)
     }
     
