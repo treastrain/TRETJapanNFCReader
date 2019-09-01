@@ -62,7 +62,11 @@ public struct RakutenEdyCardData: FeliCaCardData {
     public let type: FeliCaCardType = .rakutenEdy
     public let idm: String
     public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:]
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
     
     public var balance: Int?
     public var edyNumber: String?
@@ -73,10 +77,6 @@ public struct RakutenEdyCardData: FeliCaCardData {
         self.idm = feliCaCommonCardData.idm
         self.systemCode = feliCaCommonCardData.systemCode
         self.data = feliCaCommonCardData.data
-    }
-    
-    public func convert() {
-        
     }
 }
 
