@@ -19,7 +19,8 @@ public protocol FeliCaCardData: Codable {
     var idm: String { get }
     var systemCode: FeliCaSystemCode { get }
     var data: [FeliCaServiceCode : [Data]] { get }
-    // var items: FeliCaCardItems { get }
+    
+    mutating func convert()
 }
 
 public enum FeliCaCardType: String, Codable {

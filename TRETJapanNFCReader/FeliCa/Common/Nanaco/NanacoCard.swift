@@ -62,10 +62,7 @@ public struct NanacoCardData: FeliCaCardData {
         self.data = feliCaCommonCardData.data
     }
     
-//    @available(iOS 13.0, *)
-//    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-//        self.idm = idm
-//        self.systemCode = systemCode
-//        self.balance = balance
-//    }
+    public func convert() {
+        
+    }
 }

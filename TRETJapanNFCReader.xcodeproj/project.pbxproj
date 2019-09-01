@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD00C17B231C18E100EC59B8 /* CommonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9291CD230E41DF00F576EF /* CommonCard.swift */; };
+		CD00C17C231C28A700EC59B8 /* UnivCoopICPrepaidCardData+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData+Convert.swift */; };
 		CD06199222CE3517000EB026 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B7722CE2B66000E88B4 /* InfoPlist.strings */; };
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
@@ -142,7 +143,7 @@
 		CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderExtensions.swift; sourceTree = "<group>"; };
 		CD5476CE23105666003E3C62 /* UnivCoopICPrepaidCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCard.swift; sourceTree = "<group>"; };
 		CD5476D02310566D003E3C62 /* UnivCoopICPrepaidReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidReader.swift; sourceTree = "<group>"; };
-		CD5476D223105679003E3C62 /* UnivCoopICPrepaidReaderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidReaderFunctions.swift; sourceTree = "<group>"; };
+		CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData+Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnivCoopICPrepaidCardData+Convert.swift"; sourceTree = "<group>"; };
 		CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderError.swift; sourceTree = "<group>"; };
 		CD59FE5522D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CD5D2D4D22C5E2F7004330F3 /* DriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,8 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				CD5476CE23105666003E3C62 /* UnivCoopICPrepaidCard.swift */,
+				CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData+Convert.swift */,
 				CD5476D02310566D003E3C62 /* UnivCoopICPrepaidReader.swift */,
-				CD5476D223105679003E3C62 /* UnivCoopICPrepaidReaderFunctions.swift */,
 			);
 			path = UnivCoopICPrepaid;
 			sourceTree = "<group>";
@@ -664,6 +665,7 @@
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
 				CD17B13D231AD8A200A46679 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD8B7B6922CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift in Sources */,
+				CD00C17C231C28A700EC59B8 /* UnivCoopICPrepaidCardData+Convert.swift in Sources */,
 				CDAC056B230D2C9D00E1DDCF /* FeliCaCard.swift in Sources */,
 				CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */,
 			);

@@ -74,6 +74,10 @@ public struct RakutenEdyCardData: FeliCaCardData {
         self.systemCode = feliCaCommonCardData.systemCode
         self.data = feliCaCommonCardData.data
     }
+    
+    public func convert() {
+        
+    }
 }
 
 public struct RakutenEdyCardTransaction: FeliCaCardTransaction {

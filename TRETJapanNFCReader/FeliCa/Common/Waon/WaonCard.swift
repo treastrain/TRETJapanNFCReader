@@ -81,12 +81,9 @@ public struct WaonCardData: FeliCaCardData {
         self.systemCode = feliCaCommonCardData.systemCode
     }
     
-//    @available(iOS 13.0, *)
-//    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-//        self.idm = idm
-//        self.systemCode = systemCode
-//        self.balance = balance
-//    }
+    public func convert() {
+        
+    }
 }
 
 public struct WaonCardTransaction: FeliCaCardTransaction {

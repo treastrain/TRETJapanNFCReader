@@ -31,4 +31,8 @@ public struct FeliCaCommonCardData: FeliCaCardData {
         self.idm = idm
         self.systemCode = systemCode
     }
+    
+    public func convert() {
+        
+    }
 }

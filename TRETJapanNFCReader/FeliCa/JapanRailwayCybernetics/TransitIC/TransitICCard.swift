@@ -61,4 +61,8 @@ public struct TransitICCardData: FeliCaCardData {
         self.idm = idm
         self.systemCode = systemCode
     }
+    
+    public func convert() {
+        
+    }
 }

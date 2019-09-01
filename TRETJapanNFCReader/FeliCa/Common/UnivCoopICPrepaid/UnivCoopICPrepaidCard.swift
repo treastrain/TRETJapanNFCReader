@@ -62,7 +62,11 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public let type: FeliCaCardType = .univCoopICPrepaid
     public let idm: String
     public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:]
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
     
     public var balance: Int?
     public var membershipNumber: String?
@@ -76,14 +80,8 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
         self.idm = feliCaCommonCardData.idm
         self.systemCode = feliCaCommonCardData.systemCode
+        self.data = feliCaCommonCardData.data
     }
-    
-//    @available(iOS 13.0, *)
-//    public init(idm: String, systemCode: FeliCaSystemCode, balance: Int? = nil) {
-//        self.idm = idm
-//        self.systemCode = systemCode
-//        self.balance = balance
-//    }
 }
 
 public struct UnivCoopICPrepaidCardTransaction: FeliCaCardTransaction {
