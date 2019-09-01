@@ -59,9 +59,11 @@ public class TransitICReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         var transitICCard = feliCaCard as! TransitICCard
         DispatchQueue(label: "TRETJPNRTransitICReader", qos: .default).async {
+            var data: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.transitICCardItemTypes {
-                transitICCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
+            transitICCard.data.data = data
             completion(transitICCard)
         }
     }

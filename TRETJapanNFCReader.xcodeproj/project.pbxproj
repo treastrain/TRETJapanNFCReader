@@ -16,6 +16,8 @@
 		CD00C183231C3DF900EC59B8 /* NanacoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00C182231C3DF900EC59B8 /* NanacoCardItemType.swift */; };
 		CD00C185231C3E2C00EC59B8 /* WaonCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00C184231C3E2C00EC59B8 /* WaonCardItemType.swift */; };
 		CD00C187231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00C186231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift */; };
+		CD00C189231C40AB00EC59B8 /* TransitICCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00C188231C40AB00EC59B8 /* TransitICCardItemType.swift */; };
+		CD00C18A231C40E700EC59B8 /* TransitICCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD06199322CE3694000EB026 /* TransitICCardData.swift */; };
 		CD06199222CE3517000EB026 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B7722CE2B66000E88B4 /* InfoPlist.strings */; };
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
@@ -142,7 +144,8 @@
 		CD00C182231C3DF900EC59B8 /* NanacoCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanacoCardItemType.swift; sourceTree = "<group>"; };
 		CD00C184231C3E2C00EC59B8 /* WaonCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonCardItemType.swift; sourceTree = "<group>"; };
 		CD00C186231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidItemType.swift; sourceTree = "<group>"; };
-		CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICReaderReadFunctions.swift; sourceTree = "<group>"; };
+		CD00C188231C40AB00EC59B8 /* TransitICCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICCardItemType.swift; sourceTree = "<group>"; };
+		CD06199322CE3694000EB026 /* TransitICCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitICCardData.swift; sourceTree = "<group>"; };
 		CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriversLicenseReader.entitlements; sourceTree = "<group>"; };
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -449,8 +452,9 @@
 			isa = PBXGroup;
 			children = (
 				CDFC3B7E22CE2D46000E88B4 /* TransitICCard.swift */,
+				CD06199322CE3694000EB026 /* TransitICCardData.swift */,
+				CD00C188231C40AB00EC59B8 /* TransitICCardItemType.swift */,
 				CDFC3B7A22CE2C84000E88B4 /* TransitICReader.swift */,
-				CD06199322CE3694000EB026 /* TransitICReaderReadFunctions.swift */,
 			);
 			path = TransitIC;
 			sourceTree = "<group>";
@@ -665,12 +669,14 @@
 				CD00C185231C3E2C00EC59B8 /* WaonCardItemType.swift in Sources */,
 				CD00C17E231C38DA00EC59B8 /* NanacoCardData.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
+				CD00C189231C40AB00EC59B8 /* TransitICCardItemType.swift in Sources */,
 				CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
 				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CD17B13B231AD5D900A46679 /* WaonReader.swift in Sources */,
+				CD00C18A231C40E700EC59B8 /* TransitICCardData.swift in Sources */,
 				CD00C17B231C18E100EC59B8 /* CommonCard.swift in Sources */,
 				CD00C17F231C39AB00EC59B8 /* WaonCardData.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
