@@ -177,7 +177,7 @@ extension WaonReader {
                 
                 let year = Int(data2 >> 3) + 2005
                 let month = Int((((data2 << 8) + data3) << 5) >> 12)
-                let day = Int((data3 << 1) >> 3)
+                let day = Int((UInt8(data3) << 1) >> 3)
                 let hour = Int((((data3 << 8) + data4) << 6) >> 11)
                 let minute = Int((((data4 << 8) + data5) << 3) >> 10)
                 let dateString = "\(year)-\(month)-\(day) \(hour):\(minute)"
