@@ -6,7 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import CoreNFC
+import Foundation
 
 extension NanacoCardData {
     
