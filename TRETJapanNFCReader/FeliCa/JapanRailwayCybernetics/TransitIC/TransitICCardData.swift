@@ -31,12 +31,12 @@ public struct TransitICCardData: FeliCaCardData {
     public mutating func convert() {
         for (key, value) in self.data {
             let blockData = value
-            switch key {
-            case TransitICCardItemType.balance.serviceCode:
+            switch TransitICCardItemType(key) {
+            case .balance:
                 self.convertToBalance(blockData)
-            case TransitICCardItemType.transactions.serviceCode:
+            case .transactions:
                 self.convertToTransactions(blockData)
-            default:
+            case .none:
                 break
             }
         }

@@ -14,6 +14,15 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     case balance
     
     
+    internal init?(_ serviceCode: FeliCaServiceCode) {
+        switch serviceCode {
+        case 0x5597:
+            self = .balance
+        default:
+            return nil
+        }
+    }
+    
     var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:

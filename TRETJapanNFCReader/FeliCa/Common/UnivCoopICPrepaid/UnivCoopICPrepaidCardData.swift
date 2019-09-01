@@ -37,14 +37,14 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public mutating func convert() {
         for (key, value) in self.data {
             let blockData = value
-            switch key {
-            case UnivCoopICPrepaidItemType.balance.serviceCode:
+            switch UnivCoopICPrepaidItemType(key) {
+            case .balance:
                 self.convertToBalance(blockData)
-            case UnivCoopICPrepaidItemType.univCoopInfo.serviceCode:
+            case .univCoopInfo:
                 self.convertToUnivCoopInfo(blockData)
-            case UnivCoopICPrepaidItemType.transactions.serviceCode:
+            case .transactions:
                 self.convertToTransactions(blockData)
-            default:
+            case .none:
                 break
             }
         }

@@ -31,10 +31,10 @@ public struct NanacoCardData: FeliCaCardData {
     public mutating func convert() {
         for (key, value) in self.data {
             let blockData = value
-            switch key {
-            case NanacoCardItemType.balance.serviceCode:
+            switch NanacoCardItemType(key) {
+            case .balance:
                 self.convertToBalance(blockData)
-            default:
+            case .none:
                 break
             }
         }

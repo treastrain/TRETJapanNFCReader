@@ -33,16 +33,16 @@ public struct WaonCardData: FeliCaCardData {
     public mutating func convert() {
         for (key, value) in self.data {
             let blockData = value
-            switch key {
-            case WaonCardItemType.balance.serviceCode:
+            switch WaonCardItemType(key) {
+            case .balance:
                 self.convertToBalance(blockData)
-            case WaonCardItemType.waonNumber.serviceCode:
+            case .waonNumber:
                 self.convertToWaonNumber(blockData)
-            case WaonCardItemType.points.serviceCode:
+            case .points:
                 self.convertToPoints(blockData)
-            case WaonCardItemType.transactions.serviceCode:
+            case .transactions:
                 self.convertToTransactions(blockData)
-            default:
+            case .none:
                 break
             }
         }

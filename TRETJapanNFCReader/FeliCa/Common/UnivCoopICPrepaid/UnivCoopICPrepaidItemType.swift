@@ -18,6 +18,19 @@ public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
     case transactions
     
     
+    internal init?(_ serviceCode: FeliCaServiceCode) {
+        switch serviceCode {
+        case 0x50D7:
+            self = .balance
+        case 0x50CB:
+            self = .univCoopInfo
+        case 0x50CF:
+            self = .transactions
+        default:
+            return nil
+        }
+    }
+    
     var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:

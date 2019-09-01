@@ -33,14 +33,14 @@ public struct RakutenEdyCardData: FeliCaCardData {
     public mutating func convert() {
         for (key, value) in self.data {
             let blockData = value
-            switch key {
-            case RakutenEdyCardItemType.balance.serviceCode:
+            switch RakutenEdyCardItemType(key) {
+            case .balance:
                 self.convertToBalance(blockData)
-            case RakutenEdyCardItemType.edyNumber.serviceCode:
+            case .edyNumber:
                 self.convertToEdyNumber(blockData)
-            case RakutenEdyCardItemType.transactions.serviceCode:
+            case .transactions:
                 self.convertToTransactions(blockData)
-            default:
+            case .none:
                 break
             }
         }

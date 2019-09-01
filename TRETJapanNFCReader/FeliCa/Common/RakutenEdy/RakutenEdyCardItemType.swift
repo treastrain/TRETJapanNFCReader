@@ -18,6 +18,19 @@ public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {
     case transactions
     
     
+    internal init?(_ serviceCode: FeliCaServiceCode) {
+        switch serviceCode {
+        case 0x1317:
+            self = .balance
+        case 0x110B:
+            self = .edyNumber
+        case 0x170F:
+            self = .transactions
+        default:
+            return nil
+        }
+    }
+    
     var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:

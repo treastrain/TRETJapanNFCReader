@@ -16,6 +16,17 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     case transactions
     
     
+    internal init?(_ serviceCode: FeliCaServiceCode) {
+        switch serviceCode {
+        case 0x008B:
+            self = .balance
+        case 0x090F:
+            self = .transactions
+        default:
+            return nil
+        }
+    }
+    
     var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:

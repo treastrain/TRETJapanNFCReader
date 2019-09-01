@@ -20,6 +20,21 @@ public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {
     case transactions
     
     
+    internal init?(_ serviceCode: FeliCaServiceCode) {
+        switch serviceCode {
+        case 0x6817:
+            self = .balance
+        case 0x684F:
+            self = .waonNumber
+        case 0x684B:
+            self = .points
+        case 0x680B:
+            self = .transactions
+        default:
+            return nil
+        }
+    }
+    
     var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
