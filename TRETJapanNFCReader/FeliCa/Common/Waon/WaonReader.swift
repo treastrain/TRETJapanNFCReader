@@ -56,9 +56,11 @@ public class WaonReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         var waonCard = feliCaCard as! WaonCard
         DispatchQueue(label: "TRETJPNRWaonReader", qos: .default).async {
+            var data: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.waonCardItemTypes {
-                waonCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: waonCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: waonCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
+            waonCard.data.data = data
             completion(waonCard)
         }
     }

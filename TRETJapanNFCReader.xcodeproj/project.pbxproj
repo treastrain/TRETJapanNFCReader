@@ -11,6 +11,7 @@
 		CD00C17C231C28A700EC59B8 /* UnivCoopICPrepaidCardData+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData+Convert.swift */; };
 		CD00C17D231C36C000EC59B8 /* RakutenEdyCard+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B19230D98F900B42E6C /* RakutenEdyCard+Convert.swift */; };
 		CD00C17E231C38DA00EC59B8 /* NanacoCard+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7691A423154F470097FC2D /* NanacoCard+Convert.swift */; };
+		CD00C17F231C39AB00EC59B8 /* WaonCard+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9E273D23118B7C00BBB383 /* WaonCard+Convert.swift */; };
 		CD06199222CE3517000EB026 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDFC3B7722CE2B66000E88B4 /* InfoPlist.strings */; };
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
@@ -183,7 +184,7 @@
 		CD996F7822C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CD9E273923118B5F00BBB383 /* WaonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonCard.swift; sourceTree = "<group>"; };
 		CD9E273B23118B6F00BBB383 /* WaonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonReader.swift; sourceTree = "<group>"; };
-		CD9E273D23118B7C00BBB383 /* WaonReaderReadFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonReaderReadFunctions.swift; sourceTree = "<group>"; };
+		CD9E273D23118B7C00BBB383 /* WaonCard+Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaonCard+Convert.swift"; sourceTree = "<group>"; };
 		CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaCard.swift; sourceTree = "<group>"; };
 		CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReader.swift; sourceTree = "<group>"; };
 		CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReaderSessionDelegate.swift; sourceTree = "<group>"; };
@@ -387,8 +388,8 @@
 			isa = PBXGroup;
 			children = (
 				CD9E273923118B5F00BBB383 /* WaonCard.swift */,
+				CD9E273D23118B7C00BBB383 /* WaonCard+Convert.swift */,
 				CD9E273B23118B6F00BBB383 /* WaonReader.swift */,
-				CD9E273D23118B7C00BBB383 /* WaonReaderReadFunctions.swift */,
 			);
 			path = Waon;
 			sourceTree = "<group>";
@@ -658,6 +659,7 @@
 				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CD17B13B231AD5D900A46679 /* WaonReader.swift in Sources */,
 				CD00C17B231C18E100EC59B8 /* CommonCard.swift in Sources */,
+				CD00C17F231C39AB00EC59B8 /* WaonCard+Convert.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
 				CDB3AD4C22CFAEC20069AB7F /* Extensions.swift in Sources */,
 				CD17B138231AD48600A46679 /* NanacoReader.swift in Sources */,

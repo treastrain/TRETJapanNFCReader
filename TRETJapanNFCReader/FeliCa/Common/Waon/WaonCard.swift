@@ -68,7 +68,11 @@ public struct WaonCardData: FeliCaCardData {
     public let type: FeliCaCardType = .waon
     public let idm: String
     public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:]
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
     
     public var balance: Int?
     public var waonNumber: String?
@@ -79,10 +83,6 @@ public struct WaonCardData: FeliCaCardData {
     fileprivate init(from feliCaCommonCardData: FeliCaCommonCardData) {
         self.idm = feliCaCommonCardData.idm
         self.systemCode = feliCaCommonCardData.systemCode
-    }
-    
-    public func convert() {
-        
     }
 }
 
