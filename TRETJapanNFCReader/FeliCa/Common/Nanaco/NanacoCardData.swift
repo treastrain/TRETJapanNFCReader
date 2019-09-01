@@ -1,5 +1,5 @@
 //
-//  NanacoCard+Convert.swift
+//  NanacoCardData.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/08/27.
@@ -8,7 +8,25 @@
 
 import Foundation
 
-extension NanacoCardData {
+/// nanacoカードのデータ
+public struct NanacoCardData: FeliCaCardData {
+    public let type: FeliCaCardType = .nanaco
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
+    
+    public var balance: Int?
+    
+    @available(iOS 13.0, *)
+    internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
+        self.data = feliCaCommonCardData.data
+    }
     
     public mutating func convert() {
         for (key, value) in self.data {

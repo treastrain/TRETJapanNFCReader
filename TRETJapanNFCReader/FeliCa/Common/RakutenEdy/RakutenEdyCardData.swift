@@ -1,5 +1,5 @@
 //
-//  RakutenEdyCard+Convert.swift
+//  RakutenEdyCardData.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/08/22.
@@ -8,7 +8,27 @@
 
 import Foundation
 
-extension RakutenEdyCardData {
+/// 楽天Edyカードのデータ
+public struct RakutenEdyCardData: FeliCaCardData {
+    public let type: FeliCaCardType = .rakutenEdy
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
+    
+    public var balance: Int?
+    public var edyNumber: String?
+    public var transactions: [RakutenEdyCardTransaction]?
+    
+    @available(iOS 13.0, *)
+    internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
+        self.data = feliCaCommonCardData.data
+    }
     
     public mutating func convert() {
         for (key, value) in self.data {
@@ -71,5 +91,20 @@ extension RakutenEdyCardData {
             transactions.append(RakutenEdyCardTransaction(date: date, type: type, difference: difference, balance: balance))
         }
         self.transactions = transactions
+    }
+}
+
+/// 楽天Edyカードの利用履歴
+public struct RakutenEdyCardTransaction: FeliCaCardTransaction {
+    public var date: Date
+    public var type: FeliCaCardTransactionType
+    public var difference: Int
+    public var balance: Int
+    
+    public init(date: Date, type: FeliCaCardTransactionType, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.difference = difference
+        self.balance = balance
     }
 }

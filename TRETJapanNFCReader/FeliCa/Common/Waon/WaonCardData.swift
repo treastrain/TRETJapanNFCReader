@@ -1,5 +1,5 @@
 //
-//  WaonCard+Convert.swift
+//  WaonCardData.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/08/25.
@@ -8,7 +8,27 @@
 
 import Foundation
 
-extension WaonCardData {
+/// WAONカードのデータ
+public struct WaonCardData: FeliCaCardData {
+    public let type: FeliCaCardType = .waon
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
+    
+    public var balance: Int?
+    public var waonNumber: String?
+    public var points: Int?
+    public var transactions: [WaonCardTransaction]?
+    
+    @available(iOS 13.0, *)
+    internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
+    }
     
     public mutating func convert() {
         for (key, value) in self.data {
@@ -114,4 +134,37 @@ extension WaonCardData {
         }
         self.transactions = transactions
     }
+}
+
+/// WAONカードの利用履歴
+public struct WaonCardTransaction: FeliCaCardTransaction {
+    public let date: Date
+    public let type: FeliCaCardTransactionType
+    public let otherType: WaonCardTransactionType?
+    public let difference: Int
+    public let balance: Int
+    
+    public init(date: Date, type: FeliCaCardTransactionType, otherType: WaonCardTransactionType? = nil, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.otherType = otherType
+        self.difference = difference
+        self.balance = balance
+    }
+}
+
+/// WAONカードから読み取る事ができるWAON利用履歴のデータの種別
+public enum WaonCardTransactionType: String, Codable {
+    /// 返品
+    case returned
+    /// ポイントダウンロード
+    case pointDownload
+    /// 返金
+    case refunded
+    /// オートチャージ
+    case autoCredit
+    /// 新カードへ移行
+    case moveToNewCard
+    /// ポイント交換
+    case pointExchange
 }

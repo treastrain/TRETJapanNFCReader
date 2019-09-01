@@ -1,5 +1,5 @@
 //
-//  UnivCoopICPrepaidCardData+Convert.swift
+//  UnivCoopICPrepaidCardData.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/08/24.
@@ -8,7 +8,31 @@
 
 import Foundation
 
-extension UnivCoopICPrepaidCardData {
+/// 大学生協ICプリペイドカードのデータ
+public struct UnivCoopICPrepaidCardData: FeliCaCardData {
+    public let type: FeliCaCardType = .univCoopICPrepaid
+    public let idm: String
+    public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:] {
+        didSet {
+            self.convert()
+        }
+    }
+    
+    public var balance: Int?
+    public var membershipNumber: String?
+    public var mealCardUser: Bool?
+    public var mealCardLastUseDate: Date?
+    public var mealCardLastUsageAmount: Int?
+    public var points: Double?
+    public var transactions: [UnivCoopICPrepaidCardTransaction]?
+    
+    @available(iOS 13.0, *)
+    internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
+        self.idm = feliCaCommonCardData.idm
+        self.systemCode = feliCaCommonCardData.systemCode
+        self.data = feliCaCommonCardData.data
+    }
     
     public mutating func convert() {
         for (key, value) in self.data {
@@ -89,5 +113,20 @@ extension UnivCoopICPrepaidCardData {
             }
         }
         self.transactions = transactions
+    }
+}
+
+/// 大学生協ICプリペイドカードの利用履歴
+public struct UnivCoopICPrepaidCardTransaction: FeliCaCardTransaction {
+    public let date: Date
+    public let type: FeliCaCardTransactionType
+    public let difference: Int
+    public let balance: Int
+    
+    public init(date: Date, type: FeliCaCardTransactionType, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.difference = difference
+        self.balance = balance
     }
 }
