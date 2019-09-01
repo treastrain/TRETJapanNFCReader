@@ -23,11 +23,16 @@ public struct FeliCaCommonCardData: FeliCaCardData {
     public let type: FeliCaCardType
     public let idm: String
     public let systemCode: FeliCaSystemCode
+    public var data: [FeliCaServiceCode : [Data]] = [:]
     
     @available(iOS 13.0, *)
     public init(type: FeliCaCardType = .unknown, idm: String, systemCode: FeliCaSystemCode) {
         self.type = type
         self.idm = idm
         self.systemCode = systemCode
+    }
+    
+    public func convert() {
+        
     }
 }

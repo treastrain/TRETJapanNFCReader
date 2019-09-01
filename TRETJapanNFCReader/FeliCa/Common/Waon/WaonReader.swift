@@ -15,7 +15,7 @@ public typealias WaonCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class WaonReader: FeliCaReader {
     
-    private var waonCardItems: [WaonCardItem] = []
+    private var waonCardItemTypes: [WaonCardItemType] = []
     
     private init() {
         fatalError()
@@ -40,29 +40,27 @@ public class WaonReader: FeliCaReader {
     }
     
     /// WAONカードからデータを読み取る
-    /// - Parameter items: WAONカードから読み取りたいデータ
-    public func get(items: [WaonCardItem]) {
-        self.waonCardItems = items
+    /// - Parameter itemTypes: WAONカードから読み取りたいデータ
+    public func get(itemTypes: [WaonCardItemType]) {
+        self.waonCardItemTypes = itemTypes
         self.beginScanning()
     }
     
+    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [WaonCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        self.waonCardItemTypes = itemTypes
+        self.getItems(session, feliCaCard) { (feliCaCard) in
+            completion(feliCaCard)
+        }
+    }
+    
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        let feliCaCard = feliCaCard as! FeliCaCommonCard
-        var waonCard = WaonCard(from: feliCaCard)
+        var waonCard = feliCaCard as! WaonCard
         DispatchQueue(label: "TRETJPNRWaonReader", qos: .default).async {
-            for item in self.waonCardItems {
-                switch item {
-                case .balance:
-                    waonCard = self.readBalance(session, waonCard)
-                    break
-                case .waonNumber:
-                    waonCard = self.readWaonNumber(session, waonCard)
-                case .points:
-                    waonCard = self.readPoints(session, waonCard)
-                case .transactions:
-                    waonCard = self.readTransactions(session, waonCard)
-                }
+            var data: [FeliCaServiceCode : [Data]] = [:]
+            for itemType in self.waonCardItemTypes {
+                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: waonCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
+            waonCard.data.data = data
             completion(waonCard)
         }
     }
