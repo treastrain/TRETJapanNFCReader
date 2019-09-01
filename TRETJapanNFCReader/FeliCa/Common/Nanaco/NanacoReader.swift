@@ -55,9 +55,11 @@ public class NanacoReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
         var nanacoCard = feliCaCard as! NanacoCard
         DispatchQueue(label: "TRETJPNRNanacoReader", qos: .default).async {
+            var data: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.nanacoCardItemTypes {
-                nanacoCard.data.data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: nanacoCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: nanacoCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
+            nanacoCard.data.data = data
             completion(nanacoCard)
         }
     }
