@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+import UIKit
 import CoreNFC
 
 @available(iOS 13.0, *)

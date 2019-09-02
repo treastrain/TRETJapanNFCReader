@@ -6,8 +6,12 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+import Foundation
+#if os(iOS)
 import CoreNFC
+#endif
 
+#if os(iOS)
 @available(iOS 13.0, *)
 public struct FeliCaCommonCard: FeliCaCard {
     public let tag: NFCFeliCaTag
@@ -18,6 +22,7 @@ public struct FeliCaCommonCard: FeliCaCard {
         self.data = data
     }
 }
+#endif
 
 public struct FeliCaCommonCardData: FeliCaCardData {
     public let type: FeliCaCardType

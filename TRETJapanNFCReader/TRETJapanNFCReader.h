@@ -6,7 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for TRETJapaneseNFCReader.
 FOUNDATION_EXPORT double TRETJapaneseNFCReaderVersionNumber;
