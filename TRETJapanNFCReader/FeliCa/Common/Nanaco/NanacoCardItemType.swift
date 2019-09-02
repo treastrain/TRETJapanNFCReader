@@ -12,12 +12,20 @@ import Foundation
 public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     /// カード残高
     case balance
+    /// nanaco番号
+    case nanacoNumber
+    /// 利用履歴
+    case transactions
     
     
     internal init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x5597:
             self = .balance
+        case 0x558B:
+            self = .nanacoNumber
+        case 0x564F:
+            self = .transactions
         default:
             return nil
         }
@@ -27,6 +35,10 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
         switch self {
         case .balance:
             return 0x5597
+        case .nanacoNumber:
+            return 0x558B
+        case .transactions:
+            return 0x564F
         }
     }
     
@@ -34,6 +46,10 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
         switch self {
         case .balance:
             return 1
+        case .nanacoNumber:
+            return 1
+        case .transactions:
+            return 5
         }
     }
 }
