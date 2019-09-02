@@ -1094,7 +1094,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = watchos;
@@ -1122,7 +1122,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = watchos;
@@ -1313,7 +1313,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SKIP_INSTALL = YES;
@@ -1340,7 +1340,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SKIP_INSTALL = YES;
@@ -1368,7 +1368,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -1395,7 +1395,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -1420,7 +1420,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = appletvos;
@@ -1447,7 +1447,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = appletvos;

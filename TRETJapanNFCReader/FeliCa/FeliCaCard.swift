@@ -26,6 +26,13 @@ public protocol FeliCaCardData: Codable {
     var data: [FeliCaServiceCode : [Data]] { get }
     
     mutating func convert()
+    func toJSONData() -> Data?
+}
+
+extension FeliCaCardData {
+    public func toJSONData() -> Data? {
+        return try? JSONEncoder().encode(self)
+    }
 }
 
 public enum FeliCaCardType: String, Codable {
@@ -42,6 +49,23 @@ public enum FeliCaCardType: String, Codable {
     
     
     case unknown
+    
+    public var localizedString: String {
+        switch self {
+        case .transitIC:
+            return String(format: NSLocalizedString("transitIC", bundle: Bundle.current, comment: ""))
+        case .rakutenEdy:
+            return String(format: NSLocalizedString("rakutenEdy", bundle: Bundle.current, comment: ""))
+        case .nanaco:
+            return String(format: NSLocalizedString("nanaco", bundle: Bundle.current, comment: ""))
+        case .waon:
+            return String(format: NSLocalizedString("waon", bundle: Bundle.current, comment: ""))
+        case .univCoopICPrepaid:
+            return String(format: NSLocalizedString("univCoopICPrepaid", bundle: Bundle.current, comment: ""))
+        case .unknown:
+            return "Unknown"
+        }
+    }
 }
 
 public enum FeliCaSystemCode: String, Codable {

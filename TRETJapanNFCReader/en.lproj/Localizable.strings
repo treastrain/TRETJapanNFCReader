@@ -18,3 +18,9 @@
 "nfcTagReaderSessionDoneMessage" = "Done!";
 
 "pinRequired" = "PIN required.";
+
+"transitIC" = "Transit IC";
+"rakutenEdy" = "Rakuten Edy";
+"nanaco" = "nanaco";
+"waon" = "WAON";
+"univCoopICPrepaid" = "Univ. Co-op";

@@ -59,7 +59,7 @@ public struct NanacoCardData: FeliCaCardData {
     
     private mutating func convertToTransactions(_ blockData: [Data]) {
         var transactions: [NanacoCardTransaction] = []
-        for (i, data) in blockData.enumerated() {
+        for data in blockData {
             
             var type = FeliCaCardTransactionType.unknown
             var otherType: NanacoCardTransactionType?

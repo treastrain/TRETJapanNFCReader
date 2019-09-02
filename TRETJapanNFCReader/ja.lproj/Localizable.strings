@@ -18,3 +18,9 @@
 "nfcTagReaderSessionDoneMessage" = "完了";
 
 "pinRequired" = "暗証番号の入力が必要です";
+
+"transitIC" = "交通系IC";
+"rakutenEdy" = "楽天Edy";
+"nanaco" = "nanaco";
+"waon" = "WAON";
+"univCoopICPrepaid" = "大学生協ICプリペイド";
