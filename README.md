@@ -27,7 +27,9 @@ Japanese & English Support!
 
 ### NFC-F (Type-F, FeliCa)
 IDm と System Code の表示
-- [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, SAPICA, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
+- [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
+    - 残高の読み取りと表示
+- [x] 865E: SAPICA
     - 残高の読み取りと表示
 - [x] FE00: 楽天Edy
     - 残高の読み取りと表示
