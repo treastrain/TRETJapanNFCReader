@@ -14,6 +14,10 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     case balance
     /// 取引履歴
     case transactions
+    /// 改札入出場履歴情報
+    case entryExitInformations
+    /// SF入場情報
+    case sfEntryInformations
     
     
     internal init?(_ serviceCode: FeliCaServiceCode) {
@@ -22,6 +26,10 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             self = .balance
         case 0x090F:
             self = .transactions
+        case 0x108F:
+            self = .entryExitInformations
+        case 0x10CB:
+            self = .sfEntryInformations
         default:
             return nil
         }
@@ -33,6 +41,10 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             return 0x008B
         case .transactions:
             return 0x090F
+        case .entryExitInformations:
+            return 0x108F
+        case .sfEntryInformations:
+            return 0x10CB
         }
     }
     
@@ -42,6 +54,10 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             return 1
         case .transactions:
             return 20
+        case .entryExitInformations:
+            return 3
+        case .sfEntryInformations:
+            return 2
         }
     }
 }

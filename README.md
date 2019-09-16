@@ -29,8 +29,10 @@ Japanese & English Support!
 IDm と System Code の表示
 - [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, りゅーと, odeca, くまモンのIC CARD, icsca, IruCa, PASPY, ...etc.)
     - 残高の読み取りと表示
+    - 利用履歴、改札入出場履歴、SF入場情報の読み取り
 - [x] 865E: SAPICA
     - 残高の読み取りと表示
+    - 利用履歴、改札入出場履歴、SF入場情報の読み取り
 - [x] FE00: 楽天Edy
     - 残高の読み取りと表示
 - [x] FE00: nanaco

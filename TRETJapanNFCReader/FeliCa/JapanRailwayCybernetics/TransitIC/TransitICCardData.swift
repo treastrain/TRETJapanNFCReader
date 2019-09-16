@@ -21,6 +21,8 @@ public struct TransitICCardData: FeliCaCardData {
     
     public var balance: Int?
     public var transactionsData: [Data]?
+    public var entryExitInformationsData: [Data]?
+    public var sfEntryInformationsData: [Data]?
     
     @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
@@ -36,6 +38,10 @@ public struct TransitICCardData: FeliCaCardData {
                 self.convertToBalance(blockData)
             case .transactions:
                 self.convertToTransactions(blockData)
+            case .entryExitInformations:
+                self.convertToEntryExitInformations(blockData)
+            case .sfEntryInformations:
+                self.convertToSFEntryInformations(blockData)
             case .none:
                 break
             }
@@ -50,5 +56,13 @@ public struct TransitICCardData: FeliCaCardData {
     
     private mutating func convertToTransactions(_ blockData: [Data]) {
         self.transactionsData = blockData
+    }
+    
+    private mutating func convertToEntryExitInformations(_ blockData: [Data]) {
+        self.entryExitInformationsData = blockData
+    }
+    
+    private mutating func convertToSFEntryInformations(_ blockData: [Data]) {
+        self.sfEntryInformationsData = blockData
     }
 }
