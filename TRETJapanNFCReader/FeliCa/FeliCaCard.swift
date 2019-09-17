@@ -70,6 +70,8 @@ public enum FeliCaCardType: String, Codable {
 
 public enum FeliCaSystemCode: String, Codable {
     case japanRailwayCybernetics
+    case iruca
+    case paspy
     case sapica
     case common
     
@@ -78,6 +80,10 @@ public enum FeliCaSystemCode: String, Codable {
         switch systemCode {
         case "0003":
             self = .japanRailwayCybernetics
+        case "de80":
+            self = .iruca
+        case "8592":
+            self = .paspy
         case "865e":
             self = .sapica
         case "fe00":
@@ -91,6 +97,10 @@ public enum FeliCaSystemCode: String, Codable {
         switch self {
         case .japanRailwayCybernetics:
             return "0003"
+        case .iruca:
+            return "de80"
+        case .paspy:
+            return "8592"
         case .sapica:
             return "865e"
         case .common:
