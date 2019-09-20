@@ -35,7 +35,7 @@ extension FeliCaCardData {
     }
 }
 
-public enum FeliCaCardType: String, Codable {
+public enum FeliCaCardType: String, Codable, CaseIterable {
     /// 交通系ICカード
     case transitIC
     /// 楽天Edyカード

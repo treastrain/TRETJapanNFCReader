@@ -42,11 +42,11 @@ public struct OctopusCardData: FeliCaCardData {
     private mutating func convertToBalance(_ blockData: [Data]) {
         let data = blockData.first!
         var balance = 0
-        balance += Int(data[0])
-        balance += Int(data[1] << 8)
-        balance += Int(data[2] << 16)
-        balance += Int(data[3] << 24)
-        balance -= 500
+        balance += Int(UInt32(data[0]) << 24)
+        balance += Int(UInt32(data[1]) << 16)
+        balance += Int(UInt32(data[2]) << 8)
+        balance += Int(data[3])
+        balance -= 350
         self.balance = balance
     }
     
