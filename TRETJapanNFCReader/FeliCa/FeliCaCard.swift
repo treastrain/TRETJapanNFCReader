@@ -47,6 +47,8 @@ public enum FeliCaCardType: String, Codable {
     /// 大学生協ICプリペイドカード
     case univCoopICPrepaid
     
+    /// Octopus Card (八達通)
+    case octopus
     
     case unknown
     
@@ -62,6 +64,8 @@ public enum FeliCaCardType: String, Codable {
             return String(format: NSLocalizedString("waon", bundle: Bundle.current, comment: ""))
         case .univCoopICPrepaid:
             return String(format: NSLocalizedString("univCoopICPrepaid", bundle: Bundle.current, comment: ""))
+        case .octopus:
+            return "Octopus (八達通)"
         case .unknown:
             return "Unknown"
         }
@@ -74,6 +78,8 @@ public enum FeliCaSystemCode: String, Codable {
     case paspy
     case sapica
     case common
+    
+    case octopus
     
     public init?(from systemCodeData: Data) {
         let systemCode = systemCodeData.map { String(format: "%.2hhx", $0) }.joined()
@@ -88,6 +94,8 @@ public enum FeliCaSystemCode: String, Codable {
             self = .sapica
         case "fe00":
             self = .common
+        case "8008":
+            self = .octopus
         default:
             return nil
         }
@@ -105,6 +113,8 @@ public enum FeliCaSystemCode: String, Codable {
             return "865e"
         case .common:
             return "fe00"
+        case .octopus:
+            return "8008"
         }
     }
 }

@@ -33,6 +33,16 @@
 		CD17B13E231AD8A200A46679 /* UnivCoopICPrepaidReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5476D02310566D003E3C62 /* UnivCoopICPrepaidReader.swift */; };
 		CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */; };
 		CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */; };
+		CD1A79362334A7C700218B4A /* OctopusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A79352334A7C700218B4A /* OctopusCard.swift */; };
+		CD1A793B2334A87100218B4A /* OctopusReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A793A2334A87100218B4A /* OctopusReader.swift */; };
+		CD1A79402334A90B00218B4A /* OctopusCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A793F2334A90B00218B4A /* OctopusCardData.swift */; };
+		CD1A79412334A90B00218B4A /* OctopusCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A793F2334A90B00218B4A /* OctopusCardData.swift */; };
+		CD1A79422334A90B00218B4A /* OctopusCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A793F2334A90B00218B4A /* OctopusCardData.swift */; };
+		CD1A79432334A90B00218B4A /* OctopusCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A793F2334A90B00218B4A /* OctopusCardData.swift */; };
+		CD1A79452334AB3C00218B4A /* OctopusCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */; };
+		CD1A79462334AB3C00218B4A /* OctopusCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */; };
+		CD1A79472334AB3C00218B4A /* OctopusCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */; };
+		CD1A79482334AB3C00218B4A /* OctopusCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */; };
 		CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */; };
 		CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5522D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift */; };
 		CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */; };
@@ -140,12 +150,82 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CD1A79252334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 514D7742C6CBB0BDBD9984AEE97DDFDE;
+			remoteInfo = "BoringSSL-GRPC";
+		};
+		CD1A79272334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 43B1E4CD7B30B9FD278100133C2AC788;
+			remoteInfo = FirebaseAuth;
+		};
+		CD1A79292334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92000153CD73F7FC2DBAB4AB708269F3;
+			remoteInfo = FirebaseFirestore;
+		};
+		CD1A792B2334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1911113E0FBF13CFF9132E5FF7685228;
+			remoteInfo = "gRPC-C++";
+		};
+		CD1A792D2334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7C87B5D0A6752AFA2642F1BCA967A3;
+			remoteInfo = "gRPC-C++-gRPCCertificates-Cpp";
+		};
+		CD1A792F2334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B471867C535B02FA55D87E260F6480F8;
+			remoteInfo = "gRPC-Core";
+		};
+		CD1A79312334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C1998E0D8085221AD87F89B614C10E52;
+			remoteInfo = GTMSessionFetcher;
+		};
+		CD1A79332334A79D00218B4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0A9F46A999C47653013D3AD854352507;
+			remoteInfo = "leveldb-library";
+		};
 		CD5D2D8022C5EFE8004330F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CD5D2D7022C5E977004330F3;
 			remoteInfo = TRETJapaneseNFCReader;
+		};
+		CD90FB182332E92300679DB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7C3AE4425E7B08F16F1B4FD32951CA7F;
+			remoteInfo = FirebaseABTesting;
+		};
+		CD90FB1A2332E92300679DB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C2105C94812B6214B154F54DCEDB72AC;
+			remoteInfo = Protobuf;
 		};
 		CDB55B80230C0BA30015BE2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -167,6 +247,76 @@
 			proxyType = 2;
 			remoteGlobalIDString = CDB55AEA230BECF20015BE2F;
 			remoteInfo = "japanNFCReader WatchKit Extension";
+		};
+		CDD1375C232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E2B63D462DB7F827C4B11FD51E4F8E2D;
+			remoteInfo = FirebaseCore;
+		};
+		CDD1375E232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8CC9178C366942FD6FF6A115604EAD58;
+			remoteInfo = FirebaseCoreDiagnostics;
+		};
+		CDD13760232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2DA0D814DFCB860D31D7BCD63D795858;
+			remoteInfo = FirebaseInstanceID;
+		};
+		CDD13762232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 856B5CD56F194FAD26EA91620B66D614;
+			remoteInfo = GoogleDataTransport;
+		};
+		CDD13764232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6942351307BC1F54575D9853307EAE0E;
+			remoteInfo = GoogleDataTransportCCTSupport;
+		};
+		CDD13766232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B43874C6CBB50E7134FBEC24BABFE14F;
+			remoteInfo = GoogleUtilities;
+		};
+		CDD13768232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06FC5C9CF96D60C50FCD47D339C91951;
+			remoteInfo = nanopb;
+		};
+		CDD1376A232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 98D2088EBB4055858C2E4320F31CC2F7;
+			remoteInfo = "Pods-japanNFCReader";
+		};
+		CDD1376C232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A76CBD6B4CD37D761B065A30CF88AE94;
+			remoteInfo = "Pods-japanNFCReader WatchKit App";
+		};
+		CDD1376E232181BF002AF46B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6E2E79FC2203E169558783960CC3A0F;
+			remoteInfo = "Pods-japanNFCReader WatchKit Extension";
 		};
 		CDFC3B7022CE2B05000E88B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -219,6 +369,10 @@
 		CD163B19230D98F900B42E6C /* RakutenEdyCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyCardData.swift; sourceTree = "<group>"; };
 		CD1999BD22CD08740035AEBD /* DriversLicenseReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderError.swift; sourceTree = "<group>"; };
 		CD1999BF22CD12E10035AEBD /* DriversLicenseReaderExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderExtensions.swift; sourceTree = "<group>"; };
+		CD1A79352334A7C700218B4A /* OctopusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctopusCard.swift; sourceTree = "<group>"; };
+		CD1A793A2334A87100218B4A /* OctopusReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctopusReader.swift; sourceTree = "<group>"; };
+		CD1A793F2334A90B00218B4A /* OctopusCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctopusCardData.swift; sourceTree = "<group>"; };
+		CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctopusCardItemType.swift; sourceTree = "<group>"; };
 		CD5476CE23105666003E3C62 /* UnivCoopICPrepaidCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCard.swift; sourceTree = "<group>"; };
 		CD5476D02310566D003E3C62 /* UnivCoopICPrepaidReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidReader.swift; sourceTree = "<group>"; };
 		CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCardData.swift; sourceTree = "<group>"; };
@@ -266,6 +420,7 @@
 		CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CDB3AD4B22CFAEC10069AB7F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = japanNFCReader.xcodeproj; path = japanNFCReader/japanNFCReader.xcodeproj; sourceTree = "<group>"; };
+		CDD1374B232181BF002AF46B /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = japanNFCReader/Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		CDD2895223143A6300087725 /* FeliCa+NFCFeliCaTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeliCa+NFCFeliCaTag.swift"; sourceTree = "<group>"; };
 		CDF5C099231CEAEF00E2791A /* TRETJapanNFCReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRETJapanNFCReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitICReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +509,8 @@
 			isa = PBXGroup;
 			children = (
 				CDFC3B7922CE2C52000E88B4 /* TransitIC */,
+				CD95F0AA23309A45007E2641 /* Iruca */,
+				CDF86CE2232F743300696F51 /* Sapica */,
 			);
 			path = JapanRailwayCybernetics;
 			sourceTree = "<group>";
@@ -368,6 +525,17 @@
 				CD5476CA23105648003E3C62 /* UnivCoopICPrepaid */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		CD1A79052334A79D00218B4A /* Octopus */ = {
+			isa = PBXGroup;
+			children = (
+				CD1A79352334A7C700218B4A /* OctopusCard.swift */,
+				CD1A793F2334A90B00218B4A /* OctopusCardData.swift */,
+				CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */,
+				CD1A793A2334A87100218B4A /* OctopusReader.swift */,
+			);
+			path = Octopus;
 			sourceTree = "<group>";
 		};
 		CD5476CA23105648003E3C62 /* UnivCoopICPrepaid */ = {
@@ -385,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */,
+				CDD1374B232181BF002AF46B /* Pods.xcodeproj */,
 				CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */,
 				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
 				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
@@ -488,6 +657,13 @@
 			path = Nanaco;
 			sourceTree = "<group>";
 		};
+		CD95F0AA23309A45007E2641 /* Iruca */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Iruca;
+			sourceTree = "<group>";
+		};
 		CD9E2735231189BB00BBB383 /* Waon */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +683,7 @@
 				CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */,
 				CD9291CB230E3F0000F576EF /* FeliCaReaderProtocol.swift */,
 				CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */,
+				CD1A79052334A79D00218B4A /* Octopus */,
 				CD163B1B230DA29700B42E6C /* JapanRailwayCybernetics */,
 				CD163B1C230DA2C500B42E6C /* Common */,
 			);
@@ -521,6 +698,40 @@
 				CDB55B85230C0BA30015BE2F /* JPN NFC Reader.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CDD1374C232181BF002AF46B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD1A79262334A79D00218B4A /* openssl_grpc.framework */,
+				CD90FB192332E92300679DB2 /* FirebaseABTesting.framework */,
+				CD1A79282334A79D00218B4A /* FirebaseAuth.framework */,
+				CDD1375D232181BF002AF46B /* FirebaseCore.framework */,
+				CDD1375F232181BF002AF46B /* FirebaseCoreDiagnostics.framework */,
+				CD1A792A2334A79D00218B4A /* FirebaseFirestore.framework */,
+				CDD13761232181BF002AF46B /* FirebaseInstanceID.framework */,
+				CDD13763232181BF002AF46B /* GoogleDataTransport.framework */,
+				CDD13765232181BF002AF46B /* GoogleDataTransportCCTSupport.framework */,
+				CDD13767232181BF002AF46B /* GoogleUtilities.framework */,
+				CD1A792C2334A79D00218B4A /* grpcpp.framework */,
+				CD1A792E2334A79D00218B4A /* gRPCCertificates-Cpp.bundle */,
+				CD1A79302334A79D00218B4A /* grpc.framework */,
+				CD1A79322334A79D00218B4A /* GTMSessionFetcher.framework */,
+				CD1A79342334A79D00218B4A /* leveldb.framework */,
+				CDD13769232181BF002AF46B /* nanopb.framework */,
+				CDD1376B232181BF002AF46B /* Pods_japanNFCReader.framework */,
+				CDD1376D232181BF002AF46B /* Pods_japanNFCReader_WatchKit_App.framework */,
+				CDD1376F232181BF002AF46B /* Pods_japanNFCReader_WatchKit_Extension.framework */,
+				CD90FB1B2332E92300679DB2 /* Protobuf.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CDF86CE2232F743300696F51 /* Sapica */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sapica;
 			sourceTree = "<group>";
 		};
 		CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */ = {
@@ -745,6 +956,10 @@
 					ProductGroup = CDB55B7B230C0BA30015BE2F /* Products */;
 					ProjectRef = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
 				},
+				{
+					ProductGroup = CDD1374C232181BF002AF46B /* Products */;
+					ProjectRef = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -759,6 +974,76 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		CD1A79262334A79D00218B4A /* openssl_grpc.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = openssl_grpc.framework;
+			remoteRef = CD1A79252334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A79282334A79D00218B4A /* FirebaseAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseAuth.framework;
+			remoteRef = CD1A79272334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A792A2334A79D00218B4A /* FirebaseFirestore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseFirestore.framework;
+			remoteRef = CD1A79292334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A792C2334A79D00218B4A /* grpcpp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = grpcpp.framework;
+			remoteRef = CD1A792B2334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A792E2334A79D00218B4A /* gRPCCertificates-Cpp.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "gRPCCertificates-Cpp.bundle";
+			remoteRef = CD1A792D2334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A79302334A79D00218B4A /* grpc.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = grpc.framework;
+			remoteRef = CD1A792F2334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A79322334A79D00218B4A /* GTMSessionFetcher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTMSessionFetcher.framework;
+			remoteRef = CD1A79312334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD1A79342334A79D00218B4A /* leveldb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = leveldb.framework;
+			remoteRef = CD1A79332334A79D00218B4A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD90FB192332E92300679DB2 /* FirebaseABTesting.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseABTesting.framework;
+			remoteRef = CD90FB182332E92300679DB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD90FB1B2332E92300679DB2 /* Protobuf.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Protobuf.framework;
+			remoteRef = CD90FB1A2332E92300679DB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CDB55B81230C0BA30015BE2F /* JPN NFC Reader.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -778,6 +1063,76 @@
 			fileType = "wrapper.app-extension";
 			path = "JPN NFC Reader.appex";
 			remoteRef = CDB55B84230C0BA30015BE2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD1375D232181BF002AF46B /* FirebaseCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCore.framework;
+			remoteRef = CDD1375C232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD1375F232181BF002AF46B /* FirebaseCoreDiagnostics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCoreDiagnostics.framework;
+			remoteRef = CDD1375E232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD13761232181BF002AF46B /* FirebaseInstanceID.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseInstanceID.framework;
+			remoteRef = CDD13760232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD13763232181BF002AF46B /* GoogleDataTransport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransport.framework;
+			remoteRef = CDD13762232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD13765232181BF002AF46B /* GoogleDataTransportCCTSupport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransportCCTSupport.framework;
+			remoteRef = CDD13764232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD13767232181BF002AF46B /* GoogleUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleUtilities.framework;
+			remoteRef = CDD13766232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD13769232181BF002AF46B /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = CDD13768232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD1376B232181BF002AF46B /* Pods_japanNFCReader.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_japanNFCReader.framework;
+			remoteRef = CDD1376A232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD1376D232181BF002AF46B /* Pods_japanNFCReader_WatchKit_App.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_japanNFCReader_WatchKit_App.framework;
+			remoteRef = CDD1376C232181BF002AF46B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CDD1376F232181BF002AF46B /* Pods_japanNFCReader_WatchKit_Extension.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_japanNFCReader_WatchKit_Extension.framework;
+			remoteRef = CDD1376E232181BF002AF46B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -854,6 +1209,7 @@
 				CDF5C07B231CE74A00E2791A /* FeliCaCard.swift in Sources */,
 				CDF5C086231CE75700E2791A /* RakutenEdyCardItemType.swift in Sources */,
 				CDF5C06C231CE73A00E2791A /* JapanNFCReaderError.swift in Sources */,
+				CD1A79412334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CDF5C091231CE76300E2791A /* UnivCoopICPrepaidCardData.swift in Sources */,
 				CDF5C083231CE75200E2791A /* CommonCard.swift in Sources */,
 				CDF5C092231CE76300E2791A /* UnivCoopICPrepaidItemType.swift in Sources */,
@@ -864,6 +1220,7 @@
 				CDF5C080231CE75000E2791A /* TransitICCardData.swift in Sources */,
 				CDF5C06E231CE73E00E2791A /* Extensions.swift in Sources */,
 				CDF5C089231CE75B00E2791A /* NanacoCardData.swift in Sources */,
+				CD1A79462334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CDF5C08E231CE76000E2791A /* WaonCardItemType.swift in Sources */,
 				CDF5C072231CE74600E2791A /* DriversLicenseReaderError.swift in Sources */,
 				CDF5C077231CE74600E2791A /* Status.swift in Sources */,
@@ -900,6 +1257,7 @@
 				CD9291CC230E3F0000F576EF /* FeliCaReaderProtocol.swift in Sources */,
 				CD00C185231C3E2C00EC59B8 /* WaonCardItemType.swift in Sources */,
 				CD00C17E231C38DA00EC59B8 /* NanacoCardData.swift in Sources */,
+				CD1A79362334A7C700218B4A /* OctopusCard.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD00C189231C40AB00EC59B8 /* TransitICCardItemType.swift in Sources */,
 				CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */,
@@ -911,6 +1269,7 @@
 				CD00C18A231C40E700EC59B8 /* TransitICCardData.swift in Sources */,
 				CD00C17B231C18E100EC59B8 /* CommonCard.swift in Sources */,
 				CD00C17F231C39AB00EC59B8 /* WaonCardData.swift in Sources */,
+				CD1A793B2334A87100218B4A /* OctopusReader.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
 				CDB3AD4C22CFAEC20069AB7F /* Extensions.swift in Sources */,
 				CD00C187231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift in Sources */,
@@ -918,6 +1277,7 @@
 				CD17B138231AD48600A46679 /* NanacoReader.swift in Sources */,
 				CD00C17D231C36C000EC59B8 /* RakutenEdyCardData.swift in Sources */,
 				CD17B131231AC87C00A46679 /* TransitICCard.swift in Sources */,
+				CD1A79452334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CDD2895323143A6300087725 /* FeliCa+NFCFeliCaTag.swift in Sources */,
 				CD17B137231AD48600A46679 /* NanacoCard.swift in Sources */,
 				CD8FC6F322D20317007ECC1C /* DriversLicenseExtensions.swift in Sources */,
@@ -926,6 +1286,7 @@
 				CD17B13D231AD8A200A46679 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD8B7B6922CA55710027E1ED /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD00C17C231C28A700EC59B8 /* UnivCoopICPrepaidCardData.swift in Sources */,
+				CD1A79402334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CDAC056B230D2C9D00E1DDCF /* FeliCaCard.swift in Sources */,
 				CD996F7722C7A2DE00193E7A /* DriversLicenseCard.swift in Sources */,
 			);
@@ -940,6 +1301,7 @@
 				CD9EEA7C231CECBE00513DBF /* JapanNFCReaderError.swift in Sources */,
 				CD9EEA8A231CECFA00513DBF /* NanacoCardData.swift in Sources */,
 				CD9EEA81231CECD400513DBF /* Status.swift in Sources */,
+				CD1A79432334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CD9EEA80231CECCA00513DBF /* DriversLicenseReaderError.swift in Sources */,
 				CD9EEA82231CECD800513DBF /* DriversLicenseExtensions.swift in Sources */,
 				CD9EEA88231CECF000513DBF /* RakutenEdyCardData.swift in Sources */,
@@ -950,6 +1312,7 @@
 				CD9EEA7D231CECC100513DBF /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CD9EEA86231CECE900513DBF /* TransitICCardItemType.swift in Sources */,
 				CD9EEA8C231CED0600513DBF /* WaonCardData.swift in Sources */,
+				CD1A79482334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CD9EEA89231CECF500513DBF /* RakutenEdyCardItemType.swift in Sources */,
 				CD9EEA85231CECE600513DBF /* TransitICCardData.swift in Sources */,
 				CD9EEA8E231CED1100513DBF /* UnivCoopICPrepaidCardData.swift in Sources */,
@@ -965,6 +1328,7 @@
 				CDF5C0A2231CEB5000E2791A /* JapanNFCReaderError.swift in Sources */,
 				CDF5C0B0231CEB9100E2791A /* NanacoCardData.swift in Sources */,
 				CDF5C0AE231CEB8700E2791A /* RakutenEdyCardItemType.swift in Sources */,
+				CD1A79422334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CDF5C0A7231CEB6600E2791A /* Status.swift in Sources */,
 				CDF5C0A6231CEB5E00E2791A /* DriversLicenseReaderError.swift in Sources */,
 				CDF5C0A8231CEB6800E2791A /* DriversLicenseExtensions.swift in Sources */,
@@ -975,6 +1339,7 @@
 				CDF5C0AA231CEB7000E2791A /* FeliCaCard.swift in Sources */,
 				CDF5C0A3231CEB5400E2791A /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CDF5C0B2231CEB9B00E2791A /* WaonCardData.swift in Sources */,
+				CD1A79472334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CDF5C0AC231CEB7C00E2791A /* TransitICCardItemType.swift in Sources */,
 				CDF5C0AB231CEB7900E2791A /* TransitICCardData.swift in Sources */,
 				CDF5C0B4231CEBA500E2791A /* UnivCoopICPrepaidCardData.swift in Sources */,
@@ -1095,13 +1460,13 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-watchOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1123,13 +1488,13 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-watchOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1301,8 +1666,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1314,7 +1681,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-iOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SKIP_INSTALL = YES;
 				SUPPORTS_UIKITFORMAC = NO;
@@ -1328,8 +1695,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1341,7 +1710,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-iOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SKIP_INSTALL = YES;
 				SUPPORTS_UIKITFORMAC = NO;
@@ -1369,7 +1738,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1396,7 +1765,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1421,7 +1790,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-tvOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -1448,7 +1817,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.8;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.TRETJapanNFCReader;
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-tvOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
