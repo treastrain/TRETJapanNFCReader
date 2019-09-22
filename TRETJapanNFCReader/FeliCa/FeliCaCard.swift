@@ -77,6 +77,13 @@ public enum FeliCaSystemCode: String, Codable {
     case iruca
     case paspy
     case sapica
+    
+    case okikca
+    case ica
+    case luluca
+    case nicepass
+    case cica
+    
     case common
     
     case octopus
@@ -92,6 +99,16 @@ public enum FeliCaSystemCode: String, Codable {
             self = .paspy
         case "865e":
             self = .sapica
+        case "8fc1":
+            self = .okikca
+        case "80ef":
+            self = .ica
+        case "a604":
+            self = .luluca
+        case "0f04":
+            self = .nicepass
+        case "8157":
+            self = .cica
         case "fe00":
             self = .common
         case "8008":
@@ -111,6 +128,16 @@ public enum FeliCaSystemCode: String, Codable {
             return "8592"
         case .sapica:
             return "865e"
+        case .okikca:
+            return "8fc1"
+        case .ica:
+            return "80ef"
+        case .luluca:
+            return "a604"
+        case .nicepass:
+            return "0f04"
+        case .cica:
+            return "8157"
         case .common:
             return "fe00"
         case .octopus:
