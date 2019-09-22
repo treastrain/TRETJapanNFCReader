@@ -20,10 +20,22 @@ public class OctopusReader: FeliCaReader {
         fatalError()
     }
     
-    /// Initializes OctopusReader
+    /// Initializes OctopusReader.
     /// - Parameter feliCaReader: FeliCaReader
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
+    }
+    
+    /// Initializes OctopusReader.
+    /// - Parameter delegate: FeliCaReaderSessionDelegate
+    public override init(delegate: FeliCaReaderSessionDelegate) {
+        super.init(delegate: delegate)
+    }
+    
+    /// Initializes OctopusReader.
+    /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
+    public override init(viewController: FeliCaReaderViewController) {
+        super.init(viewController: viewController)
     }
     
     /// Get read data from Octopus card

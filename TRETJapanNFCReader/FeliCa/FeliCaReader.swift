@@ -16,6 +16,7 @@ public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSes
 open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     
     internal let delegate: FeliCaReaderSessionDelegate?
+    public var selectedSystemCodes: [FeliCaSystemCode]?
     
     private init() {
         fatalError()
@@ -103,6 +104,17 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             guard let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode) else {
                 // systemCode がこのライブラリでは対応していない場合
                 session.invalidate(errorMessage: "非対応のカードです。")
+                return
+            }
+            
+            if let selectedSystemCodes = self.selectedSystemCodes, !selectedSystemCodes.contains(systemCode) {
+                let retryInterval = DispatchTimeInterval.milliseconds(1000)
+                let alertedMessage = session.alertMessage
+                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
+                DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
+                    session.restartPolling()
+                    session.alertMessage = alertedMessage
+                })
                 return
             }
             

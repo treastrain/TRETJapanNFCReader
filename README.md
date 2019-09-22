@@ -154,4 +154,7 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 - `oboenikui/UnivFeliCa.md`
     - [大学生協FeliCaの仕様](https://gist.github.com/oboenikui/ee9fb0cb07a6690c410b872f64345120)
 
+### 八達通 `TRETJapanNFCReader/FeliCa/Octopus`
+- [Octopus · metrodroid/metrodroid Wiki](https://github.com/metrodroid/metrodroid/wiki/Octopus)
+
 各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。

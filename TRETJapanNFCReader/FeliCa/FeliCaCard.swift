@@ -106,7 +106,7 @@ public enum FeliCaSystemCode: String, Codable {
         case .japanRailwayCybernetics:
             return "0003"
         case .iruca:
-            return "de80"
+            return "80de"
         case .paspy:
             return "8592"
         case .sapica:

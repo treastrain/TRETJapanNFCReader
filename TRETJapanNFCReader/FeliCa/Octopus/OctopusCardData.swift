@@ -19,6 +19,8 @@ public struct OctopusCardData: FeliCaCardData {
         }
     }
     
+    /// The real balance is (`balance` - Offset) / 10
+    /// (e.g.  (4557 - 350) / 10 = HK$420.7 )
     public var balance: Int?
     
     @available(iOS 13.0, *)
@@ -46,7 +48,6 @@ public struct OctopusCardData: FeliCaCardData {
         balance += Int(UInt32(data[1]) << 16)
         balance += Int(UInt32(data[2]) << 8)
         balance += Int(data[3])
-        balance -= 350
         self.balance = balance
     }
     
