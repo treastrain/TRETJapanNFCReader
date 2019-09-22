@@ -70,11 +70,10 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     public override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         if tags.count > 1 {
             let retryInterval = DispatchTimeInterval.milliseconds(1000)
-            let alertedMessage = session.alertMessage
             session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage")
             DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                 session.restartPolling()
-                session.alertMessage = alertedMessage
+                session.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
             })
             return
         }
@@ -89,11 +88,10 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             
             guard case NFCTag.feliCa(let feliCaCardTag) = tag else {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
-                let alertedMessage = session.alertMessage
                 session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
                 DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                     session.restartPolling()
-                    session.alertMessage = alertedMessage
+                    session.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
                 })
                 return
             }
@@ -103,17 +101,16 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
             guard let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode) else {
                 // systemCode がこのライブラリでは対応していない場合
-                session.invalidate(errorMessage: "非対応のカードです。")
+                session.invalidate(errorMessage: self.localizedString(key: "cardNotSupported"))
                 return
             }
             
             if let selectedSystemCodes = self.selectedSystemCodes, !selectedSystemCodes.contains(systemCode) {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
-                let alertedMessage = session.alertMessage
                 session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
                 DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                     session.restartPolling()
-                    session.alertMessage = alertedMessage
+                    session.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
                 })
                 return
             }
