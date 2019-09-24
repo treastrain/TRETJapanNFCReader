@@ -72,7 +72,7 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     }
 }
 
-public enum FeliCaSystemCode: String, Codable {
+public enum FeliCaSystemCode: String, Codable, CaseIterable {
     case japanRailwayCybernetics
     case iruca
     case paspy

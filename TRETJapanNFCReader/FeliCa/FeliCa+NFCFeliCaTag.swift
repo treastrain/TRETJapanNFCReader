@@ -18,7 +18,7 @@ extension NFCFeliCaTag {
     /// - Parameter status2: ステータスフラグ 2
     /// - Parameter blockData: ブロックデータ
     /// - Parameter error: エラー
-    func readWithoutEncryption24(serviceCode: Data, blockList: [Data], completionHandler: @escaping (_ status1: Int, _ status2: Int, _ blockData: [Data], _ error: Error?) -> Void) {
+    public func readWithoutEncryption24(serviceCode: Data, blockList: [Data], completionHandler: @escaping (_ status1: Int, _ status2: Int, _ blockData: [Data], _ error: Error?) -> Void) {
         
         var completionBlockData: [Data] = []
         

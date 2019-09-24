@@ -15,7 +15,7 @@ public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSes
 @available(iOS 13.0, *)
 open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     
-    internal let delegate: FeliCaReaderSessionDelegate?
+    public let delegate: FeliCaReaderSessionDelegate?
     public var selectedSystemCodes: [FeliCaSystemCode]?
     
     private init() {
@@ -52,7 +52,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         self.session?.begin()
     }
     
-    public override func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
+    open override func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
@@ -67,7 +67,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
     }
     
-    public override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+    open override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         if tags.count > 1 {
             let retryInterval = DispatchTimeInterval.milliseconds(1000)
             session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage")
@@ -145,7 +145,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         completion(feliCaCard)
     }
     
-    internal func readWithoutEncryption(session: NFCTagReaderSession, tag: NFCFeliCaTag, serviceCode: FeliCaServiceCode, blocks: Int) -> [Data]? {
+    public func readWithoutEncryption(session: NFCTagReaderSession, tag: NFCFeliCaTag, serviceCode: FeliCaServiceCode, blocks: Int) -> [Data]? {
         var data: [Data]? = nil
         
         let semaphore = DispatchSemaphore(value: 0)
