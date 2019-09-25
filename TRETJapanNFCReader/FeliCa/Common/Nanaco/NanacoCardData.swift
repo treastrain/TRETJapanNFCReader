@@ -21,6 +21,7 @@ public struct NanacoCardData: FeliCaCardData {
     
     public var balance: Int?
     public var nanacoNumber: String?
+    public var points: Int?
     public var transactions: [NanacoCardTransaction]?
     
     @available(iOS 13.0, *)
@@ -38,6 +39,8 @@ public struct NanacoCardData: FeliCaCardData {
                 self.convertToBalance(blockData)
             case .nanacoNumber:
                 self.convertToNanacoNumber(blockData)
+            case .points:
+                self.convertToPoints(blockData)
             case .transactions:
                 self.convertToTransactions(blockData)
             case .none:
@@ -55,6 +58,11 @@ public struct NanacoCardData: FeliCaCardData {
     private mutating func convertToNanacoNumber(_ blockData: [Data]) {
         let data = blockData.first!
         self.nanacoNumber = data[0].toString() + data[1].toString() + "-" + data[2].toString() + data[3].toString() + "-" + data[4].toString() + data[5].toString() + "-" + data[6].toString() + data[7].toString()
+    }
+    
+    private mutating func convertToPoints(_ blockData: [Data]) {
+        let data = blockData.last!
+        self.points = Int((UInt32(data[0]) << 16) + (UInt32(data[1]) << 8) + UInt32(data[2]))
     }
     
     private mutating func convertToTransactions(_ blockData: [Data]) {

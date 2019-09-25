@@ -19,6 +19,9 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     /// SF入場情報
     case sfEntryInformations
     
+    /// SAPICA ポイント
+    case sapicaPoints
+    
     
     internal init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
@@ -30,6 +33,8 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             self = .entryExitInformations
         case 0x10CB:
             self = .sfEntryInformations
+        case 0xBA4B:
+            self = .sapicaPoints
         default:
             return nil
         }
@@ -45,6 +50,8 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             return 0x108F
         case .sfEntryInformations:
             return 0x10CB
+        case .sapicaPoints:
+            return 0xBA4B
         }
     }
     
@@ -58,6 +65,8 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             return 3
         case .sfEntryInformations:
             return 2
+        case .sapicaPoints:
+            return 1
         }
     }
 }

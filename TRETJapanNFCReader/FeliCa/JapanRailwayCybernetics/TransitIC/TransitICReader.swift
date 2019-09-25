@@ -60,6 +60,11 @@ public class TransitICReader: FeliCaReader {
         var transitICCard = feliCaCard as! TransitICCard
         DispatchQueue(label: "TRETJPNRTransitICReader", qos: .default).async {
             var data: [FeliCaServiceCode : [Data]] = [:]
+            
+            if transitICCard.data.systemCode != FeliCaSystemCode.sapica {
+                self.transitICCardItemTypes = self.transitICCardItemTypes.filter { $0 != .sapicaPoints }
+            }
+            
             for itemType in self.transitICCardItemTypes {
                 data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }

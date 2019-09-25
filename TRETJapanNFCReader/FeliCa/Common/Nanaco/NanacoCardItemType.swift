@@ -14,6 +14,8 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     case balance
     /// nanaco番号
     case nanacoNumber
+    /// ポイント
+    case points
     /// 利用履歴
     case transactions
     
@@ -24,6 +26,8 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
             self = .balance
         case 0x558B:
             self = .nanacoNumber
+        case 0x560B:
+            self = .points
         case 0x564F:
             self = .transactions
         default:
@@ -37,6 +41,8 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
             return 0x5597
         case .nanacoNumber:
             return 0x558B
+        case .points:
+            return 0x560B
         case .transactions:
             return 0x564F
         }
@@ -48,6 +54,8 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
             return 1
         case .nanacoNumber:
             return 1
+        case .points:
+            return 2
         case .transactions:
             return 5
         }

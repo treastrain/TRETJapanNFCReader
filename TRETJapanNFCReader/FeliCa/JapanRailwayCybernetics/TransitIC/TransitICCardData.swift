@@ -24,6 +24,8 @@ public struct TransitICCardData: FeliCaCardData {
     public var entryExitInformationsData: [Data]?
     public var sfEntryInformationsData: [Data]?
     
+    public var sapicaPoints: Int?
+    
     @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.idm = idm
@@ -42,6 +44,8 @@ public struct TransitICCardData: FeliCaCardData {
                 self.convertToEntryExitInformations(blockData)
             case .sfEntryInformations:
                 self.convertToSFEntryInformations(blockData)
+            case .sapicaPoints:
+                self.convertToSapicaPoints(blockData)
             case .none:
                 break
             }
@@ -64,5 +68,11 @@ public struct TransitICCardData: FeliCaCardData {
     
     private mutating func convertToSFEntryInformations(_ blockData: [Data]) {
         self.sfEntryInformationsData = blockData
+    }
+    
+    private mutating func convertToSapicaPoints(_ blockData: [Data]) {
+        let data = blockData.first!
+        let points = data.toIntReversed(0, 2)
+        self.sapicaPoints = points
     }
 }
