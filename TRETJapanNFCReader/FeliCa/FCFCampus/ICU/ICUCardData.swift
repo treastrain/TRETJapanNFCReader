@@ -59,7 +59,7 @@ public struct ICUCardData: FeliCaCardData {
         // get student name
         self.name = String(bytes: blockData[1].filter({ 0x41...0x5A ~= $0 || $0 == 0x2C}), encoding: .utf8)
     }
-    
+
     private mutating func convertToTransactions(_ blockData: [Data]) {
         self.transactions = nil
         if blockData.count < 1 {
@@ -67,4 +67,22 @@ public struct ICUCardData: FeliCaCardData {
         }
         // TODO
     }
+
+    private mutating func toTransaction(data: Data) -> ICUCardTransaction {
+        // TODO: Currently, analysis is not perfect. So only hour and min can be obtained from data.
+        // In the future, if it becomes possible to get date info, add the code here.
+        let hour: Int = Int(data[3])githib
+        let min: Int = Int(data[4])
+        let date = Calendar.current.date(from: DateComponents(hour: hour, minute: min))!
+
+        return ICUCardTransaction(
+            date: date,
+            type: (data[15] == 0xFF) ? .credit : .purchase,
+
+            // difference and balance are signed but it never becomes negagtive. IMO this should be fixed.
+            difference: Int(UInt(data[9]) << 2 + UInt(data[8])),
+            balance: Int(UInt(data[12]) << 2 + UInt(data[11]))
+        )
+    }
+
 }
