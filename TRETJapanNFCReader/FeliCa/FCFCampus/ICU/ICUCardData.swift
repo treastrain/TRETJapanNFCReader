@@ -50,5 +50,10 @@ public struct ICUCardData: FeliCaCardData {
         if blockData.count < 2 {
             return
         }
+        
+        // get student ID
+        self.id = blockData[0][2...7].reduce(0) { (stack, digit) in
+            return stack * 10 + Int(digit & 0x0F)
+        }
     }
 }
