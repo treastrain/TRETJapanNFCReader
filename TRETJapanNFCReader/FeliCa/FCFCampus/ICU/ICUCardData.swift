@@ -55,5 +55,8 @@ public struct ICUCardData: FeliCaCardData {
         self.id = blockData[0][2...7].reduce(0) { (stack, digit) in
             return stack * 10 + Int(digit & 0x0F)
         }
+        
+        // get student name
+        self.name = String(bytes: blockData[1].filter({ 0x41...0x5A ~= $0 || $0 == 0x2C}), encoding: .utf8)
     }
 }
