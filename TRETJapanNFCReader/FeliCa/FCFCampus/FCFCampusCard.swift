@@ -2,7 +2,7 @@
 //  CommonCard.swift
 //  TRETJapanNFCReader
 //
-//  Created by treastrain on 2019/08/22.
+//  Created by Qs-F on 2019/09/27.
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
