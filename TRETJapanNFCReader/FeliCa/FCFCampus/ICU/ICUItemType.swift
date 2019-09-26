@@ -19,7 +19,7 @@ public enum ICUItemType: CaseIterable, FeliCaCardItemType {
         switch service {
         case .Some:
             self = service!
-        case .None {
+        case .None:
             return nil
         }
     }
