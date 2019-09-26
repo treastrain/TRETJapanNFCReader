@@ -65,13 +65,13 @@ public struct ICUCardData: FeliCaCardData {
         if blockData.count < 1 {
             return
         }
-        // TODO
+        self.transactions = blockData.map { toTransaction(data:$0) }
     }
 
     private mutating func toTransaction(data: Data) -> ICUCardTransaction {
         // TODO: Currently, analysis is not perfect. So only hour and min can be obtained from data.
         // In the future, if it becomes possible to get date info, add the code here.
-        let hour: Int = Int(data[3])githib
+        let hour: Int = Int(data[3])
         let min: Int = Int(data[4])
         let date = Calendar.current.date(from: DateComponents(hour: hour, minute: min))!
 
