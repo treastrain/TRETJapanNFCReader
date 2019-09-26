@@ -29,4 +29,18 @@ public struct ICUCardData: FeliCaCardData {
         self.systemCode = fcfCampusCardData.systemCode
         self.data = fcfCampusCardData.data
     }
+
+    public mutating func convert() {
+        for (key, value) in self.data {
+            let blockData = value
+            switch ICUItemType(key) {
+            case .identity:
+                self.convertToIdentity(blockData)
+            case .transactions:
+                self.convertToTransactions(blockData)
+            case .none:
+                break
+            }
+        }
+    }
 }
