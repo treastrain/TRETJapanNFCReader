@@ -129,6 +129,8 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
                 feliCaCard = FeliCaCommonCard(tag: feliCaCardTag, data: FeliCaCommonCardData(idm: idm, systemCode: systemCode))
             case .octopus:
                 feliCaCard = OctopusCard(tag: feliCaCardTag, data: OctopusCardData(idm: idm, systemCode: systemCode))
+            case .fcfcampus:
+                feliCaCard = FCFCampusCard(tag: feliCaCardTag, data: FCFCampusCardData(idm: idm, systemCode: systemCode))
             }
             
             self.getItems(session, feliCaCard) { (feliCaCard) in
