@@ -23,4 +23,10 @@ public struct ICUCardData: FeliCaCardData {
     public var balance: Int?
     public var transactions: [ICUCardTransaction]?
 
+    @available(iOS 13.0, *)
+    internal init(from fcfCampusCardData: FCFCampusCardData) {
+        self.idm = fcfCampusCardData.idm
+        self.systemCode = fcfCampusCardData.systemCode
+        self.data = fcfCampusCardData.data
+    }
 }
