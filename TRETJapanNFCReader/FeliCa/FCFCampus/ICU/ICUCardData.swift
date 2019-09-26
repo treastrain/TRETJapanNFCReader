@@ -84,5 +84,18 @@ public struct ICUCardData: FeliCaCardData {
             balance: Int(UInt(data[12]) << 2 + UInt(data[11]))
         )
     }
+}
 
+public struct ICUCardTransaction: FeliCaCardTransaction {
+    public var date: Date
+    public var type: FeliCaCardTransactionType
+    public var difference: Int
+    public var balance: Int
+
+    public init(date: Date, type: FeliCaCardTransactionType, difference: Int, balance: Int) {
+        self.date = date
+        self.type = type
+        self.difference = difference
+        self.balance = balance
+    }
 }
