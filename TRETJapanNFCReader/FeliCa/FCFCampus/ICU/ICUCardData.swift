@@ -59,4 +59,12 @@ public struct ICUCardData: FeliCaCardData {
         // get student name
         self.name = String(bytes: blockData[1].filter({ 0x41...0x5A ~= $0 || $0 == 0x2C}), encoding: .utf8)
     }
+    
+    private mutating func convertToTransactions(_ blockData: [Data]) {
+        self.transactions = nil
+        if blockData.count < 1 {
+            return
+        }
+        // TODO
+    }
 }
