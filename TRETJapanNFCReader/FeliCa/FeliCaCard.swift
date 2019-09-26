@@ -124,7 +124,7 @@ public enum FeliCaSystemCode: String, Codable {
             return "fe00"
         case .octopus:
             return "8008"
-          case .fcfcampus:
+        case .fcfcampus:
             return "8760"
         }
     }
