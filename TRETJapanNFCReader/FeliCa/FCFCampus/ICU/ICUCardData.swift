@@ -43,4 +43,12 @@ public struct ICUCardData: FeliCaCardData {
             }
         }
     }
+
+    private mutating func convertToIdentity(_ blockData: [Data]) {
+        self.id = nil
+        self.name = nil
+        if blockData.count < 2 {
+            return
+        }
+    }
 }
