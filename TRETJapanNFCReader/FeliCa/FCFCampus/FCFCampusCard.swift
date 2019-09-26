@@ -15,7 +15,7 @@ import CoreNFC
 @available(iOS 13.0, *)
 public struct FCFCampusCard: FeliCaCard{
     public let tag: NFCFeliCaTag
-    public let data: FCFCamousCardData
+    public let data: FCFCampusCardData
     
     public init(tag: NFCFeliCaTag, data: FCFCampusCardData) {
         self.tag = tag
