@@ -9,7 +9,7 @@
 import Foundation
 
 // data typs which can be obtained from ICU Student ID card.
-public enum ICUItemType: CaseIterable, FeliCaCardItemType {
+public enum ICUItemType: UInt16, CaseIterable, FeliCaCardItemType {
     case identity = 0x188B
     case transactions = 0x120F
     
@@ -17,9 +17,9 @@ public enum ICUItemType: CaseIterable, FeliCaCardItemType {
     internal init?(_ serviceCode: FeliCaServiceCode) {
         let service = ICUItemType(rawValue: serviceCode)
         switch service {
-        case .Some:
+        case .some:
             self = service!
-        case .None:
+        case .none:
             return nil
         }
     }
