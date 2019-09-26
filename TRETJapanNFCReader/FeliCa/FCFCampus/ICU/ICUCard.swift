@@ -15,7 +15,7 @@ public struct ICUCard: FeliCaCard {
     public var data: ICUCardData
     
     public init(from fcfCampusCard: FCFCampusCard) {
-        self.tag = fcfCamousCard.tag
+        self.tag = fcfCampusCard.tag
         self.data = ICUCardData(from: fcfCampusCard.data)
     }
     
