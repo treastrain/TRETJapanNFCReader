@@ -18,6 +18,7 @@
 "nfcTagReaderSessionDoneMessage" = "Done!";
 
 "pinRequired" = "PIN required.";
+"cardNotSupported" = "The card is not supported.";
 
 "transitIC" = "Transit IC";
 "rakutenEdy" = "Rakuten Edy";
