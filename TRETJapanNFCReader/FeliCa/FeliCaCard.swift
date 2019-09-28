@@ -86,7 +86,7 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
         switch systemCode {
         case "0003":
             self = .japanRailwayCybernetics
-        case "de80":
+        case "80de":
             self = .iruca
         case "8592":
             self = .paspy
