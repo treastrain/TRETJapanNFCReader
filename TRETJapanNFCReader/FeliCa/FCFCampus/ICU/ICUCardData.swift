@@ -33,7 +33,7 @@ public struct ICUCardData: FeliCaCardData {
     public mutating func convert() {
         for (key, value) in self.data {
             let blockData = value
-            switch ICUItemType(key) {
+            switch ICUCardItemType(key) {
             case .identity:
                 self.convertToIdentity(blockData)
             case .transactions:

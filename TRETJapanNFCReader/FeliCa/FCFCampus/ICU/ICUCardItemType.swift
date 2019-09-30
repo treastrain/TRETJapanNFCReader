@@ -1,5 +1,5 @@
 //
-//  ICUItemType.swift
+//  ICUCardItemType.swift
 //  TRETJapanNFCReader
 //
 //  Created by Qs-F on 2019/09/26.
@@ -9,13 +9,13 @@
 import Foundation
 
 // data typs which can be obtained from ICU Student ID card.
-public enum ICUItemType: UInt16, CaseIterable, FeliCaCardItemType {
+public enum ICUCardItemType: UInt16, CaseIterable, FeliCaCardItemType {
     case identity = 0x188B
     case transactions = 0x120F
     
     // typeof FeliCaServiceCode == UInt16
     internal init?(_ serviceCode: FeliCaServiceCode) {
-        let service = ICUItemType(rawValue: serviceCode)
+        let service = ICUCardItemType(rawValue: serviceCode)
         switch service {
         case .some:
             self = service!

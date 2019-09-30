@@ -12,10 +12,10 @@
 		46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2AE0233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2AE1233CFF700060DCB0 /* ICUCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */; };
-		46DF2AE2233CFF700060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
-		46DF2AE4233CFF700060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
-		46DF2AE6233CFF710060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
-		46DF2AE8233CFF720060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
+		46DF2AE2233CFF700060DCB0 /* ICUCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */; };
+		46DF2AE4233CFF700060DCB0 /* ICUCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */; };
+		46DF2AE6233CFF710060DCB0 /* ICUCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */; };
+		46DF2AE8233CFF720060DCB0 /* ICUCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */; };
 		46DF2AEA233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
 		46DF2AEB233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
 		46DF2AEC233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
@@ -376,7 +376,7 @@
 /* Begin PBXFileReference section */
 		46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCFCampusCard.swift; sourceTree = "<group>"; };
 		46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCard.swift; sourceTree = "<group>"; };
-		46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUItemType.swift; sourceTree = "<group>"; };
+		46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCardItemType.swift; sourceTree = "<group>"; };
 		46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCardData.swift; sourceTree = "<group>"; };
 		46DF2AEE233D02F00060DCB0 /* ICUReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUReader.swift; sourceTree = "<group>"; };
 		CD00C180231C3DAC00EC59B8 /* RakutenEdyCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyCardItemType.swift; sourceTree = "<group>"; };
@@ -525,8 +525,8 @@
 			isa = PBXGroup;
 			children = (
 				46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */,
-				46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */,
 				46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */,
+				46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */,
 				46DF2AEE233D02F00060DCB0 /* ICUReader.swift */,
 			);
 			path = ICU;
@@ -724,15 +724,15 @@
 		CDAC0566230D2C7D00E1DDCF /* FeliCa */ = {
 			isa = PBXGroup;
 			children = (
-				46DF2AD2233CFAAB0060DCB0 /* FCFCampus */,
 				CDD2895223143A6300087725 /* FeliCa+NFCFeliCaTag.swift */,
 				CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */,
 				CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */,
 				CD9291CB230E3F0000F576EF /* FeliCaReaderProtocol.swift */,
 				CDAC056E230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift */,
-				CD1A79052334A79D00218B4A /* Octopus */,
 				CD163B1B230DA29700B42E6C /* JapanRailwayCybernetics */,
 				CD163B1C230DA2C500B42E6C /* Common */,
+				46DF2AD2233CFAAB0060DCB0 /* FCFCampus */,
+				CD1A79052334A79D00218B4A /* Octopus */,
 			);
 			path = FeliCa;
 			sourceTree = "<group>";
@@ -1272,7 +1272,7 @@
 				CDF5C078231CE74600E2791A /* DriversLicenseExtensions.swift in Sources */,
 				CDF5C08A231CE75B00E2791A /* NanacoCardItemType.swift in Sources */,
 				46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */,
-				46DF2AE4233CFF700060DCB0 /* ICUItemType.swift in Sources */,
+				46DF2AE4233CFF700060DCB0 /* ICUCardItemType.swift in Sources */,
 				CDF5C08D231CE76000E2791A /* WaonCardData.swift in Sources */,
 				CDF5C06D231CE73C00E2791A /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CDF5C080231CE75000E2791A /* TransitICCardData.swift in Sources */,
@@ -1316,7 +1316,7 @@
 				CD9291CC230E3F0000F576EF /* FeliCaReaderProtocol.swift in Sources */,
 				CD00C185231C3E2C00EC59B8 /* WaonCardItemType.swift in Sources */,
 				CD00C17E231C38DA00EC59B8 /* NanacoCardData.swift in Sources */,
-				46DF2AE2233CFF700060DCB0 /* ICUItemType.swift in Sources */,
+				46DF2AE2233CFF700060DCB0 /* ICUCardItemType.swift in Sources */,
 				CD1A79362334A7C700218B4A /* OctopusCard.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD00C189231C40AB00EC59B8 /* TransitICCardItemType.swift in Sources */,
@@ -1372,7 +1372,7 @@
 				CD9EEA87231CECED00513DBF /* CommonCard.swift in Sources */,
 				CD9EEA7E231CECC300513DBF /* Extensions.swift in Sources */,
 				46DF2AE0233CFF620060DCB0 /* FCFCampusCard.swift in Sources */,
-				46DF2AE8233CFF720060DCB0 /* ICUItemType.swift in Sources */,
+				46DF2AE8233CFF720060DCB0 /* ICUCardItemType.swift in Sources */,
 				CD9EEA84231CECE000513DBF /* FeliCaCard.swift in Sources */,
 				CD9EEA8F231CED1700513DBF /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CD9EEA7D231CECC100513DBF /* JapanNFCReaderSessionDelegate.swift in Sources */,
@@ -1402,7 +1402,7 @@
 				CDF5C0AD231CEB8400E2791A /* CommonCard.swift in Sources */,
 				CDF5C0A4231CEB5600E2791A /* Extensions.swift in Sources */,
 				46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */,
-				46DF2AE6233CFF710060DCB0 /* ICUItemType.swift in Sources */,
+				46DF2AE6233CFF710060DCB0 /* ICUCardItemType.swift in Sources */,
 				CDF5C0AF231CEB8A00E2791A /* RakutenEdyCardData.swift in Sources */,
 				CDF5C0B5231CEBA900E2791A /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CDF5C0AA231CEB7000E2791A /* FeliCaCard.swift in Sources */,

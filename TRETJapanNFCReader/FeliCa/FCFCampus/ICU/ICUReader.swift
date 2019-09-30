@@ -14,7 +14,7 @@ public typealias ICUCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class ICUReader: FeliCaReader {
 
-    private var ICUCardItemTypes: [ICUItemType] = []
+    private var ICUCardItemTypes: [ICUCardItemType] = []
     
     private init() {
         fatalError()
@@ -40,12 +40,12 @@ public class ICUReader: FeliCaReader {
     
     /// IICUカードからデータを読み取る
     /// - Parameter itemTypes: ICUカードから読み取りたいデータのタイプ
-    public func get(itemTypes: [ICUItemType]) {
+    public func get(itemTypes: [ICUCardItemType]) {
         self.ICUCardItemTypes = itemTypes
         self.beginScanning()
     }
     
-    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [ICUItemType], completion: @escaping (FeliCaCard) -> Void) {
+    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [ICUCardItemType], completion: @escaping (FeliCaCard) -> Void) {
         self.ICUCardItemTypes = itemTypes
         self.getItems(session, feliCaCard) { (feliCaCard) in
             completion(feliCaCard)
