@@ -126,15 +126,15 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             case .sapica:
                 feliCaCard = TransitICCard(tag: feliCaCardTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
             case .okikca:
-                aaa
-            case .ica:
-                aaa
-            case .luluca:
-                aaa
-            case .nicepass:
-                aaa
-            case .cica:
-                aaa
+                break
+//            case .ica:
+//                break
+//            case .luluca:
+//                break
+//            case .nicepass:
+//                break
+//            case .cica:
+//                break
             case .common:
                 feliCaCard = FeliCaCommonCard(tag: feliCaCardTag, data: FeliCaCommonCardData(idm: idm, systemCode: systemCode))
             case .octopus:
