@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
+		46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
+		46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
+		46DF2AE0233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
+		46DF2AE1233CFF700060DCB0 /* ICUCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */; };
+		46DF2AE2233CFF700060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
+		46DF2AE3233CFF700060DCB0 /* ICUCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */; };
+		46DF2AE4233CFF700060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
+		46DF2AE5233CFF710060DCB0 /* ICUCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */; };
+		46DF2AE6233CFF710060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
+		46DF2AE7233CFF720060DCB0 /* ICUCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */; };
+		46DF2AE8233CFF720060DCB0 /* ICUItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */; };
+		46DF2AEA233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
+		46DF2AEB233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
+		46DF2AEC233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
+		46DF2AED233D02D90060DCB0 /* ICUCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */; };
+		46DF2AEF233D02F00060DCB0 /* ICUReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AEE233D02F00060DCB0 /* ICUReader.swift */; };
+		46DF2AF0233D02F00060DCB0 /* ICUReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AEE233D02F00060DCB0 /* ICUReader.swift */; };
+		46DF2AF1233D02F00060DCB0 /* ICUReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AEE233D02F00060DCB0 /* ICUReader.swift */; };
+		46DF2AF2233D02F00060DCB0 /* ICUReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AEE233D02F00060DCB0 /* ICUReader.swift */; };
 		CD00C17B231C18E100EC59B8 /* CommonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9291CD230E41DF00F576EF /* CommonCard.swift */; };
 		CD00C17C231C28A700EC59B8 /* UnivCoopICPrepaidCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData.swift */; };
 		CD00C17D231C36C000EC59B8 /* RakutenEdyCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B19230D98F900B42E6C /* RakutenEdyCardData.swift */; };
@@ -353,6 +373,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCFCampusCard.swift; sourceTree = "<group>"; };
+		46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCard.swift; sourceTree = "<group>"; };
+		46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUItemType.swift; sourceTree = "<group>"; };
+		46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCardData.swift; sourceTree = "<group>"; };
+		46DF2AEE233D02F00060DCB0 /* ICUReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUReader.swift; sourceTree = "<group>"; };
 		CD00C180231C3DAC00EC59B8 /* RakutenEdyCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakutenEdyCardItemType.swift; sourceTree = "<group>"; };
 		CD00C182231C3DF900EC59B8 /* NanacoCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanacoCardItemType.swift; sourceTree = "<group>"; };
 		CD00C184231C3E2C00EC59B8 /* WaonCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaonCardItemType.swift; sourceTree = "<group>"; };
@@ -486,6 +511,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46DF2AD2233CFAAB0060DCB0 /* FCFCampus */ = {
+			isa = PBXGroup;
+			children = (
+				46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */,
+				46DF2AD5233CFAEC0060DCB0 /* ICU */,
+			);
+			path = FCFCampus;
+			sourceTree = "<group>";
+		};
+		46DF2AD5233CFAEC0060DCB0 /* ICU */ = {
+			isa = PBXGroup;
+			children = (
+				46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */,
+				46DF2AD7233CFAEC0060DCB0 /* ICUItemType.swift */,
+				46DF2AE9233D02D90060DCB0 /* ICUCardData.swift */,
+				46DF2AEE233D02F00060DCB0 /* ICUReader.swift */,
+			);
+			path = ICU;
+			sourceTree = "<group>";
+		};
 		CD163B13230D88D900B42E6C /* ISO14443 */ = {
 			isa = PBXGroup;
 			children = (
@@ -678,6 +723,7 @@
 		CDAC0566230D2C7D00E1DDCF /* FeliCa */ = {
 			isa = PBXGroup;
 			children = (
+				46DF2AD2233CFAAB0060DCB0 /* FCFCampus */,
 				CDD2895223143A6300087725 /* FeliCa+NFCFeliCaTag.swift */,
 				CDAC056A230D2C9D00E1DDCF /* FeliCaCard.swift */,
 				CDAC056C230D2D9400E1DDCF /* FeliCaReader.swift */,
@@ -1205,16 +1251,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF5C081231CE75000E2791A /* TransitICCardItemType.swift in Sources */,
+				46DF2AEB233D02D90060DCB0 /* ICUCardData.swift in Sources */,
 				CDF5C085231CE75700E2791A /* RakutenEdyCardData.swift in Sources */,
 				CDF5C07B231CE74A00E2791A /* FeliCaCard.swift in Sources */,
 				CDF5C086231CE75700E2791A /* RakutenEdyCardItemType.swift in Sources */,
 				CDF5C06C231CE73A00E2791A /* JapanNFCReaderError.swift in Sources */,
 				CD1A79412334A90B00218B4A /* OctopusCardData.swift in Sources */,
+				46DF2AF0233D02F00060DCB0 /* ICUReader.swift in Sources */,
 				CDF5C091231CE76300E2791A /* UnivCoopICPrepaidCardData.swift in Sources */,
 				CDF5C083231CE75200E2791A /* CommonCard.swift in Sources */,
 				CDF5C092231CE76300E2791A /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CDF5C078231CE74600E2791A /* DriversLicenseExtensions.swift in Sources */,
 				CDF5C08A231CE75B00E2791A /* NanacoCardItemType.swift in Sources */,
+				46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */,
+				46DF2AE4233CFF700060DCB0 /* ICUItemType.swift in Sources */,
 				CDF5C08D231CE76000E2791A /* WaonCardData.swift in Sources */,
 				CDF5C06D231CE73C00E2791A /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CDF5C080231CE75000E2791A /* TransitICCardData.swift in Sources */,
@@ -1222,6 +1272,7 @@
 				CDF5C089231CE75B00E2791A /* NanacoCardData.swift in Sources */,
 				CD1A79462334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CDF5C08E231CE76000E2791A /* WaonCardItemType.swift in Sources */,
+				46DF2AE3233CFF700060DCB0 /* ICUCard.swift in Sources */,
 				CDF5C072231CE74600E2791A /* DriversLicenseReaderError.swift in Sources */,
 				CDF5C077231CE74600E2791A /* Status.swift in Sources */,
 			);
@@ -1250,6 +1301,7 @@
 				CD17B13A231AD5D900A46679 /* WaonCard.swift in Sources */,
 				CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */,
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
+				46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */,
 				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */,
 				CD17B13E231AD8A200A46679 /* UnivCoopICPrepaidReader.swift in Sources */,
@@ -1257,6 +1309,7 @@
 				CD9291CC230E3F0000F576EF /* FeliCaReaderProtocol.swift in Sources */,
 				CD00C185231C3E2C00EC59B8 /* WaonCardItemType.swift in Sources */,
 				CD00C17E231C38DA00EC59B8 /* NanacoCardData.swift in Sources */,
+				46DF2AE2233CFF700060DCB0 /* ICUItemType.swift in Sources */,
 				CD1A79362334A7C700218B4A /* OctopusCard.swift in Sources */,
 				CD1999BE22CD08740035AEBD /* DriversLicenseReaderError.swift in Sources */,
 				CD00C189231C40AB00EC59B8 /* TransitICCardItemType.swift in Sources */,
@@ -1271,8 +1324,10 @@
 				CD00C17F231C39AB00EC59B8 /* WaonCardData.swift in Sources */,
 				CD1A793B2334A87100218B4A /* OctopusReader.swift in Sources */,
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
+				46DF2AEA233D02D90060DCB0 /* ICUCardData.swift in Sources */,
 				CDB3AD4C22CFAEC20069AB7F /* Extensions.swift in Sources */,
 				CD00C187231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift in Sources */,
+				46DF2AEF233D02F00060DCB0 /* ICUReader.swift in Sources */,
 				CD00C183231C3DF900EC59B8 /* NanacoCardItemType.swift in Sources */,
 				CD17B138231AD48600A46679 /* NanacoReader.swift in Sources */,
 				CD00C17D231C36C000EC59B8 /* RakutenEdyCardData.swift in Sources */,
@@ -1281,6 +1336,7 @@
 				CDD2895323143A6300087725 /* FeliCa+NFCFeliCaTag.swift in Sources */,
 				CD17B137231AD48600A46679 /* NanacoCard.swift in Sources */,
 				CD8FC6F322D20317007ECC1C /* DriversLicenseExtensions.swift in Sources */,
+				46DF2AE1233CFF700060DCB0 /* ICUCard.swift in Sources */,
 				CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */,
 				CD00C181231C3DAC00EC59B8 /* RakutenEdyCardItemType.swift in Sources */,
 				CD17B13D231AD8A200A46679 /* UnivCoopICPrepaidCard.swift in Sources */,
@@ -1297,16 +1353,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9EEA8B231CED0300513DBF /* NanacoCardItemType.swift in Sources */,
+				46DF2AED233D02D90060DCB0 /* ICUCardData.swift in Sources */,
 				CD9EEA8D231CED0A00513DBF /* WaonCardItemType.swift in Sources */,
 				CD9EEA7C231CECBE00513DBF /* JapanNFCReaderError.swift in Sources */,
 				CD9EEA8A231CECFA00513DBF /* NanacoCardData.swift in Sources */,
 				CD9EEA81231CECD400513DBF /* Status.swift in Sources */,
 				CD1A79432334A90B00218B4A /* OctopusCardData.swift in Sources */,
+				46DF2AF2233D02F00060DCB0 /* ICUReader.swift in Sources */,
 				CD9EEA80231CECCA00513DBF /* DriversLicenseReaderError.swift in Sources */,
 				CD9EEA82231CECD800513DBF /* DriversLicenseExtensions.swift in Sources */,
 				CD9EEA88231CECF000513DBF /* RakutenEdyCardData.swift in Sources */,
 				CD9EEA87231CECED00513DBF /* CommonCard.swift in Sources */,
 				CD9EEA7E231CECC300513DBF /* Extensions.swift in Sources */,
+				46DF2AE0233CFF620060DCB0 /* FCFCampusCard.swift in Sources */,
+				46DF2AE8233CFF720060DCB0 /* ICUItemType.swift in Sources */,
 				CD9EEA84231CECE000513DBF /* FeliCaCard.swift in Sources */,
 				CD9EEA8F231CED1700513DBF /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CD9EEA7D231CECC100513DBF /* JapanNFCReaderSessionDelegate.swift in Sources */,
@@ -1314,6 +1374,7 @@
 				CD9EEA8C231CED0600513DBF /* WaonCardData.swift in Sources */,
 				CD1A79482334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CD9EEA89231CECF500513DBF /* RakutenEdyCardItemType.swift in Sources */,
+				46DF2AE7233CFF720060DCB0 /* ICUCard.swift in Sources */,
 				CD9EEA85231CECE600513DBF /* TransitICCardData.swift in Sources */,
 				CD9EEA8E231CED1100513DBF /* UnivCoopICPrepaidCardData.swift in Sources */,
 			);
@@ -1324,16 +1385,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF5C0B1231CEB9300E2791A /* NanacoCardItemType.swift in Sources */,
+				46DF2AEC233D02D90060DCB0 /* ICUCardData.swift in Sources */,
 				CDF5C0B3231CEB9E00E2791A /* WaonCardItemType.swift in Sources */,
 				CDF5C0A2231CEB5000E2791A /* JapanNFCReaderError.swift in Sources */,
 				CDF5C0B0231CEB9100E2791A /* NanacoCardData.swift in Sources */,
 				CDF5C0AE231CEB8700E2791A /* RakutenEdyCardItemType.swift in Sources */,
 				CD1A79422334A90B00218B4A /* OctopusCardData.swift in Sources */,
+				46DF2AF1233D02F00060DCB0 /* ICUReader.swift in Sources */,
 				CDF5C0A7231CEB6600E2791A /* Status.swift in Sources */,
 				CDF5C0A6231CEB5E00E2791A /* DriversLicenseReaderError.swift in Sources */,
 				CDF5C0A8231CEB6800E2791A /* DriversLicenseExtensions.swift in Sources */,
 				CDF5C0AD231CEB8400E2791A /* CommonCard.swift in Sources */,
 				CDF5C0A4231CEB5600E2791A /* Extensions.swift in Sources */,
+				46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */,
+				46DF2AE6233CFF710060DCB0 /* ICUItemType.swift in Sources */,
 				CDF5C0AF231CEB8A00E2791A /* RakutenEdyCardData.swift in Sources */,
 				CDF5C0B5231CEBA900E2791A /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CDF5C0AA231CEB7000E2791A /* FeliCaCard.swift in Sources */,
@@ -1341,6 +1406,7 @@
 				CDF5C0B2231CEB9B00E2791A /* WaonCardData.swift in Sources */,
 				CD1A79472334AB3C00218B4A /* OctopusCardItemType.swift in Sources */,
 				CDF5C0AC231CEB7C00E2791A /* TransitICCardItemType.swift in Sources */,
+				46DF2AE5233CFF710060DCB0 /* ICUCard.swift in Sources */,
 				CDF5C0AB231CEB7900E2791A /* TransitICCardData.swift in Sources */,
 				CDF5C0B4231CEBA500E2791A /* UnivCoopICPrepaidCardData.swift in Sources */,
 			);

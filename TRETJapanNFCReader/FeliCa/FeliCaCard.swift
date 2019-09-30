@@ -49,6 +49,9 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     
     /// Octopus Card (八達通)
     case octopus
+
+    /// FCF Campus Card
+    case fcfcampus
     
     case unknown
     
@@ -66,6 +69,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return String(format: NSLocalizedString("univCoopICPrepaid", bundle: Bundle.current, comment: ""))
         case .octopus:
             return "Octopus (八達通)"
+        case .fcfcampus:
+            return "FCF Campus"
         case .unknown:
             return "Unknown"
         }
@@ -77,9 +82,18 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
     case iruca
     case paspy
     case sapica
+    
+    case okikca
+    case ica
+    case luluca
+    case nicepass
+    case cica
+    
     case common
     
     case octopus
+
+    case fcfcampus
     
     public init?(from systemCodeData: Data) {
         let systemCode = systemCodeData.map { String(format: "%.2hhx", $0) }.joined()
@@ -92,10 +106,22 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
             self = .paspy
         case "865e":
             self = .sapica
+        case "8fc1":
+            self = .okikca
+        case "80ef":
+            self = .ica
+        case "a604":
+            self = .luluca
+        case "0f04":
+            self = .nicepass
+        case "8157":
+            self = .cica
         case "fe00":
             self = .common
         case "8008":
             self = .octopus
+        case "8760":
+            self = .fcfcampus
         default:
             return nil
         }
@@ -111,10 +137,22 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
             return "8592"
         case .sapica:
             return "865e"
+        case .okikca:
+            return "8fc1"
+        case .ica:
+            return "80ef"
+        case .luluca:
+            return "a604"
+        case .nicepass:
+            return "0f04"
+        case .cica:
+            return "8157"
         case .common:
             return "fe00"
         case .octopus:
             return "8008"
+        case .fcfcampus:
+            return "8760"
         }
     }
 }
