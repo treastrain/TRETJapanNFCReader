@@ -10,7 +10,7 @@ import Foundation
 
 // data typs which can be obtained from ICU Student ID card.
 public enum ICUCardItemType: UInt16, CaseIterable, FeliCaCardItemType {
-    case identity = 0x188B
+    case identity = 0x1A8B
     case transactions = 0x120F
     
     // typeof FeliCaServiceCode == UInt16
