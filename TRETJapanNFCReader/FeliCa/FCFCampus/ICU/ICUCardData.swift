@@ -78,7 +78,7 @@ public struct ICUCardData: FeliCaCardData {
 
         return ICUCardTransaction(
             date: date,
-            type: (data[15] == 0xFF) ? .credit : .purchase,
+            type: (data[4] == 0x11) ? .credit : .purchase,
 
             // difference and balance are signed but it never becomes negagtive. IMO this should be fixed.
             difference: Int(UInt(data[9]) << 8 + UInt(data[8])),
