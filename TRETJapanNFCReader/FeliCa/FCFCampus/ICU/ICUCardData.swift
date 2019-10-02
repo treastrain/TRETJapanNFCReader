@@ -66,7 +66,7 @@ public struct ICUCardData: FeliCaCardData {
             return
         }
         self.transactions = blockData.map { toTransaction(data:$0) }
-        self.balance = self.transactions.first!.balance
+        self.balance = self.transactions?.first?.balance
     }
 
     private mutating func toTransaction(data: Data) -> ICUCardTransaction {
