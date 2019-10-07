@@ -62,7 +62,9 @@ public struct NanacoCardData: FeliCaCardData {
     
     private mutating func convertToPoints(_ blockData: [Data]) {
         let data = blockData.last!
-        self.points = Int((UInt32(data[0]) << 16) + (UInt32(data[1]) << 8) + UInt32(data[2]))
+        let points1 = Int((UInt32(data[0]) << 16) + (UInt32(data[1]) << 8) + UInt32(data[2]))
+        let points2 = Int((UInt32(data[5]) << 16) + (UInt32(data[6]) << 8) + UInt32(data[7]))
+        self.points = points1 + points2
     }
     
     private mutating func convertToTransactions(_ blockData: [Data]) {
