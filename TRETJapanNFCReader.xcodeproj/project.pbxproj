@@ -87,7 +87,6 @@
 		CD5D2D7522C5E977004330F3 /* TRETJapanNFCReader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD5D2D7322C5E977004330F3 /* TRETJapanNFCReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD5D2D7C22C5EA6B004330F3 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D7B22C5EA6B004330F3 /* Status.swift */; };
 		CD5D2D7D22C5ED8C004330F3 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
-		CD5D2D7E22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
 		CD5D2D7F22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD5D2D8522C5F3EB004330F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD5D2D8722C5F3EB004330F3 /* InfoPlist.strings */; };
 		CD68FAD022CB9ABD004ABCAF /* MattersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */; };
@@ -515,7 +514,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD5D2D7D22C5ED8C004330F3 /* TRETJapanNFCReader.framework in Frameworks */,
-				CD5D2D7E22C5EFE8004330F3 /* TRETJapanNFCReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,7 +1017,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "treastrain / Tanaka Ryoga";
 				TargetAttributes = {
 					CD02AC61231CE5F6008614B7 = {
@@ -1821,7 +1819,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -1850,7 +1848,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
