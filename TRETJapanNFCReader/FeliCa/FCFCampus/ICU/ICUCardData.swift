@@ -72,14 +72,22 @@ public struct ICUCardData: FeliCaCardData {
     private mutating func toTransaction(data: Data) -> ICUCardTransaction {
         // TODO: Currently, analysis is not perfect. So only hour and min can be obtained from data.
         // In the future, if it becomes possible to get date info, add the code here.
+        enum t: Int {
+            case min = 60
+            case hour = 3600
+            case day = 86400
+        }
+        let base: Date = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 1))!
+
         let hour: Int = Int(data[3])
         let min: Int = Int(data[4])
-        let date = Calendar.current.date(from: DateComponents(hour: hour, minute: min))!
+        let sec: Int = Int(data[5])
+        let daysSince2000: Int = Int(UInt(data[1]) << 8 + UInt(data[0]))
+        let date: Date = Date(timeInterval: TimeInterval(daysSince2000 * t.day.rawValue + hour * t.hour.rawValue + min * t.min.rawValue + sec), since: base)
 
         return ICUCardTransaction(
             date: date,
             type: (data[15] == 0xFF) ? .credit : .purchase,
-
             // difference and balance are signed but it never becomes negagtive. IMO this should be fixed.
             difference: Int(UInt(data[9]) << 8 + UInt(data[8])),
             balance: Int(UInt(data[12]) << 8 + UInt(data[11]))
