@@ -44,15 +44,15 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
         self.beginScanning()
     }
     
-    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [UnivCoopICPrepaidItemType], completion: @escaping (FeliCaCard) -> Void) {
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [UnivCoopICPrepaidItemType], completion: @escaping (FeliCaCard) -> Void) {
         self.univCoopICPrepaidCardItemTypes = itemTypes
-        self.getItems(session, feliCaCard) { (feliCaCard) in
+        self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        var univCoopICPrepaidCard = feliCaCard as! UnivCoopICPrepaidCard
+    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        var univCoopICPrepaidCard = UnivCoopICPrepaidCard(tag: feliCaTag, data: UnivCoopICPrepaidCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRUnivCoopICPrepaidReader", qos: .default).async {
             var data: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.univCoopICPrepaidCardItemTypes {

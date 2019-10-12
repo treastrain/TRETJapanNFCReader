@@ -45,22 +45,22 @@ public class ICUReader: FeliCaReader {
         self.beginScanning()
     }
     
-    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [ICUCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [ICUCardItemType], completion: @escaping (FeliCaCard) -> Void) {
         self.ICUCardItemTypes = itemTypes
-        self.getItems(session, feliCaCard) { (feliCaCard) in
+        self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        var ICUCard = feliCaCard as! ICUCard
+    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        var icuCard = ICUCard(tag: feliCaTag, data: ICUCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRICUReader", qos: .default).async {
             var data: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.ICUCardItemTypes {
-                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: ICUCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: icuCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            ICUCard.data.data = data
-            completion(ICUCard)
+            icuCard.data.data = data
+            completion(icuCard)
         }
     }
 }
