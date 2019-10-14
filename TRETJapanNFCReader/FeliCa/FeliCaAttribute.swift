@@ -23,7 +23,7 @@ public enum FeliCaAttribute {
     
     case unknown
     
-    var description: String {
+    public var description: String {
         switch self {
         case .areaThatCanCreateSubArea:
             return "Area (that can create Sub-Area)"
