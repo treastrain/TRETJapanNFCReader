@@ -12,8 +12,54 @@ public typealias FeliCaServiceCode = UInt16
 
 public extension FeliCaServiceCode {
     
+    /// FeliCa エリア属性 または FeliCa サービス属性
+    var attribute: FeliCaAttribute {
+        let s = self & 0x3F
+        switch s {
+        case 0b000000:
+            return .areaThatCanCreateSubArea
+        case 0b000001:
+            return .areaThatCannotCreateSubArea
+        case 0b001000:
+            return .randomServiceReadWrite
+        case 0b001001:
+            return .randomServiceReadWrite
+        case 0b001010:
+            return .randomServiceReadOnly
+        case 0b001011:
+            return .randomServiceReadOnly
+        case 0b001100:
+            return .cyclicServiceReadWrite
+        case 0b001101:
+            return .cyclicServiceReadWrite
+        case 0b001110:
+            return .cyclicServiceReadOnly
+        case 0b001111:
+            return .cyclicServiceReadOnly
+        case 0b010000:
+            return .purseServiceDirect
+        case 0b010001:
+            return .purseServiceDirect
+        case 0b010010:
+            return .purseServiceCashbackDecrement
+        case 0b010011:
+            return .purseServiceCashbackDecrement
+        case 0b010100:
+            return .purseServiceDecrement
+        case 0b010101:
+            return .purseServiceDecrement
+        case 0b010110:
+            return .purseServiceReadOnly
+        case 0b010111:
+            return .purseServiceReadOnly
+        default:
+            return .unknown
+        }
+    }
+    
+    /// 認証が必要か
     var isAuthenticationRequired: Bool {
-        if self & 0x3F == 0b000000 {
+        if self.attribute == .areaThatCanCreateSubArea || self.attribute == .areaThatCannotCreateSubArea {
             return false
         }
         
@@ -21,48 +67,6 @@ public extension FeliCaServiceCode {
             return true
         } else {
             return false
-        }
-    }
-    
-    var attribute: String {
-        let s = self & 0x3F
-        switch s {
-        case 0b000000:
-            return "Area"
-        case 0b001000:
-            return "Random Service, Read/Write Access: authentication required"
-        case 0b001001:
-            return "Random Service, Read/Write Access: authentication not required"
-        case 0b001010:
-            return "Random Service, Read Only Access: authentication required"
-        case 0b001011:
-            return "Random Service, Read Only Access: authentication not required"
-        case 0b001100:
-            return "Cyclic Service, Read/Write Access: authentication required"
-        case 0b001101:
-            return "Cyclic Service, Read/Write Access: authentication not required"
-        case 0b001110:
-            return "Cyclic Service, Read Only Access: authentication required"
-        case 0b001111:
-            return "Cyclic Service, Read Only Access: authentication not required"
-        case 0b010000:
-            return "Purse Service, Direct Access: authentication required"
-        case 0b010001:
-            return "Purse Service, Direct Access: authentication not required"
-        case 0b010010:
-            return "Purse Service, Cashback Access/Decrement Access: authentication required"
-        case 0b010011:
-            return "Purse Service, Cashback Access/Decrement Access: authentication not required"
-        case 0b010100:
-            return "Purse Service, Decrement Access: authentication required"
-        case 0b010101:
-            return "Purse Service, Decrement Access: authentication not required"
-        case 0b010110:
-            return "Purse Service, Read Only Access: authentication required"
-        case 0b010111:
-            return "Purse Service, Read Only Access: authentication not required"
-        default:
-            return "Unknown"
         }
     }
 }
