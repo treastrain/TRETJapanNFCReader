@@ -115,35 +115,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
                 return
             }
             
-            var feliCaCard: FeliCaCard!
-            switch systemCode {
-            case .japanRailwayCybernetics:
-                feliCaCard = TransitICCard(tag: feliCaCardTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
-            case .iruca:
-                feliCaCard = TransitICCard(tag: feliCaCardTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
-            case .paspy:
-                feliCaCard = TransitICCard(tag: feliCaCardTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
-            case .sapica:
-                feliCaCard = TransitICCard(tag: feliCaCardTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
-            case .okikca:
-                break
-//            case .ica:
-//                break
-//            case .luluca:
-//                break
-//            case .nicepass:
-//                break
-//            case .cica:
-//                break
-            case .common:
-                feliCaCard = FeliCaCommonCard(tag: feliCaCardTag, data: FeliCaCommonCardData(idm: idm, systemCode: systemCode))
-            case .octopus:
-                feliCaCard = OctopusCard(tag: feliCaCardTag, data: OctopusCardData(idm: idm, systemCode: systemCode))
-            case .fcfcampus:
-                feliCaCard = FCFCampusCard(tag: feliCaCardTag, data: FCFCampusCardData(idm: idm, systemCode: systemCode))
-            }
-            
-            self.getItems(session, feliCaCard) { (feliCaCard) in
+            self.getItems(session, feliCaTag: feliCaCardTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
                 session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
                 session.invalidate()
                 
@@ -152,9 +124,10 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         }
     }
     
-    open func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        print("FeliCaReader.getItems を override することで読み取る item を指定できます")
-        completion(feliCaCard)
+    open func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        print("FeliCaReader.getItems を override し、FeliCaCard を作成してください。また、読み取る item を指定できます。")
+        session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
+        session.invalidate()
     }
     
     public func readWithoutEncryption(session: NFCTagReaderSession, tag: NFCFeliCaTag, serviceCode: FeliCaServiceCode, blocks: Int) -> [Data]? {

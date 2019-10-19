@@ -45,15 +45,15 @@ public class NanacoReader: FeliCaReader {
         self.beginScanning()
     }
     
-    public func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, itemTypes: [NanacoCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [NanacoCardItemType], completion: @escaping (FeliCaCard) -> Void) {
         self.nanacoCardItemTypes = itemTypes
-        self.getItems(session, feliCaCard) { (feliCaCard) in
+        self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void) {
-        var nanacoCard = feliCaCard as! NanacoCard
+    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        var nanacoCard = NanacoCard(tag: feliCaTag, data: NanacoCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRNanacoReader", qos: .default).async {
             var data: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.nanacoCardItemTypes {
