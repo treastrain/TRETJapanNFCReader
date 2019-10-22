@@ -154,7 +154,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
                 Data([0x80, UInt8(block)])
             }
             
-            tag.readWithoutEncryption24(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
+            tag.readWithoutEncryption36(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)
