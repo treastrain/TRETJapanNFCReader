@@ -30,7 +30,7 @@ IDm と System Code の表示
 - [x] 0003: 交通系ICカード (Suica, ICOCA, Kitaca, PASMO, TOICA, manaca, PiTaPa, SUGOCA, nimoca, はやかけん, icsca, ...etc.)
     - 残高の読み取りと表示
     - 利用履歴、改札入出場履歴、SF入場情報の読み取り
-- [x] DE80: IruCa
+- [x] 80DE: IruCa
     - 残高の読み取りと表示
     - 利用履歴、改札入出場履歴、SF入場情報の読み取り
 - [x] 8592: PASPY
