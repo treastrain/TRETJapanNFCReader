@@ -39,6 +39,9 @@ IDm と System Code の表示
 - [x] 865E: SAPICA
     - 残高の読み取りと表示
     - 利用履歴、改札入出場履歴、SF入場情報の読み取り
+- [x] 8FC1: OKICA
+    - 残高の読み取りと表示
+    - 利用履歴、改札入出場履歴、SF入場情報の読み取り
 - [x] FE00: 楽天Edy
     - 残高の読み取りと表示
     - 利用履歴の読み取り
@@ -150,6 +153,9 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 ### 運転免許証 `TRETJapanNFCReader/ISO14443/DriversLicense` 
 - `JIS0208.TXT`
     - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
+
+### OKICA `TRETJapanNFCReader/FeliCa/Okica/`
+OKICA の情報、および OKICA カード内に保存されているゆいレールの駅名情報、各バス会社名の情報は [Twitter@resi098](https://twitter.com/resi098) 様からご提供いただきました。
 
 ### 大学生協ICプリペイド `TRETJapanNFCReader/FeliCa/Common/UnivCoopICPrepaid`
 大学生協ICプリペイドの読み取り実装においては以下に掲載されている仕様を参考にしました。
