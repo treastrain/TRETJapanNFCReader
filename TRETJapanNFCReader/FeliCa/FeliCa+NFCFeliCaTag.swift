@@ -24,7 +24,7 @@ extension NFCFeliCaTag {
         
         let blockLists = blockList.split(count: 12)
         let blockList = blockLists.first ?? []
-        print("blockLists.count:", blockLists.count)
+        
         self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockList) { (status1, status2, blockData, error) in
             
             if let error = error {
