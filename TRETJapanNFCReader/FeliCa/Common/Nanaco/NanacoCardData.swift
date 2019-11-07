@@ -82,7 +82,7 @@ public struct NanacoCardData: FeliCaCardData {
             switch data[0] {
             case 0x47:
                 type = .purchase
-            case 0x6F, 0x70:
+            case 0x5C, 0x6F, 0x70:
                 type = .credit
             case 0x35:
                 type = .other
