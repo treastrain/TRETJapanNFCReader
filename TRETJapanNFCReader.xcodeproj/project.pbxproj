@@ -891,8 +891,7 @@
 				CDFF4F34235C6C2200B7D4EC /* NTasuCardItemType.swift */,
 				CDFF4F39235C6C2A00B7D4EC /* NTasuReader.swift */,
 			);
-			name = NTasu;
-			path = "エヌタスTカード";
+			path = NTasu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
