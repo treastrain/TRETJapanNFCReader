@@ -44,14 +44,15 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
 //            self = .ica
 //        case "a604":
 //            self = .luluca
-//        case "0f04":
+//        case "040f":
 //            self = .nicepass
 //        case "8157":
 //            self = .cica
+        case "93ec":
+            self = .ntasu
         case "8760":
             self = .fcfcampus
-        case "8008":
-            self = .octopus
+        
         case "fe00":
             self = .common
         default:
@@ -76,11 +77,11 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
 //        case .luluca:
 //            return "a604"
 //        case .nicepass:
-//            return "0f04"
+//            return "040f"
 //        case .cica:
 //            return "8157"
         case .ntasu:
-            return "93EC"
+            return "93ec"
         case .fcfcampus:
             return "8760"
         case .octopus:
