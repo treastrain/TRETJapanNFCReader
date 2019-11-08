@@ -23,6 +23,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     /// OKICA
     case okica
     
+    case ntasu
+    
     /// FCF Campus Card
     case fcfcampus
     
@@ -45,6 +47,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return String(format: NSLocalizedString("univCoopICPrepaid", bundle: Bundle.current, comment: ""))
         case .okica:
             return "OKICA"
+        case .ntasu:
+            return "NTasu"
         case .fcfcampus:
             return "FCF Campus"
         case .octopus:

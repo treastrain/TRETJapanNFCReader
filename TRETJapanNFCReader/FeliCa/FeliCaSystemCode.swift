@@ -19,6 +19,7 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
     // case luluca
     // case nicepass
     // case cica
+    case ntasu
     
     case fcfcampus
     
@@ -78,6 +79,8 @@ public enum FeliCaSystemCode: String, Codable, CaseIterable {
 //            return "0f04"
 //        case .cica:
 //            return "8157"
+        case .ntasu:
+            return "93EC"
         case .fcfcampus:
             return "8760"
         case .octopus:

@@ -10,7 +10,7 @@ import Foundation
 
 /// エヌタス
 public struct NTasuCardData: FeliCaCardData {
-    public let type: FeliCaCardType = .unknown
+    public let type: FeliCaCardType = .ntasu
     public let idm: String
     public let systemCode: FeliCaSystemCode
     public var data: [FeliCaServiceCode : [Data]] = [:] {
