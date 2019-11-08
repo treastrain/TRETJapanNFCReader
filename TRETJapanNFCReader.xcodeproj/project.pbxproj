@@ -81,6 +81,10 @@
 		CD2B6F922354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
 		CD2B6F932354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
 		CD2B6F942354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
+		CD3C78A12375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
+		CD3C78A22375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
+		CD3C78A32375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
+		CD3C78A42375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
 		CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */; };
 		CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5522D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift */; };
 		CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */; };
@@ -448,6 +452,7 @@
 		CD1A793F2334A90B00218B4A /* OctopusCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctopusCardData.swift; sourceTree = "<group>"; };
 		CD1A79442334AB3C00218B4A /* OctopusCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctopusCardItemType.swift; sourceTree = "<group>"; };
 		CD2B6F902354846F00675465 /* FeliCaAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaAttribute.swift; sourceTree = "<group>"; };
+		CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaSystem.swift; sourceTree = "<group>"; };
 		CD5476CE23105666003E3C62 /* UnivCoopICPrepaidCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCard.swift; sourceTree = "<group>"; };
 		CD5476D02310566D003E3C62 /* UnivCoopICPrepaidReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidReader.swift; sourceTree = "<group>"; };
 		CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCardData.swift; sourceTree = "<group>"; };
@@ -785,6 +790,7 @@
 				CD071FE6234E30340083AE4B /* FeliCaCardData.swift */,
 				CD07200A234E30630083AE4B /* FeliCaCardType.swift */,
 				CD07200F234E307F0083AE4B /* FeliCaSystemCode.swift */,
+				CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */,
 				CD072014234E30950083AE4B /* FeliCaServiceCode.swift */,
 				CD2B6F902354846F00675465 /* FeliCaAttribute.swift */,
 				CD072019234E30BB0083AE4B /* FeliCaCardTransaction.swift */,
@@ -1355,6 +1361,7 @@
 				CD2B6F922354846F00675465 /* FeliCaAttribute.swift in Sources */,
 				CDF5C06C231CE73A00E2791A /* JapanNFCReaderError.swift in Sources */,
 				CDC8D0B42343BB53002325DB /* OkicaCardData.swift in Sources */,
+				CD3C78A22375D00B00926A81 /* FeliCaSystem.swift in Sources */,
 				CD071FE8234E30340083AE4B /* FeliCaCardData.swift in Sources */,
 				CD1A79412334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CDF5C091231CE76300E2791A /* UnivCoopICPrepaidCardData.swift in Sources */,
@@ -1403,6 +1410,7 @@
 				CD17B132231AC87C00A46679 /* TransitICReader.swift in Sources */,
 				CD17B13A231AD5D900A46679 /* WaonCard.swift in Sources */,
 				CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */,
+				CD3C78A12375D00B00926A81 /* FeliCaSystem.swift in Sources */,
 				CD07200B234E30630083AE4B /* FeliCaCardType.swift in Sources */,
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
 				46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */,
@@ -1479,6 +1487,7 @@
 				CD2B6F942354846F00675465 /* FeliCaAttribute.swift in Sources */,
 				CD9EEA81231CECD400513DBF /* Status.swift in Sources */,
 				CDC8D0B62343BB53002325DB /* OkicaCardData.swift in Sources */,
+				CD3C78A42375D00B00926A81 /* FeliCaSystem.swift in Sources */,
 				CD071FEA234E30340083AE4B /* FeliCaCardData.swift in Sources */,
 				CD1A79432334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CD9EEA80231CECCA00513DBF /* DriversLicenseReaderError.swift in Sources */,
@@ -1519,6 +1528,7 @@
 				CD2B6F932354846F00675465 /* FeliCaAttribute.swift in Sources */,
 				CDF5C0AE231CEB8700E2791A /* RakutenEdyCardItemType.swift in Sources */,
 				CDC8D0B52343BB53002325DB /* OkicaCardData.swift in Sources */,
+				CD3C78A32375D00B00926A81 /* FeliCaSystem.swift in Sources */,
 				CD071FE9234E30340083AE4B /* FeliCaCardData.swift in Sources */,
 				CD1A79422334A90B00218B4A /* OctopusCardData.swift in Sources */,
 				CDF5C0A7231CEB6600E2791A /* Status.swift in Sources */,

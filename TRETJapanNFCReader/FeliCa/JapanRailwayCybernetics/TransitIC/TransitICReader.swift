@@ -61,7 +61,7 @@ public class TransitICReader: FeliCaReader {
         DispatchQueue(label: "TRETJPNRTransitICReader", qos: .default).async {
             var data: [FeliCaServiceCode : [Data]] = [:]
             
-            if transitICCard.data.systemCode != FeliCaSystemCode.sapica {
+            if transitICCard.data.primarySystemCode != FeliCaSystemCode.sapica {
                 self.transitICCardItemTypes = self.transitICCardItemTypes.filter { $0 != .sapicaPoints }
             }
             
@@ -70,6 +70,19 @@ public class TransitICReader: FeliCaReader {
             }
             transitICCard.data.data = data
             completion(transitICCard)
+            
+            
+            
+            var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:]
+            
+            if transitICCard.data.primarySystemCode != FeliCaSystemCode.sapica {
+                self.transitICCardItemTypes = self.transitICCardItemTypes.filter { $0 != .sapicaPoints }
+            }
+            
+            for itemType in self.transitICCardItemTypes {
+                let data = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                
+            }
         }
     }
 }
