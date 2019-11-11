@@ -54,6 +54,7 @@
 "ordinaryVehicle" = "Ordinary Vehicle";
 "heavySpecialVehicle" = "Heavy Special Vehicle";
 "heavyMotorcycle" = "Heavy Motorcycle";
+"ordinaryMotorcycle" = "Ordinary Motorcycle";
 "smallSpecialVehicle" = "Small Special Vehicle";
 "trailer" = "Trailer";
 "class2HeavyVehicle" = "Class 2 Heavy Vehicle";
