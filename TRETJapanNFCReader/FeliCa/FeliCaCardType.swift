@@ -25,8 +25,6 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     /// エヌタス
     case ntasu
     
-    case ntasu
-    
     /// FCF Campus Card
     case fcfcampus
     
