@@ -81,6 +81,7 @@
 		CD2B6F922354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
 		CD2B6F932354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
 		CD2B6F942354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
+		CD5671742379D691008B984C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5671732379D691008B984C /* PhotoViewController.swift */; };
 		CD59FE5422D41BBE00AAEF8B /* JapanNFCReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */; };
 		CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59FE5522D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift */; };
 		CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */; };
@@ -451,6 +452,7 @@
 		CD5476CE23105666003E3C62 /* UnivCoopICPrepaidCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCard.swift; sourceTree = "<group>"; };
 		CD5476D02310566D003E3C62 /* UnivCoopICPrepaidReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidReader.swift; sourceTree = "<group>"; };
 		CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCardData.swift; sourceTree = "<group>"; };
+		CD5671732379D691008B984C /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderError.swift; sourceTree = "<group>"; };
 		CD59FE5522D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CD5D2D4D22C5E2F7004330F3 /* DriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -690,6 +692,7 @@
 				CD8B7B6D22CA5D680027E1ED /* PINSettingViewController.swift */,
 				CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */,
 				CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */,
+				CD5671732379D691008B984C /* PhotoViewController.swift */,
 				CD5D2D5822C5E2FA004330F3 /* Assets.xcassets */,
 				CD5D2D5A22C5E2FA004330F3 /* LaunchScreen.storyboard */,
 				CD5D2D5D22C5E2FA004330F3 /* Info.plist */,
@@ -1181,7 +1184,7 @@
 		CD90FB1B2332E92300679DB2 /* Protobuf.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Protobuf.framework;
+			path = protobuf.framework;
 			remoteRef = CD90FB1A2332E92300679DB2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1390,6 +1393,7 @@
 				CD5D2D5422C5E2F7004330F3 /* DriversLicenseViewController.swift in Sources */,
 				CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */,
 				CD94050222DBA65200CA9E32 /* RegisteredDomicileViewController.swift in Sources */,
+				CD5671742379D691008B984C /* PhotoViewController.swift in Sources */,
 				CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */,
 				CD5D2D5222C5E2F7004330F3 /* SceneDelegate.swift in Sources */,
 				CD68FAD022CB9ABD004ABCAF /* MattersViewController.swift in Sources */,

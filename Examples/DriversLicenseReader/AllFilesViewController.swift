@@ -31,7 +31,8 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             "",
             "",
             "",
-            NSLocalizedString("matters_registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
+            NSLocalizedString("matters_registeredDomicile", bundle: Bundle(for: type(of: self)), comment: ""),
+            NSLocalizedString("photo", bundle: Bundle(for: type(of: self)), comment: "")
         ]
     }
     
@@ -121,6 +122,8 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             return 17
         case 8: // 記載事項(本籍)
             return 1
+        case 9: // 写真
+            return 1
         default:
             return 0
         }
@@ -138,13 +141,15 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
             return NSLocalizedString("dateOfLicense", bundle: Bundle(for: type(of: self)), comment: "")
         case 8: // 記載事項(本籍)
             return NSLocalizedString("matters_registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
+        case 9: // 写真
+            return NSLocalizedString("photo", bundle: Bundle(for: type(of: self)), comment: "")
         default:
             return nil
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         switch indexPath.section {
         case 0: // カード発行者データ
@@ -325,13 +330,32 @@ class AllFilesViewController: UITableViewController, DriversLicenseReaderSession
         case 8: // 記載事項(本籍)
             cell.textLabel?.text = NSLocalizedString("registeredDomicile", bundle: Bundle(for: type(of: self)), comment: "")
             cell.detailTextLabel?.text = self.driversLicenseCard?.registeredDomicile?.registeredDomicile
-            break
+        case 9: // 写真
+            cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
+            let imageView = cell.contentView.viewWithTag(1) as! UIImageView
+            if let photoData = self.driversLicenseCard?.photo?.photoData {
+                imageView.image = UIImage(data: photoData)
+                imageView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.copyImage(sender:))))
+            } else {
+                imageView.image = nil
+            }
         default:
             break
         }
         
         return cell
     }
-
+    
+    @objc func copyImage(sender: UILongPressGestureRecognizer) {
+        if let image = (sender.view as? UIImageView)?.image {
+            let pasteboard = UIPasteboard.general
+            pasteboard.image = image
+            let alertController = UIAlertController(title: "Copied photo image.", message: nil, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
 
 }
