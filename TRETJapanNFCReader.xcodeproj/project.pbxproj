@@ -81,7 +81,6 @@
 		CD2B6F922354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
 		CD2B6F932354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
 		CD2B6F942354846F00675465 /* FeliCaAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B6F902354846F00675465 /* FeliCaAttribute.swift */; };
-		CD5671742379D691008B984C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5671732379D691008B984C /* PhotoViewController.swift */; };
 		CD3C78A12375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
 		CD3C78A22375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
 		CD3C78A32375D00B00926A81 /* FeliCaSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C78A02375D00B00926A81 /* FeliCaSystem.swift */; };
