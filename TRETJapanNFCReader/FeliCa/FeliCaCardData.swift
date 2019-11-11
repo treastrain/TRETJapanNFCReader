@@ -10,9 +10,14 @@ import Foundation
 
 public protocol FeliCaCardData: Codable {
     var type: FeliCaCardType { get }
-    var idm: String { get }
-    var systemCode: FeliCaSystemCode { get }
-    var data: [FeliCaServiceCode : [Data]] { get }
+    var primaryIDm: String { get }
+    var primarySystemCode: FeliCaSystemCode { get }
+    var contents: [FeliCaSystemCode : [FeliCaSystem]] { get }
+    
+    /// Unavailable
+    // var idm: String { get }
+    // var systemCode: FeliCaSystemCode { get }
+    // var data: [FeliCaServiceCode : [Data]] { get }
     
     mutating func convert()
     func toJSONData() -> Data?

@@ -23,7 +23,7 @@ Japanese & English Support!
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
-- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）、写真（DF2/EF01）まで実装済み
+- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）まで実装済み
 
 ### NFC-F (Type-F, FeliCa)
 IDm と System Code の表示
@@ -87,7 +87,7 @@ class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reader = DriversLicenseReader(self)
-        self.reader.get(items: DriversLicenseCardItem.allCases, pin1: "暗証番号1", pin2: "暗証番号2")
+        self.reader.get(items: DriversLicenseCardItems.allCases, pin1: "暗証番号1")
     }
 
     func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
@@ -111,7 +111,7 @@ class ViewController: UIViewController, TransitICReaderSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reader = TransitICReader(self)
-        self.reader.get(items: TransitICCardItem.allCases)
+        self.reader.get(items: TransitICCardItems.allCases)
     }
 
     func transitICReaderSession(didRead transitICCard: TransitICCard) {
