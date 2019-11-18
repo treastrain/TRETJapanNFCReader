@@ -14,13 +14,14 @@ public protocol FeliCaCardData: Codable {
     var primarySystemCode: FeliCaSystemCode { get }
     var contents: [FeliCaSystemCode : [FeliCaSystem]] { get }
     
+    mutating func convert()
+    func toJSONData() -> Data?
+    
+    
     /// Unavailable
     // var idm: String { get }
     // var systemCode: FeliCaSystemCode { get }
     // var data: [FeliCaServiceCode : [Data]] { get }
-    
-    mutating func convert()
-    func toJSONData() -> Data?
 }
 
 extension FeliCaCardData {
