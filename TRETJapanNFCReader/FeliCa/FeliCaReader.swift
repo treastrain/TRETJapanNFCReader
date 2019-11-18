@@ -99,11 +99,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             session.alertMessage = self.localizedString(key: "nfcTagReaderSessionReadingMessage")
             
             let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
-            guard let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode) else {
-                // systemCode がこのライブラリでは対応していない場合
-                session.invalidate(errorMessage: self.localizedString(key: "cardNotSupported"))
-                return
-            }
+            let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode)
             
             if let selectedSystemCodes = self.selectedSystemCodes, !selectedSystemCodes.contains(systemCode) {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
