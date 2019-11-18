@@ -26,18 +26,25 @@ public struct FeliCaCommonCard: FeliCaCard {
 
 public struct FeliCaCommonCardData: FeliCaCardData {
     public let type: FeliCaCardType
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:]
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:]
     
     @available(iOS 13.0, *)
     public init(type: FeliCaCardType = .unknown, idm: String, systemCode: FeliCaSystemCode) {
         self.type = type
-        self.idm = idm
-        self.systemCode = systemCode
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
     }
     
     public func convert() {
         
     }
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public let idm: String
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public let systemCode: FeliCaSystemCode
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] = [:]
 }
