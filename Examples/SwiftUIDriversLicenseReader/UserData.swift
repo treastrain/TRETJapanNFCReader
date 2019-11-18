@@ -37,8 +37,8 @@ final class UserData: NSObject, ObservableObject, DriversLicenseReaderSessionDel
         print("error")
     }
     
-    func scan(pin1: String = "", pin2: String = "") {
-        self.reader?.get(items: [.registeredDomicile],
+    func startScan(items: [DriversLicenseCardItem], pin1: String = "", pin2: String = "") {
+        self.reader?.get(items: items,
                          pin1: pin1, pin2: pin2)
         print("start getting")
     }

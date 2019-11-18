@@ -17,6 +17,7 @@
 		0527E7C223829BAE005B3936 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E7C123829BAE005B3936 /* UserData.swift */; };
 		0527E7C323829BF2005B3936 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
 		0527E7C423829BF2005B3936 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0527E7CC2382BF17005B3936 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E7CB2382BF17005B3936 /* RecordView.swift */; };
 		46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
@@ -458,6 +459,7 @@
 		0527E7BF23829B85005B3936 /* RegisteredDomicileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileView.swift; sourceTree = "<group>"; };
 		0527E7C123829BAE005B3936 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SwiftUIDriversLicenseReader.entitlements; path = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements; sourceTree = "<group>"; };
+		0527E7CB2382BF17005B3936 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCFCampusCard.swift; sourceTree = "<group>"; };
 		46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCard.swift; sourceTree = "<group>"; };
 		46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCardItemType.swift; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 				0527E78E23825457005B3936 /* Info.plist */,
 				0527E78F23825457005B3936 /* SceneDelegate.swift */,
 				0527E7C123829BAE005B3936 /* UserData.swift */,
+				0527E7CB2382BF17005B3936 /* RecordView.swift */,
 			);
 			path = SwiftUIDriversLicenseReader;
 			sourceTree = "<group>";
@@ -1459,6 +1462,7 @@
 				0527E7C223829BAE005B3936 /* UserData.swift in Sources */,
 				0527E7B52382650B005B3936 /* PinSettingView.swift in Sources */,
 				0527E7B62382650B005B3936 /* WelcomeView.swift in Sources */,
+				0527E7CC2382BF17005B3936 /* RecordView.swift in Sources */,
 				0527E7C023829B85005B3936 /* RegisteredDomicileView.swift in Sources */,
 				0527E7B72382650B005B3936 /* AppDelegate.swift in Sources */,
 				0527E7B82382650B005B3936 /* SceneDelegate.swift in Sources */,

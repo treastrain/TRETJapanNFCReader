@@ -21,7 +21,7 @@ struct WelcomeView: View {
                 NavigationLink(destination: PinSettingView()) {
                     Text("記載事項（本籍除く）")
                 }
-                NavigationLink(destination: PinSettingView()) {
+                NavigationLink(destination: RegisteredDomicileView().environmentObject(UserData())) {
                     Text("記載事項（本籍）")
                 }
                 NavigationLink(destination: PinSettingView()) {
