@@ -62,8 +62,8 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
             } else {
                 self.balanceLabel.text = "¥ -----"
             }
-            self.idmLabel.text = "IDm: \(transitICCard.data.idm)"
-            self.systemCodeLabel.text = "System Code: \(transitICCard.data.systemCode.string)"
+            self.idmLabel.text = "IDm: \(transitICCard.data.primaryIDm)"
+            self.systemCodeLabel.text = "System Code: \(transitICCard.data.primarySystemCode.string)"
         }
         
         self.transitICCard = transitICCard
