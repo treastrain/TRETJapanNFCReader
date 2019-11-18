@@ -53,8 +53,6 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return "FCF Campus"
         case .octopus:
             return "Octopus (八達通)"
-        case .ntasu:
-            return "エヌタス"
         case .unknown:
             return "Unknown"
         }
