@@ -17,6 +17,7 @@ final class UserData: NSObject, ObservableObject, DriversLicenseReaderSessionDel
     var reader: DriversLicenseReader?
     // @Published var pinSetting: Bool! = nil
     @Published var registeredDomicileString: String? = nil
+    @Published var pinSettingString: String? = nil
     
     func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
         // スキャン完了時の処理
@@ -28,6 +29,9 @@ final class UserData: NSObject, ObservableObject, DriversLicenseReaderSessionDel
         // DispatchQueue.main.async を使う理由は、UserData と ContentView が別スレッドで走っているため。代入処理をこれで囲む
         DispatchQueue.main.async {
             self.registeredDomicileString = driversLicneceCard.registeredDomicile?.registeredDomicile
+            if let pinSetting = driversLicneceCard.pinSetting?.pinSetting {
+                                self.pinSettingString = pinSetting ? "設定あり" : "設定なし"
+            }
             print("published!")
         }
     }

@@ -9,13 +9,23 @@
 import SwiftUI
 
 struct PinSettingView: View {
+    @EnvironmentObject var userData: UserData
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List {
+                if self.userData.pinSettingString != nil {
+                    RecordView(key: "暗証番号(PIN)設定", value: self.userData.pinSettingString)
+                }
+            }.navigationBarTitle("暗証番号(PIN)設定")
+                .onAppear(perform: {
+                    self.userData.startScan(items: [.pinSetting])
+            })
+        }
     }
 }
 
 struct PinSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        PinSettingView()
+        PinSettingView().environmentObject(UserData())
     }
 }

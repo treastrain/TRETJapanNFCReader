@@ -15,7 +15,7 @@ struct WelcomeView: View {
                 NavigationLink(destination: PinSettingView()) {
                     Text("共通データ要素")
                 }
-                NavigationLink(destination: PinSettingView()) {
+                NavigationLink(destination: PinSettingView().environmentObject(UserData())) {
                     Text("暗証番号(PIN)設定")
                 }
                 NavigationLink(destination: PinSettingView()) {
