@@ -59,30 +59,20 @@ public class TransitICReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         var transitICCard = TransitICCard(tag: feliCaTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRTransitICReader", qos: .default).async {
-            var data: [FeliCaServiceCode : [Data]] = [:]
+            var services: [FeliCaServiceCode : [Data]] = [:]
             
             if transitICCard.data.primarySystemCode != FeliCaSystemCode.sapica {
                 self.transitICCardItemTypes = self.transitICCardItemTypes.filter { $0 != .sapicaPoints }
             }
             
             for itemType in self.transitICCardItemTypes {
-                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            transitICCard.data.data = data
+            
+            var systems = transitICCard.data.contents[systemCode] ?? []
+            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
+            transitICCard.data.contents[systemCode] = systems
             completion(transitICCard)
-            
-            
-            
-            var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:]
-            
-            if transitICCard.data.primarySystemCode != FeliCaSystemCode.sapica {
-                self.transitICCardItemTypes = self.transitICCardItemTypes.filter { $0 != .sapicaPoints }
-            }
-            
-            for itemType in self.transitICCardItemTypes {
-                let data = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
-                
-            }
         }
     }
 }
