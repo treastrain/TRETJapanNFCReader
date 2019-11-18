@@ -41,10 +41,11 @@ public struct FeliCaCommonCardData: FeliCaCardData {
         
     }
     
+    
     @available(*, unavailable, renamed: "primaryIDm")
-    public let idm: String
+    public var idm: String { return "" }
     @available(*, unavailable, renamed: "primarySystemCode")
-    public let systemCode: FeliCaSystemCode
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
     @available(*, unavailable)
-    public var data: [FeliCaServiceCode : [Data]] = [:]
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }
