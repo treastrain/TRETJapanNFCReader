@@ -13,6 +13,10 @@
 		0527E7B82382650B005B3936 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E78F23825457005B3936 /* SceneDelegate.swift */; };
 		0527E7B92382651E005B3936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0527E78623825457005B3936 /* Assets.xcassets */; };
 		0527E7BB2382652B005B3936 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0527E78923825457005B3936 /* LaunchScreen.storyboard */; };
+		0527E7C023829B85005B3936 /* RegisteredDomicileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E7BF23829B85005B3936 /* RegisteredDomicileView.swift */; };
+		0527E7C223829BAE005B3936 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E7C123829BAE005B3936 /* UserData.swift */; };
+		0527E7C323829BF2005B3936 /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
+		0527E7C423829BF2005B3936 /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
@@ -214,6 +218,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0527E7C523829BF2005B3936 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD5D2D7022C5E977004330F3;
+			remoteInfo = "TRETJapanNFCReader iOS";
+		};
 		CD1A79252334A79D00218B4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
@@ -399,6 +410,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0527E7C723829BF2005B3936 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0527E7C423829BF2005B3936 /* TRETJapanNFCReader.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD5D2D8222C5EFE9004330F3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -433,6 +455,9 @@
 		0527E78E23825457005B3936 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0527E78F23825457005B3936 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0527E7A1238264B7005B3936 /* SwiftUIDriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIDriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0527E7BF23829B85005B3936 /* RegisteredDomicileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileView.swift; sourceTree = "<group>"; };
+		0527E7C123829BAE005B3936 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SwiftUIDriversLicenseReader.entitlements; path = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements; sourceTree = "<group>"; };
 		46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCFCampusCard.swift; sourceTree = "<group>"; };
 		46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCard.swift; sourceTree = "<group>"; };
 		46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCardItemType.swift; sourceTree = "<group>"; };
@@ -542,6 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0527E7C323829BF2005B3936 /* TRETJapanNFCReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +622,7 @@
 			isa = PBXGroup;
 			children = (
 				0527E78523825457005B3936 /* PinSettingView.swift */,
+				0527E7BF23829B85005B3936 /* RegisteredDomicileView.swift */,
 				0527E78623825457005B3936 /* Assets.xcassets */,
 				0527E78723825457005B3936 /* Preview Content */,
 				0527E78923825457005B3936 /* LaunchScreen.storyboard */,
@@ -603,6 +630,7 @@
 				0527E78C23825457005B3936 /* AppDelegate.swift */,
 				0527E78E23825457005B3936 /* Info.plist */,
 				0527E78F23825457005B3936 /* SceneDelegate.swift */,
+				0527E7C123829BAE005B3936 /* UserData.swift */,
 			);
 			path = SwiftUIDriversLicenseReader;
 			sourceTree = "<group>";
@@ -705,6 +733,7 @@
 				CDD1374B232181BF002AF46B /* Pods.xcodeproj */,
 				CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */,
 				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
+				0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */,
 				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
 				CD5D2D6322C5E47F004330F3 /* Examples */,
 				CD5D2D3F22C5DF36004330F3 /* Products */,
@@ -989,10 +1018,12 @@
 				0527E79D238264B7005B3936 /* Sources */,
 				0527E79E238264B7005B3936 /* Frameworks */,
 				0527E79F238264B7005B3936 /* Resources */,
+				0527E7C723829BF2005B3936 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0527E7C623829BF2005B3936 /* PBXTargetDependency */,
 			);
 			name = SwiftUIDriversLicenseReader;
 			productName = SwiftUIDriversLicenseReader;
@@ -1425,8 +1456,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0527E7C223829BAE005B3936 /* UserData.swift in Sources */,
 				0527E7B52382650B005B3936 /* PinSettingView.swift in Sources */,
 				0527E7B62382650B005B3936 /* WelcomeView.swift in Sources */,
+				0527E7C023829B85005B3936 /* RegisteredDomicileView.swift in Sources */,
 				0527E7B72382650B005B3936 /* AppDelegate.swift in Sources */,
 				0527E7B82382650B005B3936 /* SceneDelegate.swift in Sources */,
 			);
@@ -1650,6 +1683,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0527E7C623829BF2005B3936 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader iOS */;
+			targetProxy = 0527E7C523829BF2005B3936 /* PBXContainerItemProxy */;
+		};
 		CD5D2D8122C5EFE8004330F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader iOS */;
@@ -1745,6 +1783,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Examples/SwiftUIDriversLicenseReader/Preview Content\"";
 				DEVELOPMENT_TEAM = 822HL63RB2;
@@ -1758,7 +1797,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.aBite.SwiftUIDriversLicenseReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1766,6 +1805,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Examples/SwiftUIDriversLicenseReader/Preview Content\"";
 				DEVELOPMENT_TEAM = 822HL63RB2;
@@ -1779,7 +1819,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.aBite.SwiftUIDriversLicenseReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
