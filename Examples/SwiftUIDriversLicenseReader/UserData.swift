@@ -22,7 +22,6 @@ final class UserData: NSObject, ObservableObject, DriversLicenseReaderSessionDel
     func driversLicenseReaderSession(didRead driversLicenseCard: DriversLicenseCard) {
         // スキャン完了時の処理
         self.publishCardInfo(driversLicenseCard)
-        print("data passed to publishCardInfo!")
     }
     
     func publishCardInfo(_ driversLicneceCard: DriversLicenseCard) {
@@ -32,19 +31,18 @@ final class UserData: NSObject, ObservableObject, DriversLicenseReaderSessionDel
             if let pinSetting = driversLicneceCard.pinSetting?.pinSetting {
                                 self.pinSettingString = pinSetting ? "設定あり" : "設定なし"
             }
-            print("published!")
         }
+        print("data has been published")
     }
     
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
         print("finished")
-        print("error")
     }
     
     func startScan(items: [DriversLicenseCardItem], pin1: String = "", pin2: String = "") {
         self.reader?.get(items: items,
                          pin1: pin1, pin2: pin2)
-        print("start getting")
+        print("UserData startScan")
     }
     
     override init() {

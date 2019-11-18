@@ -12,21 +12,15 @@ struct WelcomeView: View {
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: PinSettingView()) {
-                    Text("共通データ要素")
-                }
+                Text("共通データ要素").foregroundColor(.gray)
                 NavigationLink(destination: PinSettingView().environmentObject(UserData())) {
                     Text("暗証番号(PIN)設定")
                 }
-                NavigationLink(destination: PinSettingView()) {
-                    Text("記載事項（本籍除く）")
-                }
+                Text("記載事項（本籍除く）").foregroundColor(.gray)
                 NavigationLink(destination: RegisteredDomicileView().environmentObject(UserData())) {
                     Text("記載事項（本籍）")
                 }
-                NavigationLink(destination: PinSettingView()) {
-                    Text("写真")
-                }
+                Text("写真").foregroundColor(.gray)
             }.navigationBarTitle("運転免許リーダ")
         }
     }
