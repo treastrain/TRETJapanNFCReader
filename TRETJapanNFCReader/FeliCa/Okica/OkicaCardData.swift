@@ -11,9 +11,9 @@ import Foundation
 /// OKICA のデータ
 public struct OkicaCardData: FeliCaCardData {
     public let type: FeliCaCardType = .okica
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:] {
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:] {
         didSet {
             self.convert()
         }
@@ -30,21 +30,30 @@ public struct OkicaCardData: FeliCaCardData {
     
     @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
-        self.idm = idm
-        self.systemCode = systemCode
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
     }
     
     public mutating func convert() {
-        for (key, value) in self.data {
-            let blockData = value
-            switch OkicaCardItemType(key) {
-            case .transactions:
-                self.transactions = self.convertToTransactions(blockData)
-            case .entryExitInformations:
-                self.entryExitInformationsData = blockData
-            case .sfEntryInformations:
-                self.sfEntryInformationsData = blockData
-            case .none:
+        for (systemCode, systems) in self.contents {
+            switch systemCode {
+            case self.primarySystemCode:
+                for system in systems {
+                    let services = system.services
+                    for (serviceCode, blockData) in services {
+                        switch OkicaCardItemType(serviceCode) {
+                        case .transactions:
+                            self.transactions = self.convertToTransactions(blockData)
+                        case .entryExitInformations:
+                            self.entryExitInformationsData = blockData
+                        case .sfEntryInformations:
+                            self.sfEntryInformationsData = blockData
+                        case .none:
+                            break
+                        }
+                    }
+                }
+            default:
                 break
             }
         }
@@ -193,6 +202,14 @@ public struct OkicaCardData: FeliCaCardData {
         let n = (UInt16(dataD) << 8) + UInt16(dataE)
         return "\(n)"
     }
+    
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public var idm: String { return "" }
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }
 
 /// OKICA の利用履歴
