@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0527E7B52382650B005B3936 /* PinSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E78523825457005B3936 /* PinSettingView.swift */; };
+		0527E7B62382650B005B3936 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E78B23825457005B3936 /* WelcomeView.swift */; };
+		0527E7B72382650B005B3936 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E78C23825457005B3936 /* AppDelegate.swift */; };
+		0527E7B82382650B005B3936 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0527E78F23825457005B3936 /* SceneDelegate.swift */; };
+		0527E7B92382651E005B3936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0527E78623825457005B3936 /* Assets.xcassets */; };
+		0527E7BB2382652B005B3936 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0527E78923825457005B3936 /* LaunchScreen.storyboard */; };
 		46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
 		46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */; };
@@ -418,6 +424,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0527E78523825457005B3936 /* PinSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinSettingView.swift; sourceTree = "<group>"; };
+		0527E78623825457005B3936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0527E78823825457005B3936 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0527E78A23825457005B3936 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0527E78B23825457005B3936 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		0527E78C23825457005B3936 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0527E78E23825457005B3936 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0527E78F23825457005B3936 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0527E7A1238264B7005B3936 /* SwiftUIDriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIDriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCFCampusCard.swift; sourceTree = "<group>"; };
 		46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCard.swift; sourceTree = "<group>"; };
 		46DF2AD7233CFAEC0060DCB0 /* ICUCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCardItemType.swift; sourceTree = "<group>"; };
@@ -523,6 +538,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0527E79E238264B7005B3936 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD02AC5F231CE5F6008614B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,6 +592,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0527E78423825457005B3936 /* SwiftUIDriversLicenseReader */ = {
+			isa = PBXGroup;
+			children = (
+				0527E78523825457005B3936 /* PinSettingView.swift */,
+				0527E78623825457005B3936 /* Assets.xcassets */,
+				0527E78723825457005B3936 /* Preview Content */,
+				0527E78923825457005B3936 /* LaunchScreen.storyboard */,
+				0527E78B23825457005B3936 /* WelcomeView.swift */,
+				0527E78C23825457005B3936 /* AppDelegate.swift */,
+				0527E78E23825457005B3936 /* Info.plist */,
+				0527E78F23825457005B3936 /* SceneDelegate.swift */,
+			);
+			path = SwiftUIDriversLicenseReader;
+			sourceTree = "<group>";
+		};
+		0527E78723825457005B3936 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0527E78823825457005B3936 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		46DF2AD2233CFAAB0060DCB0 /* FCFCampus */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,6 +721,7 @@
 				CD02AC62231CE5F6008614B7 /* TRETJapanNFCReader.framework */,
 				CDF5C099231CEAEF00E2791A /* TRETJapanNFCReader.framework */,
 				CD9EEA6F231CEC7900513DBF /* TRETJapanNFCReader_macOS.framework */,
+				0527E7A1238264B7005B3936 /* SwiftUIDriversLicenseReader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -712,6 +758,7 @@
 		CD5D2D6322C5E47F004330F3 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				0527E78423825457005B3936 /* SwiftUIDriversLicenseReader */,
 				CD5D2D4E22C5E2F7004330F3 /* DriversLicenseReader */,
 				CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */,
 			);
@@ -848,7 +895,7 @@
 				CDD1376B232181BF002AF46B /* Pods_japanNFCReader.framework */,
 				CDD1376D232181BF002AF46B /* Pods_japanNFCReader_WatchKit_App.framework */,
 				CDD1376F232181BF002AF46B /* Pods_japanNFCReader_WatchKit_Extension.framework */,
-				CD90FB1B2332E92300679DB2 /* Protobuf.framework */,
+				CD90FB1B2332E92300679DB2 /* protobuf.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -935,6 +982,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0527E7A0238264B7005B3936 /* SwiftUIDriversLicenseReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0527E7B2238264B9005B3936 /* Build configuration list for PBXNativeTarget "SwiftUIDriversLicenseReader" */;
+			buildPhases = (
+				0527E79D238264B7005B3936 /* Sources */,
+				0527E79E238264B7005B3936 /* Frameworks */,
+				0527E79F238264B7005B3936 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftUIDriversLicenseReader;
+			productName = SwiftUIDriversLicenseReader;
+			productReference = 0527E7A1238264B7005B3936 /* SwiftUIDriversLicenseReader.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CD02AC61231CE5F6008614B7 /* TRETJapanNFCReader watchOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD02AC6C231CE5F6008614B7 /* Build configuration list for PBXNativeTarget "TRETJapanNFCReader watchOS" */;
@@ -1051,10 +1115,13 @@
 		CD5D2D3522C5DF36004330F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "treastrain / Tanaka Ryoga";
 				TargetAttributes = {
+					0527E7A0238264B7005B3936 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					CD02AC61231CE5F6008614B7 = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -1102,6 +1169,7 @@
 			targets = (
 				CD5D2D4C22C5E2F7004330F3 /* DriversLicenseReader */,
 				CDFC3B5922CE2AD2000E88B4 /* TransitICReader */,
+				0527E7A0238264B7005B3936 /* SwiftUIDriversLicenseReader */,
 				CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader iOS */,
 				CD02AC61231CE5F6008614B7 /* TRETJapanNFCReader watchOS */,
 				CDF5C098231CEAEE00E2791A /* TRETJapanNFCReader tvOS */,
@@ -1181,7 +1249,7 @@
 			remoteRef = CD90FB182332E92300679DB2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CD90FB1B2332E92300679DB2 /* Protobuf.framework */ = {
+		CD90FB1B2332E92300679DB2 /* protobuf.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = protobuf.framework;
@@ -1282,6 +1350,15 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0527E79F238264B7005B3936 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0527E7BB2382652B005B3936 /* LaunchScreen.storyboard in Resources */,
+				0527E7B92382651E005B3936 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD02AC60231CE5F6008614B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1344,6 +1421,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0527E79D238264B7005B3936 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0527E7B52382650B005B3936 /* PinSettingView.swift in Sources */,
+				0527E7B62382650B005B3936 /* WelcomeView.swift in Sources */,
+				0527E7B72382650B005B3936 /* AppDelegate.swift in Sources */,
+				0527E7B82382650B005B3936 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD02AC5E231CE5F6008614B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1575,6 +1663,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0527E78923825457005B3936 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0527E78A23825457005B3936 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		CD15F81722C7DFE800201FAB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1645,6 +1741,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0527E7B3238264B9005B3936 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Examples/SwiftUIDriversLicenseReader/Preview Content\"";
+				DEVELOPMENT_TEAM = 822HL63RB2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Examples/SwiftUIDriversLicenseReader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aBite.SwiftUIDriversLicenseReader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0527E7B4238264B9005B3936 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Examples/SwiftUIDriversLicenseReader/Preview Content\"";
+				DEVELOPMENT_TEAM = 822HL63RB2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Examples/SwiftUIDriversLicenseReader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aBite.SwiftUIDriversLicenseReader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		CD02AC67231CE5F6008614B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2073,6 +2211,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0527E7B2238264B9005B3936 /* Build configuration list for PBXNativeTarget "SwiftUIDriversLicenseReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0527E7B3238264B9005B3936 /* Debug */,
+				0527E7B4238264B9005B3936 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CD02AC6C231CE5F6008614B7 /* Build configuration list for PBXNativeTarget "TRETJapanNFCReader watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
