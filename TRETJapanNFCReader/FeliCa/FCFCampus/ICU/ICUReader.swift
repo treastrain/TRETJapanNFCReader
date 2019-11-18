@@ -14,7 +14,7 @@ public typealias ICUCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class ICUReader: FeliCaReader {
 
-    private var ICUCardItemTypes: [ICUCardItemType] = []
+    private var icuCardItemTypes: [ICUCardItemType] = []
     
     private init() {
         fatalError()
@@ -41,12 +41,12 @@ public class ICUReader: FeliCaReader {
     /// IICUカードからデータを読み取る
     /// - Parameter itemTypes: ICUカードから読み取りたいデータのタイプ
     public func get(itemTypes: [ICUCardItemType]) {
-        self.ICUCardItemTypes = itemTypes
+        self.icuCardItemTypes = itemTypes
         self.beginScanning()
     }
     
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [ICUCardItemType], completion: @escaping (FeliCaCard) -> Void) {
-        self.ICUCardItemTypes = itemTypes
+        self.icuCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
@@ -55,11 +55,13 @@ public class ICUReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         var icuCard = ICUCard(tag: feliCaTag, data: ICUCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRICUReader", qos: .default).async {
-            var data: [FeliCaServiceCode : [Data]] = [:]
-            for itemType in self.ICUCardItemTypes {
-                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: icuCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+            var services: [FeliCaServiceCode : [Data]] = [:]
+            for itemType in self.icuCardItemTypes {
+                services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: icuCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            icuCard.data.data = data
+            var systems = icuCard.data.contents[systemCode] ?? []
+            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
+            icuCard.data.contents[systemCode] = systems
             completion(icuCard)
         }
     }

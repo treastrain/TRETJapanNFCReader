@@ -10,9 +10,9 @@ import Foundation
 
 public struct ICUCardData: FeliCaCardData {
     public let type: FeliCaCardType = .fcfcampus
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:] {
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:] {
         didSet {
             self.convert()
         }
@@ -25,26 +25,35 @@ public struct ICUCardData: FeliCaCardData {
     
     @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
-        self.idm = idm
-        self.systemCode = systemCode
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
     }
 
     @available(iOS 13.0, *)
     internal init(from fcfCampusCardData: FCFCampusCardData) {
-        self.idm = fcfCampusCardData.idm
-        self.systemCode = fcfCampusCardData.systemCode
-        self.data = fcfCampusCardData.data
+        self.primaryIDm = fcfCampusCardData.primaryIDm
+        self.primarySystemCode = fcfCampusCardData.primarySystemCode
+        self.contents = fcfCampusCardData.contents
     }
 
     public mutating func convert() {
-        for (key, value) in self.data {
-            let blockData = value
-            switch ICUCardItemType(key) {
-            case .identity:
-                self.convertToIdentity(blockData)
-            case .transactions:
-                self.convertToTransactions(blockData)
-            case .none:
+        for (systemCode, systems) in self.contents {
+            switch systemCode {
+            case self.primarySystemCode:
+                for system in systems {
+                    let services = system.services
+                    for (serviceCode, blockData) in services {
+                        switch ICUCardItemType(serviceCode) {
+                        case .identity:
+                            self.convertToIdentity(blockData)
+                        case .transactions:
+                            self.convertToTransactions(blockData)
+                        case .none:
+                            break
+                        }
+                    }
+                }
+            default:
                 break
             }
         }
@@ -99,6 +108,14 @@ public struct ICUCardData: FeliCaCardData {
             balance: Int(UInt(data[12]) << 8 + UInt(data[11]))
         )
     }
+    
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public var idm: String { return "" }
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }
 
 public struct ICUCardTransaction: FeliCaCardTransaction {
