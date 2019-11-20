@@ -69,9 +69,7 @@ public class TransitICReader: FeliCaReader {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: transitICCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
             
-            var systems = transitICCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            transitICCard.data.contents[systemCode] = systems
+            transitICCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(transitICCard)
         }
     }

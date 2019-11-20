@@ -60,9 +60,7 @@ public class WaonReader: FeliCaReader {
             for itemType in self.waonCardItemTypes {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: waonCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = waonCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            waonCard.data.contents[systemCode] = systems
+            waonCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(waonCard)
         }
     }

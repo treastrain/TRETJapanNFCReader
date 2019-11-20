@@ -13,7 +13,7 @@ public struct NTasuCardData: FeliCaCardData {
     public let type: FeliCaCardType = .ntasu
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
-    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:] {
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
         didSet {
             self.convert()
         }

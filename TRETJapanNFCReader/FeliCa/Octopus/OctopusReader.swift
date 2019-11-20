@@ -59,9 +59,7 @@ public class OctopusReader: FeliCaReader {
             for itemType in self.octopusCardItemTypes {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: octopusCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = octopusCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            octopusCard.data.contents[systemCode] = systems
+            octopusCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(octopusCard)
         }
     }

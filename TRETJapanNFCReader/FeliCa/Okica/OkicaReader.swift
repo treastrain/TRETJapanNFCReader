@@ -60,9 +60,7 @@ public class OkicaReader: FeliCaReader {
             for itemType in self.okicaCardItemTypes {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: okicaCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = okicaCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            okicaCard.data.contents[systemCode] = systems
+            okicaCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(okicaCard)
         }
     }

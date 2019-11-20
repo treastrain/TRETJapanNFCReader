@@ -59,9 +59,7 @@ public class RakutenEdyReader: FeliCaReader {
             for itemType in self.rakutenEdyCardItemTypes {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: rakutenEdyCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = rakutenEdyCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            rakutenEdyCard.data.contents[systemCode] = systems
+            rakutenEdyCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(rakutenEdyCard)
         }
     }

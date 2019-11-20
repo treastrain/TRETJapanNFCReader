@@ -59,9 +59,7 @@ public class NanacoReader: FeliCaReader {
             for itemType in self.nanacoCardItemTypes {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: nanacoCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = nanacoCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            nanacoCard.data.contents[systemCode] = systems
+            nanacoCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(nanacoCard)
         }
     }

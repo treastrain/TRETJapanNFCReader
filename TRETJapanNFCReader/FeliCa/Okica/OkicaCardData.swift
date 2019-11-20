@@ -13,7 +13,7 @@ public struct OkicaCardData: FeliCaCardData {
     public let type: FeliCaCardType = .okica
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
-    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:] {
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
         didSet {
             self.convert()
         }
@@ -35,22 +35,20 @@ public struct OkicaCardData: FeliCaCardData {
     }
     
     public mutating func convert() {
-        for (systemCode, systems) in self.contents {
+        for (systemCode, system) in self.contents {
             switch systemCode {
             case self.primarySystemCode:
-                for system in systems {
-                    let services = system.services
-                    for (serviceCode, blockData) in services {
-                        switch OkicaCardItemType(serviceCode) {
-                        case .transactions:
-                            self.transactions = self.convertToTransactions(blockData)
-                        case .entryExitInformations:
-                            self.entryExitInformationsData = blockData
-                        case .sfEntryInformations:
-                            self.sfEntryInformationsData = blockData
-                        case .none:
-                            break
-                        }
+                let services = system.services
+                for (serviceCode, blockData) in services {
+                    switch OkicaCardItemType(serviceCode) {
+                    case .transactions:
+                        self.transactions = self.convertToTransactions(blockData)
+                    case .entryExitInformations:
+                        self.entryExitInformationsData = blockData
+                    case .sfEntryInformations:
+                        self.sfEntryInformationsData = blockData
+                    case .none:
+                        break
                     }
                 }
             default:

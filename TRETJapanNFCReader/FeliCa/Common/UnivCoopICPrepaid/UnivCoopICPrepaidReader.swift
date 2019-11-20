@@ -58,9 +58,7 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
             for itemType in self.univCoopICPrepaidCardItemTypes {
                services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: univCoopICPrepaidCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = univCoopICPrepaidCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            univCoopICPrepaidCard.data.contents[systemCode] = systems
+            univCoopICPrepaidCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(univCoopICPrepaidCard)
         }
     }

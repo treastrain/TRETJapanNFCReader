@@ -13,7 +13,7 @@ public struct OctopusCardData: FeliCaCardData {
     public var type: FeliCaCardType = .octopus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
-    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:] {
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
         didSet {
             self.convert()
         }
@@ -30,18 +30,16 @@ public struct OctopusCardData: FeliCaCardData {
     }
     
     public mutating func convert() {
-        for (systemCode, systems) in self.contents {
+        for (systemCode, system) in self.contents {
             switch systemCode {
             case self.primarySystemCode:
-                for system in systems {
-                    let services = system.services
-                    for (serviceCode, blockData) in services {
-                        switch OctopusCardItemType(serviceCode) {
-                        case .balance:
-                            self.convertToBalance(blockData)
-                        case .none:
-                            break
-                        }
+                let services = system.services
+                for (serviceCode, blockData) in services {
+                    switch OctopusCardItemType(serviceCode) {
+                    case .balance:
+                        self.convertToBalance(blockData)
+                    case .none:
+                        break
                     }
                 }
             default:

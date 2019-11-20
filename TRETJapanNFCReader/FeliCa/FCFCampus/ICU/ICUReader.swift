@@ -59,9 +59,7 @@ public class ICUReader: FeliCaReader {
             for itemType in self.icuCardItemTypes {
                 services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: icuCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            var systems = icuCard.data.contents[systemCode] ?? []
-            systems.append(FeliCaSystem(systemCode: systemCode, idm: idm, services: services))
-            icuCard.data.contents[systemCode] = systems
+            icuCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(icuCard)
         }
     }

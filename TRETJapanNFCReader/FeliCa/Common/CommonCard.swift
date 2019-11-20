@@ -28,7 +28,7 @@ public struct FeliCaCommonCardData: FeliCaCardData {
     public let type: FeliCaCardType
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
-    public var contents: [FeliCaSystemCode : [FeliCaSystem]] = [:]
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:]
     
     @available(iOS 13.0, *)
     public init(type: FeliCaCardType = .unknown, idm: String, systemCode: FeliCaSystemCode) {
