@@ -27,8 +27,6 @@ public extension FeliCaSystemCode {
     static let cjrc: FeliCaSystemCode = 0x0003
     /// ナイスパス
     static let nicePass: FeliCaSystemCode = 0x040F
-    /// passca
-    static let passca: FeliCaSystemCode = 0x040F
     /// QUICPay
     static let quicpay: FeliCaSystemCode = 0x04C1
     /// nanaco
@@ -41,10 +39,14 @@ public extension FeliCaSystemCode {
     static let shenzhenTong: FeliCaSystemCode = 0x8005
     /// 八達通 (Octopus)
     static let octopus: FeliCaSystemCode = 0x8008
+    /// ひまわりバスカード
+    static let himawariBus: FeliCaSystemCode = 0x800D
     /// 長崎スマートカード
     static let nagasakiSmart: FeliCaSystemCode = 0x8016
+    /// ICバスカード 北海道北見バス
+    static let kitamiBus: FeliCaSystemCode = 0x804C
     /// LuLuCa
-    static let luluca: FeliCaSystemCode = 0x804C
+    static let luluca: FeliCaSystemCode = 0x804C // 0x04A6 もある
     /// 近江鉄道バスICカード
     static let ohmiRailwayBus: FeliCaSystemCode = 0x8074
     /// IruCa
@@ -57,12 +59,18 @@ public extension FeliCaSystemCode {
     static let ica: FeliCaSystemCode = 0x80EF
     /// CI-CA
     static let cica: FeliCaSystemCode = 0x8157
+    /// いわさきICカード
+    static let iwasaki: FeliCaSystemCode = 0x8194
     /// RapiCa
     static let rapica: FeliCaSystemCode = 0x8194
     /// NicoPa
     static let nicopa: FeliCaSystemCode = 0x8287
+    /// passca
+    static let passca: FeliCaSystemCode = 0x832C
     /// ecomyca
     static let ecomyca: FeliCaSystemCode = 0x832C
+    /// Hareca
+    static let hareca: FeliCaSystemCode = 0x83CC
     /// ayuca
     static let ayuca: FeliCaSystemCode = 0x83EE
     /// hanica
