@@ -10,6 +10,7 @@ import Foundation
 
 /// 大学生協ICプリペイドカードのデータ
 public struct UnivCoopICPrepaidCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .univCoopICPrepaid
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -27,7 +28,6 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public var points: Double?
     public var transactions: [UnivCoopICPrepaidCardTransaction]?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode

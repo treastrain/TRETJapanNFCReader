@@ -25,12 +25,12 @@ public struct FCFCampusCard: FeliCaCard{
 #endif
 
 public struct FCFCampusCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:]
     
-    @available(iOS 13.0, *)
     public init(type: FeliCaCardType = .fcfcampus, idm: String, systemCode: FeliCaSystemCode) {
         self.type = type
         self.primaryIDm = idm

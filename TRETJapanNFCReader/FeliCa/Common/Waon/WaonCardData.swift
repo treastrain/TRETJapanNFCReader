@@ -10,6 +10,7 @@ import Foundation
 
 /// WAONカードのデータ
 public struct WaonCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .waon
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -24,7 +25,6 @@ public struct WaonCardData: FeliCaCardData {
     public var points: Int?
     public var transactions: [WaonCardTransaction]?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode

@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol FeliCaCardData: Codable {
+    var version: String { get }
     var type: FeliCaCardType { get }
     var primaryIDm: String { get }
     var primarySystemCode: FeliCaSystemCode { get }

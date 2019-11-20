@@ -10,6 +10,7 @@ import Foundation
 
 /// 楽天Edyカードのデータ
 public struct RakutenEdyCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .rakutenEdy
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -23,7 +24,6 @@ public struct RakutenEdyCardData: FeliCaCardData {
     public var edyNumber: String?
     public var transactions: [RakutenEdyCardTransaction]?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode

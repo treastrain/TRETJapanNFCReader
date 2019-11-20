@@ -10,6 +10,7 @@ import Foundation
 
 /// nanacoカードのデータ
 public struct NanacoCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .nanaco
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -24,7 +25,6 @@ public struct NanacoCardData: FeliCaCardData {
     public var points: Int?
     public var transactions: [NanacoCardTransaction]?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
@@ -117,8 +117,6 @@ public struct NanacoCardData: FeliCaCardData {
             let data10 = data[10]
             let data11 = UInt16(data[11])
             let data12 = data[12]
-            
-            print(data9, data10, data11, data12)
             
             let year = Int((data9 + UInt16(data10)) >> 5) + 2000
             let month = Int((data10 << 3) >> 4)

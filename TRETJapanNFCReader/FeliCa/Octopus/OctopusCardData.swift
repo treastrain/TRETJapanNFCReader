@@ -10,6 +10,7 @@ import Foundation
 
 /// Octopus Card Data
 public struct OctopusCardData: FeliCaCardData {
+    public var version: String = "2"
     public var type: FeliCaCardType = .octopus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -23,7 +24,6 @@ public struct OctopusCardData: FeliCaCardData {
     /// (e.g.  (4557 - 350) / 10 = HK$420.7 )
     public var balance: Int?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode

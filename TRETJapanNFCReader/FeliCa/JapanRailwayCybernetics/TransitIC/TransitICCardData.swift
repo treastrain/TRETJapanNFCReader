@@ -10,6 +10,7 @@ import Foundation
 
 /// 交通系ICカードのデータ
 public struct TransitICCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .transitIC
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -26,7 +27,6 @@ public struct TransitICCardData: FeliCaCardData {
     
     public var sapicaPoints: Int?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode

@@ -9,6 +9,7 @@
 import Foundation
 
 public struct ICUCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .fcfcampus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -23,7 +24,6 @@ public struct ICUCardData: FeliCaCardData {
     public var balance: Int?
     public var transactions: [ICUCardTransaction]?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
