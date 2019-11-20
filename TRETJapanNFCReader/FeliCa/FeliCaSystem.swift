@@ -12,4 +12,8 @@ public struct FeliCaSystem: Codable {
     public let systemCode: FeliCaSystemCode
     public let idm: String
     public var services: [FeliCaServiceCode : [Data]]
+    
+    public subscript(serviceCode: FeliCaServiceCode) -> [Data]? {
+        return self.services[serviceCode]
+    }
 }
