@@ -24,6 +24,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     case okica
     /// エヌタス
     case ntasu
+    /// りゅーと
+    case ryuto
     
     /// FCF Campus Card
     case fcfcampus
@@ -49,6 +51,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return "OKICA"
         case .ntasu:
             return "NTasu"
+        case .ryuto:
+            return "りゅーと"
         case .fcfcampus:
             return "FCF Campus"
         case .octopus:

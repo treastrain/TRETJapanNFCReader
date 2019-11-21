@@ -201,6 +201,16 @@
 		CDF5C0B3231CEB9E00E2791A /* WaonCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00C184231C3E2C00EC59B8 /* WaonCardItemType.swift */; };
 		CDF5C0B4231CEBA500E2791A /* UnivCoopICPrepaidCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData.swift */; };
 		CDF5C0B5231CEBA900E2791A /* UnivCoopICPrepaidItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00C186231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift */; };
+		CDF81D472386976C00260BD5 /* RyutoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D3F2386968900260BD5 /* RyutoCard.swift */; };
+		CDF81D482386976C00260BD5 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D412386969000260BD5 /* RyutoCardData.swift */; };
+		CDF81D492386976C00260BD5 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */; };
+		CDF81D4A2386976C00260BD5 /* RyutoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D45238696A300260BD5 /* RyutoReader.swift */; };
+		CDF81D4C2386976C00260BD5 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D412386969000260BD5 /* RyutoCardData.swift */; };
+		CDF81D4D2386976C00260BD5 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */; };
+		CDF81D502386976D00260BD5 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D412386969000260BD5 /* RyutoCardData.swift */; };
+		CDF81D512386976D00260BD5 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */; };
+		CDF81D542386976E00260BD5 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D412386969000260BD5 /* RyutoCardData.swift */; };
+		CDF81D552386976E00260BD5 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */; };
 		CDFC3B5D22CE2AD2000E88B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */; };
 		CDFC3B5F22CE2AD2000E88B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */; };
 		CDFC3B6122CE2AD2000E88B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFC3B6022CE2AD2000E88B4 /* ViewController.swift */; };
@@ -549,6 +559,10 @@
 		CDD1374B232181BF002AF46B /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = japanNFCReader/Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		CDD2895223143A6300087725 /* FeliCa+NFCFeliCaTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeliCa+NFCFeliCaTag.swift"; sourceTree = "<group>"; };
 		CDF5C099231CEAEF00E2791A /* TRETJapanNFCReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRETJapanNFCReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF81D3F2386968900260BD5 /* RyutoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyutoCard.swift; sourceTree = "<group>"; };
+		CDF81D412386969000260BD5 /* RyutoCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyutoCardData.swift; sourceTree = "<group>"; };
+		CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyutoCardItemType.swift; sourceTree = "<group>"; };
+		CDF81D45238696A300260BD5 /* RyutoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RyutoReader.swift; sourceTree = "<group>"; };
 		CDFC3B5A22CE2AD2000E88B4 /* TransitICReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitICReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -914,6 +928,10 @@
 		CDF81D3E2386960D00260BD5 /* Ryuto */ = {
 			isa = PBXGroup;
 			children = (
+				CDF81D3F2386968900260BD5 /* RyutoCard.swift */,
+				CDF81D412386969000260BD5 /* RyutoCardData.swift */,
+				CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */,
+				CDF81D45238696A300260BD5 /* RyutoReader.swift */,
 			);
 			name = Ryuto;
 			path = NTasu/Ryuto;
@@ -1461,6 +1479,7 @@
 				CDF5C086231CE75700E2791A /* RakutenEdyCardItemType.swift in Sources */,
 				CDFF4F31235C6C1100B7D4EC /* NTasuCardData.swift in Sources */,
 				CD2B6F922354846F00675465 /* FeliCaAttribute.swift in Sources */,
+				CDF81D4C2386976C00260BD5 /* RyutoCardData.swift in Sources */,
 				CDF5C06C231CE73A00E2791A /* JapanNFCReaderError.swift in Sources */,
 				CDC8D0B42343BB53002325DB /* OkicaCardData.swift in Sources */,
 				CD3C78A22375D00B00926A81 /* FeliCaSystem.swift in Sources */,
@@ -1475,6 +1494,7 @@
 				46DF2ADE233CFF610060DCB0 /* FCFCampusCard.swift in Sources */,
 				46DF2AE4233CFF700060DCB0 /* ICUCardItemType.swift in Sources */,
 				CDF5C08D231CE76000E2791A /* WaonCardData.swift in Sources */,
+				CDF81D4D2386976C00260BD5 /* RyutoCardItemType.swift in Sources */,
 				CDF5C06D231CE73C00E2791A /* JapanNFCReaderSessionDelegate.swift in Sources */,
 				CD07201B234E30BB0083AE4B /* FeliCaCardTransaction.swift in Sources */,
 				CDF5C080231CE75000E2791A /* TransitICCardData.swift in Sources */,
@@ -1516,6 +1536,7 @@
 				CD07200B234E30630083AE4B /* FeliCaCardType.swift in Sources */,
 				CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */,
 				46DF2ADD233CFF610060DCB0 /* FCFCampusCard.swift in Sources */,
+				CDF81D472386976C00260BD5 /* RyutoCard.swift in Sources */,
 				CD1999C022CD12E10035AEBD /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD163B18230D94F800B42E6C /* RakutenEdyReader.swift in Sources */,
 				CD17B13E231AD8A200A46679 /* UnivCoopICPrepaidReader.swift in Sources */,
@@ -1530,8 +1551,10 @@
 				CD00C189231C40AB00EC59B8 /* TransitICCardItemType.swift in Sources */,
 				CD072015234E30950083AE4B /* FeliCaServiceCode.swift in Sources */,
 				CD59FE5622D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift in Sources */,
+				CDF81D4A2386976C00260BD5 /* RyutoReader.swift in Sources */,
 				CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */,
 				CD996F7922C7A58D00193E7A /* DriversLicenseReaderSessionDelegate.swift in Sources */,
+				CDF81D482386976C00260BD5 /* RyutoCardData.swift in Sources */,
 				CD79369522C62C3400E5AC2E /* DriversLicenseReader.swift in Sources */,
 				CDAC056F230D2E6300E1DDCF /* FeliCaReaderSessionDelegate.swift in Sources */,
 				CDC8D0BD2343BB67002325DB /* OkicaReader.swift in Sources */,
@@ -1545,6 +1568,7 @@
 				CD79369722C62E7B00E5AC2E /* JapanNFCReader.swift in Sources */,
 				CDFF4F35235C6C2200B7D4EC /* NTasuCardItemType.swift in Sources */,
 				46DF2AEA233D02D90060DCB0 /* ICUCardData.swift in Sources */,
+				CDF81D492386976C00260BD5 /* RyutoCardItemType.swift in Sources */,
 				CDB3AD4C22CFAEC20069AB7F /* Extensions.swift in Sources */,
 				CD00C187231C3EBF00EC59B8 /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CDC8D0B32343BB53002325DB /* OkicaCardData.swift in Sources */,
@@ -1587,6 +1611,7 @@
 				CD9EEA8A231CECFA00513DBF /* NanacoCardData.swift in Sources */,
 				CDFF4F33235C6C1100B7D4EC /* NTasuCardData.swift in Sources */,
 				CD2B6F942354846F00675465 /* FeliCaAttribute.swift in Sources */,
+				CDF81D542386976E00260BD5 /* RyutoCardData.swift in Sources */,
 				CD9EEA81231CECD400513DBF /* Status.swift in Sources */,
 				CDC8D0B62343BB53002325DB /* OkicaCardData.swift in Sources */,
 				CD3C78A42375D00B00926A81 /* FeliCaSystem.swift in Sources */,
@@ -1601,6 +1626,7 @@
 				46DF2AE0233CFF620060DCB0 /* FCFCampusCard.swift in Sources */,
 				46DF2AE8233CFF720060DCB0 /* ICUCardItemType.swift in Sources */,
 				CD9EEA84231CECE000513DBF /* FeliCaCard.swift in Sources */,
+				CDF81D552386976E00260BD5 /* RyutoCardItemType.swift in Sources */,
 				CD9EEA8F231CED1700513DBF /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CD07201D234E30BB0083AE4B /* FeliCaCardTransaction.swift in Sources */,
 				CD9EEA7D231CECC100513DBF /* JapanNFCReaderSessionDelegate.swift in Sources */,
@@ -1628,6 +1654,7 @@
 				CDF5C0B0231CEB9100E2791A /* NanacoCardData.swift in Sources */,
 				CDFF4F32235C6C1100B7D4EC /* NTasuCardData.swift in Sources */,
 				CD2B6F932354846F00675465 /* FeliCaAttribute.swift in Sources */,
+				CDF81D502386976D00260BD5 /* RyutoCardData.swift in Sources */,
 				CDF5C0AE231CEB8700E2791A /* RakutenEdyCardItemType.swift in Sources */,
 				CDC8D0B52343BB53002325DB /* OkicaCardData.swift in Sources */,
 				CD3C78A32375D00B00926A81 /* FeliCaSystem.swift in Sources */,
@@ -1642,6 +1669,7 @@
 				46DF2ADF233CFF620060DCB0 /* FCFCampusCard.swift in Sources */,
 				46DF2AE6233CFF710060DCB0 /* ICUCardItemType.swift in Sources */,
 				CDF5C0AF231CEB8A00E2791A /* RakutenEdyCardData.swift in Sources */,
+				CDF81D512386976D00260BD5 /* RyutoCardItemType.swift in Sources */,
 				CDF5C0B5231CEBA900E2791A /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CD07201C234E30BB0083AE4B /* FeliCaCardTransaction.swift in Sources */,
 				CDF5C0AA231CEB7000E2791A /* FeliCaCard.swift in Sources */,
