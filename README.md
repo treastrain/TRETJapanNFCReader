@@ -157,7 +157,7 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 ### OKICA `TRETJapanNFCReader/FeliCa/Okica/`
 OKICA の情報、および OKICA カード内に保存されているゆいレールの駅名情報、各バス会社名の情報は [Twitter@resi098](https://twitter.com/resi098) 様からご提供いただきました。
 
-### 大学生協ICプリペイド `TRETJapanNFCReader/FeliCa/Common/UnivCoopICPrepaid`
+### 大学生協ICプリペイド `TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid`
 大学生協ICプリペイドの読み取り実装においては以下に掲載されている仕様を参考にしました。
 - `oboenikui/UnivFeliCa.md`
     - [大学生協FeliCaの仕様](https://gist.github.com/oboenikui/ee9fb0cb07a6690c410b872f64345120)
