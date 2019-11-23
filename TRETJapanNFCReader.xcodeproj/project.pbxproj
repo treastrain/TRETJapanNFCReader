@@ -933,8 +933,7 @@
 				CDF81D432386969C00260BD5 /* RyutoCardItemType.swift */,
 				CDF81D45238696A300260BD5 /* RyutoReader.swift */,
 			);
-			name = Ryuto;
-			path = NTasu/Ryuto;
+			path = Ryuto;
 			sourceTree = "<group>";
 		};
 		CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */ = {
