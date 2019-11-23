@@ -52,7 +52,7 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
         case .ntasu:
             return "NTasu"
         case .ryuto:
-            return "りゅーと"
+            return String(format: NSLocalizedString("ryuto", bundle: Bundle.current, comment: ""))
         case .fcfcampus:
             return "FCF Campus"
         case .octopus:
