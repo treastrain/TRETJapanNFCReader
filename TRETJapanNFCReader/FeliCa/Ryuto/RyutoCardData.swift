@@ -26,8 +26,6 @@ public struct RyutoCardData: FeliCaCardData {
             self.balance = transactions?.first?.balance
         }
     }
-    public var entryExitInformationsData: [Data]?
-    public var sfEntryInformationsData: [Data]?
     
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
@@ -43,10 +41,6 @@ public struct RyutoCardData: FeliCaCardData {
                     switch RyutoCardItemType(serviceCode) {
                     case .transactions:
                         self.transactions = convertToTransactions(blockData)
-                    case .entryExitInformations:
-                        self.entryExitInformationsData = blockData
-                    case .sfEntryInformations:
-                        self.sfEntryInformationsData = blockData
                     case .none:
                         break
                     }

@@ -12,19 +12,15 @@ import Foundation
 public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
     /// 取引履歴
     case transactions
-    /// 改札入出場履歴情報
-    case entryExitInformations
-    /// SF入場情報
-    case sfEntryInformations
     
     internal init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x898F:
             self = .transactions
         case 0x884B:
-            self = .entryExitInformations
+            fallthrough
         case 0x804B:
-            self = .sfEntryInformations
+            fallthrough
         default:
             return nil
         }
@@ -34,10 +30,6 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
         switch self {
         case .transactions:
             return 0x898F
-        case .entryExitInformations:
-            return 0x884B
-        case .sfEntryInformations:
-            return 0x804B
         }
     }
     
@@ -45,10 +37,6 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
         switch self {
         case .transactions:
             return 20
-        case .entryExitInformations:
-            return 3
-        case .sfEntryInformations:
-            return 2
         }
     }
 }
