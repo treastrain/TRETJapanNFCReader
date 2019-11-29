@@ -1,29 +1,33 @@
 ![](TRETJapanNFCReader.png)
 
 # TRETJapanNFCReader
-日本のNFCカード向けリーダーライブラリ（iOS 9.3 以降、NFCカードの読み取りは iOS 13.0 以降）
-[Twitter: @JapanNFCReader](https://twitter.com/JapanNFCReader)
-
-Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON、運転免許証の読み取り
-
-日本語・英語に対応  
-Japanese & English Support!
+日本のNFCカード向けリーダーライブラリ
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/treastrain/TRETJapanNFCReader/blob/master/LICENSE)
-![Swift: 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
-![Platform: iOS](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)
+[![GitHub Stars](https://img.shields.io/github/stars/treastrain/TRETJapanNFCReader)](https://github.com/treastrain/TRETJapanNFCReader/stargazers)
+![Platform: iOS|watchOS|tvOS|macOS](https://img.shields.io/badge/Platform-iOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20macOS-lightgrey.svg)
+![Swift: 5.1.2](https://img.shields.io/badge/Swift-5.1.2-orange.svg)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/treastrain/TRETJapanNFCReader)
 [![CocoaPods](https://img.shields.io/cocoapods/v/TRETJapanNFCReader?label=CocoaPods)](https://cocoapods.org/pods/TRETJapanNFCReader)
+※現時点で Swift Package Manager で利用可能なのは iOS のみ。
 
-関連するページ
-- [treastrain/ios13-felica-reader: Sample project to read FeliCa on iOS 13 and later - GitHub](https://github.com/treastrain/ios13-felica-reader)
-- [iOS 13 で FeliCa (Suica) にアクセス | notes from E](https://notes.tret.jp/ios13-felica-reading/)
-- [iOS 13 の Core NFC で運転免許証を読み取ろう【TRETJapanNFCReader】 - Qiita](https://qiita.com/treastrain/items/f95ee3f99c6b6111e999)
+サポート [Twitter: @JapanNFCReader](https://twitter.com/JapanNFCReader)
+Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON などの電子マネーカード、運転免許証の読み取り
+
+## 対応 OS
+- iOS 9.3 以降
+- watchOS 2.0 以降
+- tvOS 9.2 以降
+- macOS 10.9 以降
+※ NFCカードの読み取りは iOS 13.0 以降で対応するデバイスで使用可能。
+
 
 ## 対応 NFC カード
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
-- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）、写真（DF2/EF01）まで実装済み
+- 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）写真（DF2/EF01）まで実装済み
 
 ### NFC-F (Type-F, FeliCa)
 IDm と System Code の表示
@@ -42,6 +46,9 @@ IDm と System Code の表示
 - [x] 8FC1: OKICA
     - 残高の読み取りと表示
     - 利用履歴、改札入出場履歴、SF入場情報の読み取り
+- [x] 8B5D: りゅーと
+    - 残高の読み取りと表示
+    - 利用履歴の読み取り
 - [x] FE00: 楽天Edy
     - 残高の読み取りと表示
     - 利用履歴の読み取り
@@ -57,13 +64,9 @@ IDm と System Code の表示
 - [x] 8008: 八達通
     - 残高の読み取りと表示
 
-## 対応 OS
-- iOS 9.3 以降
-
-※ NFCカードの読み取りは iOS 13.0 以降で対応するデバイスで使用可能。
-※ iOS 13.0 beta 1 では NFC-B (Type-B) を正常に読み書きできない事象を確認。iOS 13.0 beta 2 で解消。
 
 ## 使い方
+`Examples` 配下にサンプルを掲載。
 ### 全 NFC カード共通
 1. プロジェクトの TARGET から開発している iOS Application を選び、Signing & Capabilities で Near Field Communication Tag Reading を有効にする（Near Field Communication Tag Reader Session Formats が entitlements ファイルに含まれている必要がある）。
 2. Near Field Communication Tag Reader Session Formats の中に "NFC tag-specific data protocol (TAG)" が含まれていることを確認する。
@@ -97,37 +100,26 @@ class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
 ```
 
 ### NFC-F (Type-F, FeliCa)
-- FeliCa を読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加する。ワイルドカードは使用できない。
+- FeliCa を読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加し、読み取る際に使用する FeliCa システムコードを記述する。ワイルドカードは使用できない。
+各カードに対応する `Reader` と `Card` がある。
 
-#### 交通系ICカードの場合
-- 0003
-```swift
-import UIKit
-import TRETJapanNFCReader
-class ViewController: UIViewController, TransitICReaderSessionDelegate {
+|カードの種類|FeliCa システムコード|`Reader`|`Card`|
+|:--|:--|:--|:--|
+|交通系IC|`0003`|`TransitICReader`|`TransitICCard`|
+|IruCa|`80DE`|`TransitICReader`|`TransitICCard`|
+|PASPY|`8592`|`TransitICReader`|`TransitICCard`|
+|SAPICA|`865E`|`TransitICReader`|`TransitICCard`|
+|りゅーと|`8B5D`|`RyutoReader`|`RyutoCard`|
+|OKICA|`8FC1`|`OkicaReader`|`OkicaCard`|
+|楽天Edy|`FE00`|`RakutenEdyReader`|`RakutenEdyCard`|
+|nanaco|`FE00`|`NanacoReader`|`NanacoCard`|
+|WAON|`FE00`|`WaonReader`|`WaonCard`|
+|大学生協ICプリペイド|`FE00`|`UnivCoopICPrepaidReader`|`UnivCoopICPrepaidCard`|
+|FCFCampus(ICU)|`FE00`|`ICUReader`|`ICUCard`|
+|八達通|`8008`|`OctopusReader`|`OctopusCard`|
 
-    var reader: TransitICReader!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.reader = TransitICReader(self)
-        self.reader.get(items: TransitICCardItem.allCases)
-    }
-
-    func transitICReaderSession(didRead transitICCard: TransitICCard) {
-        // transitICCard に読み取った交通系ICカードの情報が格納されている
-    }
-}
-```
-
-#### 楽天Edy、nanaco、WAON、大学生協ICプリペイド（大学 学生証）の場合
-- FE00
-対応する `Reader` と `Card` があります。
-- 楽天Edy　`RakutenEdyReader`、`RakutenEdyCard`
-- nanaco　`NanacoReader`、`NanacoCard`
-- WAON　`WaonReader`、`WaonCard`
-- 大学生協ICプリペイド　`UnivCoopICPrepaidReader`、`UnivCoopICPrepaidCard`
-下の例は楽天Edyの場合
+#### 使用例
+楽天Edyの例。各`Reader`、`Card`は上記の表に対応するものに書き換える。
 ```swift
 import UIKit
 import TRETJapanNFCReader
@@ -149,20 +141,33 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 }
 ```
 
+
+## i18n
+- 日本語 Japanese
+- English
+
+
+## 関連するページ
+- [treastrain/ios13-felica-reader: Sample project to read FeliCa on iOS 13 and later - GitHub](https://github.com/treastrain/ios13-felica-reader)
+- [iOS 13 で FeliCa (Suica) にアクセス | notes from E](https://notes.tret.jp/ios13-felica-reading/)
+- [iOS 13 の Core NFC で運転免許証を読み取ろう【TRETJapanNFCReader】 - Qiita](https://qiita.com/treastrain/items/f95ee3f99c6b6111e999)
+
+
 ## 謝辞 Acknowledgments
-### 運転免許証 `TRETJapanNFCReader/ISO14443/DriversLicense` 
+### 運転免許証 `Sources/ISO14443/DriversLicense` 
 - `JIS0208.TXT`
     - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
 
-### OKICA `TRETJapanNFCReader/FeliCa/Okica/`
+### OKICA `Sources/FeliCa/Okica/`
 OKICA の情報、および OKICA カード内に保存されているゆいレールの駅名情報、各バス会社名の情報は [Twitter@resi098](https://twitter.com/resi098) 様からご提供いただきました。
 
-### 大学生協ICプリペイド `TRETJapanNFCReader/FeliCa/Common/UnivCoopICPrepaid`
+### 大学生協ICプリペイド `Sources/FeliCa/UnivCoopICPrepaid`
 大学生協ICプリペイドの読み取り実装においては以下に掲載されている仕様を参考にしました。
 - `oboenikui/UnivFeliCa.md`
     - [大学生協FeliCaの仕様](https://gist.github.com/oboenikui/ee9fb0cb07a6690c410b872f64345120)
 
-### 八達通 `TRETJapanNFCReader/FeliCa/Octopus`
+### 八達通 `Sources/FeliCa/Octopus`
 - [Octopus · metrodroid/metrodroid Wiki](https://github.com/metrodroid/metrodroid/wiki/Octopus)
 
 各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。
+これは電子マネーカード提供各社が公式に提供するものではありません。

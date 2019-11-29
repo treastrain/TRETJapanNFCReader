@@ -25,19 +25,27 @@ public struct FCFCampusCard: FeliCaCard{
 #endif
 
 public struct FCFCampusCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:]
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:]
     
-    @available(iOS 13.0, *)
     public init(type: FeliCaCardType = .fcfcampus, idm: String, systemCode: FeliCaSystemCode) {
         self.type = type
-        self.idm = idm
-        self.systemCode = systemCode
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
     }
     
     public func convert() {
         
     }
+    
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public var idm: String { return "" }
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }

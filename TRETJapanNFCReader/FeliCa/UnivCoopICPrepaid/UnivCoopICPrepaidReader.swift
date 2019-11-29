@@ -54,11 +54,11 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         var univCoopICPrepaidCard = UnivCoopICPrepaidCard(tag: feliCaTag, data: UnivCoopICPrepaidCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRUnivCoopICPrepaidReader", qos: .default).async {
-            var data: [FeliCaServiceCode : [Data]] = [:]
+            var services: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.univCoopICPrepaidCardItemTypes {
-               data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: univCoopICPrepaidCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+               services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: univCoopICPrepaidCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            univCoopICPrepaidCard.data.data = data
+            univCoopICPrepaidCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(univCoopICPrepaidCard)
         }
     }

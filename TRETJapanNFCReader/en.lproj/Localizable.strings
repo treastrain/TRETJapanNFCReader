@@ -18,7 +18,6 @@
 "nfcTagReaderSessionDoneMessage" = "Done!";
 
 "pinRequired" = "PIN required.";
-"cardNotSupported" = "The card is not supported.";
 
 "transitIC" = "Transit IC";
 "rakutenEdy" = "Rakuten Edy";
@@ -26,3 +25,4 @@
 "waon" = "WAON";
 "univCoopICPrepaid" = "Univ. Co-op";
 "octopus" = "Octopus";
+"ryuto" = "Ryuto";

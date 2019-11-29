@@ -10,10 +10,11 @@ import Foundation
 
 /// nanacoカードのデータ
 public struct NanacoCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .nanaco
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:] {
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
         didSet {
             self.convert()
         }
@@ -24,32 +25,38 @@ public struct NanacoCardData: FeliCaCardData {
     public var points: Int?
     public var transactions: [NanacoCardTransaction]?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
-        self.idm = idm
-        self.systemCode = systemCode
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
     }
     
     @available(iOS 13.0, *)
     internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
-        self.idm = feliCaCommonCardData.idm
-        self.systemCode = feliCaCommonCardData.systemCode
-        self.data = feliCaCommonCardData.data
+        self.primaryIDm = feliCaCommonCardData.primaryIDm
+        self.primarySystemCode = feliCaCommonCardData.primarySystemCode
+        self.contents = feliCaCommonCardData.contents
     }
     
     public mutating func convert() {
-        for (key, value) in self.data {
-            let blockData = value
-            switch NanacoCardItemType(key) {
-            case .balance:
-                self.convertToBalance(blockData)
-            case .nanacoNumber:
-                self.convertToNanacoNumber(blockData)
-            case .points:
-                self.convertToPoints(blockData)
-            case .transactions:
-                self.convertToTransactions(blockData)
-            case .none:
+        for (systemCode, system) in self.contents {
+            switch systemCode {
+            case self.primarySystemCode:
+                let services = system.services
+                for (serviceCode, blockData) in services {
+                    switch NanacoCardItemType(serviceCode) {
+                    case .balance:
+                        self.convertToBalance(blockData)
+                    case .nanacoNumber:
+                        self.convertToNanacoNumber(blockData)
+                    case .points:
+                        self.convertToPoints(blockData)
+                    case .transactions:
+                        self.convertToTransactions(blockData)
+                    case .none:
+                        break
+                    }
+                }
+            default:
                 break
             }
         }
@@ -111,8 +118,6 @@ public struct NanacoCardData: FeliCaCardData {
             let data11 = UInt16(data[11])
             let data12 = data[12]
             
-            print(data9, data10, data11, data12)
-            
             let year = Int((data9 + UInt16(data10)) >> 5) + 2000
             let month = Int((data10 << 3) >> 4)
             let day = Int((((UInt16(data10) << 8) + data11) << 7) >> 11)
@@ -130,6 +135,14 @@ public struct NanacoCardData: FeliCaCardData {
         }
         self.transactions = transactions
     }
+    
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public var idm: String { return "" }
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }
 
 /// nanacoカードの利用履歴

@@ -30,12 +30,6 @@ extension DriversLicenseReader {
         tag.sendCommand(apdu: adpu, completionHandler: completionHandler)
     }
     
-    internal func selectDF2(tag: DriversLicenseCardTag, completionHandler: @escaping DriversLicenseReaderCompletionHandler) {
-        let adpu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xA4, p1Parameter: 0x04, p2Parameter: 0x0C, data: Data([0xA0, 0x00, 0x00, 0x02, 0x31, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]), expectedResponseLength: -1)
-        
-        tag.sendCommand(apdu: adpu, completionHandler: completionHandler)
-    }
-    
     internal func selectEF(tag: DriversLicenseCardTag, data: [UInt8], completionHandler: @escaping DriversLicenseReaderCompletionHandler) {
         let adpu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xA4, p1Parameter: 0x02, p2Parameter: 0x0C, data: Data(data), expectedResponseLength: -1)
         

@@ -55,11 +55,11 @@ public class OctopusReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         var octopusCard = OctopusCard(tag: feliCaTag, data: OctopusCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNROctopusReader", qos: .default).async {
-            var data: [FeliCaServiceCode : [Data]] = [:]
+            var services: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.octopusCardItemTypes {
-                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: octopusCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: octopusCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            octopusCard.data.data = data
+            octopusCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(octopusCard)
         }
     }

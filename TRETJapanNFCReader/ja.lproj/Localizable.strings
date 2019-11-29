@@ -18,7 +18,6 @@
 "nfcTagReaderSessionDoneMessage" = "完了";
 
 "pinRequired" = "暗証番号の入力が必要です";
-"cardNotSupported" = "非対応のカードです";
 
 "transitIC" = "交通系IC";
 "rakutenEdy" = "楽天Edy";
@@ -26,3 +25,4 @@
 "waon" = "WAON";
 "univCoopICPrepaid" = "大学生協ICプリペイド";
 "octopus" = "オクトパス（八達通）";
+"ryuto" = "りゅーと";

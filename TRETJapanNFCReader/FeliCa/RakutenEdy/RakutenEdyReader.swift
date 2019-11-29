@@ -55,11 +55,11 @@ public class RakutenEdyReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         var rakutenEdyCard = RakutenEdyCard(tag: feliCaTag, data: RakutenEdyCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRRakutenEdyReader", qos: .default).async {
-            var data: [FeliCaServiceCode : [Data]] = [:]
+            var services: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.rakutenEdyCardItemTypes {
-                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: rakutenEdyCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: rakutenEdyCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            rakutenEdyCard.data.data = data
+            rakutenEdyCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(rakutenEdyCard)
         }
     }

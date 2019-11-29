@@ -81,6 +81,11 @@ internal extension UInt16 {
     var uint8: [UInt8] {
         return [UInt8(self >> 8), UInt8(self & 0x00ff)]
     }
+    
+    func toHexString() -> String {
+        let bytes = self.uint8
+        return "0x" + bytes[0].toString() + bytes[1].toString()
+    }
 }
 
 internal extension String {

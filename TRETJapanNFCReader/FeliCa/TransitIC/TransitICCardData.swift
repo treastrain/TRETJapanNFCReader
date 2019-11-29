@@ -10,10 +10,11 @@ import Foundation
 
 /// 交通系ICカードのデータ
 public struct TransitICCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .transitIC
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:] {
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
         didSet {
             self.convert()
         }
@@ -26,27 +27,33 @@ public struct TransitICCardData: FeliCaCardData {
     
     public var sapicaPoints: Int?
     
-    @available(iOS 13.0, *)
     public init(idm: String, systemCode: FeliCaSystemCode) {
-        self.idm = idm
-        self.systemCode = systemCode
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
     }
     
     public mutating func convert() {
-        for (key, value) in self.data {
-            let blockData = value
-            switch TransitICCardItemType(key) {
-            case .balance:
-                self.convertToBalance(blockData)
-            case .transactions:
-                self.convertToTransactions(blockData)
-            case .entryExitInformations:
-                self.convertToEntryExitInformations(blockData)
-            case .sfEntryInformations:
-                self.convertToSFEntryInformations(blockData)
-            case .sapicaPoints:
-                self.convertToSapicaPoints(blockData)
-            case .none:
+        for (systemCode, system) in self.contents {
+            switch systemCode {
+            case self.primarySystemCode:
+                let services = system.services
+                for (serviceCode, blockData) in services {
+                    switch TransitICCardItemType(serviceCode) {
+                    case .balance:
+                        self.convertToBalance(blockData)
+                    case .transactions:
+                        self.convertToTransactions(blockData)
+                    case .entryExitInformations:
+                        self.convertToEntryExitInformations(blockData)
+                    case .sfEntryInformations:
+                        self.convertToSFEntryInformations(blockData)
+                    case .sapicaPoints:
+                        self.convertToSapicaPoints(blockData)
+                    case .none:
+                        break
+                    }
+                }
+            default:
                 break
             }
         }
@@ -75,4 +82,12 @@ public struct TransitICCardData: FeliCaCardData {
         let points = data.toIntReversed(0, 2)
         self.sapicaPoints = points
     }
+    
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public var idm: String { return "" }
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }

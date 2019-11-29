@@ -10,10 +10,11 @@ import Foundation
 
 /// エヌタス
 public struct NTasuCardData: FeliCaCardData {
+    public var version: String = "2"
     public let type: FeliCaCardType = .ntasu
-    public let idm: String
-    public let systemCode: FeliCaSystemCode
-    public var data: [FeliCaServiceCode : [Data]] = [:] {
+    public let primaryIDm: String
+    public let primarySystemCode: FeliCaSystemCode
+    public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
         didSet {
             self.convert()
         }
@@ -25,6 +26,14 @@ public struct NTasuCardData: FeliCaCardData {
     public func convert() {
         
     }
+    
+    
+    @available(*, unavailable, renamed: "primaryIDm")
+    public var idm: String { return "" }
+    @available(*, unavailable, renamed: "primarySystemCode")
+    public var systemCode: FeliCaSystemCode { return 0xFFFF }
+    @available(*, unavailable)
+    public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }
 
 /// エヌタス の利用履歴

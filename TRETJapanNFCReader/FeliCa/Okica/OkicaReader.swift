@@ -56,11 +56,11 @@ public class OkicaReader: FeliCaReader {
     public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         var okicaCard = OkicaCard(tag: feliCaTag, data: OkicaCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNROkicaReader", qos: .default).async {
-            var data: [FeliCaServiceCode : [Data]] = [:]
+            var services: [FeliCaServiceCode : [Data]] = [:]
             for itemType in self.okicaCardItemTypes {
-                data[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: okicaCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
+                services[itemType.serviceCode] = self.readWithoutEncryption(session: session, tag: okicaCard.tag, serviceCode: itemType.serviceCode, blocks: itemType.blocks)
             }
-            okicaCard.data.data = data
+            okicaCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(okicaCard)
         }
     }
