@@ -10,6 +10,7 @@ import Foundation
 
 extension Bundle {
     static var current: Bundle {
+        print(LocalizedBundle.bundle())
         return LocalizedBundle.bundle()
     }
 }
