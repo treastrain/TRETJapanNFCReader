@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "TRETJapanNFCReader"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "日本のNFCカード向けリーダーライブラリ（iOS、watchOS、tvOS、macOS）"
   spec.description  = <<-DESC
 			日本のNFCカード向けリーダーライブラリ（NFCカードの読み取りは iOS 13.0 以降のみ）。Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON、運転免許証の読み取り。日本語・英語に対応 Japanese & English Support!

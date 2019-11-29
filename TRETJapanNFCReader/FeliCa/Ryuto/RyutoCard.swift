@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// りゅーと
@@ -19,3 +20,4 @@ public struct RyutoCard: FeliCaCard {
         self.data = data
     }
 }
+#endif

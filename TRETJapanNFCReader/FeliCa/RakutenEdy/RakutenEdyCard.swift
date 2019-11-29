@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// 楽天Edyカード
@@ -24,3 +25,5 @@ public struct RakutenEdyCard: FeliCaCard {
         self.data = data
     }
 }
+
+#endif

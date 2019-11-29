@@ -6,9 +6,10 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
-// ICU Student ID Card
+/// ICU Student ID Card
 @available(iOS 13.0, *)
 public struct ICUCard: FeliCaCard {
     public let tag: ICUCardTag
@@ -24,3 +25,5 @@ public struct ICUCard: FeliCaCard {
         self.data = data
     }
 }
+
+#endif

@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// WAONカード
@@ -25,4 +26,4 @@ public struct WaonCard: FeliCaCard {
     }
 }
 
-
+#endif

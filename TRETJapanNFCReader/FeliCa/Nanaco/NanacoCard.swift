@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// nanacoカード
@@ -23,5 +24,6 @@ public struct NanacoCard: FeliCaCard {
         self.tag = tag
         self.data = data
     }
-    
 }
+
+#endif

@@ -11,7 +11,6 @@
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/treastrain/TRETJapanNFCReader)
 [![CocoaPods](https://img.shields.io/cocoapods/v/TRETJapanNFCReader?label=CocoaPods)](https://cocoapods.org/pods/TRETJapanNFCReader)
-※現時点で Swift Package Manager で利用可能なのは iOS のみ。
 
 
 サポート [Twitter: @JapanNFCReader](https://twitter.com/JapanNFCReader)

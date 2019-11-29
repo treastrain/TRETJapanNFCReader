@@ -29,12 +29,14 @@ public struct ICUCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
 
+    #if os(iOS)
     @available(iOS 13.0, *)
     internal init(from fcfCampusCardData: FCFCampusCardData) {
         self.primaryIDm = fcfCampusCardData.primaryIDm
         self.primarySystemCode = fcfCampusCardData.primarySystemCode
         self.contents = fcfCampusCardData.contents
     }
+    #endif
 
     public mutating func convert() {
         for (systemCode, system) in self.contents {

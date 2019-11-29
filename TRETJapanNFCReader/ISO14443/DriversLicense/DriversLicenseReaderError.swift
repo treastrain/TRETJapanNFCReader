@@ -8,15 +8,6 @@
 
 import Foundation
 
-//public struct DriversLicenseReaderError {
-//
-//    public enum Code: Int {
-//        case incorrectPINFormat = 6300
-//    }
-//
-//    public static var incorrectPINFormat = Code.incorrectPINFormat
-//}
-
 public enum DriversLicenseReaderError: Error {
     case needPIN
     case incorrectPIN(Int)

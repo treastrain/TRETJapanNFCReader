@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -66,3 +67,5 @@ extension NFCFeliCaTag {
     public func readWithoutEncryption24(serviceCode: Data, blockList: [Data], completionHandler: @escaping (_ status1: Int, _ status2: Int, _ blockData: [Data], _ error: Error?) -> Void) {
     }
 }
+
+#endif

@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 @available(iOS 13.0, *)
@@ -76,6 +77,6 @@ extension DriversLicenseReader {
             print("responseCount: \(responseString.count), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
         }
     }
-    
 }
 
+#endif

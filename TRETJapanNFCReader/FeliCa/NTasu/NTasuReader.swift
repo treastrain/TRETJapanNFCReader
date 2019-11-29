@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -31,5 +32,6 @@ public class NTasuReader: FeliCaReader {
     public override init(viewController: FeliCaReaderViewController) {
         super.init(viewController: viewController)
     }
-    
 }
+
+#endif

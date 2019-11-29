@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -46,6 +47,6 @@ extension DriversLicenseReader {
         
         tag.sendCommand(apdu: adpu, completionHandler: completionHandler)
     }
-    
 }
 
+#endif

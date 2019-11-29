@@ -6,7 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import UIKit
+#if os(iOS)
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -63,3 +63,5 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
         }
     }
 }
+
+#endif

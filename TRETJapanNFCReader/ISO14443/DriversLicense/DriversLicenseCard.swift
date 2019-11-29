@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import CoreNFC
 
 /// 日本の運転免許証から読み取ることができるデータの種別
@@ -469,3 +470,4 @@ public struct DriversLicenseCard {
     }
 }
 
+#endif

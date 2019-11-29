@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 import CoreNFC
 
@@ -173,3 +174,5 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         return data
     }
 }
+
+#endif

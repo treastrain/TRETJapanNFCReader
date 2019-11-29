@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// 交通系ICカード
@@ -19,3 +20,5 @@ public struct TransitICCard: FeliCaCard {
         self.data = data
     }
 }
+
+#endif

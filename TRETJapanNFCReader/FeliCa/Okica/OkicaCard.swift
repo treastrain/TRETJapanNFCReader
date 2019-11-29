@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// OKICA
@@ -19,3 +20,5 @@ public struct OkicaCard: FeliCaCard {
         self.data = data
     }
 }
+
+#endif

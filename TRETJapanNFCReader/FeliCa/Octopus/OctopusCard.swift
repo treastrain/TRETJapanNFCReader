@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// Octopus Card (八達通)
@@ -19,3 +20,5 @@ public struct OctopusCard: FeliCaCard {
         self.data = data
     }
 }
+
+#endif

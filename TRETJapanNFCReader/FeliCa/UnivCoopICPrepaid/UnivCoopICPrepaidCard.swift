@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// 大学生協ICプリペイドカード
@@ -24,3 +25,5 @@ public struct UnivCoopICPrepaidCard: FeliCaCard {
         self.data = data
     }
 }
+
+#endif

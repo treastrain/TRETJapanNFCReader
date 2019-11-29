@@ -6,11 +6,8 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import UIKit
+#if os(iOS)
 import CoreNFC
-
-//@available(iOS 13.0, *)
-//public typealias TransitICReaderViewController = UIViewController & TransitICReaderSessionDelegate
 
 @available(iOS 13.0, *)
 public typealias TransitICCardTag = NFCFeliCaTag
@@ -74,3 +71,5 @@ public class TransitICReader: FeliCaReader {
         }
     }
 }
+
+#endif

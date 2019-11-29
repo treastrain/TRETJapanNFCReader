@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 import CoreNFC
 
@@ -170,5 +171,6 @@ public class DriversLicenseReader: JapanNFCReader {
             completion(driversLicenseCard)
         }
     }
-    
 }
+
+#endif

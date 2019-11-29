@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 /// エヌタス
@@ -14,3 +15,5 @@ public struct NTasuCard: FeliCaCard {
     public let tag: NTasuCardTag
     public var data: NTasuCardData
 }
+
+#endif

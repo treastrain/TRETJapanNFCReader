@@ -19,7 +19,6 @@ public protocol FeliCaCard {
 }
 #endif
 
-
 public protocol FeliCaCardItems: Codable {
 }
 

@@ -6,9 +6,12 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 @available(iOS 13.0, *)
 public protocol FeliCaReaderSessionDelegate: JapanNFCReaderSessionDelegate {
     func feliCaReaderSession(didRead feliCaCard: FeliCaCard)
 }
+
+#endif

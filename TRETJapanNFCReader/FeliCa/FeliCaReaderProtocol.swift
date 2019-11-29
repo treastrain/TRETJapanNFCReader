@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import CoreNFC
 
 @available(iOS 13.0, *)
@@ -15,3 +16,5 @@ protocol FeliCaReaderProtocol {
     // @available(*, unavailable, renamed: "getItems")
     // func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void)
 }
+
+#endif

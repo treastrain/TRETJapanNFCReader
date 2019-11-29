@@ -6,6 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 import CoreNFC
 
@@ -102,3 +103,4 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
 }
 
+#endif
