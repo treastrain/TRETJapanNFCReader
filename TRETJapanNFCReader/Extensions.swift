@@ -11,14 +11,7 @@ import Foundation
 extension Bundle {
     static var current: Bundle {
         class C {}
-        print(Bundle(for: type(of: C())))
         return Bundle(for: type(of: C()))
-    }
-}
-
-class LocalizedBundle {
-    static func bundle() -> Bundle {
-        return Bundle(for: self)
     }
 }
 
