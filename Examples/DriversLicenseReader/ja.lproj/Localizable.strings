@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   TRETJapanNFCReader
 
@@ -70,3 +70,5 @@
 "enterPINsTitle" = "暗証番号1・2を入力";
 "enterPINsMessage" = "暗証番号を設定していない場合は何も入力せずに「次へ」をタップしてください。";
 "enterPIN2TextFieldPlaceholder" = "暗証番号2";
+
+"photo" = "写真";

@@ -64,6 +64,7 @@
 		CD07201B234E30BB0083AE4B /* FeliCaCardTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD072019234E30BB0083AE4B /* FeliCaCardTransaction.swift */; };
 		CD07201C234E30BB0083AE4B /* FeliCaCardTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD072019234E30BB0083AE4B /* FeliCaCardTransaction.swift */; };
 		CD07201D234E30BB0083AE4B /* FeliCaCardTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD072019234E30BB0083AE4B /* FeliCaCardTransaction.swift */; };
+		CD12A989239131DE00B61132 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12A988239131DE00B61132 /* PhotoViewController.swift */; };
 		CD15F81222C7D1E500201FAB /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
 		CD163B16230D925200B42E6C /* RakutenEdyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD163B15230D925200B42E6C /* RakutenEdyCard.swift */; };
@@ -491,6 +492,7 @@
 		CD07200F234E307F0083AE4B /* FeliCaSystemCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaSystemCode.swift; sourceTree = "<group>"; };
 		CD072014234E30950083AE4B /* FeliCaServiceCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaServiceCode.swift; sourceTree = "<group>"; };
 		CD072019234E30BB0083AE4B /* FeliCaCardTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaCardTransaction.swift; sourceTree = "<group>"; };
+		CD12A988239131DE00B61132 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		CD15F81122C7D1E500201FAB /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				CD8B7B6D22CA5D680027E1ED /* PINSettingViewController.swift */,
 				CD68FACF22CB9ABD004ABCAF /* MattersViewController.swift */,
 				CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */,
+				CD12A988239131DE00B61132 /* PhotoViewController.swift */,
 				CD5D2D5822C5E2FA004330F3 /* Assets.xcassets */,
 				CD5D2D5A22C5E2FA004330F3 /* LaunchScreen.storyboard */,
 				CD5D2D5D22C5E2FA004330F3 /* Info.plist */,
@@ -1518,6 +1521,7 @@
 				CD5D2D5422C5E2F7004330F3 /* DriversLicenseViewController.swift in Sources */,
 				CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */,
 				CD94050222DBA65200CA9E32 /* RegisteredDomicileViewController.swift in Sources */,
+				CD12A989239131DE00B61132 /* PhotoViewController.swift in Sources */,
 				CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */,
 				CD5D2D5222C5E2F7004330F3 /* SceneDelegate.swift in Sources */,
 				CD68FAD022CB9ABD004ABCAF /* MattersViewController.swift in Sources */,

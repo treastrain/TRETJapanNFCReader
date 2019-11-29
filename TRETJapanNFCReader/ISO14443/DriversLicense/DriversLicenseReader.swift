@@ -45,8 +45,10 @@ public class DriversLicenseReader: JapanNFCReader {
     
     /// 運転免許証からデータを読み取る
     /// - Parameter items: 運転免許証から読み取りたいデータ
+    /// - Parameter pin1: 暗証番号1
+    /// - Parameter pin2: 暗証番号2
     public func get(items: [DriversLicenseCardItem], pin1: String = "", pin2: String = "") {
-        if items.contains(.matters) || items.contains(.registeredDomicile) {
+        if items.contains(.matters) || items.contains(.registeredDomicile) || items.contains(.photo) {
             if let pin = convertPINStringToJISX0201(pin1) {
                 self.pin1 = pin
             } else {
@@ -55,7 +57,7 @@ public class DriversLicenseReader: JapanNFCReader {
             }
         }
         
-        if items.contains(.registeredDomicile) {
+        if items.contains(.registeredDomicile) || items.contains(.photo) {
             if let pin = convertPINStringToJISX0201(pin2) {
                 self.pin2 = pin
             } else {
@@ -164,6 +166,8 @@ public class DriversLicenseReader: JapanNFCReader {
                     driversLicenseCard = self.readMatters(session, driversLicenseCard, pin1: self.pin1)
                 case .registeredDomicile:
                     driversLicenseCard = self.readRegisteredDomicile(session, driversLicenseCard, pin1: self.pin1, pin2: self.pin2)
+                case .photo:
+                    driversLicenseCard = self.readPhoto(session, driversLicenseCard, pin1: self.pin1, pin2: self.pin2)
                 }
             }
             self.pin1 = []

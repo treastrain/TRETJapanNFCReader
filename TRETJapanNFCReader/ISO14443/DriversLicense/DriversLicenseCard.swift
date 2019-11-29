@@ -19,6 +19,8 @@ public enum DriversLicenseCardItem: CaseIterable {
     case matters
     /// DF1/EF02 記載事項(本籍)
     case registeredDomicile
+    /// DF2/EF01 写真
+    case photo
 }
 
 /// 日本の運転免許証
@@ -201,14 +203,21 @@ public struct DriversLicenseCard {
     var 発行者名: String
     var 主体者名: String
     var 主体者鍵識別子: UInt8
+    */
     
-    // DF2/EF01 写真
-    var 写真: Data
+    /// DF2/EF01 写真
+    public struct Photo {
+        /// 写真
+        public var photoData: Data
+    }
+    /// DF2/EF01 写真
+    public var photo: Photo?
     
+    /*
     // DF3/EF01 RFU
     */
     
-    typealias TLVField = (tag: UInt8, length: UInt8, value: [UInt8])
+    typealias TLVField = (tag: [UInt8], length: Int, value: [UInt8])
     
     internal func convert(items: DriversLicenseCardItem, from data: [UInt8]) -> DriversLicenseCard {
         var driversLicenseCard = self
@@ -216,15 +225,24 @@ public struct DriversLicenseCard {
         
         var i = 0
         while i < data.count {
-            let tag = data[i]
-            if tag == 0xFF {
+            if data[i] == 0xFF {
                 break
             }
+            var tag = [data[i]]
+            if tag.first! == 0x5F {
+                i += 1
+                tag.append(data[i])
+            }
             i += 1
-            let length = data[i]
+            var length = UInt16(data[i])
             if length == 0 {
                 i += 1
                 continue
+            }
+            if length == 0x82 {
+                i += 1
+                length = UInt16(data[i]) << 8 + UInt16(data[i + 1])
+                i += 1
             }
             i += 1
             let endIndex = Int(length) + i - 1
@@ -234,7 +252,7 @@ public struct DriversLicenseCard {
             // let valueString = value.map { (u) -> String in u.toHexString() }
             // print("タグ: \(tag.toHexString()), 長さ: \(length), 値: \(valueString)")
             
-            fields.append((tag: tag, length: length, value: value))
+            fields.append((tag: tag, length: Int(length), value: value))
         }
         
         switch items {
@@ -246,6 +264,8 @@ public struct DriversLicenseCard {
             driversLicenseCard = self.convertToMatters(fields: fields)
         case .registeredDomicile:
             driversLicenseCard = self.convertToRegisteredDomicile(fields: fields)
+        case .photo:
+            driversLicenseCard = self.convertToPhoto(fields: fields)
         }
         
         return driversLicenseCard
@@ -266,7 +286,7 @@ public struct DriversLicenseCard {
         formatter.dateFormat = "yyyyMMdd"
         
         for field in fields {
-            switch field.tag {
+            switch field.tag.first {
             case 0x45:
                 specificationVersionNumber = String(data: Data(field.value[0...2]), encoding: .shiftJIS)
                 let issuanceDateString = field.value[3...6].map { (data) -> String in
@@ -354,7 +374,7 @@ public struct DriversLicenseCard {
         var semiMediumVehicleLicenceDate: Date?
         
         for field in fields {
-            switch field.tag {
+            switch field.tag.first {
             case 0x11:
                 jisX0208EstablishmentYearNumber = field.value.first?.toString()
             case 0x12:
@@ -464,6 +484,17 @@ public struct DriversLicenseCard {
         
         if let registeredDomicileData = fields.first?.value.split(count: 2), let registeredDomicile = String?(jisX0208Data: registeredDomicileData) {
             driversLicenseCard.registeredDomicile = DriversLicenseCard.RegisteredDomicile(registeredDomicile: registeredDomicile)
+        }
+        
+        return driversLicenseCard
+    }
+    
+    private func convertToPhoto(fields: [TLVField]) -> DriversLicenseCard {
+        var driversLicenseCard = self
+        
+        if let value = fields.first?.value {
+            let photoData = Data(value)
+            driversLicenseCard.photo = DriversLicenseCard.Photo(photoData: photoData)
         }
         
         return driversLicenseCard
