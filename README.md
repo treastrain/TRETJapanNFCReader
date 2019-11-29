@@ -1,7 +1,8 @@
 ![](TRETJapanNFCReader.png)
 
 # TRETJapanNFCReader
-日本のNFCカード向けリーダーライブラリ
+日本のNFCカード向けリーダーライブラリ / NFC Reader for Japanese NFC Cards for iOS etc.
+
 
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/treastrain/TRETJapanNFCReader/blob/master/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/treastrain/TRETJapanNFCReader)](https://github.com/treastrain/TRETJapanNFCReader/stargazers)
@@ -12,18 +13,21 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/TRETJapanNFCReader?label=CocoaPods)](https://cocoapods.org/pods/TRETJapanNFCReader)
 ※現時点で Swift Package Manager で利用可能なのは iOS のみ。
 
+
 サポート [Twitter: @JapanNFCReader](https://twitter.com/JapanNFCReader)
+
 Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON などの電子マネーカード、運転免許証の読み取り
 
-## 対応 OS
+## 対応 OS / Supported OS
 - iOS 9.3 以降
 - watchOS 2.0 以降
 - tvOS 9.2 以降
 - macOS 10.9 以降
+
 ※ NFCカードの読み取りは iOS 13.0 以降で対応するデバイスで使用可能。
 
 
-## 対応 NFC カード
+## 対応 NFC カード / Supported NFC card
 ### NFC-B (Type-B)
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
@@ -65,8 +69,24 @@ IDm と System Code の表示
     - 残高の読み取りと表示
 
 
-## 使い方
+## 使い方 / How to use
 `Examples` 配下にサンプルを掲載。
+### Swift Package Manager
+Xcode 11: File > Swift Package > Add Package Dependency... > Enter package repository URL
+```
+https://github.com/treastrain/TRETJapanNFCReader
+```
+### Carthage
+`Cartfile` に以下を記述し、`carthage update`
+```
+github "treastrain/TRETJapanNFCReader"
+```
+### CocoaPods
+`Podfile` に以下を記述し、`pod install`
+```
+pod 'treastrain/TRETJapanNFCReader'
+```
+
 ### 全 NFC カード共通
 1. プロジェクトの TARGET から開発している iOS Application を選び、Signing & Capabilities で Near Field Communication Tag Reading を有効にする（Near Field Communication Tag Reader Session Formats が entitlements ファイルに含まれている必要がある）。
 2. Near Field Communication Tag Reader Session Formats の中に "NFC tag-specific data protocol (TAG)" が含まれていることを確認する。
@@ -75,9 +95,9 @@ IDm と System Code の表示
 ### NFC-B (Type-B)
 #### 運転免許証の場合
 1. 運転免許証を読み取るには、開発している iOS Application の Info.plist に "ISO7816 application identifiers for NFC Tag Reader Session (com.apple.developer.nfc.readersession.iso7816.select-identifiers)" を追加する。ISO7816 application identifiers for NFC Tag Reader Session には以下を含める必要がある。
-- Item 0: A0000002310100000000000000000000
-- Item 1: A0000002310200000000000000000000
-- Item 2: A0000002480300000000000000000000
+- Item 0: `A0000002310100000000000000000000`
+- Item 1: `A0000002310200000000000000000000`
+- Item 2: `A0000002480300000000000000000000`
 
 2. ライブラリをインポートし、`DriversLicenseReader` を初期化した後でスキャンを開始する。
 ```swift
@@ -147,13 +167,13 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 - English
 
 
-## 関連するページ
+## 関連するページ / Related
 - [treastrain/ios13-felica-reader: Sample project to read FeliCa on iOS 13 and later - GitHub](https://github.com/treastrain/ios13-felica-reader)
 - [iOS 13 で FeliCa (Suica) にアクセス | notes from E](https://notes.tret.jp/ios13-felica-reading/)
 - [iOS 13 の Core NFC で運転免許証を読み取ろう【TRETJapanNFCReader】 - Qiita](https://qiita.com/treastrain/items/f95ee3f99c6b6111e999)
 
 
-## 謝辞 Acknowledgments
+## 謝辞 / Acknowledgments
 ### 運転免許証 `TRETJapanNFCReader/ISO14443/DriversLicense` 
 - `JIS0208.TXT`
     - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
@@ -170,4 +190,7 @@ OKICA の情報、および OKICA カード内に保存されているゆいレ�
 - [Octopus · metrodroid/metrodroid Wiki](https://github.com/metrodroid/metrodroid/wiki/Octopus)
 
 各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。
-これは電子マネーカード提供各社が公式に提供するものではありません。
+本ライブラリは電子マネーカード提供各社が公式に提供するものではありません。
+
+The names of e-money and the services are generally trademarks and registered trademarks of each company.
+This library is not officially provided by e-money card providers.
