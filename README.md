@@ -154,19 +154,19 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
 
 ## 謝辞 Acknowledgments
-### 運転免許証 `Sources/ISO14443/DriversLicense` 
+### 運転免許証 `TRETJapanNFCReader/ISO14443/DriversLicense` 
 - `JIS0208.TXT`
     - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
 
-### OKICA `Sources/FeliCa/Okica/`
+### OKICA `TRETJapanNFCReader/FeliCa/Okica/`
 OKICA の情報、および OKICA カード内に保存されているゆいレールの駅名情報、各バス会社名の情報は [Twitter@resi098](https://twitter.com/resi098) 様からご提供いただきました。
 
-### 大学生協ICプリペイド `Sources/FeliCa/UnivCoopICPrepaid`
+### 大学生協ICプリペイド `TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid`
 大学生協ICプリペイドの読み取り実装においては以下に掲載されている仕様を参考にしました。
 - `oboenikui/UnivFeliCa.md`
     - [大学生協FeliCaの仕様](https://gist.github.com/oboenikui/ee9fb0cb07a6690c410b872f64345120)
 
-### 八達通 `Sources/FeliCa/Octopus`
+### 八達通 `TRETJapanNFCReader/FeliCa/Octopus`
 - [Octopus · metrodroid/metrodroid Wiki](https://github.com/metrodroid/metrodroid/wiki/Octopus)
 
 各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。
