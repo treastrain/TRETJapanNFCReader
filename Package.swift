@@ -19,7 +19,8 @@ let package = Package(
     targets: [
         .target(
             name: "TRETJapanNFCReader",
-            dependencies: []),
+            dependencies: [],
+            path: "TRETJapanNFCReader"),
     ],
     swiftLanguageVersions: [.v5]
 )
