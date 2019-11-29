@@ -730,7 +730,7 @@
 			children = (
 				CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */,
 				CDD1374B232181BF002AF46B /* Pods.xcodeproj */,
-				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
+				CD5D2D7222C5E977004330F3 /* Sources */,
 				CD5D2D6322C5E47F004330F3 /* Examples */,
 				CD5D2D3F22C5DF36004330F3 /* Products */,
 				CD5D2D6122C5E345004330F3 /* Frameworks */,
@@ -790,7 +790,7 @@
 			path = Examples;
 			sourceTree = "<group>";
 		};
-		CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */ = {
+		CD5D2D7222C5E977004330F3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				CD5D2D7322C5E977004330F3 /* TRETJapanNFCReader.h */,
@@ -803,7 +803,7 @@
 				CD163B13230D88D900B42E6C /* ISO14443 */,
 				CDAC0566230D2C7D00E1DDCF /* FeliCa */,
 			);
-			path = TRETJapanNFCReader;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		CD5D2D7A22C5EA25004330F3 /* DriversLicense */ = {
