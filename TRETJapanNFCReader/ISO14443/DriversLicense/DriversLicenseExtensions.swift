@@ -20,7 +20,7 @@ internal extension Optional where Wrapped == String {
             let tableStringArray = tableString.components(separatedBy: .newlines)
             // var tableFromJISX0208ToShiftJIS: [Data : Data] = [:]
             var tableFromJISX0208ToUnicode: [Data : Data] = [:]
-            print("はじまり")
+            // print("はじまり")
             for row in tableStringArray {
                 if row.first != "#" {
                     let col = row.components(separatedBy: .whitespaces)
@@ -30,11 +30,11 @@ internal extension Optional where Wrapped == String {
                         let col2 = col[2].hexData
                         // tableFromJISX0208ToShiftJIS[col1] = col0
                         tableFromJISX0208ToUnicode[col1] = col2
-                        print("UInt16(\(col[1])).data : UInt16(\(col[2])).data,")
+                        // print("UInt16(\(col[1])).data : UInt16(\(col[2])).data,")
                     }
                 }
             }
-            print("おわり")
+            // print("おわり")
             let dataArray = jisX0208Data.map { (data) -> Data in
                 return (UInt16(data[1]) << 8 + UInt16(data[0])).data
             }
