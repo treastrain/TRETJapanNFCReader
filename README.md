@@ -146,7 +146,6 @@ import TRETJapanNFCReader
 class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
     var reader: RakutenEdyReader!
-    var rakutenEdyCard: RakutenEdyCard?
 
     override func viewDidLoad() {
         super.viewDidLoad()
