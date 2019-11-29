@@ -471,7 +471,7 @@
 		0527E7A1238264B7005B3936 /* SwiftUIDriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIDriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0527E7BF23829B85005B3936 /* RegisteredDomicileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileView.swift; sourceTree = "<group>"; };
 		0527E7C123829BAE005B3936 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SwiftUIDriversLicenseReader.entitlements; path = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements; sourceTree = "<group>"; };
+		0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIDriversLicenseReader.entitlements; sourceTree = "<group>"; };
 		0527E7CB2382BF17005B3936 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		46DF2AD3233CFAE30060DCB0 /* FCFCampusCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCFCampusCard.swift; sourceTree = "<group>"; };
 		46DF2AD6233CFAEC0060DCB0 /* ICUCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICUCard.swift; sourceTree = "<group>"; };
@@ -640,6 +640,7 @@
 		0527E78423825457005B3936 /* SwiftUIDriversLicenseReader */ = {
 			isa = PBXGroup;
 			children = (
+				0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */,
 				0527E78523825457005B3936 /* PinSettingView.swift */,
 				0527E7BF23829B85005B3936 /* RegisteredDomicileView.swift */,
 				0527E78623825457005B3936 /* Assets.xcassets */,
@@ -729,9 +730,6 @@
 			children = (
 				CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */,
 				CDD1374B232181BF002AF46B /* Pods.xcodeproj */,
-				CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */,
-				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
-				0527E7C823829E17005B3936 /* SwiftUIDriversLicenseReader.entitlements */,
 				CD5D2D7222C5E977004330F3 /* TRETJapanNFCReader */,
 				CD5D2D6322C5E47F004330F3 /* Examples */,
 				CD5D2D3F22C5DF36004330F3 /* Products */,
@@ -756,6 +754,7 @@
 		CD5D2D4E22C5E2F7004330F3 /* DriversLicenseReader */ = {
 			isa = PBXGroup;
 			children = (
+				CD06D89222C67CD1006B238B /* DriversLicenseReader.entitlements */,
 				CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */,
 				CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */,
 				CD7936DE22C6492B00E5AC2E /* Main.storyboard */,
@@ -939,6 +938,7 @@
 		CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */ = {
 			isa = PBXGroup;
 			children = (
+				CDFC3B7322CE2B37000E88B4 /* TransitICReader.entitlements */,
 				CDFC3B5C22CE2AD2000E88B4 /* AppDelegate.swift */,
 				CDFC3B5E22CE2AD2000E88B4 /* SceneDelegate.swift */,
 				CDFC3B6022CE2AD2000E88B4 /* ViewController.swift */,
@@ -1797,10 +1797,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Examples/SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Examples/SwiftUIDriversLicenseReader/Preview Content\"";
-				DEVELOPMENT_TEAM = 822HL63RB2;
+				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Examples/SwiftUIDriversLicenseReader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1808,7 +1808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aBite.SwiftUIDriversLicenseReader;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.SwiftUIDriversLicenseReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1819,10 +1819,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Examples/SwiftUIDriversLicenseReader/SwiftUIDriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Examples/SwiftUIDriversLicenseReader/Preview Content\"";
-				DEVELOPMENT_TEAM = 822HL63RB2;
+				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Examples/SwiftUIDriversLicenseReader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1830,7 +1830,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.aBite.SwiftUIDriversLicenseReader;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.SwiftUIDriversLicenseReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2019,7 +2019,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DriversLicenseReader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Examples/DriversLicenseReader/DriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/DriversLicenseReader/Info.plist;
@@ -2040,7 +2040,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DriversLicenseReader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Examples/DriversLicenseReader/DriversLicenseReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/DriversLicenseReader/Info.plist;
@@ -2226,7 +2226,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TransitICReader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Examples/TransitICReader/TransitICReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/TransitICReader/Info.plist;
@@ -2246,7 +2246,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TransitICReader.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Examples/TransitICReader/TransitICReader.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9TWATL5SE8;
 				INFOPLIST_FILE = Examples/TransitICReader/Info.plist;
