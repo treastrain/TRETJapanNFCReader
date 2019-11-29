@@ -10,8 +10,13 @@ import Foundation
 
 extension Bundle {
     static var current: Bundle {
-        class C {}
-        return Bundle(for: type(of: C()))
+        return LocalizedBundle.bundle()
+    }
+}
+
+class LocalizedBundle {
+    static func bundle() -> Bundle {
+        return Bundle(for: self)
     }
 }
 
