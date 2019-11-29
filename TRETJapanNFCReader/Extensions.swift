@@ -10,8 +10,9 @@ import Foundation
 
 extension Bundle {
     static var current: Bundle {
-        print(LocalizedBundle.bundle())
-        return LocalizedBundle.bundle()
+        class C {}
+        print(Bundle(for: type(of: C())))
+        return Bundle(for: type(of: C()))
     }
 }
 
