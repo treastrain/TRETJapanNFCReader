@@ -512,6 +512,9 @@
 		CD5476D223105679003E3C62 /* UnivCoopICPrepaidCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCoopICPrepaidCardData.swift; sourceTree = "<group>"; };
 		CD59FE5322D41BBE00AAEF8B /* JapanNFCReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderError.swift; sourceTree = "<group>"; };
 		CD59FE5522D41EB400AAEF8B /* JapanNFCReaderSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanNFCReaderSessionDelegate.swift; sourceTree = "<group>"; };
+		CD5AA2D823964E78003FDDC3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CD5AA2D923964E8E003FDDC3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CD5AA2DA23964EA1003FDDC3 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CD5D2D4D22C5E2F7004330F3 /* DriversLicenseReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriversLicenseReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1185,6 +1188,9 @@
 				ja,
 				Base,
 				en,
+				"zh-Hans",
+				"zh-Hant",
+				"zh-HK",
 			);
 			mainGroup = CD5D2D3422C5DF36004330F3;
 			productRefGroup = CD5D2D3F22C5DF36004330F3 /* Products */;
@@ -1757,6 +1763,9 @@
 			children = (
 				CD79369B22C6300200E5AC2E /* ja */,
 				CD7936EE22C64AB600E5AC2E /* en */,
+				CD5AA2D823964E78003FDDC3 /* zh-Hans */,
+				CD5AA2D923964E8E003FDDC3 /* zh-Hant */,
+				CD5AA2DA23964EA1003FDDC3 /* zh-HK */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
