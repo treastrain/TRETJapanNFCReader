@@ -23,7 +23,7 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     case sapicaPoints
     
     
-    internal init?(_ serviceCode: FeliCaServiceCode) {
+    public init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x008B:
             self = .balance
@@ -40,7 +40,7 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    var serviceCode: FeliCaServiceCode {
+    public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
             return 0x008B

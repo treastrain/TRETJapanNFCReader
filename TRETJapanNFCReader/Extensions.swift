@@ -16,7 +16,7 @@ extension Bundle {
 }
 
 public extension Date {
-    func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
+    func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = dateStyle
         formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
@@ -27,20 +27,12 @@ public extension Date {
 
 public extension Optional where Wrapped == Date {
     func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateStyle = dateStyle
-        formatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
-        formatter.timeStyle = timeStyle
-        if self == nil {
-            return nil
-        } else {
-            return formatter.string(from: self!)
-        }
+        return self?.toString()
     }
 }
 
 public extension UInt8 {
-    func toString() -> String{
+    func toString() -> String {
         var str = String(self, radix: 16).uppercased()
         if str.count == 1 {
             str = "0" + str
@@ -57,11 +49,7 @@ public extension UInt8 {
 
 public extension Optional where Wrapped == UInt8 {
     func toHexString() -> String? {
-        if self == nil {
-            return nil
-        } else {
-            return self!.toHexString()
-        }
+        return self?.toHexString()
     }
 }
 

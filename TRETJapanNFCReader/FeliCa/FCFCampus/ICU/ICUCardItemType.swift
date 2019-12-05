@@ -14,7 +14,7 @@ public enum ICUCardItemType: UInt16, CaseIterable, FeliCaCardItemType {
     case transactions = 0x120F
     
     // typeof FeliCaServiceCode == UInt16
-    internal init?(_ serviceCode: FeliCaServiceCode) {
+    public init?(_ serviceCode: FeliCaServiceCode) {
         let service = ICUCardItemType(rawValue: serviceCode)
         switch service {
         case .some:
@@ -24,7 +24,7 @@ public enum ICUCardItemType: UInt16, CaseIterable, FeliCaCardItemType {
         }
     }
     
-    var serviceCode: FeliCaServiceCode {
+    public var serviceCode: FeliCaServiceCode {
        self.rawValue
     }
     

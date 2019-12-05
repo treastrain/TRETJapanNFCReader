@@ -13,7 +13,7 @@ public protocol FeliCaCardData: Codable {
     var type: FeliCaCardType { get }
     var primaryIDm: String { get }
     var primarySystemCode: FeliCaSystemCode { get }
-    var contents: [FeliCaSystemCode : FeliCaSystem] { get }
+    var contents: [FeliCaSystemCode : FeliCaSystem] { get set }
     
     mutating func convert()
     func toJSONData() -> Data?

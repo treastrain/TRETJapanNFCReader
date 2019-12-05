@@ -13,7 +13,7 @@ public enum OctopusCardItemType: CaseIterable, FeliCaCardItemType {
     /// Card Balance
     case balance
     
-    internal init?(_ serviceCode: FeliCaServiceCode) {
+    public init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x0117:
             self = .balance
@@ -22,7 +22,7 @@ public enum OctopusCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    var serviceCode: FeliCaServiceCode {
+    public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
             return 0x0117

@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  TRETJapanNFCReader
+
+  Created by treastrain on 2019/06/28.
+  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
+*/
+
+"nfcReadingUnavailableAlertTitle" = "不支持扫描";
+"nfcReadingUnavailableAlertMessage" = "此装置不支持扫描。";
+"nfcReaderSessionAlertMessage" = "如图中所示将 iPhone 放在卡的下半部份。";
+"nfcTagReaderSessionDidInvalidateWithErrorAlertTitle" = "此程序已无效";
+"nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage" = "检测到多于一张卡。请移除所有卡然后重新再试。";
+"nfcTagReaderSessionConnectErrorMessage" = "连接错误。请重试。";
+"nfcTagReaderSessionDifferentTagTypeErrorMessage" = "检测到不能读取的卡。 请重试。";
+"nfcTagReaderSessionReadingMessage" = "读取中…\n 将 iPhone 放在卡片上保持不动。";
+
+"nfcTagReaderSessionDoneMessage" = "完成";
+
+"pinRequired" = "需要输入 PIN 码";
+
+"transitIC" = "Transit IC";
+"rakutenEdy" = "Rakuten Edy";
+"nanaco" = "nanaco";
+"waon" = "WAON";
+"univCoopICPrepaid" = "Univ. Co-op";
+"octopus" = "Octopus";
+"ryuto" = "Ryuto";

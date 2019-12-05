@@ -105,7 +105,7 @@ extension DriversLicenseReader {
                 }
                 
                 self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 3) { (responseData, sw1, sw2, error) in
-                    self.printData(responseData, isPrintData: true, sw1, sw2)
+                    // self.printData(responseData, isPrintData: true, sw1, sw2)
                     
                     if let error = error {
                         print(error.localizedDescription)
