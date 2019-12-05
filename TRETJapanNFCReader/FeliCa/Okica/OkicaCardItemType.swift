@@ -17,7 +17,7 @@ public enum OkicaCardItemType: CaseIterable, FeliCaCardItemType {
     /// SF入場情報
     case sfEntryInformations
     
-    internal init?(_ serviceCode: FeliCaServiceCode) {
+    public init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x028F:
             self = .transactions
@@ -30,7 +30,7 @@ public enum OkicaCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    var serviceCode: FeliCaServiceCode {
+    public var serviceCode: FeliCaServiceCode {
         switch self {
         case .transactions:
             return 0x028F

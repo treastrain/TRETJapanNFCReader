@@ -20,7 +20,7 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     case transactions
     
     
-    internal init?(_ serviceCode: FeliCaServiceCode) {
+    public init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x5597:
             self = .balance
@@ -35,7 +35,7 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    var serviceCode: FeliCaServiceCode {
+    public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
             return 0x5597

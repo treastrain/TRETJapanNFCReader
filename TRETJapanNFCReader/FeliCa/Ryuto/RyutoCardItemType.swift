@@ -13,7 +13,7 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
     /// 取引履歴
     case transactions
     
-    internal init?(_ serviceCode: FeliCaServiceCode) {
+    public init?(_ serviceCode: FeliCaServiceCode) {
         switch serviceCode {
         case 0x898F:
             self = .transactions
@@ -26,7 +26,7 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    var serviceCode: FeliCaServiceCode {
+    public var serviceCode: FeliCaServiceCode {
         switch self {
         case .transactions:
             return 0x898F
