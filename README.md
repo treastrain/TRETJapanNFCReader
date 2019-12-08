@@ -83,7 +83,7 @@ github "treastrain/TRETJapanNFCReader"
 ### CocoaPods
 `Podfile` に以下を記述し、`pod install`
 ```
-pod 'treastrain/TRETJapanNFCReader'
+pod 'TRETJapanNFCReader'
 ```
 
 ### 全 NFC カード共通
