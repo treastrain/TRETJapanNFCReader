@@ -160,7 +160,7 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 ```
 
 
-## i18n
+## L10N
 - 日本語 Japanese
 - English
 
