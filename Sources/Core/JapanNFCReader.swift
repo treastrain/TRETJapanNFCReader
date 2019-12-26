@@ -17,7 +17,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
     internal let viewController: UIViewController?
     internal let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
-    internal var session: NFCTagReaderSession?
+    public var session: NFCTagReaderSession?
     
     private override init() {
         self.viewController = nil
@@ -93,7 +93,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
         self.session = nil
     }
     
-    public func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+    open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         print("tagReaderSession(_:didDetect:)")
         session.invalidate()
     }

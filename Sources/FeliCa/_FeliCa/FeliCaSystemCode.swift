@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_Core
 
 public typealias FeliCaSystemCode = UInt16
 

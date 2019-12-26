@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Bundle {
+public extension Bundle {
     static var current: Bundle {
         class C {}
         return Bundle(for: type(of: C()))
@@ -60,7 +60,7 @@ internal extension UInt8 {
     }
 }
 
-internal extension UInt16 {
+public extension UInt16 {
     var data: Data {
         var int16 = self
         return Data(bytes: &int16, count: MemoryLayout<UInt16>.size)

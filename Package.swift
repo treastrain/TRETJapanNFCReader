@@ -31,21 +31,6 @@ targets.append(
 )
 
 
-// MARK: - MIFARE (ISO 14443)
-// Required for targets using MIFARE (ISO 14443)
-products.append(
-    .library(
-        name: "TRETJapanNFCReader/MIFARE",
-        targets: ["TRETJapanNFCReader/MIFARE"])
-)
-targets.append(
-    .target(
-        name: "TRETJapanNFCReader/MIFARE",
-        dependencies: ["TRETJapanNFCReader/Core"],
-        path: "Sources/MIFARE/_MIFARE")
-)
-
-
 // MARK: - FeliCa (ISO 18092)
 // Required for targets using FeliCa (ISO 18092)
 products.append(
@@ -60,19 +45,19 @@ targets.append(
         path: "Sources/FeliCa/_FeliCa")
 )
 
-
-// MARK: - MIFARE/DriversLicense
-// 日本の運転免許証 / Japanese Driver's License
+/*
+// MARK: - MIFARE (ISO 14443)
+// Required for targets using MIFARE (ISO 14443)
 products.append(
     .library(
-        name: "TRETJapanNFCReader/MIFARE/DriversLicense",
-        targets: ["TRETJapanNFCReader/MIFARE/DriversLicense"])
+        name: "TRETJapanNFCReader/MIFARE",
+        targets: ["TRETJapanNFCReader/MIFARE"])
 )
 targets.append(
     .target(
-        name: "TRETJapanNFCReader/MIFARE/DriversLicense",
-        dependencies: ["TRETJapanNFCReader/MIFARE"],
-        path: "Sources/MIFARE/DriversLicense")
+        name: "TRETJapanNFCReader/MIFARE",
+        dependencies: ["TRETJapanNFCReader/Core"],
+        path: "Sources/MIFARE/_MIFARE")
 )
 
 
@@ -225,6 +210,21 @@ targets.append(
         path: "Sources/FeliCa/Waon")
 )
 
+
+// MARK: - MIFARE/DriversLicense
+// 日本の運転免許証 / Japanese Driver's License
+products.append(
+    .library(
+        name: "TRETJapanNFCReader/MIFARE/DriversLicense",
+        targets: ["TRETJapanNFCReader/MIFARE/DriversLicense"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader/MIFARE/DriversLicense",
+        dependencies: ["TRETJapanNFCReader/MIFARE"],
+        path: "Sources/MIFARE/DriversLicense")
+)
+*/
 
 let package = Package(
     name: "TRETJapanNFCReader",

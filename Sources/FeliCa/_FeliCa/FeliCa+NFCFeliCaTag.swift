@@ -8,6 +8,7 @@
 
 #if os(iOS)
 import CoreNFC
+import TRETJapanNFCReader_Core
 
 @available(iOS 13.0, *)
 extension NFCFeliCaTag {
