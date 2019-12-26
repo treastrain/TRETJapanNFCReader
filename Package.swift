@@ -10,7 +10,10 @@ var products: [Product] = [
 var targets: [Target] = [
     .target(
         name: "TRETJapanNFCReader",
-        dependencies: []),
+        dependencies: [
+            "TRETJapanNFCReader/Core"
+        ],
+        path: "Sources/TRETJapanNFCReader"),
 ]
 
 
