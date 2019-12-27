@@ -23,6 +23,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader/FeliCa/Ryuto",
             "TRETJapanNFCReader/FeliCa/TransitIC",
             "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid",
+            "TRETJapanNFCReader/FeliCa/Waon",
             "TRETJapanNFCReader/MIFARE/DriversLicense",
         ],
         path: "Sources/TRETJapanNFCReader"),
@@ -208,7 +209,7 @@ targets.append(
         path: "Sources/FeliCa/UnivCoopICPrepaid")
 )
 
-/*
+
 // MARK: - FeliCa/Waon
 // WAON
 products.append(
@@ -222,7 +223,7 @@ targets.append(
         dependencies: ["TRETJapanNFCReader/FeliCa"],
         path: "Sources/FeliCa/Waon")
 )
-*/
+
 
 // MARK: - MIFARE/DriversLicense
 // 日本の運転免許証 / Japanese Driver's License

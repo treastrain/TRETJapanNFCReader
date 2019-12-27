@@ -188,6 +188,34 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid"
+               BuildableName = "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid"
+               BlueprintName = "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TRETJapanNFCReader/FeliCa/Waon"
+               BuildableName = "TRETJapanNFCReader/FeliCa/Waon"
+               BlueprintName = "TRETJapanNFCReader/FeliCa/Waon"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
