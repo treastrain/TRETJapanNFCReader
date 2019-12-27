@@ -22,6 +22,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader/FeliCa/RakutenEdy",
             "TRETJapanNFCReader/FeliCa/Ryuto",
             "TRETJapanNFCReader/FeliCa/TransitIC",
+            "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid",
             "TRETJapanNFCReader/MIFARE/DriversLicense",
         ],
         path: "Sources/TRETJapanNFCReader"),
@@ -192,7 +193,7 @@ targets.append(
         path: "Sources/FeliCa/TransitIC")
 )
 
-/*
+
 // MARK: - FeliCa/UnivCoopICPrepaid
 // 大学生協ICプリペイド / Japanese Univ. Co-op IC Prepaid
 products.append(
@@ -207,7 +208,7 @@ targets.append(
         path: "Sources/FeliCa/UnivCoopICPrepaid")
 )
 
-
+/*
 // MARK: - FeliCa/Waon
 // WAON
 products.append(

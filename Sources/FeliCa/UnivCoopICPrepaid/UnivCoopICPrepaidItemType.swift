@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// 大学生協ICプリペイドカードから読み取ることができるデータの種別
 public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
