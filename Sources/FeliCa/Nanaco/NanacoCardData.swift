@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// nanacoカードのデータ
 public struct NanacoCardData: FeliCaCardData {

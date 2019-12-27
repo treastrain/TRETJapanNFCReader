@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// nanacoカードから読み取ることができるデータの種別
 public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
