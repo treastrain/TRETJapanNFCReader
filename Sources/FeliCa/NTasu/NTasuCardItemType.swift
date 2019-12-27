@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// エヌタスカードから読み取ることができるデータの種別
 public enum NTasuCardItemType: CaseIterable, FeliCaCardItemType {

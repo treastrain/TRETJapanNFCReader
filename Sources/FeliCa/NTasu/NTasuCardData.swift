@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// エヌタス
 public struct NTasuCardData: FeliCaCardData {
