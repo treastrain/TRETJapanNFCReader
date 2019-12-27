@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// Types of data that can be read from Octopus card
 public enum OctopusCardItemType: CaseIterable, FeliCaCardItemType {

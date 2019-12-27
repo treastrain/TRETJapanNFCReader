@@ -8,6 +8,7 @@
 
 #if os(iOS)
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// Octopus Card (八達通)
 @available(iOS 13.0, *)
