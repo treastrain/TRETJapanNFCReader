@@ -160,6 +160,20 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TRETJapanNFCReader/FeliCa/RakutenEdy"
+               BuildableName = "TRETJapanNFCReader/FeliCa/RakutenEdy"
+               BlueprintName = "TRETJapanNFCReader/FeliCa/RakutenEdy"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

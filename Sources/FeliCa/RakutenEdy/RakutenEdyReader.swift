@@ -8,6 +8,7 @@
 
 #if os(iOS)
 import CoreNFC
+import TRETJapanNFCReader_FeliCa
 
 @available(iOS 13.0, *)
 public typealias RakutenEdyCardTag = NFCFeliCaTag

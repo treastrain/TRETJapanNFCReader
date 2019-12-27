@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// 楽天Edyカードから読み取ることができるデータの種別
 public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// 楽天Edyカードのデータ
 public struct RakutenEdyCardData: FeliCaCardData {
