@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 public struct ICUCardData: FeliCaCardData {
     public var version: String = "2"

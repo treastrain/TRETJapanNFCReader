@@ -14,7 +14,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader/Core",
             "TRETJapanNFCReader/FeliCa",
             // "TRETJapanNFCReader/MIFARE",
-            // "TRETJapanNFCReader/FeliCa/FCFCampus",
+            "TRETJapanNFCReader/FeliCa/FCFCampus",
             // "TRETJapanNFCReader/FeliCa/Nanaco",
             "TRETJapanNFCReader/MIFARE/DriversLicense",
         ],
@@ -66,7 +66,7 @@ targets.append(
         path: "Sources/MIFARE/_MIFARE")
 )
 */
-/*
+
 // MARK: - FeliCa/FCFCampus
 // FCFCampus
 products.append(
@@ -81,7 +81,7 @@ targets.append(
         path: "Sources/FeliCa/FCFCampus")
 )
 
-
+/*
 // MARK: - FeliCa/Nanaco
 // nanaco
 products.append(

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 // data typs which can be obtained from ICU Student ID card.
 public enum ICUCardItemType: UInt16, CaseIterable, FeliCaCardItemType {
