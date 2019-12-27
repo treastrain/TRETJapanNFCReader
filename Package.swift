@@ -53,6 +53,7 @@ targets.append(
 /*
 // MARK: - MIFARE (ISO 14443)
 // Required for targets using MIFARE (ISO 14443)
+将来的に他の MIFARE 系カードに対応したとき、共通なコードを "TRETJapanNFCReader/MIFARE/DriversLicense" から分割、分離し "TRETJapanNFCReader/MIFARE" とする。
 products.append(
     .library(
         name: "TRETJapanNFCReader/MIFARE",
