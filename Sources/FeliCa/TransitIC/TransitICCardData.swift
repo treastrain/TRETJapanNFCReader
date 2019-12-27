@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// 交通系ICカードのデータ
 public struct TransitICCardData: FeliCaCardData {

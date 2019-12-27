@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// 交通系ICカードから読み取ることができるデータの種別
 public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {

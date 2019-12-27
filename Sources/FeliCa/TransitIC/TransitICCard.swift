@@ -8,6 +8,7 @@
 
 #if os(iOS)
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// 交通系ICカード
 @available(iOS 13.0, *)
