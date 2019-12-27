@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// りゅーと から読み取ることができるデータの種別
 public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {

@@ -8,6 +8,7 @@
 
 #if os(iOS)
 import Foundation
+import TRETJapanNFCReader_FeliCa
 
 /// りゅーと
 @available(iOS 13.0, *)
