@@ -11,7 +11,8 @@ var targets: [Target] = [
     .target(
         name: "TRETJapanNFCReader",
         dependencies: [
-            "TRETJapanNFCReader/Core"
+            "TRETJapanNFCReader/Core",
+            "TRETJapanNFCReader/FeliCa",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]

@@ -89,7 +89,7 @@ internal extension String {
     }
 }
 
-internal extension Array {
+public extension Array {
     func split(count: Int) -> [[Element]] {
         var s: [[Element]] = []
         var i = 0

@@ -65,11 +65,11 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
         return true
     }
     
-    public func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
+    open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
         print("tagReaderSessionDidBecomeActive(_:)")
     }
     
-    public func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
+    open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
         print("tagReaderSession(_:didInvalidateWithError:)")
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
