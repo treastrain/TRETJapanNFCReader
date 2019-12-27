@@ -13,6 +13,10 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader/Core",
             "TRETJapanNFCReader/FeliCa",
+            // "TRETJapanNFCReader/MIFARE",
+            // "TRETJapanNFCReader/FeliCa/FCFCampus",
+            // "TRETJapanNFCReader/FeliCa/Nanaco",
+            "TRETJapanNFCReader/MIFARE/DriversLicense",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -60,8 +64,8 @@ targets.append(
         dependencies: ["TRETJapanNFCReader/Core"],
         path: "Sources/MIFARE/_MIFARE")
 )
-
-
+*/
+/*
 // MARK: - FeliCa/FCFCampus
 // FCFCampus
 products.append(
@@ -210,7 +214,7 @@ targets.append(
         dependencies: ["TRETJapanNFCReader/FeliCa"],
         path: "Sources/FeliCa/Waon")
 )
-
+*/
 
 // MARK: - MIFARE/DriversLicense
 // 日本の運転免許証 / Japanese Driver's License
@@ -222,10 +226,14 @@ products.append(
 targets.append(
     .target(
         name: "TRETJapanNFCReader/MIFARE/DriversLicense",
-        dependencies: ["TRETJapanNFCReader/MIFARE"],
+        dependencies: [
+            // 将来的に他の MIFARE 系カードに対応したとき、dependencies には "TRETJapanNFCReader/MIFARE" のみを指定する。"TRETJapanNFCReader/MIFARE" の dependencies に "TRETJapanNFCReader/Core" が含まれるため。
+            /* "TRETJapanNFCReader/MIFARE" */
+            "TRETJapanNFCReader/Core"
+        ],
         path: "Sources/MIFARE/DriversLicense")
 )
-*/
+
 
 let package = Package(
     name: "TRETJapanNFCReader",

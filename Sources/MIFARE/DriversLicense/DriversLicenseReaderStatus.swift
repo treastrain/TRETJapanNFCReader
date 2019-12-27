@@ -1,5 +1,5 @@
 //
-//  Status.swift
+//  DriversLicenseReaderStatus.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/06/27.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Status: String {
+public enum DriversLicenseReaderStatus: String {
     case x9000 // "正常終了"
     case x6283 // "DFが閉塞している"
     case x6300 // "照合の不一致である"
@@ -45,7 +45,7 @@ public enum Status: String {
             sw2 = "00"
         }
         let rawValue = "x" + sw1 + sw2
-        self = Status(rawValue: rawValue)!
+        self = DriversLicenseReaderStatus(rawValue: rawValue)!
     }
     
     public var description: String {

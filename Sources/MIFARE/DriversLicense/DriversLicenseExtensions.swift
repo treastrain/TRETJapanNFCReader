@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TRETJapanNFCReader_Core
 
 @available(iOS 13.0, *)
 internal extension Optional where Wrapped == String {

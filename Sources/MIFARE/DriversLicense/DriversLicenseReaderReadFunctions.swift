@@ -27,7 +27,7 @@ extension DriversLicenseReader {
             }
             
             if sw1 != 0x90 {
-                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                 return
             }
             
@@ -41,7 +41,7 @@ extension DriversLicenseReader {
                 }
                 
                 if sw1 != 0x90 {
-                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                     return
                 }
                 
@@ -54,7 +54,7 @@ extension DriversLicenseReader {
                     }
                     
                     if sw1 != 0x90 {
-                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                        session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                         return
                     }
                     
@@ -86,7 +86,7 @@ extension DriversLicenseReader {
             }
             
             if sw1 != 0x90 {
-                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                 return
             }
             
@@ -100,7 +100,7 @@ extension DriversLicenseReader {
                 }
                 
                 if sw1 != 0x90 {
-                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                     return
                 }
                 
@@ -113,7 +113,7 @@ extension DriversLicenseReader {
                     }
                     
                     if sw1 != 0x90 {
-                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                        session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                         return
                     }
                     
@@ -163,7 +163,7 @@ extension DriversLicenseReader {
             }
             
             if sw1 != 0x90 {
-                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                 return
             }
             
@@ -177,7 +177,7 @@ extension DriversLicenseReader {
                 }
                 
                 if sw1 != 0x90 {
-                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                     return
                 }
                 
@@ -191,7 +191,7 @@ extension DriversLicenseReader {
                     }
                     
                     if sw1 != 0x90 {
-                        let status = Status(sw1: sw1, sw2: sw2)
+                        let status = DriversLicenseReaderStatus(sw1: sw1, sw2: sw2)
                         if sw1 == 0x63 {
                             var error = DriversLicenseReaderError.incorrectPIN(0)
                             switch status {
@@ -222,7 +222,7 @@ extension DriversLicenseReader {
                         }
                         
                         if sw1 != 0x90 {
-                            session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                            session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                             return
                         }
                         
@@ -236,7 +236,7 @@ extension DriversLicenseReader {
                             }
                             
                             if sw1 != 0x90 {
-                                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                 return
                             }
                             
@@ -249,7 +249,7 @@ extension DriversLicenseReader {
                                 }
                                 
                                 if sw1 != 0x90 {
-                                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                     return
                                 }
                                 
@@ -304,7 +304,7 @@ extension DriversLicenseReader {
             }
             
             if sw1 != 0x90 {
-                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                 return
             }
             
@@ -318,7 +318,7 @@ extension DriversLicenseReader {
                 }
                 
                 if sw1 != 0x90 {
-                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                     return
                 }
                 
@@ -332,7 +332,7 @@ extension DriversLicenseReader {
                     }
                     
                     if sw1 != 0x90 {
-                        let status = Status(sw1: sw1, sw2: sw2)
+                        let status = DriversLicenseReaderStatus(sw1: sw1, sw2: sw2)
                         if sw1 == 0x63 {
                             var error = DriversLicenseReaderError.incorrectPIN(0)
                             switch status {
@@ -362,7 +362,7 @@ extension DriversLicenseReader {
                         }
                         
                         if sw1 != 0x90 {
-                            session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                            session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                             return
                         }
                         
@@ -376,7 +376,7 @@ extension DriversLicenseReader {
                             }
                             
                             if sw1 != 0x90 {
-                                let status = Status(sw1: sw1, sw2: sw2)
+                                let status = DriversLicenseReaderStatus(sw1: sw1, sw2: sw2)
                                 if sw1 == 0x63 {
                                     var error = DriversLicenseReaderError.incorrectPIN(0)
                                     switch status {
@@ -407,7 +407,7 @@ extension DriversLicenseReader {
                                 }
                                 
                                 if sw1 != 0x90 {
-                                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                     return
                                 }
                                 
@@ -421,7 +421,7 @@ extension DriversLicenseReader {
                                     }
                                     
                                     if sw1 != 0x90 {
-                                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                        session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                         return
                                     }
                                     
@@ -434,7 +434,7 @@ extension DriversLicenseReader {
                                         }
                                         
                                         if sw1 != 0x90 {
-                                            session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                            session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                             return
                                         }
                                         
@@ -491,7 +491,7 @@ extension DriversLicenseReader {
             }
             
             if sw1 != 0x90 {
-                session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                 return
             }
             
@@ -505,7 +505,7 @@ extension DriversLicenseReader {
                 }
                 
                 if sw1 != 0x90 {
-                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                     return
                 }
                 
@@ -519,7 +519,7 @@ extension DriversLicenseReader {
                     }
                     
                     if sw1 != 0x90 {
-                        let status = Status(sw1: sw1, sw2: sw2)
+                        let status = DriversLicenseReaderStatus(sw1: sw1, sw2: sw2)
                         if sw1 == 0x63 {
                             var error = DriversLicenseReaderError.incorrectPIN(0)
                             switch status {
@@ -549,7 +549,7 @@ extension DriversLicenseReader {
                         }
                         
                         if sw1 != 0x90 {
-                            session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                            session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                             return
                         }
                         
@@ -563,7 +563,7 @@ extension DriversLicenseReader {
                             }
                             
                             if sw1 != 0x90 {
-                                let status = Status(sw1: sw1, sw2: sw2)
+                                let status = DriversLicenseReaderStatus(sw1: sw1, sw2: sw2)
                                 if sw1 == 0x63 {
                                     var error = DriversLicenseReaderError.incorrectPIN(0)
                                     switch status {
@@ -594,7 +594,7 @@ extension DriversLicenseReader {
                                 }
                                 
                                 if sw1 != 0x90 {
-                                    session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                    session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                     return
                                 }
                                 
@@ -608,7 +608,7 @@ extension DriversLicenseReader {
                                     }
                                     
                                     if sw1 != 0x90 {
-                                        session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                        session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                         return
                                     }
                                     
@@ -621,7 +621,7 @@ extension DriversLicenseReader {
                                         }
                                         
                                         if sw1 != 0x90 {
-                                            session.invalidate(errorMessage: "エラー: ステータス: \(Status(sw1: sw1, sw2: sw2).description)")
+                                            session.invalidate(errorMessage: "エラー: ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
                                             return
                                         }
                                         

@@ -76,7 +76,7 @@ public extension UInt16 {
     }
 }
 
-internal extension String {
+public extension String {
     var bytes: [UInt8] {
         var i = self.startIndex
         return (0..<self.count/2).compactMap { _ in
