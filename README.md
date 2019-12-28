@@ -172,10 +172,6 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
 
 ## 謝辞 / Acknowledgments
-### 運転免許証 `TRETJapanNFCReader/ISO14443/DriversLicense` 
-- `JIS0208.TXT`
-    - 2015 Unicode®, Inc. For terms of use, see [http://www.unicode.org/terms_of_use.html](http://www.unicode.org/terms_of_use.html)
-
 ### OKICA `TRETJapanNFCReader/FeliCa/Okica/`
 OKICA の情報、および OKICA カード内に保存されているゆいレールの駅名情報、各バス会社名の情報は [Twitter@resi098](https://twitter.com/resi098) 様からご提供いただきました。
 

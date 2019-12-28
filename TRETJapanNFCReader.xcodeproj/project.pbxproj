@@ -268,10 +268,6 @@
 		CD10CCC623B7999300281E33 /* DriversLicenseReaderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBC223B7999300281E33 /* DriversLicenseReaderStatus.swift */; };
 		CD10CCC723B7999300281E33 /* DriversLicenseReaderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBC223B7999300281E33 /* DriversLicenseReaderStatus.swift */; };
 		CD10CCC823B7999300281E33 /* DriversLicenseReaderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBC223B7999300281E33 /* DriversLicenseReaderStatus.swift */; };
-		CD10CCC923B7999300281E33 /* JIS0208.TXT in Resources */ = {isa = PBXBuildFile; fileRef = CD10CBC323B7999300281E33 /* JIS0208.TXT */; };
-		CD10CCCA23B7999300281E33 /* JIS0208.TXT in Resources */ = {isa = PBXBuildFile; fileRef = CD10CBC323B7999300281E33 /* JIS0208.TXT */; };
-		CD10CCCB23B7999300281E33 /* JIS0208.TXT in Resources */ = {isa = PBXBuildFile; fileRef = CD10CBC323B7999300281E33 /* JIS0208.TXT */; };
-		CD10CCCC23B7999300281E33 /* JIS0208.TXT in Resources */ = {isa = PBXBuildFile; fileRef = CD10CBC323B7999300281E33 /* JIS0208.TXT */; };
 		CD10CCCD23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBC423B7999300281E33 /* DriversLicenseReaderCommands.swift */; };
 		CD10CCCE23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBC423B7999300281E33 /* DriversLicenseReaderCommands.swift */; };
 		CD10CCCF23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBC423B7999300281E33 /* DriversLicenseReaderCommands.swift */; };
@@ -632,12 +628,12 @@
 		CD10CBC023B7999300281E33 /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
 		CD10CBC123B7999300281E33 /* DriversLicenseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseExtensions.swift; sourceTree = "<group>"; };
 		CD10CBC223B7999300281E33 /* DriversLicenseReaderStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderStatus.swift; sourceTree = "<group>"; };
-		CD10CBC323B7999300281E33 /* JIS0208.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JIS0208.TXT; sourceTree = "<group>"; };
 		CD10CBC423B7999300281E33 /* DriversLicenseReaderCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderCommands.swift; sourceTree = "<group>"; };
 		CD10CBC523B7999300281E33 /* DriversLicenseReaderReadFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderReadFunctions.swift; sourceTree = "<group>"; };
 		CD10CBC623B7999300281E33 /* DriversLicenseReaderExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderExtensions.swift; sourceTree = "<group>"; };
 		CD10CBC723B7999300281E33 /* DriversLicenseReaderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderError.swift; sourceTree = "<group>"; };
 		CD10CBC823B7999300281E33 /* DriversLicenseReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReader.swift; sourceTree = "<group>"; };
+		CD10CD3223B7AF0A00281E33 /* TRETJapanNFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRETJapanNFCReader.swift; sourceTree = "<group>"; };
 		CD12A988239131DE00B61132 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -765,9 +761,7 @@
 		CD10CB7023B7999300281E33 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */,
-				CD5D2D7422C5E977004330F3 /* Info.plist */,
-				CD79369C22C6300200E5AC2E /* Localizable.strings */,
+				CD10CD3123B7AF0A00281E33 /* TRETJapanNFCReader */,
 				CD10CB7123B7999300281E33 /* Core */,
 				CD10CB7623B7999300281E33 /* FeliCa */,
 				CD10CBBC23B7999300281E33 /* MIFARE */,
@@ -966,7 +960,6 @@
 				CD10CBC023B7999300281E33 /* DriversLicenseReaderSessionDelegate.swift */,
 				CD10CBC123B7999300281E33 /* DriversLicenseExtensions.swift */,
 				CD10CBC223B7999300281E33 /* DriversLicenseReaderStatus.swift */,
-				CD10CBC323B7999300281E33 /* JIS0208.TXT */,
 				CD10CBC423B7999300281E33 /* DriversLicenseReaderCommands.swift */,
 				CD10CBC523B7999300281E33 /* DriversLicenseReaderReadFunctions.swift */,
 				CD10CBC623B7999300281E33 /* DriversLicenseReaderExtensions.swift */,
@@ -974,6 +967,17 @@
 				CD10CBC823B7999300281E33 /* DriversLicenseReader.swift */,
 			);
 			path = DriversLicense;
+			sourceTree = "<group>";
+		};
+		CD10CD3123B7AF0A00281E33 /* TRETJapanNFCReader */ = {
+			isa = PBXGroup;
+			children = (
+				CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */,
+				CD10CD3223B7AF0A00281E33 /* TRETJapanNFCReader.swift */,
+				CD5D2D7422C5E977004330F3 /* Info.plist */,
+				CD79369C22C6300200E5AC2E /* Localizable.strings */,
+			);
+			path = TRETJapanNFCReader;
 			sourceTree = "<group>";
 		};
 		CD5D2D3422C5DF36004330F3 = {
@@ -1521,7 +1525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF5C06F231CE74100E2791A /* Localizable.strings in Resources */,
-				CD10CCCA23B7999300281E33 /* JIS0208.TXT in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1541,7 +1544,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD10CCC923B7999300281E33 /* JIS0208.TXT in Resources */,
 				CD79369A22C6300200E5AC2E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1551,7 +1553,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD9EEA7F231CECC600513DBF /* Localizable.strings in Resources */,
-				CD10CCCC23B7999300281E33 /* JIS0208.TXT in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1560,7 +1561,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF5C0A5231CEB5900E2791A /* Localizable.strings in Resources */,
-				CD10CCCB23B7999300281E33 /* JIS0208.TXT in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2070,7 +2070,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2098,7 +2098,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2292,7 +2292,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2323,7 +2323,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2351,7 +2351,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2378,7 +2378,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2404,7 +2404,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2431,7 +2431,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/TRETJapanNFCReader/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
