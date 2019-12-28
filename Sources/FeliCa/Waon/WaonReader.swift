@@ -8,7 +8,9 @@
 
 #if os(iOS)
 import CoreNFC
+#if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
+#endif
 
 @available(iOS 13.0, *)
 public typealias WaonCardTag = NFCFeliCaTag

@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
+#endif
 
 /// 楽天Edyカードのデータ
 public struct RakutenEdyCardData: FeliCaCardData {

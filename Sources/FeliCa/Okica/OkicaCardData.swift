@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
+#endif
 
 /// OKICA のデータ
 public struct OkicaCardData: FeliCaCardData {

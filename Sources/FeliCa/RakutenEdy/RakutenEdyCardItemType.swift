@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
+#endif
 
 /// 楽天Edyカードから読み取ることができるデータの種別
 public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {

@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
+#endif
 
 /// WAONカードから読み取る事ができるデータの種別
 public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {

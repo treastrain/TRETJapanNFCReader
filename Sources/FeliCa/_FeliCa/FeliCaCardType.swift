@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if canImport(TRETJapanNFCReader_Core)
 import TRETJapanNFCReader_Core
+#endif
 
 public enum FeliCaCardType: String, Codable, CaseIterable {
     /// 交通系ICカード

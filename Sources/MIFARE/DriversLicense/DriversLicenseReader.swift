@@ -9,7 +9,9 @@
 #if os(iOS)
 import UIKit
 import CoreNFC
+#if canImport(TRETJapanNFCReader_Core)
 import TRETJapanNFCReader_Core
+#endif
 
 @available(iOS 13.0, *)
 public typealias DriversLicenseReaderViewController = UIViewController & DriversLicenseReaderSessionDelegate
