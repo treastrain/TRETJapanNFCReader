@@ -14,37 +14,38 @@ import TRETJapanNFCReader_Core
 @available(iOS 13.0, *)
 internal extension Optional where Wrapped == String {
     init(jisX0208Data: [[UInt8]]) {
-        let dataArray = jisX0208Data.map { (data) -> Data in
-            return ((UInt16(data[1]) << 8 + UInt16(data[0])) + 0x8080).data
-        }
-        var string = ""
-        for data in dataArray {
-            if let s = String(data: data, encoding: .japaneseEUC) {
-                string += s
-            } else {
-                switch data {
-                case Data([0xFF, 0xF1]):
-                    string += "(外字1)"
-                case Data([0xFF, 0xF2]):
-                    string += "(外字2)"
-                case Data([0xFF, 0xF3]):
-                    string += "(外字3)"
-                case Data([0xFF, 0xF4]):
-                    string += "(外字4)"
-                case Data([0xFF, 0xF5]):
-                    string += "(外字5)"
-                case Data([0xFF, 0xF6]):
-                    string += "(外字6)"
-                case Data([0xFF, 0xF7]):
-                    string += "(外字7)"
-                case Data([0xFF, 0xFA]):
-                    string += "(欠字)"
+        self = jisX0208Data.map { (data) -> String in
+            let bytes = UInt16(data[1]) << 8 + UInt16(data[0])
+            if bytes >= 0xFFF1 {
+                switch bytes {
+                case 0xFFF1:
+                    return "(外字1)"
+                case 0xFFF2:
+                    return "(外字2)"
+                case 0xFFF3:
+                    return "(外字3)"
+                case 0xFFF4:
+                    return "(外字4)"
+                case 0xFFF5:
+                    return "(外字5)"
+                case 0xFFF6:
+                    return "(外字6)"
+                case 0xFFF7:
+                    return "(外字7)"
+                case 0xFFFA:
+                    return "(欠字)"
                 default:
-                    string += "(未定義)"
+                    return "(未定義)"
+                }
+            } else {
+                let data = (bytes + 0x8080).data
+                if let s = String(data: data, encoding: .japaneseEUC) {
+                    return s
+                } else {
+                    return "(不明)"
                 }
             }
-        }
-        self = string
+        }.joined()
     }
     
     func toDateFromJapanese() -> Date? {
