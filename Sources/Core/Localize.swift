@@ -16,7 +16,7 @@ public struct LocalizedItem {
     let zhHant: String
     let zhHK: String
     
-    public func string() -> String {
+    public func string(language: Language = .ja) -> String {
         class SelfClass {}
         let bundle = Bundle(for: type(of: SelfClass()))
         let localizedString = NSLocalizedString(self.key, bundle: bundle, comment: "")
@@ -27,11 +27,26 @@ public struct LocalizedItem {
             return localizedString
         }
         
-        let language = NSLocale.preferredLanguages.first
-        print("languages", NSLocale.preferredLanguages)
-        print("language", language ?? "nil")
-        
-        return localizedString
+        switch language {
+        case .ja:
+            return self.ja
+        case .en:
+            return self.en
+        case .zhHans:
+            return self.zhHans
+        case .zhHant:
+            return self.zhHant
+        case .zhHK:
+            return self.zhHK
+        }
+    }
+    
+    public enum Language {
+        case ja
+        case en
+        case zhHans
+        case zhHant
+        case zhHK
     }
 }
 
