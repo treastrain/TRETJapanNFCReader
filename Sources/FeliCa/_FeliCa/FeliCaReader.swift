@@ -52,7 +52,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         }
         
         self.session = NFCTagReaderSession(pollingOption: .iso18092, delegate: self)
-        self.session?.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
+        self.session?.alertMessage = Localized.nfcReaderSessionAlertMessage.string()
         self.session?.begin()
     }
     
@@ -74,10 +74,10 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     open override func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         if tags.count > 1 {
             let retryInterval = DispatchTimeInterval.milliseconds(1000)
-            session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage")
+            session.alertMessage = Localized.nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage.string()
             DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                 session.restartPolling()
-                session.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
+                session.alertMessage = Localized.nfcReaderSessionAlertMessage.string()
             })
             return
         }
@@ -86,37 +86,37 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         
         session.connect(to: tag) { (error) in
             if nil != error {
-                session.invalidate(errorMessage: self.localizedString(key: "nfcTagReaderSessionConnectErrorMessage"))
+                session.invalidate(errorMessage: Localized.nfcTagReaderSessionConnectErrorMessage.string())
                 return
             }
             
             guard case NFCTag.feliCa(let feliCaCardTag) = tag else {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
-                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
+                session.alertMessage = Localized.nfcTagReaderSessionDifferentTagTypeErrorMessage.string()
                 DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                     session.restartPolling()
-                    session.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
+                    session.alertMessage = Localized.nfcReaderSessionAlertMessage.string()
                 })
                 return
             }
             
-            session.alertMessage = self.localizedString(key: "nfcTagReaderSessionReadingMessage")
+            session.alertMessage = Localized.nfcTagReaderSessionReadingMessage.string()
             
             let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
             let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode)
             
             if let selectedSystemCodes = self.selectedSystemCodes, !selectedSystemCodes.contains(systemCode) {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
-                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
+                session.alertMessage = Localized.nfcTagReaderSessionDifferentTagTypeErrorMessage.string()
                 DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                     session.restartPolling()
-                    session.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
+                    session.alertMessage = Localized.nfcReaderSessionAlertMessage.string()
                 })
                 return
             }
             
             self.getItems(session, feliCaTag: feliCaCardTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
-                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
+                session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
                 session.invalidate()
                 
                 self.delegate?.feliCaReaderSession(didRead: feliCaCard)
@@ -126,7 +126,7 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
     
     open func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
         print("FeliCaReader.getItems を override し、FeliCaCard を作成してください。また、読み取る item を指定できます。")
-        session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
+        session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
         session.invalidate()
     }
     

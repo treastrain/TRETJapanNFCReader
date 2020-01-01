@@ -307,6 +307,10 @@
 		CD8B7B7222CA67A40027E1ED /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8B7B7122CA67A40027E1ED /* AllFilesViewController.swift */; };
 		CD94050222DBA65200CA9E32 /* RegisteredDomicileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */; };
 		CD996F7622C79FEC00193E7A /* CommonDataElementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */; };
+		CD9D81D823BC7C02007FCE0E /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D81D723BC7C02007FCE0E /* Localize.swift */; };
+		CD9D81D923BC7C02007FCE0E /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D81D723BC7C02007FCE0E /* Localize.swift */; };
+		CD9D81DA23BC7C02007FCE0E /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D81D723BC7C02007FCE0E /* Localize.swift */; };
+		CD9D81DB23BC7C02007FCE0E /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D81D723BC7C02007FCE0E /* Localize.swift */; };
 		CD9EBF0E22CDF1A7005D17CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7936DE22C6492B00E5AC2E /* Main.storyboard */; };
 		CD9EEA7F231CECC600513DBF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD79369C22C6300200E5AC2E /* Localizable.strings */; };
 		CDF5C06F231CE74100E2791A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD79369C22C6300200E5AC2E /* Localizable.strings */; };
@@ -412,6 +416,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = C2105C94812B6214B154F54DCEDB72AC;
 			remoteInfo = Protobuf;
+		};
+		CD9D81E023BC7C03007FCE0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD35AB5223BB9E0D00FCF5C0;
+			remoteInfo = "japanNFCReader Today Extension";
 		};
 		CDB55B80230C0BA30015BE2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -659,6 +670,7 @@
 		CD8FC6F522D209CF007ECC1C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		CD94050122DBA65200CA9E32 /* RegisteredDomicileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredDomicileViewController.swift; sourceTree = "<group>"; };
 		CD996F7522C79FEC00193E7A /* CommonDataElementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataElementsViewController.swift; sourceTree = "<group>"; };
+		CD9D81D723BC7C02007FCE0E /* Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		CD9EEA6F231CEC7900513DBF /* TRETJapanNFCReader_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TRETJapanNFCReader_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = japanNFCReader.xcodeproj; path = japanNFCReader/japanNFCReader.xcodeproj; sourceTree = "<group>"; };
 		CDD1374B232181BF002AF46B /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = japanNFCReader/Pods/Pods.xcodeproj; sourceTree = "<group>"; };
@@ -974,6 +986,7 @@
 			children = (
 				CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */,
 				CD10CD3223B7AF0A00281E33 /* TRETJapanNFCReader.swift */,
+				CD9D81D723BC7C02007FCE0E /* Localize.swift */,
 				CD5D2D7422C5E977004330F3 /* Info.plist */,
 				CD79369C22C6300200E5AC2E /* Localizable.strings */,
 			);
@@ -1052,6 +1065,7 @@
 				CDB55B81230C0BA30015BE2F /* JPN NFC Reader.app */,
 				CDB55B83230C0BA30015BE2F /* JPN NFC Reader.app */,
 				CDB55B85230C0BA30015BE2F /* JPN NFC Reader.appex */,
+				CD9D81E123BC7C03007FCE0E /* JPN NFC Reader Today Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1417,6 +1431,13 @@
 			remoteRef = CD90FB1A2332E92300679DB2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		CD9D81E123BC7C03007FCE0E /* JPN NFC Reader Today Extension.appex */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.app-extension";
+			path = "JPN NFC Reader Today Extension.appex";
+			remoteRef = CD9D81E023BC7C03007FCE0E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CDB55B81230C0BA30015BE2F /* JPN NFC Reader.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
@@ -1644,6 +1665,7 @@
 				CD10CCDE23B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC8E23B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD10CBE623B7999300281E33 /* ICUReader.swift in Sources */,
+				CD9D81D923BC7C02007FCE0E /* Localize.swift in Sources */,
 				CD10CC8623B7999300281E33 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD10CC6A23B7999300281E33 /* TransitICCardData.swift in Sources */,
 				CD10CC0E23B7999300281E33 /* WaonCardItemType.swift in Sources */,
@@ -1734,6 +1756,7 @@
 				CD10CCA523B7999300281E33 /* RyutoReader.swift in Sources */,
 				CD10CC0523B7999300281E33 /* NTasuCardItemType.swift in Sources */,
 				CD10CBF523B7999300281E33 /* RakutenEdyCardItemType.swift in Sources */,
+				CD9D81D823BC7C02007FCE0E /* Localize.swift in Sources */,
 				CD10CC5523B7999300281E33 /* NanacoCardItemType.swift in Sources */,
 				CD10CCD523B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CBCD23B7999300281E33 /* Extensions.swift in Sources */,
@@ -1808,6 +1831,7 @@
 				CD10CCE023B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC9023B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD10CBE823B7999300281E33 /* ICUReader.swift in Sources */,
+				CD9D81DB23BC7C02007FCE0E /* Localize.swift in Sources */,
 				CD10CC8823B7999300281E33 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD10CC6C23B7999300281E33 /* TransitICCardData.swift in Sources */,
 				CD10CC1023B7999300281E33 /* WaonCardItemType.swift in Sources */,
@@ -1882,6 +1906,7 @@
 				CD10CCDF23B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC8F23B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD10CBE723B7999300281E33 /* ICUReader.swift in Sources */,
+				CD9D81DA23BC7C02007FCE0E /* Localize.swift in Sources */,
 				CD10CC8723B7999300281E33 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD10CC6B23B7999300281E33 /* TransitICCardData.swift in Sources */,
 				CD10CC0F23B7999300281E33 /* WaonCardItemType.swift in Sources */,

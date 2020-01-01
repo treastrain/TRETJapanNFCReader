@@ -88,7 +88,7 @@ public class DriversLicenseReader: JapanNFCReader {
         }
         
         self.session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self)
-        self.session?.alertMessage = self.localizedString(key: "nfcReaderSessionAlertMessage")
+        self.session?.alertMessage = Localized.nfcReaderSessionAlertMessage.string()
         self.session?.begin()
     }
     
@@ -116,7 +116,7 @@ public class DriversLicenseReader: JapanNFCReader {
         if tags.count > 1 {
             let retryInterval = DispatchTimeInterval.milliseconds(1000)
             let alertedMessage = session.alertMessage
-            session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage")
+            session.alertMessage = Localized.nfcTagReaderSessionDidDetectTagsMoreThan1TagIsDetectedMessage.string()
             DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                 session.restartPolling()
                 session.alertMessage = alertedMessage
@@ -128,14 +128,14 @@ public class DriversLicenseReader: JapanNFCReader {
         
         session.connect(to: tag) { (error) in
             if nil != error {
-                session.invalidate(errorMessage: self.localizedString(key: "nfcTagReaderSessionConnectErrorMessage"))
+                session.invalidate(errorMessage: Localized.nfcTagReaderSessionConnectErrorMessage.string())
                 return
             }
             
             guard case NFCTag.iso7816(let driversLicenseCardTag) = tag else {
                 let retryInterval = DispatchTimeInterval.milliseconds(1000)
                 let alertedMessage = session.alertMessage
-                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDifferentTagTypeErrorMessage")
+                session.alertMessage = Localized.nfcTagReaderSessionDifferentTagTypeErrorMessage.string()
                 DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
                     session.restartPolling()
                     session.alertMessage = alertedMessage
@@ -143,12 +143,12 @@ public class DriversLicenseReader: JapanNFCReader {
                 return
             }
             
-            session.alertMessage = self.localizedString(key: "nfcTagReaderSessionReadingMessage")
+            session.alertMessage = Localized.nfcTagReaderSessionReadingMessage.string()
             
             let driversLicenseCard = DriversLicenseCard(tag: driversLicenseCardTag)
             
             self.getItems(session, driversLicenseCard) { (driversLicenseCard) in
-                session.alertMessage = self.localizedString(key: "nfcTagReaderSessionDoneMessage")
+                session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
                 session.invalidate()
                 
                 self.delegate?.driversLicenseReaderSession(didRead: driversLicenseCard)

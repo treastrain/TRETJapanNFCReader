@@ -142,7 +142,7 @@ extension DriversLicenseReader {
         if pinSetting.pinSetting {
             if pin1 == [0x2A, 0x2A, 0x2A, 0x2A] {
                 self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.needPIN)
-                session.invalidate(errorMessage: self.localizedString(key: "pinRequired"))
+                session.invalidate(errorMessage: Localized.pinRequired.string())
                 return driversLicenseCard
             }
         } else {
@@ -282,7 +282,7 @@ extension DriversLicenseReader {
         if pinSetting.pinSetting {
             if pin1 == [0x2A, 0x2A, 0x2A, 0x2A] || pin2 == [0x2A, 0x2A, 0x2A, 0x2A] {
                 self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.needPIN)
-                session.invalidate(errorMessage: self.localizedString(key: "pinRequired"))
+                session.invalidate(errorMessage: Localized.pinRequired.string())
                 return driversLicenseCard
             }
         } else {
@@ -469,7 +469,7 @@ extension DriversLicenseReader {
         if pinSetting.pinSetting {
             if pin1 == [0x2A, 0x2A, 0x2A, 0x2A] || pin2 == [0x2A, 0x2A, 0x2A, 0x2A] {
                 self.delegate?.japanNFCReaderSession(didInvalidateWithError: DriversLicenseReaderError.needPIN)
-                session.invalidate(errorMessage: self.localizedString(key: "pinRequired"))
+                session.invalidate(errorMessage: Localized.pinRequired.string())
                 return driversLicenseCard
             }
         } else {

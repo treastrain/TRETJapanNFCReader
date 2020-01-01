@@ -49,8 +49,8 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
             
             if let viewController = self.viewController {
                 let alertController = UIAlertController(
-                    title: self.localizedString(key: "nfcReadingUnavailableAlertTitle"),
-                    message: self.localizedString(key: "nfcReadingUnavailableAlertMessage"),
+                    title: Localized.nfcReadingUnavailableAlertTitle.string(),
+                    message: Localized.nfcReadingUnavailableAlertMessage.string(),
                     preferredStyle: .alert
                 )
                 alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -76,7 +76,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
                 if let viewController = self.viewController {
                     let alertController = UIAlertController(
-                        title: self.localizedString(key: "nfcTagReaderSessionDidInvalidateWithErrorAlertTitle"),
+                        title: Localized.nfcTagReaderSessionDidInvalidateWithErrorAlertTitle.string(),
                         message: readerError.localizedDescription,
                         preferredStyle: .alert
                     )
@@ -96,10 +96,6 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         print("tagReaderSession(_:didDetect:)")
         session.invalidate()
-    }
-    
-    open func localizedString(key: String) -> String {
-        return NSLocalizedString(key, bundle: Bundle.current, comment: "")
     }
 }
 
