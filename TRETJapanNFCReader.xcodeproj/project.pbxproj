@@ -788,6 +788,8 @@
 				CD10CB7323B7999300281E33 /* Extensions.swift */,
 				CD10CB7423B7999300281E33 /* JapanNFCReader.swift */,
 				CD10CB7523B7999300281E33 /* JapanNFCReaderSessionDelegate.swift */,
+				CD9D81D723BC7C02007FCE0E /* Localize.swift */,
+				CD79369C22C6300200E5AC2E /* Localizable.strings */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -986,9 +988,7 @@
 			children = (
 				CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */,
 				CD10CD3223B7AF0A00281E33 /* TRETJapanNFCReader.swift */,
-				CD9D81D723BC7C02007FCE0E /* Localize.swift */,
 				CD5D2D7422C5E977004330F3 /* Info.plist */,
-				CD79369C22C6300200E5AC2E /* Localizable.strings */,
 			);
 			path = TRETJapanNFCReader;
 			sourceTree = "<group>";

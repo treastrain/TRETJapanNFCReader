@@ -41,25 +41,25 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     public var localizedString: String {
         switch self {
         case .transitIC:
-            return String(format: NSLocalizedString("transitIC", bundle: Bundle.current, comment: ""))
+            return Localized.transitIC.string()
         case .rakutenEdy:
-            return String(format: NSLocalizedString("rakutenEdy", bundle: Bundle.current, comment: ""))
+            return Localized.rakutenEdy.string()
         case .nanaco:
-            return String(format: NSLocalizedString("nanaco", bundle: Bundle.current, comment: ""))
+            return "nanaco"
         case .waon:
-            return String(format: NSLocalizedString("waon", bundle: Bundle.current, comment: ""))
+            return "WAON"
         case .univCoopICPrepaid:
-            return String(format: NSLocalizedString("univCoopICPrepaid", bundle: Bundle.current, comment: ""))
+            return Localized.univCoopICPrepaid.string()
         case .okica:
             return "OKICA"
         case .ntasu:
             return "NTasu"
         case .ryuto:
-            return String(format: NSLocalizedString("ryuto", bundle: Bundle.current, comment: ""))
+            return Localized.ryuto.string()
         case .fcfcampus:
             return "FCF Campus"
         case .octopus:
-            return "Octopus (八達通)"
+            return Localized.octopus.string()
         case .unknown:
             return "Unknown"
         }
