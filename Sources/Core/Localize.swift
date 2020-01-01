@@ -28,7 +28,8 @@ public struct LocalizedItem {
         }
         
         let language = NSLocale.preferredLanguages.first
-        print(language ?? "nil")
+        print("languages", NSLocale.preferredLanguages)
+        print("language", language ?? "nil")
         
         return localizedString
     }
