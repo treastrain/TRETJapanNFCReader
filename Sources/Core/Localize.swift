@@ -8,6 +8,16 @@
 
 import Foundation
 
+public var JapanNFCReaderLocalizedLanguage: LocalizedLanguage = .ja
+
+public enum LocalizedLanguage {
+    case ja
+    case en
+    case zhHans
+    case zhHant
+    case zhHK
+}
+
 public struct LocalizedItem {
     let key: String
     let ja: String
@@ -16,7 +26,7 @@ public struct LocalizedItem {
     let zhHant: String
     let zhHK: String
     
-    public func string(language: Language = .ja) -> String {
+    public func string() -> String {
         class SelfClass {}
         let bundle = Bundle(for: type(of: SelfClass()))
         let localizedString = NSLocalizedString(self.key, bundle: bundle, comment: "")
@@ -27,7 +37,7 @@ public struct LocalizedItem {
             return localizedString
         }
         
-        switch language {
+        switch JapanNFCReaderLocalizedLanguage {
         case .ja:
             return self.ja
         case .en:
@@ -39,14 +49,6 @@ public struct LocalizedItem {
         case .zhHK:
             return self.zhHK
         }
-    }
-    
-    public enum Language {
-        case ja
-        case en
-        case zhHans
-        case zhHant
-        case zhHK
     }
 }
 
