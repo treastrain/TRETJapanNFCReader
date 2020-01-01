@@ -9,6 +9,7 @@
 import Foundation
 
 public var JapanNFCReaderLocalizedLanguage: LocalizedLanguage = .ja
+public var JapanNFCReaderLocalizedStringsBundle: Bundle? = nil
 
 public enum LocalizedLanguage {
     case ja
@@ -30,7 +31,7 @@ public struct LocalizedItem {
     
     public func string() -> String {
         class SelfClass {}
-        let bundle = Bundle(for: type(of: SelfClass()))
+        let bundle = JapanNFCReaderLocalizedStringsBundle ?? Bundle(for: type(of: SelfClass()))
         let localizedString = NSLocalizedString(self.key, bundle: bundle, comment: "")
         
         if localizedString != self.key {
