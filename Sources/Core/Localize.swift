@@ -16,6 +16,8 @@ public enum LocalizedLanguage {
     case zhHans
     case zhHant
     case zhHK
+    
+    case key
 }
 
 public struct LocalizedItem {
@@ -30,8 +32,6 @@ public struct LocalizedItem {
         class SelfClass {}
         let bundle = Bundle(for: type(of: SelfClass()))
         let localizedString = NSLocalizedString(self.key, bundle: bundle, comment: "")
-        
-        print("key", self.key, "localizedString", localizedString)
         
         if localizedString != self.key {
             return localizedString
@@ -48,6 +48,8 @@ public struct LocalizedItem {
             return self.zhHant
         case .zhHK:
             return self.zhHK
+        case .key:
+            return self.key
         }
     }
 }
