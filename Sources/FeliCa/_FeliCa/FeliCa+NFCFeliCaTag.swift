@@ -74,7 +74,7 @@ extension NFCFeliCaTag {
     /// - Parameters:
     ///   - serviceCode: サービスコード
     ///   - blockList: ブロックリスト
-    func readWithoutEncryption36(serviceCode: Data, blockList: [Data]) -> (status1: Int, status2: Int, blockData: [Data], error: Error?) {
+    public func readWithoutEncryption36(serviceCode: Data, blockList: [Data]) -> (status1: Int, status2: Int, blockData: [Data], error: Error?) {
         var resultStatus1: Int!
         var resultStatus2: Int!
         var resultBlockData: [Data]!
@@ -96,7 +96,7 @@ extension NFCFeliCaTag {
     ///   - systemCode: Designation of System Code.
     ///   - requestCode: Designation of Request Data.
     ///   - timeSlot: Designation of maximum number of slots possible to respond.
-    func polling(systemCode: Data, requestCode: PollingRequestCode, timeSlot: PollingTimeSlot) -> (pmm: Data, systemCode: Data, error: Error?) {
+    public func polling(systemCode: Data, requestCode: PollingRequestCode, timeSlot: PollingTimeSlot) -> (pmm: Data, systemCode: Data, error: Error?) {
         var resultPMm: Data!
         var resultSystemCode: Data!
         var resultError: Error?
