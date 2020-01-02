@@ -69,6 +69,47 @@ extension NFCFeliCaTag {
     @available(*, unavailable, renamed: "readWithoutEncryption36(serviceCode:blockList:completionHandler:)")
     public func readWithoutEncryption24(serviceCode: Data, blockList: [Data], completionHandler: @escaping (_ status1: Int, _ status2: Int, _ blockData: [Data], _ error: Error?) -> Void) {
     }
+    
+    /// FeliCa カードの仕様で定義されている Read Without Encryption コマンドを、blockList の要素数が13~36の場合において継続して処理できるように分けてタグに送信します。レスポンスデータは同期的に返されます。
+    /// - Parameters:
+    ///   - serviceCode: サービスコード
+    ///   - blockList: ブロックリスト
+    func readWithoutEncryption36(serviceCode: Data, blockList: [Data]) -> (status1: Int, status2: Int, blockData: [Data], error: Error?) {
+        var resultStatus1: Int!
+        var resultStatus2: Int!
+        var resultBlockData: [Data]!
+        var resultError: Error?
+        let semaphore = DispatchSemaphore(value: 0)
+        self.readWithoutEncryption36(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
+            resultStatus1 = status1
+            resultStatus2 = status2
+            resultBlockData = blockData
+            resultError = error
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return (resultStatus1, resultStatus2, resultBlockData, resultError)
+    }
+    
+    /// Sends the Polling command as defined by FeliCa card specification to the tag. Response data is returned synchronously.
+    /// - Parameters:
+    ///   - systemCode: Designation of System Code.
+    ///   - requestCode: Designation of Request Data.
+    ///   - timeSlot: Designation of maximum number of slots possible to respond.
+    func polling(systemCode: Data, requestCode: PollingRequestCode, timeSlot: PollingTimeSlot) -> (pmm: Data, systemCode: Data, error: Error?) {
+        var resultPMm: Data!
+        var resultSystemCode: Data!
+        var resultError: Error?
+        let semaphore = DispatchSemaphore(value: 0)
+        self.polling(systemCode: systemCode, requestCode: requestCode, timeSlot: timeSlot) { (pmm, systemCode, error) in
+            resultPMm = pmm
+            resultSystemCode = systemCode
+            resultError = error
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return (resultPMm, resultSystemCode, resultError)
+    }
 }
 
 #endif
