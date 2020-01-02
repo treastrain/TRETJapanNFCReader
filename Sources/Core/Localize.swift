@@ -31,14 +31,14 @@ public struct LocalizedItem {
     
     public func string() -> String {
         class SelfClass {}
-        let bundle = JapanNFCReaderLocalizedStringsBundle ?? Bundle(for: type(of: SelfClass()))
+        let bundle = kJapanNFCReaderLocalizedStringsBundle ?? Bundle(for: type(of: SelfClass()))
         let localizedString = NSLocalizedString(self.key, bundle: bundle, comment: "")
         
         if localizedString != self.key {
             return localizedString
         }
         
-        switch JapanNFCReaderLocalizedLanguage {
+        switch kJapanNFCReaderLocalizedLanguage {
         case .ja:
             return self.ja
         case .en:
