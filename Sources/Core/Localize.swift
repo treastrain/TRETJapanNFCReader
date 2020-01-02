@@ -8,8 +8,8 @@
 
 import Foundation
 
-public var JapanNFCReaderLocalizedLanguage: LocalizedLanguage = .ja
-public var JapanNFCReaderLocalizedStringsBundle: Bundle? = nil
+public var kJapanNFCReaderLocalizedLanguage: LocalizedLanguage = .ja
+public var kJapanNFCReaderLocalizedStringsBundle: Bundle? = nil
 
 public enum LocalizedLanguage {
     case ja
