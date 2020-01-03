@@ -14,7 +14,13 @@ import TRETJapanNFCReader_Core
 
 @available(iOS 13.0, *)
 public protocol FeliCaReaderSessionDelegate: JapanNFCReaderSessionDelegate {
+    func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?)
+}
+
+/*
+public protocol FeliCaReaderSessionDelegate: JapanNFCReaderSessionDelegate {
     func feliCaReaderSession(didRead feliCaCard: FeliCaCard)
 }
+*/
 
 #endif

@@ -14,13 +14,11 @@ import TRETJapanNFCReader_Core
 #endif
 
 @available(iOS 13.0, *)
-public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSessionDelegate
-
-@available(iOS 13.0, *)
-open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
+open class FeliCaReader: JapanNFCReader {
     
     public let delegate: FeliCaReaderSessionDelegate?
-    public var selectedSystemCodes: [FeliCaSystemCode]?
+    public var systemCodes: [FeliCaSystemCode] = []
+    public var serviceCodes: [FeliCaSystemCode: [(serviceCode: FeliCaServiceCode, numberOfBlock: Int)]] = [:]
     
     private init() {
         fatalError()
@@ -33,14 +31,23 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         super.init(delegate: delegate)
     }
     
-    /// FeliCaReader を初期化する
-    /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public init(viewController: FeliCaReaderViewController) {
-        self.delegate = viewController
-        super.init(viewController: viewController)
+    public func readWithoutEncryption(parameters: [FeliCaReadWithoutEncryptionCommandParameter]) {
+        self.systemCodes.removeAll()
+        self.serviceCodes.removeAll()
+        for parameter in parameters {
+            if self.systemCodes.contains(parameter.systemCode) {
+                self.serviceCodes[parameter.systemCode]?.append((serviceCode: parameter.serviceCode, numberOfBlock: parameter.numberOfBlock))
+            } else {
+                self.serviceCodes[parameter.systemCode] = [(serviceCode: parameter.serviceCode, numberOfBlock: parameter.numberOfBlock)]
+                self.systemCodes.append(parameter.systemCode)
+            }
+        }
+        print(self.systemCodes)
+        print(self.serviceCodes)
+        self.beginScanning()
     }
     
-    public func beginScanning() {
+    private func beginScanning() {
         guard self.checkReadingAvailable() else {
             print("""
                 ------------------------------------------------------------
@@ -83,7 +90,6 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
         }
         
         let tag = tags.first!
-        
         session.connect(to: tag) { (error) in
             if nil != error {
                 session.invalidate(errorMessage: Localized.nfcTagReaderSessionConnectErrorMessage.string())
@@ -102,80 +108,55 @@ open class FeliCaReader: JapanNFCReader, FeliCaReaderProtocol {
             
             session.alertMessage = Localized.nfcTagReaderSessionReadingMessage.string()
             
-            let idm = feliCaCardTag.currentIDm.map { String(format: "%.2hhx", $0) }.joined()
-            let systemCode = FeliCaSystemCode(from: feliCaCardTag.currentSystemCode)
-            
-            if let selectedSystemCodes = self.selectedSystemCodes, !selectedSystemCodes.contains(systemCode) {
-                let retryInterval = DispatchTimeInterval.milliseconds(1000)
-                session.alertMessage = Localized.nfcTagReaderSessionDifferentTagTypeErrorMessage.string()
-                DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
-                    session.restartPolling()
-                    session.alertMessage = Localized.nfcReaderSessionAlertMessage.string()
-                })
-                return
-            }
-            
-            self.getItems(session, feliCaTag: feliCaCardTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
+            DispatchQueue(label: "TRETJPNRFeliCaReader", qos: .default).async {
+                var feliCaData: FeliCaData = [:]
+                var pollingErrors: [FeliCaSystemCode : Error?] = [:]
+                var readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]] = [:]
+                
+                for targetSystemCode in self.systemCodes {
+                    var currentPMm = Data()
+                    if feliCaData[targetSystemCode] == nil {
+                        let (pmm, systemCode, error) = feliCaCardTag.polling(systemCode: targetSystemCode.bigEndian.data, requestCode: .systemCode, timeSlot: .max1)
+                        if targetSystemCode.bigEndian.data != systemCode {
+                            feliCaData[targetSystemCode] = FeliCaSystem(systemCode: targetSystemCode, idm: FeliCaIDm(data: Data()), pmm: FeliCaPMm(data: pmm), services: [:])
+                            pollingErrors[targetSystemCode] = error
+                            continue
+                        } else {
+                            currentPMm = pmm
+                        }
+                    }
+                    
+                    var services: [FeliCaServiceCode : FeliCaBlockData] = [:]
+                    let serviceCodeData = self.serviceCodes[targetSystemCode]!
+                    for (serviceCode, numberOfBlock) in serviceCodeData {
+                        let blockList = (0..<numberOfBlock).map { (block) -> Data in
+                            Data([0x80, UInt8(block)])
+                        }
+                        let (status1, status2, blockData, error) = feliCaCardTag.readWithoutEncryption36(serviceCode: serviceCode.data, blockList: blockList)
+                        services[serviceCode] = FeliCaBlockData(status1: status1, status2: status2, blockData: blockData)
+                        if let error = error {
+                            if readErrors[targetSystemCode] == nil {
+                                readErrors[targetSystemCode] = [serviceCode : error]
+                            } else {
+                                readErrors[targetSystemCode]![serviceCode] = error
+                            }
+                        }
+                    }
+                    
+                    feliCaData[targetSystemCode] = FeliCaSystem(systemCode: targetSystemCode, idm: FeliCaIDm(data: feliCaCardTag.currentIDm), pmm: FeliCaPMm(data: currentPMm), services: services)
+                }
+                
                 session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
                 session.invalidate()
-                
-                self.delegate?.feliCaReaderSession(didRead: feliCaCard)
+                self.delegate?.feliCaReaderSession(
+                    didRead: feliCaData,
+                    pollingErrors: pollingErrors.isEmpty ? nil : pollingErrors,
+                    readErrors: readErrors.isEmpty ? nil : readErrors
+                )
             }
         }
     }
     
-    open func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
-        print("FeliCaReader.getItems を override し、FeliCaCard を作成してください。また、読み取る item を指定できます。")
-        session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
-        session.invalidate()
-    }
-    
-    public func readWithoutEncryption(session: NFCTagReaderSession, tag: NFCFeliCaTag, serviceCode: FeliCaServiceCode, blocks: Int) -> [Data]? {
-        var data: [Data]? = nil
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        let serviceCode = Data(serviceCode.uint8.reversed())
-        
-        tag.requestService(nodeCodeList: [serviceCode]) { (nodesData, error) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-                session.invalidate(errorMessage: error.localizedDescription)
-                return
-            }
-            
-            guard let nodeData = nodesData.first, nodeData != Data([0xFF, 0xFF]) else {
-                print("選択された node のサービスが存在しません")
-                session.invalidate(errorMessage: "選択された node のサービスが存在しません")
-                return
-            }
-            
-            let blockList = (0..<blocks).map { (block) -> Data in
-                Data([0x80, UInt8(block)])
-            }
-            
-            tag.readWithoutEncryption36(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
-                
-                if let error = error {
-                    print(error.localizedDescription)
-                    session.invalidate(errorMessage: error.localizedDescription)
-                    return
-                }
-                
-                guard status1 == 0x00, status2 == 0x00 else {
-                    print("ステータスフラグがエラーを示しています", status1, status2)
-                    session.invalidate(errorMessage: "ステータスフラグがエラーを示しています")
-                    return
-                }
-                
-                data = blockData
-                semaphore.signal()
-            }
-        }
-        
-        semaphore.wait()
-        return data
-    }
 }
 
 #endif

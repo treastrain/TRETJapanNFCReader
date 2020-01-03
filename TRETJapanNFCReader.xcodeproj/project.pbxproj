@@ -293,6 +293,34 @@
 		CD10CCE323B79A5200281E33 /* JapanNFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CB7423B7999300281E33 /* JapanNFCReader.swift */; };
 		CD12A989239131DE00B61132 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12A988239131DE00B61132 /* PhotoViewController.swift */; };
 		CD15F81A22C7E49D00201FAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD15F81722C7DFE800201FAB /* Localizable.strings */; };
+		CD35A31223BECE330005075D /* FeliCaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31123BECE330005075D /* FeliCaData.swift */; };
+		CD35A31323BECE330005075D /* FeliCaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31123BECE330005075D /* FeliCaData.swift */; };
+		CD35A31423BECE330005075D /* FeliCaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31123BECE330005075D /* FeliCaData.swift */; };
+		CD35A31523BECE330005075D /* FeliCaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31123BECE330005075D /* FeliCaData.swift */; };
+		CD35A31723BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
+		CD35A31823BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
+		CD35A31923BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
+		CD35A31A23BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
+		CD35A31C23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
+		CD35A31D23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
+		CD35A31E23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
+		CD35A31F23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
+		CD35A32123BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
+		CD35A32223BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
+		CD35A32323BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
+		CD35A32423BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
+		CD5828D423BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
+		CD5828D523BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
+		CD5828D623BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
+		CD5828D723BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
+		CD5828E923BE5389001092FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828E823BE5389001092FC /* AppDelegate.swift */; };
+		CD5828EB23BE5389001092FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828EA23BE5389001092FC /* SceneDelegate.swift */; };
+		CD5828ED23BE5389001092FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828EC23BE5389001092FC /* ViewController.swift */; };
+		CD5828F023BE5389001092FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD5828EE23BE5389001092FC /* Main.storyboard */; };
+		CD5828F223BE538B001092FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD5828F123BE538B001092FC /* Assets.xcassets */; };
+		CD5828F523BE538B001092FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD5828F323BE538B001092FC /* LaunchScreen.storyboard */; };
+		CD5828FA23BE53CC001092FC /* TRETJapanNFCReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; };
+		CD5828FB23BE53CC001092FC /* TRETJapanNFCReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD5D2D7122C5E977004330F3 /* TRETJapanNFCReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CD5D2D5022C5E2F7004330F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D4F22C5E2F7004330F3 /* AppDelegate.swift */; };
 		CD5D2D5222C5E2F7004330F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D5122C5E2F7004330F3 /* SceneDelegate.swift */; };
 		CD5D2D5422C5E2F7004330F3 /* DriversLicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5D2D5322C5E2F7004330F3 /* DriversLicenseViewController.swift */; };
@@ -396,6 +424,13 @@
 			remoteGlobalIDString = AD776F1C94991D3E551CEAA515DB110A;
 			remoteInfo = FirebaseRemoteConfig;
 		};
+		CD5828FC23BE53CC001092FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD5D2D7022C5E977004330F3;
+			remoteInfo = "TRETJapanNFCReader iOS";
+		};
 		CD5D2D8022C5EFE8004330F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
@@ -416,13 +451,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = C2105C94812B6214B154F54DCEDB72AC;
 			remoteInfo = Protobuf;
-		};
-		CD9D81E023BC7C03007FCE0E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CDB55B7A230C0BA30015BE2F /* japanNFCReader.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CD35AB5223BB9E0D00FCF5C0;
-			remoteInfo = "japanNFCReader Today Extension";
 		};
 		CDB55B80230C0BA30015BE2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -532,6 +560,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0527E7C423829BF2005B3936 /* TRETJapanNFCReader.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5828FE23BE53CC001092FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CD5828FB23BE53CC001092FC /* TRETJapanNFCReader.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,6 +687,20 @@
 		CD12A988239131DE00B61132 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		CD15F81622C7DFE800201FAB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CD35A31123BECE330005075D /* FeliCaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeliCaData.swift; sourceTree = "<group>"; };
+		CD35A31623BECE770005075D /* FeliCaBlockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaBlockData.swift; sourceTree = "<group>"; };
+		CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaIDm.swift; sourceTree = "<group>"; };
+		CD35A32023BECE9E0005075D /* FeliCaPMm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaPMm.swift; sourceTree = "<group>"; };
+		CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReadWithoutEncryptionCommandParameter.swift; sourceTree = "<group>"; };
+		CD5828E623BE5389001092FC /* FeliCaRawDataReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeliCaRawDataReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD5828E823BE5389001092FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CD5828EA23BE5389001092FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CD5828EC23BE5389001092FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD5828EF23BE5389001092FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CD5828F123BE538B001092FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD5828F423BE538B001092FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CD5828F623BE538B001092FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD58292123BE5671001092FC /* FeliCaReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FeliCaReader.entitlements; sourceTree = "<group>"; };
 		CD5AA2D823964E78003FDDC3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CD5AA2D923964E8E003FDDC3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CD5AA2DA23964EA1003FDDC3 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -700,6 +753,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5828E323BE5389001092FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5828FA23BE53CC001092FC /* TRETJapanNFCReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,7 +940,12 @@
 				CD10CB9623B7999300281E33 /* FeliCa+NFCFeliCaTag.swift */,
 				CD10CB9723B7999300281E33 /* FeliCaSystemCode.swift */,
 				CD10CB9823B7999300281E33 /* FeliCaCard.swift */,
+				CD35A31123BECE330005075D /* FeliCaData.swift */,
+				CD35A31623BECE770005075D /* FeliCaBlockData.swift */,
+				CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */,
+				CD35A32023BECE9E0005075D /* FeliCaPMm.swift */,
 				CD10CB9923B7999300281E33 /* FeliCaSystem.swift */,
+				CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */,
 				CD10CB9A23B7999300281E33 /* FeliCaReaderProtocol.swift */,
 			);
 			path = _FeliCa;
@@ -993,6 +1059,21 @@
 			path = TRETJapanNFCReader;
 			sourceTree = "<group>";
 		};
+		CD5828E723BE5389001092FC /* FeliCaReader */ = {
+			isa = PBXGroup;
+			children = (
+				CD58292123BE5671001092FC /* FeliCaReader.entitlements */,
+				CD5828E823BE5389001092FC /* AppDelegate.swift */,
+				CD5828EA23BE5389001092FC /* SceneDelegate.swift */,
+				CD5828EC23BE5389001092FC /* ViewController.swift */,
+				CD5828EE23BE5389001092FC /* Main.storyboard */,
+				CD5828F123BE538B001092FC /* Assets.xcassets */,
+				CD5828F323BE538B001092FC /* LaunchScreen.storyboard */,
+				CD5828F623BE538B001092FC /* Info.plist */,
+			);
+			path = FeliCaReader;
+			sourceTree = "<group>";
+		};
 		CD5D2D3422C5DF36004330F3 = {
 			isa = PBXGroup;
 			children = (
@@ -1015,6 +1096,7 @@
 				CDF5C099231CEAEF00E2791A /* TRETJapanNFCReader.framework */,
 				CD9EEA6F231CEC7900513DBF /* TRETJapanNFCReader_macOS.framework */,
 				0527E7A1238264B7005B3936 /* SwiftUIDriversLicenseReader.app */,
+				CD5828E623BE5389001092FC /* FeliCaRawDataReader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1052,6 +1134,7 @@
 		CD5D2D6322C5E47F004330F3 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				CD5828E723BE5389001092FC /* FeliCaReader */,
 				0527E78423825457005B3936 /* SwiftUIDriversLicenseReader */,
 				CD5D2D4E22C5E2F7004330F3 /* DriversLicenseReader */,
 				CDFC3B5B22CE2AD2000E88B4 /* TransitICReader */,
@@ -1065,7 +1148,6 @@
 				CDB55B81230C0BA30015BE2F /* JPN NFC Reader.app */,
 				CDB55B83230C0BA30015BE2F /* JPN NFC Reader.app */,
 				CDB55B85230C0BA30015BE2F /* JPN NFC Reader.appex */,
-				CD9D81E123BC7C03007FCE0E /* JPN NFC Reader Today Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1189,6 +1271,25 @@
 			productReference = CD02AC62231CE5F6008614B7 /* TRETJapanNFCReader.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		CD5828E523BE5389001092FC /* FeliCaRawDataReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD5828F723BE538B001092FC /* Build configuration list for PBXNativeTarget "FeliCaRawDataReader" */;
+			buildPhases = (
+				CD5828E223BE5389001092FC /* Sources */,
+				CD5828E323BE5389001092FC /* Frameworks */,
+				CD5828E423BE5389001092FC /* Resources */,
+				CD5828FE23BE53CC001092FC /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD5828FD23BE53CC001092FC /* PBXTargetDependency */,
+			);
+			name = FeliCaRawDataReader;
+			productName = FeliCaReader;
+			productReference = CD5828E623BE5389001092FC /* FeliCaRawDataReader.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CD5D2D4C22C5E2F7004330F3 /* DriversLicenseReader */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD5D2D6022C5E2FA004330F3 /* Build configuration list for PBXNativeTarget "DriversLicenseReader" */;
@@ -1287,7 +1388,7 @@
 		CD5D2D3522C5DF36004330F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "treastrain / Tanaka Ryoga";
 				TargetAttributes = {
@@ -1296,6 +1397,9 @@
 					};
 					CD02AC61231CE5F6008614B7 = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					CD5828E523BE5389001092FC = {
+						CreatedOnToolsVersion = 11.3;
 					};
 					CD5D2D4C22C5E2F7004330F3 = {
 						CreatedOnToolsVersion = 11.0;
@@ -1344,6 +1448,7 @@
 			targets = (
 				CD5D2D4C22C5E2F7004330F3 /* DriversLicenseReader */,
 				CDFC3B5922CE2AD2000E88B4 /* TransitICReader */,
+				CD5828E523BE5389001092FC /* FeliCaRawDataReader */,
 				0527E7A0238264B7005B3936 /* SwiftUIDriversLicenseReader */,
 				CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader iOS */,
 				CD02AC61231CE5F6008614B7 /* TRETJapanNFCReader watchOS */,
@@ -1429,13 +1534,6 @@
 			fileType = wrapper.framework;
 			path = protobuf.framework;
 			remoteRef = CD90FB1A2332E92300679DB2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CD9D81E123BC7C03007FCE0E /* JPN NFC Reader Today Extension.appex */ = {
-			isa = PBXReferenceProxy;
-			fileType = "wrapper.app-extension";
-			path = "JPN NFC Reader Today Extension.appex";
-			remoteRef = CD9D81E023BC7C03007FCE0E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CDB55B81230C0BA30015BE2F /* JPN NFC Reader.app */ = {
@@ -1549,6 +1647,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD5828E423BE5389001092FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5828F523BE538B001092FC /* LaunchScreen.storyboard in Resources */,
+				CD5828F223BE538B001092FC /* Assets.xcassets in Resources */,
+				CD5828F023BE5389001092FC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD5D2D4B22C5E2F7004330F3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1630,6 +1738,7 @@
 				CD10CBCE23B7999300281E33 /* Extensions.swift in Sources */,
 				CD10CC2623B7999300281E33 /* FeliCaServiceCode.swift in Sources */,
 				CD10CBEA23B7999300281E33 /* ICUCardData.swift in Sources */,
+				CD35A31D23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CC1623B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD623B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CCA623B7999300281E33 /* RyutoReader.swift in Sources */,
@@ -1662,6 +1771,7 @@
 				CD10CCDA23B7999300281E33 /* DriversLicenseReaderError.swift in Sources */,
 				CD10CC4A23B7999300281E33 /* FeliCaSystem.swift in Sources */,
 				CD10CCAE23B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD5828D523BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCDE23B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC8E23B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD10CBE623B7999300281E33 /* ICUReader.swift in Sources */,
@@ -1672,8 +1782,10 @@
 				CD10CC0623B7999300281E33 /* NTasuCardItemType.swift in Sources */,
 				CD10CC5E23B7999300281E33 /* NanacoCardData.swift in Sources */,
 				CD10CC5A23B7999300281E33 /* NanacoCard.swift in Sources */,
+				CD35A31823BECE770005075D /* FeliCaBlockData.swift in Sources */,
 				CD10CC3223B7999300281E33 /* FeliCaCommonCard.swift in Sources */,
 				CD10CC3E23B7999300281E33 /* FeliCa+NFCFeliCaTag.swift in Sources */,
+				CD35A31323BECE330005075D /* FeliCaData.swift in Sources */,
 				CD10CBE223B7999300281E33 /* ICUCard.swift in Sources */,
 				CD10CCD223B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD10CC6623B7999300281E33 /* TransitICReader.swift in Sources */,
@@ -1684,7 +1796,18 @@
 				CD10CCAA23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CCCE23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7623B7999300281E33 /* OctopusReader.swift in Sources */,
+				CD35A32223BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC9223B7999300281E33 /* OkicaCardItemType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD5828E223BE5389001092FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD5828ED23BE5389001092FC /* ViewController.swift in Sources */,
+				CD5828E923BE5389001092FC /* AppDelegate.swift in Sources */,
+				CD5828EB23BE5389001092FC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1721,6 +1844,7 @@
 				CD10CC8123B7999300281E33 /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CD10CC4D23B7999300281E33 /* FeliCaReaderProtocol.swift in Sources */,
 				CD10CC5123B7999300281E33 /* NanacoReader.swift in Sources */,
+				CD35A31C23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CBDD23B7999300281E33 /* ICUCardItemType.swift in Sources */,
 				CD10CC7D23B7999300281E33 /* OctopusCardData.swift in Sources */,
 				CD10CBED23B7999300281E33 /* RakutenEdyCard.swift in Sources */,
@@ -1753,6 +1877,7 @@
 				CD10CC2D23B7999300281E33 /* FeliCaCardData.swift in Sources */,
 				CD10CCA123B7999300281E33 /* RyutoCard.swift in Sources */,
 				CD10CCD123B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
+				CD5828D423BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCA523B7999300281E33 /* RyutoReader.swift in Sources */,
 				CD10CC0523B7999300281E33 /* NTasuCardItemType.swift in Sources */,
 				CD10CBF523B7999300281E33 /* RakutenEdyCardItemType.swift in Sources */,
@@ -1763,8 +1888,10 @@
 				CD10CC6D23B7999300281E33 /* TransitICCardItemType.swift in Sources */,
 				CD10CC5923B7999300281E33 /* NanacoCard.swift in Sources */,
 				CD10CC4523B7999300281E33 /* FeliCaCard.swift in Sources */,
+				CD35A31723BECE770005075D /* FeliCaBlockData.swift in Sources */,
 				CD10CBE523B7999300281E33 /* ICUReader.swift in Sources */,
 				CD10CBD923B7999300281E33 /* FCFCampusCard.swift in Sources */,
+				CD35A31223BECE330005075D /* FeliCaData.swift in Sources */,
 				CD10CCAD23B7999300281E33 /* RyutoCardData.swift in Sources */,
 				CD10CBF923B7999300281E33 /* RakutenEdyCardData.swift in Sources */,
 				CD10CC1123B7999300281E33 /* WaonCardData.swift in Sources */,
@@ -1775,6 +1902,7 @@
 				CD10CCC123B7999300281E33 /* DriversLicenseExtensions.swift in Sources */,
 				CD10CCA923B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CC8523B7999300281E33 /* UnivCoopICPrepaidCard.swift in Sources */,
+				CD35A32123BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC4123B7999300281E33 /* FeliCaSystemCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1796,6 +1924,7 @@
 				CD10CBD023B7999300281E33 /* Extensions.swift in Sources */,
 				CD10CC2823B7999300281E33 /* FeliCaServiceCode.swift in Sources */,
 				CD10CBEC23B7999300281E33 /* ICUCardData.swift in Sources */,
+				CD35A31F23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CC1823B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD823B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CCA823B7999300281E33 /* RyutoReader.swift in Sources */,
@@ -1828,6 +1957,7 @@
 				CD10CCDC23B7999300281E33 /* DriversLicenseReaderError.swift in Sources */,
 				CD10CC4C23B7999300281E33 /* FeliCaSystem.swift in Sources */,
 				CD10CCB023B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD5828D723BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCE023B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC9023B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD10CBE823B7999300281E33 /* ICUReader.swift in Sources */,
@@ -1838,8 +1968,10 @@
 				CD10CC0823B7999300281E33 /* NTasuCardItemType.swift in Sources */,
 				CD10CC6023B7999300281E33 /* NanacoCardData.swift in Sources */,
 				CD10CC5C23B7999300281E33 /* NanacoCard.swift in Sources */,
+				CD35A31A23BECE770005075D /* FeliCaBlockData.swift in Sources */,
 				CD10CC3423B7999300281E33 /* FeliCaCommonCard.swift in Sources */,
 				CD10CC4023B7999300281E33 /* FeliCa+NFCFeliCaTag.swift in Sources */,
+				CD35A31523BECE330005075D /* FeliCaData.swift in Sources */,
 				CD10CBE423B7999300281E33 /* ICUCard.swift in Sources */,
 				CD10CCD423B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD10CC6823B7999300281E33 /* TransitICReader.swift in Sources */,
@@ -1850,6 +1982,7 @@
 				CD10CCAC23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CCD023B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7823B7999300281E33 /* OctopusReader.swift in Sources */,
+				CD35A32423BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC9423B7999300281E33 /* OkicaCardItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1871,6 +2004,7 @@
 				CD10CBCF23B7999300281E33 /* Extensions.swift in Sources */,
 				CD10CC2723B7999300281E33 /* FeliCaServiceCode.swift in Sources */,
 				CD10CBEB23B7999300281E33 /* ICUCardData.swift in Sources */,
+				CD35A31E23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CC1723B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD723B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CCA723B7999300281E33 /* RyutoReader.swift in Sources */,
@@ -1903,6 +2037,7 @@
 				CD10CCDB23B7999300281E33 /* DriversLicenseReaderError.swift in Sources */,
 				CD10CC4B23B7999300281E33 /* FeliCaSystem.swift in Sources */,
 				CD10CCAF23B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD5828D623BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCDF23B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC8F23B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
 				CD10CBE723B7999300281E33 /* ICUReader.swift in Sources */,
@@ -1913,8 +2048,10 @@
 				CD10CC0723B7999300281E33 /* NTasuCardItemType.swift in Sources */,
 				CD10CC5F23B7999300281E33 /* NanacoCardData.swift in Sources */,
 				CD10CC5B23B7999300281E33 /* NanacoCard.swift in Sources */,
+				CD35A31923BECE770005075D /* FeliCaBlockData.swift in Sources */,
 				CD10CC3323B7999300281E33 /* FeliCaCommonCard.swift in Sources */,
 				CD10CC3F23B7999300281E33 /* FeliCa+NFCFeliCaTag.swift in Sources */,
+				CD35A31423BECE330005075D /* FeliCaData.swift in Sources */,
 				CD10CBE323B7999300281E33 /* ICUCard.swift in Sources */,
 				CD10CCD323B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD10CC6723B7999300281E33 /* TransitICReader.swift in Sources */,
@@ -1925,6 +2062,7 @@
 				CD10CCAB23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CCCF23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7723B7999300281E33 /* OctopusReader.swift in Sources */,
+				CD35A32323BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC9323B7999300281E33 /* OkicaCardItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1946,6 +2084,11 @@
 			isa = PBXTargetDependency;
 			target = CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader iOS */;
 			targetProxy = 0527E7C523829BF2005B3936 /* PBXContainerItemProxy */;
+		};
+		CD5828FD23BE53CC001092FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD5D2D7022C5E977004330F3 /* TRETJapanNFCReader iOS */;
+			targetProxy = CD5828FC23BE53CC001092FC /* PBXContainerItemProxy */;
 		};
 		CD5D2D8122C5EFE8004330F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1975,6 +2118,22 @@
 				CD15F81822C7DFEC00201FAB /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CD5828EE23BE5389001092FC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD5828EF23BE5389001092FC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CD5828F323BE538B001092FC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD5828F423BE538B001092FC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		CD5D2D5A22C5E2FA004330F3 /* LaunchScreen.storyboard */ = {
@@ -2138,6 +2297,50 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		CD5828F823BE538B001092FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Examples/FeliCaReader/FeliCaReader.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9TWATL5SE8;
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/FeliCaReader/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.FeliCaRawDataReader;
+				PRODUCT_NAME = FeliCaRawDataReader;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CD5828F923BE538B001092FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Examples/FeliCaReader/FeliCaReader.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9TWATL5SE8;
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/FeliCaReader/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.tret.FeliCaRawDataReader;
+				PRODUCT_NAME = FeliCaRawDataReader;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -2531,6 +2734,15 @@
 			buildConfigurations = (
 				CD02AC67231CE5F6008614B7 /* Debug */,
 				CD02AC68231CE5F6008614B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD5828F723BE538B001092FC /* Build configuration list for PBXNativeTarget "FeliCaRawDataReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD5828F823BE538B001092FC /* Debug */,
+				CD5828F923BE538B001092FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
