@@ -38,25 +38,36 @@ public class OctopusReader: FeliCaReader {
     
     /// Initializes OctopusReader.
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     /// Get read data from Octopus card
     /// - Parameter itemTypes: Types of data items you want to read from Octopus card
     public func get(itemTypes: [OctopusCardItemType]) {
         self.octopusCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        
+    }
+    
+    @available(*, unavailable)
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [OctopusCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.octopusCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var octopusCard = OctopusCard(tag: feliCaTag, data: OctopusCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNROctopusReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -66,6 +77,7 @@ public class OctopusReader: FeliCaReader {
             octopusCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(octopusCard)
         }
+        */
     }
 }
 
