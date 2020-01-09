@@ -38,25 +38,36 @@ public class OkicaReader: FeliCaReader {
     
     /// OkicaReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     /// OKICA からデータを読み取る
     /// - Parameter itemTypes: OKICA から読み取りたいデータのタイプ
     public func get(itemTypes: [OkicaCardItemType]) {
         self.okicaCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        
+    }
+    
+    
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [OkicaCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.okicaCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var okicaCard = OkicaCard(tag: feliCaTag, data: OkicaCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNROkicaReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -66,6 +77,7 @@ public class OkicaReader: FeliCaReader {
             okicaCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(okicaCard)
         }
+        */
     }
 }
 
