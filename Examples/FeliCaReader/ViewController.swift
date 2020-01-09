@@ -9,9 +9,9 @@
 import UIKit
 import TRETJapanNFCReader
 
-class ViewController: UIViewController, FeliCaReader2SessionDelegate {
+class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
-    var reader: FeliCaReader2!
+    var reader: FeliCaReader!
     
     let transitICBalanceCommandParameter: FeliCaReadWithoutEncryptionCommandParameter = (systemCode: 0x0003, serviceCode: 0x008B, numberOfBlock: 1)
     let systemCode: FeliCaSystemCode = 0x0003
@@ -26,7 +26,7 @@ class ViewController: UIViewController, FeliCaReader2SessionDelegate {
             (0x0003, 0x108F, 3)
         ]
         
-        self.reader = FeliCaReader2(delegate: self)
+        self.reader = FeliCaReader(delegate: self)
         self.reader.readWithoutEncryption(parameters: parameters)
     }
     
