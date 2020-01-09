@@ -49,6 +49,7 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch UnivCoopICPrepaidItemType(serviceCode) {
                     case .balance:
                         self.convertToBalance(blockData)

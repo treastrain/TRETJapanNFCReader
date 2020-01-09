@@ -34,6 +34,18 @@ public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .balance:
+            return (0xFE00, 0x50D7, 1)
+        case .univCoopInfo:
+            return (0xFE00, 0x50CB, 6)
+        case .transactions:
+            return (0xFE00, 0x50CF, 10)
+        }
+    }
+    
+    @available(*, unavailable)
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
@@ -45,6 +57,7 @@ public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .balance:

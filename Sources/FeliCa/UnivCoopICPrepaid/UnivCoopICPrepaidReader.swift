@@ -38,23 +38,30 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
     
     /// UnivCoopICPrepaidReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     public func get(itemTypes: [UnivCoopICPrepaidItemType]) {
         self.univCoopICPrepaidCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    @available(*, unavailable)
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [UnivCoopICPrepaidItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.univCoopICPrepaidCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var univCoopICPrepaidCard = UnivCoopICPrepaidCard(tag: feliCaTag, data: UnivCoopICPrepaidCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRUnivCoopICPrepaidReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -64,6 +71,7 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
             univCoopICPrepaidCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(univCoopICPrepaidCard)
         }
+        */
     }
 }
 
