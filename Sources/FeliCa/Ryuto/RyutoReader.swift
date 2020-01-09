@@ -38,25 +38,36 @@ public class RyutoReader: FeliCaReader {
     
     /// RyutoReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     /// りゅーと からデータを読み取る
     /// - Parameter itemTypes: りゅーと から読み取りたいデータのタイプ
     public func get(itemTypes: [RyutoCardItemType]) {
         self.ryutoCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        
+    }
+    
+    @available(*, unavailable)
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [RyutoCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.ryutoCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var ryutoCard = RyutoCard(tag: feliCaTag, data: RyutoCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRRyutoReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -66,6 +77,7 @@ public class RyutoReader: FeliCaReader {
             ryutoCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(ryutoCard)
         }
+        */
     }
 }
 
