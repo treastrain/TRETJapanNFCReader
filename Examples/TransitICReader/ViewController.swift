@@ -22,7 +22,7 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.reader = TransitICReader(viewController: self)
+        self.reader = TransitICReader(delegate: self)
         self.reread()
     }
     
