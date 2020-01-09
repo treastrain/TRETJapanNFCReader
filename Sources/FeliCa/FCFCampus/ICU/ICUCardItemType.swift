@@ -12,25 +12,36 @@ import TRETJapanNFCReader_FeliCa
 #endif
 
 // data typs which can be obtained from ICU Student ID card.
-public enum ICUCardItemType: UInt16, CaseIterable, FeliCaCardItemType {
-    case identity = 0x1A8B
-    case transactions = 0x120F
+public enum ICUCardItemType: CaseIterable, FeliCaCardItemType {
+    case identity
+    case transactions
     
-    // typeof FeliCaServiceCode == UInt16
     public init?(_ serviceCode: FeliCaServiceCode) {
-        let service = ICUCardItemType(rawValue: serviceCode)
-        switch service {
-        case .some:
-            self = service!
-        case .none:
+        switch serviceCode {
+        case 0x1A8B:
+            self = .identity
+        case 0x120F:
+            self = .transactions
+        default:
             return nil
         }
     }
     
-    public var serviceCode: FeliCaServiceCode {
-       self.rawValue
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .identity:
+            return (0xFE00, 0x1A8B, 2)
+        case .transactions:
+            return (0xFE00, 0x120F, 10)
+        }
     }
     
+    @available(*, unavailable)
+    public var serviceCode: FeliCaServiceCode {
+        self.parameter.serviceCode
+    }
+    
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .identity:

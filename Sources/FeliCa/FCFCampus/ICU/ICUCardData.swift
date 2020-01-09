@@ -47,6 +47,7 @@ public struct ICUCardData: FeliCaCardData {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch ICUCardItemType(serviceCode) {
                     case .identity:
                         self.convertToIdentity(blockData)
