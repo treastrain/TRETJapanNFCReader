@@ -32,8 +32,9 @@ public class NTasuReader: FeliCaReader {
         super.init(delegate: delegate)
     }
     
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
 }
 
