@@ -26,6 +26,7 @@ public class TransitICReader: FeliCaReader {
     
     /// TransitICReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
+    @available(*, unavailable)
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
@@ -38,25 +39,36 @@ public class TransitICReader: FeliCaReader {
     
     /// TransitICReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     /// 交通系ICカードからデータを読み取る
     /// - Parameter items: 交通系ICカードから読み取りたいデータ
     public func get(itemTypes: [TransitICCardItemType]) {
         self.transitICCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        
+    }
+    
+    @available(*, unavailable)
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [TransitICCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.transitICCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var transitICCard = TransitICCard(tag: feliCaTag, data: TransitICCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRTransitICReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -72,6 +84,7 @@ public class TransitICReader: FeliCaReader {
             transitICCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(transitICCard)
         }
+        */
     }
 }
 
