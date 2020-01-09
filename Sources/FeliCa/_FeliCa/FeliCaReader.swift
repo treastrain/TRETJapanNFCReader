@@ -17,8 +17,8 @@ import TRETJapanNFCReader_Core
 open class FeliCaReader: JapanNFCReader {
     
     public let delegate: FeliCaReaderSessionDelegate?
-    public var systemCodes: [FeliCaSystemCode] = []
-    public var serviceCodes: [FeliCaSystemCode: [(serviceCode: FeliCaServiceCode, numberOfBlock: Int)]] = [:]
+    public private(set) var systemCodes: [FeliCaSystemCode] = []
+    public private(set) var serviceCodes: [FeliCaSystemCode: [(serviceCode: FeliCaServiceCode, numberOfBlock: Int)]] = [:]
     
     private init() {
         fatalError()
@@ -42,8 +42,6 @@ open class FeliCaReader: JapanNFCReader {
                 self.systemCodes.append(parameter.systemCode)
             }
         }
-        print(self.systemCodes)
-        print(self.serviceCodes)
         self.beginScanning()
     }
     
@@ -148,7 +146,7 @@ open class FeliCaReader: JapanNFCReader {
                 
                 session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
                 session.invalidate()
-                self.delegate?.feliCaReaderSession(
+                self.feliCaReaderSession(
                     didRead: feliCaData,
                     pollingErrors: pollingErrors.isEmpty ? nil : pollingErrors,
                     readErrors: readErrors.isEmpty ? nil : readErrors
@@ -157,6 +155,18 @@ open class FeliCaReader: JapanNFCReader {
         }
     }
     
+    open func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        self.delegate?.feliCaReaderSession(didRead: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)
+    }
+    
+    @available(*, unavailable)
+    public func readWithoutEncryption(session: NFCTagReaderSession, tag: NFCFeliCaTag, serviceCode: FeliCaServiceCode, blocks: Int) -> [Data]? {
+        return nil
+    }
 }
+
+@available(iOS 13.0, *)
+@available(*, unavailable)
+public typealias FeliCaReaderViewController = UIViewController & FeliCaReaderSessionDelegate
 
 #endif
