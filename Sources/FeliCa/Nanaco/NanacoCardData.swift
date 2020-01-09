@@ -46,6 +46,7 @@ public struct NanacoCardData: FeliCaCardData {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch NanacoCardItemType(serviceCode) {
                     case .balance:
                         self.convertToBalance(blockData)
