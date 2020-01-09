@@ -19,7 +19,7 @@ public protocol FeliCaReaderSessionDelegate: JapanNFCReaderSessionDelegate {
 }
 
 @available(iOS 13.0, *)
-extension FeliCaReaderSessionDelegate {
+public extension FeliCaReaderSessionDelegate {
     func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
         
     }
