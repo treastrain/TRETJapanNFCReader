@@ -38,7 +38,7 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
     
     /// UnivCoopICPrepaidReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(viewController: FeliCaReaderViewController) {
         super.init(delegate: viewController)
     }

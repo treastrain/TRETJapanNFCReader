@@ -32,7 +32,7 @@ public class NTasuReader: FeliCaReader {
         super.init(delegate: delegate)
     }
     
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(viewController: FeliCaReaderViewController) {
         super.init(delegate: viewController)
     }
