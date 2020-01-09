@@ -38,25 +38,36 @@ public class WaonReader: FeliCaReader {
     
     /// WaonReader を初期化する。
     /// - Parameter viewController: FeliCaReaderViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable)
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     /// WAONカードからデータを読み取る
     /// - Parameter itemTypes: WAONカードから読み取りたいデータ
     public func get(itemTypes: [WaonCardItemType]) {
         self.waonCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        
+    }
+    
+    @available(*, unavailable)
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [WaonCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.waonCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var waonCard = WaonCard(tag: feliCaTag, data: WaonCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRWaonReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -66,6 +77,7 @@ public class WaonReader: FeliCaReader {
             waonCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(waonCard)
         }
+        */
     }
 }
 
