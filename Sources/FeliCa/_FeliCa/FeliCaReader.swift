@@ -116,7 +116,7 @@ open class FeliCaReader: JapanNFCReader {
                     if feliCaData[targetSystemCode] == nil {
                         let (pmm, systemCode, error) = feliCaCardTag.polling(systemCode: targetSystemCode.bigEndian.data, requestCode: .systemCode, timeSlot: .max1)
                         if targetSystemCode.bigEndian.data != systemCode {
-                            feliCaData[targetSystemCode] = FeliCaSystem(systemCode: targetSystemCode, idm: FeliCaIDm(data: Data()), pmm: FeliCaPMm(data: pmm), services: [:])
+                            feliCaData[targetSystemCode] = FeliCaSystem(systemCode: targetSystemCode, idm: "", pmm: pmm.hexString, services: [:])
                             pollingErrors[targetSystemCode] = error
                             continue
                         } else {
@@ -141,7 +141,7 @@ open class FeliCaReader: JapanNFCReader {
                         }
                     }
                     
-                    feliCaData[targetSystemCode] = FeliCaSystem(systemCode: targetSystemCode, idm: FeliCaIDm(data: feliCaCardTag.currentIDm), pmm: FeliCaPMm(data: currentPMm), services: services)
+                    feliCaData[targetSystemCode] = FeliCaSystem(systemCode: targetSystemCode, idm: feliCaCardTag.currentIDm.hexString, pmm: currentPMm.hexString, services: services)
                 }
                 
                 session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()

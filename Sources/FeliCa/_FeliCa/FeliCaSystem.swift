@@ -10,8 +10,8 @@ import Foundation
 
 public struct FeliCaSystem: Codable {
     public let systemCode: FeliCaSystemCode
-    public let idm: FeliCaIDm
-    public let pmm: FeliCaPMm
+    public let idm: String
+    public let pmm: String
     public let services: [FeliCaServiceCode : FeliCaBlockData]
     
     public subscript(serviceCode: FeliCaServiceCode) -> FeliCaBlockData? {

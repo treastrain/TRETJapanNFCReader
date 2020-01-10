@@ -103,6 +103,10 @@ public extension Array {
 }
 
 public extension Data {
+    var hexString: String {
+        return self.map { String(format: "%.2hhx", $0) }.joined()
+    }
+    
     func toIntReversed(_ startIndex: Int, _ endIndex: Int) -> Int {
         var s = 0
         

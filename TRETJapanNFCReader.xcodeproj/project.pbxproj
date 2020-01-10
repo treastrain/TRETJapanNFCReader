@@ -301,14 +301,6 @@
 		CD35A31823BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
 		CD35A31923BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
 		CD35A31A23BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
-		CD35A31C23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
-		CD35A31D23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
-		CD35A31E23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
-		CD35A31F23BECE8D0005075D /* FeliCaIDm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */; };
-		CD35A32123BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
-		CD35A32223BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
-		CD35A32323BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
-		CD35A32423BECE9E0005075D /* FeliCaPMm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A32023BECE9E0005075D /* FeliCaPMm.swift */; };
 		CD5828D423BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
 		CD5828D523BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
 		CD5828D623BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
@@ -689,8 +681,6 @@
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD35A31123BECE330005075D /* FeliCaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeliCaData.swift; sourceTree = "<group>"; };
 		CD35A31623BECE770005075D /* FeliCaBlockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaBlockData.swift; sourceTree = "<group>"; };
-		CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaIDm.swift; sourceTree = "<group>"; };
-		CD35A32023BECE9E0005075D /* FeliCaPMm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaPMm.swift; sourceTree = "<group>"; };
 		CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReadWithoutEncryptionCommandParameter.swift; sourceTree = "<group>"; };
 		CD5828E623BE5389001092FC /* FeliCaRawDataReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeliCaRawDataReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5828E823BE5389001092FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -942,8 +932,6 @@
 				CD10CB9823B7999300281E33 /* FeliCaCard.swift */,
 				CD35A31123BECE330005075D /* FeliCaData.swift */,
 				CD35A31623BECE770005075D /* FeliCaBlockData.swift */,
-				CD35A31B23BECE8D0005075D /* FeliCaIDm.swift */,
-				CD35A32023BECE9E0005075D /* FeliCaPMm.swift */,
 				CD10CB9923B7999300281E33 /* FeliCaSystem.swift */,
 				CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */,
 				CD10CB9A23B7999300281E33 /* FeliCaReaderProtocol.swift */,
@@ -1738,7 +1726,6 @@
 				CD10CBCE23B7999300281E33 /* Extensions.swift in Sources */,
 				CD10CC2623B7999300281E33 /* FeliCaServiceCode.swift in Sources */,
 				CD10CBEA23B7999300281E33 /* ICUCardData.swift in Sources */,
-				CD35A31D23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CC1623B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD623B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CCA623B7999300281E33 /* RyutoReader.swift in Sources */,
@@ -1796,7 +1783,6 @@
 				CD10CCAA23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CCCE23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7623B7999300281E33 /* OctopusReader.swift in Sources */,
-				CD35A32223BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC9223B7999300281E33 /* OkicaCardItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1844,7 +1830,6 @@
 				CD10CC8123B7999300281E33 /* UnivCoopICPrepaidItemType.swift in Sources */,
 				CD10CC4D23B7999300281E33 /* FeliCaReaderProtocol.swift in Sources */,
 				CD10CC5123B7999300281E33 /* NanacoReader.swift in Sources */,
-				CD35A31C23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CBDD23B7999300281E33 /* ICUCardItemType.swift in Sources */,
 				CD10CC7D23B7999300281E33 /* OctopusCardData.swift in Sources */,
 				CD10CBED23B7999300281E33 /* RakutenEdyCard.swift in Sources */,
@@ -1902,7 +1887,6 @@
 				CD10CCC123B7999300281E33 /* DriversLicenseExtensions.swift in Sources */,
 				CD10CCA923B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CC8523B7999300281E33 /* UnivCoopICPrepaidCard.swift in Sources */,
-				CD35A32123BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC4123B7999300281E33 /* FeliCaSystemCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1924,7 +1908,6 @@
 				CD10CBD023B7999300281E33 /* Extensions.swift in Sources */,
 				CD10CC2823B7999300281E33 /* FeliCaServiceCode.swift in Sources */,
 				CD10CBEC23B7999300281E33 /* ICUCardData.swift in Sources */,
-				CD35A31F23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CC1823B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD823B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CCA823B7999300281E33 /* RyutoReader.swift in Sources */,
@@ -1982,7 +1965,6 @@
 				CD10CCAC23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CCD023B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7823B7999300281E33 /* OctopusReader.swift in Sources */,
-				CD35A32423BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC9423B7999300281E33 /* OkicaCardItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2004,7 +1986,6 @@
 				CD10CBCF23B7999300281E33 /* Extensions.swift in Sources */,
 				CD10CC2723B7999300281E33 /* FeliCaServiceCode.swift in Sources */,
 				CD10CBEB23B7999300281E33 /* ICUCardData.swift in Sources */,
-				CD35A31E23BECE8D0005075D /* FeliCaIDm.swift in Sources */,
 				CD10CC1723B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD723B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
 				CD10CCA723B7999300281E33 /* RyutoReader.swift in Sources */,
@@ -2062,7 +2043,6 @@
 				CD10CCAB23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
 				CD10CCCF23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7723B7999300281E33 /* OctopusReader.swift in Sources */,
-				CD35A32323BECE9E0005075D /* FeliCaPMm.swift in Sources */,
 				CD10CC9323B7999300281E33 /* OkicaCardItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
