@@ -13,7 +13,7 @@ import TRETJapanNFCReader
 class ViewController: UIViewController, FeliCaReaderSessionDelegate {
     
     var reader: TransitICReader!
-    var transitICCard: TransitICCard?
+    var transitICCardData: TransitICCardData?
     
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var idmLabel: UILabel!
@@ -27,7 +27,7 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
     }
     
     @IBAction func reread() {
-        self.reader.get(itemTypes: [.balance])
+        self.reader.get(itemTypes: TransitICCardItemType.allCases)
     }
     
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
@@ -48,25 +48,26 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
                     self.systemCodeLabel.text = "System Code: "
                 }
                 
-                self.transitICCard = nil
+                self.transitICCardData = nil
             }
         }
     }
     
-    func feliCaReaderSession(didRead feliCaCard: FeliCaCard) {
-        let transitICCard = feliCaCard as! TransitICCard
+    func feliCaReaderSession(didRead feliCaCardData: FeliCaCardData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        let transitICCardData = feliCaCardData as! TransitICCardData
+        print(transitICCardData)
         
         DispatchQueue.main.async {
-            if let balance = transitICCard.data.balance {
+            if let balance = transitICCardData.balance {
                 self.balanceLabel.text = "¥ \(balance)"
             } else {
                 self.balanceLabel.text = "¥ -----"
             }
-            self.idmLabel.text = "IDm: \(transitICCard.data.primaryIDm)"
-            self.systemCodeLabel.text = "System Code: \(transitICCard.data.primarySystemCode.string)"
+            self.idmLabel.text = "IDm: \(transitICCardData.primaryIDm)"
+            self.systemCodeLabel.text = "System Code: \(transitICCardData.primarySystemCode.string)"
         }
         
-        self.transitICCard = transitICCard
+        self.transitICCardData = transitICCardData
     }
 
 
