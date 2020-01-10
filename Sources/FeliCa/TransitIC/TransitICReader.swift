@@ -54,6 +54,12 @@ public class TransitICReader: FeliCaReader {
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
         
+        if let firstData = feliCaData.first {
+            let systemCode = firstData.key
+            let idm = firstData.value.idm
+            let transitICCardData = TransitICCardData(idm: idm, systemCode: systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: transitICCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        }
     }
     
     @available(*, unavailable)

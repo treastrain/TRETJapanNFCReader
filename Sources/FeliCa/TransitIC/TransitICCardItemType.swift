@@ -46,15 +46,15 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (0x0003, 0x008B, 1)
+            return (.cjrc, 0x008B, 1)
         case .transactions:
-            return (0x0003, 0x090F, 20)
+            return (.cjrc, 0x090F, 20)
         case .entryExitInformations:
-            return (0x0003, 0x108F, 3)
+            return (.cjrc, 0x108F, 3)
         case .sfEntryInformations:
-            return (0x0003, 0x10CB, 2)
+            return (.cjrc, 0x10CB, 2)
         case .sapicaPoints:
-            return (0x0003, 0xBA4B, 1)
+            return (.sapica, 0xBA4B, 1)
         }
     }
     
