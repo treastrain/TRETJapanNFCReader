@@ -41,13 +41,13 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (0xFE00, 0x5597, 1)
+            return (.common, 0x5597, 1)
         case .nanacoNumber:
-            return (0xFE00, 0x558B, 1)
+            return (.common, 0x558B, 1)
         case .points:
-            return (0xFE00, 0x560B, 2)
+            return (.common, 0x560B, 2)
         case .transactions:
-            return (0xFE00, 0x564F, 5)
+            return (.common, 0x564F, 5)
         }
     }
     
