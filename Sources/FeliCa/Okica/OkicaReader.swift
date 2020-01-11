@@ -26,6 +26,7 @@ public class OkicaReader: FeliCaReader {
     
     /// OkicaReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
+    @available(*, unavailable)
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
@@ -52,7 +53,12 @@ public class OkicaReader: FeliCaReader {
     }
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
-        
+        if let okicaSystem = feliCaData[.okica] {
+            let okicaCardData = OkicaCardData(idm: okicaSystem.idm, systemCode: okicaSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: okicaCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        } else {
+            self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
+        }
     }
     
     

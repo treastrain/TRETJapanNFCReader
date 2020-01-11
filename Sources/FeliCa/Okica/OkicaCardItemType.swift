@@ -36,11 +36,11 @@ public enum OkicaCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .transactions:
-            return (0x8FC1, 0x028F, 20)
+            return (.okica, 0x028F, 20)
         case .entryExitInformations:
-            return (0x8FC1, 0x050F, 3)
+            return (.okica, 0x050F, 3)
         case .sfEntryInformations:
-            return (0x8FC1, 0x060B, 2)
+            return (.okica, 0x060B, 2)
         }
     }
     
