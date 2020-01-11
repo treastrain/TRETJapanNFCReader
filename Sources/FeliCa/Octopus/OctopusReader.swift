@@ -53,7 +53,12 @@ public class OctopusReader: FeliCaReader {
     }
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
-        
+        if let octopusSystem = feliCaData[.octopus] {
+            let rakutenEdyCardData = OctopusCardData(idm: octopusSystem.idm, systemCode: octopusSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: rakutenEdyCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        } else {
+            self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
+        }
     }
     
     @available(*, unavailable)
