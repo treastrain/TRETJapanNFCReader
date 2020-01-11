@@ -32,9 +32,9 @@ public enum NTasuCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (0x93EC, 0x408B, 8)
+            return (.ntasu, 0x408B, 8)
         case .transactions:
-            return (0x93EC, 0x80CF, 20)
+            return (.ntasu, 0x80CF, 20)
         }
     }
     
