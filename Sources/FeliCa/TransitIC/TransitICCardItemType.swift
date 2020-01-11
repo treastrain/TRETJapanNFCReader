@@ -44,15 +44,19 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     }
     
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        return parameter(systemCode: .cjrc)
+    }
+    
+    public func parameter(systemCode: FeliCaSystemCode = .cjrc) -> FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (.cjrc, 0x008B, 1)
+            return (systemCode, 0x008B, 1)
         case .transactions:
-            return (.cjrc, 0x090F, 20)
+            return (systemCode, 0x090F, 20)
         case .entryExitInformations:
-            return (.cjrc, 0x108F, 3)
+            return (systemCode, 0x108F, 3)
         case .sfEntryInformations:
-            return (.cjrc, 0x10CB, 2)
+            return (systemCode, 0x10CB, 2)
         case .sapicaPoints:
             return (.sapica, 0xBA4B, 1)
         }

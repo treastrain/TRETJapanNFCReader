@@ -18,6 +18,7 @@ public typealias TransitICCardTag = NFCFeliCaTag
 @available(iOS 13.0, *)
 public class TransitICReader: FeliCaReader {
     
+    private var systemCode: FeliCaSystemCode = .cjrc
     private var transitICCardItemTypes: [TransitICCardItemType] = []
     
     private init() {
@@ -33,7 +34,9 @@ public class TransitICReader: FeliCaReader {
     
     /// TransitICReader を初期化する。
     /// - Parameter delegate: FeliCaReaderSessionDelegate
-    public override init(delegate: FeliCaReaderSessionDelegate) {
+    /// - Parameter systemCode: FeliCa システムコード
+    public init(delegate: FeliCaReaderSessionDelegate, systemCode: FeliCaSystemCode = .cjrc) {
+        self.systemCode = systemCode
         super.init(delegate: delegate)
     }
     
@@ -47,8 +50,13 @@ public class TransitICReader: FeliCaReader {
     /// 交通系ICカードからデータを読み取る
     /// - Parameter items: 交通系ICカードから読み取りたいデータ
     public func get(itemTypes: [TransitICCardItemType]) {
+        var itemTypes = itemTypes
+        if self.systemCode != .sapica {
+            itemTypes = itemTypes.filter { $0 != .sapicaPoints }
+        }
         self.transitICCardItemTypes = itemTypes
-        let parameters = itemTypes.map { $0.parameter }
+        let parameters = itemTypes.map { $0.parameter(systemCode: self.systemCode) }
+        print("parameters", parameters.map { $0.serviceCode })
         self.readWithoutEncryption(parameters: parameters)
     }
     
