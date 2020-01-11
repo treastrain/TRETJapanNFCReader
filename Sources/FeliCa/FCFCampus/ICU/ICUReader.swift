@@ -53,7 +53,6 @@ public class ICUReader: FeliCaReader {
     }
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
-        
         if let commonSystem = feliCaData[.common] {
             let icuCardData = ICUCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
             self.delegate?.feliCaReaderSession(didRead: icuCardData, pollingErrors: pollingErrors, readErrors: readErrors)
