@@ -26,6 +26,7 @@ public class RyutoReader: FeliCaReader {
     
     /// RyutoReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
+    @available(*, unavailable)
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
@@ -52,7 +53,12 @@ public class RyutoReader: FeliCaReader {
     }
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
-        
+        if let ryutoSystem = feliCaData[.ryuto] {
+            let ryutoCardData = RyutoCardData(idm: ryutoSystem.idm, systemCode: ryutoSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: ryutoCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        } else {
+            self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
+        }
     }
     
     @available(*, unavailable)

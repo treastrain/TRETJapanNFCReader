@@ -32,7 +32,7 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .transactions:
-            return (0x8B5D, 0x898F, 20)
+            return (.ryuto, 0x898F, 20)
         }
     }
     
