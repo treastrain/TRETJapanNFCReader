@@ -56,7 +56,6 @@ public class TransitICReader: FeliCaReader {
         }
         self.transitICCardItemTypes = itemTypes
         let parameters = itemTypes.map { $0.parameter(systemCode: self.systemCode) }
-        print("parameters", parameters.map { $0.serviceCode })
         self.readWithoutEncryption(parameters: parameters)
     }
     
@@ -67,6 +66,8 @@ public class TransitICReader: FeliCaReader {
             let idm = firstData.value.idm
             let transitICCardData = TransitICCardData(idm: idm, systemCode: systemCode, data: feliCaData)
             self.delegate?.feliCaReaderSession(didRead: transitICCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        } else {
+            self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
         }
     }
     

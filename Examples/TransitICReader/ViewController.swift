@@ -69,6 +69,11 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
         
         self.transitICCardData = transitICCardData
     }
+    
+    func feliCaReaderSession(didInvalidateWithError pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        print("pollingErrors", pollingErrors)
+        print("readErrors", readErrors)
+    }
 
 
 }
