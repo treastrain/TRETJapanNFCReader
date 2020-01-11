@@ -37,11 +37,11 @@ public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (0xFE00, 0x50D7, 1)
+            return (.common, 0x50D7, 1)
         case .univCoopInfo:
-            return (0xFE00, 0x50CB, 6)
+            return (.common, 0x50CB, 6)
         case .transactions:
-            return (0xFE00, 0x50CF, 10)
+            return (.common, 0x50CF, 10)
         }
     }
     
