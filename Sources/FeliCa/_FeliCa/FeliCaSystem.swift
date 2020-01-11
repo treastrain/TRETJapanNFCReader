@@ -17,6 +17,13 @@ public struct FeliCaSystem: Codable {
     public subscript(serviceCode: FeliCaServiceCode) -> FeliCaBlockData? {
         return self.services[serviceCode]
     }
+    
+    public init(systemCode: FeliCaSystemCode, idm: String, pmm: String, services: [FeliCaServiceCode : FeliCaBlockData]) {
+        self.systemCode = systemCode
+        self.idm = idm
+        self.pmm = pmm
+        self.services = services
+    }
 }
 
 /*
