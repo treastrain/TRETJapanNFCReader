@@ -37,11 +37,11 @@ public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (0xFE00, 0x1317, 1)
+            return (.common, 0x1317, 1)
         case .edyNumber:
-            return (0xFE00, 0x110B, 1)
+            return (.common, 0x110B, 1)
         case .transactions:
-            return (0xFE00, 0x170F, 6)
+            return (.common, 0x170F, 6)
         }
     }
     

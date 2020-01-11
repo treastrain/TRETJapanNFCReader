@@ -32,6 +32,13 @@ public struct RakutenEdyCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
     
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
+    
     @available(iOS 13.0, *)
     internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
         self.primaryIDm = feliCaCommonCardData.primaryIDm
