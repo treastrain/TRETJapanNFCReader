@@ -32,6 +32,13 @@ public struct OctopusCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
     
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
+    
     public mutating func convert() {
         for (systemCode, system) in self.contents {
             switch systemCode {
