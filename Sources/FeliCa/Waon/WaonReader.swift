@@ -26,6 +26,7 @@ public class WaonReader: FeliCaReader {
     
     /// WaonReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
+    @available(*, unavailable)
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
