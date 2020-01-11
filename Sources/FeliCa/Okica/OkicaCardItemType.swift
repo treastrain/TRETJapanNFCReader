@@ -44,7 +44,7 @@ public enum OkicaCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .transactions:

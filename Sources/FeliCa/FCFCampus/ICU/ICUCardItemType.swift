@@ -36,7 +36,7 @@ public enum ICUCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         self.parameter.serviceCode
     }

@@ -62,7 +62,7 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
