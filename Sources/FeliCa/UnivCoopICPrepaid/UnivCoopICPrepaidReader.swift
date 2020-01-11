@@ -52,8 +52,8 @@ public class UnivCoopICPrepaidReader: FeliCaReader {
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
         if let commonSystem = feliCaData[.common] {
-            let rakutenEdyCardData = UnivCoopICPrepaidCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
-            self.delegate?.feliCaReaderSession(didRead: rakutenEdyCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+            let univCoopICPrepaidCardData = UnivCoopICPrepaidCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: univCoopICPrepaidCardData, pollingErrors: pollingErrors, readErrors: readErrors)
         } else {
             self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
         }

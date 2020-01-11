@@ -54,8 +54,8 @@ public class WaonReader: FeliCaReader {
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
         if let commonSystem = feliCaData[.common] {
-            let rakutenEdyCardData = WaonCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
-            self.delegate?.feliCaReaderSession(didRead: rakutenEdyCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+            let waonCardData = WaonCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: waonCardData, pollingErrors: pollingErrors, readErrors: readErrors)
         } else {
             self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
         }
