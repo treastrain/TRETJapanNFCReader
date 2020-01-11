@@ -30,9 +30,9 @@ public enum ICUCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .identity:
-            return (0xFE00, 0x1A8B, 2)
+            return (.common, 0x1A8B, 2)
         case .transactions:
-            return (0xFE00, 0x120F, 10)
+            return (.common, 0x120F, 10)
         }
     }
     

@@ -31,6 +31,13 @@ public struct ICUCardData: FeliCaCardData {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
     }
+    
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
 
     #if os(iOS)
     @available(iOS 13.0, *)

@@ -26,6 +26,7 @@ public class ICUReader: FeliCaReader {
     
     /// ICUReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
+    @available(*, unavailable)
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
@@ -53,6 +54,12 @@ public class ICUReader: FeliCaReader {
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
         
+        if let commonSystem = feliCaData[.common] {
+            let icuCardData = ICUCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: icuCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        } else {
+            self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
+        }
     }
     
     @available(*, unavailable)
