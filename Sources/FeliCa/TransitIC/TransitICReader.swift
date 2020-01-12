@@ -27,7 +27,7 @@ public class TransitICReader: FeliCaReader {
     
     /// TransitICReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }

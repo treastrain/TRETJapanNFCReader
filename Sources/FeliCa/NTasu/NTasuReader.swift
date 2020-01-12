@@ -24,6 +24,7 @@ public class NTasuReader: FeliCaReader {
         fatalError()
     }
     
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }

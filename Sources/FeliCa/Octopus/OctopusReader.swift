@@ -26,7 +26,7 @@ public class OctopusReader: FeliCaReader {
     
     /// Initializes OctopusReader.
     /// - Parameter feliCaReader: FeliCaReader
-    @available(*, unavailable)
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
