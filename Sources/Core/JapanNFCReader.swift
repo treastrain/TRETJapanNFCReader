@@ -15,8 +15,8 @@ public typealias JapanNFCReaderViewController = UIViewController & JapanNFCReade
 @available(iOS 13.0, *)
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
-    internal let viewController: UIViewController?
-    internal let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
+    public let viewController: UIViewController?
+    public let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
     public var session: NFCTagReaderSession?
     
     private override init() {
