@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// りゅーと のデータ
 public struct RyutoCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .ryuto
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

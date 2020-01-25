@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// Octopus Card Data
 public struct OctopusCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public var type: FeliCaCardType = .octopus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

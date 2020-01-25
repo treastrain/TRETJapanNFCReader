@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// 大学生協ICプリペイドカードのデータ
 public struct UnivCoopICPrepaidCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .univCoopICPrepaid
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

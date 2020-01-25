@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// nanacoカードのデータ
 public struct NanacoCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .nanaco
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

@@ -12,7 +12,7 @@ import TRETJapanNFCReader_FeliCa
 #endif
 
 public struct ICUCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .fcfcampus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

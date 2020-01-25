@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// OKICA のデータ
 public struct OkicaCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .okica
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

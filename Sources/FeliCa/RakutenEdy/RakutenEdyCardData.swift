@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// 楽天Edyカードのデータ
 public struct RakutenEdyCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .rakutenEdy
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// WAONカードのデータ
 public struct WaonCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .waon
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

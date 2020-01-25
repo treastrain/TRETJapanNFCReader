@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// エヌタス
 public struct NTasuCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .ntasu
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode

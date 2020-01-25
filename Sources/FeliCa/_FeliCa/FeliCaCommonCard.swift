@@ -25,7 +25,7 @@ public struct FeliCaCommonCard: FeliCaCard {
 #endif
 
 public struct FeliCaCommonCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
