@@ -11,6 +11,25 @@ import Foundation
 public struct FeliCaSystem: Codable {
     public let systemCode: FeliCaSystemCode
     public let idm: String
+    public let pmm: String
+    public let services: [FeliCaServiceCode : FeliCaBlockData]
+    
+    public subscript(serviceCode: FeliCaServiceCode) -> FeliCaBlockData? {
+        return self.services[serviceCode]
+    }
+    
+    public init(systemCode: FeliCaSystemCode, idm: String, pmm: String, services: [FeliCaServiceCode : FeliCaBlockData]) {
+        self.systemCode = systemCode
+        self.idm = idm
+        self.pmm = pmm
+        self.services = services
+    }
+}
+
+/*
+public struct FeliCaSystem: Codable {
+    public let systemCode: FeliCaSystemCode
+    public let idm: String
     public var services: [FeliCaServiceCode : [Data]]
     
     public subscript(serviceCode: FeliCaServiceCode) -> [Data]? {
@@ -23,3 +42,4 @@ public struct FeliCaSystem: Codable {
         self.services = services
     }
 }
+*/

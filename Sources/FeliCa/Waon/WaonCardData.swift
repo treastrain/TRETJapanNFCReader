@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// WAONカードのデータ
 public struct WaonCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .waon
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -33,6 +33,13 @@ public struct WaonCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
     
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
+    
     @available(iOS 13.0, *)
     internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
         self.primaryIDm = feliCaCommonCardData.primaryIDm
@@ -46,6 +53,7 @@ public struct WaonCardData: FeliCaCardData {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch WaonCardItemType(serviceCode) {
                     case .balance:
                         self.convertToBalance(blockData)

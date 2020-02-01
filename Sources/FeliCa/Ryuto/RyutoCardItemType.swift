@@ -29,6 +29,14 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .transactions:
+            return (.ryuto, 0x898F, 20)
+        }
+    }
+    
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .transactions:
@@ -36,6 +44,7 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .transactions:

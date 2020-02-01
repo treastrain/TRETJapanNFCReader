@@ -38,6 +38,20 @@ public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .balance:
+            return (.common, 0x6817, 1)
+        case .waonNumber:
+            return (.common, 0x684F, 1)
+        case .points:
+            return (.common, 0x684B, 1)
+        case .transactions:
+            return (.common, 0x680B, 9)
+        }
+    }
+    
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
@@ -51,6 +65,7 @@ public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .balance:

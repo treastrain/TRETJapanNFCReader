@@ -29,6 +29,16 @@ public enum NTasuCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .balance:
+            return (.ntasu, 0x408B, 8)
+        case .transactions:
+            return (.ntasu, 0x80CF, 20)
+        }
+    }
+    
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
@@ -38,6 +48,7 @@ public enum NTasuCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .balance:

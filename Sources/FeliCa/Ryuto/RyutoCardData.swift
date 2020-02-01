@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// りゅーと のデータ
 public struct RyutoCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .ryuto
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -35,12 +35,20 @@ public struct RyutoCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
     
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
+    
     public mutating func convert() {
         for (systemCode, system) in self.contents {
             switch systemCode {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch RyutoCardItemType(serviceCode) {
                     case .transactions:
                         self.transactions = convertToTransactions(blockData)

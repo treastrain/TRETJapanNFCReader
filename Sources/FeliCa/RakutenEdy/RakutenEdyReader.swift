@@ -26,6 +26,7 @@ public class RakutenEdyReader: FeliCaReader {
     
     /// RakutenEdyReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
@@ -38,25 +39,41 @@ public class RakutenEdyReader: FeliCaReader {
     
     /// RakutenEdyReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable, renamed: "init(delegate:)")
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
     
     /// 楽天Edyカードからデータを読み取る
     /// - Parameter itemTypes: 楽天Edyカードから読み取りたいデータのタイプ
     public func get(itemTypes: [RakutenEdyCardItemType]) {
         self.rakutenEdyCardItemTypes = itemTypes
-        self.beginScanning()
+        let parameters = itemTypes.map { $0.parameter }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
+    public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        if let commonSystem = feliCaData[.common] {
+            let rakutenEdyCardData = RakutenEdyCardData(idm: commonSystem.idm, systemCode: commonSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: rakutenEdyCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        } else {
+            self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
+        }
+    }
+    
+    @available(*, unavailable)
     public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [RakutenEdyCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+        /*
         self.rakutenEdyCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
             completion(feliCaCard)
         }
+        */
     }
     
-    public override func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+    @available(*, unavailable)
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void) {
+        /*
         var rakutenEdyCard = RakutenEdyCard(tag: feliCaTag, data: RakutenEdyCardData(idm: idm, systemCode: systemCode))
         DispatchQueue(label: "TRETJPNRRakutenEdyReader", qos: .default).async {
             var services: [FeliCaServiceCode : [Data]] = [:]
@@ -66,6 +83,7 @@ public class RakutenEdyReader: FeliCaReader {
             rakutenEdyCard.data.contents[systemCode] = FeliCaSystem(systemCode: systemCode, idm: idm, services: services)
             completion(rakutenEdyCard)
         }
+        */
     }
 }
 

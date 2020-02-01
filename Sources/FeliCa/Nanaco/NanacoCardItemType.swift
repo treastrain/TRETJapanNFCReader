@@ -38,6 +38,20 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .balance:
+            return (.common, 0x5597, 1)
+        case .nanacoNumber:
+            return (.common, 0x558B, 1)
+        case .points:
+            return (.common, 0x560B, 2)
+        case .transactions:
+            return (.common, 0x564F, 5)
+        }
+    }
+    
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
@@ -51,6 +65,7 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .balance:

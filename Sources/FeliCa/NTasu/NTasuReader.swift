@@ -24,6 +24,7 @@ public class NTasuReader: FeliCaReader {
         fatalError()
     }
     
+    @available(*, unavailable, renamed: "init(delegate:)")
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
@@ -32,8 +33,9 @@ public class NTasuReader: FeliCaReader {
         super.init(delegate: delegate)
     }
     
-    public override init(viewController: FeliCaReaderViewController) {
-        super.init(viewController: viewController)
+    @available(*, unavailable, renamed: "init(delegate:)")
+    public init(viewController: FeliCaReaderViewController) {
+        super.init(delegate: viewController)
     }
 }
 

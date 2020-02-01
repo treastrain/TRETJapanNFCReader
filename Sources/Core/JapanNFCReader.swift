@@ -15,8 +15,8 @@ public typealias JapanNFCReaderViewController = UIViewController & JapanNFCReade
 @available(iOS 13.0, *)
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
-    internal let viewController: UIViewController?
-    internal let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
+    public let viewController: UIViewController?
+    public let japanNFCReaderSessionDelegate: JapanNFCReaderSessionDelegate?
     public var session: NFCTagReaderSession?
     
     private override init() {
@@ -66,11 +66,11 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-        print("tagReaderSessionDidBecomeActive(_:)")
+        // print("tagReaderSessionDidBecomeActive(_:)")
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
-        print("tagReaderSession(_:didInvalidateWithError:)")
+        // print("tagReaderSession(_:didInvalidateWithError:)")
         if let readerError = error as? NFCReaderError {
             if (readerError.code != .readerSessionInvalidationErrorFirstNDEFTagRead)
                 && (readerError.code != .readerSessionInvalidationErrorUserCanceled) {
@@ -94,7 +94,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
-        print("tagReaderSession(_:didDetect:)")
+        // print("tagReaderSession(_:didDetect:)")
         session.invalidate()
     }
 }

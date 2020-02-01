@@ -13,7 +13,7 @@ import TRETJapanNFCReader_FeliCa
 
 /// Octopus Card Data
 public struct OctopusCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public var type: FeliCaCardType = .octopus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -32,12 +32,20 @@ public struct OctopusCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
     
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
+    
     public mutating func convert() {
         for (systemCode, system) in self.contents {
             switch systemCode {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch OctopusCardItemType(serviceCode) {
                     case .balance:
                         self.convertToBalance(blockData)

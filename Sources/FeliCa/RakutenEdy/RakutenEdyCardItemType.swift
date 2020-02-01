@@ -34,6 +34,18 @@ public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+        switch self {
+        case .balance:
+            return (.common, 0x1317, 1)
+        case .edyNumber:
+            return (.common, 0x110B, 1)
+        case .transactions:
+            return (.common, 0x170F, 6)
+        }
+    }
+    
+    @available(*, unavailable, renamed: "parameter.serviceCode")
     public var serviceCode: FeliCaServiceCode {
         switch self {
         case .balance:
@@ -45,6 +57,7 @@ public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
+    @available(*, unavailable)
     var blocks: Int {
         switch self {
         case .balance:

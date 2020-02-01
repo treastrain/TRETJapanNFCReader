@@ -12,7 +12,7 @@ import TRETJapanNFCReader_FeliCa
 #endif
 
 public struct ICUCardData: FeliCaCardData {
-    public var version: String = "2"
+    public var version: String = "3"
     public let type: FeliCaCardType = .fcfcampus
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
@@ -31,6 +31,13 @@ public struct ICUCardData: FeliCaCardData {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
     }
+    
+    public init(idm: String, systemCode: FeliCaSystemCode, data: FeliCaData) {
+        self.primaryIDm = idm
+        self.primarySystemCode = systemCode
+        self.contents = data
+        self.convert()
+    }
 
     #if os(iOS)
     @available(iOS 13.0, *)
@@ -47,6 +54,7 @@ public struct ICUCardData: FeliCaCardData {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    let blockData = blockData.blockData
                     switch ICUCardItemType(serviceCode) {
                     case .identity:
                         self.convertToIdentity(blockData)

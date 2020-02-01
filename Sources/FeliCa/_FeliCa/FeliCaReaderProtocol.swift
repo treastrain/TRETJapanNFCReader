@@ -9,9 +9,10 @@
 #if os(iOS)
 import CoreNFC
 
-@available(iOS 13.0, *)
+@available(*, unavailable)
 protocol FeliCaReaderProtocol {
-    func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void)
+    // @available(*, unavailable)
+    // func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, completion: @escaping (FeliCaCard) -> Void)
     
     // @available(*, unavailable, renamed: "getItems")
     // func getItems(_ session: NFCTagReaderSession, _ feliCaCard: FeliCaCard, completion: @escaping (FeliCaCard) -> Void)
