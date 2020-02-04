@@ -143,6 +143,20 @@ public class DriversLicenseReader: JapanNFCReader {
                 return
             }
             
+            switch driversLicenseCardTag.initialSelectedAID {
+            case "A0000002310100000000000000000000", "A0000002310200000000000000000000", "A0000002480300000000000000000000" :
+                break
+            default:
+                let retryInterval = DispatchTimeInterval.milliseconds(1000)
+                let alertedMessage = session.alertMessage
+                session.alertMessage = Localized.nfcTagReaderSessionDifferentTagTypeErrorMessage.string()
+                DispatchQueue.global().asyncAfter(deadline: .now() + retryInterval, execute: {
+                    session.restartPolling()
+                    session.alertMessage = alertedMessage
+                })
+                return
+            }
+            
             session.alertMessage = Localized.nfcTagReaderSessionReadingMessage.string()
             
             let driversLicenseCard = DriversLicenseCard(tag: driversLicenseCardTag)
