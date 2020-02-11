@@ -61,9 +61,6 @@ public class TransitICReader: FeliCaReader {
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
         
-        let aaa = feliCaData[self.systemCode]
-        
-        
         if let firstData = feliCaData.first {
             print(firstData)
             let systemCode = firstData.key
