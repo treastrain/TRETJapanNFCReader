@@ -36,6 +36,11 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     /// Octopus Card (八達通)
     case octopus
     
+    /// iD （PKPaymentNetwork に準拠し、`idCredit` とした）
+    case idCredit
+    /// QUICPay
+    case quicPay
+    
     case unknown
     
     public var localizedString: String {
@@ -60,6 +65,10 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return "FCF Campus"
         case .octopus:
             return Localized.octopus.string()
+        case .idCredit:
+            return "iD"
+        case .quicPay:
+            return "QUICPay"
         case .unknown:
             return "Unknown"
         }
