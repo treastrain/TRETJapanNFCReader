@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct FeliCaSystem: Codable {
+public struct FeliCaSystem: Codable, Equatable {
     public let systemCode: FeliCaSystemCode
     public let idm: String
     public let pmm: String
@@ -23,6 +23,13 @@ public struct FeliCaSystem: Codable {
         self.idm = idm
         self.pmm = pmm
         self.services = services
+    }
+    
+    public static func == (lhs: FeliCaSystem, rhs: FeliCaSystem) -> Bool {
+        return lhs.systemCode == rhs.systemCode &&
+            lhs.idm == rhs.idm &&
+            lhs.pmm == rhs.pmm &&
+            lhs.services == rhs.services
     }
 }
 
