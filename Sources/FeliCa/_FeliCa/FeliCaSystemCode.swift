@@ -34,10 +34,10 @@ public extension FeliCaSystemCode {
     static let quicpay: FeliCaSystemCode = 0x04C1
     /// nanaco
     static let nanaco: FeliCaSystemCode = 0x04C7
-    /// WAON
-    static let waon: FeliCaSystemCode = 0x12FC
     /// NFC Data Exchange Format (NDEF)
-    static let ndef: FeliCaSystemCode = 0x4000
+    static let ndef: FeliCaSystemCode = 0x12FC
+    /// Host-based Card Emulation for NFC-F (HCE-F)
+    static let hcef: FeliCaSystemCode = 0x4000
     /// 深圳通 (Shenzhen Tong)
     static let shenzhenTong: FeliCaSystemCode = 0x8005
     /// 八達通 (Octopus)
