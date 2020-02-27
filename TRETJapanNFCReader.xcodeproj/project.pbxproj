@@ -416,6 +416,41 @@
 			remoteGlobalIDString = AD776F1C94991D3E551CEAA515DB110A;
 			remoteInfo = FirebaseRemoteConfig;
 		};
+		CD51FA8D2407767E0012CE0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF96B57ADE05E8909F823BDF6868B3E3;
+			remoteInfo = abseil;
+		};
+		CD51FA8F2407767E0012CE0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86375444C196BA272DDBB8165BF64A15;
+			remoteInfo = FirebaseCrashlytics;
+		};
+		CD51FA912407767E0012CE0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13C8C8B254851998F9289F71229B28A2;
+			remoteInfo = FirebaseInstallations;
+		};
+		CD51FA932407767E0012CE0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 251C6319AD50CB50F18D50CBF727F8B2;
+			remoteInfo = GoogleToolboxForMac;
+		};
+		CD51FA952407767E0012CE0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD1374B232181BF002AF46B /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3347A1AB6546F0A3977529B8F199DC41;
+			remoteInfo = PromisesObjC;
+		};
 		CD5828FC23BE53CC001092FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CD5D2D3522C5DF36004330F3 /* Project object */;
@@ -1143,16 +1178,20 @@
 		CDD1374C232181BF002AF46B /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				CD51FA8E2407767E0012CE0F /* absl.framework */,
 				CD1A79262334A79D00218B4A /* openssl_grpc.framework */,
 				CD90FB192332E92300679DB2 /* FirebaseABTesting.framework */,
 				CD1A79282334A79D00218B4A /* FirebaseAuth.framework */,
 				CDD1375D232181BF002AF46B /* FirebaseCore.framework */,
 				CDD1375F232181BF002AF46B /* FirebaseCoreDiagnostics.framework */,
+				CD51FA902407767E0012CE0F /* FirebaseCrashlytics.framework */,
 				CD1A792A2334A79D00218B4A /* FirebaseFirestore.framework */,
+				CD51FA922407767E0012CE0F /* FirebaseInstallations.framework */,
 				CDD13761232181BF002AF46B /* FirebaseInstanceID.framework */,
 				CD39A8DE23426392004A913D /* FirebaseRemoteConfig.framework */,
 				CDD13763232181BF002AF46B /* GoogleDataTransport.framework */,
 				CDD13765232181BF002AF46B /* GoogleDataTransportCCTSupport.framework */,
+				CD51FA942407767E0012CE0F /* GoogleToolboxForMac.framework */,
 				CDD13767232181BF002AF46B /* GoogleUtilities.framework */,
 				CD1A792C2334A79D00218B4A /* grpcpp.framework */,
 				CD1A792E2334A79D00218B4A /* gRPCCertificates-Cpp.bundle */,
@@ -1163,6 +1202,7 @@
 				CDD1376B232181BF002AF46B /* Pods_japanNFCReader.framework */,
 				CDD1376D232181BF002AF46B /* Pods_japanNFCReader_WatchKit_App.framework */,
 				CDD1376F232181BF002AF46B /* Pods_japanNFCReader_WatchKit_Extension.framework */,
+				CD51FA962407767E0012CE0F /* FBLPromises.framework */,
 				CD90FB1B2332E92300679DB2 /* protobuf.framework */,
 			);
 			name = Products;
@@ -1508,6 +1548,41 @@
 			fileType = wrapper.framework;
 			path = FirebaseRemoteConfig.framework;
 			remoteRef = CD39A8DD23426392004A913D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD51FA8E2407767E0012CE0F /* absl.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = absl.framework;
+			remoteRef = CD51FA8D2407767E0012CE0F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD51FA902407767E0012CE0F /* FirebaseCrashlytics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCrashlytics.framework;
+			remoteRef = CD51FA8F2407767E0012CE0F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD51FA922407767E0012CE0F /* FirebaseInstallations.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseInstallations.framework;
+			remoteRef = CD51FA912407767E0012CE0F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD51FA942407767E0012CE0F /* GoogleToolboxForMac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleToolboxForMac.framework;
+			remoteRef = CD51FA932407767E0012CE0F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD51FA962407767E0012CE0F /* FBLPromises.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FBLPromises.framework;
+			remoteRef = CD51FA952407767E0012CE0F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CD90FB192332E92300679DB2 /* FirebaseABTesting.framework */ = {
@@ -2241,7 +2316,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-watchOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = watchos;
@@ -2270,7 +2345,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-watchOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = watchos;
@@ -2511,7 +2586,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-iOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SKIP_INSTALL = YES;
@@ -2543,7 +2618,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-iOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SKIP_INSTALL = YES;
@@ -2573,7 +2648,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -2600,7 +2675,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -2625,7 +2700,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-tvOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = appletvos;
@@ -2652,7 +2727,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.tret.TRETJapanNFCReader-tvOS";
 				PRODUCT_NAME = TRETJapanNFCReader;
 				SDKROOT = appletvos;
