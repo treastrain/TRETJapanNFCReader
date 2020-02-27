@@ -43,6 +43,10 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
         print("entryExitInformationsData", entryExitInformationsData)
     }
     
+    func feliCaReaderSession(didRead feliCaCardData: FeliCaCardData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
+        
+    }
+    
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
         // print(error)
     }
