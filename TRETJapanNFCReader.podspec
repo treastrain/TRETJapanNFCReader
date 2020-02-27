@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/treastrain/TRETJapanNFCReader.git", :tag => "#{spec.version}" }
 
-  spec.source_files = 'TRETJapanNFCReader/**/*.{swift}'
+  spec.source_files = 'Sources/**/*.{swift}'
 
   spec.requires_arc = true
 end
