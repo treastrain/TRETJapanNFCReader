@@ -20,7 +20,7 @@ public extension Date {
 
 public extension Optional where Wrapped == Date {
     func toString(dateStyle: DateFormatter.Style = .full, timeStyle: DateFormatter.Style = .none) -> String? {
-        return self?.toString()
+        return self?.toString(dateStyle: dateStyle, timeStyle: timeStyle)
     }
 }
 
