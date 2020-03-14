@@ -232,22 +232,22 @@
 		CD10CC9E23B7999300281E33 /* OkicaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB323B7999300281E33 /* OkicaReader.swift */; };
 		CD10CC9F23B7999300281E33 /* OkicaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB323B7999300281E33 /* OkicaReader.swift */; };
 		CD10CCA023B7999300281E33 /* OkicaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB323B7999300281E33 /* OkicaReader.swift */; };
-		CD10CCA123B7999300281E33 /* RyutoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* RyutoCard.swift */; };
-		CD10CCA223B7999300281E33 /* RyutoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* RyutoCard.swift */; };
-		CD10CCA323B7999300281E33 /* RyutoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* RyutoCard.swift */; };
-		CD10CCA423B7999300281E33 /* RyutoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* RyutoCard.swift */; };
-		CD10CCA523B7999300281E33 /* RyutoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* RyutoReader.swift */; };
-		CD10CCA623B7999300281E33 /* RyutoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* RyutoReader.swift */; };
-		CD10CCA723B7999300281E33 /* RyutoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* RyutoReader.swift */; };
-		CD10CCA823B7999300281E33 /* RyutoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* RyutoReader.swift */; };
-		CD10CCA923B7999300281E33 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* RyutoCardItemType.swift */; };
-		CD10CCAA23B7999300281E33 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* RyutoCardItemType.swift */; };
-		CD10CCAB23B7999300281E33 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* RyutoCardItemType.swift */; };
-		CD10CCAC23B7999300281E33 /* RyutoCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* RyutoCardItemType.swift */; };
-		CD10CCAD23B7999300281E33 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* RyutoCardData.swift */; };
-		CD10CCAE23B7999300281E33 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* RyutoCardData.swift */; };
-		CD10CCAF23B7999300281E33 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* RyutoCardData.swift */; };
-		CD10CCB023B7999300281E33 /* RyutoCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* RyutoCardData.swift */; };
+		CD10CCA123B7999300281E33 /* LocalTransitICCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* LocalTransitICCard.swift */; };
+		CD10CCA223B7999300281E33 /* LocalTransitICCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* LocalTransitICCard.swift */; };
+		CD10CCA323B7999300281E33 /* LocalTransitICCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* LocalTransitICCard.swift */; };
+		CD10CCA423B7999300281E33 /* LocalTransitICCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB523B7999300281E33 /* LocalTransitICCard.swift */; };
+		CD10CCA523B7999300281E33 /* LocalTransitICReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* LocalTransitICReader.swift */; };
+		CD10CCA623B7999300281E33 /* LocalTransitICReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* LocalTransitICReader.swift */; };
+		CD10CCA723B7999300281E33 /* LocalTransitICReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* LocalTransitICReader.swift */; };
+		CD10CCA823B7999300281E33 /* LocalTransitICReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB623B7999300281E33 /* LocalTransitICReader.swift */; };
+		CD10CCA923B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* LocalTransitICCardItemType.swift */; };
+		CD10CCAA23B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* LocalTransitICCardItemType.swift */; };
+		CD10CCAB23B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* LocalTransitICCardItemType.swift */; };
+		CD10CCAC23B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB723B7999300281E33 /* LocalTransitICCardItemType.swift */; };
+		CD10CCAD23B7999300281E33 /* LocalTransitICCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* LocalTransitICCardData.swift */; };
+		CD10CCAE23B7999300281E33 /* LocalTransitICCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* LocalTransitICCardData.swift */; };
+		CD10CCAF23B7999300281E33 /* LocalTransitICCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* LocalTransitICCardData.swift */; };
+		CD10CCB023B7999300281E33 /* LocalTransitICCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10CBB823B7999300281E33 /* LocalTransitICCardData.swift */; };
 		CD10CCB123B7999300281E33 /* TRETJapanNFCReader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD10CCB223B7999300281E33 /* TRETJapanNFCReader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD10CCB323B7999300281E33 /* TRETJapanNFCReader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -696,10 +696,10 @@
 		CD10CBB123B7999300281E33 /* OkicaCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkicaCard.swift; sourceTree = "<group>"; };
 		CD10CBB223B7999300281E33 /* OkicaCardData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkicaCardData.swift; sourceTree = "<group>"; };
 		CD10CBB323B7999300281E33 /* OkicaReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OkicaReader.swift; sourceTree = "<group>"; };
-		CD10CBB523B7999300281E33 /* RyutoCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RyutoCard.swift; sourceTree = "<group>"; };
-		CD10CBB623B7999300281E33 /* RyutoReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RyutoReader.swift; sourceTree = "<group>"; };
-		CD10CBB723B7999300281E33 /* RyutoCardItemType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RyutoCardItemType.swift; sourceTree = "<group>"; };
-		CD10CBB823B7999300281E33 /* RyutoCardData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RyutoCardData.swift; sourceTree = "<group>"; };
+		CD10CBB523B7999300281E33 /* LocalTransitICCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTransitICCard.swift; sourceTree = "<group>"; };
+		CD10CBB623B7999300281E33 /* LocalTransitICReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTransitICReader.swift; sourceTree = "<group>"; };
+		CD10CBB723B7999300281E33 /* LocalTransitICCardItemType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTransitICCardItemType.swift; sourceTree = "<group>"; };
+		CD10CBB823B7999300281E33 /* LocalTransitICCardData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTransitICCardData.swift; sourceTree = "<group>"; };
 		CD10CBBA23B7999300281E33 /* TRETJapanNFCReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRETJapanNFCReader.h; sourceTree = "<group>"; };
 		CD10CBBF23B7999300281E33 /* DriversLicenseCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseCard.swift; sourceTree = "<group>"; };
 		CD10CBC023B7999300281E33 /* DriversLicenseReaderSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriversLicenseReaderSessionDelegate.swift; sourceTree = "<group>"; };
@@ -893,7 +893,7 @@
 				CD10CBA523B7999300281E33 /* Octopus */,
 				CD10CBAA23B7999300281E33 /* UnivCoopICPrepaid */,
 				CD10CBAF23B7999300281E33 /* Okica */,
-				CD10CBB423B7999300281E33 /* Ryuto */,
+				CD10CBB423B7999300281E33 /* LocalTransitIC */,
 			);
 			path = FeliCa;
 			sourceTree = "<group>";
@@ -1029,15 +1029,15 @@
 			path = Okica;
 			sourceTree = "<group>";
 		};
-		CD10CBB423B7999300281E33 /* Ryuto */ = {
+		CD10CBB423B7999300281E33 /* LocalTransitIC */ = {
 			isa = PBXGroup;
 			children = (
-				CD10CBB523B7999300281E33 /* RyutoCard.swift */,
-				CD10CBB623B7999300281E33 /* RyutoReader.swift */,
-				CD10CBB723B7999300281E33 /* RyutoCardItemType.swift */,
-				CD10CBB823B7999300281E33 /* RyutoCardData.swift */,
+				CD10CBB523B7999300281E33 /* LocalTransitICCard.swift */,
+				CD10CBB623B7999300281E33 /* LocalTransitICReader.swift */,
+				CD10CBB723B7999300281E33 /* LocalTransitICCardItemType.swift */,
+				CD10CBB823B7999300281E33 /* LocalTransitICCardData.swift */,
 			);
-			path = Ryuto;
+			path = LocalTransitIC;
 			sourceTree = "<group>";
 		};
 		CD10CBBC23B7999300281E33 /* MIFARE */ = {
@@ -1803,7 +1803,7 @@
 				CD10CBEA23B7999300281E33 /* ICUCardData.swift in Sources */,
 				CD10CC1623B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD623B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
-				CD10CCA623B7999300281E33 /* RyutoReader.swift in Sources */,
+				CD10CCA623B7999300281E33 /* LocalTransitICReader.swift in Sources */,
 				CD10CC5623B7999300281E33 /* NanacoCardItemType.swift in Sources */,
 				CD10CC0A23B7999300281E33 /* NTasuReader.swift in Sources */,
 				CD10CC9E23B7999300281E33 /* OkicaReader.swift in Sources */,
@@ -1832,7 +1832,7 @@
 				CD10CC1E23B7999300281E33 /* FeliCaCardType.swift in Sources */,
 				CD10CCDA23B7999300281E33 /* DriversLicenseReaderError.swift in Sources */,
 				CD10CC4A23B7999300281E33 /* FeliCaSystem.swift in Sources */,
-				CD10CCAE23B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD10CCAE23B7999300281E33 /* LocalTransitICCardData.swift in Sources */,
 				CD5828D523BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCDE23B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC8E23B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
@@ -1852,10 +1852,10 @@
 				CD10CCD223B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD10CC6623B7999300281E33 /* TransitICReader.swift in Sources */,
 				CD10CC8223B7999300281E33 /* UnivCoopICPrepaidItemType.swift in Sources */,
-				CD10CCA223B7999300281E33 /* RyutoCard.swift in Sources */,
+				CD10CCA223B7999300281E33 /* LocalTransitICCard.swift in Sources */,
 				CD10CC9623B7999300281E33 /* OkicaCard.swift in Sources */,
 				CD10CBF623B7999300281E33 /* RakutenEdyCardItemType.swift in Sources */,
-				CD10CCAA23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
+				CD10CCAA23B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */,
 				CD10CCCE23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7623B7999300281E33 /* OctopusReader.swift in Sources */,
 				CD10CC9223B7999300281E33 /* OkicaCardItemType.swift in Sources */,
@@ -1935,10 +1935,10 @@
 				CD10CBE923B7999300281E33 /* ICUCardData.swift in Sources */,
 				CD10CC9123B7999300281E33 /* OkicaCardItemType.swift in Sources */,
 				CD10CC2D23B7999300281E33 /* FeliCaCardData.swift in Sources */,
-				CD10CCA123B7999300281E33 /* RyutoCard.swift in Sources */,
+				CD10CCA123B7999300281E33 /* LocalTransitICCard.swift in Sources */,
 				CD10CCD123B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD5828D423BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
-				CD10CCA523B7999300281E33 /* RyutoReader.swift in Sources */,
+				CD10CCA523B7999300281E33 /* LocalTransitICReader.swift in Sources */,
 				CD10CC0523B7999300281E33 /* NTasuCardItemType.swift in Sources */,
 				CD10CBF523B7999300281E33 /* RakutenEdyCardItemType.swift in Sources */,
 				CD9D81D823BC7C02007FCE0E /* Localize.swift in Sources */,
@@ -1952,7 +1952,7 @@
 				CD10CBE523B7999300281E33 /* ICUReader.swift in Sources */,
 				CD10CBD923B7999300281E33 /* FCFCampusCard.swift in Sources */,
 				CD35A31223BECE330005075D /* FeliCaData.swift in Sources */,
-				CD10CCAD23B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD10CCAD23B7999300281E33 /* LocalTransitICCardData.swift in Sources */,
 				CD10CBF923B7999300281E33 /* RakutenEdyCardData.swift in Sources */,
 				CD10CC1123B7999300281E33 /* WaonCardData.swift in Sources */,
 				CD10CBF123B7999300281E33 /* RakutenEdyReader.swift in Sources */,
@@ -1960,7 +1960,7 @@
 				CD10CC0D23B7999300281E33 /* WaonCardItemType.swift in Sources */,
 				CD10CCBD23B7999300281E33 /* DriversLicenseReaderSessionDelegate.swift in Sources */,
 				CD10CCC123B7999300281E33 /* DriversLicenseExtensions.swift in Sources */,
-				CD10CCA923B7999300281E33 /* RyutoCardItemType.swift in Sources */,
+				CD10CCA923B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */,
 				CD10CC8523B7999300281E33 /* UnivCoopICPrepaidCard.swift in Sources */,
 				CD10CC4123B7999300281E33 /* FeliCaSystemCode.swift in Sources */,
 			);
@@ -1985,7 +1985,7 @@
 				CD10CBEC23B7999300281E33 /* ICUCardData.swift in Sources */,
 				CD10CC1823B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD823B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
-				CD10CCA823B7999300281E33 /* RyutoReader.swift in Sources */,
+				CD10CCA823B7999300281E33 /* LocalTransitICReader.swift in Sources */,
 				CD10CC5823B7999300281E33 /* NanacoCardItemType.swift in Sources */,
 				CD10CC0C23B7999300281E33 /* NTasuReader.swift in Sources */,
 				CD10CCA023B7999300281E33 /* OkicaReader.swift in Sources */,
@@ -2014,7 +2014,7 @@
 				CD10CC2023B7999300281E33 /* FeliCaCardType.swift in Sources */,
 				CD10CCDC23B7999300281E33 /* DriversLicenseReaderError.swift in Sources */,
 				CD10CC4C23B7999300281E33 /* FeliCaSystem.swift in Sources */,
-				CD10CCB023B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD10CCB023B7999300281E33 /* LocalTransitICCardData.swift in Sources */,
 				CD5828D723BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCE023B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC9023B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
@@ -2034,10 +2034,10 @@
 				CD10CCD423B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD10CC6823B7999300281E33 /* TransitICReader.swift in Sources */,
 				CD10CC8423B7999300281E33 /* UnivCoopICPrepaidItemType.swift in Sources */,
-				CD10CCA423B7999300281E33 /* RyutoCard.swift in Sources */,
+				CD10CCA423B7999300281E33 /* LocalTransitICCard.swift in Sources */,
 				CD10CC9823B7999300281E33 /* OkicaCard.swift in Sources */,
 				CD10CBF823B7999300281E33 /* RakutenEdyCardItemType.swift in Sources */,
-				CD10CCAC23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
+				CD10CCAC23B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */,
 				CD10CCD023B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7823B7999300281E33 /* OctopusReader.swift in Sources */,
 				CD10CC9423B7999300281E33 /* OkicaCardItemType.swift in Sources */,
@@ -2063,7 +2063,7 @@
 				CD10CBEB23B7999300281E33 /* ICUCardData.swift in Sources */,
 				CD10CC1723B7999300281E33 /* WaonCard.swift in Sources */,
 				CD10CCD723B7999300281E33 /* DriversLicenseReaderExtensions.swift in Sources */,
-				CD10CCA723B7999300281E33 /* RyutoReader.swift in Sources */,
+				CD10CCA723B7999300281E33 /* LocalTransitICReader.swift in Sources */,
 				CD10CC5723B7999300281E33 /* NanacoCardItemType.swift in Sources */,
 				CD10CC0B23B7999300281E33 /* NTasuReader.swift in Sources */,
 				CD10CC9F23B7999300281E33 /* OkicaReader.swift in Sources */,
@@ -2092,7 +2092,7 @@
 				CD10CC1F23B7999300281E33 /* FeliCaCardType.swift in Sources */,
 				CD10CCDB23B7999300281E33 /* DriversLicenseReaderError.swift in Sources */,
 				CD10CC4B23B7999300281E33 /* FeliCaSystem.swift in Sources */,
-				CD10CCAF23B7999300281E33 /* RyutoCardData.swift in Sources */,
+				CD10CCAF23B7999300281E33 /* LocalTransitICCardData.swift in Sources */,
 				CD5828D623BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */,
 				CD10CCDF23B7999300281E33 /* DriversLicenseReader.swift in Sources */,
 				CD10CC8F23B7999300281E33 /* UnivCoopICPrepaidReader.swift in Sources */,
@@ -2112,10 +2112,10 @@
 				CD10CCD323B7999300281E33 /* DriversLicenseReaderReadFunctions.swift in Sources */,
 				CD10CC6723B7999300281E33 /* TransitICReader.swift in Sources */,
 				CD10CC8323B7999300281E33 /* UnivCoopICPrepaidItemType.swift in Sources */,
-				CD10CCA323B7999300281E33 /* RyutoCard.swift in Sources */,
+				CD10CCA323B7999300281E33 /* LocalTransitICCard.swift in Sources */,
 				CD10CC9723B7999300281E33 /* OkicaCard.swift in Sources */,
 				CD10CBF723B7999300281E33 /* RakutenEdyCardItemType.swift in Sources */,
-				CD10CCAB23B7999300281E33 /* RyutoCardItemType.swift in Sources */,
+				CD10CCAB23B7999300281E33 /* LocalTransitICCardItemType.swift in Sources */,
 				CD10CCCF23B7999300281E33 /* DriversLicenseReaderCommands.swift in Sources */,
 				CD10CC7723B7999300281E33 /* OctopusReader.swift in Sources */,
 				CD10CC9323B7999300281E33 /* OkicaCardItemType.swift in Sources */,

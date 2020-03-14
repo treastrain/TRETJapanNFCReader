@@ -1,6 +1,6 @@
 //
-//  RyutoCardData.swift
-//  DriversLicenseReader
+//  LocalTransitICCardData.swift
+//  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/11/21.
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
