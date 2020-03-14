@@ -13,56 +13,56 @@ import TRETJapanNFCReader_FeliCa
 #endif
 
 @available(iOS 13.0, *)
-public typealias RyutoCardTag = NFCFeliCaTag
+public typealias LocalTransitICCardTag = NFCFeliCaTag
 
 @available(iOS 13.0, *)
-public class RyutoReader: FeliCaReader {
+public class LocalTransitICReader: FeliCaReader {
     
-    private var ryutoCardItemTypes: [RyutoCardItemType] = []
+    private var localTransitICCardItemTypes: [LocalTransitICCardItemType] = []
     
     private init() {
         fatalError()
     }
     
-    /// RyutoReader を初期化する。
+    /// LocalTransitICReader を初期化する。
     /// - Parameter feliCaReader: FeliCaReader
     @available(*, unavailable, renamed: "init(delegate:)")
     public init(feliCaReader: FeliCaReader) {
         super.init(delegate: feliCaReader.delegate!)
     }
     
-    /// RyutoReader を初期化する。
+    /// LocalTransitICReader を初期化する。
     /// - Parameter delegate: FeliCaReaderSessionDelegate
     public override init(delegate: FeliCaReaderSessionDelegate) {
         super.init(delegate: delegate)
     }
     
-    /// RyutoReader を初期化する。
+    /// LocalTransitICReader を初期化する。
     /// - Parameter viewController: FeliCaReaderSessionDelegate を適用した UIViewController
     @available(*, unavailable, renamed: "init(delegate:)")
     public init(viewController: FeliCaReaderViewController) {
         super.init(delegate: viewController)
     }
     
-    /// りゅーと からデータを読み取る
-    /// - Parameter itemTypes: りゅーと から読み取りたいデータのタイプ
-    public func get(itemTypes: [RyutoCardItemType]) {
-        self.ryutoCardItemTypes = itemTypes
+    /// 地方交通系ICカードからデータを読み取る
+    /// - Parameter itemTypes: 地方交通系ICカードから読み取りたいデータのタイプ
+    public func get(itemTypes: [LocalTransitICCardItemType]) {
+        self.localTransitICCardItemTypes = itemTypes
         let parameters = itemTypes.map { $0.parameter }
         self.readWithoutEncryption(parameters: parameters)
     }
     
     public override func feliCaReaderSession(didRead feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?]?, readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]?) {
-        if let ryutoSystem = feliCaData[.ryuto] {
-            let ryutoCardData = RyutoCardData(idm: ryutoSystem.idm, systemCode: ryutoSystem.systemCode, data: feliCaData)
-            self.delegate?.feliCaReaderSession(didRead: ryutoCardData, pollingErrors: pollingErrors, readErrors: readErrors)
+        if let localTransitICSystem = feliCaData[.ryuto] {
+            let localTransitICCardData = LocalTransitICCardData(idm: localTransitICSystem.idm, systemCode: localTransitICSystem.systemCode, data: feliCaData)
+            self.delegate?.feliCaReaderSession(didRead: localTransitICCardData, pollingErrors: pollingErrors, readErrors: readErrors)
         } else {
             self.delegate?.feliCaReaderSession(didInvalidateWithError: pollingErrors, readErrors: readErrors)
         }
     }
     
     @available(*, unavailable)
-    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [RyutoCardItemType], completion: @escaping (FeliCaCard) -> Void) {
+    public func getItems(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag, idm: String, systemCode: FeliCaSystemCode, itemTypes: [LocalTransitICCardItemType], completion: @escaping (FeliCaCard) -> Void) {
         /*
         self.ryutoCardItemTypes = itemTypes
         self.getItems(session, feliCaTag: feliCaTag, idm: idm, systemCode: systemCode) { (feliCaCard) in
@@ -86,5 +86,13 @@ public class RyutoReader: FeliCaReader {
         */
     }
 }
+
+@available(iOS 13.0, *)
+@available(*, unavailable, renamed: "LocalTransitICCardTag")
+public typealias RyutoCardTag = NFCFeliCaTag
+
+@available(iOS 13.0, *)
+@available(*, unavailable, renamed: "LocalTransitICReader")
+public class RyutoReader: FeliCaReader {}
 
 #endif

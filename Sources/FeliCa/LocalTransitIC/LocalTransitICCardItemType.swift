@@ -11,8 +11,8 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// りゅーと から読み取ることができるデータの種別
-public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
+/// 地方交通系ICカードから読み取ることができるデータの種別
+public enum LocalTransitICCardItemType: CaseIterable, FeliCaCardItemType {
     /// 取引履歴
     case transactions
     
@@ -52,3 +52,6 @@ public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
 }
+
+@available(*, unavailable, renamed: "LocalTransitICCardItemType")
+public enum RyutoCardItemType: CaseIterable, FeliCaCardItemType {}

@@ -12,15 +12,18 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// りゅーと
+/// 地方交通系ICカード
 @available(iOS 13.0, *)
-public struct RyutoCard: FeliCaCard {
-    public let tag: RyutoCardTag
-    public var data: RyutoCardData
+public struct LocalTransitICCard: FeliCaCard {
+    public let tag: LocalTransitICCardTag
+    public var data: LocalTransitICCardData
     
-    public init(tag: RyutoCardTag, data: RyutoCardData) {
+    public init(tag: LocalTransitICCardTag, data: LocalTransitICCardData) {
         self.tag = tag
         self.data = data
     }
 }
+
+@available(*, unavailable, renamed: "LocalTransitICCard")
+public struct RyutoCard/*: FeliCaCard*/ {}
 #endif
