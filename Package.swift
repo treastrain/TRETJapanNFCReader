@@ -20,7 +20,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader/FeliCa/Octopus",
             "TRETJapanNFCReader/FeliCa/Okica",
             "TRETJapanNFCReader/FeliCa/RakutenEdy",
-            "TRETJapanNFCReader/FeliCa/Ryuto",
+            "TRETJapanNFCReader/FeliCa/LocalTransitIC",
             "TRETJapanNFCReader/FeliCa/TransitIC",
             "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid",
             "TRETJapanNFCReader/FeliCa/Waon",
@@ -165,18 +165,18 @@ targets.append(
 )
 
 
-// MARK: - FeliCa/Ryuto
-// りゅーと / Ryuto
+// MARK: - FeliCa/LocalTransitIC
+// 地方交通系IC（passca、ecomyca、りゅーと） / passca, ecomyca, Ryuto
 products.append(
     .library(
-        name: "TRETJapanNFCReader/FeliCa/Ryuto",
-        targets: ["TRETJapanNFCReader/FeliCa/Ryuto"])
+        name: "TRETJapanNFCReader/FeliCa/LocalTransitIC",
+        targets: ["TRETJapanNFCReader/FeliCa/LocalTransitIC"])
 )
 targets.append(
     .target(
-        name: "TRETJapanNFCReader/FeliCa/Ryuto",
+        name: "TRETJapanNFCReader/FeliCa/LocalTransitIC",
         dependencies: ["TRETJapanNFCReader/FeliCa"],
-        path: "Sources/FeliCa/Ryuto")
+        path: "Sources/FeliCa/LocalTransitIC")
 )
 
 
