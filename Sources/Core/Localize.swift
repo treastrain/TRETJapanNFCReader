@@ -174,15 +174,6 @@ public enum Localized {
         zhHK: "大學生協會預付 IC"
     )
     
-    public static let ryuto = LocalizedItem(
-        key: "ryuto",
-        ja: "りゅーと",
-        en: "Ryuto",
-        zhHans: "Ryuto",
-        zhHant: "Ryuto",
-        zhHK: "Ryuto"
-    )
-    
     public static let octopus = LocalizedItem(
         key: "octopus",
         ja: "オクトパス（八達通）",

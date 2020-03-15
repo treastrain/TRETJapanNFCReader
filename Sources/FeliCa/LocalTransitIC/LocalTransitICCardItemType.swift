@@ -29,26 +29,10 @@ public enum LocalTransitICCardItemType: CaseIterable, FeliCaCardItemType {
         }
     }
     
-    public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
+    public func parameter(systemCode: FeliCaSystemCode) -> FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .transactions:
-            return (.ryuto, 0x898F, 20)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .transactions:
-            return 0x898F
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .transactions:
-            return 20
+            return (systemCode, 0x898F, 20)
         }
     }
 }

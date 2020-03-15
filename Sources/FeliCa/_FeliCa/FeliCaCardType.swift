@@ -14,6 +14,8 @@ import TRETJapanNFCReader_Core
 public enum FeliCaCardType: String, Codable, CaseIterable {
     /// 交通系ICカード
     case transitIC
+    /// 地方交通系ICカード（passca、ecomyca、りゅーと）
+    case localTransitIC
     /// 楽天Edyカード
     case rakutenEdy
     /// nanaco
@@ -27,8 +29,6 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     case okica
     /// エヌタス
     case ntasu
-    /// りゅーと
-    case ryuto
     
     /// FCF Campus Card
     case fcfcampus
@@ -43,10 +43,18 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     
     case unknown
     
+//    public init?(rawValue: String) {
+//        print(rawValue)
+//        RawRepresentable
+//        self.init(rawValue: rawValue)
+//    }
+    
     public var localizedString: String {
         switch self {
         case .transitIC:
             return Localized.transitIC.string()
+        case .localTransitIC:
+            return "地方交通系IC"
         case .rakutenEdy:
             return Localized.rakutenEdy.string()
         case .nanaco:
@@ -59,8 +67,6 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return "OKICA"
         case .ntasu:
             return "NTasu"
-        case .ryuto:
-            return Localized.ryuto.string()
         case .fcfcampus:
             return "FCF Campus"
         case .octopus:
@@ -71,6 +77,40 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
             return "QUICPay"
         case .unknown:
             return "Unknown"
+        }
+    }
+    
+    /// りゅーと
+    // case ryuto
+    
+    public init(rawValue: String) {
+        switch rawValue {
+        case "transitIC":
+            self = .transitIC
+        case "localTransitIC", "ryuto":
+            self = .localTransitIC
+        case "rakutenEdy":
+            self = .rakutenEdy
+        case "nanaco":
+            self = .nanaco
+        case "waon":
+            self = .waon
+        case "univCoopICPrepaid":
+            self = .univCoopICPrepaid
+        case "okica":
+            self = .okica
+        case "ntasu":
+            self = .ntasu
+        case "fcfcampus":
+            self = .fcfcampus
+        case "octopus":
+            self = .octopus
+        case "idCredit":
+            self = .idCredit
+        case "quicPay":
+            self = .quicPay
+        default:
+            self = .unknown
         }
     }
 }
