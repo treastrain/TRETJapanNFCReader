@@ -71,17 +71,17 @@ public struct LocalTransitICCardData: FeliCaCardData {
         
         for data in blockData {
             let (boardingDateString, alightingDateString) = self.dateString(from: data[0], data[1], data[2], data[3], data[4])
-            guard let boardingDate = formatter.date(from: boardingDateString), let alightingDate = formatter.date(from: alightingDateString) else {
+            guard let departDate = formatter.date(from: boardingDateString), let arriveDate = formatter.date(from: alightingDateString) else {
                 continue
             }
             
-            let boardingBusStop = Data([data[5], data[6]])
-            let alightingBusStop = Data([data[7], data[8]])
-            let transactionType = self.transactionType(from: data[9])
+            let departStation = Data([data[5], data[6]])
+            let arriveStation = Data([data[7], data[8]])
+            let transactionType = self.transactionType(from: data[10])
             let difference = (Int(data[10]) << 8) + Int(data[11])
             let balance = (Int(data[14]) << 8) + Int(data[15])
             
-            let transaction = LocalTransitICCardTransaction(date: alightingDate, type: transactionType, difference: difference, balance: balance, boardingDate: boardingDate, alightingDate: alightingDate, boardingBusStop: boardingBusStop, alightingBusStop: alightingBusStop)
+            let transaction = LocalTransitICCardTransaction(date: arriveDate, type: transactionType, difference: difference, balance: balance, departDate: departDate, arriveDate: arriveDate, departStation: departStation, arriveStation: arriveStation)
             transactions.append(transaction)
         }
         
@@ -93,7 +93,7 @@ public struct LocalTransitICCardData: FeliCaCardData {
         let year = Int(data0 >> 1) + 2000
         let month = ((data0 & 0x1) << 3) + (data1 >> 5)
         let day = data1 & 0x1F
-        let boardingHour = (data2 >> 2) & 0x1F
+        let boardingHour = (data2 >> 2) & 0x3F
         let boardingMinute = ((data2 & 0x3) << 4) + (data3 >> 4)
         let alightingHour = ((data3 & 0x7) << 2) + (data4 >> 6)
         let alightingMinute = data4 & 0x3F
@@ -105,11 +105,12 @@ public struct LocalTransitICCardData: FeliCaCardData {
         return (boardingDateString, alightingDateString)
     }
     
-    private func transactionType(from data9: UInt8) -> FeliCaCardTransactionType {
-        switch data9 {
-        case 0x52:
+    private func transactionType(from dataA: UInt8) -> FeliCaCardTransactionType {
+        print(dataA.toHexString())
+        switch dataA {
+        case 0x00, 0x01:
             return .transit
-        case 0x55:
+        case 0x02, 0x03, 0x05, 0x0B:
             return .credit
         default:
             return .unknown
@@ -124,10 +125,10 @@ public struct LocalTransitICCardTransaction: FeliCaCardTransaction {
     public let difference: Int
     public let balance: Int
     
-    public let boardingDate: Date
-    public let alightingDate: Date
-    public let boardingBusStop: Data
-    public let alightingBusStop: Data
+    public let departDate: Date
+    public let arriveDate: Date
+    public let departStation: Data
+    public let arriveStation: Data
 }
 
 @available(*, unavailable, renamed: "LocalTransitICCardData")
