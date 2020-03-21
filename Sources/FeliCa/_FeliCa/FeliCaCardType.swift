@@ -14,7 +14,7 @@ import TRETJapanNFCReader_Core
 public enum FeliCaCardType: String, Codable, CaseIterable {
     /// 交通系ICカード
     case transitIC
-    /// 地方交通系ICカード（passca、ecomyca、りゅーと）
+    /// 地方交通系ICカード（ecomyca、りゅーと）
     case localTransitIC
     /// 楽天Edyカード
     case rakutenEdy

@@ -68,8 +68,6 @@ public extension FeliCaSystemCode {
     static let rapica: FeliCaSystemCode = 0x8194
     /// NicoPa
     static let nicopa: FeliCaSystemCode = 0x8287
-    /// passca
-    static let passca: FeliCaSystemCode = 0x832C
     /// ecomyca
     static let ecomyca: FeliCaSystemCode = 0x832C
     /// Hareca
