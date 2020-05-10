@@ -20,7 +20,7 @@ public typealias DriversLicenseReaderViewController = UIViewController & Drivers
 internal typealias DriversLicenseCardTag = NFCISO7816Tag
 
 @available(iOS 13.0, *)
-public class DriversLicenseReader: JapanNFCReader {
+public class DriversLicenseReader: MiFareReader {
     
     internal let delegate: DriversLicenseReaderSessionDelegate?
     private var driversLicenseCardItems: [DriversLicenseCardItem] = []
