@@ -13,7 +13,7 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader/Core",
             "TRETJapanNFCReader/FeliCa",
-            // "TRETJapanNFCReader/MIFARE",
+            "TRETJapanNFCReader/MIFARE",
             "TRETJapanNFCReader/FeliCa/FCFCampus",
             "TRETJapanNFCReader/FeliCa/Nanaco",
             "TRETJapanNFCReader/FeliCa/NTasu",
@@ -25,6 +25,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader/FeliCa/UnivCoopICPrepaid",
             "TRETJapanNFCReader/FeliCa/Waon",
             "TRETJapanNFCReader/MIFARE/DriversLicense",
+            "TRETJapanNFCReader/MIFARE/IndividualNumber",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -58,10 +59,9 @@ targets.append(
         path: "Sources/FeliCa/_FeliCa")
 )
 
-/*
+
 // MARK: - MIFARE (ISO 14443)
 // Required for targets using MIFARE (ISO 14443)
-将来的に他の MIFARE 系カードに対応したとき、共通なコードを "TRETJapanNFCReader/MIFARE/DriversLicense" から分割、分離し "TRETJapanNFCReader/MIFARE" とする。
 products.append(
     .library(
         name: "TRETJapanNFCReader/MIFARE",
@@ -73,7 +73,7 @@ targets.append(
         dependencies: ["TRETJapanNFCReader/Core"],
         path: "Sources/MIFARE/_MIFARE")
 )
-*/
+
 
 // MARK: - FeliCa/FCFCampus
 // FCFCampus
@@ -236,11 +236,26 @@ targets.append(
     .target(
         name: "TRETJapanNFCReader/MIFARE/DriversLicense",
         dependencies: [
-            // 将来的に他の MIFARE 系カードに対応したとき、dependencies には "TRETJapanNFCReader/MIFARE" のみを指定する。"TRETJapanNFCReader/MIFARE" の dependencies に "TRETJapanNFCReader/Core" が含まれるため。
-            /* "TRETJapanNFCReader/MIFARE" */
-            "TRETJapanNFCReader/Core"
+            "TRETJapanNFCReader/MIFARE"
         ],
         path: "Sources/MIFARE/DriversLicense")
+)
+
+
+// MARK: - MIFARE/IndividualNumber
+// マイナンバーカード / Japanese Individual Number Card (My Number Card)
+products.append(
+    .library(
+        name: "TRETJapanNFCReader/MIFARE/IndividualNumber",
+        targets: ["TRETJapanNFCReader/MIFARE/IndividualNumber"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader/MIFARE/IndividualNumber",
+        dependencies: [
+            "TRETJapanNFCReader/MIFARE"
+        ],
+        path: "Sources/MIFARE/IndividualNumber")
 )
 
 
