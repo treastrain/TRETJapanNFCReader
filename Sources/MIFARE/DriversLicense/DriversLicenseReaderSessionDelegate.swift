@@ -8,8 +8,8 @@
 
 #if os(iOS)
 import CoreNFC
-#if canImport(TRETJapanNFCReader_Core)
-import TRETJapanNFCReader_Core
+#if canImport(TRETJapanNFCReader_MIFARE)
+import TRETJapanNFCReader_MIFARE
 #endif
 
 @available(iOS 13.0, *)
