@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import TRETJapanNFCReader
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, IndividualNumberReaderSessionDelegate {
+    
+    var reader: IndividualNumberReader!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.execute()
     }
-
-
+    
+    @IBAction func execute() {
+        self.reader = IndividualNumberReader(delegate: self)
+        self.reader.get()
+    }
+    
+    func individualNumberReaderSession(didRead individualNumberCard: IndividualNumberCard) {
+        print(individualNumberCard)
+    }
+    
+    func japanNFCReaderSession(didInvalidateWithError error: Error) {
+        print(error.localizedDescription)
+    }
 }
 
