@@ -34,8 +34,30 @@ extension IndividualNumberReader {
             self.selectEF(tag: tag, data: [0x00, 0x06]) { (responseData, sw1, sw2, error) in
                 self.printData(responseData, sw1, sw2)
                 
+                if let error = error {
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: "SELECT EF\n\(error.localizedDescription)")
+                    return
+                }
+                
+                if sw1 != 0x90 {
+                    session.invalidate(errorMessage: "エラー: ステータス: \(IndividualNumberReaderStatus(sw1: sw1, sw2: sw2).description)")
+                    return
+                }
+                
                 self.readBinary(tag: tag, p1Parameter: 0x00, p2Parameter: 0x00, expectedResponseLength: 0x20) { (responseData, sw1, sw2, error) in
                     self.printData(responseData, sw1, sw2)
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        session.invalidate(errorMessage: "READ BINARY\n\(error.localizedDescription)")
+                        return
+                    }
+                    
+                    if sw1 != 0x90 {
+                        session.invalidate(errorMessage: "エラー: ステータス: \(IndividualNumberReaderStatus(sw1: sw1, sw2: sw2).description)")
+                        return
+                    }
                     
                     let responseString = String(data: responseData, encoding: .utf8) ?? ""
                     individualNumberCard.token = responseString.filter { $0 != " " }
