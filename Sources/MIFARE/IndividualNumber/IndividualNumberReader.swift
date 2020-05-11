@@ -21,6 +21,8 @@ public class IndividualNumberReader: MiFareReader {
     internal let delegate: IndividualNumberReaderSessionDelegate?
     private var items: [IndividualNumberCardItem] = []
     
+    private var cardInfoInputSupportAppPIN: [UInt8] = []
+    
     private init() {
         fatalError()
     }
@@ -32,8 +34,13 @@ public class IndividualNumberReader: MiFareReader {
         super.init(delegate: delegate)
     }
     
-    public func get() {
-        self.items = []
+    public func get(items: [IndividualNumberCardItem], cardInfoInputSupportAppPIN: String = "") {
+        self.items = items
+        
+        if let cardInfoInputSupportAppPIN = cardInfoInputSupportAppPIN.data(using: .utf8) {
+            self.cardInfoInputSupportAppPIN = [UInt8](cardInfoInputSupportAppPIN)
+        }
+        
         self.beginScanning()
     }
     
@@ -125,13 +132,13 @@ public class IndividualNumberReader: MiFareReader {
             
             session.alertMessage = Localized.nfcTagReaderSessionReadingMessage.string()
             
-            let individualNumberCard = IndividualNumberCard(tag: individualNumberCardTag)
+            let individualNumberCard = IndividualNumberCard(tag: individualNumberCardTag, data: IndividualNumberCardData())
             
             self.getItems(session, individualNumberCard) { (individualNumberCard) in
                 session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
                 session.invalidate()
                 
-                self.delegate?.individualNumberReaderSession(didRead: individualNumberCard)
+                self.delegate?.individualNumberReaderSession(didRead: individualNumberCard.data)
             }
         }
     }
@@ -140,7 +147,14 @@ public class IndividualNumberReader: MiFareReader {
         var individualNumberCard = individualNumberCard
         
         DispatchQueue(label: "TRETJPNRIndividualNumberReader", qos: .default).async {
-            individualNumberCard = self.readJPKIToken(session, individualNumberCard)
+            for item in self.items {
+                switch item {
+                case .tokenInfo:
+                    individualNumberCard = self.readJPKIToken(session, individualNumberCard)
+                case .individualNumber:
+                    individualNumberCard = self.readIndividualNumber(session, individualNumberCard, cardInfoInputSupportAppPIN: self.cardInfoInputSupportAppPIN)
+                }
+            }
             completion(individualNumberCard)
         }
     }
