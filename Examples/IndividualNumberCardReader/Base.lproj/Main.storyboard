@@ -16,15 +16,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wb-Jr-BH3">
-                                <rect key="frame" x="148.5" y="421.5" width="117" height="53"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <state key="normal" title="Execute"/>
+                                <rect key="frame" x="93.5" y="428.5" width="227" height="39"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <state key="normal" title="Read Individual Number"/>
                                 <connections>
                                     <action selector="execute" destination="BYZ-38-t0r" eventType="touchUpInside" id="xsQ-i7-4B5"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="y0R-V1-TXi">
-                                <rect key="frame" x="16" y="339" width="382" height="62.5"/>
+                                <rect key="frame" x="16" y="346" width="382" height="62.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Info Input Support PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy5-RE-MBn">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -39,13 +39,51 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rpx-gr-TiG">
+                                <rect key="frame" x="20" y="64" width="374" height="143.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lookup Remaining PIN attempts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-fM-It9">
+                                        <rect key="frame" x="0.0" y="0.0" width="245" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as0-vG-AuM">
+                                        <rect key="frame" x="0.0" y="28.5" width="152" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="For digital signature"/>
+                                        <connections>
+                                            <action selector="lookupRemainingForDigitalSignature" destination="BYZ-38-t0r" eventType="touchUpInside" id="82U-kc-yH8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOR-N6-8vo">
+                                        <rect key="frame" x="0.0" y="69.5" width="177" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="For user authentication"/>
+                                        <connections>
+                                            <action selector="lookupRemainingForUserAuthentication" destination="BYZ-38-t0r" eventType="touchUpInside" id="fDH-L0-Iaj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0H-7p-IoW">
+                                        <rect key="frame" x="0.0" y="110.5" width="204" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="For card info input support"/>
+                                        <connections>
+                                            <action selector="lookupRemainingForCardInfoInputSupport" destination="BYZ-38-t0r" eventType="touchUpInside" id="iTl-CN-hZE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="y0R-V1-TXi" secondAttribute="trailing" constant="16" id="31V-oL-3CN"/>
                             <constraint firstItem="0Wb-Jr-BH3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6ts-F8-aYW"/>
+                            <constraint firstItem="Rpx-gr-TiG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9iO-qy-Dz6"/>
                             <constraint firstItem="y0R-V1-TXi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="DN4-Ne-wBk"/>
+                            <constraint firstItem="Rpx-gr-TiG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="DYj-2X-OLB"/>
                             <constraint firstItem="0Wb-Jr-BH3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EYj-Mk-OKs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rpx-gr-TiG" secondAttribute="trailing" constant="20" id="set-gm-oGX"/>
                             <constraint firstItem="0Wb-Jr-BH3" firstAttribute="top" secondItem="y0R-V1-TXi" secondAttribute="bottom" constant="20" id="wWj-bI-otI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
