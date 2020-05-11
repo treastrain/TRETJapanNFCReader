@@ -23,14 +23,36 @@
                                     <action selector="execute" destination="BYZ-38-t0r" eventType="touchUpInside" id="xsQ-i7-4B5"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="y0R-V1-TXi">
+                                <rect key="frame" x="16" y="339" width="382" height="62.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Info Input Support PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy5-RE-MBn">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Info Input Support PIN" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NZ2-Ny-Dhw">
+                                        <rect key="frame" x="0.0" y="28.5" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="y0R-V1-TXi" secondAttribute="trailing" constant="16" id="31V-oL-3CN"/>
                             <constraint firstItem="0Wb-Jr-BH3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6ts-F8-aYW"/>
+                            <constraint firstItem="y0R-V1-TXi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="DN4-Ne-wBk"/>
                             <constraint firstItem="0Wb-Jr-BH3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EYj-Mk-OKs"/>
+                            <constraint firstItem="0Wb-Jr-BH3" firstAttribute="top" secondItem="y0R-V1-TXi" secondAttribute="bottom" constant="20" id="wWj-bI-otI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="cardInfoInputSupportPINTextField" destination="NZ2-Ny-Dhw" id="CkF-BE-3c6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
