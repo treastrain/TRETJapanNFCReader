@@ -21,9 +21,9 @@ public enum IndividualNumberCardItem: CaseIterable {
 
 public enum IndividualNumberCardApplication: CaseIterable {
     /// 公的個人認証AP
-    case 公的個人認証AP
+    case electronicApplication
     /// 券面事項確認AP
-    case 券面事項確認AP
+    case cardInfoInputCheckApplication
     /// 券面事項入力補助AP
     case cardInfoInputSupportApplication
     /// 住基AP
