@@ -39,19 +39,25 @@ extension IndividualNumberReader {
     }
     
     internal func selectJPKIAP(tag: IndividualNumberCardTag, completionHandler: @escaping IndividualNumberReaderCompletionHandler) {
-        let data = Data([0xD3, 0x92, 0xF0, 0x00, 0x26, 0x01, 0x00, 0x00, 0x00, 0x01])
+        let data = IndividualNumberCardAID.jpkiAP
         self.selectDF(tag: tag, data: data, completionHandler: completionHandler)
     }
     
     internal func selectVisualAP(tag: IndividualNumberCardTag, completionHandler: @escaping IndividualNumberReaderCompletionHandler) {
-        let data = Data([0xD3, 0x92, 0x10, 0x00, 0x31, 0x00, 0x01, 0x01, 0x04, 0x02])
+        let data = IndividualNumberCardAID.visualAP
         self.selectDF(tag: tag, data: data, completionHandler: completionHandler)
     }
     
     internal func selectTextAP(tag: IndividualNumberCardTag, completionHandler: @escaping IndividualNumberReaderCompletionHandler) {
-        let data = Data([0xD3, 0x92, 0x10, 0x00, 0x31, 0x00, 0x01, 0x01, 0x04, 0x08])
+        let data = IndividualNumberCardAID.textAP
         self.selectDF(tag: tag, data: data, completionHandler: completionHandler)
     }
+}
+
+internal enum IndividualNumberCardAID {
+    internal static var jpkiAP = Data([0xD3, 0x92, 0xF0, 0x00, 0x26, 0x01, 0x00, 0x00, 0x00, 0x01])
+    internal static var visualAP = Data([0xD3, 0x92, 0x10, 0x00, 0x31, 0x00, 0x01, 0x01, 0x04, 0x02])
+    internal static var textAP = Data([0xD3, 0x92, 0x10, 0x00, 0x31, 0x00, 0x01, 0x01, 0x04, 0x08])
 }
 
 
