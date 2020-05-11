@@ -23,6 +23,9 @@ public class IndividualNumberReader: MiFareReader {
     
     private var cardInfoInputSupportAppPIN: [UInt8] = []
     
+    private var lookupRemainingPINType: IndividualNumberCardPINType?
+    private var lookupRemainingPINCompletion: ((Int?) -> Void)?
+    
     private init() {
         fatalError()
     }
@@ -36,11 +39,18 @@ public class IndividualNumberReader: MiFareReader {
     
     public func get(items: [IndividualNumberCardItem], cardInfoInputSupportAppPIN: String = "") {
         self.items = items
+        self.lookupRemainingPINType = nil
         
         if let cardInfoInputSupportAppPIN = cardInfoInputSupportAppPIN.data(using: .utf8) {
             self.cardInfoInputSupportAppPIN = [UInt8](cardInfoInputSupportAppPIN)
         }
         
+        self.beginScanning()
+    }
+    
+    public func lookupRemainingPIN(pinType: IndividualNumberCardPINType, completion: @escaping (Int?) -> Void) {
+        self.lookupRemainingPINType = pinType
+        self.lookupRemainingPINCompletion = completion
         self.beginScanning()
     }
     
@@ -134,11 +144,22 @@ public class IndividualNumberReader: MiFareReader {
             
             let individualNumberCard = IndividualNumberCard(tag: individualNumberCardTag, data: IndividualNumberCardData())
             
-            self.getItems(session, individualNumberCard) { (individualNumberCard) in
-                session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
-                session.invalidate()
-                
-                self.delegate?.individualNumberReaderSession(didRead: individualNumberCard.data)
+            if let pinType = self.lookupRemainingPINType {
+                DispatchQueue(label: "TRETJPNRIndividualNumberReader", qos: .default).async {
+                    let remaining = self.lookupRemainingPIN(session, individualNumberCardTag, pinType)
+                    session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
+                    session.invalidate()
+                    DispatchQueue.main.async {
+                        self.lookupRemainingPINCompletion?(remaining)
+                    }
+                }
+            } else {
+                self.getItems(session, individualNumberCard) { (individualNumberCard) in
+                    session.alertMessage = Localized.nfcTagReaderSessionDoneMessage.string()
+                    session.invalidate()
+                    
+                    self.delegate?.individualNumberReaderSession(didRead: individualNumberCard.data)
+                }
             }
         }
     }

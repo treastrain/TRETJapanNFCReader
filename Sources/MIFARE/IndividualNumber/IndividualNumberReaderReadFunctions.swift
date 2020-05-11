@@ -200,6 +200,81 @@ extension IndividualNumberReader {
         semaphore.wait()
         return individualNumberCard
     }
+    
+    /// 署名用電子証明書の暗証番号の残り試行回数を確認する
+    internal func lookupRemainingPIN(_ session: NFCTagReaderSession, _ tag: IndividualNumberCardTag, _ pinType: IndividualNumberCardPINType) -> Int? {
+        var remaining: Int? = nil
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let dfData: Data
+        let efData: [UInt8]
+        switch pinType {
+        case .digitalSignature:
+            dfData = IndividualNumberCardAID.jpkiAP
+            efData = [0x00, 0x1B]
+        case .userAuthentication:
+            dfData = IndividualNumberCardAID.jpkiAP
+            efData = [0x00, 0x18]
+        case .cardInfoInputSupport:
+            dfData = IndividualNumberCardAID.textAP
+            efData = [0x00, 0x11]
+        }
+        
+        self.selectDF(tag: tag, data: dfData) { (responseData, sw1, sw2, error) in
+            // self.printData(responseData, isPrintData: true, sw1, sw2)
+            
+            if let error = error {
+                print(error.localizedDescription)
+                session.invalidate(errorMessage: "SELECT DF\n\(error.localizedDescription)")
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                return
+            }
+            
+            if sw1 != 0x90 {
+                session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                return
+            }
+            
+            self.selectEF(tag: tag, data: efData) { (responseData, sw1, sw2, error) in
+                // self.printData(responseData, isPrintData: true, sw1, sw2)
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: "SELECT EF\n\(error.localizedDescription)")
+                    self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                    return
+                }
+                
+                if sw1 != 0x90 {
+                    session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                    return
+                }
+                
+                self.verify(tag: tag, pin: []) { (responseData, sw1, sw2, error) in
+                    // self.printData(responseData, isPrintData: true, sw1, sw2)
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        session.invalidate(errorMessage: "VERIFY\n\(error.localizedDescription)")
+                        self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                        return
+                    }
+                    
+                    if sw1 == 0x63 {
+                        remaining = Int(sw2 & 0x0F)
+                    } else {
+                        session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                        return
+                    }
+                    
+                    semaphore.signal()
+                }
+            }
+        }
+        
+        semaphore.wait()
+        return remaining
+    }
 }
 
 #endif
