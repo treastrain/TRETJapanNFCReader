@@ -14,7 +14,7 @@ import TRETJapanNFCReader_MIFARE
 
 @available(iOS 13.0, *)
 public protocol IndividualNumberReaderSessionDelegate: JapanNFCReaderSessionDelegate {
-    func individualNumberReaderSession(didRead individualNumberCard: IndividualNumberCard)
+    func individualNumberReaderSession(didRead individualNumberCardData: IndividualNumberCardData)
 }
 
 #endif
