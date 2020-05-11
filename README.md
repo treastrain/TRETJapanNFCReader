@@ -12,10 +12,10 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/treastrain/TRETJapanNFCReader)
 [![CocoaPods](https://img.shields.io/cocoapods/v/TRETJapanNFCReader?label=CocoaPods)](https://cocoapods.org/pods/TRETJapanNFCReader)
 
+Support: [![Twitter: @JapanNFCReader](https://img.shields.io/twitter/follow/JapanNFCReader?label=%40JapanNFCReader&style=social)](https://twitter.com/JapanNFCReader)
+Developer [![Twitter: @treastrain](https://img.shields.io/twitter/follow/treastrain?label=%40treastrain&style=social)](https://twitter.com/treastrain)
 
-サポート [Twitter: @JapanNFCReader](https://twitter.com/JapanNFCReader)
-
-Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON などの電子マネーカード、運転免許証の読み取り
+Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON などの電子マネーカード、運転免許証、マイナンバーカードの読み取り
 
 ## 対応 OS / Supported OS
 - iOS 9.3 以降
@@ -31,6 +31,8 @@ Suica、PASMOなどの交通系ICカード、楽天Edy、nanaco、WAON などの
 - [x] 運転免許証
 - 警察庁交通局運転免許課による「運転免許証及び運転免許証作成システム等仕様書（仕様書バージョン番号:008）」に対応
 - 共通データ要素（MF/EF01）、暗証番号(PIN)設定（MF/EF02）の読み取り、暗証番号1による認証、記載事項(本籍除く)（DF1/EF01）写真（DF2/EF01）まで実装済み
+- [x] マイナンバーカード（個人番号カード、Individual Number Card）
+- ICカード種別情報（JPKI_CardType）、マイナンバーの読み取りまで実装済み
 
 ### NFC-F (Type-F, FeliCa)
 IDm と System Code の表示
@@ -118,6 +120,40 @@ class ViewController: UIViewController, DriversLicenseReaderSessionDelegate {
 }
 ```
 
+#### マイナンバーカードの場合
+1. マイナンバーカードを読み取るには、開発している iOS Application の Info.plist に "ISO7816 application identifiers for NFC Tag Reader Session (com.apple.developer.nfc.readersession.iso7816.select-identifiers)" を追加する。ISO7816 application identifiers for NFC Tag Reader Session には以下を含める必要がある。
+- Item 0: `D392F000260100000001`
+- Item 1: `D3921000310001010408`
+- Item 2: `D3921000310001010100`
+- Item 3: `D3921000310001010401`
+
+2. ライブラリをインポートし、`IndividualNumberReader` を初期化した後でスキャンを開始する。
+```swift
+import UIKit
+import TRETJapanNFCReader
+class ViewController: UIViewController, IndividualNumberReaderSessionDelegate {
+
+    var reader: IndividualNumberReader!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let items: [IndividualNumberCardItem] = [.tokenInfo, .individualNumber]
+        
+        self.reader = IndividualNumberReader(delegate: self)
+        self.reader.get(items: items, cardInfoInputSupportAppPIN: "券面入力補助用AppPIN")
+    }
+
+    func individualNumberReaderSession(didRead individualNumberCardData: IndividualNumberCardData) {
+        print(individualNumberCardData)
+    }
+
+    func japanNFCReaderSession(didInvalidateWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}
+```
+
 ### NFC-F (Type-F, FeliCa)
 - FeliCa を読み取るには、開発している iOS Application の Info.plist に "ISO18092 system codes for NFC Tag Reader Session (com.apple.developer.nfc.readersession.felica.systemcodes)" を追加し、読み取る際に使用する FeliCa システムコードを記述する。ワイルドカードは使用できない。
 各カードに対応する `Reader` と `Card` がある。
@@ -172,6 +208,15 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
 
 ## 謝辞 / Acknowledgments
+### MiFare `TRETJapanNFCReader/MIFARE`
+- ISO/IEC7816
+- JIS X 6320-4
+
+### マイナンバーカード `TRETJapanNFCReader/MIFARE/IndividualNumber`
+マイナンバーカードの読み取り実装においては以下に掲載されている情報を参考にしました。
+- [`jpki/myna`](https://github.com/jpki/myna)
+- 公的個人認証サービス 利用者クライアントソフト API 仕様書【個人認証サービス AP C 言語インターフェース編】第4.3版 地方公共団体情報システム機構
+
 ### OKICA `TRETJapanNFCReader/FeliCa/Okica/`
 OKICA の情報、および OKICA カード内に保存されているゆいレールの駅名情報、各バス会社名の情報は [Twitter@resi098](https://twitter.com/resi098) 様からご提供いただきました。
 
@@ -184,7 +229,7 @@ OKICA の情報、および OKICA カード内に保存されているゆいレ�
 - [Octopus · metrodroid/metrodroid Wiki](https://github.com/metrodroid/metrodroid/wiki/Octopus)
 
 各電子マネー、電子マネーサービス等の名称は一般に各社の商標、登録商標です。
-本ライブラリは電子マネーカード提供各社が公式に提供するものではありません。
+本ライブラリはサービス提供各団体および各社、電子マネーカード提供各社が公式に提供するものではありません。
 
 The names of e-money and the services are generally trademarks and registered trademarks of each company.
-This library is not officially provided by e-money card providers.
+This library is not officially provided by e-money card service providers and others.
