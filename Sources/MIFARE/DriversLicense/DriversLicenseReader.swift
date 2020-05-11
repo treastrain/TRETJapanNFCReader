@@ -9,6 +9,9 @@
 #if os(iOS)
 import UIKit
 import CoreNFC
+#if canImport(TRETJapanNFCReader_Core)
+import TRETJapanNFCReader_Core
+#endif
 #if canImport(TRETJapanNFCReader_MIFARE)
 import TRETJapanNFCReader_MIFARE
 #endif

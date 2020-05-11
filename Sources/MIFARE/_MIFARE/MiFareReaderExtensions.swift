@@ -12,7 +12,7 @@ import Foundation
 @available(iOS 13.0, *)
 extension MiFareReader {
     
-    internal func printData(_ responseData: Data, isPrintData: Bool = false, _ sw1: UInt8, _ sw2: UInt8) {
+    public func printData(_ responseData: Data, isPrintData: Bool = false, _ sw1: UInt8, _ sw2: UInt8) {
         let responseData = [UInt8](responseData)
         let responseString = responseData.map({ (byte) -> String in
             return byte.toHexString()

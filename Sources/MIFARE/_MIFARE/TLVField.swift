@@ -16,7 +16,7 @@ public struct TLVField {
     /// データ
     public var value: [UInt8]
     
-    static func sequenceOfFields(from data: Data) -> [TLVField] {
+    static public func sequenceOfFields(from data: Data) -> [TLVField] {
         var fields: [TLVField] = []
         
         var i = 0
@@ -54,7 +54,7 @@ public struct TLVField {
         return fields
     }
     
-    static func sequenceOfFields(from data: [UInt8]) -> [TLVField] {
+    static public func sequenceOfFields(from data: [UInt8]) -> [TLVField] {
         self.sequenceOfFields(from: Data(data))
     }
 }

@@ -116,7 +116,7 @@ open class FeliCaReader: JapanNFCReader {
         }
     }
     
-    public func feliCaTagReaderSessionReadWithoutEncryption(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag) {
+    open func feliCaTagReaderSessionReadWithoutEncryption(_ session: NFCTagReaderSession, feliCaTag: NFCFeliCaTag) {
         var feliCaData: FeliCaData = [:]
         var pollingErrors: [FeliCaSystemCode : Error?] = [:]
         var readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]] = [:]
