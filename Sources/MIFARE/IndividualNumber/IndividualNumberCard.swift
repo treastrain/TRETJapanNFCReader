@@ -11,22 +11,30 @@ import CoreNFC
 
 /// マイナンバーカードから読み取ることができるデータの種別
 public enum IndividualNumberCardItem: CaseIterable {
+    /// トークン情報
+    /// - `"JPKIAPICCTOKEN"` 住基カード
+    /// - `"JPKIAPICCTOKEN2"` マイナンバーカード
+    case tokenInfo
+    /// マイナンバー
+    case individualNumber
+}
+
+public enum IndividualNumberCardApplication: CaseIterable {
     /// 公的個人認証AP
     case 公的個人認証AP
     /// 券面事項確認AP
     case 券面事項確認AP
     /// 券面事項入力補助AP
-    case 券面事項入力補助AP
+    case cardInfoInputSupportApplication
     /// 住基AP
-    case 住基AP
+    case basicResidentRegistrationApplication
 }
 
 /// マイナンバーカード
 @available(iOS 13.0, *)
 public struct IndividualNumberCard {
     internal var tag: IndividualNumberCardTag
-    
-    public var token: String?
+    public var data: IndividualNumberCardData
 }
 
 #endif
