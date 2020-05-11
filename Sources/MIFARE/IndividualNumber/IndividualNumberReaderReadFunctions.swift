@@ -26,6 +26,7 @@ extension IndividualNumberReader {
             if let error = error {
                 print(error.localizedDescription)
                 session.invalidate(errorMessage: "SELECT JPKIAP\n\(error.localizedDescription)")
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                 return
             }
             
@@ -40,6 +41,7 @@ extension IndividualNumberReader {
                 if let error = error {
                     print(error.localizedDescription)
                     session.invalidate(errorMessage: "SELECT EF\n\(error.localizedDescription)")
+                    self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                     return
                 }
                 
@@ -54,6 +56,7 @@ extension IndividualNumberReader {
                     if let error = error {
                         print(error.localizedDescription)
                         session.invalidate(errorMessage: "READ BINARY\n\(error.localizedDescription)")
+                        self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                         return
                     }
                     
@@ -76,11 +79,10 @@ extension IndividualNumberReader {
     internal func readIndividualNumber(_ session: NFCTagReaderSession, _ individualNumberCard: IndividualNumberCard, cardInfoInputSupportAppPIN: [UInt8]) -> IndividualNumberCard {
         
         if cardInfoInputSupportAppPIN.isEmpty {
+            session.invalidate(errorMessage: IndividualNumberReaderError.needPIN.errorDescription!)
             self.delegate?.japanNFCReaderSession(didInvalidateWithError: IndividualNumberReaderError.needPIN)
             return individualNumberCard
         }
-        
-        
         
         let semaphore = DispatchSemaphore(value: 0)
         var individualNumberCard = individualNumberCard
@@ -92,6 +94,7 @@ extension IndividualNumberReader {
             if let error = error {
                 print(error.localizedDescription)
                 session.invalidate(errorMessage: "SELECT TextAP\n\(error.localizedDescription)")
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                 return
             }
             
@@ -106,6 +109,7 @@ extension IndividualNumberReader {
                 if let error = error {
                     print(error.localizedDescription)
                     session.invalidate(errorMessage: "SELECT EF\n\(error.localizedDescription)")
+                    self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                     return
                 }
                 
@@ -120,6 +124,7 @@ extension IndividualNumberReader {
                     if let error = error {
                         print(error.localizedDescription)
                         session.invalidate(errorMessage: "VERIFY\n\(error.localizedDescription)")
+                        self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                         return
                     }
                     
@@ -140,7 +145,7 @@ extension IndividualNumberReader {
                             default:
                                 break
                             }
-                            
+                            print("PIN エラー", error)
                             self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                         }
                         session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
@@ -153,6 +158,7 @@ extension IndividualNumberReader {
                         if let error = error {
                             print(error.localizedDescription)
                             session.invalidate(errorMessage: "SELECT EF\n\(error.localizedDescription)")
+                            self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                             return
                         }
                         
@@ -167,6 +173,7 @@ extension IndividualNumberReader {
                             if let error = error {
                                 print(error.localizedDescription)
                                 session.invalidate(errorMessage: "READ BINARY\n\(error.localizedDescription)")
+                                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
                                 return
                             }
                             

@@ -35,7 +35,7 @@ class ViewController: UIViewController, IndividualNumberReaderSessionDelegate {
     }
     
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
-        print(error.localizedDescription)
+        print(error)
     }
 }
 
