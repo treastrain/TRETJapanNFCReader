@@ -19,9 +19,9 @@ extension MiFareReader {
         })
         
         if isPrintData {
-            print("responseCount: \(responseString.count), response: \(responseString), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
+            print("responseCount: \(responseString.count), response: \(responseString), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
         } else {
-            print("responseCount: \(responseString.count), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(DriversLicenseReaderStatus(sw1: sw1, sw2: sw2).description)")
+            print("responseCount: \(responseString.count), sw1: \(sw1.toHexString()), sw2: \(sw2.toHexString()), ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
         }
     }
 }
