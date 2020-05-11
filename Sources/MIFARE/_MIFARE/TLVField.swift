@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(TRETJapanNFCReader_Core)
+import TRETJapanNFCReader_Core
+#endif
 
 public struct TLVField {
     /// タグ
