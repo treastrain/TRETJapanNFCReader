@@ -230,11 +230,13 @@ extension IndividualNumberReader {
                 print(error.localizedDescription)
                 session.invalidate(errorMessage: "SELECT DF\n\(error.localizedDescription)")
                 self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                semaphore.signal()
                 return
             }
             
             if sw1 != 0x90 {
                 session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                semaphore.signal()
                 return
             }
             
@@ -245,11 +247,13 @@ extension IndividualNumberReader {
                     print(error.localizedDescription)
                     session.invalidate(errorMessage: "SELECT EF\n\(error.localizedDescription)")
                     self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                    semaphore.signal()
                     return
                 }
                 
                 if sw1 != 0x90 {
                     session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                    semaphore.signal()
                     return
                 }
                 
@@ -260,6 +264,7 @@ extension IndividualNumberReader {
                         print(error.localizedDescription)
                         session.invalidate(errorMessage: "VERIFY\n\(error.localizedDescription)")
                         self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                        semaphore.signal()
                         return
                     }
                     
@@ -267,7 +272,6 @@ extension IndividualNumberReader {
                         remaining = Int(sw2 & 0x0F)
                     } else {
                         session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
-                        return
                     }
                     
                     semaphore.signal()
