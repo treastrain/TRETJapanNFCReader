@@ -53,6 +53,10 @@ class ViewController: UIViewController, IndividualNumberReaderSessionDelegate {
         self.lookupRemaining(pinType: .cardInfoInputSupport, title: "Card Info Input Support")
     }
     
+    @IBAction func lookupRemainingForIndividualNumber() {
+        self.lookupRemaining(pinType: .individualNumber, title: "Individual Number")
+    }
+    
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
         print(error)
     }

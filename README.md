@@ -138,10 +138,13 @@ class ViewController: UIViewController, IndividualNumberReaderSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 取得したい情報を指定
         let items: [IndividualNumberCardItem] = [.tokenInfo, .individualNumber]
+        // 券面入力補助用パスワード
+        let cardInfoInputSupportAppPIN = "1234"
         
         self.reader = IndividualNumberReader(delegate: self)
-        self.reader.get(items: items, cardInfoInputSupportAppPIN: "券面入力補助用AppPIN")
+        self.reader.get(items: items, cardInfoInputSupportAppPIN: cardInfoInputSupportAppPIN)
     }
 
     func individualNumberReaderSession(didRead individualNumberCardData: IndividualNumberCardData) {
@@ -150,6 +153,16 @@ class ViewController: UIViewController, IndividualNumberReaderSessionDelegate {
 
     func japanNFCReaderSession(didInvalidateWithError error: Error) {
         print(error.localizedDescription)
+    }
+
+    // パスワードの残り試行回数を取得する場合
+    func lookupRemaining() {
+        // 取得したい残り試行回数の種別を指定
+        let pinType: IndividualNumberCardPINType = .digitalSignature
+        
+        self.reader.lookupRemainingPIN(pinType: pinType) { (remaining) in
+            print("Remaining:", remaining)
+        }
     }
 }
 ```

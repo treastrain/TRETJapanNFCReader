@@ -40,7 +40,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rpx-gr-TiG">
-                                <rect key="frame" x="20" y="64" width="374" height="143.5"/>
+                                <rect key="frame" x="20" y="64" width="374" height="184.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lookup Remaining PIN attempts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iac-fM-It9">
                                         <rect key="frame" x="0.0" y="0.0" width="245" height="20.5"/>
@@ -70,6 +70,14 @@
                                         <state key="normal" title="For card info input support"/>
                                         <connections>
                                             <action selector="lookupRemainingForCardInfoInputSupport" destination="BYZ-38-t0r" eventType="touchUpInside" id="iTl-CN-hZE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC2-XC-DS5">
+                                        <rect key="frame" x="0.0" y="151.5" width="166" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <state key="normal" title="For individual number"/>
+                                        <connections>
+                                            <action selector="lookupRemainingForIndividualNumber" destination="BYZ-38-t0r" eventType="touchUpInside" id="tdR-We-NbQ"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -88,7 +88,7 @@ extension IndividualNumberReader {
         var individualNumberCard = individualNumberCard
         let tag = individualNumberCard.tag
         
-        self.selectTextAP(tag: tag) { (responseData, sw1, sw2, error) in
+        self.selectCardInfoInputSupportAP(tag: tag) { (responseData, sw1, sw2, error) in
             self.printData(responseData, sw1, sw2)
             
             if let error = error {
@@ -201,7 +201,7 @@ extension IndividualNumberReader {
         return individualNumberCard
     }
     
-    /// 署名用電子証明書の暗証番号の残り試行回数を確認する
+    
     internal func lookupRemainingPIN(_ session: NFCTagReaderSession, _ tag: IndividualNumberCardTag, _ pinType: IndividualNumberCardPINType) -> Int? {
         var remaining: Int? = nil
         let semaphore = DispatchSemaphore(value: 0)
@@ -216,8 +216,11 @@ extension IndividualNumberReader {
             dfData = IndividualNumberCardAID.jpkiAP
             efData = [0x00, 0x18]
         case .cardInfoInputSupport:
-            dfData = IndividualNumberCardAID.textAP
+            dfData = IndividualNumberCardAID.cardInfoInputSupportAP
             efData = [0x00, 0x11]
+        case .individualNumber:
+            dfData = IndividualNumberCardAID.individualNumberAP
+            efData = [0x00, 0x1C]
         }
         
         self.selectDF(tag: tag, data: dfData) { (responseData, sw1, sw2, error) in

@@ -301,6 +301,10 @@
 		CD35A31823BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
 		CD35A31923BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
 		CD35A31A23BECE770005075D /* FeliCaBlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35A31623BECE770005075D /* FeliCaBlockData.swift */; };
+		CD3810D1246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3810D0246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift */; };
+		CD3810D2246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3810D0246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift */; };
+		CD3810D3246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3810D0246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift */; };
+		CD3810D4246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3810D0246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift */; };
 		CD5828D423BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
 		CD5828D523BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
 		CD5828D623BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */; };
@@ -790,6 +794,7 @@
 		CD15F81822C7DFEC00201FAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD35A31123BECE330005075D /* FeliCaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeliCaData.swift; sourceTree = "<group>"; };
 		CD35A31623BECE770005075D /* FeliCaBlockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaBlockData.swift; sourceTree = "<group>"; };
+		CD3810D0246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualNumberCardPINType.swift; sourceTree = "<group>"; };
 		CD5828D323BD0B84001092FC /* FeliCaReadWithoutEncryptionCommandParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeliCaReadWithoutEncryptionCommandParameter.swift; sourceTree = "<group>"; };
 		CD5828E623BE5389001092FC /* FeliCaRawDataReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeliCaRawDataReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5828E823BE5389001092FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1297,6 +1302,7 @@
 			isa = PBXGroup;
 			children = (
 				CD897DCE2467F5D6006F83EF /* IndividualNumberCard.swift */,
+				CD3810D0246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift */,
 				CD897E0C246944D4006F83EF /* IndividualNumberCardData.swift */,
 				CD897DD32467F71E006F83EF /* IndividualNumberReaderSessionDelegate.swift */,
 				CD897DED24684908006F83EF /* IndividualNumberReaderCommands.swift */,
@@ -2000,6 +2006,7 @@
 				CD897DDF2467F97E006F83EF /* IndividualNumberReaderError.swift in Sources */,
 				CD10CC1A23B7999300281E33 /* WaonReader.swift in Sources */,
 				CD10CC6E23B7999300281E33 /* TransitICCardItemType.swift in Sources */,
+				CD3810D2246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */,
 				CD10CCBA23B7999300281E33 /* DriversLicenseCard.swift in Sources */,
 				CD897DE42467F9C2006F83EF /* IndividualNumberReader.swift in Sources */,
 				CD897DF424684D7F006F83EF /* MiFareReader.swift in Sources */,
@@ -2116,6 +2123,7 @@
 				CD897DDE2467F97E006F83EF /* IndividualNumberReaderError.swift in Sources */,
 				CD10CC6523B7999300281E33 /* TransitICReader.swift in Sources */,
 				CD10CBC923B7999300281E33 /* JapanNFCReaderError.swift in Sources */,
+				CD3810D1246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */,
 				CD10CCC523B7999300281E33 /* DriversLicenseReaderStatus.swift in Sources */,
 				CD897DE32467F9C2006F83EF /* IndividualNumberReader.swift in Sources */,
 				CD897DF324684D7F006F83EF /* MiFareReader.swift in Sources */,
@@ -2216,6 +2224,7 @@
 				CD897DE12467F97E006F83EF /* IndividualNumberReaderError.swift in Sources */,
 				CD10CC1C23B7999300281E33 /* WaonReader.swift in Sources */,
 				CD10CC7023B7999300281E33 /* TransitICCardItemType.swift in Sources */,
+				CD3810D4246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */,
 				CD10CCBC23B7999300281E33 /* DriversLicenseCard.swift in Sources */,
 				CD897DE62467F9C2006F83EF /* IndividualNumberReader.swift in Sources */,
 				CD897DF624684D7F006F83EF /* MiFareReader.swift in Sources */,
@@ -2306,6 +2315,7 @@
 				CD897DE02467F97E006F83EF /* IndividualNumberReaderError.swift in Sources */,
 				CD10CC1B23B7999300281E33 /* WaonReader.swift in Sources */,
 				CD10CC6F23B7999300281E33 /* TransitICCardItemType.swift in Sources */,
+				CD3810D3246BFEFA0034ADF2 /* IndividualNumberCardPINType.swift in Sources */,
 				CD10CCBB23B7999300281E33 /* DriversLicenseCard.swift in Sources */,
 				CD897DE52467F9C2006F83EF /* IndividualNumberReader.swift in Sources */,
 				CD897DF524684D7F006F83EF /* MiFareReader.swift in Sources */,

@@ -30,17 +30,6 @@ public enum IndividualNumberCardApplication: CaseIterable {
     case basicResidentRegistrationApplication
 }
 
-public enum IndividualNumberCardPINType {
-    /// 署名用
-    case digitalSignature
-    /// 利用者証明書用
-    case userAuthentication
-    /// 券面事項入力補助用
-    case cardInfoInputSupport
-    /// 個人番号カード用
-    // case individualNumberCard
-}
-
 /// マイナンバーカード
 @available(iOS 13.0, *)
 public struct IndividualNumberCard {
