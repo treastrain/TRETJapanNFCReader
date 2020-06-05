@@ -20,6 +20,7 @@ public extension NFCISO7816Tag {
     ///   - sw2: 状態バイト SW2。
     ///   - error: コマンド操作が正常に完了した場合には `nil`、タグとの通信に問題がある場合は [NSError](apple-reference-documentation://hsInK_-ThL)。
     typealias ISO7816SendCommandCompletionHandler = (_ responseData: Data, _ sw1: UInt8, _ sw2: UInt8, _ error: Error?) -> Void
+    typealias ISO7816SendCommandCompletion = (Data, UInt8, UInt8, Error?)
     
     /// ISO/IEC 7816-4 で規定されている READ BINARY コマンド
     /// - Parameters:
@@ -32,6 +33,23 @@ public extension NFCISO7816Tag {
         let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xB0, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
         
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
+    
+    /// ISO/IEC 7816-4 で規定されている READ BINARY コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func readBinary(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.readBinary(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
     }
     
     /// ISO/IEC 7816-4 で規定されている WRITE BINARY コマンド
@@ -47,6 +65,23 @@ public extension NFCISO7816Tag {
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
     }
     
+    /// ISO/IEC 7816-4 で規定されている WRITE BINARY コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func writeBinary(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.writeBinary(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
+    }
+    
     /// ISO/IEC 7816-4 で規定されている UPDATE BINARY コマンド
     /// - Parameters:
     ///   - p1Parameter: パラメーターバイト P1。
@@ -58,6 +93,23 @@ public extension NFCISO7816Tag {
         let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xD6, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
         
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
+    
+    /// ISO/IEC 7816-4 で規定されている UPDATE BINARY コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func updateBinary(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.updateBinary(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
     }
     
     /// ISO/IEC 7816-4 で規定されている READ RECORDS コマンド
@@ -73,6 +125,23 @@ public extension NFCISO7816Tag {
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
     }
     
+    /// ISO/IEC 7816-4 で規定されている READ RECORDS コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func readRecords(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.readRecords(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
+    }
+    
     /// ISO/IEC 7816-4 で規定されている WRITE RECORD コマンド
     /// - Parameters:
     ///   - p1Parameter: パラメーターバイト P1。
@@ -84,6 +153,23 @@ public extension NFCISO7816Tag {
         let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xD2, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
         
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
+    
+    /// ISO/IEC 7816-4 で規定されている WRITE RECORD コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func writeRecord(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.writeRecord(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
     }
     
     /// ISO/IEC 7816-4 で規定されている APPEND RECORD コマンド
@@ -99,6 +185,23 @@ public extension NFCISO7816Tag {
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
     }
     
+    /// ISO/IEC 7816-4 で規定されている APPEND RECORD コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func appendRecord(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.appendRecord(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
+    }
+    
     /// ISO/IEC 7816-4 で規定されている UPDATE RECORD コマンド
     /// - Parameters:
     ///   - p1Parameter: パラメーターバイト P1。
@@ -110,6 +213,23 @@ public extension NFCISO7816Tag {
         let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xDC, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
         
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
+    
+    /// ISO/IEC 7816-4 で規定されている UPDATE RECORD コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func updateRecord(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.updateRecord(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
     }
     
     /// ISO/IEC 7816-4 で規定されている SELECT FILE コマンド
@@ -125,6 +245,23 @@ public extension NFCISO7816Tag {
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
     }
     
+    /// ISO/IEC 7816-4 で規定されている SELECT FILE コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func selectFile(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.selectFile(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
+    }
+    
     /// ISO/IEC 7816-4 で規定されている VERIFY コマンド
     /// - Parameters:
     ///   - p1Parameter: パラメーターバイト P1。
@@ -136,6 +273,23 @@ public extension NFCISO7816Tag {
         let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0x20, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
         
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
+    
+    /// ISO/IEC 7816-4 で規定されている VERIFY コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func verify(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.verify(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
     }
     
     /// ISO/IEC 7816-4 で規定されている INTERNAL AUTHENTICATE コマンド
@@ -151,6 +305,23 @@ public extension NFCISO7816Tag {
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
     }
     
+    /// ISO/IEC 7816-4 で規定されている INTERNAL AUTHENTICATE コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func internalAuthenticate(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.internalAuthenticate(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
+    }
+    
     /// ISO/IEC 7816-4 で規定されている EXTERNAL AUTHENTICATE コマンド
     /// - Parameters:
     ///   - p1Parameter: パラメーターバイト P1。
@@ -164,6 +335,23 @@ public extension NFCISO7816Tag {
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
     }
     
+    /// ISO/IEC 7816-4 で規定されている EXTERNAL AUTHENTICATE コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func externalAuthenticate(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.externalAuthenticate(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
+    }
+    
     /// ISO/IEC 7816-4 で規定されている GET CHALLENGE コマンド
     /// - Parameters:
     ///   - p1Parameter: パラメーターバイト P1。
@@ -175,6 +363,23 @@ public extension NFCISO7816Tag {
         let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0x84, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
         
         self.sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
+    
+    /// ISO/IEC 7816-4 で規定されている GET CHALLENGE コマンド
+    /// - Parameters:
+    ///   - p1Parameter: パラメーターバイト P1。
+    ///   - p2Parameter: パラメーターバイト P2。
+    ///   - data: 送信するデータ。
+    ///   - expectedResponseLength: 期待されるレスポンスデータバイトの長さ (Le)。レスポンスデータフィールドの最大バイト数を期待する場合は `0` を指定する。レスポンスデータフィールドが存在しないことを期待する場合は `-1` を指定する。
+    func getChallenge(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int) -> ISO7816SendCommandCompletion {
+        var completion: ISO7816SendCommandCompletion!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.getChallenge(p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength) { (responseData, sw1, sw2, error) in
+            completion = (responseData, sw1, sw2, error)
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return completion
     }
 }
 
