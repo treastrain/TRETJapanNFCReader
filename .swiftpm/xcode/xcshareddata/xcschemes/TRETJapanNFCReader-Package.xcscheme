@@ -440,6 +440,48 @@
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TRETJapanNFCReader-ISO7816"
+               BuildableName = "TRETJapanNFCReader-ISO7816"
+               BlueprintName = "TRETJapanNFCReader-ISO7816"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TRETJapanNFCReader-ISO7816-DriversLicense"
+               BuildableName = "TRETJapanNFCReader-ISO7816-DriversLicense"
+               BlueprintName = "TRETJapanNFCReader-ISO7816-DriversLicense"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TRETJapanNFCReader-ISO7816-IndividualNumber"
+               BuildableName = "TRETJapanNFCReader-ISO7816-IndividualNumber"
+               BlueprintName = "TRETJapanNFCReader-ISO7816-IndividualNumber"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

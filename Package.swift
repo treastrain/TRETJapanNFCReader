@@ -13,7 +13,7 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
-            "TRETJapanNFCReader-MIFARE",
+            "TRETJapanNFCReader-ISO7816",
             "TRETJapanNFCReader-FeliCa-FCFCampus",
             "TRETJapanNFCReader-FeliCa-Nanaco",
             "TRETJapanNFCReader-FeliCa-NTasu",
@@ -24,8 +24,8 @@ var targets: [Target] = [
             "TRETJapanNFCReader-FeliCa-TransitIC",
             "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
             "TRETJapanNFCReader-FeliCa-Waon",
-            "TRETJapanNFCReader-MIFARE-DriversLicense",
-            "TRETJapanNFCReader-MIFARE-IndividualNumber",
+            "TRETJapanNFCReader-ISO7816-DriversLicense",
+            "TRETJapanNFCReader-ISO7816-IndividualNumber",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -60,18 +60,18 @@ targets.append(
 )
 
 
-// MARK: - MIFARE (ISO 14443)
-// Required for targets using MIFARE (ISO 14443)
+// MARK: - ISO7816 (ISO 14443)
+// Required for targets using ISO7816 (ISO 14443)
 products.append(
     .library(
-        name: "TRETJapanNFCReader-MIFARE",
-        targets: ["TRETJapanNFCReader-MIFARE"])
+        name: "TRETJapanNFCReader-ISO7816",
+        targets: ["TRETJapanNFCReader-ISO7816"])
 )
 targets.append(
     .target(
-        name: "TRETJapanNFCReader-MIFARE",
+        name: "TRETJapanNFCReader-ISO7816",
         dependencies: ["TRETJapanNFCReader-Core"],
-        path: "Sources/MIFARE/_MIFARE")
+        path: "Sources/ISO7816/_ISO7816")
 )
 
 
@@ -225,37 +225,37 @@ targets.append(
 )
 
 
-// MARK: - MIFARE-DriversLicense
+// MARK: - ISO7816-DriversLicense
 // 日本の運転免許証 / Japanese Driver's License
 products.append(
     .library(
-        name: "TRETJapanNFCReader-MIFARE-DriversLicense",
-        targets: ["TRETJapanNFCReader-MIFARE-DriversLicense"])
+        name: "TRETJapanNFCReader-ISO7816-DriversLicense",
+        targets: ["TRETJapanNFCReader-ISO7816-DriversLicense"])
 )
 targets.append(
     .target(
-        name: "TRETJapanNFCReader-MIFARE-DriversLicense",
+        name: "TRETJapanNFCReader-ISO7816-DriversLicense",
         dependencies: [
-            "TRETJapanNFCReader-MIFARE"
+            "TRETJapanNFCReader-ISO7816"
         ],
-        path: "Sources/MIFARE/DriversLicense")
+        path: "Sources/ISO7816/DriversLicense")
 )
 
 
-// MARK: - MIFARE-IndividualNumber
-// マイナンバーカード / Japanese Individual Number Card (My Number Card)
+// MARK: - ISO7816-IndividualNumber
+// 個人番号カード（マイナンバーカード） / Japanese Individual Number Card (My Number Card)
 products.append(
     .library(
-        name: "TRETJapanNFCReader-MIFARE-IndividualNumber",
-        targets: ["TRETJapanNFCReader-MIFARE-IndividualNumber"])
+        name: "TRETJapanNFCReader-ISO7816-IndividualNumber",
+        targets: ["TRETJapanNFCReader-ISO7816-IndividualNumber"])
 )
 targets.append(
     .target(
-        name: "TRETJapanNFCReader-MIFARE-IndividualNumber",
+        name: "TRETJapanNFCReader-ISO7816-IndividualNumber",
         dependencies: [
-            "TRETJapanNFCReader-MIFARE"
+            "TRETJapanNFCReader-ISO7816"
         ],
-        path: "Sources/MIFARE/IndividualNumber")
+        path: "Sources/ISO7816/IndividualNumber")
 )
 
 
