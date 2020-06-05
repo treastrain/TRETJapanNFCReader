@@ -7,8 +7,8 @@
 //
 
 import Foundation
-#if canImport(TRETJapanNFCReader_MIFARE)
-import TRETJapanNFCReader_MIFARE
+#if canImport(TRETJapanNFCReader_ISO7816)
+import TRETJapanNFCReader_ISO7816
 #endif
 
 @available(iOS 13.0, *)
