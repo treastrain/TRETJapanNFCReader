@@ -16,14 +16,12 @@ import TRETJapanNFCReader_ISO7816
 #endif
 
 @available(iOS 13.0, *)
-internal typealias IndividualNumberCardTag = NFCISO7816Tag
-
-@available(iOS 13.0, *)
 public class IndividualNumberReader: MiFareReader {
     
     internal let delegate: IndividualNumberReaderSessionDelegate?
     private var items: [IndividualNumberCardItem] = []
     
+    // private var cardInfoInputCheckAppPIN: [UInt8] = []
     private var cardInfoInputSupportAppPIN: [UInt8] = []
     
     private var lookupRemainingPINType: IndividualNumberCardPINType?
@@ -44,6 +42,9 @@ public class IndividualNumberReader: MiFareReader {
         self.items = items
         self.lookupRemainingPINType = nil
         
+//        if let cardInfoInputCheckAppPIN = cardInfoInputCheckAppPIN.data(using: .utf8) {
+//            self.cardInfoInputCheckAppPIN = [UInt8](cardInfoInputCheckAppPIN)
+//        }
         if let cardInfoInputSupportAppPIN = cardInfoInputSupportAppPIN.data(using: .utf8) {
             self.cardInfoInputSupportAppPIN = [UInt8](cardInfoInputSupportAppPIN)
         }
@@ -177,6 +178,8 @@ public class IndividualNumberReader: MiFareReader {
                     individualNumberCard = self.readJPKIToken(session, individualNumberCard)
                 case .individualNumber:
                     individualNumberCard = self.readIndividualNumber(session, individualNumberCard, cardInfoInputSupportAppPIN: self.cardInfoInputSupportAppPIN)
+                // case .券面事項:
+                    // individualNumberCard = self.read券面事項(session, individualNumberCard, cardInfoInputCheckAppPIN: self.cardInfoInputCheckAppPIN)
                 }
             }
             completion(individualNumberCard)

@@ -221,13 +221,14 @@ class ViewController: UIViewController, FeliCaReaderSessionDelegate {
 
 
 ## 謝辞 / Acknowledgments
-### MiFare `TRETJapanNFCReader/MIFARE`
+### ISO7816 `TRETJapanNFCReader/ISO7816`
 - ISO/IEC7816
 - JIS X 6320-4
 
-### マイナンバーカード `TRETJapanNFCReader/MIFARE/IndividualNumber`
+### マイナンバーカード `TRETJapanNFCReader/ISO7816/IndividualNumber`
 マイナンバーカードの読み取り実装においては以下に掲載されている情報を参考にしました。
 - [`jpki/myna`](https://github.com/jpki/myna)
+    - `ASN1PartialParser.swift` は `jpki/myna/libmyna/utils.go` を参考に実装
 - 公的個人認証サービス 利用者クライアントソフト API 仕様書【個人認証サービス AP C 言語インターフェース編】第4.3版 地方公共団体情報システム機構
 
 ### OKICA `TRETJapanNFCReader/FeliCa/Okica/`

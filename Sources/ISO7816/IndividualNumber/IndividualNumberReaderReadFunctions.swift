@@ -8,6 +8,7 @@
 
 #if os(iOS)
 import CoreNFC
+import CryptoTokenKit
 #if canImport(TRETJapanNFCReader_ISO7816)
 import TRETJapanNFCReader_ISO7816
 #endif
@@ -191,6 +192,139 @@ extension IndividualNumberReader {
                             }
                             
                             semaphore.signal()
+                        }
+                    }
+                }
+            }
+        }
+        
+        semaphore.wait()
+        return individualNumberCard
+    }
+    
+    @available(*, unavailable)
+    internal func read券面事項(_ session: NFCTagReaderSession, _ individualNumberCard: IndividualNumberCard, cardInfoInputCheckAppPIN: [UInt8]) -> IndividualNumberCard {
+        
+        if cardInfoInputCheckAppPIN.isEmpty {
+            session.invalidate(errorMessage: IndividualNumberReaderError.needPIN.errorDescription!)
+            self.delegate?.japanNFCReaderSession(didInvalidateWithError: IndividualNumberReaderError.needPIN)
+            return individualNumberCard
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        var individualNumberCard = individualNumberCard
+        let tag = individualNumberCard.tag
+        
+        self.selectCardInfoInputSupportAP(tag: tag) { (responseData, sw1, sw2, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                session.invalidate(errorMessage: "SELECT IndividualNumberAP\n\(error.localizedDescription)")
+                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                return
+            }
+            if sw1 != 0x90 {
+                session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                return
+            }
+            
+            tag.selectEF(data: [0x00, 0x11]) { (responseData, sw1, sw2, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    session.invalidate(errorMessage: "SELECT EF \n\(error.localizedDescription)")
+                    self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                    return
+                }
+                if sw1 != 0x90 {
+                    session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                    return
+                }
+                
+                tag.verify(p1Parameter: 0x00, p2Parameter: 0x80, data: Data(cardInfoInputCheckAppPIN), expectedResponseLength: -1) { (responseData, sw1, sw2, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        session.invalidate(errorMessage: "VEIFY \n\(error.localizedDescription)")
+                        self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                        return
+                    }
+                    if sw1 != 0x90 {
+                        if sw1 == 0x63 {
+                            var error = IndividualNumberReaderError.incorrectPIN(0)
+                            switch sw2 {
+                            case 0xC1:
+                                error = .incorrectPIN(1)
+                            case 0xC2:
+                                error = .incorrectPIN(2)
+                            case 0xC3:
+                                error = .incorrectPIN(3)
+                            case 0xC4:
+                                error = .incorrectPIN(4)
+                            case 0xC5:
+                                error = .incorrectPIN(5)
+                            default:
+                                break
+                            }
+                            print("PIN エラー", error)
+                            self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                        }
+                        session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                        return
+                    }
+                    
+                    tag.selectEF(data: [0x00, 0x02]) { (responseData, sw1, sw2, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            session.invalidate(errorMessage: "VEIFY \n\(error.localizedDescription)")
+                            self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                            return
+                        }
+                        if sw1 != 0x90 {
+                            session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                            return
+                        }
+                        
+                        tag.readBinary(p1Parameter: 0x00, p2Parameter: 0x00, data: Data(), expectedResponseLength: 7) { (responseData, sw1, sw2, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                                session.invalidate(errorMessage: "READ BINARY \n\(error.localizedDescription)")
+                                self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                                return
+                            }
+                            if sw1 != 0x90 {
+                                session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                                return
+                            }
+                            
+                            self.printData(responseData, isPrintData: true, sw1, sw2)
+                            
+                            guard let asn1 = try? ASN1PartialParser(data: responseData) else {
+                                session.invalidate(errorMessage: "ASN1PartialParser Error")
+                                return
+                            }
+                            print("length:", asn1.size)
+                            
+                            tag.readBinary(p1Parameter: 0x00, p2Parameter: 0x00, data: Data(), expectedResponseLength: asn1.size) { (responseData, sw1, sw2, error) in
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                    session.invalidate(errorMessage: "READ BINARY \n\(error.localizedDescription)")
+                                    self.delegate?.japanNFCReaderSession(didInvalidateWithError: error)
+                                    return
+                                }
+                                if sw1 != 0x90 {
+                                    session.invalidate(errorMessage: "エラー: ステータス: \(ISO7816Status.localizedString(forStatusCode: sw1, sw2))")
+                                    return
+                                }
+                                
+                                self.printData(responseData, isPrintData: true, sw1, sw2)
+                                
+                                var data = [UInt8](responseData)
+                                data.removeFirst()
+                                let fields = TLVField.sequenceOfFields(from: data)
+                                let fieldData = fields.first!.value
+                                let string = String(data: Data(fieldData), encoding: .utf8)
+                                print(string)
+                                
+                                semaphore.signal()
+                            }
                         }
                     }
                 }
