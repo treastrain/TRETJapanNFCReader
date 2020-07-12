@@ -15,10 +15,6 @@ import TRETJapanNFCReader_Core
 /// The abstract base class that represents a FeliCa (ISO 18092, NFC-F) reader.
 @available(iOS 13.0, *)
 open class FeliCaReader: JapanNFCReader {
-    
-    private override init() {
-        fatalError()
-    }
 }
 
 #endif
