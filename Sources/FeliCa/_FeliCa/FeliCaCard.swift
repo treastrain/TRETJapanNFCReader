@@ -12,7 +12,7 @@ import CoreNFC
 #endif
 
 #if os(iOS)
-/// FeliCaカード
+/// FeliCa Card
 @available(iOS 13.0, *)
 public protocol FeliCaCard {
     var tag: NFCFeliCaTag { get }

@@ -15,18 +15,22 @@ public typealias FeliCaSystemCode = UInt16
 
 public extension FeliCaSystemCode {
     
+    /*
     init(from systemCodeData: Data) {
         let bytes = [systemCodeData[1], systemCodeData[0]] /// Little Endian (LE)
         self = UnsafePointer(bytes).withMemoryRebound(to: FeliCaSystemCode.self, capacity: 1) {
             $0.pointee
         }
     }
+    */
     
+    /*
     var string: String {
         return self.toHexString()
     }
+    */
     
-    /// 日本鉄道サイバネティクス協議会（CJRC）規格
+    /// Congress of Japan Railway Cybernetics (CJRC) Standard
     static let cjrc: FeliCaSystemCode = 0x0003
     /// ナイスパス
     static let nicePass: FeliCaSystemCode = 0x040F
@@ -110,7 +114,7 @@ public extension FeliCaSystemCode {
     static let hayakaken: FeliCaSystemCode = 0x927A
     /// エヌタスTカード
     static let ntasu: FeliCaSystemCode = 0x93EC
-    /// FeliCa 共通領域
+    /// FeliCa Common
     static let common: FeliCaSystemCode = 0xFE00
     /// FeliCa Plug
     static let plug: FeliCaSystemCode = 0xFEE1

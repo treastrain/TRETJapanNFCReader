@@ -12,7 +12,7 @@ public typealias FeliCaServiceCode = UInt16
 
 public extension FeliCaServiceCode {
     
-    /// FeliCa エリア属性 または FeliCa サービス属性
+    /// FeliCa Area Attribute or FeliCa Service Attribute
     var attribute: FeliCaAttribute {
         let s = self & 0x3F
         switch s {
@@ -57,7 +57,7 @@ public extension FeliCaServiceCode {
         }
     }
     
-    /// 認証が必要か
+    /// A Boolean value that indicates whether the authentication is required.
     var isAuthenticationRequired: Bool {
         if self.attribute == .areaThatCanCreateSubArea || self.attribute == .areaThatCannotCreateSubArea {
             return false

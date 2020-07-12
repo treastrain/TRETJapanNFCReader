@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// FeliCa エリア属性 または FeliCa サービス属性
+/// FeliCa Area Attribute or FeliCa Service Attribute
 public enum FeliCaAttribute {
     case areaThatCanCreateSubArea
     case areaThatCannotCreateSubArea

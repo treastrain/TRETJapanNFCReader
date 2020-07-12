@@ -11,18 +11,18 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// 交通系ICカードから読み取ることができるデータの種別
+/// Types of item data that can be read from Transit IC Cards.
 public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
-    /// カード残高
+    /// Balance
     case balance
-    /// 取引履歴
+    /// Transactions
     case transactions
-    /// 改札入出場履歴情報
+    /// Entry and exit informations
     case entryExitInformations
-    /// SF入場情報
+    /// SF entry informations
     case sfEntryInformations
     
-    /// SAPICA ポイント
+    /// SAPICA points
     case sapicaPoints
     
     
@@ -59,38 +59,6 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
             return (systemCode, 0x10CB, 2)
         case .sapicaPoints:
             return (.sapica, 0xBA4B, 1)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .balance:
-            return 0x008B
-        case .transactions:
-            return 0x090F
-        case .entryExitInformations:
-            return 0x108F
-        case .sfEntryInformations:
-            return 0x10CB
-        case .sapicaPoints:
-            return 0xBA4B
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .balance:
-            return 1
-        case .transactions:
-            return 20
-        case .entryExitInformations:
-            return 3
-        case .sfEntryInformations:
-            return 2
-        case .sapicaPoints:
-            return 1
         }
     }
 }

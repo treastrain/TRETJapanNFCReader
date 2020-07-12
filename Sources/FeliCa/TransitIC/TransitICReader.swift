@@ -16,9 +16,15 @@ import TRETJapanNFCReader_FeliCa
 @available(iOS 13.0, *)
 public class TransitICReader: FeliCaReader {
     
-    private init() {
-        fatalError()
+    /// Reading data from Transit IC card
+    /// - Parameters:
+    ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    ///   - delegate: An object that handles callbacks from the reader.
+    public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
     }
+    
+    @available(*, unavailable, renamed: "read")
+    public func get(itemTypes: [TransitICCardItemType]) {}
 }
 
 #endif
