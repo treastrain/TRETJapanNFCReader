@@ -9,5 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_12_beta.app/Contents/Developer'
+    - name: Show Xcode version
+      run: xcodebuild -version
+    - name: Show Swift version
+      run: swift --version
     - name: Build
       run: swift build -v
