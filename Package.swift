@@ -13,6 +13,7 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
+            "TRETJapanNFCReader-FeliCa-TransitIC",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -45,6 +46,22 @@ targets.append(
         dependencies: ["TRETJapanNFCReader-Core"],
         path: "Sources/FeliCa/_FeliCa")
 )
+
+
+// MARK: - FeliCa-TransitIC
+// Transit IC (comply with CJRC standards) / 交通系IC (CJRC規格準拠)
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-TransitIC",
+        targets: ["TRETJapanNFCReader-FeliCa-TransitIC"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-TransitIC",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/TransitIC")
+)
+
 
 let package = Package(
     name: "TRETJapanNFCReader",
