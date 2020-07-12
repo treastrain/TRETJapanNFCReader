@@ -9,8 +9,20 @@
 #if os(iOS)
 import CoreNFC
 
+/// The abstract base class that represents a NFC reader.
 @available(iOS 13.0, *)
-open class JapanNFCReader {
+open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
+    open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
+        
+    }
+    
+    open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
+        
+    }
+    
+    open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+        
+    }
 }
 
 #endif
