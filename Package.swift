@@ -12,6 +12,7 @@ var targets: [Target] = [
         name: "TRETJapanNFCReader",
         dependencies: [
             "TRETJapanNFCReader-Core",
+            "TRETJapanNFCReader-FeliCa",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -28,6 +29,21 @@ targets.append(
     .target(
         name: "TRETJapanNFCReader-Core",
         path: "Sources/Core")
+)
+
+
+// MARK: - FeliCa (ISO 18092)
+// Required for targets using FeliCa (ISO 18092)
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa",
+        targets: ["TRETJapanNFCReader-FeliCa"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa",
+        dependencies: ["TRETJapanNFCReader-Core"],
+        path: "Sources/FeliCa/_FeliCa")
 )
 
 let package = Package(
