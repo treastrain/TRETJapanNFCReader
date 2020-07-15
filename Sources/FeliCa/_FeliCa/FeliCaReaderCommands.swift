@@ -1,5 +1,5 @@
 //
-//  FeliCa+NFCFeliCaTag.swift
+//  FeliCaReaderCommands.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/08/27.
