@@ -14,83 +14,97 @@ import TRETJapanNFCReader_Core
 
 @available(iOS 13.0, *)
 extension NFCFeliCaTag {
-    /// FeliCa カードの仕様で定義されている Read Without Encryption コマンドを、blockList の要素数が13~36の場合において継続して処理できるように分けてタグに送信します。
-    /// - Parameter serviceCode: サービスコード
-    /// - Parameter blockList: ブロックリスト
-    /// - Parameter completionHandler: レスポンスデータ
-    /// - Parameter status1: ステータスフラグ 1
-    /// - Parameter status2: ステータスフラグ 2
-    /// - Parameter blockData: ブロックデータ
-    /// - Parameter error: エラー
-    public func readWithoutEncryption36(serviceCode: Data, blockList: [Data], completionHandler: @escaping (_ status1: Int, _ status2: Int, _ blockData: [Data], _ error: Error?) -> Void) {
+    
+    /// Read Without Encrypton command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
+    /// - Parameters:
+    ///   - serviceCodeList: Service Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 16 inclusive. Each service code should be 2 bytes stored in Little Endian format.
+    ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
+    ///   - resultHandler: Completion handler called when the operation is completed. Valid read data blocks (block length of 16 bytes) are returned in an array of Data objects when Status Flag 1 equals zero.
+    public func readWithoutEncryption(serviceCodeList: [Data], blockList: [Data], resultHandler: @escaping (Result<(FeliCaStatusFlag, [Data]), Error>) -> Void) {
+        if #available(iOS 14.0, *) {
+            self.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (response: Result<(NFCFeliCaStatusFlag, [Data]), Error>) in
+                switch response {
+                case .success((let statusFlag, let blockData)):
+                    resultHandler(.success((FeliCaStatusFlag(statusFlag), blockData)))
+                case .failure(let error):
+                    resultHandler(.failure(error))
+                }
+            }
+        } else {
+            self.readWithoutEncryption(serviceCodeList: serviceCodeList, blockList: blockList) { (statusFlag1, statusFlag2, blockData, error) in
+                if let error = error {
+                    resultHandler(.failure(error))
+                } else {
+                    resultHandler(.success((FeliCaStatusFlag(statusFlag1, statusFlag2), blockData)))
+                }
+            }
+        }
+    }
+    
+    /// Read Without Encrypton command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36.
+    /// - Parameters:
+    ///   - serviceCode: Service Code
+    ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
+    ///   - resultHandler: Completion handler called when the operation is completed. Valid read data blocks (block length of 16 bytes) are returned in an array of Data objects when Status Flag 1 equals zero.
+    public func readWithoutEncryption36(serviceCode: Data, blockList: [Data], resultHandler: @escaping (Result<(FeliCaStatusFlag, [Data]), Error>) -> Void) {
         
         var completionBlockData: [Data] = []
         
         let blockLists = blockList.split(count: 12)
         let blockList = blockLists.first ?? []
         
-        self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockList) { (status1, status2, blockData, error) in
-            
-            if let error = error {
-                completionHandler(status1, status2, blockData, error)
-                return
-            }
-            
-            guard status1 == 0x00, status2 == 0x00, blockLists.count >= 2 else {
-                completionHandler(status1, status2, blockData, error)
-                return
-            }
-            
-            completionBlockData += blockData
-            
-            self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockLists[1]) { (status1, status2, blockData, error) in
-                
-                if let error = error {
-                    completionHandler(status1, status2, completionBlockData, error)
+        self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockList) { (response) in
+            switch response {
+            case .success((let statusFlag, let blockData)):
+                guard statusFlag.isSucceeded, blockLists.count >= 2 else {
+                    resultHandler(.success((statusFlag, blockData)))
                     return
                 }
                 
                 completionBlockData += blockData
-                
-                guard status1 == 0x00, status2 == 0x00, blockLists.count >= 3 else {
-                    completionHandler(status1, status2, completionBlockData, error)
-                    return
+                self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockLists[1]) { (response) in
+                    switch response {
+                    case .success((let statusFlag, let blockData)):
+                        completionBlockData += blockData
+                        
+                        guard statusFlag.isSucceeded, blockLists.count >= 3 else {
+                            resultHandler(.success((statusFlag, completionBlockData)))
+                            return
+                        }
+                        self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockLists[2]) { (response) in
+                            switch response {
+                            case .success((let statusFlag, let blockData)):
+                                completionBlockData += blockData
+                                resultHandler(.success((statusFlag, completionBlockData)))
+                            case .failure(let error):
+                                resultHandler(.failure(error))
+                            }
+                        }
+                    case .failure(let error):
+                        resultHandler(.failure(error))
+                    }
                 }
-                
-                self.readWithoutEncryption(serviceCodeList: [serviceCode], blockList: blockLists[2]) { (status1, status2, blockData, error) in
-                    
-                    completionBlockData += blockData
-                    completionHandler(status1, status2, completionBlockData, error)
-                }
+            case .failure(let error):
+                resultHandler(.failure(error))
             }
         }
     }
     
-    @available(*, unavailable, renamed: "readWithoutEncryption36(serviceCode:blockList:completionHandler:)")
-    public func readWithoutEncryption24(serviceCode: Data, blockList: [Data], completionHandler: @escaping (_ status1: Int, _ status2: Int, _ blockData: [Data], _ error: Error?) -> Void) {
-    }
-    
-    /// FeliCa カードの仕様で定義されている Read Without Encryption コマンドを、blockList の要素数が13~36の場合において継続して処理できるように分けてタグに送信します。レスポンスデータは同期的に返されます。
+    /// Read Without Encrypton command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36. Response data is returned synchronously.
     /// - Parameters:
-    ///   - serviceCode: サービスコード
-    ///   - blockList: ブロックリスト
-    public func readWithoutEncryption36(serviceCode: Data, blockList: [Data]) -> (status1: Int, status2: Int, blockData: [Data], error: Error?) {
-        var resultStatus1: Int!
-        var resultStatus2: Int!
-        var resultBlockData: [Data]!
-        var resultError: Error?
+    ///   - serviceCode: Service Code
+    ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
+    public func readWithoutEncryption36(serviceCode: Data, blockList: [Data]) -> Result<(FeliCaStatusFlag, [Data]), Error> {
+        var result: Result<(FeliCaStatusFlag, [Data]), Error>!
         let semaphore = DispatchSemaphore(value: 0)
-        self.readWithoutEncryption36(serviceCode: serviceCode, blockList: blockList) { (status1, status2, blockData, error) in
-            resultStatus1 = status1
-            resultStatus2 = status2
-            resultBlockData = blockData
-            resultError = error
-            semaphore.signal()
+        self.readWithoutEncryption36(serviceCode: serviceCode, blockList: blockList) { (response) in
+            result = response
         }
         semaphore.wait()
-        return (resultStatus1, resultStatus2, resultBlockData, resultError)
+        return result
     }
     
+    /*
     /// Sends the Polling command as defined by FeliCa card specification to the tag. Response data is returned synchronously.
     /// - Parameters:
     ///   - systemCode: Designation of System Code.
@@ -110,6 +124,7 @@ extension NFCFeliCaTag {
         semaphore.wait()
         return (resultPMm, resultSystemCode, resultError)
     }
+    */
 }
 
 #endif
