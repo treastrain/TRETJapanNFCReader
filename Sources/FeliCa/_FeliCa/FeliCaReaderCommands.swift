@@ -15,7 +15,7 @@ import TRETJapanNFCReader_Core
 @available(iOS 13.0, *)
 extension NFCFeliCaTag {
     
-    /// Read Without Encrypton command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
+    /// Read Without Encryption command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
     /// - Parameters:
     ///   - serviceCodeList: Service Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 16 inclusive. Each service code should be 2 bytes stored in Little Endian format.
     ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
@@ -41,7 +41,7 @@ extension NFCFeliCaTag {
         }
     }
     
-    /// Read Without Encrypton command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36.
+    /// Read Without Encryption command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36.
     /// - Parameters:
     ///   - serviceCode: Service Code
     ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
@@ -90,7 +90,7 @@ extension NFCFeliCaTag {
         }
     }
     
-    /// Read Without Encrypton command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36. Response data is returned synchronously.
+    /// Read Without Encryption command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36. Response data is returned synchronously.
     /// - Parameters:
     ///   - serviceCode: Service Code
     ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
