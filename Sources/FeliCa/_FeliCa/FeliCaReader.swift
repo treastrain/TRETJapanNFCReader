@@ -16,21 +16,21 @@ import TRETJapanNFCReader_Core
 @available(iOS 13.0, *)
 open class FeliCaReader: JapanNFCReader, JapanNFCReaderDelegate {
     
-    public override init() {
-        super.init()
-        super.delegate = self
-    }
-    
+    /// Starts the reader, and run Read Without Encryption command defined by FeliCa card specification.
+    /// - Parameters:
+    ///   - parameters: Parameters (system code, service code and number of blocks) for specifying the block.
+    ///   - didBecomeActiveHandler: A handler called when the reader is active.
+    ///   - resultHandler: A completion handler called when the operation is completed.
     public func readWithoutEncryption(parameters: [FeliCaReadWithoutEncryptionCommandParameter], didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
-        self.beginScanning(pollingOption: .iso18092, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+        self.beginScanning(pollingOption: .iso18092, delegate: self, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
     public func tagReaderSession(_ session: NFCTagReaderSession, didConnect tag: NFCTag) {
-        print(self, #function, #line, session.connectedTag)
+        print(self, #function, #line, tag)
         
-        guard case .feliCa(let feliCaTag) = session.connectedTag else {
+        guard case .feliCa(let feliCaTag) = tag else {
             session.invalidate(errorMessage: "FeliCa タグではないものが検出されました。")
-            DispatchQueue.main.async {
+            self.readerQueue.async {
                 self.resultHandler?(.failure(NSError()))
             }
             return
@@ -39,7 +39,7 @@ open class FeliCaReader: JapanNFCReader, JapanNFCReaderDelegate {
         print("FeliCa タグでした🎉", feliCaTag.currentSystemCode as NSData)
         session.alertMessage = "完了"
         session.invalidate()
-        DispatchQueue.main.async {
+        self.readerQueue.async {
             self.resultHandler?(.success(Data()))
         }
     }

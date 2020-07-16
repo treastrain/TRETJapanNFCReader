@@ -9,8 +9,9 @@
 #if os(iOS)
 import CoreNFC
 
+/// A protocol that an object implements to receive callbacks sent from an NFC reader.
 @available(iOS 13.0, *)
-public protocol JapanNFCReaderDelegate {
+public protocol JapanNFCReaderDelegate: class {
     func tagReaderSession(_ session: NFCTagReaderSession, didConnect tag: NFCTag)
 }
 
