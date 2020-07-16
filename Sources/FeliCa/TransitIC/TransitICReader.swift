@@ -16,32 +16,29 @@ import TRETJapanNFCReader_FeliCa
 @available(iOS 13.0, *)
 public class TransitICReader: FeliCaReader {
     
-    private var didBecomeActiveHandler: (() -> Void)?
-    private var resultHandler: ((Result<Data, Error>) -> Void)?
+    private var systemCode: FeliCaSystemCode = .cjrc
+    
+    /// Creates an Transit IC reader.
+    /// - Parameter systemCode: FeliCa System Code
+    public init(systemCode: FeliCaSystemCode = .cjrc) {
+        self.systemCode = systemCode
+    }
     
     /// Reading data from Transit IC card
     /// - Parameters:
     ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     ///   - delegate: An object that handles callbacks from the reader.
-    public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
-    }
+    // public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
+    // }
     
     public func read(itemTypes: [TransitICCardItemType], didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
-        guard NFCReaderSession.readingAvailable,
-              let session = NFCTagReaderSession(pollingOption: .iso18092, delegate: self) else {
-            resultHandler(.failure(NSError()))
-            return
+        var itemTypes = itemTypes
+        if self.systemCode != .sapica {
+            itemTypes = itemTypes.filter { $0 != .sapicaPoints }
         }
+        let parameters = itemTypes.map { $0.parameter(systemCode: self.systemCode) }
         
-        self.didBecomeActiveHandler = didBecomeActiveHandler
-        self.resultHandler = resultHandler
-        
-        session.alertMessage = "カードを平らな面に置き、カードの下半分を隠すように iPhone をその上に置いてください。"
-        session.begin()
-    }
-    
-    public override func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-        self.didBecomeActiveHandler?()
+        self.readWithoutEncryption(parameters: parameters, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
     @available(*, unavailable, renamed: "read")
