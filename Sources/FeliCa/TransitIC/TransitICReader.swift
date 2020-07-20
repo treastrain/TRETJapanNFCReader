@@ -41,6 +41,10 @@ public class TransitICReader: FeliCaReader {
         self.readWithoutEncryption(parameters: parameters, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
+    public func read(itemTypes: TransitICCardItemType..., didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
+        self.read(itemTypes: itemTypes, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    }
+    
     @available(*, unavailable, renamed: "read")
     public func get(itemTypes: [TransitICCardItemType]) {}
 }
