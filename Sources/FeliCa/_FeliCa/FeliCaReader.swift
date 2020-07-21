@@ -22,7 +22,7 @@ open class FeliCaReader: JapanNFCReader, JapanNFCReaderDelegate {
     ///   - queue: A dispatch queue that the reader uses when making callbacks to the handler.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
     ///   - resultHandler: A completion handler called when the operation is completed.
-    public func readWithoutEncryption(parameters: [FeliCaReadWithoutEncryptionCommandParameter], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
+    public func readWithoutEncryption(parameters: [FeliCaReadWithoutEncryptionCommandParameter], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, JapanNFCReaderError>) -> Void) {
         self.beginScanning(pollingOption: .iso18092, delegate: self, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
@@ -32,7 +32,7 @@ open class FeliCaReader: JapanNFCReader, JapanNFCReaderDelegate {
         guard case .feliCa(let feliCaTag) = tag else {
             session.invalidate(errorMessage: "FeliCa タグではないものが検出されました。")
             self.readerQueue.async {
-                self.resultHandler?(.failure(NSError()))
+                self.resultHandler?(.failure(.invalidDetectedTagType))
             }
             return
         }
