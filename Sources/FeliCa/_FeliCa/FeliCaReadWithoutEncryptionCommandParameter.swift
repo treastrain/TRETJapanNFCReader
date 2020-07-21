@@ -8,4 +8,24 @@
 
 import Foundation
 
-public typealias FeliCaReadWithoutEncryptionCommandParameter = (systemCode: FeliCaSystemCode, serviceCode: FeliCaServiceCode, numberOfBlock: Int)
+public struct FeliCaReadWithoutEncryptionCommandParameter: Codable, Hashable {
+    let systemCode: FeliCaSystemCode
+    let serviceCode: FeliCaServiceCode
+    let numberOfBlock: Int
+    
+    public init(systemCode: FeliCaSystemCode, serviceCode: FeliCaServiceCode, numberOfBlock: Int) {
+        self.systemCode = systemCode
+        self.serviceCode = serviceCode
+        self.numberOfBlock = numberOfBlock
+    }
+    
+    public static func == (lhs: FeliCaReadWithoutEncryptionCommandParameter, rhs: FeliCaReadWithoutEncryptionCommandParameter) -> Bool {
+        return lhs.systemCode == rhs.systemCode && lhs.serviceCode == rhs.serviceCode && lhs.numberOfBlock == rhs.numberOfBlock
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(systemCode)
+        hasher.combine(serviceCode)
+        hasher.combine(numberOfBlock)
+    }
+}

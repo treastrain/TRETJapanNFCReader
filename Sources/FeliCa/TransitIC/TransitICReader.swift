@@ -34,14 +34,18 @@ public class TransitICReader: FeliCaReader {
     // public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
     // }
     
-    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: Set<TransitICCardItemType>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, JapanNFCReaderError>) -> Void) {
         var itemTypes = itemTypes
         if self.systemCode != .sapica {
             itemTypes = itemTypes.filter { $0 != .sapicaPoints }
         }
-        let parameters = itemTypes.map { $0.parameter(systemCode: self.systemCode) }
+        let parameters = itemTypes.setMap { $0.parameter(systemCode: self.systemCode) }
         
         self.readWithoutEncryption(parameters: parameters, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    }
+    
+    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, JapanNFCReaderError>) -> Void) {
+        self.read(Set(itemTypes), queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
     public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, JapanNFCReaderError>) -> Void) {

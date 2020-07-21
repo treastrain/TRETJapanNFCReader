@@ -117,3 +117,9 @@ public extension Array {
 //        return s
 //    }
 //}
+
+public extension Set {
+    func setMap<U>(transform: (Element) -> U) -> Set<U> {
+        return Set<U>(self.lazy.map(transform))
+    }
+}

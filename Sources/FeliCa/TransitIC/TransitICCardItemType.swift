@@ -50,15 +50,15 @@ public enum TransitICCardItemType: CaseIterable, FeliCaCardItemType {
     public func parameter(systemCode: FeliCaSystemCode = .cjrc) -> FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (systemCode, 0x008B, 1)
+            return .init(systemCode: systemCode, serviceCode: 0x008B, numberOfBlock: 1)
         case .transactions:
-            return (systemCode, 0x090F, 20)
+            return .init(systemCode: systemCode, serviceCode: 0x090F, numberOfBlock: 20)
         case .entryExitInformations:
-            return (systemCode, 0x108F, 3)
+            return .init(systemCode: systemCode, serviceCode: 0x108F, numberOfBlock: 3)
         case .sfEntryInformations:
-            return (systemCode, 0x10CB, 2)
+            return .init(systemCode: systemCode, serviceCode: 0x10CB, numberOfBlock: 2)
         case .sapicaPoints:
-            return (.sapica, 0xBA4B, 1)
+            return .init(systemCode: .sapica, serviceCode: 0xBA4B, numberOfBlock: 1)
         }
     }
 }
