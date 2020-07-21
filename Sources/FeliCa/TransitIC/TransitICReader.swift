@@ -31,18 +31,18 @@ public class TransitICReader: FeliCaReader {
     // public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
     // }
     
-    public func read(_ itemTypes: [TransitICCardItemType], didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
+    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
         var itemTypes = itemTypes
         if self.systemCode != .sapica {
             itemTypes = itemTypes.filter { $0 != .sapicaPoints }
         }
         let parameters = itemTypes.map { $0.parameter(systemCode: self.systemCode) }
         
-        self.readWithoutEncryption(parameters: parameters, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+        self.readWithoutEncryption(parameters: parameters, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
-    public func read(_ itemTypes: TransitICCardItemType..., didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
-        self.read(itemTypes, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
+        self.read(itemTypes, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
     @available(*, unavailable, renamed: "read")

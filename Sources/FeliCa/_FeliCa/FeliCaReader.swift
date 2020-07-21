@@ -19,10 +19,11 @@ open class FeliCaReader: JapanNFCReader, JapanNFCReaderDelegate {
     /// Starts the reader, and run Read Without Encryption command defined by FeliCa card specification.
     /// - Parameters:
     ///   - parameters: Parameters (system code, service code and number of blocks) for specifying the block.
+    ///   - queue: A dispatch queue that the reader uses when making callbacks to the handler.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
     ///   - resultHandler: A completion handler called when the operation is completed.
-    public func readWithoutEncryption(parameters: [FeliCaReadWithoutEncryptionCommandParameter], didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
-        self.beginScanning(pollingOption: .iso18092, delegate: self, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    public func readWithoutEncryption(parameters: [FeliCaReadWithoutEncryptionCommandParameter], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<Data, Error>) -> Void) {
+        self.beginScanning(pollingOption: .iso18092, delegate: self, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
     public func tagReaderSession(_ session: NFCTagReaderSession, didConnect tag: NFCTag) {
