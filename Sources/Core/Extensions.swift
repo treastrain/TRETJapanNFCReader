@@ -53,11 +53,11 @@ import Foundation
 //    }
 //}
 //
-//public extension UInt16 {
-//    var data: Data {
-//        var int16 = self
-//        return Data(bytes: &int16, count: MemoryLayout<UInt16>.size)
-//    }
+public extension UInt16 {
+    var data: Data {
+        var int16 = self
+        return Data(bytes: &int16, count: MemoryLayout<UInt16>.size)
+    }
 //
 //    var uint8: [UInt8] {
 //        return [UInt8(self >> 8), UInt8(self & 0x00ff)]
@@ -67,7 +67,7 @@ import Foundation
 //        let bytes = self.uint8
 //        return "0x" + bytes[0].toString() + bytes[1].toString()
 //    }
-//}
+}
 //
 //public extension String {
 //    var bytes: [UInt8] {
@@ -101,11 +101,11 @@ public extension Array {
         return s
     }
 }
-//
-//public extension Data {
-//    var hexString: String {
-//        return self.map { String(format: "%.2hhx", $0) }.joined()
-//    }
+
+public extension Data {
+    var hexString: String {
+        return self.map { String(format: "%.2hhx", $0) }.joined()
+    }
 //
 //    func toIntReversed(_ startIndex: Int, _ endIndex: Int) -> Int {
 //        var s = 0
@@ -116,7 +116,7 @@ public extension Array {
 //
 //        return s
 //    }
-//}
+}
 
 public extension Set {
     func setMap<U>(transform: (Element) -> U) -> Set<U> {

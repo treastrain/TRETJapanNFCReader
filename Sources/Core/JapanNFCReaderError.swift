@@ -6,8 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-#if os(iOS)
-import CoreNFC
+import Foundation
 
 @available(iOS 13.0, *)
 public enum JapanNFCReaderError: Error {
@@ -23,5 +22,3 @@ public enum JapanNFCReaderError: Error {
     /// An error that occurred in `NFCTagReaderSession.connect(to:completionHandler:)` method.
     case tagReaderSessionConnectError(_ nfcReaderError: Error)
 }
-
-#endif

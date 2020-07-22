@@ -19,6 +19,13 @@ public struct FeliCaBlockData: Codable, Equatable {
         self.blockData = blockData
     }
     
+    @available(iOS 13.0, *)
+    public init(statusFlag: FeliCaStatusFlag, blockData: [Data]) {
+        self.status1 = statusFlag.statusFlag1
+        self.status2 = statusFlag.statusFlag2
+        self.blockData = blockData
+    }
+    
     public static func == (lhs: FeliCaBlockData, rhs: FeliCaBlockData) -> Bool {
         return lhs.status1 == rhs.status1 &&
             lhs.status2 == rhs.status2 &&

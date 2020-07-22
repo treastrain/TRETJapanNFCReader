@@ -3,6 +3,7 @@
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2020/07/16.
+//  Copyright © 2020 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
 #if os(iOS)

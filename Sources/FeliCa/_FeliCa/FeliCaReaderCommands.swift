@@ -15,6 +15,51 @@ import TRETJapanNFCReader_Core
 @available(iOS 13.0, *)
 extension NFCFeliCaTag {
     
+    /// Polling command defined by FeliCa card specification.  Refer to the FeliCa specification for details. System code must be one of the provided values in the "com.apple.developer.nfc.readersession.felica.systemcodes" in the Info.plist; `NFCReaderErrorSecurityViolation` will be returned when an invalid system code is used.  Polling with wildcard value in the upper or lower byte is not supported.
+    /// - Parameters:
+    ///   - systemCode: Designation of System Code.  Wildcard value (0xFF) in the upper or the lower byte is not supported.
+    ///   - requestCode: Designation of Requset Data output.
+    ///   - timeSlot: Maximum number of slots possible to respond.
+    ///   - resultHandler: Returns `FeliCaPollingResponse` or a `NFCErrorDomain` error when the operation is completed.  Valid `requestData` is return when `requestCode` is a non-zero parameter and feature is supported by the tag. The `currentIDM` property will be updated on each execution, except when an invalid `systemCode` is provided and the existing selected system will stay selected.
+    public func polling(systemCode: Data, requestCode: PollingRequestCode, timeSlot: PollingTimeSlot, resultHandler: @escaping (Result<FeliCaPollingResponse, Error>) -> Void) {
+        if #available(iOS 14.0, *) {
+            self.polling(systemCode: systemCode, requestCode: requestCode, timeSlot: timeSlot) { (response: Result<NFCFeliCaPollingResponse, Error>) in
+                switch response {
+                case .success(let pollingResponse):
+                    resultHandler(.success(FeliCaPollingResponse(pollingResponse)))
+                case .failure(let error):
+                    resultHandler(.failure(error))
+                }
+            }
+        } else {
+            self.polling(systemCode: systemCode, requestCode: requestCode, timeSlot: timeSlot) { (manufactureParameter, requestData, error) in
+                if let error = error {
+                    resultHandler(.failure(error))
+                } else {
+                    resultHandler(.success(FeliCaPollingResponse(manufactureParameter, requestData)))
+                }
+            }
+        }
+    }
+    
+    /// Polling command defined by FeliCa card specification. Refer to the FeliCa specification for details. System code must be one of the provided values in the "com.apple.developer.nfc.readersession.felica.systemcodes" in the Info.plist; `NFCReaderErrorSecurityViolation` will be returned when an invalid system code is used.  Polling with wildcard value in the upper or lower byte is not supported.
+    /// - Parameters:
+    ///   - systemCode: Designation of System Code.  Wildcard value (0xFF) in the upper or the lower byte is not supported.
+    ///   - requestCode: Designation of Requset Data output.
+    ///   - timeSlot: Maximum number of slots possible to respond.
+    ///   - resultHandler: Returns `FeliCaPollingResponse` or a `NFCErrorDomain` error when the operation is completed.  Valid `requestData` is return when `requestCode` is a non-zero parameter and feature is supported by the tag. The `currentIDM` property will be updated on each execution, except when an invalid `systemCode` is provided and the existing selected system will stay selected.
+    /// - Important: Response data is returned synchronously.
+    public func polling(systemCode: Data, requestCode: PollingRequestCode, timeSlot: PollingTimeSlot) -> Result<FeliCaPollingResponse, Error> {
+        var result: Result<FeliCaPollingResponse, Error>!
+        let semaphore = DispatchSemaphore(value: 0)
+        self.polling(systemCode: systemCode, requestCode: requestCode, timeSlot: timeSlot) { (response) in
+            result = response
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return result
+    }
+    
     /// Read Without Encryption command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
     /// - Parameters:
     ///   - serviceCodeList: Service Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 16 inclusive. Each service code should be 2 bytes stored in Little Endian format.
@@ -90,41 +135,21 @@ extension NFCFeliCaTag {
         }
     }
     
-    /// Read Without Encryption command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36. Response data is returned synchronously.
+    /// Read Without Encryption command defined by FeliCa card specification, is sent to the tag separately for continued processing when the number of elements in the blockList is 13 to 36.
     /// - Parameters:
     ///   - serviceCode: Service Code
     ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
+    /// - Important: Response data is returned synchronously.
     public func readWithoutEncryption36(serviceCode: Data, blockList: [Data]) -> Result<(FeliCaStatusFlag, [Data]), Error> {
         var result: Result<(FeliCaStatusFlag, [Data]), Error>!
         let semaphore = DispatchSemaphore(value: 0)
         self.readWithoutEncryption36(serviceCode: serviceCode, blockList: blockList) { (response) in
             result = response
+            semaphore.signal()
         }
         semaphore.wait()
         return result
     }
-    
-    /*
-    /// Sends the Polling command as defined by FeliCa card specification to the tag. Response data is returned synchronously.
-    /// - Parameters:
-    ///   - systemCode: Designation of System Code.
-    ///   - requestCode: Designation of Request Data.
-    ///   - timeSlot: Designation of maximum number of slots possible to respond.
-    public func polling(systemCode: Data, requestCode: PollingRequestCode, timeSlot: PollingTimeSlot) -> (pmm: Data, systemCode: Data, error: Error?) {
-        var resultPMm: Data!
-        var resultSystemCode: Data!
-        var resultError: Error?
-        let semaphore = DispatchSemaphore(value: 0)
-        self.polling(systemCode: systemCode, requestCode: requestCode, timeSlot: timeSlot) { (pmm, systemCode, error) in
-            resultPMm = pmm
-            resultSystemCode = systemCode
-            resultError = error
-            semaphore.signal()
-        }
-        semaphore.wait()
-        return (resultPMm, resultSystemCode, resultError)
-    }
-    */
 }
 
 #endif
