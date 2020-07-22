@@ -6,8 +6,10 @@
 //  Copyright © 2020 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+import Foundation
 #if os(iOS)
 import CoreNFC
+#endif
 
 @available(iOS 13.0, *)
 public struct FeliCaStatusFlag {
@@ -19,15 +21,15 @@ public struct FeliCaStatusFlag {
         self.statusFlag2 = statusFlag2
     }
     
+    #if canImport(CoreNFC)
     @available(iOS 14.0, *)
     init(_ statusFlag: CoreNFC.NFCFeliCaStatusFlag) {
         self.statusFlag1 = statusFlag.statusFlag1
         self.statusFlag2 = statusFlag.statusFlag2
     }
+    #endif
     
     public var isSucceeded: Bool {
         return statusFlag1 == 0x00 && statusFlag2 == 0x00
     }
 }
-
-#endif
