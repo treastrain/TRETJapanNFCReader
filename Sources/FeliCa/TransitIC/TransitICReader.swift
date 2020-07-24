@@ -24,7 +24,8 @@ public class TransitICReader: FeliCaReader {
     
     /// Creates an Transit IC reader.
     /// - Parameter systemCode: FeliCa System Code
-    public init(systemCode: FeliCaSystemCode = .cjrc) {
+    public init(configuration: Configuration = .default, systemCode: FeliCaSystemCode = .cjrc) {
+        super.init(configuration: configuration)
         self.systemCode = systemCode
     }
     

@@ -13,6 +13,8 @@ import CoreNFC
 @available(iOS 13.0, *)
 open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
+    /// A configuration object. See JapanNFCReader.Configuration for more information.
+    public private(set) var configuration: Configuration = .default
     /// A dispatch queue that the reader uses when making callbacks to the closure.
     public private(set) var readerQueue: DispatchQueue = .main
     /// A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.
@@ -23,6 +25,14 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     public private(set) var resultHandler: ((Result<(NFCTagReaderSession, NFCTag), JapanNFCReaderError>) -> Void)?
     
     private let sessionQueue = DispatchQueue(label: "jp.tret.japannfcreader", attributes: .concurrent)
+    
+    private override init() {
+        super.init()
+    }
+    
+    public init(configuration: Configuration = .default) {
+        self.configuration = configuration
+    }
     
     deinit {
         print(self, "deinited 🎉")
