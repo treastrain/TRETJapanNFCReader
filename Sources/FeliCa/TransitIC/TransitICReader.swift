@@ -20,6 +20,7 @@ import TRETJapanNFCReader_FeliCa
 public class TransitICReader: FeliCaReader {
     
     private var systemCode: FeliCaSystemCode = .cjrc
+    private var readResultHandler: ((Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void)?
     
     /// Creates an Transit IC reader.
     /// - Parameter systemCode: FeliCa System Code
@@ -34,22 +35,44 @@ public class TransitICReader: FeliCaReader {
     // public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
     // }
     
-    public func read(_ itemTypes: Set<TransitICCardItemType>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<FeliCaReadWithoutEncryptionResponse, JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: Set<TransitICCardItemType>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void) {
         var itemTypes = itemTypes
         if self.systemCode != .sapica {
             itemTypes = itemTypes.filter { $0 != .sapicaPoints }
         }
         let parameters = itemTypes.setMap { $0.parameter(systemCode: self.systemCode) }
+        self.readResultHandler = resultHandler
         
-        self.readWithoutEncryption(parameters: parameters, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+        self.readWithoutEncryption(parameters: parameters, queue: queue, didBecomeActive: didBecomeActiveHandler) { [weak self] response in
+            guard let `self` = self else {
+                print(#file, #function, "An instance of this class has already been deinited.")
+                return
+            }
+            self.parse(from: response)
+        }
     }
     
-    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<FeliCaReadWithoutEncryptionResponse, JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void) {
         self.read(Set(itemTypes), queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
-    public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<FeliCaReadWithoutEncryptionResponse, JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void) {
         self.read(itemTypes, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    }
+    
+    private func parse(from response: Result<FeliCaReadWithoutEncryptionResponse, JapanNFCReaderError>) {
+        switch response {
+        case .success(let responseData):
+            guard let feliCaSystem = responseData.feliCaData[self.systemCode] else {
+                self.readResultHandler?(.failure(.notFoundPrimaryFeliCaSystem))
+                return
+            }
+            let cardData = TransitICCardData(idm: feliCaSystem.idm, systemCode: self.systemCode, data: responseData.feliCaData)
+            self.readResultHandler?(.success((cardData, responseData.pollingErrors, responseData.readErrors)))
+        case .failure(let error):
+            print(self, #function, "error", error)
+            self.readResultHandler?(.failure(error))
+        }
     }
     
     @available(*, unavailable, renamed: "read")

@@ -17,12 +17,6 @@ public protocol FeliCaCardData: Codable {
     
     mutating func convert()
     func toJSONData() -> Data?
-    
-    
-    /// Unavailable
-    // var idm: String { get }
-    // var systemCode: FeliCaSystemCode { get }
-    // var data: [FeliCaServiceCode : [Data]] { get }
 }
 
 extension FeliCaCardData {

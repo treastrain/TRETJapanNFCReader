@@ -106,16 +106,16 @@ public extension Data {
     var hexString: String {
         return self.map { String(format: "%.2hhx", $0) }.joined()
     }
-//
-//    func toIntReversed(_ startIndex: Int, _ endIndex: Int) -> Int {
-//        var s = 0
-//
-//        for (n, i) in (startIndex...endIndex).enumerated() {
-//            s += Int(self[i]) << (n * 8)
-//        }
-//
-//        return s
-//    }
+    
+    func toIntReversed(_ startIndex: Int, _ endIndex: Int) -> Int {
+        var s = 0
+        
+        for (n, i) in (startIndex...endIndex).enumerated() {
+            s += Int(self[i]) << (n * 8)
+        }
+        
+        return s
+    }
 }
 
 public extension Set {

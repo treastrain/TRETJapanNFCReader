@@ -47,7 +47,10 @@ open class FeliCaReader: JapanNFCReader {
         self.set(parameters)
         self.readWithoutEncryptionResultHandler = resultHandler
         let superResultHandler: ((Result<(NFCTagReaderSession, NFCTag), JapanNFCReaderError>) -> Void) = { [weak self] response in
-            guard let `self` = self else { return }
+            guard let `self` = self else {
+                print(#file, #function, "An instance of this class has already been deinited.")
+                return
+            }
             switch response {
             case .success((let session, let tag)):
                 self.readWithoutEncryption(session, didConnect: tag)

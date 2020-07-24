@@ -16,6 +16,8 @@ public enum JapanNFCReaderError: Error {
     case couldNotCreateTagReaderSession
     /// The detected tag type is invalid because it is an unspecified type.
     case invalidDetectedTagType
+    /// The primary FeliCa system was not found.
+    case notFoundPrimaryFeliCaSystem
     
     /// An error that occurred in `NFCTagReaderSessionDelegate.tagReaderSession(_:didInvalidateWithError:)` method.
     case tagReaderSessionDidInvalidateWithError(_ nfcReaderError: Error)
