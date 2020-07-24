@@ -6,6 +6,7 @@
 //  Copyright © 2020 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
+#if os(iOS)
 import Foundation
 
 @available(iOS 13.0, *)
@@ -17,3 +18,5 @@ extension JapanNFCReader {
         private init() {}
     }
 }
+
+#endif
