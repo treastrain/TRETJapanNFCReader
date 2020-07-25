@@ -66,6 +66,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
     open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
         print(self, #function, #line, session)
+        session.isSuccessfullyFinished = false
         self.readerQueue.async {
             self.didBecomeActiveHandler?()
         }
@@ -74,8 +75,13 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
         print(self, #function, #line, session, error)
         self.readerQueue.async {
+            if !self.configuration.returnReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
+               session.isSuccessfullyFinished,
+               (error as? NFCReaderError)?.code == .readerSessionInvalidationErrorUserCanceled {
+                return
+            }
+            
             self.resultHandler?(.failure(.tagReaderSessionDidInvalidateWithError(error)))
-            let a = NFCReaderError.readerSessionInvalidationErrorUserCanceled
         }
     }
     

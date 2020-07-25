@@ -117,7 +117,7 @@ open class FeliCaReader: JapanNFCReader {
         }
         
         session.alertMessage = "完了"
-        session.invalidate()
+        session.invalidateSuccessfully()
         self.readerQueue.async {
             self.readWithoutEncryptionResultHandler?(.success(FeliCaReadWithoutEncryptionResponse(feliCaData: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)))
         }
