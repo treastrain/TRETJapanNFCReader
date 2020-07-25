@@ -19,7 +19,7 @@ extension JapanNFCReader {
         /**
          A Boolean value that indicates whether to return `NFCReaderError.readerSessionInvalidationErrorUserCanceled` after the NFC connection is completed.
          
-         The `NFCReaderError.readerSessionInvalidationErrorUserCanceled` is the value of the `NFCTagReaderSessionDelegate.tagReaderSession(_:didInvalidateWithError:)` when the user taps its own cancel button and the NFC communication is terminated. However, the `NFCReaderSessionProtocol.invalidate()` tells it even after the reader session has been successfully closed. If you set this Boolean value to false, it will not return it.
+         The `NFCReaderError.readerSessionInvalidationErrorUserCanceled` is the value of the `NFCTagReaderSessionDelegate.tagReaderSession(_:didInvalidateWithError:)` when the user taps its own cancel button and the NFC communication is terminated. However, it tells it even after the reader session has been successfully closed by `NFCReaderSessionProtocol.invalidate()`. If you set this Boolean value to false, it will not return it.
          
          The default value is false.
          */
