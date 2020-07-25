@@ -16,6 +16,6 @@ public enum FeliCaReaderError: Error {
     /// The primary FeliCa system was not found.
     case notFoundPrimarySystem(pollingErrors: [FeliCaSystemCode : Error?], readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]])
     
-    /// An error that occurred in `NFCTagReaderSessionDelegate.tagReaderSession(_:didInvalidateWithError:)` method.
+    /// An error that occurred by `JapanNFCReaderError`.
     case japanNFCReaderError(_ error: JapanNFCReaderError)
 }
