@@ -20,7 +20,7 @@ import TRETJapanNFCReader_FeliCa
 public class TransitICReader: FeliCaReader {
     
     private var systemCode: FeliCaSystemCode = .cjrc
-    private var readResultHandler: ((Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void)?
+    private var readResultHandler: ((Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), FeliCaReaderError>) -> Void)?
     
     /// Creates an Transit IC reader.
     /// - Parameter systemCode: FeliCa System Code
@@ -36,7 +36,7 @@ public class TransitICReader: FeliCaReader {
     // public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
     // }
     
-    public func read(_ itemTypes: Set<TransitICCardItemType>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: Set<TransitICCardItemType>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), FeliCaReaderError>) -> Void) {
         var itemTypes = itemTypes
         if self.systemCode != .sapica {
             itemTypes = itemTypes.filter { $0 != .sapicaPoints }
@@ -53,19 +53,19 @@ public class TransitICReader: FeliCaReader {
         }
     }
     
-    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), FeliCaReaderError>) -> Void) {
         self.read(Set(itemTypes), queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
-    public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), JapanNFCReaderError>) -> Void) {
+    public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), FeliCaReaderError>) -> Void) {
         self.read(itemTypes, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
-    private func parse(from response: Result<FeliCaReadWithoutEncryptionResponse, JapanNFCReaderError>) {
+    private func parse(from response: Result<FeliCaReadWithoutEncryptionResponse, FeliCaReaderError>) {
         switch response {
         case .success(let responseData):
             guard let feliCaSystem = responseData.feliCaData[self.systemCode] else {
-                self.readResultHandler?(.failure(.notFoundPrimaryFeliCaSystem))
+                self.readResultHandler?(.failure(.notFoundPrimarySystem(pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors)))
                 return
             }
             let cardData = TransitICCardData(idm: feliCaSystem.idm, systemCode: self.systemCode, data: responseData.feliCaData)

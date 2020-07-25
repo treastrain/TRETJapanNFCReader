@@ -65,7 +65,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-        print(self, #function, #line, session)
+        // print(self, #function, #line, session)
         session.isSuccessfullyFinished = false
         self.readerQueue.async {
             self.didBecomeActiveHandler?()
@@ -73,7 +73,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
-        print(self, #function, #line, session, error)
+        // print(self, #function, #line, session, error)
         self.readerQueue.async {
             if !self.configuration.returnReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
                session.isSuccessfullyFinished,
@@ -86,7 +86,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
-        print(self, #function, #line, session, tags)
+        // print(self, #function, #line, session, tags)
         
         guard tags.count == 1 else {
             session.alertMessage = "More than 1 tags found. Please present only 1 tag."
