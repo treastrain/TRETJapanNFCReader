@@ -150,6 +150,31 @@ extension NFCFeliCaTag {
         semaphore.wait()
         return result
     }
+    
+    /// Request System Code command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
+    /// - Returns: Returns an array of system code as Data or a `NFCErrorDomain` error when the operation is completed.  Each system code is 2 bytes stored in Little Endian format.
+    /// - Important: Response data is returned synchronously.
+    public func requestSystemCode() -> Result<[Data], Error> {
+        var result: Result<[Data], Error>!
+        let semaphore = DispatchSemaphore(value: 0)
+        if #available(iOS 14.0, *) {
+            self.requestSystemCode { (response) in
+                result = response
+                semaphore.signal()
+            }
+        } else {
+            self.requestSystemCode { (systemCodes, error) in
+                if let error = error {
+                    result = .failure(error)
+                } else {
+                    result = .success(systemCodes)
+                }
+                semaphore.signal()
+            }
+        }
+        semaphore.wait()
+        return result
+    }
 }
 
 #endif
