@@ -9,23 +9,28 @@
 #if os(iOS)
 import CoreNFC
 
-private var _tagReaderSessionSuccessfullyFinished = false
+private var _tagReaderSessionInvalidatedByUser = true
 
 @available(iOS 13.0, *)
 extension NFCTagReaderSession {
     
-    public internal(set) var isSuccessfullyFinished: Bool {
+    public internal(set) var  isInvalidatedByUser: Bool {
         get {
-            return _tagReaderSessionSuccessfullyFinished
+            return _tagReaderSessionInvalidatedByUser
         }
         set {
-            _tagReaderSessionSuccessfullyFinished = newValue
+            _tagReaderSessionInvalidatedByUser = newValue
         }
     }
     
-    open func invalidateSuccessfully() {
-        self.isSuccessfullyFinished = true
-        super.invalidate()
+    open func invalidateByReader(errorMessage: String? = nil) {
+        self.isInvalidatedByUser = false
+        
+        if let errorMessage = errorMessage {
+            super.invalidate(errorMessage: errorMessage)
+        } else {
+            super.invalidate()
+        }
     }
 }
 

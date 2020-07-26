@@ -66,7 +66,7 @@ open class FeliCaReader: JapanNFCReader {
         // print(self, #function, #line, tag)
         
         guard case .feliCa(let feliCaTag) = tag else {
-            session.invalidate(errorMessage: "FeliCa タグではないものが検出されました。")
+            session.invalidateByReader(errorMessage: "FeliCa タグではないものが検出されました。")
             self.readerQueue.async {
                 self.resultHandler?(.failure(JapanNFCReaderError.invalidDetectedTagType))
             }
@@ -75,6 +75,7 @@ open class FeliCaReader: JapanNFCReader {
         
         print("FeliCa タグでした🎉", feliCaTag.currentSystemCode as NSData)
         
+        var errorMessage: String? = nil
         var feliCaData: FeliCaData = [:]
         var pollingErrors: [FeliCaSystemCode : Error?] = [:]
         var readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]] = [:]
@@ -91,7 +92,9 @@ open class FeliCaReader: JapanNFCReader {
                 currentPMm = pollingResponse.manufactureParameter
             case .failure(let error):
                 if !self.configuration.continuesProcessIfErrorOccurred {
+                    errorMessage = error.localizedDescription
                     self.resultHandler?(.failure(error))
+                    self.readWithoutEncryptionResultHandler = nil
                     break systemCodeLoop
                 }
                 pollingErrors[systemCode] = error
@@ -110,7 +113,9 @@ open class FeliCaReader: JapanNFCReader {
                 services[serviceCode] = FeliCaBlockData(statusFlag: statusFlag, blockData: blockData)
                 case .failure(let error):
                     if !self.configuration.continuesProcessIfErrorOccurred {
+                        errorMessage = error.localizedDescription
                         self.resultHandler?(.failure(error))
+                        self.readWithoutEncryptionResultHandler = nil
                         break systemCodeLoop
                     }
                     if readErrors[systemCode] != nil {
@@ -125,7 +130,7 @@ open class FeliCaReader: JapanNFCReader {
         }
         
         session.alertMessage = "完了"
-        session.invalidateSuccessfully()
+        session.invalidateByReader(errorMessage: errorMessage)
         self.readerQueue.async {
             self.readWithoutEncryptionResultHandler?(.success(FeliCaReadWithoutEncryptionResponse(feliCaData: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)))
         }
