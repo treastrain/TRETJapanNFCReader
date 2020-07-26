@@ -24,6 +24,13 @@ extension JapanNFCReader {
          The default value is false.
          */
         public var returnReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted = false
+        
+        /**
+         A Boolean value that indicates whether to continue processing even if an error occurs during processing.
+         
+         The default value is true.
+         */
+        public var continuesProcessIfErrorOccurred = true
     }
 }
 
