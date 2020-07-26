@@ -23,7 +23,7 @@ extension JapanNFCReader {
          
          The default value is false.
          */
-        public var returnReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted = false
+        public var returnsReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted = false
         
         /**
          A Boolean value that indicates whether to continue processing even if an error occurs during processing.
