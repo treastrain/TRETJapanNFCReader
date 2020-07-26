@@ -15,14 +15,9 @@ public typealias FeliCaSystemCode = UInt16
 
 public extension FeliCaSystemCode {
     
-    /*
     init(from systemCodeData: Data) {
-        let bytes = [systemCodeData[1], systemCodeData[0]] /// Little Endian (LE)
-        self = UnsafePointer(bytes).withMemoryRebound(to: FeliCaSystemCode.self, capacity: 1) {
-            $0.pointee
-        }
+        self = systemCodeData.withUnsafeBytes { $0.load(as: UInt16.self) }
     }
-    */
     
     /*
     var string: String {
