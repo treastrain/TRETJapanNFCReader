@@ -75,7 +75,7 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
         // print(self, #function, #line, session, error)
         self.readerQueue.async {
-            if !self.configuration.returnReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
+            if !self.configuration.returnsReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
                session.isSuccessfullyFinished,
                (error as? NFCReaderError)?.code == .readerSessionInvalidationErrorUserCanceled {
                 return
