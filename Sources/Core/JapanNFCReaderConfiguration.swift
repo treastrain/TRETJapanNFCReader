@@ -28,6 +28,8 @@ extension JapanNFCReader {
         /**
          A Boolean value that indicates whether to continue processing even if an error occurs during processing.
          
+         If it is not a technical error that causes the NFC connection to be disconnected by the system (e.g. `NFCReaderError`), the process continues.
+         
          The default value is true.
          */
         public var continuesProcessIfErrorOccurred = true
