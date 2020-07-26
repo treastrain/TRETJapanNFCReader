@@ -79,7 +79,7 @@ open class FeliCaReader: JapanNFCReader {
         var pollingErrors: [FeliCaSystemCode : Error?] = [:]
         var readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]] = [:]
         
-        for systemCode in self.systemCodes {
+        systemCodeLoop: for systemCode in self.systemCodes {
             var currentPMm: Data
             let result = feliCaTag.polling(systemCode: systemCode.bigEndian.data, requestCode: .systemCode, timeSlot: .max1)
             switch result {
@@ -90,6 +90,10 @@ open class FeliCaReader: JapanNFCReader {
                 }
                 currentPMm = pollingResponse.manufactureParameter
             case .failure(let error):
+                if !self.configuration.continuesProcessIfErrorOccurred {
+                    self.resultHandler?(.failure(error))
+                    break systemCodeLoop
+                }
                 pollingErrors[systemCode] = error
                 continue
             }
@@ -105,6 +109,10 @@ open class FeliCaReader: JapanNFCReader {
                 case .success((let statusFlag, let blockData)):
                 services[serviceCode] = FeliCaBlockData(statusFlag: statusFlag, blockData: blockData)
                 case .failure(let error):
+                    if !self.configuration.continuesProcessIfErrorOccurred {
+                        self.resultHandler?(.failure(error))
+                        break systemCodeLoop
+                    }
                     if readErrors[systemCode] != nil {
                         readErrors[systemCode]![serviceCode] = error
                     } else {
