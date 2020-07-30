@@ -16,7 +16,7 @@ public typealias FeliCaSystemCode = UInt16
 public extension FeliCaSystemCode {
     
     init(from systemCodeData: Data) {
-        self = systemCodeData.withUnsafeBytes { $0.load(as: UInt16.self) }
+        self = systemCodeData.withUnsafeBytes { $0.load(as: UInt16.self) }.bigEndian
     }
     
     /*
