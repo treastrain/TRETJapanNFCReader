@@ -15,10 +15,10 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     
     /// A configuration object. See JapanNFCReader.Configuration for more information.
     public private(set) var configuration: Configuration = .default
-    /// A dispatch queue that the reader uses when making callbacks to the closure.
-    public private(set) var readerQueue: DispatchQueue = .main
     /// A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.
     public private(set) var session: NFCTagReaderSession?
+    /// A dispatch queue that the reader uses when making callbacks to the closure.
+    public private(set) var readerQueue: DispatchQueue = .main
     /// A handler called when the reader is active.
     public private(set) var didBecomeActiveHandler: (() -> Void)?
     /// A completion handler called when the operation is completed.
@@ -45,7 +45,6 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
     ///   - resultHandler: A completion handler called when the operation is completed.
     open func beginScanning(pollingOption: NFCTagReaderSession.PollingOption, queue readerQueue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(NFCTagReaderSession, NFCTag), Error>) -> Void) {
-        self.readerQueue = readerQueue
         
         guard NFCTagReaderSession.readingAvailable else {
             resultHandler(.failure(JapanNFCReaderError.readingUnavailable))
@@ -56,12 +55,16 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
             return
         }
         
-        self.session = session
-        self.didBecomeActiveHandler = didBecomeActiveHandler
-        self.resultHandler = resultHandler
-        
+        self.set(session: session, queue: readerQueue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
         self.session?.alertMessage = "カードを平らな面に置き、カードの下半分を隠すように iPhone をその上に置いてください。"
         self.session?.begin()
+    }
+    
+    public func set(session: NFCTagReaderSession, queue readerQueue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)? = nil) {
+        self.session = session
+        self.readerQueue = readerQueue
+        self.didBecomeActiveHandler = didBecomeActiveHandler
+        self.resultHandler = resultHandler
     }
     
     open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
