@@ -53,7 +53,13 @@ public class TransitICReader: FeliCaReader {
                 print(#file, #function, "An instance of this class has already been deinited.")
                 return
             }
-            self.parse(from: response)
+            switch response {
+            case .success(let responseData):
+                self.parse(from: responseData)
+            case .failure(let error):
+                print(self, #function, "error", error)
+                self.readResultHandler?(.failure(error))
+            }
         }
     }
     
@@ -65,19 +71,13 @@ public class TransitICReader: FeliCaReader {
         self.read(itemTypes, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
-    private func parse(from response: Result<FeliCaReadWithoutEncryptionResponse, Error>) {
-        switch response {
-        case .success(let responseData):
-            guard let feliCaSystem = responseData.feliCaData[self.systemCode] else {
-                self.readResultHandler?(.failure(FeliCaReaderError.notFoundPrimarySystem(pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors)))
-                return
-            }
-            let cardData = TransitICCardData(idm: feliCaSystem.idm, systemCode: self.systemCode, data: responseData.feliCaData)
-            self.readResultHandler?(.success((cardData, responseData.pollingErrors, responseData.readErrors)))
-        case .failure(let error):
-            print(self, #function, "error", error)
-            self.readResultHandler?(.failure(error))
+    private func parse(from responseData: FeliCaReadWithoutEncryptionResponse) {
+        guard let feliCaSystem = responseData.feliCaData[self.systemCode] else {
+            self.readResultHandler?(.failure(FeliCaReaderError.notFoundPrimarySystem(pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors)))
+            return
         }
+        let cardData = TransitICCardData(idm: feliCaSystem.idm, systemCode: self.systemCode, data: responseData.feliCaData)
+        self.readResultHandler?(.success((cardData, responseData.pollingErrors, responseData.readErrors)))
     }
     
     @available(*, unavailable, renamed: "read")
