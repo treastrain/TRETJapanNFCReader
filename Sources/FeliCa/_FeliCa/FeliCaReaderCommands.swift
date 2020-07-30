@@ -60,6 +60,32 @@ extension NFCFeliCaTag {
         return result
     }
     
+    /// Request Service command defined by FeliCa card specification. Refer to the FeliCa specification for details.
+    /// - Parameter nodeCodeList: Node Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 32 inclusive. Each node code should be 2 bytes stored in Little Endian format.
+    /// - Returns: Node key version list is returned as an array of Data objects, and each data object is stored in Little Endian format per FeliCa specification.
+    /// - Important: Response data is returned synchronously.
+    public func requestService(nodeCodeList: [Data]) -> Result<[Data], Error> {
+        var result: Result<[Data], Error>!
+        let semaphore = DispatchSemaphore(value: 0)
+        if #available(iOS 14.0, *) {
+            self.requestService(nodeCodeList: nodeCodeList) { (response) in
+                result = response
+                semaphore.signal()
+            }
+        } else {
+            self.requestService(nodeCodeList: nodeCodeList) { (nodeKeyVersionList, error) in
+                if let error = error {
+                    result = .failure(error)
+                } else {
+                    result = .success(nodeKeyVersionList)
+                }
+                semaphore.signal()
+            }
+        }
+        semaphore.wait()
+        return result
+    }
+    
     /// Read Without Encryption command defined by FeliCa card specification.  Refer to the FeliCa specification for details.
     /// - Parameters:
     ///   - serviceCodeList: Service Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 16 inclusive. Each service code should be 2 bytes stored in Little Endian format.
