@@ -22,6 +22,10 @@ public class TransitICReader: FeliCaReader {
     private var systemCode: FeliCaSystemCode = .cjrc
     private var readResultHandler: ((Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), Error>) -> Void)?
     
+    private override init(configuration: Configuration = .default) {
+        fatalError()
+    }
+    
     /// Creates an Transit IC reader.
     /// - Parameter systemCode: FeliCa System Code
     public init(configuration: Configuration = .default, systemCode: FeliCaSystemCode = .cjrc) {
