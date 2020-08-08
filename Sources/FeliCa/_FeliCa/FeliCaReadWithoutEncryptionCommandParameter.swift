@@ -9,9 +9,9 @@
 import Foundation
 
 public struct FeliCaReadWithoutEncryptionCommandParameter: Codable, Hashable {
-    let systemCode: FeliCaSystemCode
-    let serviceCode: FeliCaServiceCode
-    let numberOfBlock: Int
+    public let systemCode: FeliCaSystemCode
+    public let serviceCode: FeliCaServiceCode
+    public let numberOfBlock: Int
     
     public init(systemCode: FeliCaSystemCode, serviceCode: FeliCaServiceCode, numberOfBlock: Int) {
         self.systemCode = systemCode
