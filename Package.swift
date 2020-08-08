@@ -59,7 +59,13 @@ targets.append(
     .target(
         name: "TRETJapanNFCReader-FeliCa-TransitIC",
         dependencies: ["TRETJapanNFCReader-FeliCa"],
-        path: "Sources/FeliCa/TransitIC")
+        path: "Sources/FeliCa/TransitIC/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-TransitICTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-TransitIC"],
+        path: "Sources/FeliCa/TransitIC/Tests")
 )
 
 
