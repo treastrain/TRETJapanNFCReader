@@ -15,16 +15,16 @@ open class JapanNFCReader: NSObject {
     
     /// A configuration object. See JapanNFCReader.Configuration for more information.
     public private(set) var configuration: Configuration = .default
-    /// An object that handles callbacks from the reader session.
-    public private(set) var delegate: JapanNFCReaderDelegate? = nil
-    /// A dispatch queue that the reader uses when making callbacks to the closure.
+    /// The delegate of the reader.
+    public private(set) weak var delegate: JapanNFCReaderDelegate? = nil
+    /// The queue on which the reader delegate callbacks and completion block handlers are dispatched.
     public private(set) var readerQueue: DispatchQueue = .main
     /// A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.
     public private(set) var session: NFCTagReaderSession?
     /// A handler called when the reader is active.
-    public private(set) var didBecomeActiveHandler: (() -> Void)? = nil
+    private var didBecomeActiveHandler: (() -> Void)? = nil
     /// A completion handler called when the operation is completed.
-    public private(set) var resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)? = nil
+    private var resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)? = nil
     
     private let sessionQueue = DispatchQueue(label: "jp.tret.japannfcreader", attributes: .concurrent)
     
@@ -41,6 +41,10 @@ open class JapanNFCReader: NSObject {
         self.configuration = configuration
         self.delegate = delegate
         self.readerQueue = readerQueue
+        super.init()
+        if delegate == nil {
+            self.delegate = self as? JapanNFCReaderDelegate
+        }
     }
     
     deinit {
@@ -91,7 +95,7 @@ open class JapanNFCReader: NSObject {
         self.session?.begin()
     }
     
-    func returnResultDelegateOrHandler(result: Result<(NFCTagReaderSession, NFCTag), Error>) {
+    public func returnResultDelegateOrHandler(result: Result<(NFCTagReaderSession, NFCTag), Error>) {
         let work = {
             if let resultHandler = self.resultHandler {
                 resultHandler(result)
