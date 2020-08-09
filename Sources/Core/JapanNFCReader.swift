@@ -11,18 +11,20 @@ import CoreNFC
 
 /// The abstract base class that represents a NFC reader.
 @available(iOS 13.0, *)
-open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
+open class JapanNFCReader: NSObject {
     
     /// A configuration object. See JapanNFCReader.Configuration for more information.
     public private(set) var configuration: Configuration = .default
-    /// A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.
-    public private(set) var session: NFCTagReaderSession?
+    /// An object that handles callbacks from the reader session.
+    public private(set) var delegate: JapanNFCReaderDelegate? = nil
     /// A dispatch queue that the reader uses when making callbacks to the closure.
     public private(set) var readerQueue: DispatchQueue = .main
+    /// A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.
+    public private(set) var session: NFCTagReaderSession?
     /// A handler called when the reader is active.
-    public private(set) var didBecomeActiveHandler: (() -> Void)?
+    public private(set) var didBecomeActiveHandler: (() -> Void)? = nil
     /// A completion handler called when the operation is completed.
-    public private(set) var resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)?
+    public private(set) var resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)? = nil
     
     private let sessionQueue = DispatchQueue(label: "jp.tret.japannfcreader", attributes: .concurrent)
     
@@ -30,8 +32,15 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
         super.init()
     }
     
-    public init(configuration: Configuration = .default) {
+    /// Creates a reader with the specified session configuration, delegate, and reader queue.
+    /// - Parameters:
+    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    ///   - delegate: A reader delegate object that handles reader-related events. If nil, the class should be used only with methods that take result handlers.
+    ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
+    public init(configuration: Configuration = .default, delegate: JapanNFCReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
         self.configuration = configuration
+        self.delegate = delegate
+        self.readerQueue = readerQueue
     }
     
     deinit {
@@ -39,12 +48,28 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
     }
     
     /// Starts the reader session.
+    /// - Parameter pollingOption: One or more options specifying the type of tags that the reader session scans for and detects.
+    open func beginScanning(pollingOption: NFCTagReaderSession.PollingOption) {
+        
+        guard NFCTagReaderSession.readingAvailable else {
+            self.delegate?.readerSessionDidInvalidate(with: .failure(JapanNFCReaderError.readingUnavailable))
+            return
+        }
+        
+        guard let session = NFCTagReaderSession(pollingOption: pollingOption, delegate: self, queue: self.sessionQueue) else {
+            self.delegate?.readerSessionDidInvalidate(with: .failure(JapanNFCReaderError.couldNotCreateTagReaderSession))
+            return
+        }
+        
+        self.begin(session: session, didBecomeActive: nil, resultHandler: nil)
+    }
+    
+    /// Starts the reader session, then calls a handler upon completion.
     /// - Parameters:
     ///   - pollingOption: One or more options specifying the type of tags that the reader session scans for and detects.
-    ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
     ///   - resultHandler: A completion handler called when the operation is completed.
-    open func beginScanning(pollingOption: NFCTagReaderSession.PollingOption, queue readerQueue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(NFCTagReaderSession, NFCTag), Error>) -> Void) {
+    open func beginScanning(pollingOption: NFCTagReaderSession.PollingOption, didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping (Result<(NFCTagReaderSession, NFCTag), Error>) -> Void) {
         
         guard NFCTagReaderSession.readingAvailable else {
             resultHandler(.failure(JapanNFCReaderError.readingUnavailable))
@@ -55,37 +80,56 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
             return
         }
         
-        self.set(session: session, queue: readerQueue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+        self.begin(session: session, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    }
+    
+    public func begin(session: NFCTagReaderSession, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)? = nil) {
+        self.session = session
+        self.didBecomeActiveHandler = didBecomeActiveHandler
+        self.resultHandler = resultHandler
         self.session?.alertMessage = "カードを平らな面に置き、カードの下半分を隠すように iPhone をその上に置いてください。"
         self.session?.begin()
     }
     
-    public func set(session: NFCTagReaderSession, queue readerQueue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void)? = nil) {
-        self.session = session
-        self.readerQueue = readerQueue
-        self.didBecomeActiveHandler = didBecomeActiveHandler
-        self.resultHandler = resultHandler
+    func returnResultDelegateOrHandler(result: Result<(NFCTagReaderSession, NFCTag), Error>) {
+        let work = {
+            if let resultHandler = self.resultHandler {
+                resultHandler(result)
+            } else {
+                self.delegate?.readerSessionDidInvalidate(with: result)
+            }
+        }
+        
+        switch result {
+        case .success((_, _)):
+            work()
+        case .failure(_):
+            self.readerQueue.async(execute: work)
+        }
     }
-    
+}
+
+@available(iOS 13.0, *)
+extension JapanNFCReader: NFCTagReaderSessionDelegate {
     open func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-        // print(self, #function, #line, session)
         session.isInvalidatedByUser = true
         self.readerQueue.async {
-            self.didBecomeActiveHandler?()
+            if let didBecomeActiveHandler = self.didBecomeActiveHandler {
+                didBecomeActiveHandler()
+            } else {
+                self.delegate?.readerSessionDidBecomeActive()
+            }
         }
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
-        // print(self, #function, #line, session, error)
-        self.readerQueue.async {
-            if !self.configuration.returnsReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
-               !session.isInvalidatedByUser,
-               (error as? NFCReaderError)?.code == .readerSessionInvalidationErrorUserCanceled {
-                return
-            }
-            
-            self.resultHandler?(.failure(JapanNFCReaderError.tagReaderSessionDidInvalidateWithError(error)))
+        if !self.configuration.returnsReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
+           !session.isInvalidatedByUser,
+           (error as? NFCReaderError)?.code == .readerSessionInvalidationErrorUserCanceled {
+            return
         }
+        
+        self.returnResultDelegateOrHandler(result: .failure(JapanNFCReaderError.tagReaderSessionDidInvalidateWithError(error)))
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
@@ -102,11 +146,9 @@ open class JapanNFCReader: NSObject, NFCTagReaderSessionDelegate {
         let tag = tags.first!
         session.connect(to: tag) { (error) in
             if let error = error {
-                self.readerQueue.async {
-                    self.resultHandler?(.failure(JapanNFCReaderError.tagReaderSessionConnectError(error)))
-                }
+                self.returnResultDelegateOrHandler(result: .failure(JapanNFCReaderError.tagReaderSessionConnectError(error)))
             } else {
-                self.resultHandler?(.success((session, tag)))
+                self.returnResultDelegateOrHandler(result: .success((session, tag)))
             }
         }
     }
