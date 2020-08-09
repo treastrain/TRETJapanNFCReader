@@ -11,14 +11,8 @@ import Foundation
 import TRETJapanNFCReader_Core
 #endif
 
-public struct FeliCaReadWithoutEncryptionResponse {
-    public let feliCaData: FeliCaData
-    public let pollingErrors: [FeliCaSystemCode : Error?]
-    public let readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]
-    
-    public init(feliCaData: FeliCaData, pollingErrors: [FeliCaSystemCode : Error?], readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]]) {
-        self.feliCaData = feliCaData
-        self.pollingErrors = pollingErrors
-        self.readErrors = readErrors
-    }
+public protocol FeliCaReadWithoutEncryptionResponse {
+    var feliCaData: FeliCaData { get }
+    var pollingErrors: [FeliCaSystemCode : Error?] { get }
+    var readErrors: [FeliCaSystemCode : [FeliCaServiceCode : Error]] { get }
 }

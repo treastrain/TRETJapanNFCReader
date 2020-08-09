@@ -16,11 +16,26 @@ import TRETJapanNFCReader_Core
 @available(iOS 13.0, *)
 open class FeliCaReader: JapanNFCReader {
     
-    public private(set) var readWithoutEncryptionResultHandler: ((Result<FeliCaReadWithoutEncryptionResponse, Error>) -> Void)?
+    /// The delegate of the reader.
+    public private(set) var feliCaReaderDelegate: FeliCaReaderDelegate? = nil
+    /// A handler called when the reader is active.
+    private var didBecomeActiveHandler: (() -> Void)? = nil
+    /// A completion handler called when the operation is completed.
+    private var readWithoutEncryptionResultHandler: ((Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) -> Void)?
     
     private var parameters: Set<FeliCaReadWithoutEncryptionCommandParameter> = []
     private var systemCodes: Set<FeliCaSystemCode> = []
     private var serviceCodes: [FeliCaSystemCode : [(serviceCode: FeliCaServiceCode, numberOfBlock: Int)]] = [:]
+    
+    /// Creates a reader with the specified session configuration, delegate, and reader queue.
+    /// - Parameters:
+    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    ///   - delegate: A reader delegate object that handles reader-related events. If nil, the class should be used only with methods that take result handlers.
+    ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
+    public init(configuration: Configuration = .default, delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
+        self.feliCaReaderDelegate = delegate
+        super.init(configuration: configuration, delegate: nil, queue: readerQueue)
+    }
     
     private func set(_ parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>) {
         self.parameters = parameters
@@ -38,34 +53,31 @@ open class FeliCaReader: JapanNFCReader {
     }
     
     /// Starts the reader, and run Read Without Encryption command defined by FeliCa card specification.
-    /// - Parameters:
-    ///   - parameters: Parameters (system code, service code and number of blocks) for specifying the block.
-    ///   - queue: A dispatch queue that the reader uses when making callbacks to the handler.
-    ///   - didBecomeActiveHandler: A handler called when the reader is active.
-    ///   - resultHandler: A completion handler called when the operation is completed.
-    open func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<FeliCaReadWithoutEncryptionResponse, Error>) -> Void) {
-        self.set(parameters)
-        self.readWithoutEncryptionResultHandler = resultHandler
-        let superResultHandler: ((Result<(NFCTagReaderSession, NFCTag), Error>) -> Void) = { [weak self] response in
-            guard let `self` = self else {
-                print(#file, #function, "An instance of this class has already been deinited.")
-                return
-            }
-            switch response {
-            case .success((let session, let tag)):
-                self.readWithoutEncryption(session, didConnect: tag)
-            case .failure(let error):
-                self.readWithoutEncryptionResultHandler?(.failure(error))
-            }
-        }
-        
-        self.beginScanning(pollingOption: .iso18092, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: superResultHandler)
+    /// - Parameter parameters: Parameters (system code, service code and number of blocks) for specifying the block.
+    open func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>) {
+        self.readWithoutEncryption(parameters: parameters, didBecomeActive: nil, resultHandler: nil)
     }
     
-    open func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>, queue: DispatchQueue = .main, session: NFCTagReaderSession, didConnect feliCaTag: NFCFeliCaTag, resultHandler: @escaping (Result<FeliCaReadWithoutEncryptionResponse, Error>) -> Void) {
+    /// Starts the reader, and run Read Without Encryption command defined by FeliCa card specification, then calls a handler upon completion.
+    /// - Parameters:
+    ///   - parameters: Parameters (system code, service code and number of blocks) for specifying the block.
+    ///   - didBecomeActiveHandler: A handler called when the reader is active.
+    ///   - resultHandler: A completion handler called when the operation is completed.
+    open func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>, didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping (Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) -> Void) {
+        self.readWithoutEncryption(parameters: parameters, didBecomeActive: Optional(didBecomeActiveHandler), resultHandler: Optional(resultHandler))
+    }
+    
+    private func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: ((Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) -> Void)? = nil) {
         self.set(parameters)
+        self.didBecomeActiveHandler = didBecomeActiveHandler
         self.readWithoutEncryptionResultHandler = resultHandler
-        self.set(session: session, queue: queue, didBecomeActive: nil, resultHandler: nil)
+        self.beginScanning(pollingOption: .iso18092)
+    }
+    
+    open func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>, session: NFCTagReaderSession, didConnect feliCaTag: NFCFeliCaTag, resultHandler: @escaping (Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) -> Void) {
+        self.set(parameters)
+        self.didBecomeActiveHandler = nil
+        self.readWithoutEncryptionResultHandler = resultHandler
         self.readWithoutEncryption(session, didConnect: feliCaTag)
     }
     
@@ -74,9 +86,7 @@ open class FeliCaReader: JapanNFCReader {
         
         guard case .feliCa(let feliCaTag) = tag else {
             session.invalidateByReader(errorMessage: "FeliCa タグではないものが検出されました。")
-            self.readerQueue.async {
-                self.resultHandler?(.failure(JapanNFCReaderError.invalidDetectedTagType))
-            }
+            self.returnResultDelegateOrHandler(result: .failure(JapanNFCReaderError.invalidDetectedTagType))
             return
         }
         
@@ -85,7 +95,7 @@ open class FeliCaReader: JapanNFCReader {
     }
     
     private func readWithoutEncryption(_ session: NFCTagReaderSession, didConnect feliCaTag: NFCFeliCaTag) {
-        // print(self, #function, #line, tag)
+        print(self, #function, #line, feliCaTag)
         
         var errorMessage: String? = nil
         var feliCaData: FeliCaData = [:]
@@ -105,8 +115,7 @@ open class FeliCaReader: JapanNFCReader {
             case .failure(let error):
                 if !self.configuration.continuesProcessIfErrorOccurred {
                     errorMessage = error.localizedDescription
-                    self.resultHandler?(.failure(error))
-                    self.readWithoutEncryptionResultHandler = nil
+                    self.returnResultDelegateOrHandler(result: .failure(error))
                     break systemCodeLoop
                 }
                 pollingErrors[systemCode] = error
@@ -126,8 +135,7 @@ open class FeliCaReader: JapanNFCReader {
                 case .failure(let error):
                     if !self.configuration.continuesProcessIfErrorOccurred {
                         errorMessage = error.localizedDescription
-                        self.resultHandler?(.failure(error))
-                        self.readWithoutEncryptionResultHandler = nil
+                        self.returnResultDelegateOrHandler(result: .failure(error))
                         break systemCodeLoop
                     }
                     if readErrors[systemCode] != nil {
@@ -143,8 +151,42 @@ open class FeliCaReader: JapanNFCReader {
         
         session.alertMessage = "完了"
         session.invalidateByReader(errorMessage: errorMessage)
+        if errorMessage != nil {
+            self.returnReaderSessionReadWithoutEncryptionDidInvalidate(result: .success(FeliCaCardDataReadWithoutEncryptionResponse(feliCaData: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)))
+        }
+    }
+    
+    public func returnReaderSessionReadWithoutEncryptionDidInvalidate(result: Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) {
         self.readerQueue.async {
-            self.readWithoutEncryptionResultHandler?(.success(FeliCaReadWithoutEncryptionResponse(feliCaData: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)))
+            if let readWithoutEncryptionResultHandler = self.readWithoutEncryptionResultHandler {
+                readWithoutEncryptionResultHandler(result)
+            } else {
+                self.feliCaReaderDelegate?.readerSessionReadWithoutEncryptionDidInvalidate(with: result)
+            }
+        }
+    }
+}
+
+@available(iOS 13.0, *)
+extension FeliCaReader: JapanNFCReaderDelegate {
+    public func readerSessionDidBecomeActive() {
+        if let didBecomeActiveHandler = self.didBecomeActiveHandler {
+            didBecomeActiveHandler()
+        } else {
+            self.feliCaReaderDelegate?.readerSessionDidBecomeActive()
+        }
+    }
+    
+    public func readerSessionDidInvalidate(with result: Result<(NFCTagReaderSession, NFCTag), Error>) {
+        switch result {
+        case .success((let session, let tag)):
+            self.readWithoutEncryption(session, didConnect: tag)
+        case .failure(let error):
+            if let readWithoutEncryptionResultHandler = self.readWithoutEncryptionResultHandler {
+                readWithoutEncryptionResultHandler(.failure(error))
+            } else {
+                self.feliCaReaderDelegate?.readerSessionReadWithoutEncryptionDidInvalidate(with: .failure(error))
+            }
         }
     }
 }
