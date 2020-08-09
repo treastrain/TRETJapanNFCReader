@@ -20,68 +20,120 @@ import TRETJapanNFCReader_FeliCa
 public class TransitICReader: FeliCaReader {
     
     private var systemCode: FeliCaSystemCode = .cjrc
-    private var readResultHandler: ((Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), Error>) -> Void)?
+    /// A handler called when the reader is active.
+    private var didBecomeActiveHandler: (() -> Void)? = nil
+    /// A completion handler called when the operation is completed.
+    private var readResultHandler: ((Result<TransitICCardDataResponse, Error>) -> Void)?
     
-    private override init(configuration: Configuration = .default) {
+    private override init(configuration: Configuration = .default, delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
         fatalError()
     }
     
-    /// Creates an Transit IC reader.
-    /// - Parameter systemCode: FeliCa System Code
-    public init(configuration: Configuration = .default, systemCode: FeliCaSystemCode = .cjrc) {
-        super.init(configuration: configuration)
+    /// Creates an Transit IC reader with the specified session configuration, delegate, and reader queue.
+    /// - Parameters:
+    ///   - systemCode: FeliCa System Code.
+    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    ///   - delegate: A reader delegate object that handles reader-related events. If nil, the class should be used only with methods that take result handlers.
+    ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
+    public init(systemCode: FeliCaSystemCode = .cjrc, configuration: Configuration = .default, delegate: TransitICReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
+        super.init(configuration: configuration, delegate: delegate, queue: readerQueue)
         self.systemCode = systemCode
     }
     
-    /// Reading data from Transit IC card
-    /// - Parameters:
-    ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
-    ///   - delegate: An object that handles callbacks from the reader.
-    // public func read(itemTypes: [TransitICCardItemType]/*, delegate: TransitICReaderDelegate*/) {
-    // }
-    
-    public func read(_ itemTypes: Set<TransitICCardItemType>, queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), Error>) -> Void) {
+    private func convertToParameters(from itemTypes: Set<TransitICCardItemType>) -> Set<FeliCaReadWithoutEncryptionCommandParameter> {
         var itemTypes = itemTypes
         if self.systemCode != .sapica {
             itemTypes = itemTypes.filter { $0 != .sapicaPoints }
         }
-        let parameters = itemTypes.setMap { $0.parameter(systemCode: self.systemCode) }
+        return itemTypes.setMap { $0.parameter(systemCode: self.systemCode) }
+    }
+    
+    /// Reads data from Transit IC card.
+    /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    public func read(_ itemTypes: Set<TransitICCardItemType>) {
+        let parameters = self.convertToParameters(from: itemTypes)
+        self.readWithoutEncryption(parameters: parameters)
+    }
+    
+    /// Reads data from Transit IC card.
+    /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    public func read(_ itemTypes: [TransitICCardItemType]) {
+        self.read(Set(itemTypes))
+    }
+    
+    /// Reads data from Transit IC card.
+    /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    public func read(_ itemTypes: TransitICCardItemType...) {
+        self.read(itemTypes)
+    }
+    
+    /// Reads data from Transit IC card, then calls a handler upon completion.
+    /// - Parameters:
+    ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    ///   - didBecomeActiveHandler: A handler called when the reader is active.
+    ///   - resultHandler: A completion handler called when the operation is completed.
+    public func read(_ itemTypes: Set<TransitICCardItemType>, didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping ((Result<TransitICCardDataResponse, Error>) -> Void)) {
+        self.read(itemTypes, didBecomeActive: Optional(didBecomeActiveHandler), resultHandler: Optional(resultHandler))
+    }
+    
+    /// Reads data from Transit IC card, then calls a handler upon completion.
+    /// - Parameters:
+    ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    ///   - didBecomeActiveHandler: A handler called when the reader is active.
+    ///   - resultHandler: A completion handler called when the operation is completed.
+    public func read(_ itemTypes: [TransitICCardItemType], didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping ((Result<TransitICCardDataResponse, Error>) -> Void)) {
+        self.read(Set(itemTypes), didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    }
+    
+    /// Reads data from Transit IC card, then calls a handler upon completion.
+    /// - Parameters:
+    ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
+    ///   - didBecomeActiveHandler: A handler called when the reader is active.
+    ///   - resultHandler: A completion handler called when the operation is completed.
+    public func read(_ itemTypes: TransitICCardItemType..., didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping ((Result<TransitICCardDataResponse, Error>) -> Void)) {
+        self.read(itemTypes, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
+    }
+    
+    private func read(_ itemTypes: Set<TransitICCardItemType>, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: ((Result<TransitICCardDataResponse, Error>) -> Void)? = nil) {
+        let parameters = self.convertToParameters(from: itemTypes)
+        self.didBecomeActiveHandler = didBecomeActiveHandler
         self.readResultHandler = resultHandler
-        
-        self.readWithoutEncryption(parameters: parameters, queue: queue, didBecomeActive: didBecomeActiveHandler) { [weak self] response in
-            guard let `self` = self else {
-                print(#file, #function, "An instance of this class has already been deinited.")
-                return
-            }
-            switch response {
-            case .success(let responseData):
-                self.parse(from: responseData)
-            case .failure(let error):
-                print(self, #function, "error", error)
-                self.readResultHandler?(.failure(error))
-            }
-        }
+        self.readWithoutEncryption(parameters: parameters)
     }
     
-    public func read(_ itemTypes: [TransitICCardItemType], queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), Error>) -> Void) {
-        self.read(Set(itemTypes), queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
-    }
-    
-    public func read(_ itemTypes: TransitICCardItemType..., queue: DispatchQueue = .main, didBecomeActive didBecomeActiveHandler: (() -> Void)? = nil, resultHandler: @escaping (Result<(TransitICCardData, [FeliCaSystemCode : Error?], [FeliCaSystemCode : [FeliCaServiceCode : Error]]), Error>) -> Void) {
-        self.read(itemTypes, queue: queue, didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
-    }
-    
-    private func parse(from responseData: FeliCaReadWithoutEncryptionResponse) {
+    private func parse(from responseData: FeliCaCardDataReadWithoutEncryptionResponse) {
         guard let feliCaSystem = responseData.feliCaData[self.systemCode] else {
             self.readResultHandler?(.failure(FeliCaReaderError.notFoundPrimarySystem(pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors)))
             return
         }
         let cardData = TransitICCardData(idm: feliCaSystem.idm, systemCode: self.systemCode, data: responseData.feliCaData)
-        self.readResultHandler?(.success((cardData, responseData.pollingErrors, responseData.readErrors)))
+        self.returnReaderSessionReadDidInvalidate(result: .success(TransitICCardDataResponse(cardData: cardData, feliCaData: responseData.feliCaData, pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors)))
+    }
+    
+    public func returnReaderSessionReadDidInvalidate(result: Result<TransitICCardDataResponse, Error>) {
+        self.readerQueue.async {
+            if let readResultHandler = self.readResultHandler {
+                readResultHandler(result)
+            } else {
+                (self.feliCaReaderDelegate as? TransitICReaderDelegate)?.readerSessionReadDidInvalidate(with: result)
+            }
+        }
     }
     
     @available(*, unavailable, renamed: "read")
     public func get(itemTypes: [TransitICCardItemType]) {}
+}
+
+@available(iOS 13.0, *)
+extension TransitICReader: FeliCaReaderDelegate {
+    public func readerSessionReadWithoutEncryptionDidInvalidate(with result: Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) {
+        switch result {
+        case .success(let responseData):
+            self.parse(from: responseData)
+        case .failure(let error):
+            self.returnReaderSessionReadDidInvalidate(result: .failure(error))
+        }
+    }
 }
 
 #endif
