@@ -17,8 +17,12 @@ import TRETJapanNFCReader_FeliCa
 
 @available(iOS 13.0, *)
 public protocol TransitICReaderDelegate: FeliCaReaderDelegate {
-    func readerSessionDidBecomeActive()
     func readerSessionReadDidInvalidate(with result: Result<TransitICCardDataResponse, Error>)
+}
+
+@available(iOS 13.0, *)
+extension TransitICReaderDelegate {
+    public func readerSessionReadWithoutEncryptionDidInvalidate(with result: Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) {}
 }
 
 #endif

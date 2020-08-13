@@ -13,6 +13,7 @@ import CoreNFC
 @available(iOS 13.0, *)
 open class JapanNFCReader: NSObject {
     
+    private let pollingOption: NFCTagReaderSession.PollingOption
     /// A configuration object. See JapanNFCReader.Configuration for more information.
     public private(set) var configuration: Configuration = .default
     /// The delegate of the reader.
@@ -29,18 +30,21 @@ open class JapanNFCReader: NSObject {
     private let sessionQueue = DispatchQueue(label: "jp.tret.japannfcreader", attributes: .concurrent)
     
     private override init() {
+        self.pollingOption = []
         super.init()
     }
     
     /// Creates a reader with the specified session configuration, delegate, and reader queue.
     /// - Parameters:
-    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    ///   - pollingOption: One or more options specifying the type of tags that the reader session scans for and detects.
     ///   - delegate: A reader delegate object that handles reader-related events. If nil, the class should be used only with methods that take result handlers.
     ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
-    public init(configuration: Configuration = .default, delegate: JapanNFCReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
-        self.configuration = configuration
+    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    public init(pollingOption: NFCTagReaderSession.PollingOption, delegate: JapanNFCReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: Configuration = .default) {
+        self.pollingOption = pollingOption
         self.delegate = delegate
         self.readerQueue = readerQueue
+        self.configuration = configuration
         super.init()
         if delegate == nil {
             self.delegate = self as? JapanNFCReaderDelegate
@@ -52,15 +56,14 @@ open class JapanNFCReader: NSObject {
     }
     
     /// Starts the reader session.
-    /// - Parameter pollingOption: One or more options specifying the type of tags that the reader session scans for and detects.
-    open func beginScanning(pollingOption: NFCTagReaderSession.PollingOption) {
+    open func beginScanning() {
         
         guard NFCTagReaderSession.readingAvailable else {
             self.delegate?.readerSessionDidInvalidate(with: .failure(JapanNFCReaderError.readingUnavailable))
             return
         }
         
-        guard let session = NFCTagReaderSession(pollingOption: pollingOption, delegate: self, queue: self.sessionQueue) else {
+        guard let session = NFCTagReaderSession(pollingOption: self.pollingOption, delegate: self, queue: self.sessionQueue) else {
             self.delegate?.readerSessionDidInvalidate(with: .failure(JapanNFCReaderError.couldNotCreateTagReaderSession))
             return
         }
@@ -70,16 +73,15 @@ open class JapanNFCReader: NSObject {
     
     /// Starts the reader session, then calls a handler upon completion.
     /// - Parameters:
-    ///   - pollingOption: One or more options specifying the type of tags that the reader session scans for and detects.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
     ///   - resultHandler: A completion handler called when the operation is completed.
-    open func beginScanning(pollingOption: NFCTagReaderSession.PollingOption, didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping (Result<(NFCTagReaderSession, NFCTag), Error>) -> Void) {
+    open func beginScanning(didBecomeActive didBecomeActiveHandler: @escaping (() -> Void), resultHandler: @escaping (Result<(NFCTagReaderSession, NFCTag), Error>) -> Void) {
         
         guard NFCTagReaderSession.readingAvailable else {
             resultHandler(.failure(JapanNFCReaderError.readingUnavailable))
             return
         }
-        guard let session = NFCTagReaderSession(pollingOption: pollingOption, delegate: self, queue: self.sessionQueue) else {
+        guard let session = NFCTagReaderSession(pollingOption: self.pollingOption, delegate: self, queue: self.sessionQueue) else {
             resultHandler(.failure(JapanNFCReaderError.couldNotCreateTagReaderSession))
             return
         }
@@ -137,7 +139,7 @@ extension JapanNFCReader: NFCTagReaderSessionDelegate {
     }
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
-        // print(self, #function, #line, session, tags)
+        // print("⏩", self, #function, #line, session, tags)
         
         guard tags.count == 1 else {
             session.alertMessage = "More than 1 tags found. Please present only 1 tag."

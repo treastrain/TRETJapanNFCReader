@@ -25,18 +25,18 @@ public class TransitICReader: FeliCaReader {
     /// A completion handler called when the operation is completed.
     private var readResultHandler: ((Result<TransitICCardDataResponse, Error>) -> Void)?
     
-    private override init(configuration: Configuration = .default, delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
+    private override init(delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: JapanNFCReader.Configuration = .default) {
         fatalError()
     }
     
     /// Creates an Transit IC reader with the specified session configuration, delegate, and reader queue.
     /// - Parameters:
     ///   - systemCode: FeliCa System Code.
-    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
     ///   - delegate: A reader delegate object that handles reader-related events. If nil, the class should be used only with methods that take result handlers.
     ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
-    public init(systemCode: FeliCaSystemCode = .cjrc, configuration: Configuration = .default, delegate: TransitICReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
-        super.init(configuration: configuration, delegate: delegate, queue: readerQueue)
+    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    public init(systemCode: FeliCaSystemCode = .cjrc, delegate: TransitICReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: Configuration = .default) {
+        super.init(delegate: delegate, queue: readerQueue, configuration: configuration)
         self.systemCode = systemCode
     }
     
@@ -51,8 +51,7 @@ public class TransitICReader: FeliCaReader {
     /// Reads data from Transit IC card.
     /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     public func read(_ itemTypes: Set<TransitICCardItemType>) {
-        let parameters = self.convertToParameters(from: itemTypes)
-        self.readWithoutEncryption(parameters: parameters)
+        self.read(itemTypes, didBecomeActive: nil, resultHandler: nil)
     }
     
     /// Reads data from Transit IC card.
@@ -98,7 +97,15 @@ public class TransitICReader: FeliCaReader {
         let parameters = self.convertToParameters(from: itemTypes)
         self.didBecomeActiveHandler = didBecomeActiveHandler
         self.readResultHandler = resultHandler
-        self.readWithoutEncryption(parameters: parameters)
+        self.readWithoutEncryption(parameters: parameters) { [weak self] in
+            if let didBecomeActiveHandler = self?.didBecomeActiveHandler {
+                didBecomeActiveHandler()
+            } else {
+                (self?.feliCaReaderDelegate as? TransitICReaderDelegate)?.readerSessionDidBecomeActive()
+            }
+        } resultHandler: { (response) in
+            self.readerSessionReadWithoutEncryptionDidInvalidate(with: response)
+        }
     }
     
     private func parse(from responseData: FeliCaCardDataReadWithoutEncryptionResponse) {

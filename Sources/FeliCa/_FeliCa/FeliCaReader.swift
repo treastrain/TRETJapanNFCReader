@@ -29,12 +29,15 @@ open class FeliCaReader: JapanNFCReader {
     
     /// Creates a reader with the specified session configuration, delegate, and reader queue.
     /// - Parameters:
-    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
     ///   - delegate: A reader delegate object that handles reader-related events. If nil, the class should be used only with methods that take result handlers.
     ///   - readerQueue: A dispatch queue that the reader uses when making callbacks to the delegate or closure. This is NOT the dispatch queue specified for `NFCTagReaderSession` init.
-    public init(configuration: Configuration = .default, delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main) {
+    ///   - configuration: A configuration object. See `JapanNFCReader.Configuration` for more information.
+    public init(delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: Configuration = .default) {
         self.feliCaReaderDelegate = delegate
-        super.init(configuration: configuration, delegate: nil, queue: readerQueue)
+        super.init(pollingOption: .iso18092, delegate: nil, queue: readerQueue, configuration: configuration)
+        if delegate == nil {
+            self.feliCaReaderDelegate = self as? FeliCaReaderDelegate
+        }
     }
     
     private func set(_ parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>) {
@@ -71,7 +74,7 @@ open class FeliCaReader: JapanNFCReader {
         self.set(parameters)
         self.didBecomeActiveHandler = didBecomeActiveHandler
         self.readWithoutEncryptionResultHandler = resultHandler
-        self.beginScanning(pollingOption: .iso18092)
+        self.beginScanning()
     }
     
     open func readWithoutEncryption(parameters: Set<FeliCaReadWithoutEncryptionCommandParameter>, session: NFCTagReaderSession, didConnect feliCaTag: NFCFeliCaTag, resultHandler: @escaping (Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) -> Void) {
@@ -82,7 +85,7 @@ open class FeliCaReader: JapanNFCReader {
     }
     
     private func readWithoutEncryption(_ session: NFCTagReaderSession, didConnect tag: NFCTag) {
-        // print(self, #function, #line, tag)
+        // print("⏩", self, #function, #line, tag)
         
         guard case .feliCa(let feliCaTag) = tag else {
             session.invalidateByReader(errorMessage: "FeliCa タグではないものが検出されました。")
@@ -95,7 +98,7 @@ open class FeliCaReader: JapanNFCReader {
     }
     
     private func readWithoutEncryption(_ session: NFCTagReaderSession, didConnect feliCaTag: NFCFeliCaTag) {
-        print(self, #function, #line, feliCaTag)
+        // print("⏩", self, #function, #line, feliCaTag)
         
         var errorMessage: String? = nil
         var feliCaData: FeliCaData = [:]
@@ -151,9 +154,9 @@ open class FeliCaReader: JapanNFCReader {
         
         session.alertMessage = "完了"
         session.invalidateByReader(errorMessage: errorMessage)
-        if errorMessage != nil {
+        // if errorMessage != nil {
             self.returnReaderSessionReadWithoutEncryptionDidInvalidate(result: .success(FeliCaCardDataReadWithoutEncryptionResponse(feliCaData: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)))
-        }
+        // }
     }
     
     public func returnReaderSessionReadWithoutEncryptionDidInvalidate(result: Result<FeliCaCardDataReadWithoutEncryptionResponse, Error>) {
