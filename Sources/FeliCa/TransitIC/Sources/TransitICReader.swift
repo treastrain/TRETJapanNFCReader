@@ -103,14 +103,19 @@ public class TransitICReader: FeliCaReader {
             } else {
                 (self?.feliCaReaderDelegate as? TransitICReaderDelegate)?.readerSessionDidBecomeActive()
             }
-        } resultHandler: { (response) in
-            self.readerSessionReadWithoutEncryptionDidInvalidate(with: response)
+        } resultHandler: { [weak self] (response) in
+            self?.readerSessionReadWithoutEncryptionDidInvalidate(with: response)
         }
     }
     
     private func parse(from responseData: FeliCaCardDataReadWithoutEncryptionResponse) {
         guard let feliCaSystem = responseData.feliCaData[self.systemCode] else {
-            self.readResultHandler?(.failure(FeliCaReaderError.notFoundPrimarySystem(pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors)))
+            let failureResult: Result<TransitICCardDataResponse, Error> = .failure(FeliCaReaderError.notFoundPrimarySystem(pollingErrors: responseData.pollingErrors, readErrors: responseData.readErrors))
+            if let readResultHandler = self.readResultHandler {
+                readResultHandler(failureResult)
+            } else {
+                (self.feliCaReaderDelegate as? TransitICReaderDelegate)?.readerSessionReadDidInvalidate(with: failureResult)
+            }
             return
         }
         let cardData = TransitICCardData(idm: feliCaSystem.idm, systemCode: self.systemCode, data: responseData.feliCaData)
