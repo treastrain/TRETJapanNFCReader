@@ -69,6 +69,26 @@ targets.append(
 )
 
 
+// MARK: - FeliCa-UnivCoopICPrepaid
+// Japanese Univ. Co-op IC Prepaid / 大学生協ICプリペイド
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
+        targets: ["TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/UnivCoopICPrepaid/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaidTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid"],
+        path: "Sources/FeliCa/UnivCoopICPrepaid/Tests")
+)
+
 let package = Package(
     name: "TRETJapanNFCReader",
     defaultLocalization: "en",
