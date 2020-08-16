@@ -14,7 +14,7 @@ import TRETJapanNFCReader_FeliCa
 /// 大学生協ICプリペイドカードのデータ
 public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public var version: String = "3"
-    public let type: FeliCaCardType = .univCoopICPrepaid
+    public var type: FeliCaCardType = .univCoopICPrepaid
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
@@ -74,27 +74,20 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     }
     
     private mutating func convertToUnivCoopInfo(_ blockData: [Data]) {
-        for (i, data) in blockData.enumerated() {
-            switch i {
+        for (index, data) in zip(blockData.indices, blockData) {
+            switch index {
             case 0:
-                self.membershipNumber = data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString() + data[4].toString() + data[5].toString()
+                self.membershipNumber = data.prefix(6).map { $0.toString() }.joined()
             case 1:
-                if Int(data[0]) == 0 {
-                    self.mealCardUser = false
-                } else if Int(data[0]) == 1 {
-                    self.mealCardUser = true
-                }
-                if var year = Int(data[2].toString()), let month = Int(data[3].toString()), let day = Int(data[4].toString()) {
-                    year += 2000
-                    let dateString = "\(year)/\(month)/\(day)"
-                    let formatter = DateFormatter()
-                    formatter.dateFormat = "yyyy/MM/dd"
-                    formatter.locale = Locale(identifier: "en_US_POSIX")
-                    self.mealCardLastUseDate = formatter.date(from: dateString)
-                    self.mealCardLastUsageAmount = Int(data[5].toString() + data[6].toString() + data[7].toString())
-                }
+                self.mealCardUser = data[0] != 0
+                var dateComponents = DateComponents()
+                dateComponents.year = Int("20\(data[2].toString())")
+                dateComponents.month = Int(data[3].toString())
+                dateComponents.day = Int(data[4].toString())
+                self.mealCardLastUseDate = Calendar(identifier: .gregorian).date(from: dateComponents)
+                self.mealCardLastUsageAmount = Int(data[5...7].map { $0.toString() }.joined())
             case 2:
-                if let pointsInt = Int("\(data[0].toString())\(data[1].toString())\(data[2].toString())\(data[3].toString())", radix: 16) {
+                if let pointsInt = Int(data.prefix(4).map { $0.toString() }.joined(), radix: 16) {
                     self.points = Double(pointsInt) / 10.0
                 }
             default:
@@ -106,24 +99,29 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     private mutating func convertToTransactions(_ blockData: [Data]) {
         var transactions: [UnivCoopICPrepaidCardTransaction] = []
         for data in blockData {
-            
-            let dateString = data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString() + data[4].toString() + data[5].toString() + data[6].toString()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMddHHmmss"
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            guard let date = formatter.date(from: dateString) else {
+            var dateComponents = DateComponents()
+            dateComponents.year = Int(data.prefix(2).map { $0.toString() }.joined())
+            dateComponents.month = Int(data[2].toString())
+            dateComponents.day = Int(data[3].toString())
+            dateComponents.hour = Int(data[4].toString())
+            dateComponents.minute = Int(data[5].toString())
+            dateComponents.second = Int(data[6].toString())
+            guard let date = Calendar(identifier: .gregorian).date(from: dateComponents) else {
                 continue
             }
             
-            var type = FeliCaCardTransactionType.unknown
-            if Int(data[7]) == 5 {
-                type = .purchase
-            } else if Int(data[7]) == 1 {
+            let type: FeliCaCardTransactionType
+            switch data[7] {
+            case 1:
                 type = .credit
+            case 5:
+                type = .purchase
+            default:
+                type = .unknown
             }
             
-            let difference = Int(data[8].toString() + data[9].toString() + data[10].toString())
-            let balance = Int(data[11].toString() + data[12].toString() + data[13].toString())
+            let difference = Int(data[8...10].map { $0.toString() }.joined())
+            let balance = Int(data[11...13].map { $0.toString() }.joined())
             
             if let difference = difference, let balance = balance {
                 transactions.append(UnivCoopICPrepaidCardTransaction(date: date, type: type, difference: difference, balance: balance))
@@ -158,7 +156,7 @@ public struct UnivCoopICPrepaidCardTransaction: FeliCaCardTransaction {
 
 public extension UInt8 {
     func toString() -> String {
-        var str = String(self, radix: 16).uppercased()
+        var str = String(self, radix: 16, uppercase: true)
         if str.count == 1 {
             str = "0" + str
         }
