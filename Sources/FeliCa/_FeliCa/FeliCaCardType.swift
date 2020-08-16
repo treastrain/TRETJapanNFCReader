@@ -20,8 +20,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
 //    case nanaco
 //    /// WAON
 //    case waon
-//    /// 大学生協ICプリペイドカード
-//    case univCoopICPrepaid
+    /// 大学生協ICプリペイドカード
+    case univCoopICPrepaid
 //    
 //    /// OKICA
 //    case okica

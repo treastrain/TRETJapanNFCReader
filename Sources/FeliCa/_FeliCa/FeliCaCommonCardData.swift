@@ -1,5 +1,5 @@
 //
-//  CommonCard.swift
+//  FeliCaCommonCardData.swift
 //  TRETJapanNFCReader
 //
 //  Created by treastrain on 2019/08/22.
@@ -12,16 +12,16 @@ import CoreNFC
 #endif
 
 #if os(iOS)
-@available(iOS 13.0, *)
-public struct FeliCaCommonCard: FeliCaCard {
-    public let tag: NFCFeliCaTag
-    public let data: FeliCaCommonCardData
-    
-    public init(tag: NFCFeliCaTag, data: FeliCaCommonCardData) {
-        self.tag = tag
-        self.data = data
-    }
-}
+//@available(iOS 13.0, *)
+//public struct FeliCaCommonCard: FeliCaCard {
+//    public let tag: NFCFeliCaTag
+//    public let data: FeliCaCommonCardData
+//
+//    public init(tag: NFCFeliCaTag, data: FeliCaCommonCardData) {
+//        self.tag = tag
+//        self.data = data
+//    }
+//}
 #endif
 
 public struct FeliCaCommonCardData: FeliCaCardData {
@@ -37,15 +37,5 @@ public struct FeliCaCommonCardData: FeliCaCardData {
         self.primarySystemCode = systemCode
     }
     
-    public func convert() {
-        
-    }
-    
-    
-    @available(*, unavailable, renamed: "primaryIDm")
-    public var idm: String { return "" }
-    @available(*, unavailable, renamed: "primarySystemCode")
-    public var systemCode: FeliCaSystemCode { return 0xFFFF }
-    @available(*, unavailable)
-    public var data: [FeliCaServiceCode : [Data]] { return [:] }
+    public mutating func convert() {}
 }

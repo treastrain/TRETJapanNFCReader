@@ -11,13 +11,13 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// 大学生協ICプリペイドカードから読み取ることができるデータの種別
-public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
-    /// カード残高
+/// Types of item data that can be read from Japanese Univ. Co-op IC Prepaid cards.
+public enum UnivCoopICPrepaidCardItemType: CaseIterable, FeliCaCardItemType {
+    /// Balance
     case balance
-    /// 大学生協
+    /// Univ. Co-op Info
     case univCoopInfo
-    /// 利用履歴
+    /// Transactions
     case transactions
     
     
@@ -37,35 +37,14 @@ public enum UnivCoopICPrepaidItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (.common, 0x50D7, 1)
+            return .init(systemCode: .common, serviceCode: 0x50D7, numberOfBlock: 1)
         case .univCoopInfo:
-            return (.common, 0x50CB, 6)
+            return .init(systemCode: .common, serviceCode: 0x50CB, numberOfBlock: 6)
         case .transactions:
-            return (.common, 0x50CF, 10)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .balance:
-            return 0x50D7
-        case .univCoopInfo:
-            return 0x50CB
-        case .transactions:
-            return 0x50CF
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .balance:
-            return 1
-        case .univCoopInfo:
-            return 6
-        case .transactions:
-            return 10
+            return .init(systemCode: .common, serviceCode: 0x50CF, numberOfBlock: 10)
         }
     }
 }
+
+// 互換性維持のための typealias
+public typealias UnivCoopICPrepaidItemType = UnivCoopICPrepaidCardItemType

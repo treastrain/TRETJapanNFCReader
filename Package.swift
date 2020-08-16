@@ -14,6 +14,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
             "TRETJapanNFCReader-FeliCa-TransitIC",
+            "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
