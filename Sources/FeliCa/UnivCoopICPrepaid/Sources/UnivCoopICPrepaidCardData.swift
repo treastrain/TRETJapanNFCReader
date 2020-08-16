@@ -80,7 +80,11 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
                 self.membershipNumber = data.prefix(6).map { $0.toString() }.joined()
             case 1:
                 self.mealCardUser = data[0] != 0
+                let calendar = Calendar(identifier: .gregorian)
                 var dateComponents = DateComponents()
+                dateComponents.calendar = calendar
+                dateComponents.timeZone = TimeZone(identifier: "Asia/Tokyo")
+                dateComponents.era = 1
                 dateComponents.year = Int("20\(data[2].toString())")
                 dateComponents.month = Int(data[3].toString())
                 dateComponents.day = Int(data[4].toString())
@@ -99,14 +103,18 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     private mutating func convertToTransactions(_ blockData: [Data]) {
         var transactions: [UnivCoopICPrepaidCardTransaction] = []
         for data in blockData {
+            let calendar = Calendar(identifier: .gregorian)
             var dateComponents = DateComponents()
+            dateComponents.calendar = calendar
+            dateComponents.timeZone = TimeZone(identifier: "Asia/Tokyo")
+            dateComponents.era = 1
             dateComponents.year = Int(data.prefix(2).map { $0.toString() }.joined())
             dateComponents.month = Int(data[2].toString())
             dateComponents.day = Int(data[3].toString())
             dateComponents.hour = Int(data[4].toString())
             dateComponents.minute = Int(data[5].toString())
             dateComponents.second = Int(data[6].toString())
-            guard let date = Calendar(identifier: .gregorian).date(from: dateComponents) else {
+            guard let date = calendar.date(from: dateComponents) else {
                 continue
             }
             
