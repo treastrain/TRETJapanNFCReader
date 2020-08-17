@@ -14,7 +14,7 @@ import TRETJapanNFCReader_FeliCa
 /// 楽天Edyカードのデータ
 public struct RakutenEdyCardData: FeliCaCardData {
     public var version: String = "3"
-    public let type: FeliCaCardType = .rakutenEdy
+    public var type: FeliCaCardType = .rakutenEdy
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
@@ -39,19 +39,15 @@ public struct RakutenEdyCardData: FeliCaCardData {
         self.convert()
     }
     
-    @available(iOS 13.0, *)
-    internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
-        self.primaryIDm = feliCaCommonCardData.primaryIDm
-        self.primarySystemCode = feliCaCommonCardData.primarySystemCode
-        self.contents = feliCaCommonCardData.contents
-    }
-    
     public mutating func convert() {
         for (systemCode, system) in self.contents {
             switch systemCode {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    guard blockData.statusFlag.isSucceeded else {
+                        continue
+                    }
                     let blockData = blockData.blockData
                     switch RakutenEdyCardItemType(serviceCode) {
                     case .balance:

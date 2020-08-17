@@ -49,6 +49,9 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    guard blockData.statusFlag.isSucceeded else {
+                        continue
+                    }
                     let blockData = blockData.blockData
                     switch UnivCoopICPrepaidItemType(serviceCode) {
                     case .balance:
@@ -159,21 +162,5 @@ public struct UnivCoopICPrepaidCardTransaction: FeliCaCardTransaction {
         self.type = type
         self.difference = difference
         self.balance = balance
-    }
-}
-
-public extension UInt8 {
-    func toString() -> String {
-        var str = String(self, radix: 16, uppercase: true)
-        if str.count == 1 {
-            str = "0" + str
-        }
-        return str
-    }
-
-    func toHexString() -> String {
-        var str = self.toString()
-        str = "0x\(str)"
-        return str
     }
 }

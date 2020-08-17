@@ -14,6 +14,7 @@ var targets: [Target] = [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
             "TRETJapanNFCReader-FeliCa-TransitIC",
+            "TRETJapanNFCReader-FeliCa-RakutenEdy",
             "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
         ],
         path: "Sources/TRETJapanNFCReader"),
@@ -67,6 +68,27 @@ targets.append(
         name: "TRETJapanNFCReader-FeliCa-TransitICTests",
         dependencies: ["TRETJapanNFCReader-FeliCa-TransitIC"],
         path: "Sources/FeliCa/TransitIC/Tests")
+)
+
+
+// MARK: - FeliCa-RakutenEdy
+// Rakuten Edy / 楽天Edy
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-RakutenEdy",
+        targets: ["TRETJapanNFCReader-FeliCa-RakutenEdy"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-RakutenEdy",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/RakutenEdy/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-RakutenEdyTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-RakutenEdy"],
+        path: "Sources/FeliCa/RakutenEdy/Tests")
 )
 
 

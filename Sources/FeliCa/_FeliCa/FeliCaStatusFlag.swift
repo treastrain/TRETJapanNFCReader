@@ -11,7 +11,6 @@ import Foundation
 import CoreNFC
 #endif
 
-@available(iOS 13.0, *)
 public struct FeliCaStatusFlag {
     public var statusFlag1: Int
     public var statusFlag2: Int

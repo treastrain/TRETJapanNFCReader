@@ -11,13 +11,13 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// 楽天Edyカードから読み取ることができるデータの種別
+/// Types of item data that can be read from Rakuten Edy cards.
 public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {
-    /// カード残高
+    /// Balance
     case balance
-    /// Edy番号
+    /// Edy Number
     case edyNumber
-    /// 利用履歴
+    /// Transactions
     case transactions
     
     
@@ -37,35 +37,11 @@ public enum RakutenEdyCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (.common, 0x1317, 1)
+            return .init(systemCode: .common, serviceCode: 0x1317, numberOfBlock: 1)
         case .edyNumber:
-            return (.common, 0x110B, 1)
+            return .init(systemCode: .common, serviceCode: 0x110B, numberOfBlock: 1)
         case .transactions:
-            return (.common, 0x170F, 6)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .balance:
-            return 0x1317
-        case .edyNumber:
-            return 0x110B
-        case .transactions:
-            return 0x170F
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .balance:
-            return 1
-        case .edyNumber:
-            return 1
-        case .transactions:
-            return 6
+            return .init(systemCode: .common, serviceCode: 0x170F, numberOfBlock: 6)
         }
     }
 }

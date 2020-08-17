@@ -24,21 +24,21 @@ import Foundation
 //    }
 //}
 //
-//public extension UInt8 {
-//    func toString() -> String {
-//        var str = String(self, radix: 16).uppercased()
-//        if str.count == 1 {
-//            str = "0" + str
-//        }
-//        return str
-//    }
-//
-//    func toHexString() -> String {
-//        var str = self.toString()
-//        str = "0x\(str)"
-//        return str
-//    }
-//}
+public extension UInt8 {
+    func toString() -> String {
+        var str = String(self, radix: 16, uppercase: true)
+        if str.count == 1 {
+            str = "0" + str
+        }
+        return str
+    }
+
+    func toHexString() -> String {
+        var str = self.toString()
+        str = "0x\(str)"
+        return str
+    }
+}
 //
 //public extension Optional where Wrapped == UInt8 {
 //    func toHexString() -> String? {

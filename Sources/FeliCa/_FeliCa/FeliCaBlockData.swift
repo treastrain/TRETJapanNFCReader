@@ -13,6 +13,10 @@ public struct FeliCaBlockData: Codable, Equatable {
     public let status2: Int
     public let blockData: [Data]
     
+    public var statusFlag: FeliCaStatusFlag {
+        return FeliCaStatusFlag(self.status1, self.status2)
+    }
+    
     public init(status1: Int, status2: Int, blockData: [Data]) {
         self.status1 = status1
         self.status2 = status2
