@@ -85,7 +85,7 @@ public struct RakutenEdyCardData: FeliCaCardData {
     private mutating func convertToTransactions(_ blockData: [Data]) {
         var transactions: [RakutenEdyCardTransaction] = []
         for data in blockData {
-            var type: FeliCaCardTransactionType
+            let type: FeliCaCardTransactionType
             switch data[0] {
             case 0x02, 0x04:
                 type = .credit
