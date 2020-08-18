@@ -15,7 +15,7 @@ import TRETJapanNFCReader_Core
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// A reader for Transit IC (comply with CJRC standards, e.g.: Suica, ICOCA, PiTaPa, TOICA, PASMO, nimoca, Kitaca, SUGOCA, はやかけん, manaca, etc.) cards.
+/// A reader for Transit IC (comply or correspond with CJRC standards, e.g.: Suica, ICOCA, PiTaPa, IruCa, TOICA, PASMO, PASPY, nimoca, Kitaca, SAPICA, SUGOCA, はやかけん, manaca, icsca, etc.) cards.
 @available(iOS 13.0, *)
 public class TransitICReader: FeliCaReader {
     

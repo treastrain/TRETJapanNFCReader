@@ -51,7 +51,8 @@ targets.append(
 
 
 // MARK: - FeliCa-TransitIC
-// Transit IC (comply with CJRC standards) / 交通系IC (CJRC規格準拠)
+// Transit IC (comply or correspond with CJRC standards) / 交通系IC (CJRC規格準拠または対応)
+// Suica, ICOCA, PiTaPa, IruCa, TOICA, PASMO, PASPY, nimoca, Kitaca, SAPICA, SUGOCA, はやかけん, manaca, icsca, etc.
 products.append(
     .library(
         name: "TRETJapanNFCReader-FeliCa-TransitIC",
