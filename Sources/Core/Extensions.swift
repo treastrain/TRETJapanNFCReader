@@ -123,3 +123,11 @@ public extension Set {
         return Set<U>(self.lazy.map(transform))
     }
 }
+
+public extension Calendar {
+    static var asiaTokyo: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        return calendar
+    }
+}

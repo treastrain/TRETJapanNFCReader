@@ -83,14 +83,14 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
                 self.membershipNumber = data.prefix(6).map { $0.toString() }.joined()
             case 1:
                 self.mealCardUser = data[0] != 0
-                let calendar = Calendar(identifier: .gregorian)
                 var dateComponents = DateComponents()
-                dateComponents.calendar = calendar
-                dateComponents.timeZone = TimeZone(identifier: "Asia/Tokyo")
+                dateComponents.calendar = Calendar.asiaTokyo
+                dateComponents.timeZone = dateComponents.calendar?.timeZone
                 dateComponents.era = 1
                 dateComponents.year = Int("20\(data[2].toString())")
                 dateComponents.month = Int(data[3].toString())
                 dateComponents.day = Int(data[4].toString())
+                print(dateComponents)
                 self.mealCardLastUseDate = Calendar(identifier: .gregorian).date(from: dateComponents)
                 self.mealCardLastUsageAmount = Int(data[5...7].map { $0.toString() }.joined())
             case 2:
