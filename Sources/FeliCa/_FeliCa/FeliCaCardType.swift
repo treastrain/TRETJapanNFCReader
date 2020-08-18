@@ -16,8 +16,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     case transitIC
     /// 楽天Edyカード
     case rakutenEdy
-//    /// nanaco
-//    case nanaco
+    /// nanaco
+    case nanaco
 //    /// WAON
 //    case waon
     /// 大学生協ICプリペイドカード

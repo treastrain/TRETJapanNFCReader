@@ -14,7 +14,7 @@ import TRETJapanNFCReader_FeliCa
 /// nanacoカードのデータ
 public struct NanacoCardData: FeliCaCardData {
     public var version: String = "3"
-    public let type: FeliCaCardType = .nanaco
+    public var type: FeliCaCardType = .nanaco
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
@@ -40,19 +40,15 @@ public struct NanacoCardData: FeliCaCardData {
         self.convert()
     }
     
-    @available(iOS 13.0, *)
-    internal init(from feliCaCommonCardData: FeliCaCommonCardData) {
-        self.primaryIDm = feliCaCommonCardData.primaryIDm
-        self.primarySystemCode = feliCaCommonCardData.primarySystemCode
-        self.contents = feliCaCommonCardData.contents
-    }
-    
     public mutating func convert() {
         for (systemCode, system) in self.contents {
             switch systemCode {
             case self.primarySystemCode:
                 let services = system.services
                 for (serviceCode, blockData) in services {
+                    guard blockData.statusFlag.isSucceeded else {
+                        continue
+                    }
                     let blockData = blockData.blockData
                     switch NanacoCardItemType(serviceCode) {
                     case .balance:
@@ -73,7 +69,7 @@ public struct NanacoCardData: FeliCaCardData {
         }
     }
     
-    public mutating func convertToBalance(_ blockData: [Data]) {
+    private mutating func convertToBalance(_ blockData: [Data]) {
         let data = blockData.first!
         let balance = data.toIntReversed(0, 3)
         self.balance = balance
@@ -162,7 +158,7 @@ public struct NanacoCardTransaction: FeliCaCardTransaction {
     public let type: FeliCaCardTransactionType
     public let otherType: NanacoCardTransactionType?
     public let difference: Int
-    public var balance: Int
+    public let balance: Int
     
     public init(date: Date, type: FeliCaCardTransactionType, otherType: NanacoCardTransactionType? = nil, difference: Int, balance: Int) {
         self.date = date

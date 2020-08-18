@@ -11,15 +11,15 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// nanacoカードから読み取ることができるデータの種別
+/// Types of item data that can be read from nanaco cards.
 public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
-    /// カード残高
+    /// Balance
     case balance
-    /// nanaco番号
+    /// nanaco Number
     case nanacoNumber
-    /// ポイント
+    /// Points
     case points
-    /// 利用履歴
+    /// Transactions
     case transactions
     
     
@@ -41,41 +41,13 @@ public enum NanacoCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (.common, 0x5597, 1)
+            return .init(systemCode: .common, serviceCode: 0x5597, numberOfBlock: 1)
         case .nanacoNumber:
-            return (.common, 0x558B, 1)
+            return .init(systemCode: .common, serviceCode: 0x558B, numberOfBlock: 1)
         case .points:
-            return (.common, 0x560B, 2)
+            return .init(systemCode: .common, serviceCode: 0x560B, numberOfBlock: 2)
         case .transactions:
-            return (.common, 0x564F, 5)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .balance:
-            return 0x5597
-        case .nanacoNumber:
-            return 0x558B
-        case .points:
-            return 0x560B
-        case .transactions:
-            return 0x564F
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .balance:
-            return 1
-        case .nanacoNumber:
-            return 1
-        case .points:
-            return 2
-        case .transactions:
-            return 5
+            return .init(systemCode: .common, serviceCode: 0x564F, numberOfBlock: 5)
         }
     }
 }

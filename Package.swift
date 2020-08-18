@@ -13,7 +13,7 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
-            // "TRETJapanNFCReader-FeliCa-Nanaco",
+            "TRETJapanNFCReader-FeliCa-Nanaco",
             // "TRETJapanNFCReader-FeliCa-Octopus",
             // "TRETJapanNFCReader-FeliCa-Okica",
             "TRETJapanNFCReader-FeliCa-RakutenEdy",
@@ -52,6 +52,27 @@ targets.append(
         name: "TRETJapanNFCReader-FeliCa",
         dependencies: ["TRETJapanNFCReader-Core"],
         path: "Sources/FeliCa/_FeliCa")
+)
+
+
+// MARK: - FeliCa-Nanaco
+// nanaco / nanaco
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-Nanaco",
+        targets: ["TRETJapanNFCReader-FeliCa-Nanaco"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-Nanaco",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/Nanaco/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-NanacoTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-Nanaco"],
+        path: "Sources/FeliCa/Nanaco/Tests")
 )
 
 
