@@ -124,10 +124,10 @@ public struct RakutenEdyCardData: FeliCaCardData {
 
 /// 楽天Edyカードの利用履歴
 public struct RakutenEdyCardTransaction: FeliCaCardTransaction {
-    public var date: Date
-    public var type: FeliCaCardTransactionType
-    public var difference: Int
-    public var balance: Int
+    public let date: Date
+    public let type: FeliCaCardTransactionType
+    public let difference: Int
+    public let balance: Int
     
     public init(date: Date, type: FeliCaCardTransactionType, difference: Int, balance: Int) {
         self.date = date
