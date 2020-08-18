@@ -31,6 +31,8 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
     public var points: Double?
     public var transactions: [UnivCoopICPrepaidCardTransaction]?
     
+    private lazy var calendar = Calendar.asiaTokyo
+    
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
@@ -84,7 +86,7 @@ public struct UnivCoopICPrepaidCardData: FeliCaCardData {
             case 1:
                 self.mealCardUser = data[0] != 0
                 var dateComponents = DateComponents()
-                dateComponents.calendar = Calendar.asiaTokyo
+                dateComponents.calendar = self.calendar
                 dateComponents.timeZone = dateComponents.calendar?.timeZone
                 dateComponents.era = 1
                 dateComponents.year = Int("20\(data[2].toString())")
