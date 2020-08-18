@@ -28,6 +28,8 @@ public struct NanacoCardData: FeliCaCardData {
     public var points: Int?
     public var transactions: [NanacoCardTransaction]?
     
+    private lazy var calendar = Calendar.asiaTokyo
+    
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
@@ -77,27 +79,32 @@ public struct NanacoCardData: FeliCaCardData {
     
     private mutating func convertToNanacoNumber(_ blockData: [Data]) {
         let data = blockData.first!
-        self.nanacoNumber = data[0].toString() + data[1].toString() + "-" + data[2].toString() + data[3].toString() + "-" + data[4].toString() + data[5].toString() + "-" + data[6].toString() + data[7].toString()
+        self.nanacoNumber = String(
+            stride(from: 0, to: 7, by: 2)
+                .map { data[$0].toString() + data[$0 + 1].toString() + "-" }
+                .joined()
+                .dropLast()
+        )
     }
     
     private mutating func convertToPoints(_ blockData: [Data]) {
         let data = blockData.last!
-        let points1 = Int((UInt32(data[0]) << 16) + (UInt32(data[1]) << 8) + UInt32(data[2]))
-        let points2 = Int((UInt32(data[5]) << 16) + (UInt32(data[6]) << 8) + UInt32(data[7]))
-        self.points = points1 + points2
+        self.points = data.toInt(from: 0, to: 2) + data.toInt(from: 5, to: 7)
     }
     
     private mutating func convertToTransactions(_ blockData: [Data]) {
         var transactions: [NanacoCardTransaction] = []
         for data in blockData {
             
-            var type = FeliCaCardTransactionType.unknown
-            var otherType: NanacoCardTransactionType?
+            let type: FeliCaCardTransactionType
+            let otherType: NanacoCardTransactionType?
             switch data[0] {
             case 0x47:
                 type = .purchase
+                otherType = nil
             case 0x5C, 0x6F, 0x70:
                 type = .credit
+                otherType = nil
             case 0x35:
                 type = .other
                 otherType = .transfer
@@ -108,35 +115,21 @@ public struct NanacoCardData: FeliCaCardData {
                 continue
             }
             
-            let data1 = UInt32(data[1]) << 24
-            let data2 = UInt32(data[2]) << 16
-            let data3 = UInt32(data[3]) << 8
-            let data4 = UInt32(data[4])
-            let difference = Int(data1 + data2 + data3 + data4)
-            
-            let data5 = UInt32(data[5]) << 24
-            let data6 = UInt32(data[6]) << 16
-            let data7 = UInt32(data[7]) << 8
-            let data8 = UInt32(data[8])
-            let balance = Int(data5 + data6 + data7 + data8)
-            
-            let data9 = UInt16(data[9]) << 8
-            let data10 = data[10]
-            let data11 = UInt16(data[11])
-            let data12 = data[12]
-            
-            let year = Int((data9 + UInt16(data10)) >> 5) + 2000
-            let month = Int((data10 << 3) >> 4)
-            let day = Int((((UInt16(data10) << 8) + data11) << 7) >> 11)
-            let hour = Int((((data11 << 8) + UInt16(data12)) << 4) >> 10)
-            let minute = Int(data12 & 0x3F)
-            let dateString = "\(year)-\(month)-\(day) \(hour):\(minute)"
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-M-d H:m"
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            guard let date = formatter.date(from: dateString) else {
+            var dateComponents = DateComponents()
+            dateComponents.calendar = self.calendar
+            dateComponents.timeZone = dateComponents.calendar?.timeZone
+            dateComponents.era = 1
+            dateComponents.year = data.toInt(from: 9, to: 10) >> 5 + 2000
+            dateComponents.month = Int(data[10] >> 1 & 0xF)
+            dateComponents.day = data.toInt(from: 10, to: 11) >> 4 & 0x1F
+            dateComponents.hour = data.toInt(from: 11, to: 12) >> 6 & 0x3F
+            dateComponents.minute = Int(data[12] & 0x3F)
+            guard let date = self.calendar.date(from: dateComponents) else {
                 continue
             }
+            
+            let difference = data.toInt(from: 1, to: 4)
+            let balance = data.toInt(from: 5, to: 8)
             
             transactions.append(NanacoCardTransaction(date: date, type: type, otherType: otherType, difference: difference, balance: balance))
         }
