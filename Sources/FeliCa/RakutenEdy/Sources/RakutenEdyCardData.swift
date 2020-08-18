@@ -27,6 +27,8 @@ public struct RakutenEdyCardData: FeliCaCardData {
     public var edyNumber: String?
     public var transactions: [RakutenEdyCardTransaction]?
     
+    private lazy var calendar = Calendar.asiaTokyo
+    
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
         self.primarySystemCode = systemCode
@@ -74,39 +76,35 @@ public struct RakutenEdyCardData: FeliCaCardData {
     
     private mutating func convertToEdyNumber(_ blockData: [Data]) {
         let data = blockData.first!
-        self.edyNumber = data[2].toString() + data[3].toString() + " " + data[4].toString() + data[5].toString() + " " + data[6].toString() + data[7].toString() + " " + data[8].toString() + data[9].toString()
+        self.edyNumber = stride(from: 2, to: 9, by: 2)
+            .map { data[$0].toString() + data[$0 + 1].toString() + " " }
+            .joined()
+            .trimmingCharacters(in: .whitespaces)
     }
     
     private mutating func convertToTransactions(_ blockData: [Data]) {
         var transactions: [RakutenEdyCardTransaction] = []
         for data in blockData {
-            
-            var type = FeliCaCardTransactionType.unknown
-            if data[0] == 0x02 || data[0] == 0x04 {
+            var type: FeliCaCardTransactionType
+            switch data[0] {
+            case 0x02, 0x04:
                 type = .credit
-            } else if data[0] == 0x20 {
+            case 0x20:
                 type = .purchase
-            } else {
+            default:
                 continue
             }
             
-            let day = Int(((UInt16(data[4]) << 8) + UInt16(data[5])) >> 1)
-            let second = Int(((UInt32(data[5]) << 16) + (UInt32(data[6]) << 8) + UInt32(data[7])) & 0x1FFFF)
-            var date = Date(timeIntervalSince1970: 946652400)
-            date = Calendar.current.date(byAdding: .day, value: day, to: date)!
-            date = Calendar.current.date(byAdding: .second, value: second, to: date)!
+            let date20000101 = Date(timeIntervalSince1970: 946652400)
+            let day = data.toInt(from: 4, to: 5) >> 1
+            let second = data.toInt(from: 5, to: 7) & 0x1FFFF
+            guard let dateAddedDay = self.calendar.date(byAdding: .day, value: day, to: date20000101),
+                  let date = self.calendar.date(byAdding: .second, value: second, to: dateAddedDay) else {
+                continue
+            }
             
-            let data8 = UInt32(data[8]) << 24
-            let data9 = UInt32(data[9]) << 16
-            let data10 = UInt32(data[10]) << 8
-            let data11 = UInt32(data[11])
-            let difference = Int(data8 + data9 + data10 + data11)
-            
-            let data12 = UInt32(data[12]) << 24
-            let data13 = UInt32(data[13]) << 16
-            let data14 = UInt32(data[14]) << 8
-            let data15 = UInt32(data[15])
-            let balance = Int(data12 + data13 + data14 + data15)
+            let difference = data.toInt(from: 8, to: 11)
+            let balance = data.toInt(from: 12, to: 15)
             
             transactions.append(RakutenEdyCardTransaction(date: date, type: type, difference: difference, balance: balance))
         }

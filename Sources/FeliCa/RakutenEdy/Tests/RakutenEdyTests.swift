@@ -21,7 +21,7 @@ final class RakutenEdyTests: XCTestCase {
                     Data([0x23, 0x00, 0x00, 0x00, 0x96, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00])
                 ]),
                 0x110B : FeliCaBlockData(status1: 0, status2: 0, blockData: [
-                    Data([0x00, 0x02, 0x19, 0x01, 0x23, 0x35, 0x00, 0x33, 0x16, 0x13, 0x28, 0x90, 0x00, 0x00, 0x00, 0x11]),
+                    Data([0x00, 0x02, 0x19, 0x01, 0x23, 0x45, 0x67, 0x89, 0x01, 0x23, 0x28, 0x90, 0x00, 0x00, 0x00, 0x11]),
                     Data([0x00, 0x00, 0x61, 0xA8, 0x00, 0x00, 0xC3, 0x50, 0x00, 0x00, 0xC3, 0x50, 0x00, 0x00, 0x00, 0x00]),
                 ]),
                 0x170F : FeliCaBlockData(status1: 0, status2: 0, blockData: [
@@ -36,10 +36,10 @@ final class RakutenEdyTests: XCTestCase {
         ]
         let cardData = RakutenEdyCardData(idm: idm, systemCode: systemCode, data: data)
         let transactions = [
-            RakutenEdyCardTransaction(date: "2019-10-05 06:11:47 +0000".date, type: .purchase, difference: 150, balance: 35),
-            RakutenEdyCardTransaction(date: "2019-09-11 10:56:28 +0000".date, type: .purchase, difference: 610, balance: 185),
-            RakutenEdyCardTransaction(date: "2019-08-22 11:29:36 +0000".date, type: .purchase, difference: 205, balance: 795),
-            RakutenEdyCardTransaction(date: "2019-08-22 11:29:22 +0000".date, type: .credit, difference: 1000, balance: 1000)
+            RakutenEdyCardTransaction(date: "2019-10-05 15:11:47 +0900".date, type: .purchase, difference: 150, balance: 35),
+            RakutenEdyCardTransaction(date: "2019-09-11 19:56:28 +0900".date, type: .purchase, difference: 610, balance: 185),
+            RakutenEdyCardTransaction(date: "2019-08-22 20:29:36 +0900".date, type: .purchase, difference: 205, balance: 795),
+            RakutenEdyCardTransaction(date: "2019-08-22 20:29:22 +0900".date, type: .credit, difference: 1000, balance: 1000)
         ]
         
         XCTAssertEqual(cardData.version, "3")
@@ -48,7 +48,7 @@ final class RakutenEdyTests: XCTestCase {
         XCTAssertEqual(cardData.primarySystemCode, systemCode)
         XCTAssertEqual(cardData.contents, data)
         XCTAssertEqual(cardData.balance, 35)
-        XCTAssertEqual(cardData.edyNumber, "1901 2335 0033 1613")
+        XCTAssertEqual(cardData.edyNumber, "1901 2345 6789 0123")
         XCTAssertNotNil(cardData.transactions)
         for (cardDataTransaction, dummyTransaction) in zip(cardData.transactions!, transactions) {
             XCTAssertEqual(cardDataTransaction.date, dummyTransaction.date)

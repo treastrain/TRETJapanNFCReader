@@ -107,6 +107,14 @@ public extension Data {
         return self.map { String(format: "%.2hhx", $0) }.joined()
     }
     
+    func toInt(from startIndex: Int, to endIndex: Int) -> Int {
+        var s = 0
+        for (n, index) in (startIndex...endIndex).reversed().enumerated() {
+            s += Int(self[index]) << (n * 8)
+        }
+        return s
+    }
+    
     func toIntReversed(_ startIndex: Int, _ endIndex: Int) -> Int {
         var s = 0
         
