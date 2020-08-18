@@ -13,9 +13,14 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
-            "TRETJapanNFCReader-FeliCa-TransitIC",
+            // "TRETJapanNFCReader-FeliCa-Nanaco",
+            // "TRETJapanNFCReader-FeliCa-Octopus",
+            // "TRETJapanNFCReader-FeliCa-Okica",
             "TRETJapanNFCReader-FeliCa-RakutenEdy",
+            // "TRETJapanNFCReader-FeliCa-Ryuto",
+            "TRETJapanNFCReader-FeliCa-TransitIC",
             "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
+            // "TRETJapanNFCReader-FeliCa-Waon",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -50,6 +55,27 @@ targets.append(
 )
 
 
+// MARK: - FeliCa-RakutenEdy
+// Rakuten Edy / 楽天Edy
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-RakutenEdy",
+        targets: ["TRETJapanNFCReader-FeliCa-RakutenEdy"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-RakutenEdy",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/RakutenEdy/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-RakutenEdyTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-RakutenEdy"],
+        path: "Sources/FeliCa/RakutenEdy/Tests")
+)
+
+
 // MARK: - FeliCa-TransitIC
 // Transit IC (comply or correspond with CJRC standards) / 交通系IC (CJRC規格準拠または対応)
 // Suica, ICOCA, PiTaPa, IruCa, TOICA, PASMO, PASPY, nimoca, Kitaca, SAPICA, SUGOCA, はやかけん, manaca, icsca, etc.
@@ -69,27 +95,6 @@ targets.append(
         name: "TRETJapanNFCReader-FeliCa-TransitICTests",
         dependencies: ["TRETJapanNFCReader-FeliCa-TransitIC"],
         path: "Sources/FeliCa/TransitIC/Tests")
-)
-
-
-// MARK: - FeliCa-RakutenEdy
-// Rakuten Edy / 楽天Edy
-products.append(
-    .library(
-        name: "TRETJapanNFCReader-FeliCa-RakutenEdy",
-        targets: ["TRETJapanNFCReader-FeliCa-RakutenEdy"])
-)
-targets.append(
-    .target(
-        name: "TRETJapanNFCReader-FeliCa-RakutenEdy",
-        dependencies: ["TRETJapanNFCReader-FeliCa"],
-        path: "Sources/FeliCa/RakutenEdy/Sources")
-)
-targets.append(
-    .testTarget(
-        name: "TRETJapanNFCReader-FeliCa-RakutenEdyTests",
-        dependencies: ["TRETJapanNFCReader-FeliCa-RakutenEdy"],
-        path: "Sources/FeliCa/RakutenEdy/Tests")
 )
 
 
