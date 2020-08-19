@@ -11,15 +11,15 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// WAONカードから読み取る事ができるデータの種別
+/// Types of item data that can be read from WAON cards.
 public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {
-    /// カード残高
+    /// Balance
     case balance
-    /// WAON番号
+    /// WAON Number
     case waonNumber
-    /// ポイント
+    /// Points
     case points
-    /// 利用履歴
+    /// Transactions
     case transactions
     
     
@@ -41,41 +41,13 @@ public enum WaonCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (.common, 0x6817, 1)
+            return .init(systemCode: .common, serviceCode: 0x6817, numberOfBlock: 1)
         case .waonNumber:
-            return (.common, 0x684F, 1)
+            return .init(systemCode: .common, serviceCode: 0x684F, numberOfBlock: 1)
         case .points:
-            return (.common, 0x684B, 1)
+            return .init(systemCode: .common, serviceCode: 0x684B, numberOfBlock: 1)
         case .transactions:
-            return (.common, 0x680B, 9)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .balance:
-            return 0x6817
-        case .waonNumber:
-            return 0x684F
-        case .points:
-            return 0x684B
-        case .transactions:
-            return 0x680B
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .balance:
-            return 1
-        case .waonNumber:
-            return 1
-        case .points:
-            return 1
-        case .transactions:
-            return 9
+            return .init(systemCode: .common, serviceCode: 0x680B, numberOfBlock: 9)
         }
     }
 }

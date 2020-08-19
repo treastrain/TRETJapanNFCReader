@@ -20,7 +20,7 @@ var targets: [Target] = [
             // "TRETJapanNFCReader-FeliCa-Ryuto",
             "TRETJapanNFCReader-FeliCa-TransitIC",
             "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
-            // "TRETJapanNFCReader-FeliCa-Waon",
+            "TRETJapanNFCReader-FeliCa-Waon",
         ],
         path: "Sources/TRETJapanNFCReader"),
 ]
@@ -138,6 +138,28 @@ targets.append(
         dependencies: ["TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid"],
         path: "Sources/FeliCa/UnivCoopICPrepaid/Tests")
 )
+
+
+// MARK: - FeliCa-Waon
+// WAON / WAON
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-Waon",
+        targets: ["TRETJapanNFCReader-FeliCa-Waon"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-Waon",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/Waon/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-WaonTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-Waon"],
+        path: "Sources/FeliCa/Waon/Tests")
+)
+
 
 let package = Package(
     name: "TRETJapanNFCReader",
