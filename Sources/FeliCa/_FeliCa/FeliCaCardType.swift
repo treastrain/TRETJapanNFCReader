@@ -33,8 +33,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
 //    /// FCF Campus Card
 //    case fcfcampus
 //    
-//    /// Octopus Card (八達通)
-//    case octopus
+    /// Octopus Card (八達通)
+    case octopus
 //    
 //    /// iD （PKPaymentNetwork に準拠し、`idCredit` とした）
 //    case idCredit

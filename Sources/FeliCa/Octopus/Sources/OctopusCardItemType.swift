@@ -11,9 +11,9 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// Types of data that can be read from Octopus card
+/// Types of item data that can be read from Octopus cards.
 public enum OctopusCardItemType: CaseIterable, FeliCaCardItemType {
-    /// Card Balance
+    /// Balance
     case balance
     
     public init?(_ serviceCode: FeliCaServiceCode) {
@@ -28,23 +28,7 @@ public enum OctopusCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .balance:
-            return (.octopus, 0x0117, 1)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .balance:
-            return 0x0117
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .balance:
-            return 1
+            return .init(systemCode: .octopus, serviceCode: 0x0117, numberOfBlock: 1)
         }
     }
 }
