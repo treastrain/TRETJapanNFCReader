@@ -25,10 +25,6 @@ public class TransitICReader: FeliCaReader {
     /// A completion handler called when the operation is completed.
     private var readResultHandler: ((Result<TransitICCardDataResponse, Error>) -> Void)?
     
-    private override init(delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: JapanNFCReader.Configuration = .default) {
-        fatalError()
-    }
-    
     /// Creates an Transit IC reader with the specified session configuration, delegate, and reader queue.
     /// - Parameters:
     ///   - systemCode: FeliCa System Code.
@@ -38,14 +34,6 @@ public class TransitICReader: FeliCaReader {
     public init(systemCode: FeliCaSystemCode = .cjrc, delegate: TransitICReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: Configuration = .default) {
         super.init(delegate: delegate, queue: readerQueue, configuration: configuration)
         self.systemCode = systemCode
-    }
-    
-    private func convertToParameters(from itemTypes: Set<TransitICCardItemType>) -> Set<FeliCaReadWithoutEncryptionCommandParameter> {
-        var itemTypes = itemTypes
-        if self.systemCode != .sapica {
-            itemTypes = itemTypes.filter { $0 != .sapicaPoints }
-        }
-        return itemTypes.setMap { $0.parameter(systemCode: self.systemCode) }
     }
     
     /// Reads data from Transit IC card.
@@ -130,6 +118,18 @@ public class TransitICReader: FeliCaReader {
                 (self.feliCaReaderDelegate as? TransitICReaderDelegate)?.readerSessionReadDidInvalidate(with: result)
             }
         }
+    }
+    
+    private override init(delegate: FeliCaReaderDelegate? = nil, queue readerQueue: DispatchQueue = .main, configuration: JapanNFCReader.Configuration = .default) {
+        fatalError()
+    }
+    
+    private func convertToParameters(from itemTypes: Set<TransitICCardItemType>) -> Set<FeliCaReadWithoutEncryptionCommandParameter> {
+        var itemTypes = itemTypes
+        if self.systemCode != .sapica {
+            itemTypes = itemTypes.filter { $0 != .sapicaPoints }
+        }
+        return itemTypes.setMap { $0.parameter(systemCode: self.systemCode) }
     }
     
     @available(*, unavailable, renamed: "read")
