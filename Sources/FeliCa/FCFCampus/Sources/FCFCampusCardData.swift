@@ -1,5 +1,5 @@
 //
-//  CommonCard.swift
+//  FCFCampusCardData.swift
 //  TRETJapanNFCReader
 //
 //  Created by Qs-F on 2019/09/27.
@@ -11,17 +11,6 @@ import CoreNFC
 #if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
 #endif
-
-@available(iOS 13.0, *)
-public struct FCFCampusCard: FeliCaCard {
-    public let tag: NFCFeliCaTag
-    public let data: FCFCampusCardData
-    
-    public init(tag: NFCFeliCaTag, data: FCFCampusCardData) {
-        self.tag = tag
-        self.data = data
-    }
-}
 
 public struct FCFCampusCardData: FeliCaCardData {
     public var version: String = "3"

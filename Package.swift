@@ -13,6 +13,7 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
+            "TRETJapanNFCReader-FeliCa-FCFCampus",
             "TRETJapanNFCReader-FeliCa-LocalTransitIC",
             "TRETJapanNFCReader-FeliCa-Nanaco",
             "TRETJapanNFCReader-FeliCa-Octopus",
@@ -52,6 +53,28 @@ targets.append(
         name: "TRETJapanNFCReader-FeliCa",
         dependencies: ["TRETJapanNFCReader-Core"],
         path: "Sources/FeliCa/_FeliCa")
+)
+
+
+// MARK: - FeliCa-FCFCampus
+// FCFCampus / FCFCampus
+// ICU 学生証
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-FCFCampus",
+        targets: ["TRETJapanNFCReader-FeliCa-FCFCampus"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-FCFCampus",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/FCFCampus/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-FCFCampusTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-FCFCampus"],
+        path: "Sources/FeliCa/FCFCampus/Tests")
 )
 
 
