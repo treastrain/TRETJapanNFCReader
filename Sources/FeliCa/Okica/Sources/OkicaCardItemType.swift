@@ -36,35 +36,11 @@ public enum OkicaCardItemType: CaseIterable, FeliCaCardItemType {
     public var parameter: FeliCaReadWithoutEncryptionCommandParameter {
         switch self {
         case .transactions:
-            return (.okica, 0x028F, 20)
+            return .init(systemCode: .okica, serviceCode: 0x028F, numberOfBlock: 20)
         case .entryExitInformations:
-            return (.okica, 0x050F, 3)
+            return .init(systemCode: .okica, serviceCode: 0x050F, numberOfBlock: 3)
         case .sfEntryInformations:
-            return (.okica, 0x060B, 2)
-        }
-    }
-    
-    @available(*, unavailable, renamed: "parameter.serviceCode")
-    public var serviceCode: FeliCaServiceCode {
-        switch self {
-        case .transactions:
-            return 0x028F
-        case .entryExitInformations:
-            return 0x050F
-        case .sfEntryInformations:
-            return 0x060B
-        }
-    }
-    
-    @available(*, unavailable)
-    var blocks: Int {
-        switch self {
-        case .transactions:
-            return 20
-        case .entryExitInformations:
-            return 3
-        case .sfEntryInformations:
-            return 2
+            return .init(systemCode: .okica, serviceCode: 0x060B, numberOfBlock: 2)
         }
     }
 }

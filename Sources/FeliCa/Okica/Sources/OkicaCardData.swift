@@ -14,7 +14,7 @@ import TRETJapanNFCReader_FeliCa
 /// OKICA のデータ
 public struct OkicaCardData: FeliCaCardData {
     public var version: String = "3"
-    public let type: FeliCaCardType = .okica
+    public var type: FeliCaCardType = .okica
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
@@ -31,6 +31,8 @@ public struct OkicaCardData: FeliCaCardData {
     }
     public var entryExitInformationsData: [Data]?
     public var sfEntryInformationsData: [Data]?
+    
+    private lazy var calendar = Calendar.asiaTokyo
     
     public init(idm: String, systemCode: FeliCaSystemCode) {
         self.primaryIDm = idm
@@ -69,33 +71,40 @@ public struct OkicaCardData: FeliCaCardData {
     }
     
     private mutating func convertToTransactions(_ blockData: [Data]) -> [OkicaCardTransaction] {
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/M/d"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        
         var transactions: [OkicaCardTransaction] = []
-        
         for (i, data) in zip(blockData.indices, blockData) {
             if i >= blockData.count - 1 {
                 continue
             }
             
-            let dateString = self.dateString(from: data[4], data[5])
-            guard let date = formatter.date(from: dateString) else {
+            let year = Int(data[4] >> 1) + 2000
+            let month = data.toInt(from: 4, to: 5) >> 5 & 0xF
+            let day = Int(data[5] & 0x1F)
+            let dateString = "\(year)/\(month)/\(day)"
+            
+            var dateComponents = DateComponents()
+            dateComponents.calendar = self.calendar
+            dateComponents.timeZone = dateComponents.calendar?.timeZone
+            dateComponents.era = 1
+            dateComponents.year = year
+            dateComponents.month = month
+            dateComponents.day = day
+            guard let date = self.calendar.date(from: dateComponents) else {
                 continue
             }
             
-            var type: FeliCaCardTransactionType = .unknown
-            var otherType: OkicaCardTransactionType? = nil
-            var usageType = "不明"
-            let usageTypeData = (UInt32(data[0]) << 24) + (UInt32(data[1]) << 16) + UInt32(data[2] << 8) + UInt32(data[3])
+            let type: FeliCaCardTransactionType
+            let otherType: OkicaCardTransactionType?
+            let usageType: String
+            let usageTypeData = data.toInt(from: 0, to: 3)
             switch usageTypeData {
             case 0x16010002:
                 type = .transit
+                otherType = nil
                 usageType = "ゆいレール（移動）"
             case 0x08020000:
                 type = .credit
+                otherType = nil
                 usageType = "ゆいレール（チャージ）"
             case 0x08480000, 0x08480400:
                 type = .other
@@ -103,9 +112,11 @@ public struct OkicaCardData: FeliCaCardData {
                 usageType = "ポイントチャージ"
             case 0x051F0000:
                 type = .credit
+                otherType = nil
                 usageType = "バス（チャージ）"
             case 0x050F000F:
                 type = .transit
+                otherType = nil
                 usageType = "バス（移動）"
             case 0x08070000:
                 type = .other
@@ -113,33 +124,25 @@ public struct OkicaCardData: FeliCaCardData {
                 usageType = "新規発行"
             case 0x1F1F0000:
                 type = .credit
+                otherType = nil
                 usageType = "チャージ機"
             default:
-                break
+                type = .unknown
+                otherType = nil
+                usageType = "不明"
             }
-            
-            print(i, data as NSData, usageTypeData, usageType)
             
             let entryStation = self.station(from: data[6], data[7])
             let exitedStation = self.station(from: data[8], data[9])
             let balance = data.toIntReversed(10, 11)
             let previousBalance = blockData[i + 1].toIntReversed(10, 11)
             let difference = balance - previousBalance
-            let sequentialNumber = self.transactionSerialNumber(from: data[13], data[14])
+            let sequentialNumber = String(data.toInt(from: 13, to: 14))
             
             let transaction = OkicaCardTransaction(type: type, otherType: otherType, dateString: dateString, date: date, usageType: usageType, entryStation: entryStation, exitedStation: exitedStation, balance: balance, difference: difference, sequentialNumber: sequentialNumber)
             transactions.append(transaction)
         }
-        
         return transactions
-    }
-    
-    
-    private func dateString(from data4: UInt8, _ data5: UInt8) -> String {
-        let year = Int(data4 >> 1) + 2000
-        let month = ((data4 & 0x1) << 3) + (data5 >> 5)
-        let day = data5 & 0x1F
-        return "\(year)/\(month)/\(day)"
     }
     
     public func station(from stationCode1: UInt8, _ stationCode2: UInt8) -> String {
@@ -205,11 +208,6 @@ public struct OkicaCardData: FeliCaCardData {
         default:
             return ""
         }
-    }
-    
-    private func transactionSerialNumber(from dataD: UInt8, _ dataE: UInt8) -> String {
-        let n = (UInt16(dataD) << 8) + UInt16(dataE)
-        return "\(n)"
     }
     
     

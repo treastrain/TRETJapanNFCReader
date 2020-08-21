@@ -22,9 +22,9 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     case waon
     /// 大学生協ICプリペイドカード
     case univCoopICPrepaid
-//    
-//    /// OKICA
-//    case okica
+    
+    /// OKICA
+    case okica
 //    /// エヌタス
 //    case ntasu
 //    /// りゅーと
