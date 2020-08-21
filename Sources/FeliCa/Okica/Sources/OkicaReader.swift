@@ -15,7 +15,7 @@ import TRETJapanNFCReader_Core
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// A reader for Okica cards.
+/// A reader for OKICA cards.
 @available(iOS 13.0, *)
 public class OkicaReader: FeliCaReader {
     
@@ -28,25 +28,25 @@ public class OkicaReader: FeliCaReader {
         super.init(delegate: delegate, queue: readerQueue, configuration: configuration)
     }
     
-    /// Reads data from Okica card.
+    /// Reads data from OKICA card.
     /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     public func read(_ itemTypes: Set<OkicaCardItemType>) {
         self.read(itemTypes, didBecomeActive: nil, resultHandler: nil)
     }
     
-    /// Reads data from Okica card.
+    /// Reads data from OKICA card.
     /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     public func read(_ itemTypes: [OkicaCardItemType]) {
         self.read(Set(itemTypes))
     }
     
-    /// Reads data from Okica card.
+    /// Reads data from OKICA card.
     /// - Parameter itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     public func read(_ itemTypes: OkicaCardItemType...) {
         self.read(itemTypes)
     }
     
-    /// Reads data from Okica card, then calls a handler upon completion.
+    /// Reads data from OKICA card, then calls a handler upon completion.
     /// - Parameters:
     ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
@@ -55,7 +55,7 @@ public class OkicaReader: FeliCaReader {
         self.read(itemTypes, didBecomeActive: Optional(didBecomeActiveHandler), resultHandler: Optional(resultHandler))
     }
     
-    /// Reads data from Okica card, then calls a handler upon completion.
+    /// Reads data from OKICA card, then calls a handler upon completion.
     /// - Parameters:
     ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.
@@ -64,7 +64,7 @@ public class OkicaReader: FeliCaReader {
         self.read(Set(itemTypes), didBecomeActive: didBecomeActiveHandler, resultHandler: resultHandler)
     }
     
-    /// Reads data from Okica card, then calls a handler upon completion.
+    /// Reads data from OKICA card, then calls a handler upon completion.
     /// - Parameters:
     ///   - itemTypes: Configures the item type of the reader; multiple types can be OR’ed together.
     ///   - didBecomeActiveHandler: A handler called when the reader is active.

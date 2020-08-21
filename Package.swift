@@ -98,7 +98,7 @@ targets.append(
 
 
 // MARK: - FeliCa-Okica
-// Okica / 沖縄ICカード
+// OKICA / 沖縄ICカード
 products.append(
     .library(
         name: "TRETJapanNFCReader-FeliCa-Okica",
