@@ -13,11 +13,11 @@ var targets: [Target] = [
         dependencies: [
             "TRETJapanNFCReader-Core",
             "TRETJapanNFCReader-FeliCa",
+            "TRETJapanNFCReader-FeliCa-LocalTransitIC",
             "TRETJapanNFCReader-FeliCa-Nanaco",
             "TRETJapanNFCReader-FeliCa-Octopus",
             "TRETJapanNFCReader-FeliCa-Okica",
             "TRETJapanNFCReader-FeliCa-RakutenEdy",
-            // "TRETJapanNFCReader-FeliCa-Ryuto",
             "TRETJapanNFCReader-FeliCa-TransitIC",
             "TRETJapanNFCReader-FeliCa-UnivCoopICPrepaid",
             "TRETJapanNFCReader-FeliCa-Waon",
@@ -52,6 +52,28 @@ targets.append(
         name: "TRETJapanNFCReader-FeliCa",
         dependencies: ["TRETJapanNFCReader-Core"],
         path: "Sources/FeliCa/_FeliCa")
+)
+
+
+// MARK: - FeliCa-LocalTransitIC
+// Local Transit IC / 地方の交通系IC
+// りゅーと
+products.append(
+    .library(
+        name: "TRETJapanNFCReader-FeliCa-LocalTransitIC",
+        targets: ["TRETJapanNFCReader-FeliCa-LocalTransitIC"])
+)
+targets.append(
+    .target(
+        name: "TRETJapanNFCReader-FeliCa-LocalTransitIC",
+        dependencies: ["TRETJapanNFCReader-FeliCa"],
+        path: "Sources/FeliCa/LocalTransitIC/Sources")
+)
+targets.append(
+    .testTarget(
+        name: "TRETJapanNFCReader-FeliCa-LocalTransitICTests",
+        dependencies: ["TRETJapanNFCReader-FeliCa-LocalTransitIC"],
+        path: "Sources/FeliCa/LocalTransitIC/Tests")
 )
 
 

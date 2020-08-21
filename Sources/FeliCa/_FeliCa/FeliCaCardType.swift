@@ -14,6 +14,8 @@ import TRETJapanNFCReader_Core
 public enum FeliCaCardType: String, Codable, CaseIterable {
     /// 交通系ICカード
     case transitIC
+    /// 地方の交通系ICカード
+    case localTransitIC
     /// 楽天Edyカード
     case rakutenEdy
     /// nanaco
@@ -27,8 +29,6 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     case okica
 //    /// エヌタス
 //    case ntasu
-//    /// りゅーと
-//    case ryuto
 //    
 //    /// FCF Campus Card
 //    case fcfcampus
@@ -73,4 +73,8 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
 //            return "Unknown"
 //        }
 //    }
+    
+    /// りゅーと
+    @available(*, unavailable, renamed: "localTransitIC")
+    public static var ryuto = FeliCaCardType.localTransitIC
 }

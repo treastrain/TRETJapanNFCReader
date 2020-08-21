@@ -1,5 +1,5 @@
 //
-//  RyutoCardData.swift
+//  LocalTransitICCardData.swift
 //  DriversLicenseReader
 //
 //  Created by treastrain on 2019/11/21.
@@ -11,10 +11,10 @@ import Foundation
 import TRETJapanNFCReader_FeliCa
 #endif
 
-/// りゅーと のデータ
-public struct RyutoCardData: FeliCaCardData {
+/// 地方の交通系ICカードのデータ
+public struct LocalTransitICCardData: FeliCaCardData {
     public var version: String = "3"
-    public let type: FeliCaCardType = .ryuto
+    public var type: FeliCaCardType = .localTransitIC
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
@@ -24,7 +24,7 @@ public struct RyutoCardData: FeliCaCardData {
     }
     
     public var balance: Int?
-    public var transactions: [RyutoCardTransaction]? {
+    public var transactions: [LocalTransitICCardTransaction]? {
         didSet {
             self.balance = transactions?.first?.balance
         }
@@ -49,7 +49,7 @@ public struct RyutoCardData: FeliCaCardData {
                 let services = system.services
                 for (serviceCode, blockData) in services {
                     let blockData = blockData.blockData
-                    switch RyutoCardItemType(serviceCode) {
+                    switch LocalTransitICCardItemType(serviceCode) {
                     case .transactions:
                         self.transactions = convertToTransactions(blockData)
                     case .none:
@@ -62,12 +62,12 @@ public struct RyutoCardData: FeliCaCardData {
         }
     }
     
-    private mutating func convertToTransactions(_ blockData: [Data]) -> [RyutoCardTransaction] {
+    private mutating func convertToTransactions(_ blockData: [Data]) -> [LocalTransitICCardTransaction] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/M/d H:m"
         formatter.locale = Locale(identifier: "en_US_POSIX")
         
-        var transactions: [RyutoCardTransaction] = []
+        var transactions: [LocalTransitICCardTransaction] = []
         
         for data in blockData {
             let (boardingDateString, alightingDateString) = self.dateString(from: data[0], data[1], data[2], data[3], data[4])
@@ -81,7 +81,7 @@ public struct RyutoCardData: FeliCaCardData {
             let difference = (Int(data[10]) << 8) + Int(data[11])
             let balance = (Int(data[14]) << 8) + Int(data[15])
             
-            let transaction = RyutoCardTransaction(date: alightingDate, type: transactionType, difference: difference, balance: balance, boardingDate: boardingDate, alightingDate: alightingDate, boardingBusStop: boardingBusStop, alightingBusStop: alightingBusStop)
+            let transaction = LocalTransitICCardTransaction(date: alightingDate, type: transactionType, difference: difference, balance: balance, boardingDate: boardingDate, alightingDate: alightingDate, boardingBusStop: boardingBusStop, alightingBusStop: alightingBusStop)
             transactions.append(transaction)
         }
         
@@ -117,8 +117,8 @@ public struct RyutoCardData: FeliCaCardData {
     }
 }
 
-/// りゅーと の利用履歴
-public struct RyutoCardTransaction: FeliCaCardTransaction {
+/// 地方の交通系ICカードの利用履歴
+public struct LocalTransitICCardTransaction: FeliCaCardTransaction {
     public let date: Date
     public let type: FeliCaCardTransactionType
     public let difference: Int
@@ -129,3 +129,8 @@ public struct RyutoCardTransaction: FeliCaCardTransaction {
     public let boardingBusStop: Data
     public let alightingBusStop: Data
 }
+
+@available(*, unavailable, renamed: "LocalTransitICCardData")
+public typealias RyutoCardData = LocalTransitICCardData
+@available(*, unavailable, renamed: "LocalTransitICCardTransaction")
+public typealias RyutoCardTransaction = LocalTransitICCardTransaction
