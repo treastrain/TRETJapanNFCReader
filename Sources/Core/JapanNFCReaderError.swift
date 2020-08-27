@@ -6,7 +6,8 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-import Foundation
+#if os(iOS)
+import CoreNFC
 
 @available(iOS 13.0, *)
 public enum JapanNFCReaderError: Error {
@@ -34,7 +35,7 @@ extension JapanNFCReaderError: LocalizedError {
         case .invalidDetectedTagType:
             return nil
         case .tagReaderSessionDidInvalidateWithError(_):
-            return nil
+            return "The reader session has invalid."
         case .tagReaderSessionConnectError(_):
             return nil
         }
@@ -48,10 +49,13 @@ extension JapanNFCReaderError: LocalizedError {
             return nil
         case .invalidDetectedTagType:
             return nil
-        case .tagReaderSessionDidInvalidateWithError(_):
-            return nil
+        case .tagReaderSessionDidInvalidateWithError(let error):
+            let nfcReaderError = error as? NFCReaderError
+            return nfcReaderError?.localizedDescription
         case .tagReaderSessionConnectError(_):
             return nil
         }
     }
 }
+
+#endif
