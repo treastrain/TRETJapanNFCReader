@@ -130,7 +130,7 @@ extension JapanNFCReader: NFCTagReaderSessionDelegate {
     
     open func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
         if !self.configuration.returnsReaderSessionInvalidationErrorUserCanceledAfterNFCConnectionCompleted,
-           !session.isInvalidatedByUser,
+           session.isInvalidatedByUser,
            (error as? NFCReaderError)?.code == .readerSessionInvalidationErrorUserCanceled {
             return
         }
