@@ -14,7 +14,7 @@ import TRETJapanNFCReader_FeliCa
 /// 交通系ICカードのデータ
 public struct TransitICCardData: FeliCaCardData {
     public var version: String = "3"
-    public let type: FeliCaCardType = .transitIC
+    public var type: FeliCaCardType = .transitIC
     public let primaryIDm: String
     public let primarySystemCode: FeliCaSystemCode
     public var contents: [FeliCaSystemCode : FeliCaSystem] = [:] {
