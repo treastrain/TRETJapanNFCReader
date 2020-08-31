@@ -43,38 +43,38 @@ public enum FeliCaCardType: String, Codable, CaseIterable {
     
     case unknown
     
-//    public var localizedString: String {
-//        switch self {
-//        case .transitIC:
-//            return Localized.transitIC.string()
-//        case .rakutenEdy:
-//            return Localized.rakutenEdy.string()
-//        case .nanaco:
-//            return "nanaco"
-//        case .waon:
-//            return "WAON"
-//        case .univCoopICPrepaid:
-//            return Localized.univCoopICPrepaid.string()
-//        case .okica:
-//            return "OKICA"
-//        case .ntasu:
-//            return "NTasu"
-//        case .ryuto:
-//            return Localized.ryuto.string()
-//        case .fcfcampus:
-//            return "FCF Campus"
-//        case .octopus:
-//            return Localized.octopus.string()
-//        case .idCredit:
-//            return "iD"
-//        case .quicPay:
-//            return "QUICPay"
-//        case .unknown:
-//            return "Unknown"
-//        }
-//    }
+    
+    public var localizedName: String {
+        switch self {
+        case .transitIC:
+            return "Transit IC"
+        case .localTransitIC:
+            return "Local Transit IC"
+        case .rakutenEdy:
+            return "Rakuten Edy"
+        case .nanaco:
+            return "nanaco"
+        case .waon:
+            return "WAON"
+        case .univCoopICPrepaid:
+            return "Univ. Co-op IC Prepaid"
+        case .okica:
+            return "OKICA"
+        case .fcfcampus:
+            return "FCF Campus"
+        case .octopus:
+            return "Octopus"
+        case .unknown:
+            return "Unknown"
+        }
+    }
     
     /// りゅーと
     @available(*, unavailable, renamed: "localTransitIC")
     public static var ryuto = FeliCaCardType.localTransitIC
+    
+    @available(*, unavailable, renamed: "localizedName")
+    public var localizedString: String {
+        return self.localizedName
+    }
 }
