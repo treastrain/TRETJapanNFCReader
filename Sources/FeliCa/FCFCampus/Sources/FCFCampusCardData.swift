@@ -6,8 +6,7 @@
 //  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
 //
 
-#if os(iOS)
-import CoreNFC
+import Foundation
 #if canImport(TRETJapanNFCReader_FeliCa)
 import TRETJapanNFCReader_FeliCa
 #endif
@@ -37,5 +36,3 @@ public struct FCFCampusCardData: FeliCaCardData {
     @available(*, unavailable)
     public var data: [FeliCaServiceCode : [Data]] { return [:] }
 }
-
-#endif
