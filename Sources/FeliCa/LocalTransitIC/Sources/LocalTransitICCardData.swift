@@ -71,17 +71,17 @@ public struct LocalTransitICCardData: FeliCaCardData {
         
         for data in blockData {
             let (boardingDateString, alightingDateString) = self.dateString(from: data[0], data[1], data[2], data[3], data[4])
-            guard let boardingDate = formatter.date(from: boardingDateString), let alightingDate = formatter.date(from: alightingDateString) else {
+            guard let departDate = formatter.date(from: boardingDateString), let arriveDate = formatter.date(from: alightingDateString) else {
                 continue
             }
             
-            let boardingBusStop = Data([data[5], data[6]])
-            let alightingBusStop = Data([data[7], data[8]])
+            let departStation = Data([data[5], data[6]])
+            let arriveStation = Data([data[7], data[8]])
             let transactionType = self.transactionType(from: data[9])
             let difference = (Int(data[10]) << 8) + Int(data[11])
             let balance = (Int(data[14]) << 8) + Int(data[15])
             
-            let transaction = LocalTransitICCardTransaction(date: alightingDate, type: transactionType, difference: difference, balance: balance, boardingDate: boardingDate, alightingDate: alightingDate, boardingBusStop: boardingBusStop, alightingBusStop: alightingBusStop)
+            let transaction = LocalTransitICCardTransaction(date: arriveDate, type: transactionType, difference: difference, balance: balance, departDate: departDate, arriveDate: arriveDate, departStation: departStation, arriveStation: arriveStation)
             transactions.append(transaction)
         }
         
@@ -124,10 +124,10 @@ public struct LocalTransitICCardTransaction: FeliCaCardTransaction {
     public let difference: Int
     public let balance: Int
     
-    public let boardingDate: Date
-    public let alightingDate: Date
-    public let boardingBusStop: Data
-    public let alightingBusStop: Data
+    public let departDate: Date
+    public let arriveDate: Date
+    public let departStation: Data
+    public let arriveStation: Data
 }
 
 @available(*, unavailable, renamed: "LocalTransitICCardData")
