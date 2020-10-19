@@ -58,15 +58,15 @@ public extension UInt16 {
         var int16 = self
         return Data(bytes: &int16, count: MemoryLayout<UInt16>.size)
     }
-//
-//    var uint8: [UInt8] {
-//        return [UInt8(self >> 8), UInt8(self & 0x00ff)]
-//    }
-//
-//    func toHexString() -> String {
-//        let bytes = self.uint8
-//        return "0x" + bytes[0].toString() + bytes[1].toString()
-//    }
+
+    var uint8: [UInt8] {
+        return [UInt8(self >> 8), UInt8(self & 0x00ff)]
+    }
+
+    func toHexString() -> String {
+        let bytes = self.uint8
+        return "0x" + bytes[0].toString() + bytes[1].toString()
+    }
 }
 //
 //public extension String {
