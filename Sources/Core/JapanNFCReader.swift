@@ -93,7 +93,7 @@ open class JapanNFCReader: NSObject {
         self.session = session
         self.didBecomeActiveHandler = didBecomeActiveHandler
         self.resultHandler = resultHandler
-        self.session?.alertMessage = "カードを平らな面に置き、カードの下半分を隠すように iPhone をその上に置いてください。"
+        self.session?.alertMessage = NSLocalizedString("JapanNFCReader_begin_alertMessage", bundle: Bundle.module, comment: "")
         self.session?.begin()
     }
     
@@ -142,7 +142,7 @@ extension JapanNFCReader: NFCTagReaderSessionDelegate {
         // print("⏩", self, #function, #line, session, tags)
         
         guard tags.count == 1 else {
-            session.alertMessage = "More than 1 tags found. Please present only 1 tag."
+            session.alertMessage = NSLocalizedString("JapanNFCReader_tagReaderSession_moreThanOneTagsFoundAlertMessage", bundle: Bundle.module, comment: "")
             DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500), execute: {
                 session.restartPolling()
             })

@@ -29,31 +29,31 @@ extension JapanNFCReaderError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .readingUnavailable:
-            return "NFC Tag Reading is unavailable."
+            return NSLocalizedString("JapanNFCReaderError_readingUnavailable_errorDescription", bundle: Bundle.module, comment: "")
         case .couldNotCreateTagReaderSession:
-            return nil
+            return NSLocalizedString("JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription", bundle: Bundle.module, comment: "")
         case .invalidDetectedTagType:
-            return nil
+            return NSLocalizedString("JapanNFCReaderError_invalidDetectedTagType_errorDescription", bundle: Bundle.module, comment: "")
         case .tagReaderSessionDidInvalidateWithError(_):
-            return "The reader session has invalid."
+            return NSLocalizedString("JapanNFCReaderError_tagReaderSessionDidInvalidateWithError_errorDescription", bundle: Bundle.module, comment: "")
         case .tagReaderSessionConnectError(_):
-            return nil
+            return NSLocalizedString("JapanNFCReaderError_tagReaderSessionConnectError_errorDescription", bundle: Bundle.module, comment: "")
         }
     }
     
     public var failureReason: String? {
         switch self {
         case .readingUnavailable:
-            return "This device does not support NFC tag reading."
+            return NSLocalizedString("JapanNFCReaderError_readingUnavailable_failureReason", bundle: Bundle.module, comment: "")
         case .couldNotCreateTagReaderSession:
-            return nil
+            return NSLocalizedString("JapanNFCReaderError_couldNotCreateTagReaderSession_failureReason", bundle: Bundle.module, comment: "")
         case .invalidDetectedTagType:
-            return nil
+            return NSLocalizedString("JapanNFCReaderError_invalidDetectedTagType_failureReason", bundle: Bundle.module, comment: "")
         case .tagReaderSessionDidInvalidateWithError(let error):
             let nfcReaderError = error as? NFCReaderError
             return nfcReaderError?.localizedDescription
         case .tagReaderSessionConnectError(_):
-            return nil
+            return NSLocalizedString("JapanNFCReaderError_tagReaderSessionConnectError_failureReason", bundle: Bundle.module, comment: "")
         }
     }
 }

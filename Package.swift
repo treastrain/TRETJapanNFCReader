@@ -37,7 +37,8 @@ products.append(
 targets.append(
     .target(
         name: "TRETJapanNFCReader-Core",
-        path: "Sources/Core")
+        path: "Sources/Core",
+        resources: [.process("Resources")])
 )
 
 
