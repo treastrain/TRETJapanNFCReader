@@ -1,12 +1,8 @@
 "JapanNFCReader_begin_alertMessage" = "カードを平らな面に置き、カードの下半分を隠すように iPhone をその上に置いてください。";
-"JapanNFCReader_tagReaderSession_moreThanOneTagsFoundAlertMessage" = "More than 1 tags found. Please present only 1 tag.";
+"JapanNFCReader_tagReaderSession_moreThanOneTagsFoundAlertMessage" = "複数のカードが検出されました。すべてのカードを取り除いてもう一度やり直してください。";
 
-"JapanNFCReaderError_readingUnavailable_errorDescription" = "NFC Tag Reading is unavailable.";
-"JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription" = nil;
-"JapanNFCReaderError_invalidDetectedTagType_errorDescription" = nil;
-"JapanNFCReaderError_tagReaderSessionDidInvalidateWithError_errorDescription" = "The reader session has invalid.";
-"JapanNFCReaderError_tagReaderSessionConnectError_errorDescription" = nil;
-"JapanNFCReaderError_readingUnavailable_failureReason" = "This device does not support NFC tag reading."
-"JapanNFCReaderError_couldNotCreateTagReaderSession_failureReason" = nil;
-"JapanNFCReaderError_invalidDetectedTagType_failureReason" = nil;
-"JapanNFCReaderError_tagReaderSessionConnectError_failureReason" = nil;
+"JapanNFCReaderError_readingUnavailable_errorDescription" = "読み取りを開始できません。この端末ではNFCのスキャンや検出をすることができません。";
+"JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription" = "読み取りを開始できません。この端末ではNFCのスキャンや検出をすることができません。";
+"JapanNFCReaderError_invalidDetectedTagType_errorDescription" = "読み取り対象ではないカードが検出されました。もう一度やり直してください。";
+"JapanNFCReaderError_tagReaderSessionDidInvalidateWithError_errorDescription" = "セッションが無効になりました。";
+"JapanNFCReaderError_tagReaderSessionConnectError_errorDescription" = "接続エラーです。もう一度やり直してください。";

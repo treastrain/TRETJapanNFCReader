@@ -40,22 +40,6 @@ extension JapanNFCReaderError: LocalizedError {
             return NSLocalizedString("JapanNFCReaderError_tagReaderSessionConnectError_errorDescription", bundle: Bundle.module, comment: "")
         }
     }
-    
-    public var failureReason: String? {
-        switch self {
-        case .readingUnavailable:
-            return NSLocalizedString("JapanNFCReaderError_readingUnavailable_failureReason", bundle: Bundle.module, comment: "")
-        case .couldNotCreateTagReaderSession:
-            return NSLocalizedString("JapanNFCReaderError_couldNotCreateTagReaderSession_failureReason", bundle: Bundle.module, comment: "")
-        case .invalidDetectedTagType:
-            return NSLocalizedString("JapanNFCReaderError_invalidDetectedTagType_failureReason", bundle: Bundle.module, comment: "")
-        case .tagReaderSessionDidInvalidateWithError(let error):
-            let nfcReaderError = error as? NFCReaderError
-            return nfcReaderError?.localizedDescription
-        case .tagReaderSessionConnectError(_):
-            return NSLocalizedString("JapanNFCReaderError_tagReaderSessionConnectError_failureReason", bundle: Bundle.module, comment: "")
-        }
-    }
 }
 
 #endif
