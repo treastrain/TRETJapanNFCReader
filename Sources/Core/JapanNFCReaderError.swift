@@ -29,15 +29,15 @@ extension JapanNFCReaderError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .readingUnavailable:
-            return NSLocalizedString("JapanNFCReaderError_readingUnavailable_errorDescription", bundle: Bundle.module, comment: "")
+            return Localize.String.readingUnavailableErrorDescription
         case .couldNotCreateTagReaderSession:
-            return NSLocalizedString("JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription", bundle: Bundle.module, comment: "")
+            return Localize.String.couldNotCreateTagReaderSessionErrorDescription
         case .invalidDetectedTagType:
-            return NSLocalizedString("JapanNFCReaderError_invalidDetectedTagType_errorDescription", bundle: Bundle.module, comment: "")
+            return Localize.String.invalidDetectedTagTypeErrorDescription
         case .tagReaderSessionDidInvalidateWithError(_):
-            return NSLocalizedString("JapanNFCReaderError_tagReaderSessionDidInvalidateWithError_errorDescription", bundle: Bundle.module, comment: "")
+            return Localize.String.tagReaderSessionDidInvalidateWithErrorErrorDescription
         case .tagReaderSessionConnectError(_):
-            return NSLocalizedString("JapanNFCReaderError_tagReaderSessionConnectError_errorDescription", bundle: Bundle.module, comment: "")
+            return Localize.String.tagReaderSessionConnectErrorErrorDescription
         }
     }
 }

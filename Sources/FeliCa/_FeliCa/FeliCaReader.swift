@@ -152,7 +152,7 @@ open class FeliCaReader: JapanNFCReader {
             feliCaData[systemCode] = FeliCaSystem(systemCode: systemCode, idm: feliCaTag.currentIDm.hexString, pmm: currentPMm.hexString, services: services)
         }
         
-        session.alertMessage = "完了"
+        session.alertMessage = Localize.String.done
         session.invalidateByReader(errorMessage: errorMessage)
         // if errorMessage != nil {
             self.returnReaderSessionReadWithoutEncryptionDidInvalidate(result: .success(FeliCaCardDataReadWithoutEncryptionResponse(feliCaData: feliCaData, pollingErrors: pollingErrors, readErrors: readErrors)))

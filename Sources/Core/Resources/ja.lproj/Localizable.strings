@@ -1,5 +1,6 @@
 "JapanNFCReader_begin_alertMessage" = "カードを平らな面に置き、カードの下半分を隠すように iPhone をその上に置いてください。";
 "JapanNFCReader_tagReaderSession_moreThanOneTagsFoundAlertMessage" = "複数のカードが検出されました。すべてのカードを取り除いてもう一度やり直してください。";
+"JapanNFCReader_done" = "完了";
 
 "JapanNFCReaderError_readingUnavailable_errorDescription" = "読み取りを開始できません。この端末ではNFCのスキャンや検出をすることができません。";
 "JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription" = "読み取りを開始できません。この端末ではNFCのスキャンや検出をすることができません。";

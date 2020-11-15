@@ -1,5 +1,6 @@
 "JapanNFCReader_begin_alertMessage" = "Rest the top of your iPhone on the middle of the card.";
 "JapanNFCReader_tagReaderSession_moreThanOneTagsFoundAlertMessage" = "More than 1 tags found. Please present only 1 tag.";
+"JapanNFCReader_done" = "Done";
 
 "JapanNFCReaderError_readingUnavailable_errorDescription" = "NFC Tag Reading is unavailable. This device does not support NFC tag reading.";
 "JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription" = "NFC Tag Reading is unavailable. This device does not support NFC tag reading.";

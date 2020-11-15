@@ -1,5 +1,6 @@
 "JapanNFCReader_begin_alertMessage" = "如圖中所示將 iPhone 放在卡的下半部份。";
 "JapanNFCReader_tagReaderSession_moreThanOneTagsFoundAlertMessage" = "偵測到多於一張卡。請移除所有卡然後重新再試。";
+"JapanNFCReader_done" = "完成";
 
 "JapanNFCReaderError_readingUnavailable_errorDescription" = "不支援掃描。此裝置不支援掃描。";
 "JapanNFCReaderError_couldNotCreateTagReaderSession_errorDescription" = "不支援掃描。此裝置不支援掃描。";
