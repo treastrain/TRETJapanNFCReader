@@ -1,9 +1,0 @@
-/* 
-  InfoPlist.strings
-  DriversLicenseReader
-
-  Created by treastrain on 2019/06/28.
-  Copyright © 2019 treastrain / Tanaka Ryoga. All rights reserved.
-*/
-
-CFBundleDisplayName = "運転免許リーダー";
