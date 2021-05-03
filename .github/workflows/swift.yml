@@ -1,0 +1,276 @@
+name: Swift Build & Test, Xcode Build & Test
+
+on:
+  # push:
+  pull_request:
+
+env:
+  SCHEME_NAME: TRETNFCKit-Package
+  IOS_SIMULATOR_NAME: iPhone 12 mini
+  TVOS_SIMULATOR_NAME: Apple TV
+  WATCHOS_SIMULATOR_NAME: Apple Watch Series 6 - 44mm
+
+jobs:
+  setup:
+    name: set up workflow
+    runs-on: macos-latest # macos-11.0
+    steps:
+    - uses: actions/checkout@v2
+    - name: Show Xcode list
+      run: ls -n /Applications | grep 'Xcode'
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Show Xcode version
+      run: xcodebuild -version
+    - name: Export xcode-select path
+      run: xcode-select -p > xcode-select.txt
+    - name: Upload xcode-select path
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcode-select
+        path: xcode-select.txt
+    - name: Generates an Xcode project
+      run: swift package generate-xcodeproj
+    - name: Show destinations
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -showdestinations
+    - name: Show schemes
+      run: xcodebuild test -list
+    - name: Show xcpretty version
+      run: xcpretty --version
+    
+  swift_build_macos:
+    name: swift build (macOS Latest)
+    runs-on: macos-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Swift version
+      run: swift --version
+    - name: Build
+      run: swift build -v | tee swift-build-macos_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Upload swift build log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift build log (macOS, x86_64)
+        path: swift-build-macos_x86_64.log
+  
+  swift_test_macos:
+    name: swift test (macOS Latest)
+    runs-on: macos-latest
+    needs: swift_build_macos
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Swift version
+      run: swift --version
+    - name: Run tests
+      run: swift test -v | tee swift-test-macos_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Upload swift test log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift test log (macOS, x86_64)
+        path: swift-test-macos_x86_64.log
+
+  xcodebuild_test_ios:
+    name: xcodebuild test (iOS)
+    runs-on: macos-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+#     - name: Cache Gems
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor/bundle
+#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-gems-
+#     - name: Install Bundled Gems
+#       run: |
+#         bundle config path vendor/bundle
+#         bundle install --jobs 4 --retry 3
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Generates an Xcode project
+      run: swift package generate-xcodeproj
+    - name: Xcode test
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (iOS)
+        path: |
+            xcodebuild-test-ios.log
+            build/reports/tests.html
+  
+  xcodebuild_test_macos:
+    name: xcodebuild test (macOS)
+    runs-on: macos-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+#     - name: Cache Gems
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor/bundle
+#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-gems-
+#     - name: Install Bundled Gems
+#       run: |
+#         bundle config path vendor/bundle
+#         bundle install --jobs 4 --retry 3
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Generates an Xcode project
+      run: swift package generate-xcodeproj
+    - name: Xcode test (arm64)
+      if: false
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' | tee xcodebuild-test-macos_arm64.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode test report
+      if: false # if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (macOS, arm64)
+        path: |
+            xcodebuild-test-macos_arm64.log
+            build/reports/tests.html
+    - name: Xcode test (x86_64)
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-macos_x86_64.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (macOS, x86_64)
+        path: |
+            xcodebuild-test-macos_x86_64.log
+            build/reports/tests.html
+  
+  xcodebuild_test_tvos:
+    name: xcodebuild test (tvOS)
+    runs-on: macos-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+#     - name: Cache Gems
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor/bundle
+#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-gems-
+#     - name: Install Bundled Gems
+#       run: |
+#         bundle config path vendor/bundle
+#         bundle install --jobs 4 --retry 3
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Generates an Xcode project
+      run: swift package generate-xcodeproj
+    - name: Xcode test
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-tvos.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (tvOS)
+        path: |
+            xcodebuild-test-tvos.log
+            build/reports/tests.html
+  
+  xcodebuild_test_watchos:
+    name: xcodebuild test (watchOS)
+    if: false
+    runs-on: macos-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+#     - name: Cache Gems
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor/bundle
+#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-gems-
+#     - name: Install Bundled Gems
+#       run: |
+#         bundle config path vendor/bundle
+#         bundle install --jobs 4 --retry 3
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Generates an Xcode project
+      run: swift package generate-xcodeproj
+    - name: Xcode test
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-watchos.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (watchOS)
+        path: |
+            xcodebuild-test-ios.log
+            build/reports/tests.html
+  
+  swift_build_ubuntu-2004:
+    name: swift build (Ubuntu 20.04)
+    runs-on: ubuntu-20.04
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+    - name: Swift version
+      run: swift --version
+    - name: Build with enable test discovery on platforms without Objective-C runtime
+      run: swift build -v --enable-test-discovery | tee swift-build-ubuntu_2004_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Upload swift build log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift build log (Ubuntu 20.04, x86_64)
+        path: swift-build-ubuntu_2004_x86_64.log
+      
+  swift_test_ubuntu-2004:
+    name: swift test (Ubuntu 20.04)
+    runs-on: ubuntu-20.04
+    needs: swift_build_ubuntu-2004
+    steps:
+    - uses: actions/checkout@v2
+    - name: Swift version
+      run: swift --version
+    - name: Run tests with enable test discovery on platforms without Objective-C runtime
+      run: swift test -v --enable-test-discovery | tee swift-test-ubuntu_2004_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Upload swift test log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift test log (Ubuntu 20.04, x86_64)
+        path: swift-test-ubuntu_2004_x86_64.log
