@@ -8,20 +8,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Generate Documentation
+      - name: Generate documentation for Wiki
         uses: SwiftDocOrg/swift-doc@master
         with:
           inputs: "Sources"
           module-name: TRETNFCKit
-          output: "Documentation"
-      - name: Upload Documentation to Wiki
+          output: "documentation_md"
+      - name: Upload documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
-          path: "Documentation"
+          path: "documentation_md"
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+      - name: Generate documentation for GitHub Pages
+        uses: SwiftDocOrg/swift-doc@master
+        with:
+          inputs: "Sources"
+          module-name: TRETNFCKit
+          output: "documentation_html"
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Documentation
+          publish_dir: ./documentation_html
