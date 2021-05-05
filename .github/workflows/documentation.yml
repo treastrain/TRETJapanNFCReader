@@ -34,15 +34,19 @@ jobs:
           module-name: TRETNFCKit
           output: "documentation"
           format: "html"
+      - name: Copy
+        run: |
+          mkdir tmp
+          cp -r documentation tmp
       - name: Upload GitHub Pages archives
         uses: actions/upload-artifact@v2
         with:
           name: documentation_gh-pages
-          path: documentation
+          path: tmp
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./documentation
+          publish_dir: ./tmp
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
