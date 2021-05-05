@@ -28,10 +28,12 @@ jobs:
           module-name: TRETNFCKit
           output: "documentation_html"
           format: "html"
+      - name: ls
+        run: ls -a; ls -a ./documentation_html
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./documentation_html
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
