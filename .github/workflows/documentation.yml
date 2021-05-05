@@ -3,38 +3,51 @@ name: Documentation
 on: [push]
 
 jobs:
-  build:
+  for_wiki:
+    name: Update wiki
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-      - name: Generate documentation for Wiki
+      - name: Generate documentation for wiki
         uses: SwiftDocOrg/swift-doc@master
         with:
           inputs: "Sources"
           module-name: TRETNFCKit
-          output: "documentation_md"
+          output: "documentation"
           format: "commonmark"
-      - name: Upload documentation to Wiki
+      - name: Upload wiki archives
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation_wiki
+          path: documentation
+      - name: Upload documentation to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
-          path: "documentation_md"
+          path: "documentation"
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+  for_pages:
+    name: Update GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Generate documentation for GitHub Pages
         uses: SwiftDocOrg/swift-doc@master
         with:
           inputs: "Sources"
           module-name: TRETNFCKit
-          output: "documentation_html"
+          output: "documentation"
           format: "html"
-      - name: ls
-        run: ls -a; ls -a ./documentation_html
+      - name: Upload GitHub Pages archives
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation_gh-pages
+          path: documentation
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./documentation_html
+          publish_dir: ./documentation
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-
