@@ -15,11 +15,6 @@ jobs:
           module-name: TRETNFCKit
           output: "documentation"
           format: "commonmark"
-      - name: Upload wiki archives
-        uses: actions/upload-artifact@v2
-        with:
-          name: documentation_wiki
-          path: documentation
       - name: Upload documentation to wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
