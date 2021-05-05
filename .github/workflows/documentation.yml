@@ -14,6 +14,7 @@ jobs:
           inputs: "Sources"
           module-name: TRETNFCKit
           output: "documentation_md"
+          format: "commonmark"
       - name: Upload documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
@@ -26,6 +27,7 @@ jobs:
           inputs: "Sources"
           module-name: TRETNFCKit
           output: "documentation_html"
+          format: "html"
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
