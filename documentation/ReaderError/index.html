@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRETNFCKit - ReaderError</title>
+    <link rel="stylesheet" type="text/css" href="./all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="./">
+            <strong>
+                TRETNFCKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#readererror.init(_:userinfo:description:)">init(_:​user​Info:​description:​)</a></li><li class="initializer"><a href="#readererror.init(from:)">init(from:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#readererror.readererrorunsupportedfeature">reader​Error​Unsupported​Feature</a></li><li class="variable"><a href="#readererror.readererrorsecurityviolation">reader​Error​Security​Violation</a></li><li class="variable"><a href="#readererror.readererrorinvalidparameter">reader​Error​Invalid​Parameter</a></li><li class="variable"><a href="#readererror.readererrorinvalidparameterlength">reader​Error​Invalid​Parameter​Length</a></li><li class="variable"><a href="#readererror.readererrorparameteroutofbound">reader​Error​Parameter​Out​OfBound</a></li><li class="variable"><a href="#readererror.readererrorradiodisabled">reader​Error​Radio​Disabled</a></li><li class="variable"><a href="#readererror.readertransceiveerrortagconnectionlost">reader​Transceive​Error​Tag​Connection​Lost</a></li><li class="variable"><a href="#readererror.readertransceiveerrorretryexceeded">reader​Transceive​Error​Retry​Exceeded</a></li><li class="variable"><a href="#readererror.readertransceiveerrortagresponseerror">reader​Transceive​Error​Tag​Response​Error</a></li><li class="variable"><a href="#readererror.readertransceiveerrorsessioninvalidated">reader​Transceive​Error​Session​Invalidated</a></li><li class="variable"><a href="#readererror.readertransceiveerrorpackettoolong">reader​Transceive​Error​Packet​Too​Long</a></li><li class="variable"><a href="#readererror.readertransceiveerrortagnotconnected">reader​Transceive​Error​Tag​Not​Connected</a></li><li class="variable"><a href="#readererror.readersessioninvalidationerrorusercanceled">reader​Session​Invalidation​Error​User​Canceled</a></li><li class="variable"><a href="#readererror.readersessioninvalidationerrorsessiontimeout">reader​Session​Invalidation​Error​Session​Timeout</a></li><li class="variable"><a href="#readererror.readersessioninvalidationerrorsessionterminatedunexpectedly">reader​Session​Invalidation​Error​Session​Terminated​Unexpectedly</a></li><li class="variable"><a href="#readererror.readersessioninvalidationerrorsystemisbusy">reader​Session​Invalidation​Error​System​IsBusy</a></li><li class="variable"><a href="#readererror.readersessioninvalidationerrorfirstndeftagread">reader​Session​Invalidation​Error​First​NDEFTag​Read</a></li><li class="variable"><a href="#readererror.tagcommandconfigurationerrorinvalidparameters">tag​Command​Configuration​Error​Invalid​Parameters</a></li><li class="variable"><a href="#readererror.ndefreadersessionerrortagnotwritable">ndef​Reader​Session​Error​Tag​Not​Writable</a></li><li class="variable"><a href="#readererror.ndefreadersessionerrortagupdatefailure">ndef​Reader​Session​Error​Tag​Update​Failure</a></li><li class="variable"><a href="#readererror.ndefreadersessionerrortagsizetoosmall">ndef​Reader​Session​Error​Tag​Size​Too​Small</a></li><li class="variable"><a href="#readererror.ndefreadersessionerrorzerolengthmessage">ndef​Reader​Session​Error​Zero​Length​Message</a></li><li class="variable"><a href="#readererror.errordomain">error​Domain</a></li><li class="variable"><a href="#readererror.code">code</a></li><li class="variable"><a href="#readererror.errorcode">error​Code</a></li><li class="variable"><a href="#readererror.erroruserinfo">error​User​Info</a></li><li class="variable"><a href="#readererror.errordescription">error​Description</a></li></ul></li><li><a href="#operators">Operators</a><ul><li class="function"><a href="#readererror.==">==</a></li><li class="function"><a href="#readererror.==">==</a></li><li class="function"><a href="#readererror.==">==</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Reader​Error</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">ReaderError</span>: <span class="type">Error</span>, <span class="type">LocalizedError</span>, <span class="type">CustomNSError</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Possible errors returned by NFCKit and CoreNFC framework reader session.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %25 Pages: 1 -->
+<svg width="1128pt" height="243pt"
+ viewBox="0.00 0.00 1128.23 243.49" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 239.49)">
+<title>%25</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-239.49 1124.2314,-239.49 1124.2314,4 -4,4"/>
+<!-- ReaderError -->
+<g id="node1" class="node structure current">
+<title>ReaderError</title>
+<g id="a_node1"><a xlink:href="./ReaderError" xlink:title="ReaderError">
+<path fill="none" stroke="#000000" stroke-width="3" d="M654.5729,-136.0408C654.5729,-136.0408 462.5729,-136.0408 462.5729,-136.0408 456.5729,-136.0408 450.5729,-130.0408 450.5729,-124.0408 450.5729,-124.0408 450.5729,-112.0408 450.5729,-112.0408 450.5729,-106.0408 456.5729,-100.0408 462.5729,-100.0408 462.5729,-100.0408 654.5729,-100.0408 654.5729,-100.0408 660.5729,-100.0408 666.5729,-106.0408 666.5729,-112.0408 666.5729,-112.0408 666.5729,-124.0408 666.5729,-124.0408 666.5729,-130.0408 660.5729,-136.0408 654.5729,-136.0408"/>
+<text text-anchor="middle" x="558.5729" y="-114.3408" font-family="Menlo" font-size="14.00" fill="#000000">ReaderError</text>
+</a>
+</g>
+</g>
+<!-- CustomNSError -->
+<g id="node2" class="node unknown">
+<title>CustomNSError</title>
+<path fill="none" stroke="#000000" d="M1108.2314,-71.1618C1108.2314,-71.1618 916.2314,-71.1618 916.2314,-71.1618 910.2314,-71.1618 904.2314,-65.1618 904.2314,-59.1618 904.2314,-59.1618 904.2314,-47.1618 904.2314,-47.1618 904.2314,-41.1618 910.2314,-35.1618 916.2314,-35.1618 916.2314,-35.1618 1108.2314,-35.1618 1108.2314,-35.1618 1114.2314,-35.1618 1120.2314,-41.1618 1120.2314,-47.1618 1120.2314,-47.1618 1120.2314,-59.1618 1120.2314,-59.1618 1120.2314,-65.1618 1114.2314,-71.1618 1108.2314,-71.1618"/>
+<text text-anchor="middle" x="1012.2314" y="-49.4618" font-family="Menlo" font-size="14.00" fill="#000000">CustomNSError</text>
+</g>
+<!-- ReaderError&#45;&gt;CustomNSError -->
+<g id="edge2" class="edge conformsTo">
+<title>ReaderError&#45;&gt;CustomNSError</title>
+<path fill="none" stroke="#000000" d="M666.659,-102.5831C735.1018,-92.7949 823.6315,-80.134 893.9498,-70.0776"/>
+<polygon fill="#000000" stroke="#000000" points="894.7842,-73.4939 904.188,-68.6134 893.7931,-66.5644 894.7842,-73.4939"/>
+</g>
+<!-- Equatable -->
+<g id="node3" class="node unknown">
+<title>Equatable</title>
+<path fill="none" stroke="#000000" d="M361.1734,-36C361.1734,-36 169.1734,-36 169.1734,-36 163.1734,-36 157.1734,-30 157.1734,-24 157.1734,-24 157.1734,-12 157.1734,-12 157.1734,-6 163.1734,0 169.1734,0 169.1734,0 361.1734,0 361.1734,0 367.1734,0 373.1734,-6 373.1734,-12 373.1734,-12 373.1734,-24 373.1734,-24 373.1734,-30 367.1734,-36 361.1734,-36"/>
+<text text-anchor="middle" x="265.1734" y="-14.3" font-family="Menlo" font-size="14.00" fill="#000000">Equatable</text>
+</g>
+<!-- ReaderError&#45;&gt;Equatable -->
+<g id="edge4" class="edge conformsTo">
+<title>ReaderError&#45;&gt;Equatable</title>
+<path fill="none" stroke="#000000" d="M505.7801,-100.04C455.7682,-82.9873 380.636,-57.3694 327.6594,-39.3059"/>
+<polygon fill="#000000" stroke="#000000" points="328.6309,-35.9394 318.0364,-36.0248 326.3718,-42.5648 328.6309,-35.9394"/>
+</g>
+<!-- Error -->
+<g id="node4" class="node unknown">
+<title>Error</title>
+<path fill="none" stroke="#000000" d="M204,-201.7784C204,-201.7784 12,-201.7784 12,-201.7784 6,-201.7784 0,-195.7784 0,-189.7784 0,-189.7784 0,-177.7784 0,-177.7784 0,-171.7784 6,-165.7784 12,-165.7784 12,-165.7784 204,-165.7784 204,-165.7784 210,-165.7784 216,-171.7784 216,-177.7784 216,-177.7784 216,-189.7784 216,-189.7784 216,-195.7784 210,-201.7784 204,-201.7784"/>
+<text text-anchor="middle" x="108" y="-180.0784" font-family="Menlo" font-size="14.00" fill="#000000">Error</text>
+</g>
+<!-- ReaderError&#45;&gt;Error -->
+<g id="edge1" class="edge conformsTo">
+<title>ReaderError&#45;&gt;Error</title>
+<path fill="none" stroke="#000000" d="M450.3629,-133.8284C382.737,-143.6949 295.6207,-156.405 226.1903,-166.5347"/>
+<polygon fill="#000000" stroke="#000000" points="225.4692,-163.1028 216.0793,-168.0099 226.4798,-170.0294 225.4692,-163.1028"/>
+</g>
+<!-- LocalizedError -->
+<g id="node5" class="node unknown">
+<title>LocalizedError</title>
+<path fill="none" stroke="#000000" d="M952.8325,-235.49C952.8325,-235.49 760.8325,-235.49 760.8325,-235.49 754.8325,-235.49 748.8325,-229.49 748.8325,-223.49 748.8325,-223.49 748.8325,-211.49 748.8325,-211.49 748.8325,-205.49 754.8325,-199.49 760.8325,-199.49 760.8325,-199.49 952.8325,-199.49 952.8325,-199.49 958.8325,-199.49 964.8325,-205.49 964.8325,-211.49 964.8325,-211.49 964.8325,-223.49 964.8325,-223.49 964.8325,-229.49 958.8325,-235.49 952.8325,-235.49"/>
+<text text-anchor="middle" x="856.8325" y="-213.79" font-family="Menlo" font-size="14.00" fill="#000000">LocalizedError</text>
+</g>
+<!-- ReaderError&#45;&gt;LocalizedError -->
+<g id="edge3" class="edge conformsTo">
+<title>ReaderError&#45;&gt;LocalizedError</title>
+<path fill="none" stroke="#000000" d="M612.5854,-136.0503C663.3148,-152.9651 739.2465,-178.2831 792.959,-196.1925"/>
+<polygon fill="#000000" stroke="#000000" points="792.1249,-199.6038 802.7186,-199.4467 794.3392,-192.9632 792.1249,-199.6038"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for ReaderError.</figcaption>
+</figure>
+        <h3>Nested Types</h3>
+<dl>
+    <dt class="enumeration"><code><a href="./ReaderError_Code">ReaderError.Code</a></code></dt>
+<dd></dd>
+</dl>
+<h3>Conforms To</h3>
+<dl>
+    <dt class="unknown"><code>CustomNSError</code></dt>
+<dt class="unknown"><code>Equatable</code></dt>
+<dt class="unknown"><code>Error</code></dt>
+<dt class="unknown"><code>LocalizedError</code></dt>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="readererror.init(_:userinfo:description:)">
+    <h3>
+        <code>init(_:​user​Info:​description:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">code</span>: <span class="type">Code</span>, <span class="variable">userInfo</span>: [<span class="type">String</span> : <span class="keyword">Any</span>] = [:], <span class="variable">description</span>: <span class="type">String</span>? = <span class="keyword">nil</span>) </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Initialize an error within this domain with the given code and userInfo.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="readererror.init(from:)">
+    <h3>
+        <code>init(from:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">from</span> <span class="variable">coreNFCInstance</span>: <span class="type">CoreNFC</span>.<span class="type">NFCReaderError</span>) </code></pre>
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="readererror.readererrorunsupportedfeature">
+    <h3>
+        <code>reader​Error​Unsupported​Feature</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerErrorUnsupportedFeature</span>: <span class="type">Code</span> = .<span class="variable">readerErrorUnsupportedFeature</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>NFCKit is not supported on the current platform.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readererrorsecurityviolation">
+    <h3>
+        <code>reader​Error​Security​Violation</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerErrorSecurityViolation</span>: <span class="type">Code</span> = .<span class="variable">readerErrorSecurityViolation</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Missing required entitlement and/or privacy settings from the client app.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readererrorinvalidparameter">
+    <h3>
+        <code>reader​Error​Invalid​Parameter</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerErrorInvalidParameter</span>: <span class="type">Code</span> = .<span class="variable">readerErrorInvalidParameter</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Input parameter is invalid.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readererrorinvalidparameterlength">
+    <h3>
+        <code>reader​Error​Invalid​Parameter​Length</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerErrorInvalidParameterLength</span>: <span class="type">Code</span> = .<span class="variable">readerErrorInvalidParameterLength</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Length of input parameter is invalid, i.e. size of data container.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readererrorparameteroutofbound">
+    <h3>
+        <code>reader​Error​Parameter​Out​OfBound</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerErrorParameterOutOfBound</span>: <span class="type">Code</span> = .<span class="variable">readerErrorParameterOutOfBound</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Parameter value is outside of the acceptable boundary / range.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readererrorradiodisabled">
+    <h3>
+        <code>reader​Error​Radio​Disabled</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerErrorRadioDisabled</span>: <span class="type">Code</span> = .<span class="variable">readerErrorRadioDisabled</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>NFC Radio is disabled.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readertransceiveerrortagconnectionlost">
+    <h3>
+        <code>reader​Transceive​Error​Tag​Connection​Lost</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerTransceiveErrorTagConnectionLost</span>: <span class="type">Code</span> = .<span class="variable">readerTransceiveErrorTagConnectionLost</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Connection to the tag is lost.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readertransceiveerrorretryexceeded">
+    <h3>
+        <code>reader​Transceive​Error​Retry​Exceeded</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerTransceiveErrorRetryExceeded</span>: <span class="type">Code</span> = .<span class="variable">readerTransceiveErrorRetryExceeded</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Maximum data transmission retry has reached.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readertransceiveerrortagresponseerror">
+    <h3>
+        <code>reader​Transceive​Error​Tag​Response​Error</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerTransceiveErrorTagResponseError</span>: <span class="type">Code</span> = .<span class="variable">readerTransceiveErrorTagResponseError</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Tag response is invalid or tag does not provide a response.  Additional error information may be contain in the underlying user info dictionary.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readertransceiveerrorsessioninvalidated">
+    <h3>
+        <code>reader​Transceive​Error​Session​Invalidated</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerTransceiveErrorSessionInvalidated</span>: <span class="type">Code</span> = .<span class="variable">readerTransceiveErrorSessionInvalidated</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Session has been previously invalidated.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readertransceiveerrorpackettoolong">
+    <h3>
+        <code>reader​Transceive​Error​Packet​Too​Long</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerTransceiveErrorPacketTooLong</span>: <span class="type">Code</span> = .<span class="variable">readerTransceiveErrorPacketTooLong</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Packet length has exceeded the limit.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readertransceiveerrortagnotconnected">
+    <h3>
+        <code>reader​Transceive​Error​Tag​Not​Connected</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerTransceiveErrorTagNotConnected</span>: <span class="type">Code</span> = .<span class="variable">readerTransceiveErrorTagNotConnected</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Tag is not in the connected state.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readersessioninvalidationerrorusercanceled">
+    <h3>
+        <code>reader​Session​Invalidation​Error​User​Canceled</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerSessionInvalidationErrorUserCanceled</span>: <span class="type">Code</span> = .<span class="variable">readerSessionInvalidationErrorUserCanceled</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Session is invalidated by the user.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readersessioninvalidationerrorsessiontimeout">
+    <h3>
+        <code>reader​Session​Invalidation​Error​Session​Timeout</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerSessionInvalidationErrorSessionTimeout</span>: <span class="type">Code</span> = .<span class="variable">readerSessionInvalidationErrorSessionTimeout</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Session is timed out.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readersessioninvalidationerrorsessionterminatedunexpectedly">
+    <h3>
+        <code>reader​Session​Invalidation​Error​Session​Terminated​Unexpectedly</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerSessionInvalidationErrorSessionTerminatedUnexpectedly</span>: <span class="type">Code</span> = .<span class="variable">readerSessionInvalidationErrorSessionTerminatedUnexpectedly</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Session is terminated unexpectly.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readersessioninvalidationerrorsystemisbusy">
+    <h3>
+        <code>reader​Session​Invalidation​Error​System​IsBusy</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerSessionInvalidationErrorSystemIsBusy</span>: <span class="type">Code</span> = .<span class="variable">readerSessionInvalidationErrorSystemIsBusy</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Core NFC is temporary unavailable due to system resource constraints.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.readersessioninvalidationerrorfirstndeftagread">
+    <h3>
+        <code>reader​Session​Invalidation​Error​First​NDEFTag​Read</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">readerSessionInvalidationErrorFirstNDEFTagRead</span>: <span class="type">Code</span> = .<span class="variable">readerSessionInvalidationErrorFirstNDEFTagRead</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Session is terminated after the 1st NDEF tag is read.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.tagcommandconfigurationerrorinvalidparameters">
+    <h3>
+        <code>tag​Command​Configuration​Error​Invalid​Parameters</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">tagCommandConfigurationErrorInvalidParameters</span>: <span class="type">Code</span> = .<span class="variable">tagCommandConfigurationErrorInvalidParameters</span></code></pre>
+</div>
+</div>
+<div role="article" class="variable" id="readererror.ndefreadersessionerrortagnotwritable">
+    <h3>
+        <code>ndef​Reader​Session​Error​Tag​Not​Writable</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">ndefReaderSessionErrorTagNotWritable</span>: <span class="type">Code</span> = .<span class="variable">ndefReaderSessionErrorTagNotWritable</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>NDEF tag is not writable.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.ndefreadersessionerrortagupdatefailure">
+    <h3>
+        <code>ndef​Reader​Session​Error​Tag​Update​Failure</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">ndefReaderSessionErrorTagUpdateFailure</span>: <span class="type">Code</span> = .<span class="variable">ndefReaderSessionErrorTagUpdateFailure</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>NDEF tag write fails.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.ndefreadersessionerrortagsizetoosmall">
+    <h3>
+        <code>ndef​Reader​Session​Error​Tag​Size​Too​Small</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">ndefReaderSessionErrorTagSizeTooSmall</span>: <span class="type">Code</span> = .<span class="variable">ndefReaderSessionErrorTagSizeTooSmall</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>NDEF tag memory size is too small to store the desired data.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.ndefreadersessionerrorzerolengthmessage">
+    <h3>
+        <code>ndef​Reader​Session​Error​Zero​Length​Message</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">ndefReaderSessionErrorZeroLengthMessage</span>: <span class="type">Code</span> = .<span class="variable">ndefReaderSessionErrorZeroLengthMessage</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>NDEF tag does not contain any NDEF message.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="readererror.errordomain">
+    <h3>
+        <code>error​Domain</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">var</span> <span class="variable">errorDomain</span>: <span class="type">String</span> = <span class="variable">ErrorDomain</span></code></pre>
+</div>
+</div>
+<div role="article" class="variable" id="readererror.code">
+    <h3>
+        <code>code</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">code</span>: <span class="type">Code</span></code></pre>
+</div>
+</div>
+<div role="article" class="variable" id="readererror.errorcode">
+    <h3>
+        <code>error​Code</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">errorCode</span>: <span class="type">Int</span></code></pre>
+</div>
+</div>
+<div role="article" class="variable" id="readererror.erroruserinfo">
+    <h3>
+        <code>error​User​Info</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">errorUserInfo</span>: [<span class="type">String</span> : <span class="keyword">Any</span>]</code></pre>
+</div>
+</div>
+<div role="article" class="variable" id="readererror.errordescription">
+    <h3>
+        <code>error​Description</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">errorDescription</span>: <span class="type">String</span>?</code></pre>
+</div>
+</div>
+    </section>
+    <section id="operators">
+        <h2>Operators</h2>
+
+        <div role="article" class="function" id="readererror.==">
+    <h3>
+        <code>==</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> == (<span class="variable">lhs</span>: <span class="type">ReaderError</span>, <span class="variable">rhs</span>: <span class="type">ReaderError</span>) -&gt; <span class="type">Bool</span> </code></pre>
+</div>
+</div>
+<div role="article" class="function" id="readererror.==">
+    <h3>
+        <code>==</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> == (<span class="variable">lhs</span>: <span class="type">ReaderError</span>, <span class="variable">rhs</span>: <span class="type">CoreNFC</span>.<span class="type">NFCReaderError</span>) -&gt; <span class="type">Bool</span> </code></pre>
+</div>
+</div>
+<div role="article" class="function" id="readererror.==">
+    <h3>
+        <code>==</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> == (<span class="variable">lhs</span>: <span class="type">CoreNFC</span>.<span class="type">NFCReaderError</span>, <span class="variable">rhs</span>: <span class="type">ReaderError</span>) -&gt; <span class="type">Bool</span> </code></pre>
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-05-06T15:49:46+0000">May 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+</p>
+    </footer>
+</body>
+</html>
