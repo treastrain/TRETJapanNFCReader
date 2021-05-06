@@ -40,15 +40,3 @@ jobs:
           path: "documentation"
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-#       - name: Archive documentation (html) artifacts
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: documentation (html)
-#           path: documentation
-#       - name: Deploy to GitHub Pages
-#         uses: peaceiris/actions-gh-pages@v3
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: ./documentation
-#           user_name: 'github-actions[bot]'
-#           user_email: 'github-actions[bot]@users.noreply.github.com'
