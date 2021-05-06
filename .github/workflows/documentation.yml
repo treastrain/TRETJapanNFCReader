@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
+      - run: echo "$REPOSITORY_NAME"
       - name: Generate documentation for GitHub Pages
         uses: SwiftDocOrg/swift-doc@master
         with:
@@ -34,7 +36,7 @@ jobs:
           module-name: TRETNFCKit
           output: "documentation"
           format: "html"
-          base-url: "/TRETJapanNFCReader/documentation/"
+          base-url: "/${{ REPOSITORY_NAME }}/documentation/"
       - name: Upload documentation to GitHub Pages
         uses: treastrain/github-pages-publish-action@v1
         with:
