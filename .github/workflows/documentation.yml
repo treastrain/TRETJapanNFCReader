@@ -34,6 +34,11 @@ jobs:
           module-name: TRETNFCKit
           output: "documentation"
           format: "html"
+      - name: Archive documentation (html) artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation (html)
+          path: documentation
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
