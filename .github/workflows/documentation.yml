@@ -1,6 +1,8 @@
 name: Documentation
 
-on: [push]
+on:
+  # push:
+  pull_request:
 
 jobs:
   for_wiki:
