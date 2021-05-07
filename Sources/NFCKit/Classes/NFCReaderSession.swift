@@ -13,11 +13,9 @@ import CoreNFC
 /// The abstract base class that represents a reader session for detecting NFC tags.
 open class NFCReaderSession: NFCReaderSessionProtocol {
     
-    /**
-     A Boolean value that determines whether the device supports NFC tag reading.
-     
-     Before creating a reader session, always check the `readingAvailable` property to determine whether the user’s device supports scanning for and detecting NFC tags.
-     */
+    /// A Boolean value that determines whether the device supports NFC tag reading.
+    ///
+    /// Before creating a reader session, always check the `readingAvailable` property to determine whether the user’s device supports scanning for and detecting NFC tags.
     open class var readingAvailable: Bool {
         #if os(iOS) && !targetEnvironment(macCatalyst)
         guard #available(iOS 11.0, *) else {
@@ -41,6 +39,10 @@ open class NFCReaderSession: NFCReaderSessionProtocol {
     
     /// A custom description that helps users understand how they can use NFC reader mode in your app.
     public var alertMessage: String = ""
+    
+    @available(*, unavailable)
+    init() {
+    }
     
     /// Starts the reader session.
     public func begin() {
