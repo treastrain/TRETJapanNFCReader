@@ -36,11 +36,15 @@ open class NFCTagReaderSession: NSObject, NFCReaderSessionProtocol {
     
     /// A Boolean value that indicates whether the reader session is started and ready to use.
     public var isReady: Bool {
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         if #available(iOS 13.0, *) {
             return self.core.isReady
         } else {
             return false
         }
+        #else
+        return false
+        #endif
     }
     
     /// A custom description that helps users understand how they can use NFC reader mode in your app.
@@ -80,16 +84,21 @@ open class NFCTagReaderSession: NSObject, NFCReaderSessionProtocol {
     
     /// Starts the reader session.
     public func begin() {
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         guard #available(iOS 13.0, *) else {
             print(#file, #line, #function, "This method is not supported in this environment, so it did nothing.")
             return
         }
         
         self.core.begin()
+        #else
+        print(#file, #line, #function, "This method is not supported in this environment, so it did nothing.")
+        #endif
     }
     
     /// Closes the reader session and displays an error message to the user.
     public func invalidate(errorMessage: String? = nil) {
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         guard #available(iOS 13.0, *) else {
             print(#file, #line, #function, "This method is not supported in this environment, so it did nothing.")
             return
@@ -100,9 +109,13 @@ open class NFCTagReaderSession: NSObject, NFCReaderSessionProtocol {
         } else {
             self.core.invalidate()
         }
+        #else
+        print(#file, #line, #function, "This method is not supported in this environment, so it did nothing.")
+        #endif
     }
 }
 
+#if os(iOS) && !targetEnvironment(macCatalyst)
 @available(iOS 13.0, *)
 extension NFCTagReaderSession: CoreNFC.NFCTagReaderSessionDelegate {
     public func tagReaderSessionDidBecomeActive(_ session: CoreNFC.NFCTagReaderSession) {
@@ -117,3 +130,4 @@ extension NFCTagReaderSession: CoreNFC.NFCTagReaderSessionDelegate {
         self.delegate?.tagReaderSession(self, didDetect: tags)
     }
 }
+#endif
