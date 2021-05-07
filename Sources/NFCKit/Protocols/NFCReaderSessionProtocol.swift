@@ -11,7 +11,10 @@ import CoreNFC
 #endif
 
 /// A general interface for interacting with a reader session.
-public protocol NFCReaderSessionProtocol {
+public protocol NFCReaderSessionProtocol: AnyObject {
+    /// The queue on which the reader session delegate callbacks and completion block handlers are dispatched.
+    var sessionQueue: DispatchQueue { get set }
+    
     /// A Boolean value that indicates whether the reader session is started and ready to use.
     var isReady: Bool { get }
     
