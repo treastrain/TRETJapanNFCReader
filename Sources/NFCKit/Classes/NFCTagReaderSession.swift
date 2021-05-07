@@ -10,7 +10,7 @@ import Foundation
 import CoreNFC
 #endif
 
-open class NFCTagReaderSession: NFCReaderSessionProtocol {
+open class NFCTagReaderSession: NSObject, NFCReaderSessionProtocol {
     
     /// A Boolean value that determines whether the device supports NFC tag reading.
     ///
@@ -28,36 +28,91 @@ open class NFCTagReaderSession: NFCReaderSessionProtocol {
     }
     
     /// The delegate of the reader session.
-    weak open var delegate: AnyObject?
+    weak open var delegate: NFCTagReaderSessionDelegate?
     
     /// The queue on which the reader session delegate callbacks and completion block handlers are dispatched.
     open var sessionQueue: DispatchQueue = .main
     
     /// A Boolean value that indicates whether the reader session is started and ready to use.
-    public var isReady = false
+    public var isReady: Bool {
+        if #available(iOS 13.0, *) {
+            return self.core.isReady
+        } else {
+            return false
+        }
+    }
     
     /// A custom description that helps users understand how they can use NFC reader mode in your app.
     public var alertMessage: String = ""
     
     #if os(iOS) && !targetEnvironment(macCatalyst)
-//    @available(iOS 13.0, *)
-//    convenience init?(pollingOption: NFCTagReaderSession.PollingOption, delegate: NFCTagReaderSessionDelegate, queue: DispatchQueue? = nil) {
-//
-//    }
+    private var _core: Any?
+    @available(iOS 13.0, *)
+    private var core: CoreNFC.NFCTagReaderSession {
+        get {
+            return _core as! CoreNFC.NFCTagReaderSession
+        }
+        set {
+            _core = newValue
+        }
+    }
+    #endif
+    
+    #if os(iOS) && !targetEnvironment(macCatalyst)
+    /// Creates an NFC tag reader session.
+    /// - Parameters:
+    ///   - pollingOption: One or more options specifying the type of tags that the reader session scans for and detects.
+    ///   - delegate: An object that handles callbacks from the reader session.
+    ///   - queue: A dispatch queue that the reader session uses when making callbacks to the delegate. When queue is nil, the session creates and uses a serial dispatch queue.
+    @available(iOS 13.0, *)
+    init?(pollingOption: NFCTagReaderSession.PollingOption, delegate: NFCTagReaderSessionDelegate, queue: DispatchQueue? = nil) {
+        super.init()
+        
+        guard let core = CoreNFC.NFCTagReaderSession(pollingOption: .init(from: pollingOption), delegate: self, queue: queue) else {
+            return nil
+        }
+        self.core = core
+        self.delegate = delegate
+        self.sessionQueue = queue ?? .main
+    }
     #endif
     
     /// Starts the reader session.
     public func begin() {
+        guard #available(iOS 13.0, *) else {
+            print(#file, #line, #function, "This method is not supported in this environment, so it did nothing.")
+            return
+        }
+        
+        self.core.begin()
     }
     
     /// Closes the reader session and displays an error message to the user.
-    public func invalidate(errorMessage: String?) {
+    public func invalidate(errorMessage: String? = nil) {
+        guard #available(iOS 13.0, *) else {
+            print(#file, #line, #function, "This method is not supported in this environment, so it did nothing.")
+            return
+        }
+        
+        if let errorMessage = errorMessage {
+            self.core.invalidate(errorMessage: errorMessage)
+        } else {
+            self.core.invalidate()
+        }
     }
 }
 
-#if os(iOS) && !targetEnvironment(macCatalyst)
 @available(iOS 13.0, *)
-public extension CoreNFC.NFCTagReaderSession {
+extension NFCTagReaderSession: CoreNFC.NFCTagReaderSessionDelegate {
+    public func tagReaderSessionDidBecomeActive(_ session: CoreNFC.NFCTagReaderSession) {
+        self.delegate?.tagReaderSessionDidBecomeActive(self)
+    }
+    
+    public func tagReaderSession(_ session: CoreNFC.NFCTagReaderSession, didInvalidateWithError error: Error) {
+        self.delegate?.tagReaderSession(self, didInvalidateWithError: error)
+    }
+    
+    public func tagReaderSession(_ session: CoreNFC.NFCTagReaderSession, didDetect tags: [NFCTag]) {
+        self.delegate?.tagReaderSession(self, didDetect: tags)
+    }
 }
-#endif
-
