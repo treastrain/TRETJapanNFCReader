@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRETNFCKit - NFCReaderSessionProtocol</title>
+    <link rel="stylesheet" type="text/css" href="/TRETJapanNFCReader/documentation/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/TRETJapanNFCReader/documentation/">
+            <strong>
+                TRETNFCKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#nfcreadersessionprotocol.isready">is​Ready</a></li><li class="variable"><a href="#nfcreadersessionprotocol.alertmessage">alert​Message</a></li><li class="function"><a href="#nfcreadersessionprotocol.begin()">begin()</a></li><li class="function"><a href="#nfcreadersessionprotocol.invalidate(errormessage:)">invalidate(error​Message:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">NFCReader​Session​Protocol</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">NFCReaderSessionProtocol</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>A general interface for interacting with a reader session.</p>
+
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="nfcreadersessionprotocol.isready">
+    <h3>
+        <code>is​Ready</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isReady</span>: <span class="type">Bool</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether the reader session is started and ready to use.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="nfcreadersessionprotocol.alertmessage">
+    <h3>
+        <code>alert​Message</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">var</span> <span class="variable">alertMessage</span>: <span class="type">String</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>A custom description that helps users understand how they can use NFC reader mode in your app.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="nfcreadersessionprotocol.begin()">
+    <h3>
+        <code>begin()</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">func</span> <span class="function">begin</span>()</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Starts the reader session.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="nfcreadersessionprotocol.invalidate(errormessage:)">
+    <h3>
+        <code>invalidate(error​Message:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">func</span> <span class="function">invalidate</span>(<span class="variable">errorMessage</span>: <span class="type">String</span>?)</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Closes the reader session and displays an error message to the user.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>error​Message</th>
+    <td><code class="type">String?</code></td>
+    <td><p>The error message to display.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-05-07T16:19:09+0000">May 7, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+</p>
+    </footer>
+</body>
+</html>
