@@ -36,7 +36,8 @@ jobs:
           module-name: TRETNFCKit
           output: "documentation"
           format: "html"
-          base-url: "/${{ github.event.repository.name }}/documentation/"
+          # base-url: "/${{ github.event.repository.name }}/documentation/"
+          base-url: "/documentation/"
       - name: Upload documentation to GitHub Pages
         uses: treastrain/github-pages-publish-action@v1
         with:
