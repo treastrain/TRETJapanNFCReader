@@ -10,6 +10,7 @@ import Foundation
 import CoreNFC
 #endif
 
+/// A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.
 open class NFCTagReaderSession: NSObject, NFCReaderSessionProtocol {
     
     /// A Boolean value that determines whether the device supports NFC tag reading.
