@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if os(iOS)
-import CoreNFC
-#endif
 
 /// A general interface for interacting with a reader session.
 public protocol NFCReaderSessionProtocol: AnyObject {
@@ -28,9 +25,3 @@ public protocol NFCReaderSessionProtocol: AnyObject {
     /// - Parameter errorMessage: The error message to display.
     func invalidate(errorMessage: String?)
 }
-
-#if os(iOS) && !targetEnvironment(macCatalyst)
-@available(iOS 11.0, *)
-public extension CoreNFC.NFCReaderSessionProtocol {
-}
-#endif
