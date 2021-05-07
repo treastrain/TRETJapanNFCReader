@@ -1,0 +1,46 @@
+name: Documentation
+
+on:
+  # push:
+  pull_request:
+
+jobs:
+  for_wiki:
+    name: Update wiki
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate documentation for wiki
+        uses: SwiftDocOrg/swift-doc@master
+        with:
+          inputs: "Sources"
+          module-name: TRETNFCKit
+          output: "documentation"
+          format: "commonmark"
+      - name: Upload documentation to wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "documentation"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+  for_pages:
+    name: Update GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate documentation for GitHub Pages
+        uses: SwiftDocOrg/swift-doc@master
+        with:
+          inputs: "Sources"
+          module-name: TRETNFCKit
+          output: "documentation"
+          format: "html"
+          # base-url: "/${{ github.event.repository.name }}/documentation/"
+          base-url: "/documentation/"
+      - name: Upload documentation to GitHub Pages
+        uses: treastrain/github-pages-publish-action@v1
+        with:
+          path: "documentation"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
