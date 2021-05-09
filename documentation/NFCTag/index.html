@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRETNFCKit - NFCTag</title>
+    <link rel="stylesheet" type="text/css" href="/documentation/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/documentation/">
+            <strong>
+                TRETNFCKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#nfctag.init(from:)">init(from:​)</a></li></ul></li><li><a href="#enumeration cases">Enumeration Cases</a><ul><li class="case"><a href="#nfctag.felica">feli​Ca</a></li><li class="case"><a href="#nfctag.iso7816">iso7816</a></li><li class="case"><a href="#nfctag.iso15693">iso15693</a></li><li class="case"><a href="#nfctag.mifare">mi​Fare</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#nfctag.isavailable">is​Available</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Enumeration</small>
+    <code class="name">NFCTag</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">enum</span> <span class="type">NFCTag</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>An object that represents an NFC tag object.</p>
+
+</div>
+
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="nfctag.init(from:)">
+    <h3>
+        <code>init(from:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">from</span> <span class="variable">coreNFCInstance</span>: <span class="type">CoreNFC</span>.<span class="type">NFCTag</span>) </code></pre>
+</div>
+</div>
+    </section>
+    <section id="enumeration cases">
+        <h2>Enumeration Cases</h2>
+
+        <div role="article" class="case" id="nfctag.felica">
+    <h3>
+        <code>feli​Ca</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">case</span> <span class="variable">feliCa</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>FeliCa tag.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="nfctag.iso7816">
+    <h3>
+        <code>iso7816</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">case</span> <span class="variable">iso7816</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>ISO14443-4 type A / B tag with ISO7816 communication.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="nfctag.iso15693">
+    <h3>
+        <code>iso15693</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">case</span> <span class="variable">iso15693</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>ISO15693 tag.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="nfctag.mifare">
+    <h3>
+        <code>mi​Fare</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">case</span> <span class="variable">miFare</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443.</p>
+
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="nfctag.isavailable">
+    <h3>
+        <code>is​Available</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">isAvailable</span>: <span class="type">Bool</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Check whether a detected tag is available.  Returns <code>true</code> if tag is available in the current reader session. A tag remove from the RF field will become unavailable.  Tag in disconnected state will return <code>false</code>.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-05-09T15:23:54+0000">May 9, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+</p>
+    </footer>
+</body>
+</html>
