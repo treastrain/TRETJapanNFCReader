@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Tag reader session delegate.
 public protocol NFCTagReaderSessionDelegate: AnyObject {
     /// Tells the delegate that the reader session is active.
     ///
@@ -20,7 +21,7 @@ public protocol NFCTagReaderSessionDelegate: AnyObject {
     /// - Parameters:
     ///   - session: The session that detected the tags.
     ///   - tags: An array of NFC tags detected by the session.
-    func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [Any/*NFCTag*/])
+    func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag])
     
     /// Tells the delegate the reason for invalidating a reader session.
     /// - Parameters:

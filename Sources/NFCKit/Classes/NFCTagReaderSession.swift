@@ -126,8 +126,8 @@ extension NFCTagReaderSession: CoreNFC.NFCTagReaderSessionDelegate {
         self.delegate?.tagReaderSession(self, didInvalidateWithError: error)
     }
     
-    public func tagReaderSession(_ session: CoreNFC.NFCTagReaderSession, didDetect tags: [NFCTag]) {
-        self.delegate?.tagReaderSession(self, didDetect: tags)
+    public func tagReaderSession(_ session: CoreNFC.NFCTagReaderSession, didDetect tags: [CoreNFC.NFCTag]) {
+        self.delegate?.tagReaderSession(self, didDetect: .init(from: tags))
     }
 }
 #endif
