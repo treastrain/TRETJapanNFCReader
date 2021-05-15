@@ -21,11 +21,7 @@ extension FeliCaTag {
     ///   - resultHandler: Returns `FeliCaPollingResponse` or a `NFCErrorDomain` error when the operation is completed. Valid `requestData` is return when `requestCode` is a non-zero parameter and feature is supported by the tag. The `currentIDm` property will be updated on each execution, except when an invalid `systemCode` is provided and the existing selected system will stay selected.
     ///
     /// System code must be one of the provided values in the "com.apple.developer.nfc.readersession.felica.systemcodes" in the Info.plist; `NFCReaderErrorSecurityViolation` will be returned when an invalid system code is used. Polling with wildcard value in the upper or lower byte is not supported.
-    @available(iOS 13.0, *)
-    @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
-    @available(macOS, unavailable)
-    @available(macCatalyst, unavailable)
+    @available(iOS 13.0, *) @available(watchOS, unavailable) @available(tvOS, unavailable) @available(macOS, unavailable) @available(macCatalyst, unavailable)
     public func polling(systemCode: Data, requestCode: FeliCaPollingRequestCode, timeSlot: FeliCaPollingTimeSlot, resultHandler: @escaping (Result<FeliCaPollingResponse, Error>) -> Void) {
         
         #if os(iOS) && !targetEnvironment(macCatalyst)
