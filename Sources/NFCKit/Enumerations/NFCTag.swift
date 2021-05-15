@@ -13,7 +13,7 @@ import CoreNFC
 /// An object that represents an NFC tag object.
 public enum NFCTag {
     /// FeliCa tag.
-    case feliCa // (FeliCaTag)
+    case feliCa(FeliCaTag)
     
     /// ISO14443-4 type A / B tag with ISO7816 communication.
     case iso7816 // (ISO7816Tag)
@@ -33,8 +33,8 @@ public enum NFCTag {
     @available(iOS 13.0, *)
     public init(from coreNFCInstance: CoreNFC.NFCTag) {
         switch coreNFCInstance {
-        case .feliCa(_):
-            self = .feliCa
+        case .feliCa(let feliCaTag):
+            self = .feliCa(FeliCaTag(from: feliCaTag))
         case .iso7816(_):
             self = .iso7816
         case .iso15693(_):
