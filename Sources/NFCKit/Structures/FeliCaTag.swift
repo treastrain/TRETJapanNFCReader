@@ -30,25 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Polling
-    
-    /// Sends the Polling command as defined by FeliCa card specification to the tag.
-    /// - Parameters:
-    ///   - systemCode: Designation of System Code. Wildcard value (`0xFF`) in the upper or the lower byte is not supported.
-    ///   - requestCode: Designation of Requset Data output.
-    ///   - timeSlot: Maximum number of slots possible to respond.
-    ///   - resultHandler: Returns `FeliCaPollingResponse` or a `NFCErrorDomain` error when the operation is completed. Valid `requestData` is return when `requestCode` is a non-zero parameter and feature is supported by the tag. The `currentIDm` property will be updated on each execution, except when an invalid `systemCode` is provided and the existing selected system will stay selected.
-    ///
-    /// System code must be one of the provided values in the "com.apple.developer.nfc.readersession.felica.systemcodes" in the Info.plist; `NFCReaderErrorSecurityViolation` will be returned when an invalid system code is used. Polling with wildcard value in the upper or lower byte is not supported.
-    public func polling(systemCode: Data, requestCode: FeliCaPollingRequestCode, timeSlot: FeliCaPollingTimeSlot, resultHandler: @escaping (Result<FeliCaPollingResponse, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func polling(systemCode: Data, requestCode: FeliCaPollingRequestCode, timeSlot: FeliCaPollingTimeSlot, completionHandler: @escaping (Data, Data, Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Requesting Services
     
     /// Sends the Request Service command, as defined by the FeliCa card specification, to the tag.
@@ -197,7 +178,7 @@ public struct FeliCaTag {
     #if os(iOS) && !targetEnvironment(macCatalyst)
     private var _core: Any?
     @available(iOS 13.0, *)
-    private var core: CoreNFC.NFCFeliCaTag {
+    internal var core: CoreNFC.NFCFeliCaTag {
         get {
             return _core as! CoreNFC.NFCFeliCaTag
         }
