@@ -30,21 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Resetting Modes
-    
-    /// Sends the Reset Mode command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameter resultHandler: Returns `NFCFeliCaStatusFlag` or a `NFCErrorDomain` error when the operation is completed.
-    ///
-    /// Reset Mode command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func resetMode(resultHandler: @escaping (Result<FeliCaStatusFlag, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func resetMode(completionHandler: @escaping (Int, Int, Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Sending FeliCa Commands
     
     /// Sends the FeliCa command packet data to the tag.
