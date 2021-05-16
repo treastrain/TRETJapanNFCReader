@@ -17,6 +17,34 @@ public struct NDEFPayload {
     /// The payload, as defined by the NDEF specification.
     public var payload: Data
     
+    /// Creates a payload record with a URI specified as a URL.
+    /// - Parameter url: A URL object.
+    /// - Returns: An NDEF payload record.
+    @available(*, unavailable, message: "This method is not yet implemented.")
+    public static func wellKnownTypeURIPayload(url: URL) -> Self? {
+        return nil
+    }
+    
+    /// Creates a payload record with a URI specified as a string.
+    /// - Parameter uri: A URL string.
+    /// - Returns: An NDEF payload record.
+    ///
+    /// Use this method to create NDEF URI payload records that you can't create using a URL object, such as a URI containing special characters not represented by 7-bit ASCII encoding such as ä and ö.
+    @available(*, unavailable, message: "This method is not yet implemented.")
+    public static func wellKnownTypeURIPayload(string uri: String) -> Self? {
+        return nil
+    }
+    
+    /// Creates a payload record with text.
+    /// - Parameters:
+    ///   - text: Text to include in the payload.
+    ///   - locale: A locale object. This method saves the IANA language code, specified by the locale, to the payload.
+    /// - Returns: An NDEF payload record.
+    @available(*, unavailable, message: "This method is not yet implemented.")
+    public static func wellKnownTypeTextPayload(string text: String, locale: Locale) -> Self? {
+        return nil
+    }
+    
     /// Creates a payload record with the specified format, type, identifier, and payload data.
     /// - Parameters:
     ///   - format: A NFC type name format value.
@@ -46,5 +74,19 @@ public struct NDEFPayload {
         self.identifier = identifier
         self.payload = payload
         // chunkSize
+    }
+    
+    /// Returns the text and locale of a valid Well Known Type Text payload.
+    /// - Returns: A tuple containing a string and locale from a Well Known Type Text payload. The string and locale can be `nil`.
+    @available(*, unavailable, message: "This method is not yet implemented.")
+    public func wellKnownTypeTextPayload() -> (String?, Locale?) {
+        return (nil, nil)
+    }
+    
+    /// Returns the URL of a valid Well Known Type URI payload.
+    /// - Returns: A URL when the payload contains a Well Know Type URI; otherwise, `nil`.
+    @available(*, unavailable, message: "This method is not yet implemented.")
+    public func wellKnownTypeURIPayload() -> URL? {
+        return nil
     }
 }
