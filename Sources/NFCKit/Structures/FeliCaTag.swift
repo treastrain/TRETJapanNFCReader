@@ -30,21 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Requesting System Codes
-    
-    /// Sends the Request System Code command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameter resultHandler: Returns an array of system code as Data or a `NFCErrorDomain` error when the operation is completed. Each system code is 2 bytes stored in Little Endian format.
-    ///
-    /// Request System Code command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func requestSystemCode(resultHandler: @escaping (Result<[Data], Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func requestSystemCode(completionHandler: @escaping ([Data], Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Requesting Specification Versions
     
     /// Sends the Request Specification Version command, as defined by the FeliCa card specification, to the tag.
