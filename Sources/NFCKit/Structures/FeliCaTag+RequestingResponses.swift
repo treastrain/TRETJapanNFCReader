@@ -19,6 +19,8 @@ extension FeliCaTag {
     /// Request Response command defined by FeliCa card specification. Refer to the FeliCa specification for details.
     @available(iOS 13.0, *) @available(watchOS, unavailable) @available(tvOS, unavailable) @available(macOS, unavailable) @available(macCatalyst, unavailable)
     public func requestResponse(resultHandler: @escaping (Result<Int, Error>) -> Void) {
+        
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         if #available(iOS 14.0, *) {
             self.core.requestResponse(resultHandler: resultHandler)
         } else {
@@ -30,6 +32,9 @@ extension FeliCaTag {
                 }
             }
         }
+        #else
+        fatalError("\(#function): Not implemented")
+        #endif
     }
     
     @available(*, unavailable, message: "Use the one using resultHander.")
