@@ -30,38 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Requesting Services
-    
-    /// Sends the Request Service command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameters:
-    ///   - nodeCodeList: Node Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 32 inclusive. Each node code should be 2 bytes stored in Little Endian format.
-    ///   - resultHandler: Completion handler called when the operation is completed. Node key version list is returned as an array of Data objects, and each data object is stored in Little Endian format per FeliCa specification.
-    ///
-    /// Request Service command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func requestService(nodeCodeList: [Data], resultHandler: @escaping (Result<[Data], Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func requestService(nodeCodeList: [Data], completionHandler: @escaping ([Data], Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
-    /// Sends the Request Service V2 command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameters:
-    ///   - nodeCodeList: Node Code list represent in an array of Data. Number of nodes specified should be between 1 to 32 inclusive. Each node code should be 2 bytes stored in Little Endian format.
-    ///   - resultHandler: Completion handler called when the operation is completed. `encryptionIdentifier` value shall be ignored if Status Flag 1 value indicates an error. `nodeKeyVerionListAES` and `nodeKeyVersionListDES` may be nil depending on the Status Flag 1 value and the Encryption Identifier value. The 2 bytes node key version (AES and DES) is in Little Endian format.
-    ///
-    /// Request Service V2 command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func requestServiceV2(nodeCodeList: [Data], resultHandler: @escaping (Result<FeliCaRequsetServiceV2Response, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func requestServiceV2(nodeCodeList: [Data], completionHandler: @escaping (Int, Int, FeliCaEncryptionId, [Data], [Data], Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Requesting Responses
     
     /// Sends the Request Response command, as defined by the FeliCa card specification, to the tag.
