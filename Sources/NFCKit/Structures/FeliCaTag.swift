@@ -30,22 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Requesting Specification Versions
-    
-    /// Sends the Request Specification Version command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameter resultHandler: Returns `NFCFeliCaRequestSpecificationVersionResponse` or a `NFCErrorDomain` error when the operation is completed.
-    ///           `basicVersion` and `optionVersion` may be nil depending on the Status Flag 1 value and if the tag supports AES/DES.
-    ///
-    /// Request Specification Verison command defined by FeliCa card specification. This command supports response format version `00`h. Refer to the FeliCa specification for details.
-    public func requestSpecificationVersion(resultHandler: @escaping (Result<FeliCaRequestSpecificationVersionResponse, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func requestSpecificationVersion(completionHandler: @escaping (Int, Int, Data, Data, Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Resetting Modes
     
     /// Sends the Reset Mode command, as defined by the FeliCa card specification, to the tag.
