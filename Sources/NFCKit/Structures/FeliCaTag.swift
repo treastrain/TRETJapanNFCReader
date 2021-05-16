@@ -30,41 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Reading and Writing Without Encryption
-    
-    /// Sends the Read Without Encryption command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameters:
-    ///   - serviceCodeList: Service Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 16 inclusive. Each service code should be 2 bytes stored in Little Endian format.
-    ///   - blockList: Block List represent in an array of Data objects. 2-Byte or 3-Byte block list element is supported.
-    ///   - resultHandler: Completion handler called when the operation is completed. Valid read data blocks (block length of 16 bytes) are returned in an array of Data objects when Status Flag 1 equals zero.
-    ///
-    /// Read Without Encrypton command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func readWithoutEncryption(serviceCodeList: [Data], blockList: [Data], resultHandler: @escaping (Result<(FeliCaStatusFlag, [Data]), Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func readWithoutEncryption(serviceCodeList: [Data], blockList: [Data], completionHandler: @escaping (Int, Int, [Data], Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
-    /// Sends the Write Without Encryption command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameters:
-    ///   - serviceCodeList: Service Code list represented in an array of Data objects. Number of nodes specified should be between 1 to 16 inclusive. Each service code should be 2 bytes stored in Little Endian format.
-    ///   - blockList: Block List represent in an array of Data objects. Total blockList items and blockData items should match. 2-Byte or 3-Byte block list element is supported.
-    ///   - blockData: Block data represent in an array of Data objects. Total blockList items and blockData items should match. Data block should be 16 bytes in length.
-    ///   - resultHandler: Returns `NFCFeliCaStatusFlag` or a `NFCErrorDomain` error when operation is completed.
-    ///
-    /// Write Without Encrypton command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func writeWithoutEncryption(serviceCodeList: [Data], blockList: [Data], blockData: [Data], resultHandler: @escaping (Result<FeliCaStatusFlag, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func writeWithoutEncryption(serviceCodeList: [Data], blockList: [Data], blockData: [Data], completionHandler: @escaping (Int, Int, Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Requesting System Codes
     
     /// Sends the Request System Code command, as defined by the FeliCa card specification, to the tag.
