@@ -21,6 +21,7 @@ extension FeliCaTag {
     /// Transmission of FeliCa Command Packet Data at the applicaiton layer. Refer to the FeliCa specification for details. Manufacturer ID (IDm) of the currently selected system can be read from the currentIDm property.
     @available(iOS 13.0, *) @available(watchOS, unavailable) @available(tvOS, unavailable) @available(macOS, unavailable) @available(macCatalyst, unavailable)
     public func sendFeliCaCommand(commandPacket: Data, resultHandler: @escaping (Result<Data, Error>) -> Void) {
+        #if os(iOS) && !targetEnvironment(macCatalyst)
         if #available(iOS 14.0, *) {
             self.core.sendFeliCaCommand(commandPacket: commandPacket, resultHandler: resultHandler)
         } else {
@@ -32,6 +33,9 @@ extension FeliCaTag {
                 }
             }
         }
+        #else
+        fatalError("\(#function): Not implemented")
+        #endif
     }
     
     @available(*, unavailable, message: "Use the one using resultHander.")
