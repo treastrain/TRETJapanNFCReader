@@ -30,21 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Requesting Responses
-    
-    /// Sends the Request Response command, as defined by the FeliCa card specification, to the tag.
-    /// - Parameter resultHandler: Returns the mode as Int or a `NFCErrorDomain` error when the operation is completed. Valid mode value ranges from 0 to 3 inclusively.
-    ///
-    /// Request Response command defined by FeliCa card specification. Refer to the FeliCa specification for details.
-    public func requestResponse(resultHandler: @escaping (Result<Int, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func requestResponse(completionHandler: @escaping (Int, Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     // MARK: - Reading and Writing Without Encryption
     
     /// Sends the Read Without Encryption command, as defined by the FeliCa card specification, to the tag.
