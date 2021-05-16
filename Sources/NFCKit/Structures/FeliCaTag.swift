@@ -35,10 +35,10 @@ public struct FeliCaTag {
     @available(iOS 13.0, *)
     internal var core: CoreNFC.NFCFeliCaTag {
         get {
-            return _core as! CoreNFC.NFCFeliCaTag
+            return self._core as! CoreNFC.NFCFeliCaTag
         }
         set {
-            _core = newValue
+            self._core = newValue
         }
     }
     #endif
