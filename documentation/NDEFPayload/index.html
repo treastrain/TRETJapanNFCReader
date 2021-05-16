@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRETNFCKit - NDEFPayload</title>
+    <link rel="stylesheet" type="text/css" href="/documentation/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/documentation/">
+            <strong>
+                TRETNFCKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#ndefpayload.init(format:type:identifier:payload:)">init(format:​type:​identifier:​payload:​)</a></li><li class="initializer"><a href="#ndefpayload.init(format:type:identifier:payload:chunksize:)">init(format:​type:​identifier:​payload:​chunk​Size:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#ndefpayload.typenameformat">type​Name​Format</a></li><li class="variable"><a href="#ndefpayload.type">type</a></li><li class="variable"><a href="#ndefpayload.identifier">identifier</a></li><li class="variable"><a href="#ndefpayload.payload">payload</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#ndefpayload.wellknowntypeuripayload(url:)">well​Known​Type​URIPayload(url:​)</a></li><li class="function"><a href="#ndefpayload.wellknowntypeuripayload(string:)">well​Known​Type​URIPayload(string:​)</a></li><li class="function"><a href="#ndefpayload.wellknowntypetextpayload(string:locale:)">well​Known​Type​Text​Payload(string:​locale:​)</a></li><li class="function"><a href="#ndefpayload.wellknowntypetextpayload()">well​Known​Type​Text​Payload()</a></li><li class="function"><a href="#ndefpayload.wellknowntypeuripayload()">well​Known​Type​URIPayload()</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">NDEFPayload</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">NDEFPayload</span> </code></pre>
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        
+        <h3>Nested Types</h3>
+<dl>
+    <dt class="enumeration"><code><a href="/documentation/NDEFPayload_TypeNameFormat">NDEFPayload.TypeNameFormat</a></code></dt>
+<dd><p>The Type Name Format values that specify the content type for the payload data in an NFC NDEF message.</p>
+</dd>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="ndefpayload.init(format:type:identifier:payload:)">
+    <h3>
+        <code>init(format:​type:​identifier:​payload:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">format</span>: <span class="type">TypeNameFormat</span>, <span class="variable">type</span>: <span class="type">Data</span>, <span class="variable">identifier</span>: <span class="type">Data</span>, <span class="variable">payload</span>: <span class="type">Data</span>) </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Creates a payload record with the specified format, type, identifier, and payload data.</p>
+
+</div>
+<div class="discussion">
+    <p>This initializer uses the maximum payload chunk size defined by the NFC NDEF specification, which is 2^32-1 octets. If the payload size is bigger than the maximum size, the initializer splits the record into multiple record chunks.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>format</th>
+    <td><code class="type">Type​Name​Format</code></td>
+    <td><p>A NFC type name format value.</p>
+</td>
+</tr>
+<tr>
+    <th>type</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A data object describing the type of payload. If the data is empty, the method excludes this field from the payload record.</p>
+</td>
+</tr>
+<tr>
+    <th>identifier</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A URI reference that identifies the payload. If the data is empty, the method excludes this field from the payload record.</p>
+</td>
+</tr>
+<tr>
+    <th>payload</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A data object containing the payload data. If the data is empty, the method excludes this field from the payload record.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="ndefpayload.init(format:type:identifier:payload:chunksize:)">
+    <h3>
+        <code>init(format:​type:​identifier:​payload:​chunk​Size:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This initializer is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">format</span>: <span class="type">TypeNameFormat</span>, <span class="variable">type</span>: <span class="type">Data</span>, <span class="variable">identifier</span>: <span class="type">Data</span>, <span class="variable">payload</span>: <span class="type">Data</span>, <span class="variable">chunkSize</span>: <span class="type">Int</span>) </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Creates a payload record with the specified format, type, identifier, payload data, and data chunk size.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>format</th>
+    <td><code class="type">Type​Name​Format</code></td>
+    <td><p>A NFC type name format value.</p>
+</td>
+</tr>
+<tr>
+    <th>type</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A data object describing the type of payload. If the data is empty, the method excludes this field from the payload record.</p>
+</td>
+</tr>
+<tr>
+    <th>identifier</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A URI reference that identifies the payload. If the data is empty, the method excludes this field from the payload record.</p>
+</td>
+</tr>
+<tr>
+    <th>payload</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A data object containing the payload data. If the data is empty, the method excludes this field from the payload record.</p>
+</td>
+</tr>
+<tr>
+    <th>chunk​Size</th>
+    <td><code class="type">Int</code></td>
+    <td><p>The maximum size of a payload chunk. A value of zero indicates that the payload fits in a single record, that is, no chunking of the payload.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="ndefpayload.typenameformat">
+    <h3>
+        <code>type​Name​Format</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">typeNameFormat</span>: <span class="type">TypeNameFormat</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>The Type Name Format field of the payload, as defined by the NDEF specification.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="ndefpayload.type">
+    <h3>
+        <code>type</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">type</span>: <span class="type">Data</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>The type of the payload, as defined by the NDEF specification.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="ndefpayload.identifier">
+    <h3>
+        <code>identifier</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">identifier</span>: <span class="type">Data</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>The identifier of the payload, as defined by the NDEF specification.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="ndefpayload.payload">
+    <h3>
+        <code>payload</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">payload</span>: <span class="type">Data</span></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>The payload, as defined by the NDEF specification.</p>
+
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="ndefpayload.wellknowntypeuripayload(url:)">
+    <h3>
+        <code>well​Known​Type​URIPayload(url:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">wellKnownTypeURIPayload</span>(<span class="variable">url</span>: <span class="type">URL</span>) -&gt; <span class="keyword">Self</span>? </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Creates a payload record with a URI specified as a URL.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>url</th>
+    <td><code class="type">URL</code></td>
+    <td><p>A URL object.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>An NDEF payload record.</p>
+
+</div>
+<div role="article" class="function" id="ndefpayload.wellknowntypeuripayload(string:)">
+    <h3>
+        <code>well​Known​Type​URIPayload(string:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">wellKnownTypeURIPayload</span>(<span class="variable">string</span> <span class="variable">uri</span>: <span class="type">String</span>) -&gt; <span class="keyword">Self</span>? </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Creates a payload record with a URI specified as a string.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this method to create NDEF URI payload records that you can't create using a URL object, such as a URI containing special characters not represented by 7-bit ASCII encoding such as ä and ö.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>uri</th>
+    <td><code class="type">String</code></td>
+    <td><p>A URL string.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>An NDEF payload record.</p>
+
+</div>
+<div role="article" class="function" id="ndefpayload.wellknowntypetextpayload(string:locale:)">
+    <h3>
+        <code>well​Known​Type​Text​Payload(string:​locale:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">wellKnownTypeTextPayload</span>(<span class="variable">string</span> <span class="variable">text</span>: <span class="type">String</span>, <span class="variable">locale</span>: <span class="type">Locale</span>) -&gt; <span class="keyword">Self</span>? </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Creates a payload record with text.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>text</th>
+    <td><code class="type">String</code></td>
+    <td><p>Text to include in the payload.</p>
+</td>
+</tr>
+<tr>
+    <th>locale</th>
+    <td><code class="type">Locale</code></td>
+    <td><p>A locale object. This method saves the IANA language code, specified by the locale, to the payload.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>An NDEF payload record.</p>
+
+</div>
+<div role="article" class="function" id="ndefpayload.wellknowntypetextpayload()">
+    <h3>
+        <code>well​Known​Type​Text​Payload()</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">wellKnownTypeTextPayload</span>() -&gt; (<span class="type">String</span>?, <span class="type">Locale</span>?) </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Returns the text and locale of a valid Well Known Type Text payload.</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>A tuple containing a string and locale from a Well Known Type Text payload. The string and locale can be <code>nil</code>.</p>
+
+</div>
+<div role="article" class="function" id="ndefpayload.wellknowntypeuripayload()">
+    <h3>
+        <code>well​Known​Type​URIPayload()</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">wellKnownTypeURIPayload</span>() -&gt; <span class="type">URL</span>? </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Returns the URL of a valid Well Known Type URI payload.</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>A URL when the payload contains a Well Know Type URI; otherwise, <code>nil</code>.</p>
+
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-05-16T19:32:35+0000">May 16, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+</p>
+    </footer>
+</body>
+</html>

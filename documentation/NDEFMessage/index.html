@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRETNFCKit - NDEFMessage</title>
+    <link rel="stylesheet" type="text/css" href="/documentation/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/documentation/">
+            <strong>
+                TRETNFCKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#ndefmessage.init(records:)">init(records:​)</a></li><li class="initializer"><a href="#ndefmessage.init?(data:)">init?(data:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#ndefmessage.records">records</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">NDEFMessage</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">NDEFMessage</span> </code></pre>
+</div>
+
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="ndefmessage.init(records:)">
+    <h3>
+        <code>init(records:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">records</span>: [<span class="type">NDEFPayload</span>]) </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>The length, in bytes, of the NDEF message when stored on an NFC tag.</p>
+
+</div>
+<div class="discussion">
+    <p>The maximum length of an NDEF message is 128 KB.
+Creates an NDEF message with the specified records.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>records</th>
+    <td><code class="type">[NDEFPayload]</code></td>
+    <td><p>An array of payload objects for the message. To create an empty message, pass in an empty array.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="ndefmessage.init?(data:)">
+    <h3>
+        <code>init?(data:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This initializer is not yet implemented.&quot;</span>)
+    <span class="keyword">public</span> <span class="keyword">init</span>?(<span class="variable">data</span>: <span class="type">Data</span>) </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Creates an NDEF message from raw data representing the message.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>data</th>
+    <td><code class="type">Data</code></td>
+    <td><p>A data object containing the raw bytes of a complete NDEF message. The data must contain only one NDEF message, and the message must contain NDEF payloads that are valid according to the NFC Forum NDEF RTD specification.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="ndefmessage.records">
+    <h3>
+        <code>records</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">records</span>: [<span class="type">NDEFPayload</span>]</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>An array of records for the message.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-05-16T19:32:35+0000">May 16, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRETNFCKit - NDEFTagProtocol</title>
+    <link rel="stylesheet" type="text/css" href="/documentation/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/documentation/">
+            <strong>
+                TRETNFCKit
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#ndeftagprotocol.isavailable">is​Available</a></li><li class="function"><a href="#ndeftagprotocol.queryndefstatus(completionhandler:)">query​NDEFStatus(completion​Handler:​)</a></li><li class="function"><a href="#ndeftagprotocol.readndef(completionhandler:)">read​NDEF(completion​Handler:​)</a></li><li class="function"><a href="#ndeftagprotocol.writendef(_:completionhandler:)">write​NDEF(_:​completion​Handler:​)</a></li><li class="function"><a href="#ndeftagprotocol.writelock(completionhandler:)">write​Lock(completion​Handler:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">NDEFTag​Protocol</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">NDEFTagProtocol</span> </code></pre>
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="ndeftagprotocol.isavailable">
+    <h3>
+        <code>is​Available</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isAvailable</span>: <span class="type">Bool</span> </code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that determines whether the NDEF tag is available in the current reader session.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="ndeftagprotocol.queryndefstatus(completionhandler:)">
+    <h3>
+        <code>query​NDEFStatus(completion​Handler:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">func</span> <span class="function">queryNDEFStatus</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="keyword">_</span> <span class="variable">status</span>: <span class="type">NDEFStatus</span>, <span class="keyword">_</span> <span class="variable">capacity</span>: <span class="type">Int</span>, <span class="keyword">_</span> <span class="variable">error</span>: <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Asks the reader session for the NDEF support status of the tag.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>completion​Handler</th>
+    <td><code class="type">@escaping (_ status:​ NDEFStatus, _ capacity:​ Int, _ error:​ Error?) -&gt; Void</code></td>
+    <td><p>The handler invoked by the reader session that provides the NDEF support status. The handler has the following parameters:</p>
+</td>
+</tr>
+<tr>
+    <th>status</th>
+    <td></td>
+    <td><p>The <code>NDEFStatus</code> of the tag.</p>
+</td>
+</tr>
+<tr>
+    <th>capacity</th>
+    <td></td>
+    <td><p>Indicates the maximum NDEF message size, in bytes, that you can store on the tag.</p>
+</td>
+</tr>
+<tr>
+    <th>error</th>
+    <td></td>
+    <td><p>An <code>NSError</code> object if the query fails; otherwise, <code>nil</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="ndeftagprotocol.readndef(completionhandler:)">
+    <h3>
+        <code>read​NDEF(completion​Handler:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">func</span> <span class="function">readNDEF</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="keyword">_</span> <span class="variable">message</span>: <span class="type">NDEFMessage</span>?, <span class="keyword">_</span> <span class="variable">error</span>: <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Retrieves an NDEF message from the tag.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>completion​Handler</th>
+    <td><code class="type">@escaping (_ message:​ NDEFMessage?, _ error:​ Error?) -&gt; Void</code></td>
+    <td><p>The handler invoked by the reader session that provides the NDEF message. The handler has the following parameters:</p>
+</td>
+</tr>
+<tr>
+    <th>message</th>
+    <td></td>
+    <td><p>An <code>NDEFMessage</code> object, or nil if an error occurs while retrieving the message.</p>
+</td>
+</tr>
+<tr>
+    <th>error</th>
+    <td></td>
+    <td><p>An <code>NSError</code> object if the query fails; otherwise, <code>nil</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="ndeftagprotocol.writendef(_:completionhandler:)">
+    <h3>
+        <code>write​NDEF(_:​completion​Handler:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">func</span> <span class="function">writeNDEF</span>(<span class="keyword">_</span> <span class="variable">ndefMessage</span>: <span class="type">NDEFMessage</span>, <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="keyword">_</span> <span class="variable">error</span>: <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Saves an NDEF message to a writable tag.</p>
+
+</div>
+<div class="discussion">
+    <p>To determine whether the tag is writable, call <code>queryNDEFStatus(completionHandler:)</code> and check that the status is <code>NDEFStatus.readWrite</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>ndef​Message</th>
+    <td><code class="type">NDEFMessage</code></td>
+    <td><p>The NDEF message to write to the tag.</p>
+</td>
+</tr>
+<tr>
+    <th>completion​Handler</th>
+    <td><code class="type">@escaping (_ error:​ Error?) -&gt; Void</code></td>
+    <td><p>The handler invoked by the reader session after completing the write request. The session calls completionHandler on the dispatch queue provided when creating the <code>NDEFReaderSession</code>. The handler has the following parameter:</p>
+</td>
+</tr>
+<tr>
+    <th>error</th>
+    <td></td>
+    <td><p>An <code>NSError</code> object if the write request fails. A value of <code>nil</code> indicates that the write was successful.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="ndeftagprotocol.writelock(completionhandler:)">
+    <h3>
+        <code>write​Lock(completion​Handler:​)</code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">func</span> <span class="function">writeLock</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="keyword">_</span> <span class="variable">error</span>: <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Changes the NDEF tag status to read-only, preventing future write operations.</p>
+
+</div>
+<div class="discussion">
+    <p>Calling this method updates the write access condition byte in the NDEF File Control of the tag's file system, thus locking the tag. This is a permanent action that you cannot undo. After locking the tag, you can no longer write data to it.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>completion​Handler</th>
+    <td><code class="type">@escaping (_ error:​ Error?) -&gt; Void</code></td>
+    <td><p>The handler invoked by the reader session after completing the lock request. The session calls completionHandler on the dispatch queue provided when creating the <code>NFCNDEFReaderSession</code>. The handler has the following parameter:</p>
+</td>
+</tr>
+<tr>
+    <th>error</th>
+    <td></td>
+    <td><p>An <code>NSError</code> object if the write request fails. A value of <code>nil</code> indicates that the session locked the tag and future write requests aren't possible.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-05-16T19:32:35+0000">May 16, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+</p>
+    </footer>
+</body>
+</html>
