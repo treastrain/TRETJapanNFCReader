@@ -409,7 +409,8 @@
         <code>request​System​Code(result​Handler:​)</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSystemCode</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;[<span class="type">Data</span>], <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSystemCode</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;[<span class="type">Data</span>], <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Request System Code command, as defined by the FeliCa card specification, to the tag.</p>
@@ -595,7 +596,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2021-05-16T16:31:59+0000">May 16, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+    Generated on <time datetime="2021-05-16T17:05:10+0000">May 16, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
 </p>
     </footer>
 </body>
