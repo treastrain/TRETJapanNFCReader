@@ -30,23 +30,6 @@ public struct FeliCaTag {
     }
     #endif
     
-    // MARK: - Sending FeliCa Commands
-    
-    /// Sends the FeliCa command packet data to the tag.
-    /// - Parameters:
-    ///   - commandPacket: Command packet send to the FeliCa card. Maximum packet length is 254. Data length (LEN) byte and CRC bytes are calculated and inserted automatically to the provided packet data frame.
-    ///   - resultHandler: Completion handler called when the operation is completed. A `NFCErrorDomain` error is returned when there is a communication issue with the tag.
-    ///
-    /// Transmission of FeliCa Command Packet Data at the applicaiton layer. Refer to the FeliCa specification for details. Manufacturer ID (IDm) of the currently selected system can be read from the currentIDm property.
-    public func sendFeliCaCommand(commandPacket: Data, resultHandler: @escaping (Result<Data, Error>) -> Void) {
-        
-    }
-    
-    @available(*, unavailable, message: "Use the one using resultHander.")
-    public func sendFeliCaCommand(commandPacket: Data, completionHandler: @escaping (Data, Error?) -> Void) {
-        fatalError("\(#function): Use the one using resultHander.")
-    }
-    
     #if os(iOS) && !targetEnvironment(macCatalyst)
     private var _core: Any?
     @available(iOS 13.0, *)
