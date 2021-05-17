@@ -11,6 +11,7 @@ import CoreNFC
 #endif
 
 public struct NDEFPayload {
+    #if os(iOS) && !targetEnvironment(macCatalyst)
     /// The Type Name Format field of the payload, as defined by the NDEF specification.
     @available(iOS 11.0, *)
     public var typeNameFormat: TypeNameFormat {
@@ -130,6 +131,7 @@ public struct NDEFPayload {
     public func wellKnownTypeURIPayload() -> URL? {
         return self.core.wellKnownTypeURIPayload()
     }
+    #endif
     
     #if os(iOS) && !targetEnvironment(macCatalyst)
     private var _core: Any?
