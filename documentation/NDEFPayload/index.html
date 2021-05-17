@@ -58,7 +58,8 @@
         <code>init(format:​type:​identifier:​payload:​)</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">format</span>: <span class="type">TypeNameFormat</span>, <span class="variable">type</span>: <span class="type">Data</span>, <span class="variable">identifier</span>: <span class="type">Data</span>, <span class="variable">payload</span>: <span class="type">Data</span>) </code></pre>
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">format</span>: <span class="type">TypeNameFormat</span>, <span class="variable">type</span>: <span class="type">Data</span>, <span class="variable">identifier</span>: <span class="type">Data</span>, <span class="variable">payload</span>: <span class="type">Data</span>) </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Creates a payload record with the specified format, type, identifier, and payload data.</p>
@@ -111,7 +112,7 @@
         <code>init(format:​type:​identifier:​payload:​chunk​Size:​)</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This initializer is not yet implemented.&quot;</span>)
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
     <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">format</span>: <span class="type">TypeNameFormat</span>, <span class="variable">type</span>: <span class="type">Data</span>, <span class="variable">identifier</span>: <span class="type">Data</span>, <span class="variable">payload</span>: <span class="type">Data</span>, <span class="variable">chunkSize</span>: <span class="type">Int</span>) </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -171,7 +172,8 @@
         <code>type​Name​Format</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">typeNameFormat</span>: <span class="type">TypeNameFormat</span></code></pre>
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">typeNameFormat</span>: <span class="type">TypeNameFormat</span> </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>The Type Name Format field of the payload, as defined by the NDEF specification.</p>
@@ -183,7 +185,8 @@
         <code>type</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">type</span>: <span class="type">Data</span></code></pre>
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">type</span>: <span class="type">Data</span> </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>The type of the payload, as defined by the NDEF specification.</p>
@@ -195,7 +198,8 @@
         <code>identifier</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">identifier</span>: <span class="type">Data</span></code></pre>
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">identifier</span>: <span class="type">Data</span> </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>The identifier of the payload, as defined by the NDEF specification.</p>
@@ -207,7 +211,8 @@
         <code>payload</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">payload</span>: <span class="type">Data</span></code></pre>
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">11.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">payload</span>: <span class="type">Data</span> </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>The payload, as defined by the NDEF specification.</p>
@@ -223,7 +228,7 @@
         <code>well​Known​Type​URIPayload(url:​)</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">wellKnownTypeURIPayload</span>(<span class="variable">url</span>: <span class="type">URL</span>) -&gt; <span class="keyword">Self</span>? </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -258,7 +263,7 @@
         <code>well​Known​Type​URIPayload(string:​)</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">wellKnownTypeURIPayload</span>(<span class="variable">string</span> <span class="variable">uri</span>: <span class="type">String</span>) -&gt; <span class="keyword">Self</span>? </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -297,7 +302,7 @@
         <code>well​Known​Type​Text​Payload(string:​locale:​)</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">wellKnownTypeTextPayload</span>(<span class="variable">string</span> <span class="variable">text</span>: <span class="type">String</span>, <span class="variable">locale</span>: <span class="type">Locale</span>) -&gt; <span class="keyword">Self</span>? </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -338,7 +343,7 @@
         <code>well​Known​Type​Text​Payload()</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
     <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">wellKnownTypeTextPayload</span>() -&gt; (<span class="type">String</span>?, <span class="type">Locale</span>?) </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -354,7 +359,7 @@
         <code>well​Known​Type​URIPayload()</code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This method is not yet implemented.&quot;</span>)
+<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
     <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">wellKnownTypeURIPayload</span>() -&gt; <span class="type">URL</span>? </code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -374,7 +379,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2021-05-16T19:32:35+0000">May 16, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+    Generated on <time datetime="2021-05-17T17:58:36+0000">May 17, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
 </p>
     </footer>
 </body>
