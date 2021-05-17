@@ -15,4 +15,8 @@ public enum NDEFStatus: UInt {
     case readWrite = 2
     /// Tag is NDEF read-only; NDEF writing is disallowed.
     case readOnly = 3
+    
+    public enum CaseError: Error {
+        case unknown
+    }
 }

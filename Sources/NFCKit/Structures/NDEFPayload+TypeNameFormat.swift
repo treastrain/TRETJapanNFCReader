@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if os(iOS)
+import CoreNFC
+#endif
 
 extension NDEFPayload {
     /// The Type Name Format values that specify the content type for the payload data in an NFC NDEF message.
@@ -24,5 +27,19 @@ extension NDEFPayload {
         case unknown = 5
         /// A type indicating that the payload is part of a series of records containing chunked data.
         case unchanged = 6
+        
+        #if os(iOS) && !targetEnvironment(macCatalyst)
+        public init?(from coreNFCInstance: CoreNFC.NFCTypeNameFormat) {
+            self.init(rawValue: coreNFCInstance.rawValue)
+        }
+        #endif
     }
 }
+
+#if os(iOS) && !targetEnvironment(macCatalyst)
+extension CoreNFC.NFCTypeNameFormat {
+    public init(from nfcKitInstance: NDEFPayload.TypeNameFormat) {
+        self.init(rawValue: nfcKitInstance.rawValue)!
+    }
+}
+#endif
