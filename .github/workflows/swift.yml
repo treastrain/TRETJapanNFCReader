@@ -13,7 +13,7 @@ env:
 jobs:
   setup:
     name: set up workflow
-    runs-on: macos-latest # macos-11.0
+    runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
     - name: Show Xcode list
@@ -40,8 +40,8 @@ jobs:
       run: xcpretty --version
     
   swift_build_macos:
-    name: swift build (macOS Latest)
-    runs-on: macos-latest
+    name: swift build (macOS 11)
+    runs-on: macos-11
     needs: setup
     steps:
     - uses: actions/checkout@v2
@@ -63,8 +63,8 @@ jobs:
         path: swift-build-macos_x86_64.log
   
   swift_test_macos:
-    name: swift test (macOS Latest)
-    runs-on: macos-latest
+    name: swift test (macOS 11)
+    runs-on: macos-11
     needs: swift_build_macos
     steps:
     - uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
 
   xcodebuild_test_ios:
     name: xcodebuild test (iOS)
-    runs-on: macos-latest
+    runs-on: macos-11
     needs: setup
     steps:
     - uses: actions/checkout@v2
@@ -123,7 +123,7 @@ jobs:
   
   xcodebuild_test_macos:
     name: xcodebuild test (macOS)
-    runs-on: macos-latest
+    runs-on: macos-11
     needs: setup
     steps:
     - uses: actions/checkout@v2
@@ -170,7 +170,7 @@ jobs:
   
   xcodebuild_test_tvos:
     name: xcodebuild test (tvOS)
-    runs-on: macos-latest
+    runs-on: macos-11
     needs: setup
     steps:
     - uses: actions/checkout@v2
@@ -206,8 +206,7 @@ jobs:
   
   xcodebuild_test_watchos:
     name: xcodebuild test (watchOS)
-    if: false
-    runs-on: macos-latest
+    runs-on: macos-11
     needs: setup
     steps:
     - uses: actions/checkout@v2
