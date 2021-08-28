@@ -14,7 +14,6 @@
             </strong>
             <span>Documentation</span>
         </a>
-        <sup>Beta</sup>
     </header>
 
     <!--
@@ -38,7 +37,7 @@
 </h1>
 
 <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">FeliCaTag</span> </code></pre>
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">FeliCaTag</span>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>An interface for interacting with a FeliCa™ tag.</p>
@@ -54,20 +53,20 @@
 
         <div role="article" class="variable" id="felicatag.currentsystemcode">
     <h3>
-        <code>current​System​Code</code>
+        <code><a href="#felicatag.currentsystemcode">current​System​Code</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
-    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">currentSystemCode</span>: <span class="type">Data</span> </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">currentSystemCode</span>: <span class="type">Data</span>  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="variable" id="felicatag.currentidm">
     <h3>
-        <code>current​IDm</code>
+        <code><a href="#felicatag.currentidm">current​IDm</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
-    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">currentIDm</span>: <span class="type">Data</span> </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">currentIDm</span>: <span class="type">Data</span>  </body></html></code></pre>
 </div>
 </div>
     </section>
@@ -76,11 +75,11 @@
 
         <div role="article" class="function" id="felicatag.polling(systemcode:requestcode:timeslot:resulthandler:)">
     <h3>
-        <code>polling(system​Code:​request​Code:​time​Slot:​result​Handler:​)</code>
+        <code><a href="#felicatag.polling(systemcode:requestcode:timeslot:resulthandler:)">polling(system​Code:​request​Code:​time​Slot:​result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">polling</span>(<span class="variable">systemCode</span>: <span class="type">Data</span>, <span class="variable">requestCode</span>: <span class="type">FeliCaPollingRequestCode</span>, <span class="variable">timeSlot</span>: <span class="type">FeliCaPollingTimeSlot</span>, <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">FeliCaPollingResponse</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">polling</span>(<span class="variable">systemCode</span>: <span class="type">Data</span>, <span class="variable">requestCode</span>: <a href="/documentation/FeliCaPollingRequestCode"><span class="type">FeliCaPollingRequestCode</span></a>, <span class="variable">timeSlot</span>: <a href="/documentation/FeliCaPollingTimeSlot"><span class="type">FeliCaPollingTimeSlot</span></a>, <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<a href="/documentation/FeliCaPollingResponse"><span class="type">FeliCaPollingResponse</span></a>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Polling command as defined by FeliCa card specification to the tag.</p>
@@ -130,20 +129,20 @@
 </div>
 <div role="article" class="function" id="felicatag.polling(systemcode:requestcode:timeslot:completionhandler:)">
     <h3>
-        <code>polling(system​Code:​request​Code:​time​Slot:​completion​Handler:​)</code>
+        <code><a href="#felicatag.polling(systemcode:requestcode:timeslot:completionhandler:)">polling(system​Code:​request​Code:​time​Slot:​completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">polling</span>(<span class="variable">systemCode</span>: <span class="type">Data</span>, <span class="variable">requestCode</span>: <span class="type">FeliCaPollingRequestCode</span>, <span class="variable">timeSlot</span>: <span class="type">FeliCaPollingTimeSlot</span>, <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Data</span>, <span class="type">Data</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">polling</span>(<span class="variable">systemCode</span>: <span class="type">Data</span>, <span class="variable">requestCode</span>: <a href="/documentation/FeliCaPollingRequestCode"><span class="type">FeliCaPollingRequestCode</span></a>, <span class="variable">timeSlot</span>: <a href="/documentation/FeliCaPollingTimeSlot"><span class="type">FeliCaPollingTimeSlot</span></a>, <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Data</span>, <span class="type">Data</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.readwithoutencryption(servicecodelist:blocklist:resulthandler:)">
     <h3>
-        <code>read​Without​Encryption(service​Code​List:​block​List:​result​Handler:​)</code>
+        <code><a href="#felicatag.readwithoutencryption(servicecodelist:blocklist:resulthandler:)">read​Without​Encryption(service​Code​List:​block​List:​result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">readWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;(<span class="type">FeliCaStatusFlag</span>, [<span class="type">Data</span>]), <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">readWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;(<a href="/documentation/FeliCaStatusFlag"><span class="type">FeliCaStatusFlag</span></a>, [<span class="type">Data</span>]), <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Read Without Encryption command, as defined by the FeliCa card specification, to the tag.</p>
@@ -187,20 +186,20 @@
 </div>
 <div role="article" class="function" id="felicatag.readwithoutencryption(servicecodelist:blocklist:completionhandler:)">
     <h3>
-        <code>read​Without​Encryption(service​Code​List:​block​List:​completion​Handler:​)</code>
+        <code><a href="#felicatag.readwithoutencryption(servicecodelist:blocklist:completionhandler:)">read​Without​Encryption(service​Code​List:​block​List:​completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">readWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, [<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">readWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, [<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.writewithoutencryption(servicecodelist:blocklist:blockdata:resulthandler:)">
     <h3>
-        <code>write​Without​Encryption(service​Code​List:​block​List:​block​Data:​result​Handler:​)</code>
+        <code><a href="#felicatag.writewithoutencryption(servicecodelist:blocklist:blockdata:resulthandler:)">write​Without​Encryption(service​Code​List:​block​List:​block​Data:​result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">writeWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">blockData</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">FeliCaStatusFlag</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">writeWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">blockData</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<a href="/documentation/FeliCaStatusFlag"><span class="type">FeliCaStatusFlag</span></a>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Write Without Encryption command, as defined by the FeliCa card specification, to the tag.</p>
@@ -250,20 +249,20 @@
 </div>
 <div role="article" class="function" id="felicatag.writewithoutencryption(servicecodelist:blocklist:blockdata:completionhandler:)">
     <h3>
-        <code>write​Without​Encryption(service​Code​List:​block​List:​block​Data:​completion​Handler:​)</code>
+        <code><a href="#felicatag.writewithoutencryption(servicecodelist:blocklist:blockdata:completionhandler:)">write​Without​Encryption(service​Code​List:​block​List:​block​Data:​completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">writeWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">blockData</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">writeWithoutEncryption</span>(<span class="variable">serviceCodeList</span>: [<span class="type">Data</span>], <span class="variable">blockList</span>: [<span class="type">Data</span>], <span class="variable">blockData</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.requestresponse(resulthandler:)">
     <h3>
-        <code>request​Response(result​Handler:​)</code>
+        <code><a href="#felicatag.requestresponse(resulthandler:)">request​Response(result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestResponse</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">Int</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestResponse</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">Int</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Request Response command, as defined by the FeliCa card specification, to the tag.</p>
@@ -295,20 +294,20 @@
 </div>
 <div role="article" class="function" id="felicatag.requestresponse(completionhandler:)">
     <h3>
-        <code>request​Response(completion​Handler:​)</code>
+        <code><a href="#felicatag.requestresponse(completionhandler:)">request​Response(completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestResponse</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestResponse</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.requestservice(nodecodelist:resulthandler:)">
     <h3>
-        <code>request​Service(node​Code​List:​result​Handler:​)</code>
+        <code><a href="#felicatag.requestservice(nodecodelist:resulthandler:)">request​Service(node​Code​List:​result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestService</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;[<span class="type">Data</span>], <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestService</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;[<span class="type">Data</span>], <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Request Service command, as defined by the FeliCa card specification, to the tag.</p>
@@ -346,20 +345,20 @@
 </div>
 <div role="article" class="function" id="felicatag.requestservice(nodecodelist:completionhandler:)">
     <h3>
-        <code>request​Service(node​Code​List:​completion​Handler:​)</code>
+        <code><a href="#felicatag.requestservice(nodecodelist:completionhandler:)">request​Service(node​Code​List:​completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestService</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestService</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.requestservicev2(nodecodelist:resulthandler:)">
     <h3>
-        <code>request​Service​V2(node​Code​List:​result​Handler:​)</code>
+        <code><a href="#felicatag.requestservicev2(nodecodelist:resulthandler:)">request​Service​V2(node​Code​List:​result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestServiceV2</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">FeliCaRequsetServiceV2Response</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestServiceV2</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<a href="/documentation/FeliCaRequsetServiceV2Response"><span class="type">FeliCaRequsetServiceV2Response</span></a>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Request Service V2 command, as defined by the FeliCa card specification, to the tag.</p>
@@ -397,20 +396,20 @@
 </div>
 <div role="article" class="function" id="felicatag.requestservicev2(nodecodelist:completionhandler:)">
     <h3>
-        <code>request​Service​V2(node​Code​List:​completion​Handler:​)</code>
+        <code><a href="#felicatag.requestservicev2(nodecodelist:completionhandler:)">request​Service​V2(node​Code​List:​completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestServiceV2</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">FeliCaEncryptionId</span>, [<span class="type">Data</span>], [<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestServiceV2</span>(<span class="variable">nodeCodeList</span>: [<span class="type">Data</span>], <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">FeliCaEncryptionId</span>, [<span class="type">Data</span>], [<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.requestspecificationversion(resulthandler:)">
     <h3>
-        <code>request​Specification​Version(result​Handler:​)</code>
+        <code><a href="#felicatag.requestspecificationversion(resulthandler:)">request​Specification​Version(result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSpecificationVersion</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">FeliCaRequestSpecificationVersionResponse</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSpecificationVersion</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<a href="/documentation/FeliCaRequestSpecificationVersionResponse"><span class="type">FeliCaRequestSpecificationVersionResponse</span></a>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Request Specification Version command, as defined by the FeliCa card specification, to the tag.</p>
@@ -442,20 +441,20 @@
 </div>
 <div role="article" class="function" id="felicatag.requestspecificationversion(completionhandler:)">
     <h3>
-        <code>request​Specification​Version(completion​Handler:​)</code>
+        <code><a href="#felicatag.requestspecificationversion(completionhandler:)">request​Specification​Version(completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSpecificationVersion</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Data</span>, <span class="type">Data</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSpecificationVersion</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Data</span>, <span class="type">Data</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.requestsystemcode(resulthandler:)">
     <h3>
-        <code>request​System​Code(result​Handler:​)</code>
+        <code><a href="#felicatag.requestsystemcode(resulthandler:)">request​System​Code(result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSystemCode</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;[<span class="type">Data</span>], <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSystemCode</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;[<span class="type">Data</span>], <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Request System Code command, as defined by the FeliCa card specification, to the tag.</p>
@@ -487,20 +486,20 @@
 </div>
 <div role="article" class="function" id="felicatag.requestsystemcode(completionhandler:)">
     <h3>
-        <code>request​System​Code(completion​Handler:​)</code>
+        <code><a href="#felicatag.requestsystemcode(completionhandler:)">request​System​Code(completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSystemCode</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">requestSystemCode</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> ([<span class="type">Data</span>], <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.resetmode(resulthandler:)">
     <h3>
-        <code>reset​Mode(result​Handler:​)</code>
+        <code><a href="#felicatag.resetmode(resulthandler:)">reset​Mode(result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">resetMode</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">FeliCaStatusFlag</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">resetMode</span>(<span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<a href="/documentation/FeliCaStatusFlag"><span class="type">FeliCaStatusFlag</span></a>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the Reset Mode command, as defined by the FeliCa card specification, to the tag.</p>
@@ -532,20 +531,20 @@
 </div>
 <div role="article" class="function" id="felicatag.resetmode(completionhandler:)">
     <h3>
-        <code>reset​Mode(completion​Handler:​)</code>
+        <code><a href="#felicatag.resetmode(completionhandler:)">reset​Mode(completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">resetMode</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">resetMode</span>(<span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="felicatag.sendfelicacommand(commandpacket:resulthandler:)">
     <h3>
-        <code>send​Feli​CaCommand(command​Packet:​result​Handler:​)</code>
+        <code><a href="#felicatag.sendfelicacommand(commandpacket:resulthandler:)">send​Feli​CaCommand(command​Packet:​result​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">sendFeliCaCommand</span>(<span class="variable">commandPacket</span>: <span class="type">Data</span>, <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">Data</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macCatalyst</span>, <span class="variable">unavailable</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">sendFeliCaCommand</span>(<span class="variable">commandPacket</span>: <span class="type">Data</span>, <span class="variable">resultHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Result</span>&lt;<span class="type">Data</span>, <span class="type">Error</span>&gt;) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Sends the FeliCa command packet data to the tag.</p>
@@ -583,11 +582,11 @@
 </div>
 <div role="article" class="function" id="felicatag.sendfelicacommand(commandpacket:completionhandler:)">
     <h3>
-        <code>send​Feli​CaCommand(command​Packet:​completion​Handler:​)</code>
+        <code><a href="#felicatag.sendfelicacommand(commandpacket:completionhandler:)">send​Feli​CaCommand(command​Packet:​completion​Handler:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;Use the one using resultHander.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">sendFeliCaCommand</span>(<span class="variable">commandPacket</span>: <span class="type">Data</span>, <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Data</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"Use the one using resultHander."</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">sendFeliCaCommand</span>(<span class="variable">commandPacket</span>: <span class="type">Data</span>, <span class="variable">completionHandler</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Data</span>, <span class="type">Error</span>?) -&gt; <span class="type">Void</span>)  </body></html></code></pre>
 </div>
 </div>
     </section>
@@ -599,7 +598,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2021-05-17T17:58:36+0000">May 17, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+    Generated on <time datetime="2021-08-28T08:32:40+0000">August 28, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
