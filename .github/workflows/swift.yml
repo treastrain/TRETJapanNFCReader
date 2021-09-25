@@ -30,8 +30,6 @@ jobs:
       with:
         name: xcode-select
         path: xcode-select.txt
-    - name: Generates an Xcode project
-      run: swift package generate-xcodeproj
     - name: Show destinations
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -showdestinations
     - name: Show schemes
