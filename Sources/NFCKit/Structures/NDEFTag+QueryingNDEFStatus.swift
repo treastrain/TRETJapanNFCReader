@@ -35,7 +35,7 @@ extension NDEFTag {
     }
     
     @available(*, unavailable, message: "Not implemented. Use the one using resultHander.")
-    public func queryNDEFStatus(completionHandler: @escaping (NFCNDEFStatus, Int, Error?) -> Void) {
+    public func queryNDEFStatus(completionHandler: @escaping (NDEFStatus, Int, Error?) -> Void) {
         fatalError("\(#function): Not implemented. Use the one using resultHander.")
     }
 }
