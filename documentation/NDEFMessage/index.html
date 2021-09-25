@@ -14,7 +14,6 @@
             </strong>
             <span>Documentation</span>
         </a>
-        <sup>Beta</sup>
     </header>
 
     <!--
@@ -38,7 +37,7 @@
 </h1>
 
 <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">NDEFMessage</span> </code></pre>
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">NDEFMessage</span>  </body></html></code></pre>
 </div>
 
     <section id="initializers">
@@ -46,11 +45,11 @@
 
         <div role="article" class="initializer" id="ndefmessage.init(records:)">
     <h3>
-        <code>init(records:​)</code>
+        <code><a href="#ndefmessage.init(records:)">init(records:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This initializer is not yet implemented.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">records</span>: [<span class="type">NDEFPayload</span>]) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"This initializer is not yet implemented."</span>)
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">records</span>: [<a href="/documentation/NDEFPayload"><span class="type">NDEFPayload</span></a>])  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Creates an NDEF message with the specified records.</p>
@@ -78,11 +77,11 @@
 </div>
 <div role="article" class="initializer" id="ndefmessage.init?(data:)">
     <h3>
-        <code>init?(data:​)</code>
+        <code><a href="#ndefmessage.init?(data:)">init?(data:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">&quot;This initializer is not yet implemented.&quot;</span>)
-    <span class="keyword">public</span> <span class="keyword">init</span>?(<span class="variable">data</span>: <span class="type">Data</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">unavailable</span>, <span class="variable">message</span>: <span class="string literal">"This initializer is not yet implemented."</span>)
+    <span class="keyword">public</span> <span class="keyword">init</span>?(<span class="variable">data</span>: <span class="type">Data</span>)  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>Creates an NDEF message from raw data representing the message.</p>
@@ -110,11 +109,11 @@
 </div>
 <div role="article" class="initializer" id="ndefmessage.init(from:)">
     <h3>
-        <code>init(from:​)</code>
+        <code><a href="#ndefmessage.init(from:)">init(from:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
-    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">from</span> <span class="variable">coreNFCInstance</span>: <span class="type">CoreNFC</span>.<span class="type">NFCNDEFMessage</span>) </code></pre>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, *)
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">from</span> <span class="variable">coreNFCInstance</span>: <span class="type">CoreNFC</span>.<span class="type">NFCNDEFMessage</span>)  </body></html></code></pre>
 </div>
 </div>
     </section>
@@ -123,10 +122,10 @@
 
         <div role="article" class="variable" id="ndefmessage.records">
     <h3>
-        <code>records</code>
+        <code><a href="#ndefmessage.records">records</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">records</span>: [<span class="type">NDEFPayload</span>]</code></pre>
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">records</span>: [<a href="/documentation/NDEFPayload"><span class="type">NDEFPayload</span></a>] </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>An array of records for the message.</p>
@@ -135,10 +134,10 @@
 </div>
 <div role="article" class="variable" id="ndefmessage.length">
     <h3>
-        <code>length</code>
+        <code><a href="#ndefmessage.length">length</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">length</span>: <span class="type">Int</span></code></pre>
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">length</span>: <span class="type">Int</span></body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>The length, in bytes, of the NDEF message when stored on an NFC tag.</p>
@@ -158,7 +157,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2021-05-17T17:58:36+0000">May 17, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.6</span>.
+    Generated on <time datetime="2021-09-25T15:48:49+0000">September 25, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
