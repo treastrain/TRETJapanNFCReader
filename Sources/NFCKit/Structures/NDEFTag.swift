@@ -11,6 +11,7 @@ import CoreNFC
 #endif
 
 public struct NDEFTag {
+    /// A Boolean value that determines whether the NDEF tag is available in the current reader session.
     public var isAvailable: Bool {
         #if os(iOS) && !targetEnvironment(macCatalyst)
         if #available(iOS 13.0, *) {
@@ -46,21 +47,6 @@ public struct NDEFTag {
 
 #if os(iOS) && !targetEnvironment(macCatalyst)
 extension NDEFTag: NDEFTagProtocol {
-    @available(iOS 13.0, *)
-    public func queryNDEFStatus(resultHandler: @escaping (Result<(NDEFStatus, Int), Error>) -> Void) {
-        self.core.queryNDEFStatus { status, capacity, error in
-            if let error = error {
-                resultHandler(.failure(error))
-            } else {
-                guard let status = NDEFStatus(rawValue: status.rawValue) else {
-                    resultHandler(.failure(NDEFStatus.CaseError.unknown))
-                    return
-                }
-                resultHandler(.success((status, capacity)))
-            }
-        }
-    }
-    
     @available(iOS 13.0, *)
     public func readNDEF(resultHandler: @escaping (Result<NDEFMessage?, Error>) -> Void) {
         self.core.readNDEF { message, error in
