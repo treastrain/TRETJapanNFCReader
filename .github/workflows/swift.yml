@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  SCHEME_NAME: TRETNFCKit-Package
+  SCHEME_NAME: TRETNFCKit
   IOS_SIMULATOR_NAME: iPhone 12 mini
   TVOS_SIMULATOR_NAME: Apple TV
   WATCHOS_SIMULATOR_NAME: Apple Watch Series 6 - 44mm
@@ -30,8 +30,6 @@ jobs:
       with:
         name: xcode-select
         path: xcode-select.txt
-    - name: Generates an Xcode project
-      run: swift package generate-xcodeproj
     - name: Show destinations
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -showdestinations
     - name: Show schemes
@@ -108,8 +106,6 @@ jobs:
         name: xcode-select
     - name: Set xcode-select path
       run: sudo xcode-select -s `cat xcode-select.txt`
-    - name: Generates an Xcode project
-      run: swift package generate-xcodeproj
     - name: Xcode test
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload xcode test report
@@ -144,8 +140,6 @@ jobs:
         name: xcode-select
     - name: Set xcode-select path
       run: sudo xcode-select -s `cat xcode-select.txt`
-    - name: Generates an Xcode project
-      run: swift package generate-xcodeproj
     - name: Xcode test (arm64)
       if: false
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' | tee xcodebuild-test-macos_arm64.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
@@ -191,8 +185,6 @@ jobs:
         name: xcode-select
     - name: Set xcode-select path
       run: sudo xcode-select -s `cat xcode-select.txt`
-    - name: Generates an Xcode project
-      run: swift package generate-xcodeproj
     - name: Xcode test
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-tvos.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload xcode test report
@@ -227,8 +219,6 @@ jobs:
         name: xcode-select
     - name: Set xcode-select path
       run: sudo xcode-select -s `cat xcode-select.txt`
-    - name: Generates an Xcode project
-      run: swift package generate-xcodeproj
     - name: Xcode test
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-watchos.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload xcode test report
