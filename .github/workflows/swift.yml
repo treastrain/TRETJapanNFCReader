@@ -6,9 +6,9 @@ on:
 
 env:
   SCHEME_NAME: TRETNFCKit
-  IOS_SIMULATOR_NAME: iPhone 12 mini
-  TVOS_SIMULATOR_NAME: Apple TV
-  WATCHOS_SIMULATOR_NAME: Apple Watch Series 6 - 44mm
+  IOS_SIMULATOR_NAME: iPhone 13 mini
+  TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
+  WATCHOS_SIMULATOR_NAME: Apple Watch Series 7 - 45mm
 
 jobs:
   setup:
@@ -103,8 +103,8 @@ jobs:
         name: swift test log (${{ matrix.os }}, x86_64)
         path: swift-test-${{ matrix.os }}_x86_64.log
   
-  xcodebuild_test_ios:
-    name: xcodebuild test (iOS, Xcode 12.5.1)
+  xcodebuild_ios:
+    name: xcodebuild (iOS)
     runs-on: macos-11
     needs: setup
     steps:
@@ -125,7 +125,42 @@ jobs:
       with:
         name: xcode-select
     - name: Set xcode-select path
-      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app/Contents/Developer # `cat xcode-select.txt`
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Xcode build
+      run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode build report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild log and report (iOS)
+        path: |
+            xcodebuild-ios.log
+            build/reports/build.html
+  
+  xcodebuild_test_ios:
+    name: xcodebuild test (iOS)
+    if: false
+    runs-on: macos-11
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+#     - name: Cache Gems
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor/bundle
+#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-gems-
+#     - name: Install Bundled Gems
+#       run: |
+#         bundle config path vendor/bundle
+#         bundle install --jobs 4 --retry 3
+    - name: Download xcode-select path
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      run: sudo xcode-select -s `cat xcode-select.txt`
     - name: Xcode test
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload Xcode DerivedData
