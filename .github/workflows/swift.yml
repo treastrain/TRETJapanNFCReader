@@ -84,7 +84,7 @@ jobs:
         path: swift-test-macos_x86_64.log
 
   xcodebuild_test_ios:
-    name: xcodebuild test (iOS)
+    name: xcodebuild test (iOS, Xcode 12.5.1)
     runs-on: macos-11
     needs: setup
     steps:
@@ -105,7 +105,7 @@ jobs:
       with:
         name: xcode-select
     - name: Set xcode-select path
-      run: sudo xcode-select -s `cat xcode-select.txt`
+      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app/Contents/Developer # `cat xcode-select.txt`
     - name: Xcode test
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload xcode test report
