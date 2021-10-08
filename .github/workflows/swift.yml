@@ -263,37 +263,3 @@ jobs:
       with:
         name: swift test log (Ubuntu 20.04, x86_64)
         path: swift-test-ubuntu_2004_x86_64.log
-  
-  xcodebuild-12-5-1_test_ios:
-    name: xcodebuild test (iOS, Xcode 12.5.1)
-    runs-on: macos-11
-    needs: setup
-    steps:
-    - uses: actions/checkout@v2
-#     - name: Cache Gems
-#       uses: actions/cache@v2
-#       with:
-#         path: vendor/bundle
-#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-#         restore-keys: |
-#           ${{ runner.os }}-gems-
-#     - name: Install Bundled Gems
-#       run: |
-#         bundle config path vendor/bundle
-#         bundle install --jobs 4 --retry 3
-    - name: Download xcode-select path
-      uses: actions/download-artifact@v2
-      with:
-        name: xcode-select
-    - name: Set xcode-select path
-      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app/Contents/Developer # `cat xcode-select.txt`
-    - name: Xcode test
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-    - name: Upload xcode test report
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: xcodebuild test log and report (iOS)
-        path: |
-            xcodebuild-test-ios.log
-            build/reports/tests.html
