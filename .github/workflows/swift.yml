@@ -264,7 +264,7 @@ jobs:
         name: swift test log (Ubuntu 20.04, x86_64)
         path: swift-test-ubuntu_2004_x86_64.log
   
-  xcodebuild-12.5.1_test_ios:
+  xcodebuild-12-5-1_test_ios:
     name: xcodebuild test (iOS, Xcode 12.5.1)
     runs-on: macos-11
     needs: setup
