@@ -6,9 +6,9 @@ on:
 
 env:
   SCHEME_NAME: TRETNFCKit
-  IOS_SIMULATOR_NAME: iPhone 12 mini
-  TVOS_SIMULATOR_NAME: Apple TV
-  WATCHOS_SIMULATOR_NAME: Apple Watch Series 6 - 44mm
+  IOS_SIMULATOR_NAME: iPhone 13 mini
+  TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
+  WATCHOS_SIMULATOR_NAME: Apple Watch Series 7 - 45mm
 
 jobs:
   setup:
