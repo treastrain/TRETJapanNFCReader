@@ -6,9 +6,9 @@ on:
 
 env:
   SCHEME_NAME: TRETNFCKit
-  IOS_SIMULATOR_NAME: iPhone 12 mini
-  TVOS_SIMULATOR_NAME: Apple TV
-  WATCHOS_SIMULATOR_NAME: Apple Watch Series 6 - 44mm
+  IOS_SIMULATOR_NAME: iPhone 13 mini
+  TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
+  WATCHOS_SIMULATOR_NAME: Apple Watch Series 7 - 45mm
 
 jobs:
   setup:
@@ -37,54 +37,109 @@ jobs:
     - name: Show xcpretty version
       run: xcpretty --version
     
-  swift_build_macos:
-    name: swift build (macOS 11)
-    runs-on: macos-11
+  swift_build:
+    name: swift build
     needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-11, ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - name: Download xcode-select path
+      if: ${{ matrix.os == 'macos-11' }}
       uses: actions/download-artifact@v2
       with:
         name: xcode-select
     - name: Set xcode-select path
+      if: ${{ matrix.os == 'macos-11' }}
       run: sudo xcode-select -s `cat xcode-select.txt`
     - name: Swift version
       run: swift --version
     - name: Build
-      run: swift build -v | tee swift-build-macos_x86_64.log && exit ${PIPESTATUS[0]}
+      if: ${{ matrix.os == 'macos-11' }}
+      run: swift build -v | tee swift-build-${{ matrix.os }}_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Build with enable test discovery on platforms without Objective-C runtime
+      if: ${{ matrix.os == 'ubuntu-20.04' }}
+      run: swift build -v --enable-test-discovery | tee swift-build-${{ matrix.os }}_x86_64.log && exit ${PIPESTATUS[0]}
     - name: Upload swift build log
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: swift build log (macOS, x86_64)
-        path: swift-build-macos_x86_64.log
+        name: swift build log (${{ matrix.os }}, x86_64)
+        path: swift-build-${{ matrix.os }}_x86_64.log
   
-  swift_test_macos:
-    name: swift test (macOS 11)
-    runs-on: macos-11
-    needs: swift_build_macos
+  swift_test:
+    name: swift test
+    needs: swift_build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-11, ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
+    - name: Download xcode-select path
+      if: ${{ matrix.os == 'macos-11' }}
+      uses: actions/download-artifact@v2
+      with:
+        name: xcode-select
+    - name: Set xcode-select path
+      if: ${{ matrix.os == 'macos-11' }}
+      run: sudo xcode-select -s `cat xcode-select.txt`
+    - name: Swift version
+      run: swift --version
+    - name: Run tests
+      if: ${{ matrix.os == 'macos-11' }}
+      run: swift test -v | tee swift-test-${{ matrix.os }}_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Run tests with enable test discovery on platforms without Objective-C runtime
+      if: ${{ matrix.os == 'ubuntu-20.04' }}
+      run: swift test -v --enable-test-discovery | tee swift-test-${{ matrix.os }}_x86_64.log && exit ${PIPESTATUS[0]}
+    - name: Upload swift test log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift test log (${{ matrix.os }}, x86_64)
+        path: swift-test-${{ matrix.os }}_x86_64.log
+  
+  xcodebuild_ios:
+    name: xcodebuild (iOS)
+    runs-on: macos-11
+    needs: setup
+    steps:
+    - uses: actions/checkout@v2
+#     - name: Cache Gems
+#       uses: actions/cache@v2
+#       with:
+#         path: vendor/bundle
+#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+#         restore-keys: |
+#           ${{ runner.os }}-gems-
+#     - name: Install Bundled Gems
+#       run: |
+#         bundle config path vendor/bundle
+#         bundle install --jobs 4 --retry 3
     - name: Download xcode-select path
       uses: actions/download-artifact@v2
       with:
         name: xcode-select
     - name: Set xcode-select path
       run: sudo xcode-select -s `cat xcode-select.txt`
-    - name: Swift version
-      run: swift --version
-    - name: Run tests
-      run: swift test -v | tee swift-test-macos_x86_64.log && exit ${PIPESTATUS[0]}
-    - name: Upload swift test log
+    - name: Xcode build
+      run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload xcode build report
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: swift test log (macOS, x86_64)
-        path: swift-test-macos_x86_64.log
+        name: xcodebuild log and report (iOS)
+        path: |
+            xcodebuild-ios.log
+            build/reports/build.html
   
   xcodebuild_test_ios:
     name: xcodebuild test (iOS)
+    if: false
     runs-on: macos-11
     needs: setup
     steps:
@@ -108,6 +163,13 @@ jobs:
       run: sudo xcode-select -s `cat xcode-select.txt`
     - name: Xcode test
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload Xcode DerivedData
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Xcode DerivedData (iOS)
+        path: |
+            /Users/runner/Library/Developer/Xcode/DerivedData
     - name: Upload xcode test report
       if: always()
       uses: actions/upload-artifact@v2
@@ -226,74 +288,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: xcodebuild test log and report (watchOS)
-        path: |
-            xcodebuild-test-ios.log
-            build/reports/tests.html
-  
-  swift_build_ubuntu-2004:
-    name: swift build (Ubuntu 20.04)
-    runs-on: ubuntu-20.04
-    needs: setup
-    steps:
-    - uses: actions/checkout@v2
-    - name: Swift version
-      run: swift --version
-    - name: Build with enable test discovery on platforms without Objective-C runtime
-      run: swift build -v --enable-test-discovery | tee swift-build-ubuntu_2004_x86_64.log && exit ${PIPESTATUS[0]}
-    - name: Upload swift build log
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: swift build log (Ubuntu 20.04, x86_64)
-        path: swift-build-ubuntu_2004_x86_64.log
-  
-  swift_test_ubuntu-2004:
-    name: swift test (Ubuntu 20.04)
-    runs-on: ubuntu-20.04
-    needs: swift_build_ubuntu-2004
-    steps:
-    - uses: actions/checkout@v2
-    - name: Swift version
-      run: swift --version
-    - name: Run tests with enable test discovery on platforms without Objective-C runtime
-      run: swift test -v --enable-test-discovery | tee swift-test-ubuntu_2004_x86_64.log && exit ${PIPESTATUS[0]}
-    - name: Upload swift test log
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: swift test log (Ubuntu 20.04, x86_64)
-        path: swift-test-ubuntu_2004_x86_64.log
-  
-  xcodebuild-12.5.1_test_ios:
-    name: xcodebuild test (iOS, Xcode 12.5.1)
-    runs-on: macos-11
-    needs: setup
-    steps:
-    - uses: actions/checkout@v2
-#     - name: Cache Gems
-#       uses: actions/cache@v2
-#       with:
-#         path: vendor/bundle
-#         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-#         restore-keys: |
-#           ${{ runner.os }}-gems-
-#     - name: Install Bundled Gems
-#       run: |
-#         bundle config path vendor/bundle
-#         bundle install --jobs 4 --retry 3
-    - name: Download xcode-select path
-      uses: actions/download-artifact@v2
-      with:
-        name: xcode-select
-    - name: Set xcode-select path
-      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app/Contents/Developer # `cat xcode-select.txt`
-    - name: Xcode test
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-    - name: Upload xcode test report
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: xcodebuild test log and report (iOS)
         path: |
             xcodebuild-test-ios.log
             build/reports/tests.html
