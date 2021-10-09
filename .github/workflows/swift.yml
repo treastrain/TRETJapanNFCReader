@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  SCHEME_NAME: TRETNFCKit
+  SCHEME_NAME: TRETNFCKit-Package
   IOS_SIMULATOR_NAME: iPhone 13 mini
   TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
   WATCHOS_SIMULATOR_NAME: Apple Watch Series 7 - 45mm
@@ -21,7 +21,7 @@ jobs:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
-    - name: Show Xcode version
+    - name: Show the version of Xcode
       run: xcodebuild -version
     - name: Export xcode-select path
       run: xcode-select -p > xcode-select.txt
@@ -30,10 +30,10 @@ jobs:
       with:
         name: xcode-select
         path: xcode-select.txt
-    - name: Show destinations
+    - name: Show lists the targets and configurations in a project, or the schemes in a workspace
+      run: xcodebuild -list
+    - name: Show a list of destinations
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -showdestinations
-    - name: Show schemes
-      run: xcodebuild test -list
     - name: Show xcpretty version
       run: xcpretty --version
     
