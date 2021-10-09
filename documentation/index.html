@@ -25,318 +25,42 @@
     <nav>
         <div class="wrapper">
             <h2>On This Page</h2>
-            <ol><li><a href="#classes">Classes</a></li><li><a href="#structures">Structures</a></li><li><a href="#enumerations">Enumerations</a></li><li><a href="#protocols">Protocols</a></li><li><a href="#typealiases">Typealiases</a></li><li><a href="#variables">Variables</a></li><li><a href="#extensions">Extensions</a></li></ol>
+            <ol><li><a href="#functions">Functions</a></li></ol>
         </div>
     </nav>
 
     <main>
         <article>
-                <section id="classes">
-        <h2>Classes</h2>
+                <section id="functions">
+        <h2>Functions</h2>
         <dl>
-            <dt class="class">
-    <a href="/documentation/NFCReaderSession" title="class - NFCReaderSession">
-        NFCReader​Session
+            <dt class="function">
+    <a href="/documentation/connect(to_resultHandler_)" title="function - connect(to:resultHandler:)">
+        connect(to:​result​Handler:​)
     </a>
 </dt>
 <dd>
-    <p>The abstract base class that represents a reader session for detecting NFC tags.</p>
+    <p>Connects the reader session to a tag and activates that tag.</p>
 
 </dd>
-<dt class="class">
-    <a href="/documentation/NFCTagReaderSession" title="class - NFCTagReaderSession">
-        NFCTag​Reader​Session
+<dt class="function">
+    <a href="/documentation/connect(to_)" title="function - connect(to:)">
+        connect(to:​)
     </a>
 </dt>
 <dd>
-    <p>A reader session for detecting ISO7816, ISO15693, FeliCa, and MIFARE tags.</p>
+    <p>Connects the reader session to a tag and activates that tag.</p>
 
 </dd>
         </dl>
     </section>
-    <section id="structures">
-        <h2>Structures</h2>
-        <dl>
-            <dt class="structure">
-    <a href="/documentation/FeliCaPollingResponse" title="structure - FeliCaPollingResponse">
-        Feli​CaPolling​Response
-    </a>
-</dt>
-<dd>
-    <p>Response from Polling command.</p>
 
-</dd>
-<dt class="structure">
-    <a href="/documentation/FeliCaRequestSpecificationVersionResponse" title="structure - FeliCaRequestSpecificationVersionResponse">
-        Feli​CaRequest​Specification​Version​Response
-    </a>
-</dt>
-<dd>
-    <p>Response from Request Specification Version command.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/FeliCaRequsetServiceV2Response" title="structure - FeliCaRequsetServiceV2Response">
-        Feli​CaRequset​Service​V2Response
-    </a>
-</dt>
-<dd>
-    <p>Response from Request Service V2 command.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/FeliCaStatusFlag" title="structure - FeliCaStatusFlag">
-        Feli​CaStatus​Flag
-    </a>
-</dt>
-<dd>
-    <p>Response status flags.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/FeliCaTag" title="structure - FeliCaTag">
-        Feli​CaTag
-    </a>
-</dt>
-<dd>
-    <p>An interface for interacting with a FeliCa™ tag.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/ISO15693MultipleBlockSecurityStatus" title="structure - ISO15693MultipleBlockSecurityStatus">
-        ISO15693Multiple​Block​Security​Status
-    </a>
-</dt>
-<dd>
-    <p>Response of Get Multiple Block Security Status command.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/ISO15693RequestFlag" title="structure - ISO15693RequestFlag">
-        ISO15693Request​Flag
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/documentation/ISO15693ResponseFlag" title="structure - ISO15693ResponseFlag">
-        ISO15693Response​Flag
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/documentation/ISO15693SystemInfo" title="structure - ISO15693SystemInfo">
-        ISO15693System​Info
-    </a>
-</dt>
-<dd>
-    <p>Response of Get System Info commnad.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/NDEFMessage" title="structure - NDEFMessage">
-        NDEFMessage
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/documentation/NDEFPayload" title="structure - NDEFPayload">
-        NDEFPayload
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/documentation/NDEFTag" title="structure - NDEFTag">
-        NDEFTag
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/documentation/NFCTagReaderSession_PollingOption" title="structure - NFCTagReaderSession.PollingOption">
-        NFCTag​Reader​Session.​Polling​Option
-    </a>
-</dt>
-<dd>
-    <p>Options that determine the type of tags that a reader session should detect during a polling sequence.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/documentation/ReaderError" title="structure - ReaderError">
-        Reader​Error
-    </a>
-</dt>
-<dd>
-    <p>Possible errors returned by NFCKit and CoreNFC framework reader session.</p>
-
-</dd>
-        </dl>
-    </section>
-    <section id="enumerations">
-        <h2>Enumerations</h2>
-        <dl>
-            <dt class="enumeration">
-    <a href="/documentation/FeliCaPollingRequestCode" title="enumeration - FeliCaPollingRequestCode">
-        Feli​CaPolling​Request​Code
-    </a>
-</dt>
-<dd>
-    <p>Request code parameter for the polling command.</p>
-
-</dd>
-<dt class="enumeration">
-    <a href="/documentation/FeliCaPollingTimeSlot" title="enumeration - FeliCaPollingTimeSlot">
-        Feli​CaPolling​Time​Slot
-    </a>
-</dt>
-<dd>
-    <p>Time slot parameter for the polling command.</p>
-
-</dd>
-<dt class="enumeration">
-    <a href="/documentation/NDEFStatus" title="enumeration - NDEFStatus">
-        NDEFStatus
-    </a>
-</dt>
-<dd>
-    <p>Constants that indicate status for an NDEF tag.</p>
-
-</dd>
-<dt class="enumeration">
-    <a href="/documentation/NDEFStatus_CaseError" title="enumeration - NDEFStatus.CaseError">
-        NDEFStatus.​Case​Error
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="enumeration">
-    <a href="/documentation/NFCTag" title="enumeration - NFCTag">
-        NFCTag
-    </a>
-</dt>
-<dd>
-    <p>An object that represents an NFC tag object.</p>
-
-</dd>
-<dt class="enumeration">
-    <a href="/documentation/NDEFPayload_TypeNameFormat" title="enumeration - NDEFPayload.TypeNameFormat">
-        NDEFPayload.​Type​Name​Format
-    </a>
-</dt>
-<dd>
-    <p>The Type Name Format values that specify the content type for the payload data in an NFC NDEF message.</p>
-
-</dd>
-<dt class="enumeration">
-    <a href="/documentation/ReaderError_Code" title="enumeration - ReaderError.Code">
-        Reader​Error.​Code
-    </a>
-</dt>
-<dd>
-    
-</dd>
-        </dl>
-    </section>
-    <section id="protocols">
-        <h2>Protocols</h2>
-        <dl>
-            <dt class="protocol">
-    <a href="/documentation/NDEFTagProtocol" title="protocol - NDEFTagProtocol">
-        NDEFTag​Protocol
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="protocol">
-    <a href="/documentation/NFCReaderSessionProtocol" title="protocol - NFCReaderSessionProtocol">
-        NFCReader​Session​Protocol
-    </a>
-</dt>
-<dd>
-    <p>A general interface for interacting with a reader session.</p>
-
-</dd>
-<dt class="protocol">
-    <a href="/documentation/NFCTagReaderSessionDelegate" title="protocol - NFCTagReaderSessionDelegate">
-        NFCTag​Reader​Session​Delegate
-    </a>
-</dt>
-<dd>
-    <p>Tag reader session delegate.</p>
-
-</dd>
-        </dl>
-    </section>
-    <section id="typealiases">
-        <h2>Typealiases</h2>
-        <dl>
-            <dt class="typealias">
-    <a href="/documentation/FeliCaEncryptionId" title="typealias - FeliCaEncryptionId">
-        Feli​CaEncryption​Id
-    </a>
-</dt>
-<dd>
-    <p>Encryption Identifier parameter in response of Request Service V2.</p>
-
-</dd>
-        </dl>
-    </section>
-    <section id="variables">
-        <h2>Variables</h2>
-        <dl>
-            <dt class="variable">
-    <a href="/documentation/ErrorDomain" title="variable - ErrorDomain">
-        Error​Domain
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="variable">
-    <a href="/documentation/ISO15693TagResponseErrorKey" title="variable - ISO15693TagResponseErrorKey">
-        ISO15693Tag​Response​Error​Key
-    </a>
-</dt>
-<dd>
-    <p>Key in NSError userInfo dictionary.  The corresponding value is the NSUInteger error code from tag's response. Refer to ISO15693 specification for the error code values.</p>
-
-</dd>
-<dt class="variable">
-    <a href="/documentation/TagResponseUnexpectedLengthErrorKey" title="variable - TagResponseUnexpectedLengthErrorKey">
-        Tag​Response​Unexpected​Length​Error​Key
-    </a>
-</dt>
-<dd>
-    <p>Key in NSError userInfo dictionary.  Presence of this key indicates the received response packet length is invalid.</p>
-
-</dd>
-        </dl>
-    </section>
-<section id="extensions">
-    <h2>Extensions</h2>
-    <dl>
-    <dt class="extension">
-    <a href="/documentation/FeliCaEncryptionId">FeliCaEncryptionId</a>
-</dt>
-<dd></dd>
-    </dl>
-<section>
         </article>
     </main>
 
     <footer>
         <p>
-    Generated on <time datetime="2021-09-25T16:48:47+0000">September 25, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2021-10-09T16:13:11+0000">October 9, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
