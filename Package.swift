@@ -13,6 +13,7 @@ products += [
 targets += [
     .target(name: "NFCKit", dependencies: [
         "NFCKitCore",
+        "NFCKitTagReaderSession",
     ]),
     .testTarget(name: "NFCKitTests", dependencies: ["NFCKit"]),
 ]
@@ -25,6 +26,16 @@ products += [
 targets += [
     .target(name: "NFCKitCore"),
     .testTarget(name: "NFCKitCoreTests", dependencies: ["NFCKitCore"]),
+]
+
+
+// MARK: - NFCKitTagReaderSession
+products += [
+    .library(name: "NFCKitTagReaderSession", targets: ["NFCKitTagReaderSession"]),
+]
+targets += [
+    .target(name: "NFCKitTagReaderSession", dependencies: ["NFCKitCore"]),
+    .testTarget(name: "NFCKitTagReaderSessionTests", dependencies: ["NFCKitTagReaderSession"]),
 ]
 
 
