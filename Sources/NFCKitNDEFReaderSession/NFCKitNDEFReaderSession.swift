@@ -30,6 +30,7 @@ extension CoreNFC.NFCNDEFReaderSession {
         })
     }
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     /// Connects the reader session to a tag and activates that tag.
     ///
     /// A tag stays connected until your app connects to a different tag or restarts polling. Connecting to a tag that is already connected has no effect.
@@ -46,5 +47,6 @@ extension CoreNFC.NFCNDEFReaderSession {
             return .failure(error as! NFCReaderError)
         }
     }
+    #endif
 }
 #endif

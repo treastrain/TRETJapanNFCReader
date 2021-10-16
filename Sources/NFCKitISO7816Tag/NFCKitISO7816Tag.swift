@@ -13,6 +13,7 @@ extension CoreNFC.NFCISO7816Tag {
     
     // MARK: - sendCommand(apdu:)
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     /// Sends an application protocol data unit (APDU) to the tag and receives a response APDU.
     /// - Parameter apdu: An application protocol data unit to send to the tag.
     /// - Returns: A Result with the cases:
@@ -30,7 +31,9 @@ extension CoreNFC.NFCISO7816Tag {
             return .failure(error as! NFCReaderError)
         }
     }
+    #endif
     
+    #if compiler(>=5.5) && canImport(_Concurrency)
     /// Sends an application protocol data unit (APDU) to the tag and receives a response APDU.
     /// - Parameter apdu: An application protocol data unit to send to the tag.
     /// - Returns: A Result with the cases:
@@ -45,5 +48,6 @@ extension CoreNFC.NFCISO7816Tag {
             return .failure(error as! NFCReaderError)
         }
     }
+    #endif
 }
 #endif
