@@ -59,6 +59,40 @@ targets += [
 ]
 
 
+// MARK: - NFCReader
+/// The library name in `NFCReader`, which summarizes a country/region, is prefixed with the "English short name" as defined in ISO 3166-1:2020.
+do {
+    let nfcReaderTargets = [
+        "JapanIndividualNumberCardReader",
+    ]
+    products += [
+        .library(name: "NFCReader", targets: nfcReaderTargets),
+        .library(name: "NFCReaderStatic", type: .static, targets: nfcReaderTargets),
+        .library(name: "NFCReaderDynamic", type: .dynamic, targets: nfcReaderTargets),
+    ]
+}
+
+
+// MARK: - JapanNFCReader
+products += [
+    .library(
+        name: "JapanNFCReader",
+        targets: [
+            "JapanIndividualNumberCardReader",
+        ]
+    ),
+]
+
+
+// MARK: - JapanIndividualNumberCardReader
+products += [
+    .library(name: "JapanIndividualNumberCardReader", targets: ["JapanIndividualNumberCardReader"]),
+]
+targets += [
+    .target(name: "JapanIndividualNumberCardReader", dependencies: [], path: "Sources/NFCReader/JapanNFCReader/JapanIndividualNumberCardReader"),
+]
+
+
 let package = Package(
     name: "TRETNFCKit",
     defaultLocalization: "en",
