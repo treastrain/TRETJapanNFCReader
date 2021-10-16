@@ -14,6 +14,7 @@ targets += [
     .target(name: "NFCKit", dependencies: [
         "NFCKitCore",
         "NFCKitTagReaderSession",
+        "NFCKitNDEFReaderSession",
         "NFCKitISO7816Tag",
     ]),
     .testTarget(name: "NFCKitTests", dependencies: ["NFCKit"]),
