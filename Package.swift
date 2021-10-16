@@ -39,6 +39,15 @@ targets += [
 ]
 
 
+// MARK: - NFCKitNDEFReaderSession
+products += [
+    .library(name: "NFCKitNDEFReaderSession", targets: ["NFCKitNDEFReaderSession"]),
+]
+targets += [
+    .target(name: "NFCKitNDEFReaderSession", dependencies: ["NFCKitCore"]),
+]
+
+
 let package = Package(
     name: "TRETNFCKit",
     defaultLocalization: "en",
