@@ -48,6 +48,15 @@ targets += [
 ]
 
 
+// MARK: - NFCKitISO15693Tag
+products += [
+    .library(name: "NFCKitISO15693Tag", targets: ["NFCKitISO15693Tag"]),
+]
+targets += [
+    .target(name: "NFCKitISO15693Tag", dependencies: ["NFCKitCore"]),
+]
+
+
 let package = Package(
     name: "TRETNFCKit",
     defaultLocalization: "en",
