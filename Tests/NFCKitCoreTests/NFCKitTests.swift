@@ -6,13 +6,13 @@
 //
 
 import XCTest
-@testable import NFCKit
+@testable import NFCKitCore
 
-public protocol NFCKitTests: XCTestCase {
+public protocol NFCKitCoreTests: XCTestCase {
     func testObjectConsistency(_ coreSubject: Any, _ kitSubject: Any, coreChildValueHandler: ((Mirror.Child) -> AnyObject?)?, kitChildValueHandler: ((Mirror.Child) -> AnyObject?)?, file: StaticString, line: UInt)
 }
 
-public extension NFCKitTests {
+public extension NFCKitCoreTests {
     /// Test for consistency between the corresponding objects in Core NFC and NFCKit.
     /// - Parameters:
     ///   - coreSubject: A Core NFC object.
