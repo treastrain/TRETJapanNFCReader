@@ -14,6 +14,7 @@ targets += [
     .target(name: "NFCKit", dependencies: [
         "NFCKitCore",
         "NFCKitTagReaderSession",
+        "NFCKitISO7816Tag",
     ]),
     .testTarget(name: "NFCKitTests", dependencies: ["NFCKit"]),
 ]
@@ -45,6 +46,15 @@ products += [
 ]
 targets += [
     .target(name: "NFCKitNDEFReaderSession", dependencies: ["NFCKitCore"]),
+]
+
+
+// MARK: - NFCKitISO7816Tag
+products += [
+    .library(name: "NFCKitISO7816Tag", targets: ["NFCKitISO7816Tag"]),
+]
+targets += [
+    .target(name: "NFCKitISO7816Tag", dependencies: ["NFCKitCore"]),
 ]
 
 
