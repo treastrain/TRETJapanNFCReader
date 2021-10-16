@@ -7,18 +7,19 @@ var targets: [Target] = []
 
 
 // MARK: - NFCKit
-products += [
-    .library(name: "NFCKit", targets: ["NFCKit"]),
-]
-targets += [
-    .target(name: "NFCKit", dependencies: [
+do {
+    let nfcKitTargets = [
         "NFCKitCore",
         "NFCKitTagReaderSession",
         "NFCKitNDEFReaderSession",
         "NFCKitISO7816Tag",
-    ]),
-    .testTarget(name: "NFCKitTests", dependencies: ["NFCKit"]),
-]
+    ]
+    products += [
+        .library(name: "NFCKit", targets: nfcKitTargets),
+        .library(name: "NFCKitStatic", type: .static, targets: nfcKitTargets),
+        .library(name: "NFCKitDynamic", type: .dynamic, targets: nfcKitTargets),
+    ]
+}
 
 
 // MARK: - NFCKitCore
@@ -26,7 +27,7 @@ products += [
     .library(name: "NFCKitCore", targets: ["NFCKitCore"]),
 ]
 targets += [
-    .target(name: "NFCKitCore"),
+    .target(name: "NFCKitCore", path: "Sources/NFCKit/NFCKitCore"),
     .testTarget(name: "NFCKitCoreTests", dependencies: ["NFCKitCore"]),
 ]
 
@@ -36,8 +37,7 @@ products += [
     .library(name: "NFCKitTagReaderSession", targets: ["NFCKitTagReaderSession"]),
 ]
 targets += [
-    .target(name: "NFCKitTagReaderSession", dependencies: ["NFCKitCore"]),
-    .testTarget(name: "NFCKitTagReaderSessionTests", dependencies: ["NFCKitTagReaderSession"]),
+    .target(name: "NFCKitTagReaderSession", dependencies: ["NFCKitCore"], path: "Sources/NFCKit/NFCKitTagReaderSession"),
 ]
 
 
@@ -46,7 +46,7 @@ products += [
     .library(name: "NFCKitNDEFReaderSession", targets: ["NFCKitNDEFReaderSession"]),
 ]
 targets += [
-    .target(name: "NFCKitNDEFReaderSession", dependencies: ["NFCKitCore"]),
+    .target(name: "NFCKitNDEFReaderSession", dependencies: ["NFCKitCore"], path: "Sources/NFCKit/NFCKitNDEFReaderSession"),
 ]
 
 
@@ -55,7 +55,7 @@ products += [
     .library(name: "NFCKitISO7816Tag", targets: ["NFCKitISO7816Tag"]),
 ]
 targets += [
-    .target(name: "NFCKitISO7816Tag", dependencies: ["NFCKitCore"]),
+    .target(name: "NFCKitISO7816Tag", dependencies: ["NFCKitCore"], path: "Sources/NFCKit/NFCKitISO7816Tag"),
 ]
 
 
