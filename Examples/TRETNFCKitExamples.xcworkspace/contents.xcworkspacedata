@@ -4,4 +4,7 @@
    <FileRef
       location = "group:../../TRETNFCKit">
    </FileRef>
+   <FileRef
+      location = "group:JapanIndividualNumberCardReaderSample/JapanIndividualNumberCardReaderSample.xcodeproj">
+   </FileRef>
 </Workspace>
