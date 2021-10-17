@@ -1,0 +1,8 @@
+//
+//  Localizable.strings (en)
+//  TRETNFCKit
+//
+//  Created by treastrain on 2021/10/18.
+//
+
+"did_begin_reader_alert_message" = "Hold your device near the NFC tag.";
