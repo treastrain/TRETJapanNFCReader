@@ -5,4 +5,7 @@
 //  Created by treastrain on 2021/10/17.
 //
 
-import Foundation
+import NFCKitCore
+
+public class JapanIndividualNumberCardReader {
+}

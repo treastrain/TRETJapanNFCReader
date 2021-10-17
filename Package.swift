@@ -89,7 +89,7 @@ products += [
     .library(name: "JapanIndividualNumberCardReader", targets: ["JapanIndividualNumberCardReader"]),
 ]
 targets += [
-    .target(name: "JapanIndividualNumberCardReader", dependencies: [], path: "Sources/NFCReader/JapanNFCReader/JapanIndividualNumberCardReader"),
+    .target(name: "JapanIndividualNumberCardReader", dependencies: ["NFCKitCore"], path: "Sources/NFCReader/JapanNFCReader/JapanIndividualNumberCardReader"),
 ]
 
 
