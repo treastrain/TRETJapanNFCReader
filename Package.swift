@@ -59,24 +59,33 @@ targets += [
 ]
 
 
-// MARK: - NFCReader
-/// The library name in `NFCReader`, which summarizes a country/region, is prefixed with the "English short name" as defined in ISO 3166-1:2020.
+// MARK: - NFCKitReader
+/// The library name in `NFCKitReader`, which summarizes a country/region, is prefixed with the "English short name" as defined in ISO 3166-1:2020.
 do {
-    let nfcReaderTargets = [
+    let nfcKitReaderTargets = [
         "JapanIndividualNumberCardReader",
     ]
     products += [
-        .library(name: "NFCReader", targets: nfcReaderTargets),
-        .library(name: "NFCReaderStatic", type: .static, targets: nfcReaderTargets),
-        .library(name: "NFCReaderDynamic", type: .dynamic, targets: nfcReaderTargets),
+        .library(name: "NFCKitReader", targets: nfcKitReaderTargets),
+        .library(name: "NFCKitReaderStatic", type: .static, targets: nfcKitReaderTargets),
+        .library(name: "NFCKitReaderDynamic", type: .dynamic, targets: nfcKitReaderTargets),
     ]
 }
 
 
-// MARK: - JapanNFCReader
+// MARK: - NFCKitReaderCore
+products += [
+    .library(name: "NFCKitReaderCore", targets: ["NFCKitReaderCore"]),
+]
+targets += [
+    .target(name: "NFCKitReaderCore", dependencies: ["NFCKitCore"], path: "Sources/NFCKitReader/NFCKitReaderCore"),
+]
+
+
+// MARK: - JapanNFCKitReader
 products += [
     .library(
-        name: "JapanNFCReader",
+        name: "JapanNFCKitReader",
         targets: [
             "JapanIndividualNumberCardReader",
         ]
@@ -89,7 +98,7 @@ products += [
     .library(name: "JapanIndividualNumberCardReader", targets: ["JapanIndividualNumberCardReader"]),
 ]
 targets += [
-    .target(name: "JapanIndividualNumberCardReader", dependencies: ["NFCKitCore"], path: "Sources/NFCReader/JapanNFCReader/JapanIndividualNumberCardReader"),
+    .target(name: "JapanIndividualNumberCardReader", dependencies: ["NFCKitReaderCore"], path: "Sources/NFCKitReader/JapanNFCKitReader/JapanIndividualNumberCardReader"),
 ]
 
 
