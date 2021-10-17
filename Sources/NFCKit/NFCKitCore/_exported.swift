@@ -7,4 +7,6 @@
 
 #if canImport(CoreNFC)
 @_exported import CoreNFC
+#else
+@_exported import Foundation
 #endif

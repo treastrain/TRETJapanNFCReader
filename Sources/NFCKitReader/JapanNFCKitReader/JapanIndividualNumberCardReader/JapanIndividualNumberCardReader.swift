@@ -5,6 +5,7 @@
 //  Created by treastrain on 2021/10/17.
 //
 
+#if os(iOS)
 import NFCKitReaderCore
 
 /// A reader for detecting Japan Individual Number Card (個人番号カード、マイナンバーカード).
@@ -120,3 +121,4 @@ extension JapanIndividualNumberCardReader: NFCTagReaderSessionDelegate {
         
     }
 }
+#endif
