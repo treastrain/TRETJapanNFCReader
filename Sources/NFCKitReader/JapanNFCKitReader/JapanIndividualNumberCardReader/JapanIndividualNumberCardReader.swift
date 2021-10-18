@@ -79,7 +79,12 @@ open class JapanIndividualNumberCardReader: NSObject {
         }
         
         #if DEBUG
-        InfoPlistChecker.check()
+        do {
+            let result = InfoPlistChecker.check(forISO7816ApplicationIdentifiers: NFCKitISO7816ApplicationIdentifiers.japanIndividualNumberCard)
+            if case .failure(let error) = result {
+                assertionFailure(error.localizedDescription)
+            }
+        }
         #endif
         
         guard let session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self, queue: sessionQueue) else {

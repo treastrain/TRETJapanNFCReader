@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+	<array>
+		<string>D3921000310001010401</string>
+		<string>D3921000310001010402</string>
+		<string>D3921000310001010408</string>
+		<string>D392F000260100000001</string>
+	</array>
 	<key>NFCReaderUsageDescription</key>
 	<string>Read Japan Individual Number Card</string>
 	<key>UIApplicationSceneManifest</key>
