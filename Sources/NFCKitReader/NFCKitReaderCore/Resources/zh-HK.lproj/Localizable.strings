@@ -6,3 +6,6 @@
 //
 
 "did_begin_reader_alert_message" = "將裝置靠近NFC標籤。";
+"did_detect_more_than_one_tag_alert_message" = "檢測到超過1個標籤，請刪除所有標籤並再次嘗試。";
+"did_detect_different_tag_type_alert_message" = "檢測到嘅標籤類型與預期不同，請刪除所有標籤並重新嘗試。";
+"done_alert_message" = "完成";
