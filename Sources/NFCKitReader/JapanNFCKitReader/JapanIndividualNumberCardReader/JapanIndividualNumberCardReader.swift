@@ -123,7 +123,39 @@ extension JapanIndividualNumberCardReader: NFCTagReaderSessionDelegate {
     }
     
     public func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+        guard tags.count == 1 else {
+            session.alertMessage = configuration.didDetectMoreThanOneTagAlertMessage
+            DispatchQueue.global().asyncAfter(deadline: .now() + configuration.didDetectMoreThanOneTagRetryInterval, execute: {
+                session.restartPolling()
+            })
+            return
+        }
         
+        guard let tag = tags.first, case NFCTag.iso7816(let japanIndividualNumberCardTag) = tag else {
+            session.alertMessage = configuration.didDetectDifferentTagTypeAlertMessage
+            DispatchQueue.global().asyncAfter(deadline: .now() + configuration.didDetectDifferentTagTypeRetryInterval, execute: {
+                session.restartPolling()
+            })
+            return
+        }
+        
+        session.connect(to: tag) { [weak self] error in
+            if let error = error {
+                session.invalidate(errorMessage: error.localizedDescription)
+                return
+            }
+            
+            guard NFCKitISO7816ApplicationIdentifiers.japanIndividualNumberCard.contains(japanIndividualNumberCardTag.initialSelectedAID) else {
+                let configuration = self?.configuration ?? .default
+                session.alertMessage = configuration.didDetectDifferentTagTypeAlertMessage
+                DispatchQueue.global().asyncAfter(deadline: .now() + configuration.didDetectDifferentTagTypeRetryInterval, execute: {
+                    session.restartPolling()
+                })
+                return
+            }
+            
+            session.invalidate(doneMessage: (self?.configuration ?? .default).doneAlertMessage)
+        }
     }
 }
 #endif
