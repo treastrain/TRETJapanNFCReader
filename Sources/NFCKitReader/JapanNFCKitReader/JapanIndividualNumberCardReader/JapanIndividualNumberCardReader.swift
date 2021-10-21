@@ -97,6 +97,7 @@ open class JapanIndividualNumberCardReader: NSObject {
             return
         }
         self.session = session
+        self.items = items
         self.didBecomeActive = didBecomeActive
         self.didInvalidateWithError = didInvalidateWithError
         self.session?.alertMessage = configuration.didBeginReaderAlertMessage
@@ -152,6 +153,19 @@ extension JapanIndividualNumberCardReader: NFCTagReaderSessionDelegate {
                     session.restartPolling()
                 })
                 return
+            }
+            
+            for item in self?.items ?? [] {
+                switch item {
+                case .digitalSignature:
+                    break
+                case .userAuthentication:
+                    break
+                case .cardInfoInputSupportApplication:
+                    break
+                case .individualNumberCard:
+                    break
+                }
             }
             
             session.invalidate(doneMessage: (self?.configuration ?? .default).doneAlertMessage)
