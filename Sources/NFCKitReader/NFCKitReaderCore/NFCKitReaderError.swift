@@ -12,4 +12,6 @@ public enum NFCKitReaderError: Error {
     case readingUnavailable
     /// Could not initialize the reader session due to unavailability of system memory resources.
     case systemMemoryResourcesAreUnavailable
+    /// PIN が指定の形式を満たしていないため、スキャンを開始できません
+    case notStartedScanBecausePINFormatInvalid
 }

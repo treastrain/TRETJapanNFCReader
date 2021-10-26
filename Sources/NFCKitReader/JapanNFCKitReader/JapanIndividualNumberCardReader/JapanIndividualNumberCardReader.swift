@@ -5,21 +5,27 @@
 //  Created by treastrain on 2021/10/17.
 //
 
-#if os(iOS)
 import NFCKitReaderCore
 
 /// A reader for detecting Japan Individual Number Card (個人番号カード、マイナンバーカード).
 @available(iOS 13.0, *)
 open class JapanIndividualNumberCardReader: NSObject {
     
-    private var configuration: NFCKitReaderConfiguration
+    internal private(set) var configuration: NFCKitReaderConfiguration
     private var delegate: JapanIndividualNumberCardReaderDelegate? = nil
     private var sessionQueue: DispatchQueue? = nil
     
+    #if os(iOS)
     private var session: NFCTagReaderSession? = nil
+    #endif
     private var items: [JapanIndividualNumberCardItem] = []
     private var didBecomeActive: ((JapanIndividualNumberCardReader) -> Void)? = nil
     private var didInvalidateWithError: ((JapanIndividualNumberCardReader, Error) -> Void)? = nil
+    
+    internal private(set) var electronicCertificateForTheBearersSignaturePIN: [UInt8] = []
+    internal private(set) var electronicCertificateForUserIdentificationPIN: [UInt8] = []
+    internal private(set) var cardInfoInputSupportApplicationPIN: [UInt8] = []
+    internal private(set) var basicResidentRegistrationPIN: [UInt8] = []
     
     private override init() {
         fatalError("init() has not been implemented")
@@ -41,17 +47,30 @@ open class JapanIndividualNumberCardReader: NSObject {
         print(self, "deinited 🎉")
     }
     #endif
+}
+
+#if os(iOS)
+@available(iOS 13.0, *)
+public extension JapanIndividualNumberCardReader {
     
-    open func read(
+    func read(
         items: JapanIndividualNumberCardItem...,
+        electronicCertificateForTheBearersSignaturePIN: String = "",
+        electronicCertificateForUserIdentificationPIN: String = "",
+        cardInfoInputSupportApplicationPIN: String = "",
+        basicResidentRegistrationPIN: String = "",
         didBecomeActive: ((JapanIndividualNumberCardReader) -> Void)? = nil,
         didInvalidateWithError: ((JapanIndividualNumberCardReader, Error) -> Void)? = nil
     ) {
-        read(items: items, didBecomeActive: didBecomeActive, didInvalidateWithError: didInvalidateWithError)
+        read(items: items, electronicCertificateForTheBearersSignaturePIN: electronicCertificateForTheBearersSignaturePIN, electronicCertificateForUserIdentificationPIN: electronicCertificateForUserIdentificationPIN, cardInfoInputSupportApplicationPIN: cardInfoInputSupportApplicationPIN, basicResidentRegistrationPIN: basicResidentRegistrationPIN, didBecomeActive: didBecomeActive, didInvalidateWithError: didInvalidateWithError)
     }
     
-    open func read(
+    func read(
         items: [JapanIndividualNumberCardItem],
+        electronicCertificateForTheBearersSignaturePIN: String = "",
+        electronicCertificateForUserIdentificationPIN: String = "",
+        cardInfoInputSupportApplicationPIN: String = "",
+        basicResidentRegistrationPIN: String = "",
         didBecomeActive: ((JapanIndividualNumberCardReader) -> Void)? = nil,
         didInvalidateWithError: ((JapanIndividualNumberCardReader, Error) -> Void)? = nil
     ) {
@@ -86,6 +105,42 @@ open class JapanIndividualNumberCardReader: NSObject {
             }
         }
         #endif
+        
+        for item in JapanIndividualNumberCardItem.allCases {
+            guard items.contains(item) else {
+                continue
+            }
+            
+            let pinString: String
+            let convertToPINUInt8ArrayCompletion: ([UInt8]) -> Void
+            switch item {
+            case .electronicCertificateForTheBearersSignature:
+                pinString = electronicCertificateForTheBearersSignaturePIN
+                convertToPINUInt8ArrayCompletion = { self.electronicCertificateForTheBearersSignaturePIN = $0 }
+            case .electronicCertificateForUserIdentification:
+                pinString = electronicCertificateForUserIdentificationPIN
+                convertToPINUInt8ArrayCompletion = { self.electronicCertificateForUserIdentificationPIN = $0 }
+            case .cardInfoInputSupportApplication:
+                pinString = cardInfoInputSupportApplicationPIN
+                convertToPINUInt8ArrayCompletion = { self.cardInfoInputSupportApplicationPIN = $0 }
+            case .basicResidentRegistration:
+                pinString = basicResidentRegistrationPIN
+                convertToPINUInt8ArrayCompletion = { self.basicResidentRegistrationPIN = $0 }
+            }
+            
+            let result = Self.convertToJISX0201(item: item, pinString: pinString)
+            switch result {
+            case .success(let pinUInt8Array):
+                convertToPINUInt8ArrayCompletion(pinUInt8Array)
+            case .failure(let error):
+                if let completion = didInvalidateWithError {
+                    completion(self, error)
+                } else {
+                    delegate?.japanIndividualNumberCardReader(self, didInvalidateWithError: error)
+                }
+                return
+            }
+        }
         
         guard let session = NFCTagReaderSession(pollingOption: .iso14443, delegate: self, queue: sessionQueue) else {
             let error = NFCKitReaderError.systemMemoryResourcesAreUnavailable
@@ -146,8 +201,12 @@ extension JapanIndividualNumberCardReader: NFCTagReaderSessionDelegate {
                 return
             }
             
+            guard let self = self else {
+                return
+            }
+            
             guard NFCKitISO7816ApplicationIdentifiers.japanIndividualNumberCard.contains(japanIndividualNumberCardTag.initialSelectedAID) else {
-                let configuration = self?.configuration ?? .default
+                let configuration = self.configuration
                 session.alertMessage = configuration.didDetectDifferentTagTypeAlertMessage
                 DispatchQueue.global().asyncAfter(deadline: .now() + configuration.didDetectDifferentTagTypeRetryInterval, execute: {
                     session.restartPolling()
@@ -155,20 +214,20 @@ extension JapanIndividualNumberCardReader: NFCTagReaderSessionDelegate {
                 return
             }
             
-            for item in self?.items ?? [] {
+            for item in self.items {
                 switch item {
-                case .digitalSignature:
+                case .electronicCertificateForTheBearersSignature:
                     break
-                case .userAuthentication:
+                case .electronicCertificateForUserIdentification:
                     break
                 case .cardInfoInputSupportApplication:
-                    break
-                case .individualNumberCard:
+                    self.readCardInfoInputSupportApplication(session, didDetect: japanIndividualNumberCardTag, pin: self.cardInfoInputSupportApplicationPIN)
+                case .basicResidentRegistration:
                     break
                 }
             }
             
-            session.invalidate(doneMessage: (self?.configuration ?? .default).doneAlertMessage)
+            // session.invalidate(doneMessage: self.configuration.doneAlertMessage)
         }
     }
 }
