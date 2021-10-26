@@ -6,3 +6,4 @@
 //
 
 @_exported import NFCKitReaderCore
+@_exported import NFCKitISO7816Tag

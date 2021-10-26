@@ -14,6 +14,10 @@ extension CoreNFC.NFCISO7816Tag {
     // MARK: - eraseBinary
     
     // MARK: - verify
+    public func verify(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int, completionHandler: @escaping (Data, UInt8, UInt8, Error?) -> Void) {
+        let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0x20, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
+        sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
     
     // MARK: - manageChannel
     
@@ -24,6 +28,10 @@ extension CoreNFC.NFCISO7816Tag {
     // MARK: - internalAuthenticate
     
     // MARK: - selectFile
+    public func selectFile(p1Parameter: UInt8, p2Parameter: UInt8, data: Data, expectedResponseLength: Int, completionHandler: @escaping (Data, UInt8, UInt8, Error?) -> Void) {
+        let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xA4, p1Parameter: p1Parameter, p2Parameter: p2Parameter, data: data, expectedResponseLength: expectedResponseLength)
+        sendCommand(apdu: apdu, completionHandler: completionHandler)
+    }
     
     // MARK: - readBinary
     
