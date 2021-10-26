@@ -99,6 +99,7 @@ products += [
 ]
 targets += [
     .target(name: "JapanIndividualNumberCardReader", dependencies: ["NFCKitReaderCore", "NFCKitISO7816Tag"], path: "Sources/NFCKitReader/JapanNFCKitReader/JapanIndividualNumberCardReader"),
+    .testTarget(name: "JapanIndividualNumberCardReaderTests", dependencies: ["JapanIndividualNumberCardReader"]),
 ]
 
 
