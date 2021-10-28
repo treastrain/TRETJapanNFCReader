@@ -30,7 +30,23 @@ extension CoreNFC.NFCNDEFReaderSession {
         })
     }
     
-    #if compiler(>=5.5) && canImport(_Concurrency)
+    #if compiler(>=5.5.2) && canImport(_Concurrency)
+    /// Connects the reader session to a tag and activates that tag.
+    ///
+    /// A tag stays connected until your app connects to a different tag or restarts polling. Connecting to a tag that is already connected has no effect.
+    /// - Parameter tag: A tag to which the reader session should attempt to connect.
+    /// - Returns: A Result with the cases:
+    ///              success: A `Void`.
+    ///              failure: An `NFCReaderError` object indicating that a communication issue with the tag occurred.
+    open func connect(to tag: NFCNDEFTag) async -> Result<Void, NFCReaderError> {
+        do {
+            let _: Void = try await connect(to: tag)
+            return .success(())
+        } catch {
+            return .failure(error as! NFCReaderError)
+        }
+    }
+    #elseif compiler(>=5.5) && canImport(_Concurrency)
     /// Connects the reader session to a tag and activates that tag.
     ///
     /// A tag stays connected until your app connects to a different tag or restarts polling. Connecting to a tag that is already connected has no effect.
