@@ -5,6 +5,14 @@ import PackageDescription
 var products: [Product] = []
 var targets: [Target] = []
 
+var swiftWarnConcurrencySetting: [SwiftSetting]? {
+#if compiler(>=5.5)
+    return [.unsafeFlags(["-warn-concurrency"])]
+#else
+    return nil
+#endif
+}
+
 
 // MARK: - NFCKit
 do {
@@ -27,8 +35,13 @@ products += [
     .library(name: "NFCKitCore", targets: ["NFCKitCore"]),
 ]
 targets += [
-    .target(name: "NFCKitCore", path: "Sources/NFCKit/NFCKitCore"),
-    .testTarget(name: "NFCKitCoreTests", dependencies: ["NFCKitCore"]),
+    .target(
+        name: "NFCKitCore",
+        path: "Sources/NFCKit/NFCKitCore",
+        swiftSettings: swiftWarnConcurrencySetting),
+    .testTarget(
+        name: "NFCKitCoreTests",
+        dependencies: ["NFCKitCore"]),
 ]
 
 
@@ -37,7 +50,11 @@ products += [
     .library(name: "NFCKitTagReaderSession", targets: ["NFCKitTagReaderSession"]),
 ]
 targets += [
-    .target(name: "NFCKitTagReaderSession", dependencies: ["NFCKitCore"], path: "Sources/NFCKit/NFCKitTagReaderSession"),
+    .target(
+        name: "NFCKitTagReaderSession",
+        dependencies: ["NFCKitCore"],
+        path: "Sources/NFCKit/NFCKitTagReaderSession",
+        swiftSettings: swiftWarnConcurrencySetting),
 ]
 
 
@@ -46,7 +63,11 @@ products += [
     .library(name: "NFCKitNDEFReaderSession", targets: ["NFCKitNDEFReaderSession"]),
 ]
 targets += [
-    .target(name: "NFCKitNDEFReaderSession", dependencies: ["NFCKitCore"], path: "Sources/NFCKit/NFCKitNDEFReaderSession"),
+    .target(
+        name: "NFCKitNDEFReaderSession",
+        dependencies: ["NFCKitCore"],
+        path: "Sources/NFCKit/NFCKitNDEFReaderSession",
+        swiftSettings: swiftWarnConcurrencySetting),
 ]
 
 
@@ -55,7 +76,11 @@ products += [
     .library(name: "NFCKitISO7816Tag", targets: ["NFCKitISO7816Tag"]),
 ]
 targets += [
-    .target(name: "NFCKitISO7816Tag", dependencies: ["NFCKitCore"], path: "Sources/NFCKit/NFCKitISO7816Tag"),
+    .target(
+        name: "NFCKitISO7816Tag",
+        dependencies: ["NFCKitCore"],
+        path: "Sources/NFCKit/NFCKitISO7816Tag",
+        swiftSettings: swiftWarnConcurrencySetting),
 ]
 
 
