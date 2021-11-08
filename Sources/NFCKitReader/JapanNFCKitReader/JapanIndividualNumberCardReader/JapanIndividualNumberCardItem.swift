@@ -6,6 +6,9 @@
 //
 
 import NFCKitReaderCore
+#if canImport(CryptoTokenKit)
+import CryptoTokenKit
+#endif
 
 public enum JapanIndividualNumberCardItem: CaseIterable {
     /// Electronic Certificate for the Bearer's Signature (署名用電子証明書)
@@ -31,4 +34,24 @@ extension JapanIndividualNumberCardItem {
             return Data([0xD3, 0x92, 0x10, 0x00, 0x31, 0x00, 0x01, 0x01, 0x01, 0x00])
         }
     }
+    
+    #if canImport(CryptoTokenKit)
+    @available(iOS 13.0, macOS 10.11, tvOS 13.0, watchOS 8.0, *)
+    var format: TKSmartCardPINFormat {
+        let format = TKSmartCardPINFormat()
+        switch self {
+        case .electronicCertificateForTheBearersSignature:
+            format.charset = .upperAlphanumeric
+            format.encoding = .ascii
+            format.minPINLength = 6
+            format.maxPINLength = 16
+        case .electronicCertificateForUserIdentification, .cardInfoInputSupportApplication, .basicResidentRegistration:
+            format.charset = .numeric
+            format.encoding = .ascii
+            format.minPINLength = 4
+            format.maxPINLength = 4
+        }
+        return format
+    }
+    #endif
 }
