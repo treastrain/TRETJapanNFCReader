@@ -114,7 +114,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: ['iOS', 'macOS (x86_64)', 'Mac Catalyst (x86_64)', 'tvOS', 'watchOS']
+        platform: ['iOS', 'macOS\ (x86_64)', 'Mac\ Catalyst\ (x86_64)', 'tvOS', 'watchOS']
     steps:
     - uses: actions/checkout@v2
     - name: Set xcode-select path
@@ -123,8 +123,8 @@ jobs:
       run: |
         case ${{ matrix.platform }} in
           'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
-          'macOS (x86_64)' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
-          'Mac Catalyst (x86_64)' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+          'macOS\ (x86_64)' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+          'Mac\ Catalyst\ (x86_64)' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
           'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
           'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
         esac
@@ -135,11 +135,47 @@ jobs:
         name: Xcode DerivedData (Xcode 13.1 ${{ matrix.platform }})
         path: |
             /Users/runner/Library/Developer/Xcode/DerivedData
-    - name: Upload xcode test report
+    - name: Upload Xcode Test report
       if: always()
       uses: actions/upload-artifact@v2
       with:
         name: xcodebuild test log and report (Xcode 13.1 ${{ matrix.platform }})
+        path: |
+            xcodebuild-test-${{ matrix.platform }}.log
+            build/reports/tests.html
+  
+  xcodebuild_test_13-2:
+    name: Xcode 13.2 Test
+    runs-on: macos-11
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ['iOS', 'macOS\ (x86_64)', 'Mac\ Catalyst\ (x86_64)', 'tvOS', 'watchOS']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set xcode-select path
+      run: sudo xcode-select -s /Applications/Xcode_13.2.app/Contents/Developer
+    - name: Test the scheme
+      run: |
+        case ${{ matrix.platform }} in
+          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+          'macOS\ (x86_64)' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+          'Mac\ Catalyst\ (x86_64)' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]} ;;
+        esac
+    - name: Upload Xcode DerivedData
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Xcode DerivedData (Xcode 13.2 ${{ matrix.platform }})
+        path: |
+            /Users/runner/Library/Developer/Xcode/DerivedData
+    - name: Upload Xcode Test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (Xcode 13.2 ${{ matrix.platform }})
         path: |
             xcodebuild-test-${{ matrix.platform }}.log
             build/reports/tests.html
