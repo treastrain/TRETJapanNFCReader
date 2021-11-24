@@ -78,7 +78,7 @@ jobs:
         path: swift-test-${{ matrix.os }}_x86_64.log
   
   xcodebuild_12-5-1_ios:
-    name: xcodebuild (12.5.1) (iOS)
+    name: xcodebuild (Xcode 12.5.1) (iOS)
     runs-on: macos-11
     needs: setup
     steps:
@@ -96,156 +96,42 @@ jobs:
             xcodebuild-12.5.1-ios.log
             build/reports/build.html
   
-  xcode13_1:
-    name: Xcode 13.1
+  xcodebuild_test_13-1:
+    name: xcodebuild test (Xcode 13.1)
     runs-on: macos-11
     needs: setup
     strategy:
       fail-fast: false
       matrix:
-        platforms: [iOS, macOS, tvOS, watchOS]
+        platform: [iOS, macOS, tvOS, watchOS]
     steps:
     - uses: actions/checkout@v2
     - name: Set xcode-select path
       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
     - name: Xcode test
       if: ${{ matrix.platforms == 'iOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platforms }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Xcode test
       if: ${{ matrix.platforms == 'macOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platforms }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Xcode test
       if: ${{ matrix.platforms == 'tvOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platforms }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Xcode test
       if: ${{ matrix.platforms == 'watchOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platforms }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload Xcode DerivedData
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Xcode DerivedData (${{ matrix.platforms }})
+        name: Xcode DerivedData (${{ matrix.platform }})
         path: |
             /Users/runner/Library/Developer/Xcode/DerivedData
     - name: Upload xcode test report
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: xcodebuild test log and report (${{ matrix.platforms }})
+        name: xcodebuild test log and report (${{ matrix.platform }})
         path: |
-            xcodebuild-test-${{ matrix.platforms }}.log
+            xcodebuild-test-${{ matrix.platform }}.log
             build/reports/tests.html
-  
-#   xcodebuild_ios:
-#     name: xcodebuild (iOS)
-#     runs-on: macos-11
-#     needs: setup
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set xcode-select path
-#       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
-#     - name: Xcode build
-#       run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-#     - name: Upload xcode build report
-#       if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: xcodebuild log and report (iOS)
-#         path: |
-#             xcodebuild-ios.log
-#             build/reports/build.html
-  
-#   xcodebuild_test_ios:
-#     name: xcodebuild test (iOS)
-#     if: false
-#     runs-on: macos-11
-#     needs: setup
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set xcode-select path
-#       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
-#     - name: Xcode test
-#       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-#     - name: Upload Xcode DerivedData
-#       if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: Xcode DerivedData (iOS)
-#         path: |
-#             /Users/runner/Library/Developer/Xcode/DerivedData
-#     - name: Upload xcode test report
-#       if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: xcodebuild test log and report (iOS)
-#         path: |
-#             xcodebuild-test-ios.log
-#             build/reports/tests.html
-  
-#   xcodebuild_test_macos:
-#     name: xcodebuild test (macOS)
-#     runs-on: macos-11
-#     needs: setup
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set xcode-select path
-#       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
-#     - name: Xcode test (arm64)
-#       if: false
-#       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' | tee xcodebuild-test-macos_arm64.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-#     - name: Upload xcode test report
-#       if: false # if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: xcodebuild test log and report (macOS, arm64)
-#         path: |
-#             xcodebuild-test-macos_arm64.log
-#             build/reports/tests.html
-#     - name: Xcode test (x86_64)
-#       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-macos_x86_64.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-#     - name: Upload xcode test report
-#       if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: xcodebuild test log and report (macOS, x86_64)
-#         path: |
-#             xcodebuild-test-macos_x86_64.log
-#             build/reports/tests.html
-  
-#   xcodebuild_test_tvos:
-#     name: xcodebuild test (tvOS)
-#     runs-on: macos-11
-#     needs: setup
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set xcode-select path
-#       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
-#     - name: Xcode test
-#       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-tvos.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-#     - name: Upload xcode test report
-#       if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: xcodebuild test log and report (tvOS)
-#         path: |
-#             xcodebuild-test-tvos.log
-#             build/reports/tests.html
-  
-#   xcodebuild_test_watchos:
-#     name: xcodebuild test (watchOS)
-#     runs-on: macos-11
-#     needs: setup
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set xcode-select path
-#       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
-#     - name: Xcode test
-#       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-watchos.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-#     - name: Upload xcode test report
-#       if: always()
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: xcodebuild test log and report (watchOS)
-#         path: |
-#             xcodebuild-test-ios.log
-#             build/reports/tests.html
