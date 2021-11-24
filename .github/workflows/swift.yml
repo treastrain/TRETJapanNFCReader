@@ -111,39 +111,24 @@ jobs:
   xcodebuild_test_13-1:
     name: Xcode 13.1 Test
     runs-on: macos-11
-    needs: setup
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [iOS, macOS, tvOS, watchOS]
     steps:
     - uses: actions/checkout@v2
     - name: Set xcode-select path
       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
     - name: Xcode test
-      if: ${{ matrix.platform == 'iOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-    - name: Xcode test
-      if: ${{ matrix.platform == 'macOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-    - name: Xcode test
-      if: ${{ matrix.platform == 'tvOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-    - name: Xcode test
-      if: ${{ matrix.platform == 'watchOS' }}
-      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -destination 'platform=macOS,arch=x86_64' -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload Xcode DerivedData
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Xcode DerivedData (Xcode 13.1 ${{ matrix.platform }})
+        name: Xcode DerivedData (Xcode 13.1)
         path: |
             /Users/runner/Library/Developer/Xcode/DerivedData
     - name: Upload xcode test report
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: xcodebuild test log and report (Xcode 13.1 ${{ matrix.platform }})
+        name: xcodebuild test log and report (Xcode 13.1)
         path: |
-            xcodebuild-test-${{ matrix.platform }}.log
+            xcodebuild-test.log
             build/reports/tests.html
