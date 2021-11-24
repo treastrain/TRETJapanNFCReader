@@ -96,8 +96,48 @@ jobs:
             xcodebuild-12.5.1-ios.log
             build/reports/build.html
   
+  xcodebuild_test_12-5-1:
+    name: Xcode 12.5.1 Test
+    runs-on: macos-11
+    needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [iOS]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set xcode-select path
+      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app/Contents/Developer
+    - name: Xcode test
+      if: ${{ matrix.platform == 'iOS' }}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Xcode test
+      if: ${{ matrix.platform == 'macOS' }}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Xcode test
+      if: ${{ matrix.platform == 'tvOS' }}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Xcode test
+      if: ${{ matrix.platform == 'watchOS' }}
+      run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
+    - name: Upload Xcode DerivedData
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Xcode DerivedData (Xcode 12.5.1 ${{ matrix.platform }})
+        path: |
+            /Users/runner/Library/Developer/Xcode/DerivedData
+    - name: Upload xcode test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild test log and report (Xcode 12.5.1 ${{ matrix.platform }})
+        path: |
+            xcodebuild-test-${{ matrix.platform }}.log
+            build/reports/tests.html
+  
   xcodebuild_test_13-1:
-    name: xcodebuild test (Xcode 13.1)
+    name: Xcode 13.1 Test
     runs-on: macos-11
     needs: setup
     strategy:
@@ -109,29 +149,29 @@ jobs:
     - name: Set xcode-select path
       run: sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Developer
     - name: Xcode test
-      if: ${{ matrix.platforms == 'iOS' }}
+      if: ${{ matrix.platform == 'iOS' }}
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Xcode test
-      if: ${{ matrix.platforms == 'macOS' }}
+      if: ${{ matrix.platform == 'macOS' }}
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Xcode test
-      if: ${{ matrix.platforms == 'tvOS' }}
+      if: ${{ matrix.platform == 'tvOS' }}
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Xcode test
-      if: ${{ matrix.platforms == 'watchOS' }}
+      if: ${{ matrix.platform == 'watchOS' }}
       run: xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-test-${{ matrix.platform }}.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
     - name: Upload Xcode DerivedData
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Xcode DerivedData (${{ matrix.platform }})
+        name: Xcode DerivedData (Xcode 13.1 ${{ matrix.platform }})
         path: |
             /Users/runner/Library/Developer/Xcode/DerivedData
     - name: Upload xcode test report
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: xcodebuild test log and report (${{ matrix.platform }})
+        name: xcodebuild test log and report (Xcode 13.1 ${{ matrix.platform }})
         path: |
             xcodebuild-test-${{ matrix.platform }}.log
             build/reports/tests.html
