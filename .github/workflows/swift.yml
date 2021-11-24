@@ -77,25 +77,6 @@ jobs:
         name: swift test log (${{ matrix.os }}, x86_64)
         path: swift-test-${{ matrix.os }}_x86_64.log
   
-  xcodebuild_12-5-1_ios:
-    name: xcodebuild (Xcode 12.5.1) (iOS)
-    runs-on: macos-11
-    needs: setup
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set xcode-select path
-      run: sudo xcode-select -s /Applications/Xcode_12.5.1.app/Contents/Developer
-    - name: Xcode build
-      run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=iPhone 12 mini' | tee xcodebuild-12.5.1-ios.log | xcpretty --color --report html && exit ${PIPESTATUS[0]}
-    - name: Upload xcode build report
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: xcodebuild log and report (iOS)
-        path: |
-            xcodebuild-12.5.1-ios.log
-            build/reports/build.html
-  
   xcodebuild_test_12-5-1:
     name: Xcode 12.5.1 Test
     runs-on: macos-11
