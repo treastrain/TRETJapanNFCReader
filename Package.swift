@@ -1,28 +1,52 @@
 // swift-tools-version: 5.7
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
+let packageName = "TRETNFCKit"
+
+let swiftSettings: [SwiftSetting] = [
+    .unsafeFlags(
+        [
+            "-Xfrontend", "-warn-concurrency",
+            "-Xfrontend", "-enable-actor-data-race-checks",
+        ], .when(configuration: .debug)
+    ),
+]
+
+var products: [Product] = []
+var targets: [Target] = []
+
+@discardableResult
+func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTest: Bool) -> Target.Dependency {
+    let targetName = "\(packageName)_\(moduleName)"
+    products.append(
+        .library(name: targetName, targets: [targetName])
+    )
+    targets.append(
+        .target(name: targetName, dependencies: dependencies, path: "Sources/\(moduleName)", swiftSettings: swiftSettings)
+    )
+    if includesTest {
+        targets.append(
+            .testTarget(name: "\(packageName)_\(moduleName)Tests", dependencies: [.init(stringLiteral: targetName)], path: "Tests/\(moduleName)Tests", swiftSettings: swiftSettings)
+        )
+    }
+    return .init(stringLiteral: targetName)
+}
+
+// MARK: - Modules
+
+// MARK: - Package
+products.append(
+    .library(name: packageName, targets: [packageName])
+)
+targets.append(
+    .target(name: packageName, dependencies: targets.filter { !$0.isTest }.map { .init(stringLiteral: $0.name) }, swiftSettings: swiftSettings)
+)
+
 let package = Package(
-    name: "TRETNFCKit",
-    products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "TRETNFCKit",
-            targets: ["TRETNFCKit"]),
-    ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "TRETNFCKit",
-            dependencies: []),
-        .testTarget(
-            name: "TRETNFCKitTests",
-            dependencies: ["TRETNFCKit"]),
-    ]
+    name: packageName,
+    defaultLocalization: "en",
+    platforms: [.iOS(.v13), .macOS(.v10_15), .macCatalyst(.v13), .tvOS(.v13), .watchOS(.v6)],
+    products: products,
+    targets: targets
 )
