@@ -75,6 +75,7 @@ jobs:
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: TestResults.xcresult
+        title: Xcode test results (${{ matrix.os }}, ${{ matrix.platform }})
       if: success() || failure()
     - name: Upload Xcode DerivedData
       if: always()
