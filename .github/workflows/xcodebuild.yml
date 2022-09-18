@@ -1,4 +1,4 @@
-name: Xcode Build
+name: Xcode Build & Test
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
     branches: [ tretnfckit-main ]
 
 env:
-  SCHEME_NAME: TRETNFCKit
+  SCHEME_NAME: TRETNFCKit-Package
   IOS_SIMULATOR_NAME: iPhone 14 Pro
   TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
   WATCHOS_SIMULATOR_NAME: Apple Watch Ultra (49mm)
@@ -36,7 +36,7 @@ jobs:
       run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -showdestinations
     
   xcodebuild:
-    name: Xcode Build
+    name: Xcode Build & Test
     strategy:
       fail-fast: false
       matrix:
@@ -56,13 +56,6 @@ jobs:
           'tvOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
           'watchOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
         esac
-    - name: Upload Xcode DerivedData
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: Xcode DerivedData (${{ matrix.platform }})
-        path: |
-            /Users/runner/Library/Developer/Xcode/DerivedData
     - name: Upload Xcode Build log
       if: always()
       uses: actions/upload-artifact@v2
@@ -70,3 +63,23 @@ jobs:
         name: xcodebuild log (${{ matrix.platform }})
         path: |
             xcodebuild-${{ matrix.platform }}.log
+    - name: Test the scheme
+      run: |
+        case ${{ matrix.platform }} in
+          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults ;;
+          'macOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults ;;
+          'macCatalyst' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults ;;
+          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults ;;
+          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults ;;
+        esac
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: TestResults.xcresult
+      if: success() || failure()
+    - name: Upload Xcode DerivedData
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Xcode DerivedData (${{ matrix.platform }})
+        path: |
+            /Users/runner/Library/Developer/Xcode/DerivedData
