@@ -34,6 +34,7 @@ func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTes
 }
 
 // MARK: - Modules
+add(moduleName: "Core", includesTest: true)
 
 // MARK: - Package
 products.append(
