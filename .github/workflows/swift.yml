@@ -1,0 +1,59 @@
+name: Swift Build & Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ tretnfckit-main ]
+  pull_request:
+    branches: [ tretnfckit-main ]
+
+env:
+  XCODE_SELECT_PATH: '/Applications/Xcode_14.0.app/Contents/Developer'
+
+jobs:
+  show_software_information:
+    name: Show software information
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12]
+        # os: [macos-12, ubuntu-20.04, ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Show Swift version
+      run: swift --version
+    - name: Show Swift Package Manager version
+      run: swift package --version
+    
+  swift-build:
+    name: Swift Build & Test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12]
+        # os: [macos-12, ubuntu-20.04, ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Xcode version
+      if: matrix.os == 'macos-12'
+      run: sudo xcode-select -s '${{ env.XCODE_SELECT_PATH }}'
+    - name: Build
+      run: swift build -v | tee swift-build_${{ matrix.os }}.log && exit ${PIPESTATUS[0]}
+    - name: Upload build log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift build log (${{ matrix.os }})
+        path: |
+          swift-build_${{ matrix.os }}.log
+    - name: Test
+      run: swift test -v | tee swift-test_${{ matrix.os }}.log && exit ${PIPESTATUS[0]}
+    - name: Upload test log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: swift test log (${{ matrix.os }})
+        path: |
+          swift-test_${{ matrix.os }}.log
