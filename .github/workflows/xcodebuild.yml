@@ -16,7 +16,7 @@ env:
 
 jobs:
   show_software_information:
-    name: Show and set software information
+    name: Show software information
     strategy:
       fail-fast: false
       matrix:
@@ -66,15 +66,15 @@ jobs:
     - name: Test the scheme
       run: |
         case ${{ matrix.platform }} in
-          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults ;;
-          'macOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults ;;
-          'macCatalyst' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults ;;
-          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults ;;
-          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults ;;
+          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'macOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'macCatalyst' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.platform }} ;;
         esac
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
-        path: TestResults.xcresult
+        path: TestResults-${{ matrix.platform }}.xcresult
         title: Xcode test results (${{ matrix.os }}, ${{ matrix.platform }})
       if: success() || failure()
     - name: Upload Xcode DerivedData
