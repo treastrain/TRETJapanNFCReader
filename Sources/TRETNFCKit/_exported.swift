@@ -8,4 +8,4 @@
 #if canImport(CoreNFC)
 @_exported import CoreNFC
 #endif
-import TRETNFCKit_Core
+@_exported import TRETNFCKit_Core
