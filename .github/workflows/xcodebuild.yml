@@ -1,0 +1,86 @@
+name: Xcode Build & Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ tretnfckit-main ]
+  pull_request:
+    branches: [ tretnfckit-main ]
+
+env:
+  SCHEME_NAME: TRETNFCKit-Package
+  IOS_SIMULATOR_NAME: iPhone 14 Pro
+  TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
+  WATCHOS_SIMULATOR_NAME: Apple Watch Ultra (49mm)
+  XCODE_SELECT_PATH: '/Applications/Xcode_14.0.app/Contents/Developer'
+
+jobs:
+  show_software_information:
+    name: Show software information
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Show Xcode list
+      run: ls -n /Applications | grep 'Xcode'
+    - name: Show the default version of Xcode
+      run: xcodebuild -version
+    - name: Set Xcode version
+      run: sudo xcode-select -s '${{ env.XCODE_SELECT_PATH }}'
+    - name: Show lists the targets and configurations in a project, or the schemes in a workspace
+      run: xcodebuild -list
+    - name: Show a list of destinations
+      run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -showdestinations
+    
+  xcodebuild:
+    name: Xcode Build & Test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12]
+        platform: ['iOS', 'macOS', 'macCatalyst', 'tvOS', 'watchOS']
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Xcode version
+      run: sudo xcode-select -s '${{ env.XCODE_SELECT_PATH }}'
+    - name: Build the scheme
+      run: |
+        case ${{ matrix.platform }} in
+          'iOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'macOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'macCatalyst' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'tvOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'watchOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+        esac
+    - name: Upload Xcode Build log
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: xcodebuild log (${{ matrix.platform }})
+        path: |
+            xcodebuild-${{ matrix.platform }}.log
+    - name: Test the scheme
+      run: |
+        case ${{ matrix.platform }} in
+          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'macOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'macCatalyst' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.platform }} ;;
+        esac
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: TestResults-${{ matrix.platform }}.xcresult
+        title: Xcode test results (${{ matrix.os }}, ${{ matrix.platform }})
+      if: success() || failure()
+    - name: Upload Xcode DerivedData
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Xcode DerivedData (${{ matrix.platform }})
+        path: |
+            /Users/runner/Library/Developer/Xcode/DerivedData
