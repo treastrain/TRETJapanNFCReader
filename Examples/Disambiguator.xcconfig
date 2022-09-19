@@ -1,0 +1,8 @@
+//
+//  Disambiguator.xcconfig
+//  TRETNFCKitExample
+//
+//  Created by treastrain on 2022/09/20.
+//
+
+DISAMBIGUATOR=${DEVELOPMENT_TEAM}
