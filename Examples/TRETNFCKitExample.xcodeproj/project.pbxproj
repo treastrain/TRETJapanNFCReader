@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB881B8828DE0C8900B61FE9 /* NFCNDEFTagReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB881B8728DE0C8900B61FE9 /* NFCNDEFTagReaderExampleView.swift */; };
 		CBBF3F6928D8C376009D3E0E /* TRETNFCKitExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */; };
 		CBBF3F6B28D8C376009D3E0E /* NFCTagReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBF3F6A28D8C376009D3E0E /* NFCTagReaderExampleView.swift */; };
 		CBBF3F6D28D8C377009D3E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB881B8728DE0C8900B61FE9 /* NFCNDEFTagReaderExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNDEFTagReaderExampleView.swift; sourceTree = "<group>"; };
 		CBBF3F6528D8C376009D3E0E /* TRETNFCKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TRETNFCKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRETNFCKitExampleApp.swift; sourceTree = "<group>"; };
 		CBBF3F6A28D8C376009D3E0E /* NFCTagReaderExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCTagReaderExampleView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				CBBF3F7C28D8CCA0009D3E0E /* TRETNFCKitExample.entitlements */,
 				CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */,
 				CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */,
+				CB881B8728DE0C8900B61FE9 /* NFCNDEFTagReaderExampleView.swift */,
 				CBBF3F6A28D8C376009D3E0E /* NFCTagReaderExampleView.swift */,
 				CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */,
 			);
@@ -159,6 +162,7 @@
 			files = (
 				CBBF3F6B28D8C376009D3E0E /* NFCTagReaderExampleView.swift in Sources */,
 				CBBF3F6928D8C376009D3E0E /* TRETNFCKitExampleApp.swift in Sources */,
+				CB881B8828DE0C8900B61FE9 /* NFCNDEFTagReaderExampleView.swift in Sources */,
 				CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

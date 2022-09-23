@@ -18,8 +18,11 @@ struct TRETNFCKitExampleApp: App {
                         NavigationLink("NDEF Messages") {
                             NFCNDEFMessageReaderExampleView()
                         }
+                        NavigationLink("NDEF Tag") {
+                            NFCNDEFTagReaderExampleView()
+                        }
                     } header: {
-                        Text("NDEF")
+                        Text("NDEF (NFC Data Exchange Format)")
                     }
                     
                     Section {
