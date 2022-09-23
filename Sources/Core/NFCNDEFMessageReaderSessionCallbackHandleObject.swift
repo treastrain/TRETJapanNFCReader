@@ -1,5 +1,5 @@
 //
-//  NFCNDEFMessageReader.swift
+//  NFCNDEFMessageReaderSessionCallbackHandleObject.swift
 //  Core
 //
 //  Created by treastrain on 2022/09/23.
@@ -10,37 +10,27 @@ import Foundation
 @preconcurrency import CoreNFC
 #endif
 
-public actor NFCNDEFMessageReader: NSObject {
+public actor NFCNDEFMessageReaderSessionCallbackHandleObject: NSObject {
     #if canImport(CoreNFC)
-    private var session: NFCNDEFReaderSession?
-    private var didBecomeActive: ((_ session: any NFCNDEFMessageReaderSessionAlertMessageable) -> Void)?
-    private var didInvalidate: ((_ error: NFCReaderError) -> Void)?
-    private var didDetectNDEFs: ((_ session: any NFCNDEFMessageReaderSessionProtocol, _ messages: [NFCNDEFMessage]) -> DetectMessageResult)?
+    typealias TagType = NDEFMessage
+    let didBecomeActive: ((_ session: TagType.ReaderSessionAlertMessageable) -> Void)
+    let didInvalidate: ((_ error: NFCReaderError) -> Void)
+    let didDetectNDEFs: ((_ session: TagType.ReaderSessionProtocol, _ objects: TagType.ReaderSessionDetectObject) -> TagType.DetectResult)
     
-    public func read(
-        invalidateAfterFirstRead: Bool,
-        detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping (_ session: any NFCNDEFMessageReaderSessionAlertMessageable) -> Void = { _ in },
-        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
-        didDetectNDEFs: @Sendable @escaping (_ session: any NFCNDEFMessageReaderSessionProtocol, _ messages: [NFCNDEFMessage]) -> DetectMessageResult
-    ) throws {
-        guard NFCNDEFReaderSession.readingAvailable else {
-            // FIXME: set the `userInfo`
-            throw NFCReaderError(.readerErrorUnsupportedFeature)
-        }
-        // TODO: support the `queue`
-        session = .init(delegate: self, queue: nil, invalidateAfterFirstRead: invalidateAfterFirstRead)
+    init(
+        didBecomeActive: @Sendable @escaping (TagType.ReaderSessionAlertMessageable) -> Void,
+        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void,
+        didDetectNDEFs: @Sendable @escaping (TagType.ReaderSessionProtocol, TagType.ReaderSessionDetectObject) -> TagType.DetectResult
+    ) {
         self.didBecomeActive = didBecomeActive
         self.didInvalidate = didInvalidate
         self.didDetectNDEFs = didDetectNDEFs
-        session?.alertMessage = detectingAlertMessage
-        session?.begin()
     }
     #endif
 }
 
 #if canImport(CoreNFC)
-extension NFCNDEFMessageReader: NFCNDEFReaderSessionDelegate {
+extension NFCNDEFMessageReaderSessionCallbackHandleObject: NFCNDEFReaderSessionDelegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: NFCNDEFReaderSession) {
         Task {
             await didBecomeActive(session: session)
@@ -60,17 +50,16 @@ extension NFCNDEFMessageReader: NFCNDEFReaderSessionDelegate {
     }
 }
 
-extension NFCNDEFMessageReader {
+extension NFCNDEFMessageReaderSessionCallbackHandleObject {
     func didBecomeActive(session: NFCNDEFReaderSession) {
-        didBecomeActive?(session)
+        didBecomeActive(session)
     }
     
     func didInvalidateWithError(session: NFCNDEFReaderSession, error: Error) {
-        didInvalidate?(error as! NFCReaderError)
+        didInvalidate(error as! NFCReaderError)
     }
     
     func didDetectNDEFs(session: NFCNDEFReaderSession, messages: [NFCNDEFMessage]) {
-        guard let didDetectNDEFs else { return }
         let result = didDetectNDEFs(session, messages)
         switch result {
         case .success(let alertMessage):
