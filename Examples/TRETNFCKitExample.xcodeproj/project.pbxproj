@@ -11,6 +11,7 @@
 		CBBF3F6B28D8C376009D3E0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBF3F6A28D8C376009D3E0E /* ContentView.swift */; };
 		CBBF3F6D28D8C377009D3E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */; };
 		CBBF3F7B28D8C67C009D3E0E /* TRETNFCKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBBF3F7A28D8C67C009D3E0E /* TRETNFCKit */; };
+		CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CBBF3F7828D8C66A009D3E0E /* TRETNFCKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TRETNFCKit; path = ..; sourceTree = "<group>"; };
 		CBBF3F7C28D8CCA0009D3E0E /* TRETNFCKitExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TRETNFCKitExample.entitlements; sourceTree = "<group>"; };
 		CBBF3F7D28D8D3A6009D3E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNDEFMessageReaderExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				CBBF3F7D28D8D3A6009D3E0E /* Info.plist */,
 				CBBF3F7C28D8CCA0009D3E0E /* TRETNFCKitExample.entitlements */,
 				CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */,
+				CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */,
 				CBBF3F6A28D8C376009D3E0E /* ContentView.swift */,
 				CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */,
 			);
@@ -156,6 +159,7 @@
 			files = (
 				CBBF3F6B28D8C376009D3E0E /* ContentView.swift in Sources */,
 				CBBF3F6928D8C376009D3E0E /* TRETNFCKitExampleApp.swift in Sources */,
+				CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +284,7 @@
 		};
 		CBBF3F7428D8C377009D3E0E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBBF3F7628D8C51D009D3E0E /* Disambiguator.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -287,7 +292,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 9TWATL5SE8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TRETNFCKitExample/Info.plist;
@@ -312,6 +317,7 @@
 		};
 		CBBF3F7528D8C377009D3E0E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBBF3F7628D8C51D009D3E0E /* Disambiguator.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -319,7 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 9TWATL5SE8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TRETNFCKitExample/Info.plist;
