@@ -13,15 +13,15 @@ import Foundation
 public actor NFCTagReader: NSObject {
     #if canImport(CoreNFC)
     private var session: NFCTagReaderSession?
-    private var didBecomeActive: (() async -> Void)?
-    private var didInvalidate: ((_ error: NFCReaderError) async -> Void)?
+    private var didBecomeActive: ((_ session: any NFCTagReaderSessionAlertMessageable) -> Void)?
+    private var didInvalidate: ((_ error: NFCReaderError) -> Void)?
     private var didDetect: ((_ session: any NFCTagReaderSessionProtocol, _ tags: [NFCTag]) async throws -> DetectTagResult)?
     
     public func read(
         pollingOption: NFCTagReaderSession.PollingOption,
         detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping () async -> Void = {},
-        didInvalidate: @Sendable @escaping (NFCReaderError) async -> Void = { _ in },
+        didBecomeActive: @Sendable @escaping (_ session: any NFCTagReaderSessionAlertMessageable) -> Void = { _ in },
+        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
         didDetect: @Sendable @escaping (_ session: any NFCTagReaderSessionProtocol, _ tags: [NFCTag]) async throws -> DetectTagResult
     ) throws {
         guard NFCTagReaderSession.readingAvailable else {
@@ -70,12 +70,12 @@ extension NFCTagReader: NFCTagReaderSessionDelegate {
 }
 
 extension NFCTagReader {
-    func didBecomeActive(session: NFCTagReaderSession) async {
-        await didBecomeActive?()
+    func didBecomeActive(session: NFCTagReaderSession) {
+        didBecomeActive?(session)
     }
     
-    func didInvalidateWithError(session: NFCTagReaderSession, error: Error) async {
-        await didInvalidate?(error as! NFCReaderError)
+    func didInvalidateWithError(session: NFCTagReaderSession, error: Error) {
+        didInvalidate?(error as! NFCReaderError)
     }
     
     func didDetect(session: NFCTagReaderSession, tags: [NFCTag]) async {

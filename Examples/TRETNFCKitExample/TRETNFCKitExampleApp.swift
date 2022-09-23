@@ -12,7 +12,26 @@ import SwiftUI
 struct TRETNFCKitExampleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                List {
+                    Section {
+                        NavigationLink("NDEF Messages") {
+                            NFCNDEFMessageReaderExampleView()
+                        }
+                    } header: {
+                        Text("NDEF")
+                    }
+                    
+                    Section {
+                        NavigationLink("FeliCa") {
+                            NFCTagReaderExampleView()
+                        }
+                    } header: {
+                        Text("Native")
+                    }
+                }
+                .navigationBarTitle("TRETNFCKit")
+            }
         }
     }
 }
