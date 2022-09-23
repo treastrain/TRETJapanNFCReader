@@ -10,9 +10,8 @@ import Foundation
 import CoreNFC
 #endif
 
-public protocol NFCTagReaderSessionProtocol: NSObjectProtocol {
+public protocol NFCTagReaderSessionProtocol: NFCTagReaderSessionAlertMessageable {
     #if canImport(CoreNFC)
-    var alertMessage: String { get set }
     func connect(to tag: NFCTag) async throws
     #endif
 }
