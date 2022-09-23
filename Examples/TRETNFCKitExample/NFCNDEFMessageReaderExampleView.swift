@@ -9,23 +9,34 @@ import SwiftUI
 import TRETNFCKit
 
 struct NFCNDEFMessageReaderExampleView: View {
-    private let reader = NFCNDEFMessageReader()
+    @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
         List {
             Button {
-                Task {
-                    try await reader.read(invalidateAfterFirstRead: false, detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.") { session in
-                        print(session.alertMessage)
-                    } didDetectNDEFs: { session, messages in
-                        print(messages)
-                        return .success(alertMessage: "Done!")
-                    }
-                }
+                viewModel.read()
             } label: {
                 Text("Read")
             }
         }
         .navigationTitle("NDEF Messages")
+    }
+}
+
+extension NFCNDEFMessageReaderExampleView {
+    final class ViewModel: ObservableObject {
+        private var reader: NFCReader<NDEFMessage>!
+        
+        func read() {
+            Task {
+                reader = .init()
+                try await reader.read(invalidateAfterFirstRead: false, detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.") { session in
+                    print(session.alertMessage)
+                } didDetectNDEFs: { session, messages in
+                    print(messages)
+                    return .success(alertMessage: "Done!")
+                }
+            }
+        }
     }
 }
