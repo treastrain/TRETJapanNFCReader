@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CBBF3F6928D8C376009D3E0E /* TRETNFCKitExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */; };
-		CBBF3F6B28D8C376009D3E0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBF3F6A28D8C376009D3E0E /* ContentView.swift */; };
+		CBBF3F6B28D8C376009D3E0E /* NFCTagReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBF3F6A28D8C376009D3E0E /* NFCTagReaderExampleView.swift */; };
 		CBBF3F6D28D8C377009D3E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */; };
 		CBBF3F7B28D8C67C009D3E0E /* TRETNFCKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBBF3F7A28D8C67C009D3E0E /* TRETNFCKit */; };
 		CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		CBBF3F6528D8C376009D3E0E /* TRETNFCKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TRETNFCKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRETNFCKitExampleApp.swift; sourceTree = "<group>"; };
-		CBBF3F6A28D8C376009D3E0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CBBF3F6A28D8C376009D3E0E /* NFCTagReaderExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCTagReaderExampleView.swift; sourceTree = "<group>"; };
 		CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBBF3F7628D8C51D009D3E0E /* Disambiguator.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Disambiguator.xcconfig; sourceTree = "<group>"; };
 		CBBF3F7828D8C66A009D3E0E /* TRETNFCKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TRETNFCKit; path = ..; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 				CBBF3F7C28D8CCA0009D3E0E /* TRETNFCKitExample.entitlements */,
 				CBBF3F6828D8C376009D3E0E /* TRETNFCKitExampleApp.swift */,
 				CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */,
-				CBBF3F6A28D8C376009D3E0E /* ContentView.swift */,
+				CBBF3F6A28D8C376009D3E0E /* NFCTagReaderExampleView.swift */,
 				CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */,
 			);
 			path = TRETNFCKitExample;
@@ -157,7 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBBF3F6B28D8C376009D3E0E /* ContentView.swift in Sources */,
+				CBBF3F6B28D8C376009D3E0E /* NFCTagReaderExampleView.swift in Sources */,
 				CBBF3F6928D8C376009D3E0E /* TRETNFCKitExampleApp.swift in Sources */,
 				CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */,
 			);
