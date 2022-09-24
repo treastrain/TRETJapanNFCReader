@@ -8,6 +8,7 @@
 #if canImport(CoreNFC)
 public protocol NFCReaderSessionDelegatable: NFCReaderSession {
     associatedtype CallbackHandleObject
+    associatedtype AlertMessageable: Sendable
 }
 #endif
 
@@ -22,5 +23,11 @@ extension NFCTagReaderSession: NFCReaderSessionDelegatable {
 
 extension NFCVASReaderSession: NFCReaderSessionDelegatable {
     public typealias CallbackHandleObject = NFCVASReaderSessionDelegate
+}
+#endif
+
+#if canImport(CoreNFC)
+extension NFCReaderSessionDelegatable {
+    public typealias AlertMessageable = NFCReaderSessionAlertMessageable
 }
 #endif
