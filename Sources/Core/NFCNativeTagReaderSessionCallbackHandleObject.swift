@@ -1,5 +1,5 @@
 //
-//  NFCTagReader.swift
+//  NFCNativeTagReaderSessionCallbackHandleObject.swift
 //  Core
 //
 //  Created by treastrain on 2022/09/19.
@@ -10,46 +10,27 @@ import Foundation
 @preconcurrency import CoreNFC
 #endif
 
-public actor NFCTagReader: NSObject {
+public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject {
     #if canImport(CoreNFC)
-    private var session: NFCTagReaderSession?
-    private var didBecomeActive: ((_ session: any NFCTagReaderSessionAlertMessageable) -> Void)?
-    private var didInvalidate: ((_ error: NFCReaderError) -> Void)?
-    private var didDetect: ((_ session: any NFCTagReaderSessionProtocol, _ tags: [NFCTag]) async throws -> DetectTagResult)?
+    typealias TagType = NativeTag
+    let didBecomeActive: ((_ session: TagType.ReaderSessionAlertMessageable) -> Void)
+    let didInvalidate: ((_ error: NFCReaderError) -> Void)
+    let didDetect: ((_ session: TagType.ReaderSessionProtocol, _ objects: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult)
     
-    public func read(
-        pollingOption: NFCTagReaderSession.PollingOption,
-        detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping (_ session: any NFCTagReaderSessionAlertMessageable) -> Void = { _ in },
-        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
-        didDetect: @Sendable @escaping (_ session: any NFCTagReaderSessionProtocol, _ tags: [NFCTag]) async throws -> DetectTagResult
-    ) throws {
-        guard NFCTagReaderSession.readingAvailable else {
-            // FIXME: set the `userInfo`
-            throw NFCReaderError(.readerErrorUnsupportedFeature)
-        }
-        // TODO: support the `queue`
-        session = .init(pollingOption: pollingOption, delegate: self, queue: nil)
-        guard session != nil else {
-            if pollingOption.isEmpty {
-                // FIXME: replace with more accurate error
-                throw NFCReaderError(.readerErrorInvalidParameter)
-            } else {
-                // FIXME: set the `userInfo`
-                throw NFCReaderError(.readerSessionInvalidationErrorSystemIsBusy)
-            }
-        }
+    init(
+        didBecomeActive: @Sendable @escaping (_: TagType.ReaderSessionAlertMessageable) -> Void,
+        didInvalidate: @Sendable @escaping (_: NFCReaderError) -> Void,
+        didDetect: @Sendable @escaping (_: TagType.ReaderSessionProtocol, _: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
+    ) {
         self.didBecomeActive = didBecomeActive
         self.didInvalidate = didInvalidate
         self.didDetect = didDetect
-        session?.alertMessage = detectingAlertMessage
-        session?.begin()
     }
     #endif
 }
 
 #if canImport(CoreNFC)
-extension NFCTagReader: NFCTagReaderSessionDelegate {
+extension NFCNativeTagReaderSessionCallbackHandleObject: NFCTagReaderSessionDelegate {
     nonisolated public func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
         Task {
             await didBecomeActive(session: session)
@@ -69,18 +50,17 @@ extension NFCTagReader: NFCTagReaderSessionDelegate {
     }
 }
 
-extension NFCTagReader {
+extension NFCNativeTagReaderSessionCallbackHandleObject {
     func didBecomeActive(session: NFCTagReaderSession) {
-        didBecomeActive?(session)
+        didBecomeActive(session)
     }
     
     func didInvalidateWithError(session: NFCTagReaderSession, error: Error) {
-        didInvalidate?(error as! NFCReaderError)
+        didInvalidate(error as! NFCReaderError)
     }
     
     func didDetect(session: NFCTagReaderSession, tags: [NFCTag]) async {
-        guard let didDetect else { return }
-        let result: DetectTagResult
+        let result: TagType.DetectResult
         do {
             result = try await didDetect(session, tags)
         } catch {

@@ -11,8 +11,8 @@ import CoreNFC
 #endif
 
 public protocol NFCNDEFMessageReaderSessionProtocol: NFCNDEFMessageReaderSessionAlertMessageable {
-#if canImport(CoreNFC)
-#endif
+    #if canImport(CoreNFC)
+    #endif
 }
 
 #if canImport(CoreNFC)
