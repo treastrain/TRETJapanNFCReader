@@ -5,11 +5,6 @@
 //  Created by treastrain on 2022/09/24.
 //
 
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
-
 public actor NFCReader<TagType: NFCTagType> {
     #if canImport(CoreNFC)
     private(set) var session: TagType.ReaderSession?
