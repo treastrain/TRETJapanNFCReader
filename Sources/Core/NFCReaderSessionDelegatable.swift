@@ -15,4 +15,12 @@ public protocol NFCReaderSessionDelegatable: NFCReaderSession {
 extension NFCNDEFReaderSession: NFCReaderSessionDelegatable {
     public typealias CallbackHandleObject = NFCNDEFReaderSessionDelegate
 }
+
+extension NFCTagReaderSession: NFCReaderSessionDelegatable {
+    public typealias CallbackHandleObject = NFCTagReaderSessionDelegate
+}
+
+extension NFCVASReaderSession: NFCReaderSessionDelegatable {
+    public typealias CallbackHandleObject = NFCVASReaderSessionDelegate
+}
 #endif

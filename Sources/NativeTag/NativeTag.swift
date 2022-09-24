@@ -13,12 +13,6 @@ public enum NativeTag: NFCTagType {
     #endif
 }
 
-#if canImport(CoreNFC)
-extension NativeTag.ReaderSession: NFCReaderSessionDelegatable {
-    public typealias CallbackHandleObject = NFCTagReaderSessionDelegate
-}
-#endif
-
 extension NativeTag {
     public enum DetectResult: Sendable {
         case success(alertMessage: String?)
