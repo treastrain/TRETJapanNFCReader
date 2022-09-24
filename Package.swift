@@ -27,14 +27,15 @@ func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTes
     )
     if includesTest {
         targets.append(
-            .testTarget(name: "\(packageName)_\(moduleName)Tests", dependencies: [.init(stringLiteral: targetName)], path: "Tests/\(moduleName)Tests", swiftSettings: swiftSettings)
+            .testTarget(name: "\(packageName).\(moduleName)Tests", dependencies: [.init(stringLiteral: targetName)], path: "Tests/\(moduleName)Tests", swiftSettings: swiftSettings)
         )
     }
     return .init(stringLiteral: targetName)
 }
 
 // MARK: - Modules
-add(moduleName: "Core", includesTest: true)
+let core = add(moduleName: "Core", includesTest: true)
+add(moduleName: "NativeTag", dependencies: [core], includesTest: false)
 
 // MARK: - Package
 products.append(

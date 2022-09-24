@@ -6,3 +6,4 @@
 //
 
 @_exported import TRETNFCKit_Core
+@_exported import TRETNFCKit_NativeTag

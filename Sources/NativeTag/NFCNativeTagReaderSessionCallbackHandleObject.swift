@@ -1,11 +1,10 @@
 //
 //  NFCNativeTagReaderSessionCallbackHandleObject.swift
-//  Core
+//  NativeTag
 //
 //  Created by treastrain on 2022/09/19.
 //
 
-import Foundation
 #if canImport(CoreNFC)
 @preconcurrency import CoreNFC
 #endif
