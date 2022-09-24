@@ -1,14 +1,9 @@
 //
 //  NDEFTag.swift
-//  Core
+//  NDEFTag
 //
 //  Created by treastrain on 2022/09/23.
 //
-
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
 
 public enum NDEFTag: NFCTagType {
     #if canImport(CoreNFC)
@@ -18,12 +13,6 @@ public enum NDEFTag: NFCTagType {
     public typealias ReaderSessionDetectObject = [NFCNDEFTag]
     #endif
 }
-
-#if canImport(CoreNFC)
-extension NDEFTag.ReaderSession: NFCReaderSessionDelegatable {
-    public typealias CallbackHandleObject = NFCNDEFReaderSessionDelegate
-}
-#endif
 
 extension NDEFTag {
     public enum DetectResult: Sendable {

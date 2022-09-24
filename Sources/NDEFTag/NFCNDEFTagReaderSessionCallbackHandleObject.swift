@@ -1,11 +1,10 @@
 //
 //  NFCNDEFTagReaderSessionCallbackHandleObject.swift
-//  Core
+//  NDEFTag
 //
 //  Created by treastrain on 2022/09/24.
 //
 
-import Foundation
 #if canImport(CoreNFC)
 @preconcurrency import CoreNFC
 #endif

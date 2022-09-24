@@ -1,14 +1,9 @@
 //
 //  NFCNDEFTagReaderSessionProtocol.swift
-//  Core
+//  NDEFTag
 //
 //  Created by treastrain on 2022/09/24.
 //
-
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
 
 public protocol NFCNDEFTagReaderSessionProtocol: NFCNDEFTagReaderSessionAlertMessageable {
     #if canImport(CoreNFC)

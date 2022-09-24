@@ -15,3 +15,9 @@ public protocol NFCReaderSessionDelegatable: NFCReaderSession {
     associatedtype CallbackHandleObject
 }
 #endif
+
+#if canImport(CoreNFC)
+extension NFCNDEFReaderSession: NFCReaderSessionDelegatable {
+    public typealias CallbackHandleObject = NFCNDEFReaderSessionDelegate
+}
+#endif
