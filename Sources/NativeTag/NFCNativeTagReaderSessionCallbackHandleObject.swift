@@ -30,19 +30,19 @@ public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject {
 
 #if canImport(CoreNFC)
 extension NFCNativeTagReaderSessionCallbackHandleObject: NFCTagReaderSessionDelegate {
-    nonisolated public func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
+    public nonisolated func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
         Task {
             await didBecomeActive(session: session)
         }
     }
     
-    nonisolated public func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
+    public nonisolated func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
         Task {
             await didInvalidateWithError(session: session, error: error)
         }
     }
     
-    nonisolated public func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+    public nonisolated func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         Task {
             await didDetect(session: session, tags: tags)
         }

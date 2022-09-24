@@ -16,5 +16,7 @@ public protocol NFCTagType {
 }
 
 extension NFCTagType {
+    #if canImport(CoreNFC)
     public typealias ReaderSessionAlertMessageable = NFCReaderSessionAlertMessageable
+    #endif
 }
