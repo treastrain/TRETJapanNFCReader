@@ -19,12 +19,6 @@ public enum NDEFMessage: NFCTagType {
     #endif
 }
 
-#if canImport(CoreNFC)
-extension NDEFMessage.ReaderSession: NFCReaderSessionDelegatable {
-    public typealias CallbackHandleObject = NFCNDEFReaderSessionDelegate
-}
-#endif
-
 extension NDEFMessage {
     public enum DetectResult: Sendable {
         case success(alertMessage: String?)
