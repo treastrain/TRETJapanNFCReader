@@ -36,6 +36,7 @@ func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTes
 // MARK: - Modules
 let core = add(moduleName: "Core", includesTest: true)
 add(moduleName: "NativeTag", dependencies: [core], includesTest: false)
+add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false)
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: false)
 
 // MARK: - Package

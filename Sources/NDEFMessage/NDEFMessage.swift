@@ -1,14 +1,9 @@
 //
 //  NDEFMessage.swift
-//  Core
+//  NDEFMessage
 //
 //  Created by treastrain on 2022/09/23.
 //
-
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
 
 public enum NDEFMessage: NFCTagType {
     #if canImport(CoreNFC)

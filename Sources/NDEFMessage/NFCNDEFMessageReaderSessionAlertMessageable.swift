@@ -1,14 +1,9 @@
 //
 //  NFCNDEFMessageReaderSessionAlertMessageable.swift
-//  Core
+//  NDEFMessage
 //
 //  Created by treastrain on 2022/09/23.
 //
-
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
 
 public protocol NFCNDEFMessageReaderSessionAlertMessageable: NSObjectProtocol {
     #if canImport(CoreNFC)

@@ -1,14 +1,9 @@
 //
 //  NFCReader+NDEFMessage.swift
-//  Core
+//  NDEFMessage
 //
 //  Created by treastrain on 2022/09/24.
 //
-
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
 
 extension NFCReader where TagType == NDEFMessage {
     #if canImport(CoreNFC)
