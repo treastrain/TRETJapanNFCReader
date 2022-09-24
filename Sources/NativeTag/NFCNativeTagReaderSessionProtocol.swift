@@ -5,7 +5,7 @@
 //  Created by treastrain on 2022/09/20.
 //
 
-public protocol NFCNativeTagReaderSessionProtocol: NFCNativeTagReaderSessionAlertMessageable {
+public protocol NFCNativeTagReaderSessionProtocol: NFCReaderSessionAlertMessageable {
     #if canImport(CoreNFC)
     func connect(to tag: NFCTag) async throws
     #endif

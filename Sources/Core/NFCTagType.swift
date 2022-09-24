@@ -19,3 +19,7 @@ public protocol NFCTagType {
     #endif
     associatedtype DetectResult
 }
+
+extension NFCTagType {
+    public typealias ReaderSessionAlertMessageable = NFCReaderSessionAlertMessageable
+}

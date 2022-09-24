@@ -8,7 +8,6 @@
 public enum NDEFMessage: NFCTagType {
     #if canImport(CoreNFC)
     public typealias ReaderSession = NFCNDEFReaderSession
-    public typealias ReaderSessionAlertMessageable = NFCNDEFMessageReaderSessionAlertMessageable
     public typealias ReaderSessionProtocol = NFCNDEFMessageReaderSessionProtocol
     public typealias ReaderSessionDetectObject = [NFCNDEFMessage]
     #endif
