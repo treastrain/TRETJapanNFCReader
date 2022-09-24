@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TRETNFCKit
+import TRETNFCKit_NDEFMessage
 
 struct NFCNDEFMessageReaderExampleView: View {
     @ObservedObject var viewModel = ViewModel()
