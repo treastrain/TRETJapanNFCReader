@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TRETNFCKit
+import TRETNFCKit_NativeTag
 
 struct NFCNativeTagReaderExampleView: View {
     @ObservedObject var viewModel = ViewModel()
