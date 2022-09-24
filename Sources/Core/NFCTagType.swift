@@ -8,8 +8,8 @@
 public protocol NFCTagType {
     #if canImport(CoreNFC)
     associatedtype ReaderSession: NFCReaderSessionDelegatable
-    associatedtype ReaderSessionAlertMessageable
-    associatedtype ReaderSessionProtocol
+    associatedtype ReaderSessionAlertMessageable: Sendable
+    associatedtype ReaderSessionProtocol: Sendable
     associatedtype ReaderSessionDetectObject
     #endif
     associatedtype DetectResult
