@@ -5,7 +5,7 @@
 //  Created by treastrain on 2022/04/23.
 //
 
-#if canImport(CoreNFC)
-@_exported import CoreNFC
-#endif
 @_exported import TRETNFCKit_Core
+@_exported import TRETNFCKit_NativeTag
+@_exported import TRETNFCKit_NDEFMessage
+@_exported import TRETNFCKit_NDEFTag

@@ -1,14 +1,9 @@
 //
 //  NFCReader+NDEFTag.swift
-//  Core
+//  NDEFTag
 //
 //  Created by treastrain on 2022/09/24.
 //
-
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
 
 extension NFCReader where TagType == NDEFTag {
     #if canImport(CoreNFC)

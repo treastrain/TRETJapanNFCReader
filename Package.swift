@@ -19,6 +19,7 @@ var targets: [Target] = []
 @discardableResult
 func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTest: Bool) -> Target.Dependency {
     let targetName = "\(packageName)_\(moduleName)"
+    let target = Target.Dependency(stringLiteral: targetName)
     products.append(
         .library(name: targetName, targets: [targetName])
     )
@@ -27,14 +28,17 @@ func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTes
     )
     if includesTest {
         targets.append(
-            .testTarget(name: "\(packageName)_\(moduleName)Tests", dependencies: [.init(stringLiteral: targetName)], path: "Tests/\(moduleName)Tests", swiftSettings: swiftSettings)
+            .testTarget(name: "\(packageName).\(moduleName)Tests", dependencies: [target], path: "Tests/\(moduleName)Tests", swiftSettings: swiftSettings)
         )
     }
-    return .init(stringLiteral: targetName)
+    return target
 }
 
 // MARK: - Modules
-add(moduleName: "Core", includesTest: true)
+let core = add(moduleName: "Core", includesTest: true)
+add(moduleName: "NativeTag", dependencies: [core], includesTest: false)
+add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false)
+add(moduleName: "NDEFTag", dependencies: [core], includesTest: false)
 
 // MARK: - Package
 products.append(

@@ -5,15 +5,10 @@
 //  Created by treastrain on 2022/09/24.
 //
 
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
-
 public actor NFCReader<TagType: NFCTagType> {
     #if canImport(CoreNFC)
-    private(set) var session: TagType.ReaderSession?
-    private(set) var sessionDelegate: AnyObject?
+    private var session: TagType.ReaderSession?
+    private var sessionDelegate: AnyObject?
     #endif
     
     public init() {}
@@ -21,7 +16,7 @@ public actor NFCReader<TagType: NFCTagType> {
 
 extension NFCReader {
     #if canImport(CoreNFC)
-    func read(
+    public func read(
         sessionAndDelegate: () throws -> (session: TagType.ReaderSession, delegate: TagType.ReaderSession.CallbackHandleObject),
         detectingAlertMessage: String
     ) throws {

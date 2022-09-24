@@ -1,29 +1,17 @@
 //
 //  NativeTag.swift
-//  Core
+//  NativeTag
 //
 //  Created by treastrain on 2022/09/20.
 //
 
-import Foundation
-#if canImport(CoreNFC)
-import CoreNFC
-#endif
-
 public enum NativeTag: NFCTagType {
     #if canImport(CoreNFC)
     public typealias ReaderSession = NFCTagReaderSession
-    public typealias ReaderSessionAlertMessageable = NFCNativeTagReaderSessionAlertMessageable
     public typealias ReaderSessionProtocol = NFCNativeTagReaderSessionProtocol
     public typealias ReaderSessionDetectObject = [NFCTag]
     #endif
 }
-
-#if canImport(CoreNFC)
-extension NativeTag.ReaderSession: NFCReaderSessionDelegatable {
-    public typealias CallbackHandleObject = NFCTagReaderSessionDelegate
-}
-#endif
 
 extension NativeTag {
     public enum DetectResult: Sendable {
