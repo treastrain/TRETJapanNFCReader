@@ -26,7 +26,7 @@ extension NFCReader where TagType == NDEFMessage {
         )
         try read(
             // TODO: support the `queue`
-            session: .init(delegate: delegate, queue: nil, invalidateAfterFirstRead: invalidateAfterFirstRead),
+            sessionAndDelegate: { (.init(delegate: delegate, queue: nil, invalidateAfterFirstRead: invalidateAfterFirstRead), delegate) },
             detectingAlertMessage: detectingAlertMessage
         )
     }
