@@ -12,5 +12,5 @@ public protocol NFCNativeTagReaderSessionProtocol: NFCReaderSessionAlertMessagea
 }
 
 #if canImport(CoreNFC)
-extension NFCTagReaderSession: NFCNativeTagReaderSessionProtocol {}
+extension NFCTagReaderSession: NFCNativeTagReaderSessionProtocol, @unchecked Sendable {}
 #endif
