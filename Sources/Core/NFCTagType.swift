@@ -7,7 +7,7 @@
 
 public protocol NFCTagType {
     #if canImport(CoreNFC)
-    associatedtype ReaderSession: NFCReaderSessionDelegatable
+    associatedtype ReaderSession: NFCReaderSessionable
     associatedtype ReaderSessionProtocol: Sendable
     associatedtype ReaderSessionDetectObject
     #endif

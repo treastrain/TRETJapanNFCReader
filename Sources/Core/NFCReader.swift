@@ -17,7 +17,7 @@ public actor NFCReader<TagType: NFCTagType> {
 extension NFCReader {
     #if canImport(CoreNFC)
     public func read(
-        sessionAndDelegate: () throws -> (session: TagType.ReaderSession, delegate: TagType.ReaderSession.CallbackHandleObject),
+        sessionAndDelegate: () throws -> (session: TagType.ReaderSession, delegate: TagType.ReaderSession.Delegate),
         detectingAlertMessage: String
     ) throws {
         guard TagType.ReaderSession.readingAvailable else {

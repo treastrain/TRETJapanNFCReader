@@ -29,7 +29,7 @@ public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderS
 }
 
 #if canImport(CoreNFC)
-extension NFCNativeTagReaderSessionCallbackHandleObject: NativeTag.ReaderSession.CallbackHandleObject {
+extension NFCNativeTagReaderSessionCallbackHandleObject: NativeTag.ReaderSession.Delegate {
     public nonisolated func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         Task {
             await didDetect(session: session, tags: tags)
