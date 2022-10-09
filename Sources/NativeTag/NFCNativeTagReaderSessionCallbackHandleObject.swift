@@ -9,7 +9,7 @@
 @preconcurrency import CoreNFC
 #endif
 
-public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSessionCallbackHandleObject {
+public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSessionCallbackHandleableObject {
     #if canImport(CoreNFC)
     public typealias TagType = NativeTag
     public let didBecomeActiveHandler: ((_ session: TagType.ReaderSession.AlertMessageable) -> Void)

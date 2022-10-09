@@ -1,11 +1,11 @@
 //
-//  NFCReaderSessionCallbackHandleObject.swift
+//  NFCReaderSessionCallbackHandleableObject.swift
 //  Core
 //
 //  Created by treastrain on 2022/09/25.
 //
 
-public protocol NFCReaderSessionCallbackHandleObject: Actor {
+public protocol NFCReaderSessionCallbackHandleableObject: Actor {
     #if canImport(CoreNFC)
     associatedtype TagType: NFCTagType
     var didBecomeActiveHandler: (_ session: TagType.ReaderSession.AlertMessageable) -> Void { get }
@@ -15,7 +15,7 @@ public protocol NFCReaderSessionCallbackHandleObject: Actor {
 }
 
 #if canImport(CoreNFC)
-extension NFCReaderSessionCallbackHandleObject {
+extension NFCReaderSessionCallbackHandleableObject {
     public nonisolated func didBecomeActive(_ session: TagType.ReaderSession.AlertMessageable) {
         Task {
             await didBecomeActive(session: session)
@@ -29,7 +29,7 @@ extension NFCReaderSessionCallbackHandleObject {
     }
 }
 
-extension NFCReaderSessionCallbackHandleObject {
+extension NFCReaderSessionCallbackHandleableObject {
     private func didBecomeActive(session: TagType.ReaderSession.AlertMessageable) {
         didBecomeActiveHandler(session)
     }
@@ -41,7 +41,7 @@ extension NFCReaderSessionCallbackHandleObject {
 #endif
 
 #if canImport(CoreNFC)
-extension NFCReaderSessionCallbackHandleObject where TagType.ReaderSession.Delegate == NFCNDEFReaderSessionDelegate {
+extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCNDEFReaderSessionDelegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         // TODO: remove `as!`
         didBecomeActive(session as! TagType.ReaderSession.AlertMessageable)
@@ -53,7 +53,7 @@ extension NFCReaderSessionCallbackHandleObject where TagType.ReaderSession.Deleg
     }
 }
 
-extension NFCReaderSessionCallbackHandleObject where TagType.ReaderSession.Delegate == NFCTagReaderSessionDelegate {
+extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCTagReaderSessionDelegate {
     public nonisolated func tagReaderSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         // TODO: remove `as!`
         didBecomeActive(session as! TagType.ReaderSession.AlertMessageable)
@@ -65,7 +65,7 @@ extension NFCReaderSessionCallbackHandleObject where TagType.ReaderSession.Deleg
     }
 }
 
-extension NFCReaderSessionCallbackHandleObject where TagType.ReaderSession.Delegate == NFCVASReaderSessionDelegate {
+extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCVASReaderSessionDelegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         // TODO: remove `as!`
         didBecomeActive(session as! TagType.ReaderSession.AlertMessageable)
