@@ -8,7 +8,7 @@
 public protocol NFCReaderSessionCallbackHandleableObject: Actor {
     #if canImport(CoreNFC)
     associatedtype TagType: NFCTagType
-    var didBecomeActiveHandler: (_ session: TagType.ReaderSession.AlertMessageable) -> Void { get }
+    var didBecomeActiveHandler: (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void { get }
     var didInvalidateHandler: (_ error: NFCReaderError) -> Void { get }
     var didDetectHandler: (_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult { get }
     #endif
@@ -16,7 +16,7 @@ public protocol NFCReaderSessionCallbackHandleableObject: Actor {
 
 #if canImport(CoreNFC)
 extension NFCReaderSessionCallbackHandleableObject {
-    public nonisolated func didBecomeActive(_ session: TagType.ReaderSession.AlertMessageable) {
+    public nonisolated func didBecomeActive(_ session: TagType.ReaderSession.AfterBeginProtocol) {
         Task {
             await didBecomeActive(session: session)
         }
@@ -30,7 +30,7 @@ extension NFCReaderSessionCallbackHandleableObject {
 }
 
 extension NFCReaderSessionCallbackHandleableObject {
-    private func didBecomeActive(session: TagType.ReaderSession.AlertMessageable) {
+    private func didBecomeActive(session: TagType.ReaderSession.AfterBeginProtocol) {
         didBecomeActiveHandler(session)
     }
     
@@ -44,7 +44,7 @@ extension NFCReaderSessionCallbackHandleableObject {
 extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCNDEFReaderSessionDelegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         // TODO: remove `as!`
-        didBecomeActive(session as! TagType.ReaderSession.AlertMessageable)
+        didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
@@ -56,7 +56,7 @@ extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.D
 extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCTagReaderSessionDelegate {
     public nonisolated func tagReaderSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         // TODO: remove `as!`
-        didBecomeActive(session as! TagType.ReaderSession.AlertMessageable)
+        didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)
     }
     
     public nonisolated func tagReaderSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
@@ -68,7 +68,7 @@ extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.D
 extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCVASReaderSessionDelegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         // TODO: remove `as!`
-        didBecomeActive(session as! TagType.ReaderSession.AlertMessageable)
+        didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
