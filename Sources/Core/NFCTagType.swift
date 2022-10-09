@@ -7,16 +7,9 @@
 
 public protocol NFCTagType {
     #if canImport(CoreNFC)
-    associatedtype ReaderSession: NFCReaderSessionDelegatable
-    associatedtype ReaderSessionAlertMessageable
-    associatedtype ReaderSessionProtocol
+    associatedtype ReaderSession: NFCReaderSessionable
+    associatedtype ReaderSessionProtocol: Sendable
     associatedtype ReaderSessionDetectObject
     #endif
     associatedtype DetectResult
-}
-
-extension NFCTagType {
-    #if canImport(CoreNFC)
-    public typealias ReaderSessionAlertMessageable = NFCReaderSessionAlertMessageable
-    #endif
 }

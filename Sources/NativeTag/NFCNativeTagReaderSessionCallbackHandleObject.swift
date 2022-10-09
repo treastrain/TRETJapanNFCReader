@@ -9,39 +9,27 @@
 @preconcurrency import CoreNFC
 #endif
 
-public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject {
+public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSessionCallbackHandleableObject {
     #if canImport(CoreNFC)
-    typealias TagType = NativeTag
-    let didBecomeActive: ((_ session: TagType.ReaderSessionAlertMessageable) -> Void)
-    let didInvalidate: ((_ error: NFCReaderError) -> Void)
-    let didDetect: ((_ session: TagType.ReaderSessionProtocol, _ objects: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult)
+    public typealias TagType = NativeTag
+    public let didBecomeActiveHandler: ((_ session: TagType.ReaderSession.AlertMessageable) -> Void)
+    public let didInvalidateHandler: ((_ error: NFCReaderError) -> Void)
+    public let didDetectHandler: ((_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult)
     
     init(
-        didBecomeActive: @Sendable @escaping (_: TagType.ReaderSessionAlertMessageable) -> Void,
+        didBecomeActive: @Sendable @escaping (_: TagType.ReaderSession.AlertMessageable) -> Void,
         didInvalidate: @Sendable @escaping (_: NFCReaderError) -> Void,
-        didDetect: @Sendable @escaping (_: TagType.ReaderSessionProtocol, _: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
+        didDetect: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) {
-        self.didBecomeActive = didBecomeActive
-        self.didInvalidate = didInvalidate
-        self.didDetect = didDetect
+        self.didBecomeActiveHandler = didBecomeActive
+        self.didInvalidateHandler = didInvalidate
+        self.didDetectHandler = didDetect
     }
     #endif
 }
 
 #if canImport(CoreNFC)
-extension NFCNativeTagReaderSessionCallbackHandleObject: NFCTagReaderSessionDelegate {
-    public nonisolated func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-        Task {
-            await didBecomeActive(session: session)
-        }
-    }
-    
-    public nonisolated func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
-        Task {
-            await didInvalidateWithError(session: session, error: error)
-        }
-    }
-    
+extension NFCNativeTagReaderSessionCallbackHandleObject: NativeTag.ReaderSession.Delegate {
     public nonisolated func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
         Task {
             await didDetect(session: session, tags: tags)
@@ -50,18 +38,10 @@ extension NFCNativeTagReaderSessionCallbackHandleObject: NFCTagReaderSessionDele
 }
 
 extension NFCNativeTagReaderSessionCallbackHandleObject {
-    func didBecomeActive(session: NFCTagReaderSession) {
-        didBecomeActive(session)
-    }
-    
-    func didInvalidateWithError(session: NFCTagReaderSession, error: Error) {
-        didInvalidate(error as! NFCReaderError)
-    }
-    
     func didDetect(session: NFCTagReaderSession, tags: [NFCTag]) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetect(session, tags)
+            result = try await didDetectHandler(session, tags)
         } catch {
             result = .failure(with: error)
         }

@@ -9,7 +9,7 @@ extension NFCReader where TagType == NDEFTag {
     #if canImport(CoreNFC)
     public func read(
         detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSessionAlertMessageable) -> Void = { _ in },
+        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AlertMessageable) -> Void = { _ in },
         didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
         didDetect: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) throws {
