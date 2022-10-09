@@ -8,7 +8,7 @@
 #if canImport(CoreNFC)
 public protocol NFCReaderSessionable: NFCReaderSession {
     associatedtype Session
-    associatedtype Delegate
+    associatedtype Delegate // TODO: inherit `NSObjectProtocol`
     associatedtype AlertMessageable: Sendable
 }
 #endif
