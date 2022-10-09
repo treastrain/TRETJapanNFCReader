@@ -9,7 +9,7 @@
 public protocol NFCReaderSessionable: NFCReaderSession {
     associatedtype Session
     associatedtype Delegate // TODO: inherit `NSObjectProtocol`
-    associatedtype AlertMessageable: Sendable
+    associatedtype AfterBeginProtocol: Sendable
 }
 #endif
 
@@ -32,6 +32,6 @@ extension NFCVASReaderSession: NFCReaderSessionable, @unchecked Sendable {
 
 #if canImport(CoreNFC)
 extension NFCReaderSessionable {
-    public typealias AlertMessageable = any NFCReaderSessionAlertMessageable
+    public typealias AfterBeginProtocol = any NFCReaderSessionAfterBeginProtocol
 }
 #endif

@@ -5,7 +5,7 @@
 //  Created by treastrain on 2022/09/23.
 //
 
-public protocol NFCNDEFMessageReaderSessionProtocol: NFCReaderSessionAlertMessageable {
+public protocol NFCNDEFMessageReaderSessionProtocol: NFCReaderSessionAfterBeginProtocol {
     #if canImport(CoreNFC)
     #endif
 }

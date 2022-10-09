@@ -10,7 +10,7 @@ extension NFCReader where TagType == NativeTag {
     public func read(
         pollingOption: NFCTagReaderSession.PollingOption,
         detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AlertMessageable) -> Void = { _ in },
+        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
         didDetect: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) throws {

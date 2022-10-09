@@ -12,12 +12,12 @@
 public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSessionCallbackHandleableObject {
     #if canImport(CoreNFC)
     public typealias TagType = NativeTag
-    public let didBecomeActiveHandler: ((_ session: TagType.ReaderSession.AlertMessageable) -> Void)
+    public let didBecomeActiveHandler: ((_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void)
     public let didInvalidateHandler: ((_ error: NFCReaderError) -> Void)
     public let didDetectHandler: ((_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult)
     
     init(
-        didBecomeActive: @Sendable @escaping (_: TagType.ReaderSession.AlertMessageable) -> Void,
+        didBecomeActive: @Sendable @escaping (_: TagType.ReaderSession.AfterBeginProtocol) -> Void,
         didInvalidate: @Sendable @escaping (_: NFCReaderError) -> Void,
         didDetect: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) {

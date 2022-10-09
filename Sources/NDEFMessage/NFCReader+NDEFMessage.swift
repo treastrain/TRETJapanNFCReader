@@ -10,7 +10,7 @@ extension NFCReader where TagType == NDEFMessage {
     public func read(
         invalidateAfterFirstRead: Bool,
         detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AlertMessageable) -> Void = { _ in },
+        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
         didDetectNDEFs: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ messages: TagType.ReaderSessionDetectObject) -> TagType.DetectResult
     ) throws {
