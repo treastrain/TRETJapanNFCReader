@@ -6,10 +6,13 @@
 //
 
 #if canImport(CoreNFC)
-public protocol NFCReaderSessionable: NFCReaderSession {
+public protocol NFCReaderSessionable: NFCReaderSessionProtocol {
     associatedtype Session
     associatedtype Delegate // TODO: inherit `NSObjectProtocol`
     associatedtype AfterBeginProtocol: Sendable
+    
+    var delegate: AnyObject? { get }
+    static var readingAvailable: Bool { get }
 }
 #endif
 

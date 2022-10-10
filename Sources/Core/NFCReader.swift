@@ -7,8 +7,8 @@
 
 public actor NFCReader<TagType: NFCTagType> {
     #if canImport(CoreNFC)
-    private var session: TagType.ReaderSession?
-    private var sessionDelegate: AnyObject?
+    private(set) var session: TagType.ReaderSession?
+    private(set) var sessionDelegate: AnyObject?
     #endif
     
     public init() {}
