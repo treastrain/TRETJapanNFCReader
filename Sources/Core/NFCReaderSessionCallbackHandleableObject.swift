@@ -39,17 +39,3 @@ extension NFCReaderSessionCallbackHandleableObject {
     }
 }
 #endif
-
-#if canImport(CoreNFC)
-extension NFCReaderSessionCallbackHandleableObject where TagType.ReaderSession.Delegate == NFCVASReaderSessionDelegate {
-    public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
-        // TODO: remove `as!`
-        didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)
-    }
-    
-    public nonisolated func readerSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
-        // TODO: remove `as!`
-        didInvalidateWithError(session as! TagType.ReaderSessionProtocol, error: error)
-    }
-}
-#endif
