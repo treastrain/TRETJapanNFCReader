@@ -47,7 +47,13 @@ extension NFCNDEFMessageReaderSessionCallbackHandleObject: NDEFMessage.ReaderSes
 
 extension NFCNDEFMessageReaderSessionCallbackHandleObject {
     func didDetectNDEFs(session: NFCNDEFReaderSession, messages: [NFCNDEFMessage]) async {
-        let result = try! await didDetectHandler(session, messages)
+        let result: TagType.DetectResult
+        do {
+            result = try await didDetectHandler(session, messages)
+        } catch {
+            assertionFailure("Due to protocol restrictions, an error can be thrown in `NFCNDEFMessageReaderSessionCallbackHandleObject.didDetectHandler`, but it is treated as a success.")
+            result = .success(alertMessage: nil)
+        }
         switch result {
         case .success(let alertMessage):
             if let alertMessage {
