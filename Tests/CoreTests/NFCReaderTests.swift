@@ -13,23 +13,23 @@ import CoreNFC
 @testable import TRETNFCKit_Core
 
 final class NFCReaderTests: XCTestCase {
-    /// `NFCReader.read(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `true` ならば `session` と `sessionDelegate` が `nil` ではなくなり、`session.alertMessage` に `String` が入り、`session.begin()` が1回呼ばれる
-    func testNFCReaderReadWhenTagTypeReaderSessionReadingAvailableIsTrue() async throws {
+    /// `NFCReader.begin(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `true` ならば `session` と `sessionDelegate` が `nil` ではなくなり、`session.alertMessage` に `String` が入り、`session.begin()` が1回呼ばれる
+    func testNFCReaderBeginWhenTagTypeReaderSessionReadingAvailableIsTrue() async throws {
         #if canImport(CoreNFC)
         let session = NFCTestReaderSessionReadingAvailable()
         let delegate = NFCTestReaderSessionDelegate()
         let alertMessage = "Detecting Alert Message"
         
         let reader = NFCReader<TestTag<NFCTestReaderSessionReadingAvailable>>()
-        try await reader.read(
+        try await reader.begin(
             sessionAndDelegate: { (session, delegate) },
             detectingAlertMessage: alertMessage
         )
         
-        let readerSessionOrNil = await reader.session
+        let readerSessionOrNil = await reader.sessionAndDelegate?.session
         let readerSession = try XCTUnwrap(readerSessionOrNil)
         XCTAssertEqual(readerSession, session)
-        let readerSessionDelegate = await reader.sessionDelegate
+        let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
         XCTAssertIdentical(readerSessionDelegate, delegate)
         let readerSessionAlertMessage = readerSession.alertMessage
         XCTAssertEqual(readerSessionAlertMessage, alertMessage)
@@ -40,24 +40,24 @@ final class NFCReaderTests: XCTestCase {
         #endif
     }
     
-    /// `NFCReader.read(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `false` ならば `NFCReaderError` が返ってくる
-    func testNFCReaderReadWhenTagTypeReaderSessionReadingAvailableIsFalse() async throws {
+    /// `NFCReader.begin(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `false` ならば `NFCReaderError` が返ってくる
+    func testNFCReaderBeginWhenTagTypeReaderSessionReadingAvailableIsFalse() async throws {
         #if canImport(CoreNFC)
         let session = NFCTestReaderSessionReadingUnavailable()
         let delegate = NFCTestReaderSessionDelegate()
         
         let reader = NFCReader<TestTag<NFCTestReaderSessionReadingUnavailable>>()
         do {
-            try await reader.read(
+            try await reader.begin(
                 sessionAndDelegate: { (session, delegate) },
                 detectingAlertMessage: "Detecting Alert Message"
             )
             XCTFail("The `NFCReaderErrorUnsupportedFeature` is not thrown.")
         } catch {
             XCTAssertEqual((error as! NFCReaderError).code, .readerErrorUnsupportedFeature)
-            let readerSession = await reader.session
+            let readerSession = await reader.sessionAndDelegate?.session
             XCTAssertNil(readerSession)
-            let readerSessionDelegate = await reader.sessionDelegate
+            let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
             XCTAssertNil(readerSessionDelegate)
         }
         #else
