@@ -13,13 +13,13 @@ extension NFCReader where TagType == NativeTag {
         didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
         didDetect: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
-    ) throws {
+    ) async throws {
         let delegate = NFCNativeTagReaderSessionCallbackHandleObject(
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
             didDetect: didDetect
         )
-        try read(
+        try await begin(
             sessionAndDelegate: {
                 // TODO: support the `queue`
                 guard let session = TagType.ReaderSession(pollingOption: pollingOption, delegate: delegate, queue: nil) else {
