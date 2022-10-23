@@ -13,13 +13,18 @@ extension NFCReader where TagType == NDEFMessage {
         didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
         didDetectNDEFs: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ messages: TagType.ReaderSessionDetectObject) -> TagType.DetectResult
-    ) throws {
+    ) async throws {
         let delegate = NFCNDEFMessageReaderSessionCallbackHandleObject(
             didBecomeActive: didBecomeActive,
-            didInvalidate: didInvalidate,
+            didInvalidate: { error in
+                didInvalidate(error)
+                Task {
+                    await self.invalidate()
+                }
+            },
             didDetectNDEFs: didDetectNDEFs
         )
-        try read(
+        try await begin(
             // TODO: support the `queue`
             sessionAndDelegate: { (.init(delegate: delegate, queue: nil, invalidateAfterFirstRead: invalidateAfterFirstRead), delegate) },
             detectingAlertMessage: detectingAlertMessage
