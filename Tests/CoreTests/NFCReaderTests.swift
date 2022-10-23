@@ -75,7 +75,6 @@ private enum TestTag<ReaderSession: NFCReaderSessionable>: NFCTagType {
 }
 
 private class NFCTestReaderSession: NSObject, NFCReaderSessionProtocol, @unchecked Sendable {
-    typealias Session = NFCTestReaderSessionReadingAvailable
     typealias Delegate = NFCTestReaderSessionDelegate
     
     var delegate: AnyObject?
@@ -90,10 +89,12 @@ private class NFCTestReaderSession: NSObject, NFCReaderSessionProtocol, @uncheck
 }
 
 private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession, NFCReaderSessionable {
+    typealias Session = NFCTestReaderSessionReadingAvailable
     static let readingAvailable = true
 }
 
 private final class NFCTestReaderSessionReadingUnavailable: NFCTestReaderSession, NFCReaderSessionable {
+    typealias Session = NFCTestReaderSessionReadingUnavailable
     static let readingAvailable = false
 }
 
