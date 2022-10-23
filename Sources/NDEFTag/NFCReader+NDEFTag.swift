@@ -15,7 +15,12 @@ extension NFCReader where TagType == NDEFTag {
     ) async throws {
         let delegate = NFCNDEFTagReaderSessionCallbackHandleObject(
             didBecomeActive: didBecomeActive,
-            didInvalidate: didInvalidate,
+            didInvalidate: { error in
+                didInvalidate(error)
+                Task {
+                    await self.invalidate()
+                }
+            },
             didDetect: didDetect
         )
         try await begin(
