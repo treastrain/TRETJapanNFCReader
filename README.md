@@ -1,3 +1,7 @@
+# 🏎️ Road to TRETNFCKit
+We are moving away from the pattern of delegation and are being reborn as something that can take advantage of Swift Concurrency.
+Please refer to this branch: [`tretnfckit-main`](https://github.com/treastrain/TRETJapanNFCReader/tree/tretnfckit-main)
+
 ![](TRETJapanNFCReader.png)
 
 # TRETJapanNFCReader
