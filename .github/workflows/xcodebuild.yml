@@ -12,7 +12,7 @@ env:
   IOS_SIMULATOR_NAME: iPhone 14 Pro
   TVOS_SIMULATOR_NAME: Apple TV 4K (2nd generation)
   WATCHOS_SIMULATOR_NAME: Apple Watch Ultra (49mm)
-  XCODE_SELECT_PATH: '/Applications/Xcode_14.0.app/Contents/Developer'
+  XCODE_SELECT_PATH: '/Applications/Xcode_14.1.app/Contents/Developer'
 
 jobs:
   show_software_information:
