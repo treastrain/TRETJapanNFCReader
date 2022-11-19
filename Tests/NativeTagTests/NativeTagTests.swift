@@ -16,7 +16,7 @@ import CoreNFC
 final class NativeTagTests: XCTestCase {
     /// `NFCReader<NativeTag>.read(pollingOption:detectingAlertMessage:didBecomeActive:didInvalidate:didDetect:)` を呼んだとき、`pollingOption` の要素数が `0` なら `NFCReaderErrorInvalidParameter` のエラーが返ってくる
     func testNativeTagNFCReaderReadWhenPollingOptionIsEmpty() async throws {
-        #if canImport(CoreNFC)
+        #if canImport(CoreNFC) && !targetEnvironment(macCatalyst)
         let alertMessage = "Detecting Alert Message"
         
         let reader = NFCReader<NativeTag>()
@@ -37,7 +37,7 @@ final class NativeTagTests: XCTestCase {
     
     /// `NFCReader<NativeTag>.read(pollingOption:detectingAlertMessage:didBecomeActive:didInvalidate:didDetect:)` を呼んだとき、`pollingOption` の要素数が `1` なら処理に成功する
     func testNativeTagNFCReaderReadWithOnePollingOption() async throws {
-        #if canImport(CoreNFC)
+        #if canImport(CoreNFC) && !targetEnvironment(macCatalyst)
         let alertMessage = "Detecting Alert Message"
         
         let reader = NFCReader<NativeTag>()
@@ -54,7 +54,7 @@ final class NativeTagTests: XCTestCase {
     
     /// `NFCReader<NativeTag>.read(pollingOption:detectingAlertMessage:didBecomeActive:didInvalidate:didDetect:)` を呼んだとき、`pollingOption` の要素数が `2` 以上なら処理に成功する
     func testNativeTagNFCReaderReadWithMultiplePollingOptions() async throws {
-        #if canImport(CoreNFC)
+        #if canImport(CoreNFC) && !targetEnvironment(macCatalyst)
         let alertMessage = "Detecting Alert Message"
         
         let reader = NFCReader<NativeTag>()
