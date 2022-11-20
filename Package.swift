@@ -41,7 +41,7 @@ add(moduleName: "NDEFMessage", dependencies: [core], includesTest: true)
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: true)
 
 // MARK: - Modules - Secondary
-add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: false)
+add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: true)
 
 // MARK: - Package
 products.append(
