@@ -8,7 +8,7 @@
 public enum NativeTag: NFCTagType {
     #if canImport(CoreNFC)
     public typealias ReaderSession = NFCTagReaderSession
-    public typealias ReaderSessionProtocol = NFCNativeTagReaderSessionProtocol
+    public typealias ReaderSessionProtocol = any NFCNativeTagReaderSessionProtocol
     public typealias ReaderSessionDetectObject = [NFCTag]
     #endif
 }

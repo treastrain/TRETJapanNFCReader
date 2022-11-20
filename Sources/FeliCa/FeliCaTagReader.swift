@@ -8,7 +8,7 @@
 public typealias FeliCaTagReader = NFCReader<NativeTag>
 
 extension FeliCaTagReader {
-    public typealias ReaderSessionProtocol = FeliCaTagReaderSessionProtocol
+    public typealias ReaderSessionProtocol = any FeliCaTagReaderSessionProtocol
 }
 
 extension FeliCaTagReader {
@@ -24,7 +24,7 @@ extension FeliCaTagReader {
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
-            didDetect: { try await didDetect($0 as! FeliCaTagReaderSessionProtocol, $1) }
+            didDetect: { try await didDetect($0 as! any FeliCaTagReaderSessionProtocol, $1) }
         )
     }
     #endif
