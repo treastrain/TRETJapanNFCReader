@@ -9,7 +9,7 @@ public protocol FeliCaTagReaderSessionProtocol: NFCNativeTagReaderSessionProtoco
 
 extension FeliCaTagReaderSessionProtocol {
     #if canImport(CoreNFC)
-    public func connectAsFeliCaTag(to tag: NFCTag) async throws -> NFCFeliCaTag {
+    public func connectAsFeliCaTag(to tag: NFCTag) async throws -> any NFCFeliCaTag {
         guard case .feliCa(let feliCaTag) = tag else {
             throw NFCReaderError(.readerErrorInvalidParameter)
         }

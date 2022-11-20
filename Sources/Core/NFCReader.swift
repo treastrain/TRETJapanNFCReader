@@ -12,7 +12,7 @@ public actor NFCReader<TagType: NFCTagType> {
             NotificationCenter.default.post(name: .didChangeNFCReaderSessionAndDelegate, object: sessionAndDelegateChangedObserver, userInfo: [.isNilSessionAndDelegate: sessionAndDelegate == nil])
         }
     }
-    private var sessionAndDelegateChangedObserver: NSObjectProtocol?
+    private var sessionAndDelegateChangedObserver: (any NSObjectProtocol)?
     #endif
     
     public init() {}
