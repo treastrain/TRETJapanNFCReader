@@ -9,3 +9,4 @@
 @_exported import TRETNFCKit_NativeTag
 @_exported import TRETNFCKit_NDEFMessage
 @_exported import TRETNFCKit_NDEFTag
+@_exported import TRETNFCKit_FeliCa
