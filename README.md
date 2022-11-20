@@ -24,22 +24,41 @@ A wrapper for Core NFC and a useful helper when using NFC, leveraging Swift feat
 - ✅ Support Swift Concurrency (async/await, Actor, Sendable)
 
 ## Native Tags (ISO 7816-compatible & MIFARE (NFC-A/B), FeliCa (NFC-F), etc.)
+### FeliCa (NFC-F)
+```swift
+let reader: FeliCaTagReader()
+try await reader.read(
+    detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
+    didDetect: { session, tags in
+        let tag = tags.first!
+        let feliCaTag = try await session.connectAsFeliCaTag(to: tag)
+        let (statusFlag1, statusFlag2, blockData) = try await feliCaTag.readWithoutEncryption(serviceCodeList: /* ... */, blockList: /* ... */)
+        print(statusFlag1, statusFlag2, blockData)
+        return .success(alertMessage: "Done!")
+    }
+}
+```
+
+### Use directly
 ```swift
 let reader = NFCReader<NativeTag>()
-// e.g. FeliCa
 try await reader.read(
-    pollingOption: .iso18092,
+    pollingOption: [.iso14443, .iso15693, .iso18092], // You can combine options to have the reader session scan and detect different tag types at the same time.
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
     didDetect: { session, tags in
         let tag = tags.first!
         try await session.connect(to: tag)
-        guard case .feliCa(let feliCaTag) = tag else {
-            return .restartPolling(alertMessage: "No FeliCa tag.")
+        switch tag {
+        case .feliCa(let feliCaTag):
+            session.alertMessage = "FeliCa\n\(feliCaTag.currentIDm as NSData)"
+        case .iso7816(let iso7816Tag):
+            session.alertMessage = "ISO14443-4 type A / B tag with ISO7816\n\(iso7816Tag.identifier as NSData)"
+        case .iso15693(let iso15693Tag):
+            session.alertMessage = "ISO 15693\n\(iso15693Tag.identifier as NSData)"
+        case .miFare(let miFareTag):
+            session.alertMessage = "MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443\n\(miFareTag.identifier as NSData)"
         }
-        print(feliCaTag.currentIDm)
-        let (statusFlag1, statusFlag2, blockData) = try await feliCaTag.readWithoutEncryption(serviceCodeList: /* ... */, blockList: /* ... */)
-        print(statusFlag1, statusFlag2, blockData)
-        return .success(alertMessage: "Done!")
+        return .success
     }
 )
 ```

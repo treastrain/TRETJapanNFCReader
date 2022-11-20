@@ -25,8 +25,11 @@ struct TRETNFCKitExampleApp: App {
                     }
                     
                     Section {
-                        NavigationLink("FeliCa") {
+                        NavigationLink("Multiple") {
                             NFCNativeTagReaderExampleView()
+                        }
+                        NavigationLink("FeliCa") {
+                            NFCFeliCaTagReaderExampleView()
                         }
                     } header: {
                         Text("Native")
