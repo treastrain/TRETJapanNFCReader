@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+	<array>
+		<string>A0000002310100000000000000000000</string>
+		<string>A0000002310200000000000000000000</string>
+		<string>A0000002480300000000000000000000</string>
+		<string>D392F000260100000001</string>
+		<string>D3921000310001010100</string>
+		<string>D3921000310001010401</string>
+		<string>D3921000310001010402</string>
+		<string>D3921000310001010408</string>
+	</array>
 	<key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
 	<array>
 		<string>FE00</string>
