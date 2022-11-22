@@ -23,7 +23,7 @@ A wrapper for Core NFC and a useful helper when using NFC, leveraging Swift feat
   - By using this wrapper, it can be converted to a closure pattern compatible with Swift Concurrency, and the Swift syntax prevents forgetting to call the necessary commands.
 - ✅ Support Swift Concurrency (async/await, Actor, Sendable)
 
-## Native Tags (ISO 7816-compatible & MIFARE (NFC-A/B), FeliCa (NFC-F), etc.)
+## Native Tags (FeliCa (NFC-F), ISO 7816-compatible & MIFARE (NFC-A/B), etc.)
 ### FeliCa (NFC-F)
 ```swift
 let reader: FeliCaTagReader()
@@ -34,6 +34,21 @@ try await reader.read(
         let feliCaTag = try await session.connectAsFeliCaTag(to: tag)
         let (statusFlag1, statusFlag2, blockData) = try await feliCaTag.readWithoutEncryption(serviceCodeList: /* ... */, blockList: /* ... */)
         print(statusFlag1, statusFlag2, blockData)
+        return .success(alertMessage: "Done!")
+    }
+}
+```
+
+### ISO 7816-compatible (NFC-A/B)
+```swift
+let reader: ISO7816TagReader()
+try await reader.read(
+    detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
+    didDetect: { session, tags in
+        let tag = tags.first!
+        let iso7816Tag = try await session.connectAsISO7816Tag(to: tag)
+        print(iso7816Tag.identifier)
+        // ...
         return .success(alertMessage: "Done!")
     }
 }

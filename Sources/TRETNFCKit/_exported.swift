@@ -10,3 +10,4 @@
 @_exported import TRETNFCKit_NDEFMessage
 @_exported import TRETNFCKit_NDEFTag
 @_exported import TRETNFCKit_FeliCa
+@_exported import TRETNFCKit_ISO7816
