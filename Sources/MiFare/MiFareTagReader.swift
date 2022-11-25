@@ -8,7 +8,7 @@
 public typealias MiFareTagReader = NFCReader<NativeTag>
 
 extension MiFareTagReader {
-    public typealias ReaderSessionProtocol = MiFareTagReaderSessionProtocol
+    public typealias ReaderSessionProtocol = any MiFareTagReaderSessionProtocol
 }
 
 extension MiFareTagReader {
