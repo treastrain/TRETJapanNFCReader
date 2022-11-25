@@ -16,6 +16,7 @@
 		CBC1AAB9292D0EED00084F60 /* NFCISO7816TagReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC1AAB8292D0EED00084F60 /* NFCISO7816TagReaderExampleView.swift */; };
 		CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */; };
 		CBE893EC2931403C0048FB4A /* NFCISO15693TagReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE893EB2931403C0048FB4A /* NFCISO15693TagReaderExampleView.swift */; };
+		CBE893EE29314BFC0048FB4A /* NFCMiFareTagReaderExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE893ED29314BFC0048FB4A /* NFCMiFareTagReaderExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CBC1AAB8292D0EED00084F60 /* NFCISO7816TagReaderExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFCISO7816TagReaderExampleView.swift; sourceTree = "<group>"; };
 		CBC4D9BA28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCNDEFMessageReaderExampleView.swift; sourceTree = "<group>"; };
 		CBE893EB2931403C0048FB4A /* NFCISO15693TagReaderExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFCISO15693TagReaderExampleView.swift; sourceTree = "<group>"; };
+		CBE893ED29314BFC0048FB4A /* NFCMiFareTagReaderExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFCMiFareTagReaderExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				CB195749292A8E80007A5033 /* NFCFeliCaTagReaderExampleView.swift */,
 				CBC1AAB8292D0EED00084F60 /* NFCISO7816TagReaderExampleView.swift */,
 				CBE893EB2931403C0048FB4A /* NFCISO15693TagReaderExampleView.swift */,
+				CBE893ED29314BFC0048FB4A /* NFCMiFareTagReaderExampleView.swift */,
 				CBBF3F6C28D8C377009D3E0E /* Assets.xcassets */,
 			);
 			path = TRETNFCKitExample;
@@ -176,6 +179,7 @@
 				CBC1AAB9292D0EED00084F60 /* NFCISO7816TagReaderExampleView.swift in Sources */,
 				CB881B8828DE0C8900B61FE9 /* NFCNDEFTagReaderExampleView.swift in Sources */,
 				CBC4D9BB28DDDAE300DA7042 /* NFCNDEFMessageReaderExampleView.swift in Sources */,
+				CBE893EE29314BFC0048FB4A /* NFCMiFareTagReaderExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
