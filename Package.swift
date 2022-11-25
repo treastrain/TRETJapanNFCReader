@@ -43,6 +43,7 @@ add(moduleName: "NDEFTag", dependencies: [core], includesTest: true)
 // MARK: - Modules - Secondary
 add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: true)
 add(moduleName: "ISO7816", dependencies: [nativeTag], includesTest: true)
+add(moduleName: "ISO15693", dependencies: [nativeTag], includesTest: true)
 
 // MARK: - Package
 products.append(

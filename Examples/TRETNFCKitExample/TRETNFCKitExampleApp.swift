@@ -34,6 +34,9 @@ struct TRETNFCKitExampleApp: App {
                         NavigationLink("ISO 7816-compatible") {
                             NFCISO7816TagReaderExampleView()
                         }
+                        NavigationLink("ISO 15693-compatible") {
+                            NFCISO15693TagReaderExampleView()
+                        }
                     } header: {
                         Text("Native")
                     }
