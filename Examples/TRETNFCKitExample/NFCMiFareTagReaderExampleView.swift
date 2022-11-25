@@ -19,7 +19,7 @@ struct NFCMiFareTagReaderExampleView: View {
                 Text("Read")
             }
         }
-        .navigationTitle("ISO 15693-compatible")
+        .navigationTitle("MiFare")
     }
 }
 
