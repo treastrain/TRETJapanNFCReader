@@ -44,7 +44,7 @@ add(moduleName: "NDEFTag", dependencies: [core], includesTest: true)
 add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: true)
 add(moduleName: "ISO7816", dependencies: [nativeTag], includesTest: true)
 add(moduleName: "ISO15693", dependencies: [nativeTag], includesTest: true)
-add(moduleName: "MiFare", dependencies: [nativeTag], includesTest: false)
+add(moduleName: "MiFare", dependencies: [nativeTag], includesTest: true)
 
 // MARK: - Package
 products.append(
