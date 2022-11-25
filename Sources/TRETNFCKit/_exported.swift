@@ -12,3 +12,4 @@
 @_exported import TRETNFCKit_FeliCa
 @_exported import TRETNFCKit_ISO7816
 @_exported import TRETNFCKit_ISO15693
+@_exported import TRETNFCKit_MiFare

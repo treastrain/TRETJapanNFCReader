@@ -8,7 +8,7 @@
 public typealias ISO7816TagReader = NFCReader<NativeTag>
 
 extension ISO7816TagReader {
-    public typealias ReaderSessionProtocol = ISO7816TagReaderSessionProtocol
+    public typealias ReaderSessionProtocol = any ISO7816TagReaderSessionProtocol
 }
 
 extension ISO7816TagReader {
