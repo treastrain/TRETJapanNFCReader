@@ -13,3 +13,4 @@
 @_exported import TRETNFCKit_ISO7816
 @_exported import TRETNFCKit_ISO15693
 @_exported import TRETNFCKit_MiFare
+@_exported import TRETNFCKit_InfoPListChecker

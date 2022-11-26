@@ -34,6 +34,9 @@ func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTes
     return target
 }
 
+// MARK: - Modules - Tools for DEBUG
+add(moduleName: "InfoPListChecker", includesTest: false)
+
 // MARK: - Modules - Primary
 let core = add(moduleName: "Core", includesTest: true)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: true)
