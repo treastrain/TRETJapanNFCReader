@@ -35,10 +35,10 @@ func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTes
 }
 
 // MARK: - Modules - Tools for DEBUG
-add(moduleName: "InfoPListChecker", includesTest: false)
+let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false)
 
 // MARK: - Modules - Primary
-let core = add(moduleName: "Core", includesTest: true)
+let core = add(moduleName: "Core", dependencies: [infoPListChecker], includesTest: true)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: true)
 add(moduleName: "NDEFMessage", dependencies: [core], includesTest: true)
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: true)

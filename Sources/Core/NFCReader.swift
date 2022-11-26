@@ -5,6 +5,8 @@
 //  Created by treastrain on 2022/09/24.
 //
 
+import TRETNFCKit_InfoPListChecker
+
 public actor NFCReader<TagType: NFCTagType> {
     #if canImport(CoreNFC)
     private(set) var sessionAndDelegate: (session: TagType.ReaderSession, delegate: AnyObject)? {
@@ -25,9 +27,30 @@ extension NFCReader {
         detectingAlertMessage: String
     ) async throws {
         guard TagType.ReaderSession.readingAvailable else {
+            #if DEBUG
+            print("""
+            -------------------------------------------------------------------------
+            ⚠️ Developer Tips from TRETNFCKit (only visible in DEBUG builds) ⚠️
+            Could not start NFC scan. Please check if your device supports "NFC with reader mode". If your device supports "NFC with reader mode" but you still receive this message, please check the following:
+            \t• This message may appear when NFC is being used by another application or when you have just finished using NFC.
+            \t• Select the iOS Application under development from the project's TARGET and enable "Near Field Communication Tag Reading" under "Signing & Capabilities" ("Near Field Communication Tag Reader Session Formats (com.apple.developer.nfc.readersession.formats)" must be included in the entitlements file).
+            \t\t‣ Make sure "Near Field Communication Tag Reader Session Formats (com.apple.developer.nfc.readersession.formats)" contains valid values.
+            \t• Add "Privacy - NFC Scan Usage Description (NFCReaderUsageDescription)" to the Info.plist of the iOS application you are developing. Failure to add this will result in a "Signal SIGABRT" error at runtime.
+            If the above procedure does not improve the situation, also suspect a problem with the NFC module of the device.
+            -------------------------------------------------------------------------
+            """)
+            #endif
             // FIXME: set the `userInfo`
             throw NFCReaderError(.readerErrorUnsupportedFeature)
         }
+        
+        #if DEBUG
+        do {
+            try InfoPListChecker.main.checkNFCReaderUsageDescription()
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+        #endif
         
         await withCheckedContinuation { [sessionAndDelegate] continuation in
             guard sessionAndDelegate != nil else { return continuation.resume() }
