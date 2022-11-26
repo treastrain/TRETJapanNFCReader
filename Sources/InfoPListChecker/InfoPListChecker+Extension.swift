@@ -12,3 +12,12 @@ extension Bundle {
         object(forInfoDictionaryKey: "\(key.key)") as? T
     }
 }
+
+extension InfoPListChecker {
+    public func checkNFCReaderUsageDescription() throws {
+        let key = InfoPListKey.nfcReaderUsageDescription
+        let result = bundle.object(forInfoDictionaryKey: key) != nil
+        print(results: [(label: "\t• \(key.key)", result: result)])
+        if !result { throw InfoPListChecker.Error.noRequiredValuesInInfoPlist }
+    }
+}
