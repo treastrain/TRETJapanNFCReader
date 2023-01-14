@@ -11,8 +11,19 @@ import CoreNFC
 #endif
 
 @testable import TRETNFCKit_Core
+@testable @_spi(AssertServices) import TRETNFCKit_AssertServices
 
 final class NFCReaderTests: XCTestCase {
+    override class func setUp() {
+        super.setUp()
+        AssertServices.assertionFailureHandler = { _, _, _ in }
+    }
+    
+    override class func tearDown() {
+        super.tearDown()
+        AssertServices.assertionFailureHandler = AssertServices.assertionFailureDefaultHandler
+    }
+    
     /// `NFCReader.begin(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `true` ならば `session` と `sessionDelegate` が `nil` ではなくなり、`session.alertMessage` に `String` が入り、`session.begin()` が1回呼ばれる
     func testNFCReaderBeginWhenTagTypeReaderSessionReadingAvailableIsTrue() async throws {
         #if canImport(CoreNFC)
