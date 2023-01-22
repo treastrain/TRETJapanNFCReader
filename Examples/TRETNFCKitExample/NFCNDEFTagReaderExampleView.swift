@@ -9,16 +9,42 @@ import SwiftUI
 import TRETNFCKit_NDEFTag
 
 struct NFCNDEFTagReaderExampleView: View {
+    @State private var isPresented = false
     @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
         List {
+            Button {
+                isPresented = true
+            } label: {
+                Text("Read (using view modifier)")
+            }
             Button {
                 viewModel.read()
             } label: {
                 Text("Read")
             }
         }
+        .nfcNDEFTagReader(
+            isPresented: $isPresented,
+            detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
+            onBeginReadingError: { error in
+                print(error)
+            },
+            didBecomeActive: { session in
+                print(session.alertMessage)
+            },
+            didInvalidate: { error in
+                print(error)
+            },
+            didDetectNDEFs: { session, tags in
+                let tag = tags.first!
+                try await session.connect(to: tag)
+                let message = try await tag.readNDEF()
+                session.alertMessage = "\(message)"
+                return .success
+            }
+        )
         .navigationTitle("NDEF Tag")
     }
 }
