@@ -62,6 +62,7 @@ extension NFCReader {
                 }
             }
         }
+        try Task.checkCancellation()
         
         let sessionAndDelegate = try throwingSessionAndDelegate()
         self.sessionAndDelegate = (sessionAndDelegate.session, sessionAndDelegate.delegate as AnyObject)
