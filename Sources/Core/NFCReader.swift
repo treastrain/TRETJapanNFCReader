@@ -70,7 +70,10 @@ extension NFCReader {
     }
     
     public func invalidate() {
-        self.sessionAndDelegate = nil
+        if sessionAndDelegate?.session.isReady == false {
+            sessionAndDelegate?.session.invalidate()
+        }
+        sessionAndDelegate = nil
     }
     #endif
 }
