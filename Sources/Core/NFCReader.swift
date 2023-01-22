@@ -62,6 +62,7 @@ extension NFCReader {
                 }
             }
         }
+        try Task.checkCancellation()
         
         let sessionAndDelegate = try throwingSessionAndDelegate()
         self.sessionAndDelegate = (sessionAndDelegate.session, sessionAndDelegate.delegate as AnyObject)
@@ -70,7 +71,10 @@ extension NFCReader {
     }
     
     public func invalidate() {
-        self.sessionAndDelegate = nil
+        if sessionAndDelegate?.session.isReady == false {
+            sessionAndDelegate?.session.invalidate()
+        }
+        sessionAndDelegate = nil
     }
     #endif
 }
