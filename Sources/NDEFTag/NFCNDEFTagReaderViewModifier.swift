@@ -22,10 +22,10 @@ public struct NFCNDEFTagReaderViewModifier: @unchecked Sendable {
     public init(
         isPresented: Binding<Bool>,
         detectingAlertMessage: String,
-        onBeginReadingError: @Sendable @escaping (Error) -> Void,
-        didBecomeActive: @Sendable @escaping (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void,
-        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void,
-        didDetectNDEFs: @Sendable @escaping (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult
+        onBeginReadingError: @escaping @Sendable (Error) -> Void,
+        didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void,
+        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void,
+        didDetectNDEFs: @escaping @Sendable (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult
     ) {
         self.isPresented = isPresented
         self.detectingAlertMessage = detectingAlertMessage
@@ -41,7 +41,7 @@ extension NFCNDEFTagReaderViewModifier {
         private var reader: NFCReader<NDEFTag>?
         private var currentTask: Task<(), Never>?
         
-        func read(detectingAlertMessage: String, onBeginReadingError: @Sendable @escaping (Error) -> Void, didBecomeActive: @Sendable @escaping (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @Sendable @escaping (NFCReaderError) -> Void, didDetectNDEFs: @Sendable @escaping (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult) {
+        func read(detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetectNDEFs: @escaping @Sendable (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult) {
             cancel()
             currentTask = Task {
                 await withTaskCancellationHandler {
@@ -109,10 +109,10 @@ extension View {
     public func nfcNDEFTagReader(
         isPresented: Binding<Bool>,
         detectingAlertMessage: String,
-        onBeginReadingError: @Sendable @escaping (Error) -> Void,
-        didBecomeActive: @Sendable @escaping (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void,
-        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void,
-        didDetectNDEFs: @Sendable @escaping (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult
+        onBeginReadingError: @escaping @Sendable (Error) -> Void,
+        didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void,
+        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void,
+        didDetectNDEFs: @escaping @Sendable (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult
     ) -> some View {
         modifier(
             NFCNDEFTagReaderViewModifier(
