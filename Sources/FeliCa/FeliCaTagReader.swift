@@ -24,7 +24,7 @@ extension FeliCaTagReader {
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
-            didDetect: { try await didDetect($0 as! any FeliCaTagReaderSessionProtocol, $1) }
+            didDetect: { try await didDetect($0 as! ReaderSessionProtocol, $1) }
         )
     }
     #endif

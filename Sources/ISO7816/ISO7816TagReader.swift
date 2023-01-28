@@ -24,7 +24,7 @@ extension ISO7816TagReader {
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
-            didDetect: { try await didDetect($0 as! ISO7816TagReaderSessionProtocol, $1) }
+            didDetect: { try await didDetect($0 as! ReaderSessionProtocol, $1) }
         )
     }
     #endif
