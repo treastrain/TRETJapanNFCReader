@@ -20,7 +20,9 @@ struct NFCNDEFMessageReaderExampleView: View {
                 Text("Read (using view modifier)")
             }
             Button {
-                viewModel.read()
+                Task {
+                    try await viewModel.read()
+                }
             } label: {
                 Text("Read")
             }
@@ -51,24 +53,22 @@ extension NFCNDEFMessageReaderExampleView {
     final class ViewModel: ObservableObject {
         private var reader: NFCReader<NDEFMessage>!
         
-        func read() {
-            Task {
-                reader = .init()
-                try await reader.read(
-                    invalidateAfterFirstRead: false,
-                    detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                    didBecomeActive: { session in
-                        print(session)
-                    },
-                    didInvalidate: { error in
-                        print(error)
-                    },
-                    didDetectNDEFs: { session, messages in
-                        print(messages)
-                        return .success(alertMessage: "Done!")
-                    }
-                )
-            }
+        func read() async throws {
+            reader = .init()
+            try await reader.read(
+                invalidateAfterFirstRead: false,
+                detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
+                didBecomeActive: { session in
+                    print(session)
+                },
+                didInvalidate: { error in
+                    print(error)
+                },
+                didDetectNDEFs: { session, messages in
+                    print(messages)
+                    return .success(alertMessage: "Done!")
+                }
+            )
         }
     }
 }

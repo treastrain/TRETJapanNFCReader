@@ -17,9 +17,9 @@ public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderS
     public let didDetectHandler: ((_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult)
     
     init(
-        didBecomeActive: @Sendable @escaping (_: TagType.ReaderSession.AfterBeginProtocol) -> Void,
-        didInvalidate: @Sendable @escaping (_: NFCReaderError) -> Void,
-        didDetect: @Sendable @escaping (_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
+        didBecomeActive: @escaping @Sendable (_: TagType.ReaderSession.AfterBeginProtocol) -> Void,
+        didInvalidate: @escaping @Sendable (_: NFCReaderError) -> Void,
+        didDetect: @escaping @Sendable (_ session: TagType.ReaderSessionProtocol, _ object: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) {
         self.didBecomeActiveHandler = didBecomeActive
         self.didInvalidateHandler = didInvalidate

@@ -15,16 +15,16 @@ extension ISO7816TagReader {
     #if canImport(CoreNFC)
     public func read(
         detectingAlertMessage: String,
-        didBecomeActive: @Sendable @escaping (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
-        didInvalidate: @Sendable @escaping (NFCReaderError) -> Void = { _ in },
-        didDetect: @Sendable @escaping (_ session: ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
+        didBecomeActive: @escaping @Sendable (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
+        didDetect: @escaping @Sendable (_ session: ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) async throws {
         try await read(
             pollingOption: .iso14443,
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
-            didDetect: { try await didDetect($0 as! ISO7816TagReaderSessionProtocol, $1) }
+            didDetect: { try await didDetect($0 as! ReaderSessionProtocol, $1) }
         )
     }
     #endif
