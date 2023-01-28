@@ -20,7 +20,9 @@ struct NFCISO7816TagReaderExampleView: View {
                 Text("Read (using view modifier)")
             }
             Button {
-                viewModel.read()
+                Task {
+                    try await viewModel.read()
+                }
             } label: {
                 Text("Read")
             }
@@ -52,18 +54,23 @@ extension NFCISO7816TagReaderExampleView {
     final class ViewModel : ObservableObject {
         private var reader: ISO7816TagReader!
         
-        func read() {
-            Task {
-                reader = .init()
-                try await reader.read(detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.") { session in
+        func read() async throws {
+            reader = .init()
+            try await reader.read(
+                detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
+                didBecomeActive: { session in
                     print(session.alertMessage)
-                } didDetect: { session, tags in
+                },
+                didInvalidate: { error in
+                    print(error)
+                },
+                didDetect: { session, tags in
                     let tag = tags.first!
                     let iso7816Tag = try await session.connectAsISO7816Tag(to: tag)
                     session.alertMessage = "\(iso7816Tag.identifier as NSData)"
                     return .success
                 }
-            }
+            )
         }
     }
 }
