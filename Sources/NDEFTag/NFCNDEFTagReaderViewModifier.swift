@@ -22,9 +22,9 @@ public struct NFCNDEFTagReaderViewModifier: @unchecked Sendable {
     public init(
         isPresented: Binding<Bool>,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (Error) -> Void,
-        didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void,
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void,
+        onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
+        didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
         didDetectNDEFs: @escaping @Sendable (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult
     ) {
         self.isPresented = isPresented
@@ -109,9 +109,9 @@ extension View {
     public func nfcNDEFTagReader(
         isPresented: Binding<Bool>,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (Error) -> Void,
-        didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void,
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void,
+        onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
+        didBecomeActive: @escaping @Sendable (NDEFTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
         didDetectNDEFs: @escaping @Sendable (NDEFTag.ReaderSessionProtocol, NDEFTag.ReaderSessionDetectObject) async throws -> NDEFTag.DetectResult
     ) -> some View {
         modifier(

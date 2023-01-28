@@ -24,9 +24,9 @@ public struct NFCNDEFMessageReaderViewModifier: @unchecked Sendable {
         isPresented: Binding<Bool>,
         invalidateAfterFirstRead: Bool,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (Error) -> Void,
-        didBecomeActive: @escaping @Sendable (_ session: NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void,
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void,
+        onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
+        didBecomeActive: @escaping @Sendable (_ session: NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
         didDetectNDEFs: @escaping @Sendable (NDEFMessage.ReaderSessionProtocol, NDEFMessage.ReaderSessionDetectObject)  -> NDEFMessage.DetectResult
     ) {
         self.isPresented = isPresented
@@ -115,7 +115,7 @@ extension View {
         isPresented: Binding<Bool>,
         invalidateAfterFirstRead: Bool,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (Error) -> Void,
+        onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
         didDetectNDEFs: @escaping @Sendable (NDEFMessage.ReaderSessionProtocol, NDEFMessage.ReaderSessionDetectObject)  -> NDEFMessage.DetectResult
