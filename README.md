@@ -30,7 +30,7 @@ A wrapper for Core NFC and a useful helper when using NFC, leveraging Swift feat
 ```swift
 import TRETNFCKit_FeliCa
 
-let reader: FeliCaTagReader()
+let reader = FeliCaTagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
     didDetect: { session, tags in
@@ -66,7 +66,7 @@ Text("some view")
 ```swift
 import TRETNFCKit_ISO7816
 
-let reader: ISO7816TagReader()
+let reader = ISO7816TagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
     didDetect: { session, tags in
@@ -102,7 +102,7 @@ Text("some view")
 ```swift
 import TRETNFCKit_ISO15693
 
-let reader: ISO15693TagReader()
+let reader = ISO15693TagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
     didDetect: { session, tags in
@@ -138,7 +138,7 @@ Text("some view")
 ```swift
 import TRETNFCKit_MiFare
 
-let reader: MiFareTagReader()
+let reader = MiFareTagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
     didDetect: { session, tags in
