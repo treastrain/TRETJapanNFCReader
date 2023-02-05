@@ -14,22 +14,43 @@ import CoreNFC
 @testable import TRETNFCKit_ISO7816
 
 final class ISO7816TagReaderTests: XCTestCase {
-    func testISO7816TagReaderReadDetectingAlertMessageDidBecomeActiveDidInvalidateDidDetect() async throws {
+    func testISO7816TagReaderReadTaskPriorityDetectingAlertMessageDidBecomeActiveDidInvalidateDidDetect() async throws {
         #if canImport(CoreNFC) && !targetEnvironment(macCatalyst)
+        let didBecomeActiveExpectation = expectation(description: "didBecomeActive")
+        let didInvalidateExpectation = expectation(description: "didInvalidate")
+        didInvalidateExpectation.expectedFulfillmentCount = 2
+        let didDetectExpectation = expectation(description: "didDetect")
+        
         let alertMessage = "Detecting Alert Message"
         
         let reader = ISO7816TagReader()
         try await reader.read(
+            taskPriority: nil,
             detectingAlertMessage: alertMessage,
-            didBecomeActive: { _ in },
-            didInvalidate: { _ in },
-            didDetect: { _, _ in .none }
+            didBecomeActive: { session in
+                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NativeTag.ReaderSession>.size)
+                didBecomeActiveExpectation.fulfill()
+            },
+            didInvalidate: { error in
+                XCTAssertEqual(error.code, .readerErrorUnsupportedFeature)
+                didInvalidateExpectation.fulfill()
+            },
+            didDetect: { _, _ in
+                didDetectExpectation.fulfill()
+                return .none
+            }
         )
         let readerSessionOrNil = await reader.sessionAndDelegate?.session
         let readerSession = try XCTUnwrap(readerSessionOrNil)
         XCTAssertEqual(readerSession.alertMessage, alertMessage)
         let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
         XCTAssertNotNil(readerSessionDelegate)
+        
+        let object = readerSessionDelegate as! NFCNativeTagReaderSessionCallbackHandleObject
+        object.tagReaderSessionDidBecomeActive(readerSession)
+        object.tagReaderSession(readerSession, didDetect: [])
+        
+        await waitForExpectations(timeout: 0.01)
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif
