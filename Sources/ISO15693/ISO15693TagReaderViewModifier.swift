@@ -11,6 +11,7 @@ import SwiftUI
 
 public struct ISO15693TagReaderViewModifier: @unchecked Sendable {
     private var isPresented: Binding<Bool>
+    private let taskPriority: TaskPriority?
     private let detectingAlertMessage: String
     private let onBeginReadingError: @Sendable (Error) -> Void
     private let didBecomeActive: @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void
@@ -21,6 +22,7 @@ public struct ISO15693TagReaderViewModifier: @unchecked Sendable {
     
     public init(
         isPresented: Binding<Bool>,
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
@@ -28,6 +30,7 @@ public struct ISO15693TagReaderViewModifier: @unchecked Sendable {
         didDetect: @escaping @Sendable (_ session: ISO15693TagReader.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult
     ) {
         self.isPresented = isPresented
+        self.taskPriority = taskPriority
         self.detectingAlertMessage = detectingAlertMessage
         self.onBeginReadingError = onBeginReadingError
         self.didBecomeActive = didBecomeActive
@@ -41,13 +44,14 @@ extension ISO15693TagReaderViewModifier {
         private var reader: ISO15693TagReader?
         private var currentTask: Task<(), Never>?
         
-        func read(detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (_ session: ISO15693TagReader.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult) {
+        func read(taskPriority: TaskPriority?, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (_ session: ISO15693TagReader.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult) {
             cancel()
             currentTask = Task {
                 await withTaskCancellationHandler {
                     reader = .init()
                     do {
                         try await reader?.read(
+                            taskPriority: taskPriority,
                             detectingAlertMessage: detectingAlertMessage,
                             didBecomeActive: didBecomeActive,
                             didInvalidate: didInvalidate,
@@ -87,6 +91,7 @@ extension ISO15693TagReaderViewModifier: ViewModifier {
     private func action(_ flag: Bool) {
         if flag {
             object.read(
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
                 onBeginReadingError: {
                     isPresented.wrappedValue = false
@@ -108,6 +113,7 @@ extension ISO15693TagReaderViewModifier: ViewModifier {
 extension View {
     public func iso15693TagReader(
         isPresented: Binding<Bool>,
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
@@ -117,6 +123,7 @@ extension View {
         modifier(
             ISO15693TagReaderViewModifier(
                 isPresented: isPresented,
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
                 onBeginReadingError: onBeginReadingError,
                 didBecomeActive: didBecomeActive,

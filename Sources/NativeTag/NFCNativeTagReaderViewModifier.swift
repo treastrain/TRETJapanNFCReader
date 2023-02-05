@@ -12,6 +12,7 @@ import SwiftUI
 public struct NFCNativeTagReaderViewModifier: @unchecked Sendable {
     private var isPresented: Binding<Bool>
     private let pollingOption: NFCTagReaderSession.PollingOption
+    private let taskPriority: TaskPriority?
     private let detectingAlertMessage: String
     private let onBeginReadingError: @Sendable (Error) -> Void
     private let didBecomeActive: @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void
@@ -23,6 +24,7 @@ public struct NFCNativeTagReaderViewModifier: @unchecked Sendable {
     public init(
         isPresented: Binding<Bool>,
         pollingOption: NFCTagReaderSession.PollingOption,
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
@@ -31,6 +33,7 @@ public struct NFCNativeTagReaderViewModifier: @unchecked Sendable {
     ) {
         self.isPresented = isPresented
         self.pollingOption = pollingOption
+        self.taskPriority = taskPriority
         self.detectingAlertMessage = detectingAlertMessage
         self.onBeginReadingError = onBeginReadingError
         self.didBecomeActive = didBecomeActive
@@ -44,7 +47,7 @@ extension NFCNativeTagReaderViewModifier {
         private var reader: NFCReader<NativeTag>?
         private var currentTask: Task<(), Never>?
         
-        func read(pollingOption: NFCTagReaderSession.PollingOption, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (_ session: NativeTag.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult) {
+        func read(pollingOption: NFCTagReaderSession.PollingOption, taskPriority: TaskPriority?, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (_ session: NativeTag.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult) {
             cancel()
             currentTask = Task {
                 await withTaskCancellationHandler {
@@ -52,6 +55,7 @@ extension NFCNativeTagReaderViewModifier {
                     do {
                         try await reader?.read(
                             pollingOption: pollingOption,
+                            taskPriority: taskPriority,
                             detectingAlertMessage: detectingAlertMessage,
                             didBecomeActive: didBecomeActive,
                             didInvalidate: didInvalidate,
@@ -92,6 +96,7 @@ extension NFCNativeTagReaderViewModifier: ViewModifier {
         if flag {
             object.read(
                 pollingOption: pollingOption,
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
                 onBeginReadingError: {
                     isPresented.wrappedValue = false
@@ -114,6 +119,7 @@ extension View {
     public func nfcNativeTagReader(
         isPresented: Binding<Bool>,
         pollingOption: NFCTagReaderSession.PollingOption,
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
@@ -124,6 +130,7 @@ extension View {
             NFCNativeTagReaderViewModifier(
                 isPresented: isPresented,
                 pollingOption: pollingOption,
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
                 onBeginReadingError: onBeginReadingError,
                 didBecomeActive: didBecomeActive,

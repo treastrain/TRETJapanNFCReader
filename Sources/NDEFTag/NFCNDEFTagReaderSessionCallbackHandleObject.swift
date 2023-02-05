@@ -12,15 +12,18 @@
 public actor NFCNDEFTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSessionCallbackHandleableObject {
     #if canImport(CoreNFC)
     public typealias TagType = NDEFTag
+    public let taskPriority: TaskPriority?
     public let didBecomeActiveHandler: ((_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void)
     public let didInvalidateHandler: ((_ error: NFCReaderError) -> Void)
     public let didDetectHandler: ((_ session: TagType.ReaderSessionProtocol, _ objects: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult)
     
     init(
+        taskPriority: TaskPriority?,
         didBecomeActive: @escaping @Sendable (_: TagType.ReaderSession.AfterBeginProtocol) -> Void,
         didInvalidate: @escaping @Sendable (_: NFCReaderError) -> Void,
         didDetect: @escaping @Sendable (_: TagType.ReaderSessionProtocol, _: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
     ) {
+        self.taskPriority = taskPriority
         self.didBecomeActiveHandler = didBecomeActive
         self.didInvalidateHandler = didInvalidate
         self.didDetectHandler = didDetect
@@ -43,7 +46,7 @@ extension NFCNDEFTagReaderSessionCallbackHandleObject: NDEFTag.ReaderSession.Del
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didDetect tags: TagType.ReaderSessionDetectObject) {
-        Task {
+        Task(priority: taskPriority) {
             await didDetect(session: session, tags: tags)
         }
     }

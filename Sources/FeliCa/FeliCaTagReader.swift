@@ -14,6 +14,7 @@ extension FeliCaTagReader {
 extension FeliCaTagReader {
     #if canImport(CoreNFC)
     public func read(
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         didBecomeActive: @escaping @Sendable (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
@@ -21,6 +22,7 @@ extension FeliCaTagReader {
     ) async throws {
         try await read(
             pollingOption: .iso18092,
+            taskPriority: taskPriority,
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,

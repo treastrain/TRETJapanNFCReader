@@ -11,6 +11,7 @@ import SwiftUI
 
 public struct FeliCaTagReaderViewModifier: @unchecked Sendable {
     private var isPresented: Binding<Bool>
+    private let taskPriority: TaskPriority?
     private let detectingAlertMessage: String
     private let onBeginReadingError: @Sendable (Error) -> Void
     private let didBecomeActive: @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void
@@ -21,6 +22,7 @@ public struct FeliCaTagReaderViewModifier: @unchecked Sendable {
     
     public init(
         isPresented: Binding<Bool>,
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
@@ -28,6 +30,7 @@ public struct FeliCaTagReaderViewModifier: @unchecked Sendable {
         didDetect: @escaping @Sendable (_ session: FeliCaTagReader.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult
     ) {
         self.isPresented = isPresented
+        self.taskPriority = taskPriority
         self.detectingAlertMessage = detectingAlertMessage
         self.onBeginReadingError = onBeginReadingError
         self.didBecomeActive = didBecomeActive
@@ -41,13 +44,14 @@ extension FeliCaTagReaderViewModifier {
         private var reader: FeliCaTagReader?
         private var currentTask: Task<(), Never>?
         
-        func read(detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (_ session: FeliCaTagReader.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult) {
+        func read(taskPriority: TaskPriority?, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (_ session: FeliCaTagReader.ReaderSessionProtocol, _ tags: NativeTag.ReaderSessionDetectObject) async throws -> NativeTag.DetectResult) {
             cancel()
             currentTask = Task {
                 await withTaskCancellationHandler {
                     reader = .init()
                     do {
                         try await reader?.read(
+                            taskPriority: taskPriority,
                             detectingAlertMessage: detectingAlertMessage,
                             didBecomeActive: didBecomeActive,
                             didInvalidate: didInvalidate,
@@ -87,6 +91,7 @@ extension FeliCaTagReaderViewModifier: ViewModifier {
     private func action(_ flag: Bool) {
         if flag {
             object.read(
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
                 onBeginReadingError: {
                     isPresented.wrappedValue = false
@@ -108,6 +113,7 @@ extension FeliCaTagReaderViewModifier: ViewModifier {
 extension View {
     public func feliCaTagReader(
         isPresented: Binding<Bool>,
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ session: NativeTag.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
@@ -117,6 +123,7 @@ extension View {
         modifier(
             FeliCaTagReaderViewModifier(
                 isPresented: isPresented,
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
                 onBeginReadingError: onBeginReadingError,
                 didBecomeActive: didBecomeActive,

@@ -14,6 +14,7 @@ extension MiFareTagReader {
 extension MiFareTagReader {
     #if canImport(CoreNFC)
     public func read(
+        taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
         didBecomeActive: @escaping @Sendable (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
         didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
@@ -21,6 +22,7 @@ extension MiFareTagReader {
     ) async throws {
         try await read(
             pollingOption: .iso14443,
+            taskPriority: taskPriority,
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
