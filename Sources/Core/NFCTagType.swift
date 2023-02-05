@@ -13,3 +13,10 @@ public protocol NFCTagType {
     #endif
     associatedtype DetectResult
 }
+
+public protocol _NFCTagTypeOpaqueTypeBuilderProtocol {
+    #if canImport(CoreNFC)
+    associatedtype ReaderSessionProtocol: Sendable
+    var readerSessionProtocol: ReaderSessionProtocol { get }
+    #endif
+}

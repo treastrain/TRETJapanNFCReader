@@ -34,7 +34,7 @@ public actor NFCNDEFMessageReaderSessionCallbackHandleObject: NSObject, NFCReade
 #if canImport(CoreNFC)
 extension NFCNDEFMessageReaderSessionCallbackHandleObject: NDEFMessage.ReaderSession.Delegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
-        didBecomeActive(session)
+        didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {

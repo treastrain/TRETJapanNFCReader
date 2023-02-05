@@ -34,7 +34,7 @@ public actor NFCNativeTagReaderSessionCallbackHandleObject: NSObject, NFCReaderS
 #if canImport(CoreNFC)
 extension NFCNativeTagReaderSessionCallbackHandleObject: NativeTag.ReaderSession.Delegate {
     public nonisolated func tagReaderSessionDidBecomeActive(_ session: TagType.ReaderSession) {
-        didBecomeActive(session)
+        didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)
     }
     
     public nonisolated func tagReaderSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {

@@ -101,11 +101,13 @@ private class NFCTestReaderSession: NSObject, NFCReaderSessionProtocol, @uncheck
 
 private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession, NFCReaderSessionable {
     typealias Session = NFCTestReaderSessionReadingAvailable
+    typealias AfterBeginProtocol = NFCTestReaderSessionReadingAvailable
     static let readingAvailable = true
 }
 
 private final class NFCTestReaderSessionReadingUnavailable: NFCTestReaderSession, NFCReaderSessionable {
     typealias Session = NFCTestReaderSessionReadingUnavailable
+    typealias AfterBeginProtocol = NFCTestReaderSessionReadingUnavailable
     static let readingAvailable = false
 }
 
