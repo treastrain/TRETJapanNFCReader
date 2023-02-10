@@ -35,7 +35,8 @@ final class ISO15693TagReaderTests: XCTestCase {
                 XCTAssertEqual(error.code, .readerErrorUnsupportedFeature)
                 didInvalidateExpectation.fulfill()
             },
-            didDetect: { _, _ in
+            didDetect: { session, _ in
+                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NativeTag.ReaderSession>.size)
                 didDetectExpectation.fulfill()
                 return .none
             }
