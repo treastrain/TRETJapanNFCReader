@@ -27,13 +27,10 @@ extension NDEFMessage.DetectResult {
 }
 
 #if canImport(CoreNFC)
-public class _NDEFMessageOpaqueTypeBuilder: NSObject, _NFCTagTypeOpaqueTypeBuilderProtocol, NFCNDEFReaderSessionDelegate {
+public enum _NDEFMessageOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
     /// This is a dummy property to give `AfterBeginProtocol` to `some NFCNDEFMessageReaderSessionProtocol`, which will not be called from either place.
     public var readerSessionProtocol: some NFCNDEFMessageReaderSessionProtocol {
-        NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+        NDEFMessage.ReaderSession(delegate: _NFCNDEFReaderSessionOpaqueTypeBuilder(), queue: nil, invalidateAfterFirstRead: false)
     }
-    
-    public func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {}
-    public func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {}
 }
 #endif

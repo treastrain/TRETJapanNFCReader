@@ -32,14 +32,10 @@ extension NDEFTag.DetectResult {
 }
 
 #if canImport(CoreNFC)
-public class _NDEFTagOpaqueTypeBuilder: NSObject, _NFCTagTypeOpaqueTypeBuilderProtocol, NFCNDEFReaderSessionDelegate {
+public enum _NDEFTagOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
     /// This is a dummy property to give `AfterBeginProtocol` to `some NFCNDEFTagReaderSessionProtocol`, which will not be called from either place.
     public var readerSessionProtocol: some NFCNDEFTagReaderSessionProtocol {
-        NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+        NDEFTag.ReaderSession(delegate: _NFCNDEFReaderSessionOpaqueTypeBuilder(), queue: nil, invalidateAfterFirstRead: false)
     }
-    
-    public func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {}
-    public func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {}
-    public func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {}
 }
 #endif

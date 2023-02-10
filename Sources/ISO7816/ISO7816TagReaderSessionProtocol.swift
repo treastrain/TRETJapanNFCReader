@@ -9,7 +9,7 @@ public protocol ISO7816TagReaderSessionProtocol: NFCNativeTagReaderSessionProtoc
 
 extension ISO7816TagReaderSessionProtocol {
     #if canImport(CoreNFC)
-    public func connectAsISO7816Tag(to tag: NFCTag) async throws -> NFCISO7816Tag {
+    public func connectAsISO7816Tag(to tag: NFCTag) async throws -> any NFCISO7816Tag {
         guard case .iso7816(let iso7816Tag) = tag else {
             throw NFCReaderError(.readerErrorInvalidParameter)
         }

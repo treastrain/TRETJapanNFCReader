@@ -32,14 +32,10 @@ extension NativeTag.DetectResult {
 }
 
 #if canImport(CoreNFC)
-public class _NativeTagOpaqueTypeBuilder: NSObject, _NFCTagTypeOpaqueTypeBuilderProtocol, NFCTagReaderSessionDelegate {
+public enum _NativeTagOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
     /// This is a dummy property to give `AfterBeginProtocol` to `some NFCNativeTagReaderSessionProtocol`, which will not be called from either place.
     public var readerSessionProtocol: some NFCNativeTagReaderSessionProtocol {
-        NFCTagReaderSession(pollingOption: [], delegate: self)!
+        NativeTag.ReaderSession(pollingOption: [], delegate: _NFCTagReaderSessionOpaqueTypeBuilder())!
     }
-    
-    public func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {}
-    public func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {}
-    public func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {}
 }
 #endif

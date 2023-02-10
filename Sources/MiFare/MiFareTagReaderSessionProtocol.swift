@@ -9,7 +9,7 @@ public protocol MiFareTagReaderSessionProtocol: NFCNativeTagReaderSessionProtoco
 
 extension MiFareTagReaderSessionProtocol {
     #if canImport(CoreNFC)
-    public func connectAsMiFareTag(to tag: NFCTag) async throws -> NFCMiFareTag {
+    public func connectAsMiFareTag(to tag: NFCTag) async throws -> any NFCMiFareTag {
         guard case .miFare(let miFareTag) = tag else {
             throw NFCReaderError(.readerErrorInvalidParameter)
         }
