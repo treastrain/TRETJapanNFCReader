@@ -35,7 +35,8 @@ final class NDEFTagTests: XCTestCase {
                 XCTAssertEqual(error.code, .readerErrorUnsupportedFeature)
                 didInvalidateExpectation.fulfill()
             },
-            didDetect: { _, _ in
+            didDetect: { session, _ in
+                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NDEFTag.ReaderSession>.size)
                 didDetectExpectation.fulfill()
                 return .none
             }
