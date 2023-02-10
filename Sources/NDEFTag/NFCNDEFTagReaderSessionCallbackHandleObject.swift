@@ -38,7 +38,7 @@ extension NFCNDEFTagReaderSessionCallbackHandleObject: NDEFTag.ReaderSession.Del
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
-        didInvalidateWithError(session, error: error)
+        didInvalidateWithError(session as! TagType.ReaderSessionProtocol, error: error)
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
@@ -56,7 +56,7 @@ extension NFCNDEFTagReaderSessionCallbackHandleObject {
     func didDetect(session: NFCNDEFReaderSession, tags: [NFCNDEFTag]) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetectHandler(session, tags)
+            result = try await didDetectHandler(session as! TagType.ReaderSessionProtocol, tags)
         } catch {
             result = .failure(with: error)
         }

@@ -8,7 +8,7 @@
 public enum NDEFTag: NFCTagType {
     #if canImport(CoreNFC)
     public typealias ReaderSession = NFCNDEFReaderSession
-    public typealias ReaderSessionProtocol = any NFCNDEFTagReaderSessionProtocol
+    public typealias ReaderSessionProtocol = _NDEFTagOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some NFCNDEFTagReaderSessionProtocol`
     public typealias ReaderSessionDetectObject = [NFCNDEFTag]
     #endif
 }
@@ -30,3 +30,16 @@ extension NDEFTag.DetectResult {
         .failure(errorMessage: error.localizedDescription)
     }
 }
+
+#if canImport(CoreNFC)
+public class _NDEFTagOpaqueTypeBuilder: NSObject, _NFCTagTypeOpaqueTypeBuilderProtocol, NFCNDEFReaderSessionDelegate {
+    /// This is a dummy property to give `AfterBeginProtocol` to `some NFCNDEFTagReaderSessionProtocol`, which will not be called from either place.
+    public var readerSessionProtocol: some NFCNDEFTagReaderSessionProtocol {
+        NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+    }
+    
+    public func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {}
+    public func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {}
+    public func readerSession(_ session: NFCNDEFReaderSession, didDetect tags: [NFCNDEFTag]) {}
+}
+#endif
