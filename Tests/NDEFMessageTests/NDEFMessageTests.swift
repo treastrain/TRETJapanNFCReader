@@ -36,7 +36,8 @@ final class NDEFMessageTests: XCTestCase {
                 XCTAssertEqual(error.code, .readerErrorUnsupportedFeature)
                 didInvalidateExpectation.fulfill()
             },
-            didDetectNDEFs: { _, _ in
+            didDetectNDEFs: { session, _ in
+                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NDEFMessage.ReaderSession>.size)
                 didDetectNDEFsExpectation.fulfill()
                 return .continue
             }

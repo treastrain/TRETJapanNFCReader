@@ -38,7 +38,7 @@ extension NFCNDEFMessageReaderSessionCallbackHandleObject: NDEFMessage.ReaderSes
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
-        didInvalidateWithError(session, error: error)
+        didInvalidateWithError(session as! TagType.ReaderSessionProtocol, error: error)
     }
     
     public nonisolated func readerSession(_ session: TagType.ReaderSession, didDetectNDEFs messages: TagType.ReaderSessionDetectObject) {
@@ -52,7 +52,7 @@ extension NFCNDEFMessageReaderSessionCallbackHandleObject {
     func didDetectNDEFs(session: NFCNDEFReaderSession, messages: [NFCNDEFMessage]) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetectHandler(session, messages)
+            result = try await didDetectHandler(session as! TagType.ReaderSessionProtocol, messages)
         } catch {
             assertionFailure("Due to protocol restrictions, an error can be thrown in `NFCNDEFMessageReaderSessionCallbackHandleObject.didDetectHandler`, but it is treated as a success.")
             result = .success(alertMessage: nil)
