@@ -8,8 +8,18 @@
 public typealias ISO7816TagReader = NFCReader<NativeTag>
 
 extension ISO7816TagReader {
-    public typealias ReaderSessionProtocol = any ISO7816TagReaderSessionProtocol
+    #if canImport(CoreNFC)
+    public typealias ReaderSessionProtocol = _ISO7816TagReaderOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some ISO7816TagReaderSessionProtocol`
+    #endif
 }
+
+#if canImport(CoreNFC)
+public enum _ISO7816TagReaderOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+    public var readerSessionProtocol: some ISO7816TagReaderSessionProtocol {
+        NativeTag.ReaderSession(pollingOption: [], delegate: _NFCTagReaderSessionOpaqueTypeBuilder())!
+    }
+}
+#endif
 
 extension ISO7816TagReader {
     #if canImport(CoreNFC)
