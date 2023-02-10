@@ -8,8 +8,18 @@
 public typealias FeliCaTagReader = NFCReader<NativeTag>
 
 extension FeliCaTagReader {
-    public typealias ReaderSessionProtocol = any FeliCaTagReaderSessionProtocol
+    #if canImport(CoreNFC)
+    public typealias ReaderSessionProtocol = _FeliCaTagReaderOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some FeliCaTagReaderSessionProtocol`
+    #endif
 }
+
+#if canImport(CoreNFC)
+public enum _FeliCaTagReaderOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+    public var readerSessionProtocol: some FeliCaTagReaderSessionProtocol {
+        NativeTag.ReaderSession(pollingOption: [], delegate: _NFCTagReaderSessionOpaqueTypeBuilder())!
+    }
+}
+#endif
 
 extension FeliCaTagReader {
     #if canImport(CoreNFC)
