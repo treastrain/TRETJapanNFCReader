@@ -8,8 +8,18 @@
 public typealias MiFareTagReader = NFCReader<NativeTag>
 
 extension MiFareTagReader {
-    public typealias ReaderSessionProtocol = any MiFareTagReaderSessionProtocol
+    #if canImport(CoreNFC)
+    public typealias ReaderSessionProtocol = _MiFareTagReaderOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some MiFareTagReaderSessionProtocol`
+    #endif
 }
+
+#if canImport(CoreNFC)
+public enum _MiFareTagReaderOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+    public var readerSessionProtocol: some MiFareTagReaderSessionProtocol {
+        NativeTag.ReaderSession(pollingOption: [], delegate: _NFCTagReaderSessionOpaqueTypeBuilder())!
+    }
+}
+#endif
 
 extension MiFareTagReader {
     #if canImport(CoreNFC)
