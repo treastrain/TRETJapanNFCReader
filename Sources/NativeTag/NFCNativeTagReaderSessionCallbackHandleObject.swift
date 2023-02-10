@@ -38,7 +38,7 @@ extension NFCNativeTagReaderSessionCallbackHandleObject: NativeTag.ReaderSession
     }
     
     public nonisolated func tagReaderSession(_ session: TagType.ReaderSession, didInvalidateWithError error: Error) {
-        didInvalidateWithError(session, error: error)
+        didInvalidateWithError(session as! TagType.ReaderSessionProtocol, error: error)
     }
     
     public nonisolated func tagReaderSession(_ session: TagType.ReaderSession, didDetect tags: TagType.ReaderSessionDetectObject) {
@@ -52,7 +52,7 @@ extension NFCNativeTagReaderSessionCallbackHandleObject {
     func didDetect(session: NFCTagReaderSession, tags: [NFCTag]) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetectHandler(session, tags)
+            result = try await didDetectHandler(session as! TagType.ReaderSessionProtocol, tags)
         } catch {
             result = .failure(with: error)
         }
