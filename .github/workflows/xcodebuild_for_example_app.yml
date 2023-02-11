@@ -35,8 +35,8 @@ jobs:
       run: xcodebuild -scheme ${{ env.SCHEME_NAME }} -showdestinations
       working-directory: ./Examples
     
-  xcodebuild:
-    name: Xcode Build
+  xcodebuild_for_example_app:
+    name: Xcode Build for Example App
     strategy:
       fail-fast: false
       matrix:
