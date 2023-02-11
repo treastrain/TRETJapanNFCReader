@@ -13,3 +13,8 @@ public protocol NFCReaderSessionAfterBeginProtocol: NSObjectProtocol, Sendable {
     func invalidate(errorMessage: String)
     #endif
 }
+
+extension NFCReaderSessionAfterBeginProtocol {
+    @available(*, unavailable, message: "Use `DetectResult.restartPolling`")
+    public func restartPolling() {}
+}
