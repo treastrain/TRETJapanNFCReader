@@ -8,7 +8,7 @@
 @_spi(TaskPriorityToDispatchQoSClass) import TRETNFCKit_Core
 
 extension NFCReader where TagType == NativeTag {
-    #if canImport(CoreNFC)
+    #if canImport(ObjectiveC) && canImport(CoreNFC)
     public func read(
         pollingOption: NFCTagReaderSession.PollingOption,
         taskPriority: TaskPriority? = nil,

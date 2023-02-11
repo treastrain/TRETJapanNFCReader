@@ -15,7 +15,7 @@ import CoreNFC
 
 final class FeliCaTagReaderTests: XCTestCase {
     func testFeliCaTagReaderReadTaskPriorityDetectingAlertMessageDidBecomeActiveDidInvalidateDidDetect() async throws {
-        #if canImport(CoreNFC) && !targetEnvironment(macCatalyst)
+        #if canImport(ObjectiveC) && canImport(CoreNFC) && !targetEnvironment(macCatalyst)
         let didBecomeActiveExpectation = expectation(description: "didBecomeActive")
         let didInvalidateExpectation = expectation(description: "didInvalidate")
         didInvalidateExpectation.expectedFulfillmentCount = 2

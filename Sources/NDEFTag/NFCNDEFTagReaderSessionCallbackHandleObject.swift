@@ -9,6 +9,7 @@
 @preconcurrency import CoreNFC
 #endif
 
+#if canImport(ObjectiveC)
 public actor NFCNDEFTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSessionCallbackHandleableObject {
     #if canImport(CoreNFC)
     public typealias TagType = NDEFTag
@@ -30,8 +31,9 @@ public actor NFCNDEFTagReaderSessionCallbackHandleObject: NSObject, NFCReaderSes
     }
     #endif
 }
+#endif
 
-#if canImport(CoreNFC)
+#if canImport(ObjectiveC) && canImport(CoreNFC)
 extension NFCNDEFTagReaderSessionCallbackHandleObject: NDEFTag.ReaderSession.Delegate {
     public nonisolated func readerSessionDidBecomeActive(_ session: TagType.ReaderSession) {
         didBecomeActive(session as! TagType.ReaderSession.AfterBeginProtocol)

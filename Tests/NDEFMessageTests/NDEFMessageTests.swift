@@ -15,7 +15,7 @@ import CoreNFC
 
 final class NDEFMessageTests: XCTestCase {
     func testNDEFMessageNFCReaderReadTaskPriorityInvalidateAfterFirstReadDetectingAlertMessageDidBecomeActiveDidInvalidateDidDetectNDEFs() async throws {
-        #if canImport(CoreNFC) && !targetEnvironment(macCatalyst)
+        #if canImport(ObjectiveC) && canImport(CoreNFC) && !targetEnvironment(macCatalyst)
         let didBecomeActiveExpectation = expectation(description: "didBecomeActive")
         let didInvalidateExpectation = expectation(description: "didInvalidate")
         didInvalidateExpectation.expectedFulfillmentCount = 2

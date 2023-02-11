@@ -12,12 +12,16 @@ import XCTest
 @testable @_spi(TaskPriorityToDispatchQoSClass) import TRETNFCKit_Core
 
 final class TaskPriority_Tests: XCTestCase {
-    func testTaskPriorityDispatchQoSClass() {
+    func testTaskPriorityDispatchQoSClass() throws {
+        #if os(Linux)
+        throw XCTSkip("DispatchQoS.QoSClass.rawValue is internal on Linux.")
+        #else
         for priority in TaskPriority.allCases {
             let priorityRawValue = UInt32(priority.rawValue)
             let qoSClassRawValue = priority.dispatchQoSClass.rawValue.rawValue
             XCTAssertEqual(priorityRawValue, qoSClassRawValue, "\(priority.debugDescription)(\(priorityRawValue)) is not equal to \(priority.dispatchQoSClass.debugDescription)(\(qoSClassRawValue))")
         }
+        #endif
     }
 }
 
