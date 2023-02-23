@@ -9,7 +9,7 @@ public enum NDEFTag: NFCTagType {
     #if canImport(CoreNFC)
     public typealias ReaderSession = NFCNDEFReaderSession
     public typealias ReaderSessionProtocol = _NDEFTagOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some NFCNDEFTagReaderSessionProtocol`
-    public typealias ReaderSessionDetectObject = [NFCNDEFTag]
+    public typealias ReaderSessionDetectObject = [any NFCNDEFTag]
     #endif
 }
 
