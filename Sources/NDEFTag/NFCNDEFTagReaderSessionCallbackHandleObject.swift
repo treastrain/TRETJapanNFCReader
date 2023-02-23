@@ -55,7 +55,7 @@ extension NFCNDEFTagReaderSessionCallbackHandleObject: NDEFTag.ReaderSession.Del
 }
 
 extension NFCNDEFTagReaderSessionCallbackHandleObject {
-    func didDetect(session: NFCNDEFReaderSession, tags: [NFCNDEFTag]) async {
+    func didDetect(session: NFCNDEFReaderSession, tags: [any NFCNDEFTag]) async {
         let result: TagType.DetectResult
         do {
             result = try await didDetectHandler(session as! TagType.ReaderSessionProtocol, tags)
