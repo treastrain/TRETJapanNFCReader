@@ -16,7 +16,7 @@ final class NFCReaderSessionableTests: XCTestCase {
     func testNFCNDEFReaderSessionConformsToNFCReaderSessionable() throws {
         #if canImport(CoreNFC)
         XCTAssertIdentical(NFCNDEFReaderSession.Session.self, NFCNDEFReaderSession.self)
-        XCTAssertIdentical(NFCNDEFReaderSession.Delegate.self as AnyObject, NFCNDEFReaderSessionDelegate.self as AnyObject)
+        XCTAssertIdentical((any NFCNDEFReaderSession.Delegate).self as AnyObject, (any NFCNDEFReaderSessionDelegate).self as AnyObject)
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif
@@ -34,7 +34,7 @@ final class NFCReaderSessionableTests: XCTestCase {
     func testNFCVASReaderSessionConformsToNFCReaderSessionable() throws {
         #if canImport(CoreNFC)
         XCTAssertIdentical(NFCVASReaderSession.Session.self, NFCVASReaderSession.self)
-        XCTAssertIdentical(NFCVASReaderSession.Delegate.self as AnyObject, NFCVASReaderSessionDelegate.self as AnyObject)
+        XCTAssertIdentical((any NFCVASReaderSession.Delegate).self as AnyObject, (any NFCVASReaderSessionDelegate).self as AnyObject)
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif
