@@ -8,7 +8,7 @@
 public protocol NFCTagType {
     #if canImport(CoreNFC)
     associatedtype Reader: NFCReaderProtocol
-    associatedtype ReaderProtocol: NFCReaderProtocol
+    associatedtype ReaderProtocol: NFCReaderAfterBeginProtocol
     associatedtype ReaderDetectObject
     #endif
     associatedtype DetectResult: NFCTagTypeDetectResult
@@ -28,7 +28,7 @@ public protocol NFCTagTypeFailableDetectResult: NFCTagTypeDetectResult {
 
 public protocol _NFCTagTypeOpaqueTypeBuilderProtocol {
     #if canImport(CoreNFC)
-    associatedtype ReaderProtocol: NFCReaderProtocol
+    associatedtype ReaderProtocol: NFCReaderAfterBeginProtocol
     var readerProtocol: ReaderProtocol { get }
     #endif
 }

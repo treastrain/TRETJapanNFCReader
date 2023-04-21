@@ -7,7 +7,7 @@
 
 import XCTest
 #if canImport(CoreNFC)
-import CoreNFC
+@preconcurrency import protocol CoreNFC.NFCNDEFReaderSessionDelegate
 #endif
 
 @testable import TRETNFCKit_Core
@@ -28,31 +28,32 @@ final class NDEFMessageTests: XCTestCase {
             taskPriority: nil,
             invalidateAfterFirstRead: false,
             detectingAlertMessage: alertMessage,
-            didBecomeActive: { session in
-                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NDEFMessage.ReaderSession>.size)
+            didBecomeActive: { reader in
+                XCTAssertEqual(MemoryLayout.size(ofValue: reader), MemoryLayout<NDEFMessage.Reader>.size)
                 didBecomeActiveExpectation.fulfill()
             },
             didInvalidate: { error in
                 XCTAssertEqual(error.code, .readerErrorUnsupportedFeature)
                 didInvalidateExpectation.fulfill()
             },
-            didDetectNDEFs: { session, _ in
-                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NDEFMessage.ReaderSession>.size)
+            didDetectNDEFs: { reader, _ in
+                XCTAssertEqual(MemoryLayout.size(ofValue: reader), MemoryLayout<NDEFMessage.Reader>.size)
                 didDetectNDEFsExpectation.fulfill()
                 return .continue
             }
         )
-        let readerSessionOrNil = await reader.sessionAndDelegate?.session
-        let readerSession = try XCTUnwrap(readerSessionOrNil)
-        XCTAssertEqual(readerSession.alertMessage, alertMessage)
-        let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
-        XCTAssertNotNil(readerSessionDelegate)
+        let tagReaderOrNil = await reader.readerAndDelegate?.reader
+        let tagReader = try XCTUnwrap(tagReaderOrNil)
+        let tagReaderAlertMessage = await tagReader.alertMessage
+        XCTAssertEqual(tagReaderAlertMessage, alertMessage)
+        let tagReaderDelegate = await reader.readerAndDelegate?.delegate
+        XCTAssertNotNil(tagReaderDelegate)
         
-        let object = readerSessionDelegate as! NFCNDEFMessageReaderSessionCallbackHandleObject
-        object.readerSessionDidBecomeActive(readerSession)
-        object.readerSession(readerSession, didDetectNDEFs: [])
+        let object = tagReaderDelegate as! NFCNDEFMessageReaderCallbackHandleObject
+        await object.didBecomeActive()
+        await object.didDetectNDEFs(messages: [])
         
-        await waitForExpectations(timeout: 0.01)
+        await fulfillment(of: [didBecomeActiveExpectation, didInvalidateExpectation, didDetectNDEFsExpectation], timeout: 0.01)
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif
@@ -60,7 +61,7 @@ final class NDEFMessageTests: XCTestCase {
 }
 
 #if canImport(CoreNFC) && DEBUG
-extension NDEFMessage.ReaderSession {
+extension NDEFMessage.Reader.Session {
     open override class var readingAvailable: Bool { true }
 }
 #endif
