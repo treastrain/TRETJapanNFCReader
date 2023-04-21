@@ -24,52 +24,51 @@ final class NFCReaderTests: XCTestCase {
         AssertServices.assertionFailureHandler = AssertServices.assertionFailureDefaultHandler
     }
     
-    /// `NFCReader.begin(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `true` ならば `session` と `sessionDelegate` が `nil` ではなくなり、`session.alertMessage` に `String` が入り、`session.begin()` が1回呼ばれる
-    func testNFCReaderBeginWhenTagTypeReaderSessionReadingAvailableIsTrue() async throws {
+    /// `NFCReader.begin(readerAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.Reader.Session.readingAvailable` が `true` ならば `reader` と `delegate` が `nil` ではなくなり、`reader.alertMessage` に `String` が入り、`reader.begin()` が1回呼ばれる
+    func testNFCReaderBeginWhenTagTypeReaderReadingAvailableIsTrue() async throws {
         #if canImport(CoreNFC)
-        let session = NFCTestReaderSessionReadingAvailable()
-        let delegate = NFCTestReaderSessionDelegate()
+        let tagReader = NFCTestReaderReadingAvailable()
+        let delegate = NFCTestReaderSessionReadingAvailable()
         let alertMessage = "Detecting Alert Message"
         
-        let reader = NFCReader<TestTag<NFCTestReaderSessionReadingAvailable>>()
+        let reader = NFCReader<TestTag<NFCTestReaderReadingAvailable>>()
         try await reader.begin(
-            sessionAndDelegate: { (session, delegate) },
+            readerAndDelegate: { (tagReader, delegate) },
             detectingAlertMessage: alertMessage
         )
         
-        let readerSessionOrNil = await reader.sessionAndDelegate?.session
-        let readerSession = try XCTUnwrap(readerSessionOrNil)
-        XCTAssertEqual(readerSession, session)
-        let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
-        XCTAssertIdentical(readerSessionDelegate, delegate)
-        let readerSessionAlertMessage = readerSession.alertMessage
-        XCTAssertEqual(readerSessionAlertMessage, alertMessage)
-        let readerSessionBeginCallCount = readerSession.beginCallCount
-        XCTAssertEqual(readerSessionBeginCallCount, 1)
+        let tagReaderOrNil = await reader.readerAndDelegate?.reader
+        XCTAssertIdentical(tagReaderOrNil, tagReader)
+        let tagReaderDelegateOrNil = await reader.readerAndDelegate?.delegate
+        XCTAssertIdentical(tagReaderDelegateOrNil, delegate)
+        let tagReaderAlertMessage = await tagReaderOrNil?.alertMessage
+        XCTAssertEqual(tagReaderAlertMessage, alertMessage)
+        let tagReaderBeginCallCount = await tagReaderOrNil?.beginCallCount
+        XCTAssertEqual(tagReaderBeginCallCount, 1)
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif
     }
     
-    /// `NFCReader.begin(sessionAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.ReaderSession.readingAvailable` が `false` ならば `NFCReaderError` が返ってくる
-    func testNFCReaderBeginWhenTagTypeReaderSessionReadingAvailableIsFalse() async throws {
+    /// `NFCReader.begin(readerAndDelegate:detectingAlertMessage:)` を呼んだとき、`TagType.Reader.Session.readingAvailable` が `false` ならば `NFCReaderError` が返ってくる
+    func testNFCReaderBeginWhenTagTypeReaderReadingAvailableIsFalse() async throws {
         #if canImport(CoreNFC)
-        let session = NFCTestReaderSessionReadingUnavailable()
-        let delegate = NFCTestReaderSessionDelegate()
+        let tagReader = NFCTestReaderReadingUnavailable()
+        let delegate = NFCTestReaderSessionReadingUnavailable()
         
-        let reader = NFCReader<TestTag<NFCTestReaderSessionReadingUnavailable>>()
+        let reader = NFCReader<TestTag<NFCTestReaderReadingUnavailable>>()
         do {
             try await reader.begin(
-                sessionAndDelegate: { (session, delegate) },
+                readerAndDelegate: { (tagReader, delegate) },
                 detectingAlertMessage: "Detecting Alert Message"
             )
             XCTFail("The `NFCReaderErrorUnsupportedFeature` is not thrown.")
         } catch {
             XCTAssertEqual((error as! NFCReaderError).code, .readerErrorUnsupportedFeature)
-            let readerSession = await reader.sessionAndDelegate?.session
-            XCTAssertNil(readerSession)
-            let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
-            XCTAssertNil(readerSessionDelegate)
+            let tagReaderOrNil = await reader.readerAndDelegate?.reader
+            XCTAssertNil(tagReaderOrNil)
+            let tagReaderDelegateOrNil = await reader.readerAndDelegate?.delegate
+            XCTAssertNil(tagReaderDelegateOrNil)
         }
         #else
         throw XCTSkip("Support for this platform is not considered.")
@@ -78,19 +77,50 @@ final class NFCReaderTests: XCTestCase {
 }
 
 #if canImport(CoreNFC)
-private enum TestTag<ReaderSession: NFCReaderSessionable>: NFCTagType {
-    typealias ReaderSession = ReaderSession
-    typealias ReaderSessionProtocol = Never
-    typealias ReaderSessionDetectObject = Never
-    typealias DetectResult = Never
+private enum TestTag<Reader>: NFCTagType where Reader: Actor & NFCReaderProtocol & NFCReaderAfterBeginProtocol {
+    typealias Reader = Reader
+    typealias ReaderProtocol = Reader
+    typealias ReaderDetectObject = Never
+    
+    enum DetectResult: NFCTagTypeFailableDetectResult {
+        case success(alertMessage: String?)
+        case failure(errorMessage: String)
+        case restartPolling(alertMessage: String?)
+        case none
+        
+        static var success: Self { .success(alertMessage: nil) }
+        static var restartPolling: Self { .restartPolling(alertMessage: nil) }
+        static func failure(with error: Error) -> Self {
+            failure(errorMessage: error.localizedDescription)
+        }
+    }
 }
 
 private class NFCTestReaderSession: NSObject, NFCReaderSessionProtocol, @unchecked Sendable {
-    typealias Delegate = NFCTestReaderSessionDelegate
+    let isReady: Bool = false
+    var alertMessage: String = ""
+    func invalidate() {}
+    func invalidate(errorMessage: String) {}
+    var beginCallCount = 0
+    func begin() {
+        beginCallCount += 1
+    }
+}
+
+private actor NFCTestReaderReadingAvailable: NFCReaderProtocol, NFCReaderAfterBeginProtocol {
+    typealias Session = NFCTestReaderSessionReadingAvailable
+    typealias Delegate = NFCTestReaderSessionReadingAvailable
+    typealias AfterBeginProtocol = NFCTestReaderReadingAvailable
     
+    var taskPriority: TaskPriority?
     var delegate: AnyObject?
-    let isReady = false
-    var alertMessage = ""
+    static var readingAvailable: Bool { Session.readingAvailable }
+    var sessionQueue: DispatchQueue { fatalError("dummy") }
+    let isReady: Bool = false
+    var alertMessage: String = ""
+    func set(alertMessage: String) {
+        self.alertMessage = alertMessage
+    }
     var beginCallCount = 0
     func begin() {
         beginCallCount += 1
@@ -99,16 +129,38 @@ private class NFCTestReaderSession: NSObject, NFCReaderSessionProtocol, @uncheck
     func invalidate(errorMessage: String) {}
 }
 
-private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession, NFCReaderSessionable {
+private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession {
     typealias Session = NFCTestReaderSessionReadingAvailable
     typealias AfterBeginProtocol = NFCTestReaderSessionReadingAvailable
-    static let readingAvailable = true
+    class var readingAvailable: Bool { true }
 }
 
-private final class NFCTestReaderSessionReadingUnavailable: NFCTestReaderSession, NFCReaderSessionable {
+private actor NFCTestReaderReadingUnavailable: NFCReaderProtocol, NFCReaderAfterBeginProtocol {
+    typealias Session = NFCTestReaderSessionReadingUnavailable
+    typealias Delegate = NFCTestReaderSessionReadingUnavailable
+    typealias AfterBeginProtocol = NFCTestReaderReadingUnavailable
+    
+    var taskPriority: TaskPriority?
+    var delegate: AnyObject?
+    static var readingAvailable: Bool { Session.readingAvailable }
+    var sessionQueue: DispatchQueue { fatalError("dummy") }
+    let isReady: Bool = false
+    var alertMessage: String = ""
+    func set(alertMessage: String) {
+        self.alertMessage = alertMessage
+    }
+    var beginCallCount = 0
+    func begin() {
+        beginCallCount += 1
+    }
+    func invalidate() {}
+    func invalidate(errorMessage: String) {}
+}
+
+private final class NFCTestReaderSessionReadingUnavailable: NFCTestReaderSession {
     typealias Session = NFCTestReaderSessionReadingUnavailable
     typealias AfterBeginProtocol = NFCTestReaderSessionReadingUnavailable
-    static let readingAvailable = false
+    class var readingAvailable: Bool { false }
 }
 
 private actor NFCTestReaderSessionDelegate: Actor {}

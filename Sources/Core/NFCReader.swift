@@ -9,25 +9,24 @@
 import TRETNFCKit_InfoPListChecker
 
 public actor NFCReader<TagType: NFCTagType> {
-    #if canImport(CoreNFC)
-    private(set) var sessionAndDelegate: (session: TagType.ReaderSession, delegate: AnyObject)? {
+#if canImport(CoreNFC)
+    private(set) var readerAndDelegate: (reader: TagType.Reader, delegate: TagType.Reader.Delegate)? {
         didSet {
-            NotificationCenter.default.post(name: .didChangeNFCReaderSessionAndDelegate, object: sessionAndDelegateChangedObserver, userInfo: [.isNilSessionAndDelegate: sessionAndDelegate == nil])
+            NotificationCenter.default.post(name: .didChangeNFCReaderReaderAndDelegate, object: readerAndDelegateChangedObserver, userInfo: [.isNilReaderAndDelegate: readerAndDelegate == nil])
         }
     }
-    private var sessionAndDelegateChangedObserver: (any NSObjectProtocol)?
-    #endif
+    private var readerAndDelegateChangedObserver: (any NSObjectProtocol)?
+#endif
     
     public init() {}
 }
-
 extension NFCReader {
     #if canImport(CoreNFC)
     public func begin(
-        sessionAndDelegate throwingSessionAndDelegate: () throws -> (session: TagType.ReaderSession, delegate: TagType.ReaderSession.Delegate),
+        readerAndDelegate throwingReaderAndDelegate: @Sendable () throws -> (reader: TagType.Reader, delegate: TagType.Reader.Delegate),
         detectingAlertMessage: String
     ) async throws {
-        guard TagType.ReaderSession.readingAvailable else {
+        guard TagType.Reader.readingAvailable else {
             #if DEBUG
             print("""
             -------------------------------------------------------------------------
@@ -53,10 +52,10 @@ extension NFCReader {
         }
         #endif
         
-        await withCheckedContinuation { [sessionAndDelegate] continuation in
-            guard sessionAndDelegate != nil else { return continuation.resume() }
-            sessionAndDelegateChangedObserver = NotificationCenter.default.addObserver(forName: .didChangeNFCReaderSessionAndDelegate, object: nil, queue: nil) { notification in
-                if (notification.userInfo ?? [:])[.isNilSessionAndDelegate] as? Bool == true {
+        await withCheckedContinuation { continuation in
+            guard readerAndDelegate != nil else { return continuation.resume() }
+            readerAndDelegateChangedObserver = NotificationCenter.default.addObserver(forName: .didChangeNFCReaderReaderAndDelegate, object: nil, queue: nil) { notification in
+                if (notification.userInfo ?? [:])[.isNilReaderAndDelegate] as? Bool == true {
                     NotificationCenter.default.removeObserver(notification.object as Any)
                     continuation.resume()
                 }
@@ -64,25 +63,24 @@ extension NFCReader {
         }
         try Task.checkCancellation()
         
-        let sessionAndDelegate = try throwingSessionAndDelegate()
-        self.sessionAndDelegate = (sessionAndDelegate.session, sessionAndDelegate.delegate as AnyObject)
-        self.sessionAndDelegate?.session.alertMessage = detectingAlertMessage
-        self.sessionAndDelegate?.session.begin()
+        readerAndDelegate = try throwingReaderAndDelegate()
+        await readerAndDelegate?.reader.set(alertMessage: detectingAlertMessage)
+        await readerAndDelegate?.reader.begin()
     }
     
-    public func invalidate() {
-        if sessionAndDelegate?.session.isReady == false {
-            sessionAndDelegate?.session.invalidate()
+    public func invalidate() async {
+        if await readerAndDelegate?.reader.isReady == false {
+            await readerAndDelegate?.reader.invalidate()
         }
-        sessionAndDelegate = nil
+        readerAndDelegate = nil
     }
     #endif
 }
 
 extension Notification.Name {
-    fileprivate static let didChangeNFCReaderSessionAndDelegate: Self = .init("DidChangeNFCReaderSessionAndDelegate")
+    fileprivate static let didChangeNFCReaderReaderAndDelegate: Self = .init("jp.tret.nfckit.didChangeNFCReaderReaderAndDelegate")
 }
 
 extension AnyHashable {
-    fileprivate static var isNilSessionAndDelegate: Self { #function }
+    fileprivate static var isNilReaderAndDelegate: Self { #function }
 }

@@ -7,16 +7,28 @@
 
 public protocol NFCTagType {
     #if canImport(CoreNFC)
-    associatedtype ReaderSession: NFCReaderSessionable
-    associatedtype ReaderSessionProtocol: Sendable
-    associatedtype ReaderSessionDetectObject
+    associatedtype Reader: NFCReaderProtocol
+    associatedtype ReaderProtocol: NFCReaderProtocol
+    associatedtype ReaderDetectObject
     #endif
-    associatedtype DetectResult
+    associatedtype DetectResult: NFCTagTypeDetectResult
+}
+
+public protocol NFCTagTypeDetectResult: Sendable {
+    static var success: Self { get }
+    static func success(alertMessage: String?) -> Self
+    static var restartPolling: Self { get }
+    static func restartPolling(alertMessage: String?) -> Self
+}
+
+public protocol NFCTagTypeFailableDetectResult: NFCTagTypeDetectResult {
+    static func failure(errorMessage: String) -> Self
+    static func failure(with error: Error) -> Self
 }
 
 public protocol _NFCTagTypeOpaqueTypeBuilderProtocol {
     #if canImport(CoreNFC)
-    associatedtype ReaderSessionProtocol: Sendable
-    var readerSessionProtocol: ReaderSessionProtocol { get }
+    associatedtype ReaderProtocol: NFCReaderProtocol
+    var readerProtocol: ReaderProtocol { get }
     #endif
 }
