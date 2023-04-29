@@ -9,14 +9,14 @@
 import TRETNFCKit_InfoPListChecker
 
 public actor NFCReader<TagType: NFCTagType> {
-#if canImport(CoreNFC)
+    #if canImport(CoreNFC)
     private(set) var readerAndDelegate: (reader: TagType.Reader, delegate: TagType.Reader.Delegate)? {
         didSet {
             NotificationCenter.default.post(name: .didChangeNFCReaderReaderAndDelegate, object: readerAndDelegateChangedObserver, userInfo: [.isNilReaderAndDelegate: readerAndDelegate == nil])
         }
     }
     private var readerAndDelegateChangedObserver: (any NSObjectProtocol)?
-#endif
+    #endif
     
     public init() {}
 }
