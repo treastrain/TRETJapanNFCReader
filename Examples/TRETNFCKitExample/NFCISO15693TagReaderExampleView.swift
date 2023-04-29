@@ -33,16 +33,16 @@ struct NFCISO15693TagReaderExampleView: View {
             onBeginReadingError: { error in
                 print(error)
             },
-            didBecomeActive: { session in
-                print(session.alertMessage)
+            didBecomeActive: { reader in
+                await print(reader.alertMessage)
             },
             didInvalidate: { error in
                 print(error)
             },
-            didDetect: { session, tags in
+            didDetect: { reader, tags in
                 let tag = tags.first!
-                let iso15693Tag = try await session.connectAsISO15693Tag(to: tag)
-                session.alertMessage = "\(iso15693Tag.identifier as NSData)"
+                let iso15693Tag = try await reader.connectAsISO15693Tag(to: tag)
+                await reader.set(alertMessage: "\(iso15693Tag.identifier as NSData)")
                 return .success
             }
         )
@@ -58,16 +58,16 @@ extension NFCISO15693TagReaderExampleView {
             reader = .init()
             try await reader.read(
                 detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { session in
-                    print(session.alertMessage)
+                didBecomeActive: { reader in
+                    await print(reader.alertMessage)
                 },
                 didInvalidate: { error in
                     print(error)
                 },
-                didDetect: { session, tags in
+                didDetect: { reader, tags in
                     let tag = tags.first!
-                    let iso15693Tag = try await session.connectAsISO15693Tag(to: tag)
-                    session.alertMessage = "\(iso15693Tag.identifier as NSData)"
+                    let iso15693Tag = try await reader.connectAsISO15693Tag(to: tag)
+                    await reader.set(alertMessage: "\(iso15693Tag.identifier as NSData)")
                     return .success
                 }
             )
