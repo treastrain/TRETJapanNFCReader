@@ -1,16 +1,13 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 let packageName = "TRETNFCKit"
 
 let swiftSettings: [SwiftSetting] = [
-    .unsafeFlags(
-        [
-            "-Xfrontend", "-warn-concurrency",
-            "-Xfrontend", "-enable-actor-data-race-checks",
-        ], .when(configuration: .debug)
-    ),
+    .enableUpcomingFeature("ExistentialAny"),
+    .enableUpcomingFeature("StrictConcurrency"),
+    .unsafeFlags(["-enable-actor-data-race-checks"], .when(configuration: .debug)),
 ]
 
 var products: [Product] = []
