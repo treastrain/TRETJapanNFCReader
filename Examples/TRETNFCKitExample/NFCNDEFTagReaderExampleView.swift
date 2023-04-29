@@ -33,17 +33,17 @@ struct NFCNDEFTagReaderExampleView: View {
             onBeginReadingError: { error in
                 print(error)
             },
-            didBecomeActive: { session in
-                print(session.alertMessage)
+            didBecomeActive: { reader in
+                await print(reader.alertMessage)
             },
             didInvalidate: { error in
                 print(error)
             },
-            didDetectNDEFs: { session, tags in
+            didDetectNDEFs: { reader, tags in
                 let tag = tags.first!
-                try await session.connect(to: tag)
+                try await reader.connect(to: tag)
                 let message = try await tag.readNDEF()
-                session.alertMessage = "\(message)"
+                await reader.set(alertMessage: "\(message)")
                 return .success
             }
         )
@@ -59,17 +59,17 @@ extension NFCNDEFTagReaderExampleView {
             reader = .init()
             try await reader.read(
                 detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { session in
-                    print(session.alertMessage)
+                didBecomeActive: { reader in
+                    await print(reader.alertMessage)
                 },
                 didInvalidate: { error in
                     print(error)
                 },
-                didDetect: { session, tags in
+                didDetect: { reader, tags in
                     let tag = tags.first!
-                    try await session.connect(to: tag)
+                    try await reader.connect(to: tag)
                     let message = try await tag.readNDEF()
-                    session.alertMessage = "\(message)"
+                    await reader.set(alertMessage: "\(message)")
                     return .success
                 }
             )

@@ -7,14 +7,14 @@
 
 public enum NDEFTag: NFCTagType {
     #if canImport(CoreNFC)
-    public typealias ReaderSession = NFCNDEFReaderSession
-    public typealias ReaderSessionProtocol = _NDEFTagOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some NFCNDEFTagReaderSessionProtocol`
-    public typealias ReaderSessionDetectObject = [any NFCNDEFTag]
+    public typealias Reader = NFCNDEFReader
+    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some NFCNDEFTagReaderProtocol`
+    public typealias ReaderDetectObject = [any NFCNDEFTag]
     #endif
 }
 
 extension NDEFTag {
-    public enum DetectResult: Sendable {
+    public enum DetectResult: NFCTagTypeFailableDetectResult {
         case success(alertMessage: String?)
         case failure(errorMessage: String)
         case restartPolling(alertMessage: String?)
@@ -32,10 +32,12 @@ extension NDEFTag.DetectResult {
 }
 
 #if canImport(CoreNFC)
-public enum _NDEFTagOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-    /// This is a dummy property to give `AfterBeginProtocol` to `some NFCNDEFTagReaderSessionProtocol`, which will not be called from either place.
-    public var readerSessionProtocol: some NFCNDEFTagReaderSessionProtocol {
-        NDEFTag.ReaderSession(delegate: _NFCNDEFReaderSessionOpaqueTypeBuilder(), queue: nil, invalidateAfterFirstRead: false)
+extension NDEFTag {
+    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+        /// This is a dummy property to give `ReaderProtocol` to `some NFCNDEFTagReaderProtocol`, which will not be called from either place.
+        public var readerProtocol: some NFCNDEFTagReaderProtocol {
+            NDEFTag.Reader(delegate: { fatalError("Do not call this property.") }(), taskPriority: nil, invalidateAfterFirstRead: false)
+        }
     }
 }
 #endif
