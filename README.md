@@ -24,6 +24,7 @@ A wrapper for Core NFC and a useful helper when using NFC, leveraging Swift feat
   - When using Core NFC directly, it is usually a delegation pattern. In this case, this is unsafe because it is possible to forget to call a necessary command.
   - By using this wrapper, it can be converted to a closure pattern compatible with Swift Concurrency, and the Swift syntax prevents forgetting to call the necessary commands.
 - ✅ Support Swift Concurrency (async/await, Actor, Sendable)
+  - It contains an Actor-wrapped [`NFCNDEFReaderSession`](https://developer.apple.com/documentation/corenfc/nfcndefreadersession)\, [`NFCTagReaderSession`](https://developer.apple.com/documentation/corenfc/nfctagreadersession)\, and [`NFCVASReaderSession`](https://developer.apple.com/documentation/corenfc/nfcvasreadersession)\, so they are safe for concurrency.
 - ✅ Support SwiftUI
 
 ## Native Tags (FeliCa (NFC-F), ISO 7816-compatible (NFC-A/B), ISO 15693-compatible (NFC-V), MiFare (NFC-A))
@@ -34,9 +35,9 @@ import TRETNFCKit_FeliCa
 let reader = FeliCaTagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-    didDetect: { session, tags in
+    didDetect: { reader, tags in
         let tag = tags.first!
-        let feliCaTag = try await session.connectAsFeliCaTag(to: tag)
+        let feliCaTag = try await reader.connectAsFeliCaTag(to: tag)
         let (statusFlag1, statusFlag2, blockData) = try await feliCaTag.readWithoutEncryption(serviceCodeList: /* ... */, blockList: /* ... */)
         print(statusFlag1, statusFlag2, blockData)
         return .success(alertMessage: "Done!")
@@ -53,9 +54,9 @@ Text("some view")
     .feliCaTagReader(
         isPresented: $isPresented,
         detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-        didDetect: { session, tags in
+        didDetect: { reader, tags in
             let tag = tags.first!
-            let feliCaTag = try await session.connectAsFeliCaTag(to: tag)
+            let feliCaTag = try await reader.connectAsFeliCaTag(to: tag)
             let (statusFlag1, statusFlag2, blockData) = try await feliCaTag.readWithoutEncryption(serviceCodeList: /* ... */, blockList: /* ... */)
             print(statusFlag1, statusFlag2, blockData)
             return .success(alertMessage: "Done!")
@@ -70,9 +71,9 @@ import TRETNFCKit_ISO7816
 let reader = ISO7816TagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-    didDetect: { session, tags in
+    didDetect: { reader, tags in
         let tag = tags.first!
-        let iso7816Tag = try await session.connectAsISO7816Tag(to: tag)
+        let iso7816Tag = try await reader.connectAsISO7816Tag(to: tag)
         print(iso7816Tag.identifier)
         // ...
         return .success(alertMessage: "Done!")
@@ -89,9 +90,9 @@ Text("some view")
     .iso7816TagReader(
         isPresented: $isPresented,
         detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-        didDetect: { session, tags in
+        didDetect: { reader, tags in
             let tag = tags.first!
-            let iso7816Tag = try await session.connectAsISO7816Tag(to: tag)
+            let iso7816Tag = try await reader.connectAsISO7816Tag(to: tag)
             print(iso7816Tag.identifier)
             // ...
             return .success(alertMessage: "Done!")
@@ -106,9 +107,9 @@ import TRETNFCKit_ISO15693
 let reader = ISO15693TagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-    didDetect: { session, tags in
+    didDetect: { reader, tags in
         let tag = tags.first!
-        let iso15693Tag = try await session.connectAsISO15693Tag(to: tag)
+        let iso15693Tag = try await reader.connectAsISO15693Tag(to: tag)
         print(iso15693Tag.identifier)
         // ...
         return .success(alertMessage: "Done!")
@@ -125,9 +126,9 @@ Text("some view")
     .iso15693TagReader(
         isPresented: $isPresented,
         detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-        didDetect: { session, tags in
+        didDetect: { reader, tags in
             let tag = tags.first!
-            let iso15693Tag = try await session.connectAsISO15693Tag(to: tag)
+            let iso15693Tag = try await reader.connectAsISO15693Tag(to: tag)
             print(iso15693Tag.identifier)
             // ...
             return .success(alertMessage: "Done!")
@@ -142,9 +143,9 @@ import TRETNFCKit_MiFare
 let reader = MiFareTagReader()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-    didDetect: { session, tags in
+    didDetect: { reader, tags in
         let tag = tags.first!
-        let miFareTag = try await session.connectAsMiFareTag(to: tag)
+        let miFareTag = try await reader.connectAsMiFareTag(to: tag)
         print(miFareTag.identifier)
         // ...
         return .success(alertMessage: "Done!")
@@ -161,9 +162,9 @@ Text("some view")
     .miFareTagReader(
         isPresented: $isPresented,
         detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-        didDetect: { session, tags in
+        didDetect: { reader, tags in
             let tag = tags.first!
-            let miFareTag = try await session.connectAsMiFareTag(to: tag)
+            let miFareTag = try await reader.connectAsMiFareTag(to: tag)
             print(miFareTag.identifier)
             // ...
             return .success(alertMessage: "Done!")
@@ -177,20 +178,20 @@ import TRETNFCKit_NativeTag
 
 let reader = NFCReader<NativeTag>()
 try await reader.read(
-    pollingOption: [.iso14443, .iso15693, .iso18092], // You can combine options to have the reader session scan and detect different tag types at the same time.
+    pollingOption: [.iso14443, .iso15693, .iso18092], // You can combine options to have the reader scan and detect different tag types at the same time.
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-    didDetect: { session, tags in
+    didDetect: { reader, tags in
         let tag = tags.first!
-        try await session.connect(to: tag)
+        try await reader.connect(to: tag)
         switch tag {
         case .feliCa(let feliCaTag):
-            session.alertMessage = "FeliCa\n\(feliCaTag.currentIDm as NSData)"
+            await reader.set(alertMessage: "FeliCa\n\(feliCaTag.currentIDm as NSData)")
         case .iso7816(let iso7816Tag):
-            session.alertMessage = "ISO14443-4 type A / B tag with ISO7816\n\(iso7816Tag.identifier as NSData)"
+            await reader.set(alertMessage: "ISO14443-4 type A / B tag with ISO7816\n\(iso7816Tag.identifier as NSData)")
         case .iso15693(let iso15693Tag):
-            session.alertMessage = "ISO 15693\n\(iso15693Tag.identifier as NSData)"
+            await reader.set(alertMessage: "ISO 15693\n\(iso15693Tag.identifier as NSData)")
         case .miFare(let miFareTag):
-            session.alertMessage = "MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443\n\(miFareTag.identifier as NSData)"
+            await reader.set(alertMessage: "MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443\n\(miFareTag.identifier as NSData)")
         }
         return .success
     }
@@ -205,20 +206,20 @@ import TRETNFCKit_NativeTag
 Text("some view")
     .nfcNativeTagReader(
         isPresented: $isPresented,
-        pollingOption: [.iso14443, .iso15693, .iso18092], // You can combine options to have the reader session scan and detect different tag types at the same time.
+        pollingOption: [.iso14443, .iso15693, .iso18092], // You can combine options to have the reader scan and detect different tag types at the same time.
         detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-        didDetect: { session, tags in
+        didDetect: { reader, tags in
             let tag = tags.first!
-            try await session.connect(to: tag)
+            try await reader.connect(to: tag)
             switch tag {
             case .feliCa(let feliCaTag):
-                session.alertMessage = "FeliCa\n\(feliCaTag.currentIDm as NSData)"
+                await reader.set(alertMessage: "FeliCa\n\(feliCaTag.currentIDm as NSData)")
             case .iso7816(let iso7816Tag):
-                session.alertMessage = "ISO14443-4 type A / B tag with ISO7816\n\(iso7816Tag.identifier as NSData)"
+                await reader.set(alertMessage: "ISO14443-4 type A / B tag with ISO7816\n\(iso7816Tag.identifier as NSData)")
             case .iso15693(let iso15693Tag):
-                session.alertMessage = "ISO 15693\n\(iso15693Tag.identifier as NSData)"
+                await reader.set(alertMessage: "ISO 15693\n\(iso15693Tag.identifier as NSData)")
             case .miFare(let miFareTag):
-                session.alertMessage = "MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443\n\(miFareTag.identifier as NSData)"
+                await reader.set(alertMessage: "MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443\n\(miFareTag.identifier as NSData)")
             }
             return .success
         }
@@ -232,9 +233,9 @@ import TRETNFCKit_NDEFTag
 let reader = NFCReader<NDEFTag>()
 try await reader.read(
     detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-    didDetect: { session, tags in
+    didDetect: { reader, tags in
         let tag = tags.first!
-        try await session.connect(to: tag)
+        try await reader.connect(to: tag)
         let message = try await tag.readNDEF()
         print(message)
         return .success(alertMessage: "Done!")
@@ -251,9 +252,9 @@ Text("some view")
     .nfcNDEFTagReader(
         isPresented: $isPresented,
         detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-        didDetectNDEFs: { session, tags in
+        didDetectNDEFs: { reader, tags in
             let tag = tags.first!
-            try await session.connect(to: tag)
+            try await reader.connect(to: tag)
             let message = try await tag.readNDEF()
             print(message)
             return .success(alertMessage: "Done!")
