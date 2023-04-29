@@ -9,14 +9,16 @@ public typealias ISO7816TagReader = NFCReader<NativeTag>
 
 extension ISO7816TagReader {
     #if canImport(CoreNFC)
-    public typealias ReaderSessionProtocol = _ISO7816TagReaderOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some ISO7816TagReaderSessionProtocol`
+    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some ISO7816TagReaderProtocol`
     #endif
 }
 
 #if canImport(CoreNFC)
-public enum _ISO7816TagReaderOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-    public var readerSessionProtocol: some ISO7816TagReaderSessionProtocol {
-        NativeTag.ReaderSession(pollingOption: [], delegate: _NFCTagReaderSessionOpaqueTypeBuilder())!
+extension ISO7816TagReader {
+    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+        public var readerProtocol: some ISO7816TagReaderProtocol {
+            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
+        }
     }
 }
 #endif
@@ -26,9 +28,9 @@ extension ISO7816TagReader {
     public func read(
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
-        didBecomeActive: @escaping @Sendable (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
-        didDetect: @escaping @Sendable (_ session: ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
+        didBecomeActive: @escaping @Sendable (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
+        didDetect: @escaping @Sendable (_ reader: ReaderProtocol, _ tags: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
     ) async throws {
         try await read(
             pollingOption: .iso14443,
@@ -36,7 +38,7 @@ extension ISO7816TagReader {
             detectingAlertMessage: detectingAlertMessage,
             didBecomeActive: didBecomeActive,
             didInvalidate: didInvalidate,
-            didDetect: { try await didDetect($0 as! ReaderSessionProtocol, $1) }
+            didDetect: { try await didDetect($0 as! ReaderProtocol, $1) }
         )
     }
     #endif
