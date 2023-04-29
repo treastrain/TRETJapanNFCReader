@@ -5,19 +5,17 @@
 //  Created by treastrain on 2022/09/24.
 //
 
-@_spi(TaskPriorityToDispatchQoSClass) import TRETNFCKit_Core
-
 extension NFCReader where TagType == NativeTag {
     #if canImport(ObjectiveC) && canImport(CoreNFC)
     public func read(
         pollingOption: NFCTagReaderSession.PollingOption,
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
-        didBecomeActive: @escaping @Sendable (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
-        didDetect: @escaping @Sendable (_ session: TagType.ReaderSessionProtocol, _ tags: TagType.ReaderSessionDetectObject) async throws -> TagType.DetectResult
+        didBecomeActive: @escaping @Sendable (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
+        didDetect: @escaping @Sendable (_ reader: TagType.ReaderProtocol, _ tags: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
     ) async throws {
-        let delegate = NFCNativeTagReaderSessionCallbackHandleObject(
+        let delegate = NFCNativeTagReaderCallBackHandleObject(
             taskPriority: taskPriority,
             didBecomeActive: didBecomeActive,
             didInvalidate: { error in
@@ -29,8 +27,8 @@ extension NFCReader where TagType == NativeTag {
             didDetect: didDetect
         )
         try await begin(
-            sessionAndDelegate: {
-                guard let session = TagType.ReaderSession(pollingOption: pollingOption, delegate: delegate, queue: taskPriority.map { .global(qos: $0.dispatchQoSClass) }) else {
+            readerAndDelegate: {
+                guard let reader = TagType.Reader(pollingOption: pollingOption, delegate: delegate, taskPriority: taskPriority) else {
                     if pollingOption.isEmpty {
                         // FIXME: replace with more accurate error
                         throw NFCReaderError(.readerErrorInvalidParameter)
@@ -39,7 +37,8 @@ extension NFCReader where TagType == NativeTag {
                         throw NFCReaderError(.readerSessionInvalidationErrorSystemIsBusy)
                     }
                 }
-                return (session, delegate)
+                delegate.reader = reader
+                return (reader, delegate)
             },
             detectingAlertMessage: detectingAlertMessage
         )

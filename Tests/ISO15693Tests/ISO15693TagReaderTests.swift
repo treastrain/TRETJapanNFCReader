@@ -7,10 +7,11 @@
 
 import XCTest
 #if canImport(CoreNFC)
-import CoreNFC
+@preconcurrency import protocol CoreNFC.NFCTagReaderSessionDelegate
 #endif
 
 @testable import TRETNFCKit_Core
+@testable import TRETNFCKit_NativeTag
 @testable import TRETNFCKit_ISO15693
 
 final class ISO15693TagReaderTests: XCTestCase {
@@ -27,31 +28,32 @@ final class ISO15693TagReaderTests: XCTestCase {
         try await reader.read(
             taskPriority: nil,
             detectingAlertMessage: alertMessage,
-            didBecomeActive: { session in
-                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NativeTag.ReaderSession>.size)
+            didBecomeActive: { reader in
+                XCTAssertEqual(MemoryLayout.size(ofValue: reader), MemoryLayout<NativeTag.Reader>.size)
                 didBecomeActiveExpectation.fulfill()
             },
             didInvalidate: { error in
                 XCTAssertEqual(error.code, .readerErrorUnsupportedFeature)
                 didInvalidateExpectation.fulfill()
             },
-            didDetect: { session, _ in
-                XCTAssertEqual(MemoryLayout.size(ofValue: session), MemoryLayout<NativeTag.ReaderSession>.size)
+            didDetect: { reader, _ in
+                XCTAssertEqual(MemoryLayout.size(ofValue: reader), MemoryLayout<NativeTag.Reader>.size)
                 didDetectExpectation.fulfill()
                 return .none
             }
         )
-        let readerSessionOrNil = await reader.sessionAndDelegate?.session
-        let readerSession = try XCTUnwrap(readerSessionOrNil)
-        XCTAssertEqual(readerSession.alertMessage, alertMessage)
-        let readerSessionDelegate = await reader.sessionAndDelegate?.delegate
-        XCTAssertNotNil(readerSessionDelegate)
+        let tagReaderOrNil = await reader.readerAndDelegate?.reader
+        let tagReader = try XCTUnwrap(tagReaderOrNil)
+        let tagReaderAlertMessage = await tagReader.alertMessage
+        XCTAssertEqual(tagReaderAlertMessage, alertMessage)
+        let tagReaderDelegate = await reader.readerAndDelegate?.delegate
+        XCTAssertNotNil(tagReaderDelegate)
         
-        let object = readerSessionDelegate as! NFCNativeTagReaderSessionCallbackHandleObject
-        object.tagReaderSessionDidBecomeActive(readerSession)
-        object.tagReaderSession(readerSession, didDetect: [])
+        let object = tagReaderDelegate as! NFCNativeTagReaderCallBackHandleObject
+        await object.didBecomeActive()
+        await object.didDetect(tags: [])
         
-        await waitForExpectations(timeout: 0.01)
+        await fulfillment(of: [didBecomeActiveExpectation, didInvalidateExpectation, didDetectExpectation], timeout: 0.01)
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif
@@ -59,7 +61,7 @@ final class ISO15693TagReaderTests: XCTestCase {
 }
 
 #if canImport(CoreNFC) && DEBUG
-extension NativeTag.ReaderSession {
+extension NativeTag.Reader.Session {
     open override class var readingAvailable: Bool { true }
 }
 #endif

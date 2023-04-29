@@ -34,13 +34,13 @@ struct NFCNDEFMessageReaderExampleView: View {
             onBeginReadingError: { error in
                 print(error)
             },
-            didBecomeActive: { session in
-                print(session.alertMessage)
+            didBecomeActive: { reader in
+                await print(reader.alertMessage)
             },
             didInvalidate: { error in
                 print(error)
             },
-            didDetectNDEFs: { session, messages in
+            didDetectNDEFs: { reader, messages in
                 print(messages)
                 return .success(alertMessage: "Done!")
             }
@@ -58,13 +58,13 @@ extension NFCNDEFMessageReaderExampleView {
             try await reader.read(
                 invalidateAfterFirstRead: false,
                 detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { session in
-                    print(session)
+                didBecomeActive: { reader in
+                    print(reader)
                 },
                 didInvalidate: { error in
                     print(error)
                 },
-                didDetectNDEFs: { session, messages in
+                didDetectNDEFs: { reader, messages in
                     print(messages)
                     return .success(alertMessage: "Done!")
                 }

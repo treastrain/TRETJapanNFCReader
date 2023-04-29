@@ -33,16 +33,16 @@ struct NFCMiFareTagReaderExampleView: View {
             onBeginReadingError: { error in
                 print(error)
             },
-            didBecomeActive: { session in
-                print(session.alertMessage)
+            didBecomeActive: { reader in
+                await print(reader.alertMessage)
             },
             didInvalidate: { error in
                 print(error)
             },
-            didDetect: { session, tags in
+            didDetect: { reader, tags in
                 let tag = tags.first!
-                let miFareTag = try await session.connectAsMiFareTag(to: tag)
-                session.alertMessage = "\(miFareTag.identifier as NSData)"
+                let miFareTag = try await reader.connectAsMiFareTag(to: tag)
+                await reader.set(alertMessage: "\(miFareTag.identifier as NSData)")
                 return .success
             }
         )
@@ -58,16 +58,16 @@ extension NFCMiFareTagReaderExampleView {
             reader = .init()
             try await reader.read(
                 detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { session in
-                    print(session.alertMessage)
+                didBecomeActive: { reader in
+                    await print(reader.alertMessage)
                 },
                 didInvalidate: { error in
                     print(error)
                 },
-                didDetect: { session, tags in
+                didDetect: { reader, tags in
                     let tag = tags.first!
-                    let miFareTag = try await session.connectAsMiFareTag(to: tag)
-                    session.alertMessage = "\(miFareTag.identifier as NSData)"
+                    let miFareTag = try await reader.connectAsMiFareTag(to: tag)
+                    await reader.set(alertMessage: "\(miFareTag.identifier as NSData)")
                     return .success
                 }
             )

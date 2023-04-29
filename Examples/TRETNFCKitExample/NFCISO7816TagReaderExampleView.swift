@@ -33,16 +33,16 @@ struct NFCISO7816TagReaderExampleView: View {
             onBeginReadingError: { error in
                 print(error)
             },
-            didBecomeActive: { session in
-                print(session.alertMessage)
+            didBecomeActive: { reader in
+                await print(reader.alertMessage)
             },
             didInvalidate: { error in
                 print(error)
             },
-            didDetect: { session, tags in
+            didDetect: { reader, tags in
                 let tag = tags.first!
-                let iso7816Tag = try await session.connectAsISO7816Tag(to: tag)
-                session.alertMessage = "\(iso7816Tag.identifier as NSData)"
+                let iso7816Tag = try await reader.connectAsISO7816Tag(to: tag)
+                await reader.set(alertMessage: "\(iso7816Tag.identifier as NSData)")
                 return .success
             }
         )
@@ -58,16 +58,16 @@ extension NFCISO7816TagReaderExampleView {
             reader = .init()
             try await reader.read(
                 detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { session in
-                    print(session.alertMessage)
+                didBecomeActive: { reader in
+                    await print(reader.alertMessage)
                 },
                 didInvalidate: { error in
                     print(error)
                 },
-                didDetect: { session, tags in
+                didDetect: { reader, tags in
                     let tag = tags.first!
-                    let iso7816Tag = try await session.connectAsISO7816Tag(to: tag)
-                    session.alertMessage = "\(iso7816Tag.identifier as NSData)"
+                    let iso7816Tag = try await reader.connectAsISO7816Tag(to: tag)
+                    await reader.set(alertMessage: "\(iso7816Tag.identifier as NSData)")
                     return .success
                 }
             )

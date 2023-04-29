@@ -14,9 +14,9 @@ public struct NFCNDEFMessageReaderViewModifier: @unchecked Sendable {
     private let invalidateAfterFirstRead: Bool
     private let detectingAlertMessage: String
     private let onBeginReadingError: @Sendable (Error) -> Void
-    private let didBecomeActive: @Sendable (_ session: NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void
+    private let didBecomeActive: @Sendable (Object.TagType.Reader.AfterBeginProtocol) async -> Void
     private let didInvalidate: @Sendable (NFCReaderError) -> Void
-    private let didDetectNDEFs: @Sendable (NDEFMessage.ReaderSessionProtocol, NDEFMessage.ReaderSessionDetectObject)  -> NDEFMessage.DetectResult
+    private let didDetectNDEFs: @Sendable (Object.TagType.ReaderProtocol, Object.TagType.ReaderDetectObject) async -> Object.TagType.DetectResult
     
     private let object = Object()
     
@@ -24,10 +24,10 @@ public struct NFCNDEFMessageReaderViewModifier: @unchecked Sendable {
         isPresented: Binding<Bool>,
         invalidateAfterFirstRead: Bool,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
-        didBecomeActive: @escaping @Sendable (_ session: NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
-        didDetectNDEFs: @escaping @Sendable (NDEFMessage.ReaderSessionProtocol, NDEFMessage.ReaderSessionDetectObject)  -> NDEFMessage.DetectResult
+        onBeginReadingError: @escaping @Sendable (_ error: Error) -> Void = { _ in },
+        didBecomeActive: @escaping @Sendable (_ reader: NDEFMessage.Reader.AfterBeginProtocol) async -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
+        didDetectNDEFs: @escaping @Sendable (_ reader: NDEFMessage.ReaderProtocol, _ messages: NDEFMessage.ReaderDetectObject) async -> NDEFMessage.DetectResult
     ) {
         self.isPresented = isPresented
         self.invalidateAfterFirstRead = invalidateAfterFirstRead
@@ -41,10 +41,11 @@ public struct NFCNDEFMessageReaderViewModifier: @unchecked Sendable {
 
 extension NFCNDEFMessageReaderViewModifier {
     private final class Object: @unchecked Sendable {
-        private var reader: NFCReader<NDEFMessage>?
+        typealias TagType = NDEFMessage
+        private var reader: NFCReader<TagType>?
         private var currentTask: Task<(), Never>?
         
-        func read(invalidateAfterFirstRead: Bool, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetectNDEFs: @escaping @Sendable (NDEFMessage.ReaderSessionProtocol, NDEFMessage.ReaderSessionDetectObject) -> NDEFMessage.DetectResult) {
+        func read(invalidateAfterFirstRead: Bool, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (TagType.Reader.AfterBeginProtocol) async -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetectNDEFs: @escaping @Sendable (TagType.ReaderProtocol, TagType.ReaderDetectObject) async -> TagType.DetectResult) {
             cancel()
             currentTask = Task {
                 await withTaskCancellationHandler {
@@ -115,10 +116,10 @@ extension View {
         isPresented: Binding<Bool>,
         invalidateAfterFirstRead: Bool,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (Error) -> Void = { _ in },
-        didBecomeActive: @escaping @Sendable (_ session: NDEFMessage.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
-        didDetectNDEFs: @escaping @Sendable (NDEFMessage.ReaderSessionProtocol, NDEFMessage.ReaderSessionDetectObject)  -> NDEFMessage.DetectResult
+        onBeginReadingError: @escaping @Sendable (_ error: Error) -> Void = { _ in },
+        didBecomeActive: @escaping @Sendable (_ reader: NDEFMessage.Reader.AfterBeginProtocol) async -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
+        didDetectNDEFs: @escaping @Sendable (_ reader: NDEFMessage.ReaderProtocol, _ messages: NDEFMessage.ReaderDetectObject) async -> NDEFMessage.DetectResult
     ) -> some View {
         modifier(
             NFCNDEFMessageReaderViewModifier(

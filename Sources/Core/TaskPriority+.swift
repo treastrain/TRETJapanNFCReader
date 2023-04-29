@@ -9,8 +9,7 @@ import Dispatch
 import Foundation
 
 extension TaskPriority {
-    @_spi(TaskPriorityToDispatchQoSClass)
-    public var dispatchQoSClass: DispatchQoS.QoSClass {
+    var dispatchQoSClass: DispatchQoS.QoSClass {
         switch self {
         case .unspecified:
             return .unspecified

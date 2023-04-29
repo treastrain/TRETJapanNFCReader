@@ -1,13 +1,13 @@
 //
-//  ISO7816TagReaderSessionProtocol.swift
+//  ISO7816TagReaderProtocol.swift
 //  ISO7816
 //
 //  Created by treastrain on 2022/11/22.
 //
 
-public protocol ISO7816TagReaderSessionProtocol: NFCNativeTagReaderSessionProtocol {}
+public protocol ISO7816TagReaderProtocol: NFCNativeTagReaderProtocol {}
 
-extension ISO7816TagReaderSessionProtocol {
+extension ISO7816TagReaderProtocol {
     #if canImport(CoreNFC)
     public func connectAsISO7816Tag(to tag: NFCTag) async throws -> any NFCISO7816Tag {
         guard case .iso7816(let iso7816Tag) = tag else {
@@ -20,5 +20,5 @@ extension ISO7816TagReaderSessionProtocol {
 }
 
 #if canImport(CoreNFC)
-extension NFCTagReaderSession: ISO7816TagReaderSessionProtocol {}
+extension NativeTag.Reader: ISO7816TagReaderProtocol {}
 #endif

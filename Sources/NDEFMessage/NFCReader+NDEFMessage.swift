@@ -5,19 +5,17 @@
 //  Created by treastrain on 2022/09/24.
 //
 
-@_spi(TaskPriorityToDispatchQoSClass) import TRETNFCKit_Core
-
 extension NFCReader where TagType == NDEFMessage {
     #if canImport(ObjectiveC) && canImport(CoreNFC)
     public func read(
         taskPriority: TaskPriority? = nil,
         invalidateAfterFirstRead: Bool,
         detectingAlertMessage: String,
-        didBecomeActive: @escaping @Sendable (_ session: TagType.ReaderSession.AfterBeginProtocol) -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (NFCReaderError) -> Void = { _ in },
-        didDetectNDEFs: @escaping @Sendable (_ session: TagType.ReaderSessionProtocol, _ messages: TagType.ReaderSessionDetectObject) -> TagType.DetectResult
+        didBecomeActive: @escaping @Sendable (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void = { _ in },
+        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
+        didDetectNDEFs: @escaping @Sendable (_ reader: TagType.ReaderProtocol, _ messages: TagType.ReaderDetectObject) async -> TagType.DetectResult
     ) async throws {
-        let delegate = NFCNDEFMessageReaderSessionCallbackHandleObject(
+        let delegate = NFCNDEFMessageReaderCallbackHandleObject(
             taskPriority: taskPriority,
             didBecomeActive: didBecomeActive,
             didInvalidate: { error in
@@ -28,8 +26,14 @@ extension NFCReader where TagType == NDEFMessage {
             },
             didDetectNDEFs: didDetectNDEFs
         )
+        let reader = TagType.Reader(
+            delegate: delegate,
+            taskPriority: taskPriority,
+            invalidateAfterFirstRead: invalidateAfterFirstRead
+        )
+        delegate.reader = reader
         try await begin(
-            sessionAndDelegate: { (.init(delegate: delegate, queue: taskPriority.map { .global(qos: $0.dispatchQoSClass) }, invalidateAfterFirstRead: invalidateAfterFirstRead), delegate) },
+            readerAndDelegate: { (reader, delegate) },
             detectingAlertMessage: detectingAlertMessage
         )
     }

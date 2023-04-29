@@ -1,13 +1,13 @@
 //
-//  MiFareTagReaderSessionProtocol.swift
+//  MiFareTagReaderProtocol.swift
 //  MiFare
 //
 //  Created by treastrain on 2022/11/26.
 //
 
-public protocol MiFareTagReaderSessionProtocol: NFCNativeTagReaderSessionProtocol {}
+public protocol MiFareTagReaderProtocol: NFCNativeTagReaderProtocol {}
 
-extension MiFareTagReaderSessionProtocol {
+extension MiFareTagReaderProtocol {
     #if canImport(CoreNFC)
     public func connectAsMiFareTag(to tag: NFCTag) async throws -> any NFCMiFareTag {
         guard case .miFare(let miFareTag) = tag else {
@@ -20,5 +20,5 @@ extension MiFareTagReaderSessionProtocol {
 }
 
 #if canImport(CoreNFC)
-extension NFCTagReaderSession: MiFareTagReaderSessionProtocol {}
+extension NativeTag.Reader: MiFareTagReaderProtocol {}
 #endif

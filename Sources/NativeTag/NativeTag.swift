@@ -7,14 +7,14 @@
 
 public enum NativeTag: NFCTagType {
     #if canImport(CoreNFC)
-    public typealias ReaderSession = NFCTagReaderSession
-    public typealias ReaderSessionProtocol = _NativeTagOpaqueTypeBuilder.ReaderSessionProtocol // it means like `some NFCNativeTagReaderSessionProtocol`
-    public typealias ReaderSessionDetectObject = [NFCTag]
+    public typealias Reader = NFCTagReader
+    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some NFCNativeTagReaderProtocol`
+    public typealias ReaderDetectObject = [NFCTag]
     #endif
 }
 
 extension NativeTag {
-    public enum DetectResult: Sendable {
+    public enum DetectResult: NFCTagTypeFailableDetectResult {
         case success(alertMessage: String?)
         case failure(errorMessage: String)
         case restartPolling(alertMessage: String?)
@@ -32,10 +32,12 @@ extension NativeTag.DetectResult {
 }
 
 #if canImport(CoreNFC)
-public enum _NativeTagOpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-    /// This is a dummy property to give `AfterBeginProtocol` to `some NFCNativeTagReaderSessionProtocol`, which will not be called from either place.
-    public var readerSessionProtocol: some NFCNativeTagReaderSessionProtocol {
-        NativeTag.ReaderSession(pollingOption: [], delegate: _NFCTagReaderSessionOpaqueTypeBuilder())!
+extension NativeTag {
+    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+        /// This is a dummy property to give `ReaderProtocol` to `some NFCNativeTagReaderProtocol`, which will not be called from either place.
+        public var readerProtocol: some NFCNativeTagReaderProtocol {
+            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }())!
+        }
     }
 }
 #endif
