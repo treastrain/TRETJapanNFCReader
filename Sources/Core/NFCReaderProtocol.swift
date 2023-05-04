@@ -10,6 +10,7 @@ public protocol NFCReaderProtocol: Actor {
     associatedtype Session: NFCReaderSessionProtocol
     associatedtype Delegate
     associatedtype AfterBeginProtocol: NFCReaderAfterBeginProtocol
+    associatedtype AfterDetectProtocol: NFCReaderAfterDetectProtocol
     
     var taskPriority: TaskPriority? { get }
     var delegate: AnyObject? { get }
@@ -27,5 +28,7 @@ public protocol NFCReaderProtocol: Actor {
 public protocol _NFCReaderOpaqueTypeBuilderProtocol {
     associatedtype AfterBeginProtocol: NFCReaderAfterBeginProtocol
     var afterBeginProtocol: AfterBeginProtocol { get }
+    associatedtype AfterDetectProtocol: NFCReaderAfterDetectProtocol
+    var afterDetectProtocol: AfterDetectProtocol { get }
 }
 #endif

@@ -107,10 +107,11 @@ private class NFCTestReaderSession: NSObject, NFCReaderSessionProtocol, @uncheck
     }
 }
 
-private actor NFCTestReaderReadingAvailable: NFCReaderProtocol, NFCReaderAfterBeginProtocol {
+private actor NFCTestReaderReadingAvailable: NFCReaderProtocol, NFCReaderAfterDetectProtocol {
     typealias Session = NFCTestReaderSessionReadingAvailable
     typealias Delegate = NFCTestReaderSessionReadingAvailable
     typealias AfterBeginProtocol = NFCTestReaderReadingAvailable
+    typealias AfterDetectProtocol = NFCTestReaderReadingAvailable
     
     var taskPriority: TaskPriority?
     var delegate: AnyObject?
@@ -135,10 +136,11 @@ private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession {
     class var readingAvailable: Bool { true }
 }
 
-private actor NFCTestReaderReadingUnavailable: NFCReaderProtocol, NFCReaderAfterBeginProtocol {
+private actor NFCTestReaderReadingUnavailable: NFCReaderProtocol, NFCReaderAfterDetectProtocol {
     typealias Session = NFCTestReaderSessionReadingUnavailable
     typealias Delegate = NFCTestReaderSessionReadingUnavailable
     typealias AfterBeginProtocol = NFCTestReaderReadingUnavailable
+    typealias AfterDetectProtocol = NFCTestReaderReadingUnavailable
     
     var taskPriority: TaskPriority?
     var delegate: AnyObject?
