@@ -19,7 +19,7 @@ extension View {
         didDetect: @escaping @Sendable (_ reader: ISO15693TagReader.ReaderProtocol, _ tags: NativeTag.ReaderDetectObject) async throws -> NativeTag.DetectResult
     ) -> some View {
         modifier(
-            NativeTagReaderViewModifier<ISO15693TagReader>(
+            NativeTag.ReaderViewModifier<ISO15693TagReader>(
                 isPresented: isPresented,
                 taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,

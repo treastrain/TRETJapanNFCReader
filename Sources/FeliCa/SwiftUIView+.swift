@@ -19,7 +19,7 @@ extension View {
         didDetect: @escaping @Sendable (_ reader: FeliCaTagReader.ReaderProtocol, _ tags: NativeTag.ReaderDetectObject) async throws -> NativeTag.DetectResult
     ) -> some View {
         modifier(
-            NativeTagReaderViewModifier<FeliCaTagReader>(
+            NativeTag.ReaderViewModifier<FeliCaTagReader>(
                 isPresented: isPresented,
                 taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
