@@ -7,24 +7,10 @@
 
 public typealias FeliCaTagReader = NFCReader<NativeTag>
 
-extension FeliCaTagReader {
+extension FeliCaTagReader: NativeTagReaderProtocol {
     #if canImport(CoreNFC)
     public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some FeliCaTagReaderProtocol`
-    #endif
-}
-
-#if canImport(CoreNFC)
-extension FeliCaTagReader {
-    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-        public var readerProtocol: some FeliCaTagReaderProtocol {
-            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
-        }
-    }
-}
-#endif
-
-extension FeliCaTagReader {
-    #if canImport(CoreNFC)
+    
     public func read(
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
@@ -43,3 +29,13 @@ extension FeliCaTagReader {
     }
     #endif
 }
+
+#if canImport(CoreNFC)
+extension FeliCaTagReader {
+    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+        public var readerProtocol: some FeliCaTagReaderProtocol {
+            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
+        }
+    }
+}
+#endif

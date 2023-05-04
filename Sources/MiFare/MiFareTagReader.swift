@@ -7,22 +7,10 @@
 
 public typealias MiFareTagReader = NFCReader<NativeTag>
 
-extension MiFareTagReader {
+extension MiFareTagReader: NativeTagReaderProtocol {
     #if canImport(CoreNFC)
     public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some MiFareTagReaderProtocol`
-    #endif
-}
-
-#if canImport(CoreNFC)
-public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-    public var readerProtocol: some MiFareTagReaderProtocol {
-        NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
-    }
-}
-#endif
-
-extension MiFareTagReader {
-    #if canImport(CoreNFC)
+    
     public func read(
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
@@ -41,3 +29,11 @@ extension MiFareTagReader {
     }
     #endif
 }
+
+#if canImport(CoreNFC)
+public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+    public var readerProtocol: some MiFareTagReaderProtocol {
+        NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
+    }
+}
+#endif

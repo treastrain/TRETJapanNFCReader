@@ -7,24 +7,10 @@
 
 public typealias ISO15693TagReader = NFCReader<NativeTag>
 
-extension ISO15693TagReader {
+extension ISO15693TagReader: NativeTagReaderProtocol {
     #if canImport(CoreNFC)
     public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some ISO15693TagReaderProtocol`
-    #endif
-}
-
-#if canImport(CoreNFC)
-extension ISO15693TagReader {
-    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-        public var readerProtocol: some ISO15693TagReaderProtocol {
-            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
-        }
-    }
-}
-#endif
-
-extension ISO15693TagReader {
-    #if canImport(CoreNFC)
+    
     public func read(
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
@@ -43,3 +29,13 @@ extension ISO15693TagReader {
     }
     #endif
 }
+
+#if canImport(CoreNFC)
+extension ISO15693TagReader {
+    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
+        public var readerProtocol: some ISO15693TagReaderProtocol {
+            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
+        }
+    }
+}
+#endif
