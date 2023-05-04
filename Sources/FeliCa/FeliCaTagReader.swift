@@ -9,14 +9,19 @@ public typealias FeliCaTagReader = NFCReader<NativeTag>
 
 extension FeliCaTagReader {
     #if canImport(CoreNFC)
-    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some FeliCaTagReaderProtocol`
+    public typealias ReaderProtocol = _OpaqueTypeBuilder.AfterDetectProtocol // it means like `some FeliCaTagReaderProtocol`
     #endif
 }
 
 #if canImport(CoreNFC)
 extension FeliCaTagReader {
-    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-        public var readerProtocol: some FeliCaTagReaderProtocol {
+    public enum _OpaqueTypeBuilder: _NFCReaderOpaqueTypeBuilderProtocol {
+        /// This is a dummy property to give `AfterBeginProtocol` to `some NFCReaderAfterBeginProtocol`, which will not be called from either place.
+        public var afterBeginProtocol: some NFCReaderAfterBeginProtocol {
+            afterDetectProtocol
+        }
+        /// This is a dummy property to give `AfterDetectProtocol` to `some FeliCaTagReaderProtocol`, which will not be called from either place.
+        public var afterDetectProtocol: some FeliCaTagReaderProtocol {
             NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
         }
     }

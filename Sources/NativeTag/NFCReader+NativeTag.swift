@@ -13,7 +13,7 @@ extension NFCReader where TagType == NativeTag {
         detectingAlertMessage: String,
         didBecomeActive: @escaping @Sendable (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void = { _ in },
         didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
-        didDetect: @escaping @Sendable (_ reader: TagType.ReaderProtocol, _ tags: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
+        didDetect: @escaping @Sendable (_ reader: TagType.Reader.AfterDetectProtocol, _ tags: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
     ) async throws {
         let delegate = NFCNativeTagReaderCallBackHandleObject(
             taskPriority: taskPriority,

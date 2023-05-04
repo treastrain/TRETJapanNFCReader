@@ -8,7 +8,6 @@
 public enum NativeTag: NFCTagType {
     #if canImport(CoreNFC)
     public typealias Reader = NFCTagReader
-    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some NFCNativeTagReaderProtocol`
     public typealias ReaderDetectObject = [NFCTag]
     #endif
 }
@@ -30,14 +29,3 @@ extension NativeTag.DetectResult {
         .failure(errorMessage: error.localizedDescription)
     }
 }
-
-#if canImport(CoreNFC)
-extension NativeTag {
-    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-        /// This is a dummy property to give `ReaderProtocol` to `some NFCNativeTagReaderProtocol`, which will not be called from either place.
-        public var readerProtocol: some NFCNativeTagReaderProtocol {
-            NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }())!
-        }
-    }
-}
-#endif

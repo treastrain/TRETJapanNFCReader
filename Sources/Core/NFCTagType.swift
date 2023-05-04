@@ -8,7 +8,6 @@
 public protocol NFCTagType {
     #if canImport(CoreNFC)
     associatedtype Reader: NFCReaderProtocol
-    associatedtype ReaderProtocol: NFCReaderAfterBeginProtocol
     associatedtype ReaderDetectObject
     #endif
     associatedtype DetectResult: NFCTagTypeDetectResult
@@ -24,11 +23,4 @@ public protocol NFCTagTypeDetectResult: Sendable {
 public protocol NFCTagTypeFailableDetectResult: NFCTagTypeDetectResult {
     static func failure(errorMessage: String) -> Self
     static func failure(with error: Error) -> Self
-}
-
-public protocol _NFCTagTypeOpaqueTypeBuilderProtocol {
-    #if canImport(CoreNFC)
-    associatedtype ReaderProtocol: NFCReaderAfterBeginProtocol
-    var readerProtocol: ReaderProtocol { get }
-    #endif
 }

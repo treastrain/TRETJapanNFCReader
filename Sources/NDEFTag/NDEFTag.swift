@@ -8,7 +8,6 @@
 public enum NDEFTag: NFCTagType {
     #if canImport(CoreNFC)
     public typealias Reader = NFCNDEFReader
-    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some NFCNDEFTagReaderProtocol`
     public typealias ReaderDetectObject = [any NFCNDEFTag]
     #endif
 }
@@ -30,14 +29,3 @@ extension NDEFTag.DetectResult {
         .failure(errorMessage: error.localizedDescription)
     }
 }
-
-#if canImport(CoreNFC)
-extension NDEFTag {
-    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-        /// This is a dummy property to give `ReaderProtocol` to `some NFCNDEFTagReaderProtocol`, which will not be called from either place.
-        public var readerProtocol: some NFCNDEFTagReaderProtocol {
-            NDEFTag.Reader(delegate: { fatalError("Do not call this property.") }(), taskPriority: nil, invalidateAfterFirstRead: false)
-        }
-    }
-}
-#endif

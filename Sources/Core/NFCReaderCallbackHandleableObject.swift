@@ -11,7 +11,7 @@ public protocol NFCReaderCallbackHandleableObject: Actor {
     nonisolated var taskPriority: TaskPriority? { get }
     var didBecomeActiveHandler: (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void { get }
     var didInvalidateHandler: (_ error: NFCReaderError) -> Void { get }
-    var didDetectHandler: (_ reader: TagType.ReaderProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult { get }
+    var didDetectHandler: (_ reader: TagType.Reader.AfterDetectProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult { get }
     #endif
 }
 

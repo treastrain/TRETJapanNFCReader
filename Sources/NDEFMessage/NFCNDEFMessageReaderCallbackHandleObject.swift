@@ -16,7 +16,7 @@ public actor NFCNDEFMessageReaderCallbackHandleObject: NSObject, NFCReaderCallba
     public let taskPriority: TaskPriority?
     public let didBecomeActiveHandler: (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void
     public let didInvalidateHandler: (_ error: NFCReaderError) -> Void
-    public let didDetectHandler: (_ reader: TagType.ReaderProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
+    public let didDetectHandler: (_ reader: TagType.Reader.AfterDetectProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
     
     nonisolated lazy var reader: TagType.Reader = { preconditionFailure("Set that reader before beginning.") }()
     
@@ -24,7 +24,7 @@ public actor NFCNDEFMessageReaderCallbackHandleObject: NSObject, NFCReaderCallba
         taskPriority: TaskPriority?,
         didBecomeActive: @escaping @Sendable (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void,
         didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void,
-        didDetectNDEFs: @escaping @Sendable (_ reader: TagType.ReaderProtocol, _ object: TagType.ReaderDetectObject) async -> TagType.DetectResult
+        didDetectNDEFs: @escaping @Sendable (_ reader: TagType.Reader.AfterDetectProtocol, _ object: TagType.ReaderDetectObject) async -> TagType.DetectResult
     ) {
         self.taskPriority = taskPriority
         self.didBecomeActiveHandler = didBecomeActive
@@ -62,7 +62,7 @@ extension NFCNDEFMessageReaderCallbackHandleObject {
     func didDetectNDEFs(messages: TagType.ReaderDetectObject) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetectHandler(reader as! TagType.ReaderProtocol, messages)
+            result = try await didDetectHandler(reader as! TagType.Reader.AfterDetectProtocol, messages)
         } catch {
             assertionFailure("Due to protocol restrictions, an error can be thrown in `NFCNDEFMessageReaderCallbackHandleObject.didDetectHandler`, but it is treated as a success.")
             result = .success(alertMessage: nil)

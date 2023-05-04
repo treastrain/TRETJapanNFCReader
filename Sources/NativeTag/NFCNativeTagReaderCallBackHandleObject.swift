@@ -16,7 +16,7 @@ public actor NFCNativeTagReaderCallBackHandleObject: NSObject, NFCReaderCallback
     public let taskPriority: TaskPriority?
     public let didBecomeActiveHandler: (_ reader:TagType.Reader.AfterBeginProtocol) async -> Void
     public let didInvalidateHandler: (_ error: NFCReaderError) -> Void
-    public let didDetectHandler: (_ reader: TagType.ReaderProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
+    public let didDetectHandler: (_ reader: TagType.Reader.AfterDetectProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
     
     nonisolated lazy var reader: TagType.Reader = { preconditionFailure("Set that reader before beginning.") }()
     
@@ -24,7 +24,7 @@ public actor NFCNativeTagReaderCallBackHandleObject: NSObject, NFCReaderCallback
         taskPriority: TaskPriority?,
         didBecomeActive: @escaping @Sendable (_ reader: TagType.Reader.AfterBeginProtocol) async -> Void,
         didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void,
-        didDetect: @escaping @Sendable (_ reader: TagType.ReaderProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
+        didDetect: @escaping @Sendable (_ reader: TagType.Reader.AfterDetectProtocol, _ object: TagType.ReaderDetectObject) async throws -> TagType.DetectResult
     ) {
         self.taskPriority = taskPriority
         self.didBecomeActiveHandler = didBecomeActive
@@ -62,7 +62,7 @@ extension NFCNativeTagReaderCallBackHandleObject {
     func didDetect(tags: TagType.ReaderDetectObject) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetectHandler(reader as! TagType.ReaderProtocol, tags)
+            result = try await didDetectHandler(reader as! TagType.Reader.AfterDetectProtocol, tags)
         } catch {
             result = .failure(with: error)
         }

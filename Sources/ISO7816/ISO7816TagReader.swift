@@ -9,14 +9,19 @@ public typealias ISO7816TagReader = NFCReader<NativeTag>
 
 extension ISO7816TagReader {
     #if canImport(CoreNFC)
-    public typealias ReaderProtocol = _OpaqueTypeBuilder.ReaderProtocol // it means like `some ISO7816TagReaderProtocol`
+    public typealias ReaderProtocol = _OpaqueTypeBuilder.AfterDetectProtocol // it means like `some ISO7816TagReaderProtocol`
     #endif
 }
 
 #if canImport(CoreNFC)
 extension ISO7816TagReader {
-    public enum _OpaqueTypeBuilder: _NFCTagTypeOpaqueTypeBuilderProtocol {
-        public var readerProtocol: some ISO7816TagReaderProtocol {
+    public enum _OpaqueTypeBuilder: _NFCReaderOpaqueTypeBuilderProtocol {
+        /// This is a dummy property to give `AfterBeginProtocol` to `some NFCReaderAfterBeginProtocol`, which will not be called from either place.
+        public var afterBeginProtocol: some NFCReaderAfterBeginProtocol {
+            afterDetectProtocol
+        }
+        /// This is a dummy property to give `AfterDetectProtocol` to `some ISO7816TagReaderProtocol`, which will not be called from either place.
+        public var afterDetectProtocol: some ISO7816TagReaderProtocol {
             NativeTag.Reader(pollingOption: [], delegate: { fatalError("Do not call this property.") }(), taskPriority: nil)!
         }
     }
