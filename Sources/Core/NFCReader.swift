@@ -10,7 +10,7 @@ import TRETNFCKit_InfoPListChecker
 
 public actor NFCReader<TagType: NFCTagType> {
     #if canImport(CoreNFC)
-    private(set) var readerAndDelegate: (reader: TagType.Reader, delegate: TagType.Reader.Delegate)? {
+    private var readerAndDelegate: (reader: TagType.Reader, delegate: TagType.Reader.Delegate)? {
         didSet {
             NotificationCenter.default.post(name: .didChangeNFCReaderReaderAndDelegate, object: readerAndDelegateChangedObserver, userInfo: [.isNilReaderAndDelegate: readerAndDelegate == nil])
         }
@@ -20,6 +20,7 @@ public actor NFCReader<TagType: NFCTagType> {
     
     public init() {}
 }
+
 extension NFCReader {
     #if canImport(CoreNFC)
     public func begin(
@@ -69,9 +70,14 @@ extension NFCReader {
     }
     
     public func invalidate() async {
-        if await readerAndDelegate?.reader.isReady == false {
-            await readerAndDelegate?.reader.invalidate()
+        let reader = readerAndDelegate?.reader
+        if await reader?.isReady == true {
+            await reader?.invalidate()
         }
+    }
+    
+    public func _invalidateWithResetReaderAndDelegate() async {
+        await invalidate()
         readerAndDelegate = nil
     }
     #endif

@@ -21,7 +21,7 @@ extension NFCReader where TagType == NDEFMessage {
             didInvalidate: { error in
                 didInvalidate(error)
                 Task {
-                    await self.invalidate()
+                    await self._invalidateWithResetReaderAndDelegate()
                 }
             },
             didDetectNDEFs: didDetectNDEFs

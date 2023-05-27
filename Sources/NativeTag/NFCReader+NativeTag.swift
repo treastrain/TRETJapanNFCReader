@@ -21,7 +21,7 @@ extension NFCReader where TagType == NativeTag {
             didInvalidate: { error in
                 didInvalidate(error)
                 Task {
-                    await self.invalidate()
+                    await self._invalidateWithResetReaderAndDelegate()
                 }
             },
             didDetect: didDetect
