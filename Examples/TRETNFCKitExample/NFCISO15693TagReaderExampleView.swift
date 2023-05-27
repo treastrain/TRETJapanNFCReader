@@ -17,8 +17,13 @@ struct NFCISO15693TagReaderExampleView: View {
             Button {
                 isPresented = true
             } label: {
-                Text("Read (using view modifier)")
+                HStack {
+                    Text("Read (using view modifier)")
+                    Spacer()
+                    if isPresented { ProgressView() }
+                }
             }
+            .disabled(isPresented)
             Button {
                 Task {
                     try await viewModel.read()
