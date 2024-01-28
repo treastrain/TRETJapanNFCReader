@@ -50,6 +50,7 @@ let assertServices = add(moduleName: "AssertServices", includesTest: false)
 let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false)
 
 // MARK: - Modules - Primary
+let async = add(moduleName: "Async", includesTest: false)
 let core = add(moduleName: "Core", dependencies: [assertServices, infoPListChecker], includesTest: true)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: true)
 add(moduleName: "NDEFMessage", dependencies: [core], includesTest: true)
