@@ -9,8 +9,8 @@ on:
 
 env:
   SCHEME_NAME: TRETNFCKitExample
-  IOS_SIMULATOR_NAME: iPhone 14 Pro
-  XCODE_SELECT_PATH: '/Applications/Xcode_14.3.app/Contents/Developer'
+  IOS_SIMULATOR_NAME: iPhone 15 Pro
+  XCODE_SELECT_PATH: '/Applications/Xcode_15.2.app/Contents/Developer'
 
 jobs:
   show_software_information:
@@ -21,7 +21,7 @@ jobs:
         os: [macos-13]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Show Xcode list
       run: ls -n /Applications | grep 'Xcode'
     - name: Show the default version of Xcode
@@ -44,7 +44,7 @@ jobs:
         platform: ['iOS']
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set Xcode version
       run: sudo xcode-select -s '${{ env.XCODE_SELECT_PATH }}'
     - name: Build the scheme
@@ -55,14 +55,14 @@ jobs:
       working-directory: ./Examples
     - name: Upload Xcode Build log
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: xcodebuild log (${{ matrix.platform }})
         path: |
             Examples/xcodebuild-${{ matrix.platform }}.log
     - name: Upload Xcode DerivedData
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Xcode DerivedData (${{ matrix.platform }})
         path: |
