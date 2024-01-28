@@ -23,7 +23,7 @@ public protocol NFCTagTypeDetectResult: Sendable {
 
 public protocol NFCTagTypeFailableDetectResult: NFCTagTypeDetectResult {
     static func failure(errorMessage: String) -> Self
-    static func failure(with error: Error) -> Self
+    static func failure(with error: any Error) -> Self
 }
 
 public protocol _NFCTagTypeOpaqueTypeBuilderProtocol {

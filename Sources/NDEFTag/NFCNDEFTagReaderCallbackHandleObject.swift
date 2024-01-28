@@ -43,7 +43,7 @@ extension NFCNDEFTagReaderCallbackHandleObject: NDEFTag.Reader.Delegate {
         }
     }
     
-    public nonisolated func readerSession(_ session: TagType.Reader.Session, didInvalidateWithError error: Error) {
+    public nonisolated func readerSession(_ session: TagType.Reader.Session, didInvalidateWithError error: any Error) {
         didInvalidateWithError(session, error: error)
     }
     

@@ -12,7 +12,7 @@ public actor NFCTagReader: Actor {
     private let session: Session
     public nonisolated let taskPriority: TaskPriority?
     
-    public init?(pollingOption: Session.PollingOption, delegate: Delegate & Actor, taskPriority: TaskPriority? = nil) {
+    public init?(pollingOption: Session.PollingOption, delegate: any Delegate & Actor, taskPriority: TaskPriority? = nil) {
         guard let session = Session(pollingOption: pollingOption, delegate: delegate, queue: taskPriority.map { .global(qos: $0.dispatchQoSClass) }) else {
             return nil
         }

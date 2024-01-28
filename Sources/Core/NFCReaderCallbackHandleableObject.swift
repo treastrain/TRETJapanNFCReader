@@ -17,7 +17,7 @@ public protocol NFCReaderCallbackHandleableObject: Actor {
 
 #if canImport(CoreNFC)
 extension NFCReaderCallbackHandleableObject {
-    public nonisolated func didInvalidateWithError(_ session: TagType.Reader.Session, error: Error) {
+    public nonisolated func didInvalidateWithError(_ session: TagType.Reader.Session, error: any Error) {
         Task(priority: taskPriority) {
             await didInvalidateWithError(error: error)
         }
@@ -25,7 +25,7 @@ extension NFCReaderCallbackHandleableObject {
 }
 
 extension NFCReaderCallbackHandleableObject {
-    private func didInvalidateWithError(error: Error) {
+    private func didInvalidateWithError(error: any Error) {
         didInvalidateHandler(error as! NFCReaderError)
     }
 }
