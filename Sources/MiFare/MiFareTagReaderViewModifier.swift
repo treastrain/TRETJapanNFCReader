@@ -13,7 +13,7 @@ public struct MiFareTagReaderViewModifier: @unchecked Sendable {
     private var isPresented: Binding<Bool>
     private let taskPriority: TaskPriority?
     private let detectingAlertMessage: String
-    private let onBeginReadingError: @Sendable (Error) -> Void
+    private let onBeginReadingError: @Sendable (any Error) -> Void
     private let didBecomeActive: @Sendable (Object.TagType.Reader.AfterBeginProtocol) async -> Void
     private let didInvalidate: @Sendable (NFCReaderError) -> Void
     private let didDetect: @Sendable (MiFareTagReader.ReaderProtocol, Object.TagType.ReaderDetectObject) async throws -> Object.TagType.DetectResult
@@ -24,7 +24,7 @@ public struct MiFareTagReaderViewModifier: @unchecked Sendable {
         isPresented: Binding<Bool>,
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (_ error: Error) -> Void = { _ in },
+        onBeginReadingError: @escaping @Sendable (_ error: any Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ reader: NativeTag.Reader.AfterBeginProtocol) async -> Void = { _ in },
         didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
         didDetect: @escaping @Sendable (_ reader: MiFareTagReader.ReaderProtocol, _ tags: NativeTag.ReaderDetectObject) async throws -> NativeTag.DetectResult
@@ -45,7 +45,7 @@ extension MiFareTagReaderViewModifier {
         private var reader: MiFareTagReader?
         private var currentTask: Task<(), Never>?
         
-        func read(taskPriority: TaskPriority?, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (Error) -> Void, didBecomeActive: @escaping @Sendable (TagType.Reader.AfterBeginProtocol) async -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (MiFareTagReader.ReaderProtocol, TagType.ReaderDetectObject) async throws -> TagType.DetectResult) {
+        func read(taskPriority: TaskPriority?, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (any Error) -> Void, didBecomeActive: @escaping @Sendable (TagType.Reader.AfterBeginProtocol) async -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (MiFareTagReader.ReaderProtocol, TagType.ReaderDetectObject) async throws -> TagType.DetectResult) {
             cancel()
             currentTask = Task {
                 await withTaskCancellationHandler {
@@ -116,7 +116,7 @@ extension View {
         isPresented: Binding<Bool>,
         taskPriority: TaskPriority? = nil,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (_ error: Error) -> Void = { _ in },
+        onBeginReadingError: @escaping @Sendable (_ error: any Error) -> Void = { _ in },
         didBecomeActive: @escaping @Sendable (_ reader: NativeTag.Reader.AfterBeginProtocol) async -> Void = { _ in },
         didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
         didDetect: @escaping @Sendable (_ reader: MiFareTagReader.ReaderProtocol, _ tags: NativeTag.ReaderDetectObject) async throws -> NativeTag.DetectResult

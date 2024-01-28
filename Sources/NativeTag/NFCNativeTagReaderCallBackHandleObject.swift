@@ -43,7 +43,7 @@ extension NFCNativeTagReaderCallBackHandleObject: NativeTag.Reader.Delegate {
         }
     }
     
-    public nonisolated func tagReaderSession(_ session: TagType.Reader.Session, didInvalidateWithError error: Error) {
+    public nonisolated func tagReaderSession(_ session: TagType.Reader.Session, didInvalidateWithError error: any Error) {
         didInvalidateWithError(session, error: error)
     }
     

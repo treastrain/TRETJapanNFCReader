@@ -16,7 +16,7 @@ final class NFCTagReaderTests: XCTestCase {
     func testConformingNFCTagReaderSession() throws {
         #if canImport(CoreNFC)
         XCTAssertIdentical(NFCTagReader.Session.self, NFCTagReaderSession.self)
-        XCTAssertEqual(String(describing: NFCTagReader.Delegate.self), String(describing: NFCTagReaderSessionDelegate.self)) // XCTAssertIdentical((any NFCTagReader.Delegate).self as AnyObject, (any NFCTagReaderSessionDelegate).self as AnyObject) // TODO: wait fixing https://gist.github.com/treastrain/6e9358d3e715720568004d99aabb25fc
+        XCTAssertEqual(String(describing: (any NFCTagReader.Delegate).self), String(describing: (any NFCTagReaderSessionDelegate).self)) // XCTAssertIdentical((any NFCTagReader.Delegate).self as AnyObject, (any NFCTagReaderSessionDelegate).self as AnyObject) // TODO: wait fixing https://gist.github.com/treastrain/6e9358d3e715720568004d99aabb25fc
         #else
         throw XCTSkip("Support for this platform is not considered.")
         #endif

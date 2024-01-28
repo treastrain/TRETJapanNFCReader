@@ -26,7 +26,7 @@ extension NativeTag.DetectResult {
     public static var success: Self = .success(alertMessage: nil)
     public static var restartPolling: Self = .restartPolling(alertMessage: nil)
     
-    public static func failure(with error: Error) -> Self {
+    public static func failure(with error: any Error) -> Self {
         .failure(errorMessage: error.localizedDescription)
     }
 }

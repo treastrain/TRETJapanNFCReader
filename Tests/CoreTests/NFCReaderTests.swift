@@ -90,7 +90,7 @@ private enum TestTag<Reader>: NFCTagType where Reader: Actor & NFCReaderProtocol
         
         static var success: Self { .success(alertMessage: nil) }
         static var restartPolling: Self { .restartPolling(alertMessage: nil) }
-        static func failure(with error: Error) -> Self {
+        static func failure(with error: any Error) -> Self {
             failure(errorMessage: error.localizedDescription)
         }
     }
