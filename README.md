@@ -19,16 +19,28 @@ A wrapper for Core NFC and a useful helper when using NFC, leveraging Swift feat
 [![Xcode Build & Test](https://github.com/treastrain/TRETJapanNFCReader/actions/workflows/xcodebuild.yml/badge.svg?branch=tretnfckit-main)](https://github.com/treastrain/TRETJapanNFCReader/actions/workflows/xcodebuild.yml)
 [![Example App Build](https://github.com/treastrain/TRETJapanNFCReader/actions/workflows/xcodebuild_for_example_app.yml/badge.svg?branch=tretnfckit-main)](https://github.com/treastrain/TRETJapanNFCReader/actions/workflows/xcodebuild_for_example_app.yml)
 
-# Usage
-- ✅ No delegation pattern
-  - When using Core NFC directly, it is usually a delegation pattern. In this case, this is unsafe because it is possible to forget to call a necessary command.
-  - By using this wrapper, it can be converted to a closure pattern compatible with Swift Concurrency, and the Swift syntax prevents forgetting to call the necessary commands.
-- ✅ Support Swift Concurrency (async/await, Actor, Sendable)
-  - It contains an Actor-wrapped [`NFCNDEFReaderSession`](https://developer.apple.com/documentation/corenfc/nfcndefreadersession)\, [`NFCTagReaderSession`](https://developer.apple.com/documentation/corenfc/nfctagreadersession)\, and [`NFCVASReaderSession`](https://developer.apple.com/documentation/corenfc/nfcvasreadersession)\, so they are safe for concurrency.
+# Features
+- ✅ (For beginners) A high-level wrapper for reader that can prevent forgetting to call necessary commands
+  - `FeliCaTagReader`: FeliCa (NFC-F)
+  - `ISO7816TagReader`: ISO 7816-compatible (NFC-A/B)
+  - `ISO15693TagReader`: ISO 15693-compatible (NFC-V)
+  - `MiFareTagReader`: MiFare (MIFARE Plus, UltraLight, DESFire) base on ISO 14443 (NFC-A)
+  - `NFCReader`: (for use directly)
+    - `NFCReader<NDEFMessage>`
+    - `NFCReader<NDEFTag>`
+    - `NFCReader<NativeTag>`
+- ✅ (For experts) A low-level wrapper for reader session that includes a conversion to the `AsyncSequence` pattern from the delegation pattern originally provided by Core NFC
+  - The asynchronous sequence is implemented in the following wrappers, which is very similar to [`CardSession.eventStream`](https://developer.apple.com/documentation/corenfc/cardsession/4318517-eventstream) (provided by Core NFC in iOS 17.4+, which allows communication with HCE-based NFC readers based on ISO 7816-4)
+    - `AsyncNFCNDEFMessageReaderSession` (for [`NFCNDEFReaderSession`](https://developer.apple.com/documentation/corenfc/nfcndefreadersession) with [`NFCNDEFMessage`](https://developer.apple.com/documentation/corenfc/nfcndeftag)s)
+    - `AsyncNFCNDEFTagReaderSession` (for [`NFCNDEFReaderSession`](https://developer.apple.com/documentation/corenfc/nfcndefreadersession) with [`NFCNDEFTag`](https://developer.apple.com/documentation/corenfc/nfcndefmessage)s)
+    - `AsyncNFCTagReaderSession` (for [`NFCTagReaderSession`](https://developer.apple.com/documentation/corenfc/nfctagreadersession))
+    - `AsyncNFCVASReaderSession` (for [`NFCVASReaderSession`](https://developer.apple.com/documentation/corenfc/nfcvasreadersession))
 - ✅ Support SwiftUI
 
-## Native Tags (FeliCa (NFC-F), ISO 7816-compatible (NFC-A/B), ISO 15693-compatible (NFC-V), MiFare (NFC-A))
-### FeliCa (NFC-F)
+# Usage
+## High-level wrappers
+### Native Tags (FeliCa (NFC-F), ISO 7816-compatible (NFC-A/B), ISO 15693-compatible (NFC-V), MiFare (NFC-A))
+#### FeliCa (NFC-F)
 ```swift
 import TRETNFCKit_FeliCa
 
@@ -45,7 +57,7 @@ try await reader.read(
 }
 ```
 
-#### for SwiftUI
+##### for SwiftUI
 ```swift
 import SwiftUI
 import TRETNFCKit_FeliCa
@@ -64,7 +76,7 @@ Text("some view")
     )
 ```
 
-### ISO 7816-compatible (NFC-A/B)
+#### ISO 7816-compatible (NFC-A/B)
 ```swift
 import TRETNFCKit_ISO7816
 
@@ -81,7 +93,7 @@ try await reader.read(
 }
 ```
 
-#### for SwiftUI
+##### for SwiftUI
 ```swift
 import SwiftUI
 import TRETNFCKit_ISO7816
@@ -100,7 +112,7 @@ Text("some view")
     )
 ```
 
-### ISO 15693-compatible (NFC-V)
+#### ISO 15693-compatible (NFC-V)
 ```swift
 import TRETNFCKit_ISO15693
 
@@ -117,7 +129,7 @@ try await reader.read(
 }
 ```
 
-#### for SwiftUI
+##### for SwiftUI
 ```swift
 import SwiftUI
 import TRETNFCKit_ISO15693
@@ -136,7 +148,7 @@ Text("some view")
     )
 ```
 
-### MiFare (MIFARE Plus, UltraLight, DESFire) base on ISO 14443 (NFC-A)
+#### MiFare (MIFARE Plus, UltraLight, DESFire) base on ISO 14443 (NFC-A)
 ```swift
 import TRETNFCKit_MiFare
 
@@ -153,7 +165,7 @@ try await reader.read(
 }
 ```
 
-#### for SwiftUI
+##### for SwiftUI
 ```swift
 import SwiftUI
 import TRETNFCKit_MiFare
@@ -172,7 +184,7 @@ Text("some view")
     )
 ```
 
-### Use directly
+#### Use directly
 ```swift
 import TRETNFCKit_NativeTag
 
@@ -198,7 +210,7 @@ try await reader.read(
 )
 ```
 
-#### for SwiftUI
+##### for SwiftUI
 ```swift
 import SwiftUI
 import TRETNFCKit_NativeTag
@@ -226,7 +238,7 @@ Text("some view")
     )
 ```
 
-## NDEF Tags
+### NDEF Tags
 ```swift
 import TRETNFCKit_NDEFTag
 
@@ -262,7 +274,7 @@ Text("some view")
     )
 ```
 
-## NDEF Messages
+### NDEF Messages
 ```swift
 import TRETNFCKit_NDEFMessage
 
@@ -292,6 +304,159 @@ Text("some view")
             return .success(alertMessage: "Done!")
         }
     )
+```
+
+## Low-level wrappers
+
+### `AsyncNFCTagReaderSession` (for [`NFCTagReaderSession`](https://developer.apple.com/documentation/corenfc/nfctagreadersession))
+```swift
+import TRETNFCKit_Async
+
+func asyncNFCTagReaderSessionSample() async {
+    guard AsyncNFCTagReaderSession.readingAvailable else {
+        return
+    }
+    
+    let readerSession = AsyncNFCTagReaderSession(
+        pollingOption: // ...
+    )
+    
+    for await event in readerSession.eventStream {
+        switch event {
+        case .sessionIsReady:
+            readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            readerSession.start()
+        case .sessionStarted:
+            // ..
+        case .sessionBecomeActive:
+            // ..
+        case .sessionDetected(let tags):
+            let tag = tags.first!
+            do {
+                try await readerSession.connect(to: tag)
+                // ...
+                readerSession.stop()
+            } catch {
+                readerSession.stop(errorMessage: error.localizedDescription)
+            }
+        case .sessionCreationFailed(let reason):
+            // ..
+        case .sessionInvalidated(let reason):
+            // ..
+        }
+    }
+}
+```
+
+#### with SwiftUI
+See `Examples/TRETNFCKitExample/NFCNativeTagReaderExampleView.swift`.
+
+### `AsyncNFCNDEFTagReaderSession` (for [`NFCNDEFReaderSession`](https://developer.apple.com/documentation/corenfc/nfcndefreadersession) with [`NFCNDEFTag`](https://developer.apple.com/documentation/corenfc/nfcndefmessage)s)
+```swift
+import TRETNFCKit_Async
+
+func asyncNFCNDEFTagReaderSessionSample() async {
+    guard AsyncNFCNDEFTagReaderSession.readingAvailable else {
+        return
+    }
+    
+    let readerSession = AsyncNFCNDEFTagReaderSession(
+        invalidateAfterFirstRead: // ...
+    )
+    
+    for await event in readerSession.eventStream {
+        switch event {
+        case .sessionIsReady:
+            readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            readerSession.start()
+        case .sessionStarted:
+            // ...
+        case .sessionBecomeActive:
+            // ...
+        case .sessionDetected(let tags):
+            let tag = tags.first!
+            do {
+                try await readerSession.connect(to: tag)
+                // ...
+                readerSession.stop()
+            } catch {
+                readerSession.stop(errorMessage: error.localizedDescription)
+            }
+        case .sessionInvalidated(let reason):
+            // ...
+        }
+    }
+}
+```
+
+#### with SwiftUI
+See `Examples/TRETNFCKitExample/NFCNDEFTagReaderExampleView.swift`.
+
+### `AsyncNFCNDEFMessageReaderSession` (for [`NFCNDEFReaderSession`](https://developer.apple.com/documentation/corenfc/nfcndefreadersession) with [`NFCNDEFMessage`](https://developer.apple.com/documentation/corenfc/nfcndeftag)s)
+```swift
+import TRETNFCKit_Async
+
+func asyncNFCNDEFMessageReaderSessionSample() async {
+    guard AsyncNFCNDEFMessageReaderSession.readingAvailable else {
+        return
+    }
+    
+    let readerSession = AsyncNFCNDEFMessageReaderSession(
+        invalidateAfterFirstRead: // ...
+    )
+    
+    for await event in readerSession.eventStream {
+        switch event {
+        case .sessionIsReady:
+            readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            readerSession.start()
+        case .sessionStarted:
+            // ...
+        case .sessionBecomeActive:
+            // ...
+        case .sessionDetected(let messages):
+            // ...
+            readerSession.stop()
+        case .sessionInvalidated(let reason):
+            // ...
+        }
+    }
+}
+```
+
+#### with SwiftUI
+See `Examples/TRETNFCKitExample/NFCNDEFMessageReaderExampleView.swift`.
+
+### `AsyncNFCVASReaderSession` (for [`NFCVASReaderSession`](https://developer.apple.com/documentation/corenfc/nfcvasreadersession))
+```swift
+import TRETNFCKit_Async
+
+func asyncNFCVASReaderSessionSample() async {
+    guard AsyncNFCVASReaderSession.readingAvailable else {
+        return
+    }
+    
+    let readerSession = AsyncNFCVASReaderSession(
+        vasCommandConfigurations: // ...
+    )
+    
+    for await event in readerSession.eventStream {
+        switch event {
+        case .sessionIsReady:
+            readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            readerSession.start()
+        case .sessionStarted:
+            // ...
+        case .sessionBecomeActive:
+            // ...
+        case .sessionReceived(let responses):
+            // ...
+            readerSession.stop()
+        case .sessionInvalidated(let reason):
+            // ...
+        }
+    }
+}
 ```
 
 # Availability
