@@ -21,7 +21,14 @@ final class NativeTagTests: XCTestCase {
         
         let reader = NFCReader<NativeTag>()
         do {
-            try await reader.read(pollingOption: [], detectingAlertMessage: alertMessage) { _, _ in .none }
+            try await reader.read(
+                pollingOption: [],
+                taskPriority: nil,
+                detectingAlertMessage: alertMessage,
+                didBecomeActive: { _ in },
+                didInvalidate: { _ in },
+                didDetect: { _, _ in .none }
+            )
             XCTFail("The `NFCReaderErrorInvalidParameter` is not thrown.")
         } catch {
             XCTAssertEqual((error as! NFCReaderError).code, .readerErrorInvalidParameter)
@@ -41,7 +48,14 @@ final class NativeTagTests: XCTestCase {
         let alertMessage = "Detecting Alert Message"
         
         let reader = NFCReader<NativeTag>()
-        try await reader.read(pollingOption: .iso18092, detectingAlertMessage: alertMessage) { _, _ in .none }
+        try await reader.read(
+            pollingOption: .iso18092,
+            taskPriority: nil,
+            detectingAlertMessage: alertMessage,
+            didBecomeActive: { _ in },
+            didInvalidate: { _ in },
+            didDetect: { _, _ in .none }
+        )
         let tagReaderOrNil = await reader.readerAndDelegate?.reader
         let tagReader = try XCTUnwrap(tagReaderOrNil)
         let tagReaderAlertMessage = await tagReader.alertMessage
@@ -59,7 +73,14 @@ final class NativeTagTests: XCTestCase {
         let alertMessage = "Detecting Alert Message"
         
         let reader = NFCReader<NativeTag>()
-        try await reader.read(pollingOption: [.iso14443, .iso15693, .iso18092], detectingAlertMessage: alertMessage) { _, _ in .none }
+        try await reader.read(
+            pollingOption: [.iso14443, .iso15693, .iso18092],
+            taskPriority: nil,
+            detectingAlertMessage: alertMessage,
+            didBecomeActive: { _ in },
+            didInvalidate: { _ in },
+            didDetect: { _, _ in .none }
+        )
         let tagReaderOrNil = await reader.readerAndDelegate?.reader
         let tagReader = try XCTUnwrap(tagReaderOrNil)
         let tagReaderAlertMessage = await tagReader.alertMessage
