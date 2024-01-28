@@ -1,13 +1,27 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let packageName = "TRETNFCKit"
 
+extension SwiftSetting {
+    static let forwardTrailingClosures: Self = .enableUpcomingFeature("ForwardTrailingClosures")
+    static let strictConcurrency: Self = .enableUpcomingFeature("StrictConcurrency")
+    static let existentialAny: Self = .enableUpcomingFeature("ExistentialAny")
+    static let bareSlashRegexLiterals: Self = .enableUpcomingFeature("BareSlashRegexLiterals")
+    static let conciseMagicFile: Self = .enableUpcomingFeature("ConciseMagicFile")
+    static let importObjcForwardDeclarations: Self = .enableUpcomingFeature("ImportObjcForwardDeclarations")
+    static let disableOutwardActorInference: Self = .enableUpcomingFeature("DisableOutwardActorInference")
+}
+
 let swiftSettings: [SwiftSetting] = [
-    .enableUpcomingFeature("ExistentialAny"),
-    .enableUpcomingFeature("StrictConcurrency"),
-    .unsafeFlags(["-enable-actor-data-race-checks"], .when(configuration: .debug)),
+    .forwardTrailingClosures,
+    .strictConcurrency,
+    .existentialAny,
+    .bareSlashRegexLiterals,
+    .conciseMagicFile,
+    .importObjcForwardDeclarations,
+    .disableOutwardActorInference,
 ]
 
 var products: [Product] = []
@@ -58,7 +72,7 @@ targets.append(
 let package = Package(
     name: packageName,
     defaultLocalization: "en",
-    platforms: [.iOS(.v13), .macOS(.v10_15), .macCatalyst(.v13), .tvOS(.v13), .watchOS(.v6)],
+    platforms: [.iOS(.v13), .macOS(.v10_15), .macCatalyst(.v13), .tvOS(.v13), .watchOS(.v6), .visionOS(.v1)],
     products: products,
     targets: targets
 )
