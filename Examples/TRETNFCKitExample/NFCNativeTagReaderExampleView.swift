@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import TRETNFCKit_Async
 import TRETNFCKit_NativeTag
 
 struct NFCNativeTagReaderExampleView: View {
     @State private var isPresented = false
     @ObservedObject var viewModel = ViewModel()
+    @State private var readerSession: AsyncNFCTagReaderSession?
     
     var body: some View {
         List {
@@ -24,8 +26,14 @@ struct NFCNativeTagReaderExampleView: View {
                     try await viewModel.read()
                 }
             } label: {
-                Text("Read")
+                Text("Read (using reader)")
             }
+            Button {
+                readerSession = AsyncNFCTagReaderSession(pollingOption: [.iso14443, .iso15693, .iso18092])
+            } label: {
+                Text("Read (using async stream)")
+            }
+            .disabled(readerSession != nil)
         }
         .nfcNativeTagReader(
             isPresented: $isPresented,
@@ -58,6 +66,47 @@ struct NFCNativeTagReaderExampleView: View {
                 return .success
             }
         )
+        .task(id: readerSession == nil) {
+            defer { readerSession = nil }
+            guard let readerSession else { return }
+            guard AsyncNFCTagReaderSession.readingAvailable else { return }
+            
+            for await event in readerSession.eventStream {
+                switch event {
+                case .sessionIsReady:
+                    readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+                    readerSession.start()
+                case .sessionStarted:
+                    break
+                case .sessionBecomeActive:
+                    break
+                case .sessionDetected(let tags):
+                    do {
+                        let tag = tags.first!
+                        try await readerSession.connect(to: tag)
+                        switch tag {
+                        case .feliCa(let feliCaTag):
+                            readerSession.alertMessage = "FeliCa\n\(feliCaTag.currentIDm as NSData)"
+                        case .iso7816(let iso7816Tag):
+                            readerSession.alertMessage = "ISO14443-4 type A / B tag with ISO7816\n\(iso7816Tag.identifier as NSData)"
+                        case .iso15693(let iso15693Tag):
+                            readerSession.alertMessage = "ISO 15693\n\(iso15693Tag.identifier as NSData)"
+                        case .miFare(let miFareTag):
+                            readerSession.alertMessage = "MiFare technology tag (MIFARE Plus, UltraLight, DESFire) base on ISO14443\n\(miFareTag.identifier as NSData)"
+                        @unknown default:
+                            readerSession.alertMessage = "Unknown tag."
+                        }
+                        readerSession.stop()
+                    } catch {
+                        readerSession.stop(errorMessage: error.localizedDescription)
+                    }
+                case .sessionCreationFailed(let reason):
+                    print(reason)
+                case .sessionInvalidated(let reason):
+                    print(reason)
+                }
+            }
+        }
         .navigationTitle("Multiple")
     }
 }
