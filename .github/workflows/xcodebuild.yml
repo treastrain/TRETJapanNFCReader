@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14]
+        os: [macos-14]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14]
+        os: [macos-14]
         platform: ['iOS', 'macOS-x86_64', 'macOS-arm64', 'macCatalyst-x86_64', 'macCatalyst-arm64', 'tvOS', 'watchOS', 'visionOS']
     runs-on: ${{ matrix.os }}
     steps:
