@@ -42,7 +42,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-13, macos-14]
-        platform: ['iOS', 'macOS', 'macCatalyst', 'tvOS', 'watchOS', 'visionOS']
+        platform: ['iOS', 'macOS-x86_64', 'macOS-arm64', 'macCatalyst-x86_64', 'macCatalyst-arm64', 'tvOS', 'watchOS', 'visionOS']
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -52,8 +52,10 @@ jobs:
       run: |
         case ${{ matrix.platform }} in
           'iOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
-          'macOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
-          'macCatalyst' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'macOS-x86_64' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'macCatalyst-x86_64' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'macOS-arm64' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'macCatalyst-arm64' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64,variant=Mac Catalyst' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
           'tvOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
           'watchOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
           'visionOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.VISIONOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
@@ -69,8 +71,10 @@ jobs:
       run: |
         case ${{ matrix.platform }} in
           'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macCatalyst' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'macOS-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'macCatalyst-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'macOS-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'macCatalyst-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
           'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
           'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
           'visionOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.VISIONOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
