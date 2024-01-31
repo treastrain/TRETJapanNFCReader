@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, ubuntu-20.04, ubuntu-22.04]
+        os: [macos-13, macos-14, ubuntu-20.04, ubuntu-22.04]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -30,12 +30,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, ubuntu-20.04, ubuntu-22.04]
+        os: [macos-13, macos-14, ubuntu-20.04, ubuntu-22.04]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
     - name: Set Xcode version
-      if: matrix.os == 'macos-13'
+      if: ${{ matrix.os == 'macos-13' || matrix.os == 'macos-14' }}
       run: sudo xcode-select -s '${{ env.XCODE_SELECT_PATH }}'
     - name: Build
       run: swift build -v | tee swift-build_${{ matrix.os }}.log && exit ${PIPESTATUS[0]}
