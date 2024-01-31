@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13]
+        os: [macos-14]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13]
+        os: [macos-14]
         platform: ['iOS']
     runs-on: ${{ matrix.os }}
     steps:
@@ -50,20 +50,20 @@ jobs:
     - name: Build the scheme
       run: |
         case ${{ matrix.platform }} in
-          'iOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
+          'iOS' ) xcodebuild -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' | tee xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log && exit ${PIPESTATUS[0]} ;;
         esac
       working-directory: ./Examples
     - name: Upload Xcode Build log
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: xcodebuild log (${{ matrix.platform }})
+        name: xcodebuild log (${{ matrix.os }}, ${{ matrix.platform }})
         path: |
-            Examples/xcodebuild-${{ matrix.platform }}.log
+            Examples/xcodebuild-${{ matrix.os }}-${{ matrix.platform }}.log
     - name: Upload Xcode DerivedData
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: Xcode DerivedData (${{ matrix.platform }})
+        name: Xcode DerivedData (${{ matrix.os }}, ${{ matrix.platform }})
         path: |
             /Users/runner/Library/Developer/Xcode/DerivedData
