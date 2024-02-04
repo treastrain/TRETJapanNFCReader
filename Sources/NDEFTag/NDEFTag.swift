@@ -23,8 +23,8 @@ extension NDEFTag {
 }
 
 extension NDEFTag.DetectResult {
-    public static var success: Self = .success(alertMessage: nil)
-    public static var restartPolling: Self = .restartPolling(alertMessage: nil)
+    public static let success: Self = .success(alertMessage: nil)
+    public static let restartPolling: Self = .restartPolling(alertMessage: nil)
     
     public static func failure(with error: any Error) -> Self {
         .failure(errorMessage: error.localizedDescription)
