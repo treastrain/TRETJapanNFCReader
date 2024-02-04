@@ -22,8 +22,8 @@ extension NDEFMessage {
 }
 
 extension NDEFMessage.DetectResult {
-    public static var success: Self = .success(alertMessage: nil)
-    public static var restartPolling: Self = .restartPolling(alertMessage: nil)
+    public static let success: Self = .success(alertMessage: nil)
+    public static let restartPolling: Self = .restartPolling(alertMessage: nil)
 }
 
 #if canImport(CoreNFC)
