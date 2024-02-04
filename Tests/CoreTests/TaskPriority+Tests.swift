@@ -9,7 +9,7 @@ import Dispatch
 import Foundation
 import XCTest
 
-@testable @_spi(TaskPriorityToDispatchQoSClass) import TRETNFCKit_Core
+@testable import TRETNFCKit_Core
 
 final class TaskPriority_Tests: XCTestCase {
     func testTaskPriorityDispatchQoSClass() throws {

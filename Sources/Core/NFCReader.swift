@@ -5,7 +5,7 @@
 //  Created by treastrain on 2022/09/24.
 //
 
-@_spi(AssertServices) import TRETNFCKit_AssertServices
+import TRETNFCKit_AssertServices
 import TRETNFCKit_InfoPListChecker
 
 public actor NFCReader<TagType: NFCTagType> {

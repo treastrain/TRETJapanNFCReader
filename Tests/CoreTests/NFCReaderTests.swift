@@ -11,7 +11,7 @@ import CoreNFC
 #endif
 
 @testable import TRETNFCKit_Core
-@testable @_spi(AssertServices) import TRETNFCKit_AssertServices
+@testable import TRETNFCKit_AssertServices
 
 final class NFCReaderTests: XCTestCase {
     override class func setUp() {
