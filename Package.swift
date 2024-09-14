@@ -38,7 +38,7 @@ var targets: [Target] = []
 
 // MARK: - Modules - Tools for DEBUG
 let assertServices = add(moduleName: "AssertServices", includesTest: false, swiftLanguageMode: .v6)
-let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false, swiftLanguageMode: .v5)
+let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false, swiftLanguageMode: .v6)
 
 // MARK: - Modules - Primary
 let async = add(moduleName: "Async", includesTest: false, swiftLanguageMode: .v5)

@@ -7,7 +7,7 @@
 
 public import Foundation
 
-public struct InfoPListChecker {
+public struct InfoPListChecker: Sendable {
     public static let main: Self = .init(bundle: .main)
     
     public init(bundle: Bundle) {
