@@ -6,7 +6,7 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import enum CoreNFC.NFCTag
+public import enum CoreNFC.NFCTag
 #endif
 
 #if canImport(ObjectiveC)

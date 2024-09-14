@@ -6,7 +6,7 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import enum CoreNFC.NFCTag
+public import enum CoreNFC.NFCTag
 
 public actor NFCTagReader: Actor {
     private let session: Session

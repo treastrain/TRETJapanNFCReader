@@ -6,7 +6,7 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import protocol CoreNFC.NFCNDEFTag
+public import protocol CoreNFC.NFCNDEFTag
 
 public actor NFCNDEFReader: Actor {
     private let session: Session

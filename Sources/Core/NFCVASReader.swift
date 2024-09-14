@@ -6,7 +6,7 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import class CoreNFC.NFCVASCommandConfiguration
+public import class CoreNFC.NFCVASCommandConfiguration
 
 public actor NFCVASReader: Actor {
     private let session: Session

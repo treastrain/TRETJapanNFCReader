@@ -6,7 +6,7 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import class CoreNFC.NFCNDEFMessage
+public import class CoreNFC.NFCNDEFMessage
 #endif
 
 #if canImport(ObjectiveC)

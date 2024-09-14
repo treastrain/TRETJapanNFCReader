@@ -11,7 +11,7 @@ import XCTest
 #endif
 
 @testable import TRETNFCKit_Core
-@testable import TRETNFCKit_NativeTag
+@testable public import TRETNFCKit_NativeTag
 
 final class NativeTagTests: XCTestCase {
     /// `NFCReader<NativeTag>.read(pollingOption:detectingAlertMessage:didBecomeActive:didInvalidate:didDetect:)` を呼んだとき、`pollingOption` の要素数が `0` なら `NFCReaderErrorInvalidParameter` のエラーが返ってくる

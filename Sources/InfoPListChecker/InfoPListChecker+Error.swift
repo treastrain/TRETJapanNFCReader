@@ -5,7 +5,7 @@
 //  Created by treastrain on 2022/11/27.
 //
 
-import Foundation
+public import Foundation
 
 extension InfoPListChecker {
     public enum Error: LocalizedError {

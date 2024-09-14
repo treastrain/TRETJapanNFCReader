@@ -5,7 +5,7 @@
 //  Created by treastrain on 2022/11/26.
 //
 
-import Foundation
+public import Foundation
 
 public struct InfoPListChecker {
     public static let main: Self = .init(bundle: .main)

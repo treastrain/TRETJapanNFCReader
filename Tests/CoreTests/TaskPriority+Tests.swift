@@ -5,7 +5,7 @@
 //  Created by treastrain on 2023/02/05.
 //
 
-import Dispatch
+public import Dispatch
 import Foundation
 import XCTest
 

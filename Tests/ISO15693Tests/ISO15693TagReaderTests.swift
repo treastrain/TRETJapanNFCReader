@@ -11,7 +11,7 @@ import XCTest
 #endif
 
 @testable import TRETNFCKit_Core
-@testable import TRETNFCKit_NativeTag
+@testable public import TRETNFCKit_NativeTag
 @testable import TRETNFCKit_ISO15693
 
 final class ISO15693TagReaderTests: XCTestCase {
