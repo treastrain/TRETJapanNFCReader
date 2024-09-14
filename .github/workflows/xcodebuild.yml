@@ -13,7 +13,7 @@ env:
   TVOS_SIMULATOR_NAME: Apple TV 4K (3rd generation)
   WATCHOS_SIMULATOR_NAME: Apple Watch Ultra 2 (49mm)
   VISIONOS_SIMULATOR_NAME: Apple Vision Pro
-  XCODE_SELECT_PATH: '/Applications/Xcode_15.2.app/Contents/Developer'
+  XCODE_SELECT_PATH: '/Applications/Xcode_16_beta_6.app/Contents/Developer'
 
 jobs:
   show_software_information:
