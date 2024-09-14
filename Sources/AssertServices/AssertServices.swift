@@ -12,6 +12,6 @@ package func assertionFailure(_ message: @autoclosure () -> String = String(), f
 }
 
 struct AssertServices {
-    static var assertionFailureHandler: (String, StaticString, UInt) -> () = assertionFailureDefaultHandler
-    static let assertionFailureDefaultHandler = { Swift.assertionFailure($0, file: $1, line: $2) }
+    nonisolated(unsafe) static var assertionFailureHandler: (String, StaticString, UInt) -> () = assertionFailureDefaultHandler
+    nonisolated(unsafe) static let assertionFailureDefaultHandler = { Swift.assertionFailure($0, file: $1, line: $2) }
 }
