@@ -9,7 +9,7 @@
 public import protocol CoreNFC.NFCNDEFTag
 
 public actor NFCNDEFReader: Actor {
-    private let session: Session
+    private nonisolated(unsafe) let session: Session
     public nonisolated let taskPriority: TaskPriority?
     
     public init(delegate: any Delegate & Actor, taskPriority: TaskPriority?, invalidateAfterFirstRead: Bool) {
@@ -21,7 +21,7 @@ public actor NFCNDEFReader: Actor {
         session.restartPolling()
     }
     
-    public func connect(to tag: any NFCNDEFTag) async throws {
+    public func connect(to tag: sending any NFCNDEFTag) async throws {
         try await session.connect(to: tag)
     }
 }
