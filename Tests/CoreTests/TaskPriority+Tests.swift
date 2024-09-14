@@ -25,7 +25,7 @@ final class TaskPriority_Tests: XCTestCase {
     }
 }
 
-extension TaskPriority: CaseIterable {
+extension TaskPriority: @retroactive CaseIterable {
     public static let allCases: [Self] = [
         .unspecified,
         .background,
@@ -39,7 +39,7 @@ extension TaskPriority: CaseIterable {
     ]
 }
 
-extension TaskPriority: CustomDebugStringConvertible {
+extension TaskPriority: @retroactive CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .unspecified:
@@ -66,7 +66,7 @@ extension TaskPriority: CustomDebugStringConvertible {
     }
 }
 
-extension DispatchQoS.QoSClass: CustomDebugStringConvertible {
+extension DispatchQoS.QoSClass: @retroactive CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .unspecified:
