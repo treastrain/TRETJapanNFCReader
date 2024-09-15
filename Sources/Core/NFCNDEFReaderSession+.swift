@@ -53,38 +53,14 @@ extension NFCNDEFReaderSession {
 }
 
 extension NFCNDEFReaderSession {
-    public struct DetectedMessages: RandomAccessCollection, Sendable {
-        nonisolated(unsafe) let base: [NFCNDEFMessage]
-        
-        public var startIndex: Int { base.startIndex }
-        
-        public var endIndex: Int { base.endIndex }
-        
-        public func makeIterator() -> IndexingIterator<[NFCNDEFMessage]> {
-            base.makeIterator()
-        }
-        
-        public subscript(position: Int) -> NFCNDEFMessage {
-            base[position]
-        }
+    public struct DetectedMessages: NFCDetectedObjects {
+        nonisolated(unsafe) var base: [NFCNDEFMessage]
     }
 }
 
 extension NFCNDEFReaderSession {
-    public struct DetectedTags: RandomAccessCollection, Sendable {
+    public struct DetectedTags: NFCDetectedObjects {
         nonisolated(unsafe) let base: [any NFCNDEFTag]
-        
-        public var startIndex: Int { base.startIndex }
-        
-        public var endIndex: Int { base.endIndex }
-        
-        public func makeIterator() -> IndexingIterator<[any NFCNDEFTag]> {
-            base.makeIterator()
-        }
-        
-        public subscript(position: Int) -> any NFCNDEFTag {
-            base[position]
-        }
     }
 }
 

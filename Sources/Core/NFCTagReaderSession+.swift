@@ -38,20 +38,8 @@ extension NFCTagReaderSession {
 }
 
 extension NFCTagReaderSession.Event {
-    public struct DetectedTags: RandomAccessCollection, Sendable {
+    public struct DetectedTags: NFCDetectedObjects {
         nonisolated(unsafe) let base: [NFCTag]
-        
-        public var startIndex: Int { base.startIndex }
-        
-        public var endIndex: Int { base.endIndex }
-        
-        public func makeIterator() -> IndexingIterator<[NFCTag]> {
-            base.makeIterator()
-        }
-        
-        public subscript(position: Int) -> NFCTag {
-            base[position]
-        }
     }
 }
 
