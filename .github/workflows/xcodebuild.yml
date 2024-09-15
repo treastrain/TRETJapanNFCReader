@@ -70,14 +70,14 @@ jobs:
     - name: Test the scheme
       run: |
         case ${{ matrix.platform }} in
-          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
           'macOS-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macCatalyst-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macOS-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macCatalyst-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'visionOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.VISIONOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'macCatalyst-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'macOS-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'macCatalyst-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'visionOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.VISIONOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
         esac
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
