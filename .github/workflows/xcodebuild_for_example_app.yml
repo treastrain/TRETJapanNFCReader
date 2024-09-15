@@ -10,7 +10,7 @@ on:
 env:
   SCHEME_NAME: TRETNFCKitExample
   IOS_SIMULATOR_NAME: iPhone 15 Pro
-  XCODE_SELECT_PATH: '/Applications/Xcode_16_beta_6.app/Contents/Developer'
+  XCODE_SELECT_PATH: '/Applications/Xcode_16_Release_Candidate.app/Contents/Developer'
 
 jobs:
   show_software_information:
