@@ -51,7 +51,7 @@ final class ISO15693TagReaderTests: XCTestCase {
         
         let object = tagReaderDelegate as! NFCNativeTagReaderCallBackHandleObject
         await object.didBecomeActive()
-        await object.didDetect(tags: [])
+        await object.didDetect(tags: .init(tags: []))
         
         await fulfillment(of: [didBecomeActiveExpectation, didInvalidateExpectation, didDetectExpectation], timeout: 0.01)
         #else
