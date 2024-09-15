@@ -7,7 +7,7 @@
 
 public protocol NFCNativeTagReaderProtocol: NFCReaderAfterBeginProtocol {
     #if canImport(CoreNFC)
-    func connect(to tag: NFCTag) async throws
+    func connect(to tag: sending NFCTag) async throws
     #endif
 }
 

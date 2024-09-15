@@ -6,7 +6,7 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import enum CoreNFC.NFCTag
+public import enum CoreNFC.NFCTag
 #endif
 
 #if canImport(ObjectiveC)
@@ -48,8 +48,19 @@ extension NFCNativeTagReaderCallBackHandleObject: NativeTag.Reader.Delegate {
     }
     
     public nonisolated func tagReaderSession(_ session: TagType.Reader.Session, didDetect tags: TagType.ReaderDetectObject) {
+        let tags = NFCTags(tags: tags)
         Task(priority: taskPriority) {
             await didDetect(tags: tags)
+        }
+    }
+}
+
+extension NFCNativeTagReaderCallBackHandleObject {
+    struct NFCTags: Sendable {
+        nonisolated(unsafe) let base: TagType.ReaderDetectObject
+        
+        init(tags: TagType.ReaderDetectObject) {
+            self.base = tags
         }
     }
 }
@@ -59,10 +70,10 @@ extension NFCNativeTagReaderCallBackHandleObject {
         await didBecomeActiveHandler(reader as! TagType.Reader.AfterBeginProtocol)
     }
     
-    func didDetect(tags: TagType.ReaderDetectObject) async {
+    func didDetect(tags: NFCTags) async {
         let result: TagType.DetectResult
         do {
-            result = try await didDetectHandler(reader as! TagType.ReaderProtocol, tags)
+            result = try await didDetectHandler(reader as! TagType.ReaderProtocol, tags.base)
         } catch {
             result = .failure(with: error)
         }

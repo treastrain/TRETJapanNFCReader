@@ -129,7 +129,7 @@ private actor NFCTestReaderReadingAvailable: NFCReaderProtocol, NFCReaderAfterBe
     func invalidate(errorMessage: String) {}
 }
 
-private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession {
+private final class NFCTestReaderSessionReadingAvailable: NFCTestReaderSession, @unchecked Sendable {
     typealias Session = NFCTestReaderSessionReadingAvailable
     typealias AfterBeginProtocol = NFCTestReaderSessionReadingAvailable
     class var readingAvailable: Bool { true }
@@ -157,7 +157,7 @@ private actor NFCTestReaderReadingUnavailable: NFCReaderProtocol, NFCReaderAfter
     func invalidate(errorMessage: String) {}
 }
 
-private final class NFCTestReaderSessionReadingUnavailable: NFCTestReaderSession {
+private final class NFCTestReaderSessionReadingUnavailable: NFCTestReaderSession, @unchecked Sendable {
     typealias Session = NFCTestReaderSessionReadingUnavailable
     typealias AfterBeginProtocol = NFCTestReaderSessionReadingUnavailable
     class var readingAvailable: Bool { false }

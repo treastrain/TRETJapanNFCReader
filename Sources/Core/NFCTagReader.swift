@@ -6,10 +6,10 @@
 //
 
 #if canImport(CoreNFC)
-@preconcurrency import enum CoreNFC.NFCTag
+public import enum CoreNFC.NFCTag
 
 public actor NFCTagReader: Actor {
-    private let session: Session
+    private nonisolated(unsafe) let session: Session
     public nonisolated let taskPriority: TaskPriority?
     
     public init?(pollingOption: Session.PollingOption, delegate: any Delegate & Actor, taskPriority: TaskPriority? = nil) {
@@ -26,7 +26,7 @@ public actor NFCTagReader: Actor {
     
     public var connectedTag: NFCTag? { session.connectedTag }
     
-    public func connect(to tag: NFCTag) async throws {
+    public func connect(to tag: sending NFCTag) async throws {
         try await session.connect(to: tag)
     }
 }

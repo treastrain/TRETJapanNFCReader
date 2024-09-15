@@ -7,7 +7,7 @@
 
 #if canImport(SwiftUI) && canImport(CoreNFC)
 import Combine
-import SwiftUI
+public import SwiftUI
 
 public struct MiFareTagReaderViewModifier: @unchecked Sendable {
     private var isPresented: Binding<Bool>

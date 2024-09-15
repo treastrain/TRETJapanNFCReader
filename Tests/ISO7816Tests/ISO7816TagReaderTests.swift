@@ -11,7 +11,7 @@ import XCTest
 #endif
 
 @testable import TRETNFCKit_Core
-@testable import TRETNFCKit_NativeTag
+@testable public import TRETNFCKit_NativeTag
 @testable import TRETNFCKit_ISO7816
 
 final class ISO7816TagReaderTests: XCTestCase {
@@ -51,7 +51,7 @@ final class ISO7816TagReaderTests: XCTestCase {
         
         let object = tagReaderDelegate as! NFCNativeTagReaderCallBackHandleObject
         await object.didBecomeActive()
-        await object.didDetect(tags: [])
+        await object.didDetect(tags: .init(tags: []))
         
         await fulfillment(of: [didBecomeActiveExpectation, didInvalidateExpectation, didDetectExpectation], timeout: 0.01)
         #else

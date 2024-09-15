@@ -11,7 +11,7 @@ import XCTest
 #endif
 
 @testable import TRETNFCKit_Core
-@testable import TRETNFCKit_NDEFTag
+@testable public import TRETNFCKit_NDEFTag
 
 final class NDEFTagTests: XCTestCase {
     func testNDEFTagNFCReaderReadTaskPriorityDetectingAlertMessageDidBecomeActiveDidInvalidateDidDetect() async throws {

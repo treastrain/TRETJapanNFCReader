@@ -13,7 +13,7 @@ env:
   TVOS_SIMULATOR_NAME: Apple TV 4K (3rd generation)
   WATCHOS_SIMULATOR_NAME: Apple Watch Ultra 2 (49mm)
   VISIONOS_SIMULATOR_NAME: Apple Vision Pro
-  XCODE_SELECT_PATH: '/Applications/Xcode_15.2.app/Contents/Developer'
+  XCODE_SELECT_PATH: '/Applications/Xcode_16_Release_Candidate.app/Contents/Developer'
 
 jobs:
   show_software_information:
@@ -70,20 +70,22 @@ jobs:
     - name: Test the scheme
       run: |
         case ${{ matrix.platform }} in
-          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'iOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.IOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
           'macOS-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macCatalyst-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macOS-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'macCatalyst-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
-          'visionOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.VISIONOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }} ;;
+          'macCatalyst-x86_64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'macOS-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'macCatalyst-arm64' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'platform=macOS,arch=arm64,variant=Mac Catalyst' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'tvOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.TVOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'watchOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.WATCHOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
+          'visionOS' ) xcodebuild test -scheme ${{ env.SCHEME_NAME }} -destination 'name=${{ env.VISIONOS_SIMULATOR_NAME }}' -resultBundlePath TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult ;;
         esac
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: TestResults-${{ matrix.os }}-${{ matrix.platform }}.xcresult
         title: Xcode test results (${{ matrix.os }}, ${{ matrix.platform }})
-      if: success() || failure()
+      # if: success() || failure()
+      # https://x.com/treastrain/status/1835273045059199464
+      if: false
     - name: Upload Xcode DerivedData
       if: always()
       uses: actions/upload-artifact@v4
