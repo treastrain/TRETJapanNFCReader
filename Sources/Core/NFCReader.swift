@@ -84,3 +84,15 @@ extension Notification.Name {
 extension AnyHashable {
     fileprivate static var isNilReaderAndDelegate: Self { #function }
 }
+
+package final class NFCReaderSessionInvalidator<Base: NFCReaderSessionProtocol>: @unchecked Sendable {
+    private weak var readerSession: Base?
+    
+    package init(_ readerSession: Base) {
+        self.readerSession = readerSession
+    }
+    
+    package func invalidate(errorMessage: String) {
+        readerSession?.invalidate(errorMessage: errorMessage)
+    }
+}
