@@ -41,7 +41,6 @@ let assertServices = add(moduleName: "AssertServices", includesTest: false, swif
 let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false, swiftLanguageMode: .v6)
 
 // MARK: - Modules - Primary
-let async = add(moduleName: "Async", includesTest: false, swiftLanguageMode: .v5)
 let core = add(moduleName: "Core", dependencies: [assertServices, infoPListChecker], includesTest: true, swiftLanguageMode: .v6)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: true, swiftLanguageMode: .v6)
 add(moduleName: "NDEFMessage", dependencies: [core], includesTest: true, swiftLanguageMode: .v5)
