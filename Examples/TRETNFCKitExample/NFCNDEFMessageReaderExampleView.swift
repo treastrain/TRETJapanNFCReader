@@ -7,14 +7,12 @@
 
 import SwiftUI
 import TRETNFCKit_Core
-import TRETNFCKit_Async
 import TRETNFCKit_NDEFMessage
 
 struct NFCNDEFMessageReaderExampleView: View {
     @State private var isPresented = false
     @ObservedObject var viewModel = ViewModel()
-    @State private var readerSession: AsyncNFCNDEFMessageReaderSession?
-    @State private var newReaderSesssion: NFCNDEFReaderSession?
+    @State private var readerSession: NFCNDEFReaderSession?
     
     var body: some View {
         List {
@@ -31,17 +29,11 @@ struct NFCNDEFMessageReaderExampleView: View {
                 Text("Read (using reader)")
             }
             Button {
-                readerSession = AsyncNFCNDEFMessageReaderSession(invalidateAfterFirstRead: false)
+                readerSession = NFCNDEFReaderSession(of: .messages, invalidateAfterFirstRead: false)
             } label: {
                 Text("Read (using async stream)")
             }
             .disabled(readerSession != nil)
-            Button {
-                newReaderSesssion = NFCNDEFReaderSession(of: .messages, invalidateAfterFirstRead: false)
-            } label: {
-                Text("Read (using new async stream)")
-            }
-            .disabled(newReaderSesssion != nil)
         }
         .nfcNDEFMessageReader(
             isPresented: $isPresented,
@@ -64,39 +56,16 @@ struct NFCNDEFMessageReaderExampleView: View {
         .task(id: readerSession == nil) {
             defer { readerSession = nil }
             guard let readerSession else { return }
-            guard AsyncNFCNDEFMessageReaderSession.readingAvailable else { return }
-            
-            for await event in readerSession.eventStream {
+            guard NFCNDEFReaderSession.readingAvailable else { return }
+            readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            for await event in readerSession.messageEventStream {
                 switch event {
-                case .sessionIsReady:
-                    readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
-                    readerSession.start()
-                case .sessionStarted:
-                    break
                 case .sessionBecomeActive:
                     break
                 case .sessionDetected(let messages):
                     print(messages)
                     readerSession.alertMessage = "Done!"
-                    readerSession.stop()
-                case .sessionInvalidated(let reason):
-                    print(reason)
-                }
-            }
-        }
-        .task(id: newReaderSesssion == nil) {
-            defer { newReaderSesssion = nil }
-            guard let newReaderSesssion else { return }
-            guard NFCNDEFReaderSession.readingAvailable else { return }
-            newReaderSesssion.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
-            for await event in newReaderSesssion.messageEventStream {
-                switch event {
-                case .sessionBecomeActive:
-                    break
-                case .sessionDetected(let messages):
-                    print(messages)
-                    newReaderSesssion.alertMessage = "Done!"
-                    newReaderSesssion.invalidate()
+                    readerSession.invalidate()
                 case .sessionInvalidated(let reason):
                     print(reason)
                 }
