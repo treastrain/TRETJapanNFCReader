@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import TRETNFCKit_Core
 import TRETNFCKit_NDEFMessage
 
 struct NFCNDEFMessageReaderExampleView: View {
     @State private var isPresented = false
-    @ObservedObject var viewModel = ViewModel()
     @State private var readerSession: NFCNDEFReaderSession?
     
     var body: some View {
@@ -22,13 +20,6 @@ struct NFCNDEFMessageReaderExampleView: View {
                 Text("Read (using view modifier)")
             }
             .disabled(!NFCNDEFReaderSession.readingAvailable || isPresented)
-            Button {
-                Task {
-                    try await viewModel.read()
-                }
-            } label: {
-                Text("Read (using reader)")
-            }
             Button {
                 readerSession = NFCNDEFReaderSession(of: .messages, invalidateAfterFirstRead: false)
             } label: {
@@ -72,29 +63,5 @@ struct NFCNDEFMessageReaderExampleView: View {
             }
         }
         .navigationTitle("NDEF Messages")
-    }
-}
-
-extension NFCNDEFMessageReaderExampleView {
-    final class ViewModel: ObservableObject {
-        private var reader: NFCReader<NDEFMessage>!
-        
-        func read() async throws {
-            reader = .init()
-            try await reader.read(
-                invalidateAfterFirstRead: false,
-                detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { reader in
-                    print(reader)
-                },
-                didInvalidate: { error in
-                    print(error)
-                },
-                didDetectNDEFs: { reader, messages in
-                    print(messages)
-                    return .success(alertMessage: "Done!")
-                }
-            )
-        }
     }
 }
