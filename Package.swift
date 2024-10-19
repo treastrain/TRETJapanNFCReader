@@ -37,11 +37,10 @@ var targets: [Target] = []
 }
 
 // MARK: - Modules - Tools for DEBUG
-let assertServices = add(moduleName: "AssertServices", includesTest: false, swiftLanguageMode: .v6)
 let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false, swiftLanguageMode: .v6)
 
 // MARK: - Modules - Primary
-let core = add(moduleName: "Core", dependencies: [assertServices, infoPListChecker], includesTest: false, swiftLanguageMode: .v6)
+let core = add(moduleName: "Core", dependencies: [infoPListChecker], includesTest: false, swiftLanguageMode: .v6)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: false, swiftLanguageMode: .v6)
 add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false, swiftLanguageMode: .v6)
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: false, swiftLanguageMode: .v6)
