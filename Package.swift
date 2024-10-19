@@ -42,9 +42,9 @@ let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false, 
 
 // MARK: - Modules - Primary
 let core = add(moduleName: "Core", dependencies: [assertServices, infoPListChecker], includesTest: false, swiftLanguageMode: .v6)
-add(moduleName: "NDEFMessage", dependencies: [core], includesTest: true, swiftLanguageMode: .v5)
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: true, swiftLanguageMode: .v5)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: false, swiftLanguageMode: .v6)
+add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false, swiftLanguageMode: .v6)
 
 // MARK: - Modules - Secondary
 add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
