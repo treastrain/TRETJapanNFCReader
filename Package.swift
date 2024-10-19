@@ -47,10 +47,10 @@ add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false, swiftL
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: false, swiftLanguageMode: .v6)
 
 // MARK: - Modules - Secondary
-add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "ISO7816", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "ISO15693", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "MiFare", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
+add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: false, swiftLanguageMode: .v6)
+add(moduleName: "ISO7816", dependencies: [nativeTag], includesTest: false, swiftLanguageMode: .v6)
+add(moduleName: "ISO15693", dependencies: [nativeTag], includesTest: false, swiftLanguageMode: .v6)
+add(moduleName: "MiFare", dependencies: [nativeTag], includesTest: false, swiftLanguageMode: .v6)
 
 // MARK: - Package
 products.append(
