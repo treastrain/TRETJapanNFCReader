@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NFCDetectedObjects<Object>: RandomAccessCollection, Sendable {
+protocol NFCDetectedObjects<Object>: RandomAccessCollection, CustomStringConvertible, Sendable {
     associatedtype Object
     nonisolated(unsafe) var base: [Object] { get }
 }
@@ -23,5 +23,11 @@ extension NFCDetectedObjects {
     
     public subscript(position: Int) -> Object {
         base[position]
+    }
+}
+
+extension NFCDetectedObjects {
+    public var description: String {
+        base.description
     }
 }
