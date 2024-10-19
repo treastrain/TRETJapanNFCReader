@@ -9,8 +9,8 @@ on:
 
 env:
   SCHEME_NAME: TRETNFCKitExample
-  IOS_SIMULATOR_NAME: iPhone 15 Pro
-  XCODE_SELECT_PATH: '/Applications/Xcode_16_Release_Candidate.app/Contents/Developer'
+  IOS_SIMULATOR_NAME: iPhone 16 Pro
+  XCODE_SELECT_PATH: '/Applications/Xcode_16.app/Contents/Developer'
 
 jobs:
   show_software_information:
@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14]
+        os: [macos-15]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14]
+        os: [macos-15]
         platform: ['iOS']
     runs-on: ${{ matrix.os }}
     steps:

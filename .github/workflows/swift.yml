@@ -8,7 +8,7 @@ on:
     branches: [ tretnfckit-main ]
 
 env:
-  XCODE_SELECT_PATH: '/Applications/Xcode_16_Release_Candidate.app/Contents/Developer'
+  XCODE_SELECT_PATH: '/Applications/Xcode_16.app/Contents/Developer'
 
 jobs:
   show_software_information:
@@ -16,8 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [macos-14, ubuntu-20.04, ubuntu-22.04]
-        os: [macos-14]
+        os: [macos-15, ubuntu-22.04, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -31,13 +30,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [macos-14, ubuntu-20.04, ubuntu-22.04]
-        os: [macos-14]
+        os: [macos-15, ubuntu-22.04, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
     - name: Set Xcode version
-      if: ${{ matrix.os == 'macos-14' }}
+      if: ${{ matrix.os == 'macos-15' }}
       run: sudo xcode-select -s '${{ env.XCODE_SELECT_PATH }}'
     - name: Build
       run: swift build -v | tee swift-build_${{ matrix.os }}.log && exit ${PIPESTATUS[0]}
