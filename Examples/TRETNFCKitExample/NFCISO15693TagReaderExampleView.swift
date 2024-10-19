@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-import TRETNFCKit_Async
+import TRETNFCKit_Core
 import TRETNFCKit_ISO15693
 
 struct NFCISO15693TagReaderExampleView: View {
     @State private var isPresented = false
     @ObservedObject var viewModel = ViewModel()
-    @State private var readerSession: AsyncNFCTagReaderSession?
+    @State private var readerSession: NFCTagReaderSession?
     
     var body: some View {
         List {
@@ -29,7 +29,7 @@ struct NFCISO15693TagReaderExampleView: View {
                 Text("Read (using reader)")
             }
             Button {
-                readerSession = AsyncNFCTagReaderSession(pollingOption: .iso15693)
+                readerSession = NFCTagReaderSession(pollingOption: .iso15693)
             } label: {
                 Text("Read (using async stream)")
             }
@@ -57,15 +57,10 @@ struct NFCISO15693TagReaderExampleView: View {
         .task(id: readerSession == nil) {
             defer { readerSession = nil }
             guard let readerSession else { return }
-            guard AsyncNFCTagReaderSession.readingAvailable else { return }
-            
+            guard NFCTagReaderSession.readingAvailable else { return }
+            readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
             for await event in readerSession.eventStream {
                 switch event {
-                case .sessionIsReady:
-                    readerSession.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
-                    readerSession.start()
-                case .sessionStarted:
-                    break
                 case .sessionBecomeActive:
                     break
                 case .sessionDetected(let tags):
@@ -76,12 +71,10 @@ struct NFCISO15693TagReaderExampleView: View {
                         }
                         try await readerSession.connect(to: tag)
                         readerSession.alertMessage = "\(iso15693Tag.identifier as NSData)"
-                        readerSession.stop()
+                        readerSession.invalidate()
                     } catch {
-                        readerSession.stop(errorMessage: error.localizedDescription)
+                        readerSession.invalidate(errorMessage: error.localizedDescription)
                     }
-                case .sessionCreationFailed(let reason):
-                    print(reason)
                 case .sessionInvalidated(let reason):
                     print(reason)
                 }
