@@ -15,8 +15,8 @@ private struct NFCNDEFMessageReaderViewModifier: ViewModifier {
     private let taskPriority: TaskPriority
     private let detectingAlertMessage: String
     private let terminatingAlertMessage: @Sendable () -> String
-    private let onDidBecomeActive: @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void
-    private let onDidDetect: @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void
+    private let onDidBecomeActive: @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void
+    private let onDidDetect: @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void
     private let onDidInvalidate: @Sendable (_ error: any Error) -> Void
     
     init(
@@ -25,8 +25,8 @@ private struct NFCNDEFMessageReaderViewModifier: ViewModifier {
         taskPriority: TaskPriority,
         detectingAlertMessage: String,
         terminatingAlertMessage: @escaping @Sendable () -> String,
-        onDidBecomeActive: @escaping @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void,
-        onDidDetect: @escaping @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void,
+        onDidBecomeActive: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void,
+        onDidDetect: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void,
         onDidInvalidate: @escaping @Sendable (_ error: any Error) -> Void
     ) {
         self._isPresented = isPresented
@@ -60,6 +60,7 @@ private struct NFCNDEFMessageReaderViewModifier: ViewModifier {
                     return
                 }
                 readerSession.alertMessage = detectingAlertMessage
+                let invalidator = NFCReaderSessionInvalidator(readerSession)
                 await withTaskCancellationHandler(
                     operation: {
                         for await event in readerSession.messageEventStream {
@@ -74,7 +75,7 @@ private struct NFCNDEFMessageReaderViewModifier: ViewModifier {
                         }
                     },
                     onCancel: {
-                        readerSession.invalidate(errorMessage: terminatingAlertMessage())
+                        invalidator.invalidate(errorMessage: terminatingAlertMessage())
                         onDidInvalidate(CancellationError())
                     }
                 )
@@ -90,8 +91,8 @@ extension View {
         taskPriority: TaskPriority = .userInitiated,
         detectingAlertMessage: String,
         terminatingAlertMessage: @autoclosure @escaping @Sendable () -> String = "",
-        onDidBecomeActive: @escaping @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void = { _ in },
-        onDidDetect: @escaping @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void,
+        onDidBecomeActive: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void = { _ in },
+        onDidDetect: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void,
         onDidInvalidate: @escaping @Sendable (_ error: any Error) -> Void = { _ in }
     ) -> some View {
         modifier(
