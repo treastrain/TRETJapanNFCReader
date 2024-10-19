@@ -19,8 +19,9 @@ struct NFCNDEFMessageReaderExampleView: View {
             Button {
                 isPresented = true
             } label: {
-                Text("Read (using reader view modifier)")
+                Text("Read (using view modifier)")
             }
+            .disabled(!NFCNDEFReaderSession.readingAvailable || isPresented)
             Button {
                 Task {
                     try await viewModel.read()
@@ -33,24 +34,23 @@ struct NFCNDEFMessageReaderExampleView: View {
             } label: {
                 Text("Read (using async stream)")
             }
-            .disabled(readerSession != nil)
+            .disabled(!NFCNDEFReaderSession.readingAvailable || readerSession != nil)
         }
         .nfcNDEFMessageReader(
             isPresented: $isPresented,
             invalidateAfterFirstRead: false,
             detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-            onBeginReadingError: { error in
-                print(error)
+            terminatingAlertMessage: "CANCELLED",
+            onDidBecomeActive: { readerSession in
+                print(readerSession.alertMessage)
             },
-            didBecomeActive: { reader in
-                await print(reader.alertMessage)
-            },
-            didInvalidate: { error in
-                print(error)
-            },
-            didDetectNDEFs: { reader, messages in
+            onDidDetect: { readerSession, messages in
                 print(messages)
-                return .success(alertMessage: "Done!")
+                readerSession.alertMessage = "Done!"
+                readerSession.invalidate()
+            },
+            onDidInvalidate: { error in
+                print(error)
             }
         )
         .task(id: readerSession == nil) {
