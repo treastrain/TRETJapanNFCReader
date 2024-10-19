@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TRETNFCKit_Core
 import TRETNFCKit_Async
 import TRETNFCKit_NDEFTag
 
@@ -13,6 +14,7 @@ struct NFCNDEFTagReaderExampleView: View {
     @State private var isPresented = false
     @ObservedObject var viewModel = ViewModel()
     @State private var readerSession: AsyncNFCNDEFTagReaderSession?
+    @State private var newReaderSesssion: NFCNDEFReaderSession?
     
     var body: some View {
         List {
@@ -34,6 +36,12 @@ struct NFCNDEFTagReaderExampleView: View {
                 Text("Read (using async stream)")
             }
             .disabled(readerSession != nil)
+            Button {
+                newReaderSesssion = NFCNDEFReaderSession(of: .tags, invalidateAfterFirstRead: false)
+            } label: {
+                Text("Read (using new async stream)")
+            }
+            .disabled(newReaderSesssion != nil)
         }
         .nfcNDEFTagReader(
             isPresented: $isPresented,
@@ -78,6 +86,31 @@ struct NFCNDEFTagReaderExampleView: View {
                         readerSession.stop()
                     } catch {
                         readerSession.stop(errorMessage: error.localizedDescription)
+                    }
+                case .sessionInvalidated(let reason):
+                    print(reason)
+                }
+            }
+        }
+        .task(id: newReaderSesssion == nil) {
+            defer { newReaderSesssion = nil }
+            guard let newReaderSesssion else { return }
+            guard NFCNDEFReaderSession.readingAvailable else { return }
+            newReaderSesssion.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            for await event in newReaderSesssion.tagEventStream {
+                switch event {
+                case .sessionBecomeActive:
+                    break
+                case .sessionDetected(let tags):
+                    do {
+                        print(tags)
+                        let tag = tags.first!
+                        try await newReaderSesssion.connect(to: tag)
+                        let message = try await tag.readNDEF()
+                        newReaderSesssion.alertMessage = "\(message)"
+                        newReaderSesssion.invalidate()
+                    } catch {
+                        newReaderSesssion.invalidate(errorMessage: error.localizedDescription)
                     }
                 case .sessionInvalidated(let reason):
                     print(reason)

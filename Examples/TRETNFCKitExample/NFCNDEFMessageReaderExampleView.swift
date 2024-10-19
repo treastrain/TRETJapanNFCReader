@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TRETNFCKit_Core
 import TRETNFCKit_Async
 import TRETNFCKit_NDEFMessage
 
@@ -13,6 +14,7 @@ struct NFCNDEFMessageReaderExampleView: View {
     @State private var isPresented = false
     @ObservedObject var viewModel = ViewModel()
     @State private var readerSession: AsyncNFCNDEFMessageReaderSession?
+    @State private var newReaderSesssion: NFCNDEFReaderSession?
     
     var body: some View {
         List {
@@ -34,6 +36,12 @@ struct NFCNDEFMessageReaderExampleView: View {
                 Text("Read (using async stream)")
             }
             .disabled(readerSession != nil)
+            Button {
+                newReaderSesssion = NFCNDEFReaderSession(of: .messages, invalidateAfterFirstRead: false)
+            } label: {
+                Text("Read (using new async stream)")
+            }
+            .disabled(newReaderSesssion != nil)
         }
         .nfcNDEFMessageReader(
             isPresented: $isPresented,
@@ -71,6 +79,24 @@ struct NFCNDEFMessageReaderExampleView: View {
                     print(messages)
                     readerSession.alertMessage = "Done!"
                     readerSession.stop()
+                case .sessionInvalidated(let reason):
+                    print(reason)
+                }
+            }
+        }
+        .task(id: newReaderSesssion == nil) {
+            defer { newReaderSesssion = nil }
+            guard let newReaderSesssion else { return }
+            guard NFCNDEFReaderSession.readingAvailable else { return }
+            newReaderSesssion.alertMessage = "Place the tag on a flat, non-metal surface and rest your iPhone on the tag."
+            for await event in newReaderSesssion.messageEventStream {
+                switch event {
+                case .sessionBecomeActive:
+                    break
+                case .sessionDetected(let messages):
+                    print(messages)
+                    newReaderSesssion.alertMessage = "Done!"
+                    newReaderSesssion.invalidate()
                 case .sessionInvalidated(let reason):
                     print(reason)
                 }
