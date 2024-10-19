@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import TRETNFCKit_Core
 import TRETNFCKit_NDEFTag
 
 struct NFCNDEFTagReaderExampleView: View {
     @State private var isPresented = false
-    @ObservedObject var viewModel = ViewModel()
     @State private var readerSession: NFCNDEFReaderSession?
     
     var body: some View {
@@ -21,38 +19,36 @@ struct NFCNDEFTagReaderExampleView: View {
             } label: {
                 Text("Read (using view modifier)")
             }
-            Button {
-                Task {
-                    try await viewModel.read()
-                }
-            } label: {
-                Text("Read (using reader)")
-            }
+            .disabled(!NFCNDEFReaderSession.readingAvailable || isPresented)
             Button {
                 readerSession = NFCNDEFReaderSession(of: .tags, invalidateAfterFirstRead: false)
             } label: {
                 Text("Read (using async stream)")
             }
-            .disabled(readerSession != nil)
+            .disabled(!NFCNDEFReaderSession.readingAvailable || readerSession != nil)
         }
         .nfcNDEFTagReader(
             isPresented: $isPresented,
+            invalidateAfterFirstRead: false,
             detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-            onBeginReadingError: { error in
+            terminatingAlertMessage: "CANCELLED",
+            onDidBecomeActive: { readerSession in
+                print(readerSession.alertMessage)
+            },
+            onDidDetect: { readerSession, tags in
+                print(tags)
+                do {
+                    let tag = tags.first!
+                    try await readerSession.connect(to: tag)
+                    let message = try await tag.readNDEF()
+                    readerSession.alertMessage = "\(message)"
+                    readerSession.invalidate()
+                } catch {
+                    readerSession.invalidate(errorMessage: error.localizedDescription)
+                }
+            },
+            onDidInvalidate: { error in
                 print(error)
-            },
-            didBecomeActive: { reader in
-                await print(reader.alertMessage)
-            },
-            didInvalidate: { error in
-                print(error)
-            },
-            didDetectNDEFs: { reader, tags in
-                let tag = tags.first!
-                try await reader.connect(to: tag)
-                let message = try await tag.readNDEF()
-                await reader.set(alertMessage: "\(message)")
-                return .success
             }
         )
         .task(id: readerSession == nil) {
@@ -81,31 +77,5 @@ struct NFCNDEFTagReaderExampleView: View {
             }
         }
         .navigationTitle("NDEF Tag")
-    }
-}
-
-extension NFCNDEFTagReaderExampleView {
-    final class ViewModel: ObservableObject {
-        private var reader: NFCReader<NDEFTag>!
-        
-        func read() async throws {
-            reader = .init()
-            try await reader.read(
-                detectingAlertMessage: "Place the tag on a flat, non-metal surface and rest your iPhone on the tag.",
-                didBecomeActive: { reader in
-                    await print(reader.alertMessage)
-                },
-                didInvalidate: { error in
-                    print(error)
-                },
-                didDetect: { reader, tags in
-                    let tag = tags.first!
-                    try await reader.connect(to: tag)
-                    let message = try await tag.readNDEF()
-                    await reader.set(alertMessage: "\(message)")
-                    return .success
-                }
-            )
-        }
     }
 }
