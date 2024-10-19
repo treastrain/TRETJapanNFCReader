@@ -39,7 +39,7 @@ var targets: [Target] = []
 let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false)
 
 // MARK: - Modules - Primary
-let core = add(moduleName: "Core", dependencies: [infoPListChecker], includesTest: false)
+let core = add(moduleName: "Core", dependencies: [infoPListChecker], includesTest: true)
 let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: false)
 add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false)
 add(moduleName: "NDEFTag", dependencies: [core], includesTest: false)
