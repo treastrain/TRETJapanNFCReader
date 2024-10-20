@@ -1,14 +1,12 @@
 //
-//  FeliCaTagReaderProtocol.swift
+//  NFCTagReaderSession+.swift
 //  FeliCa
 //
 //  Created by treastrain on 2022/11/20.
 //
 
-public protocol FeliCaTagReaderProtocol: NFCNativeTagReaderProtocol {}
-
-extension FeliCaTagReaderProtocol {
-    #if canImport(CoreNFC)
+#if canImport(CoreNFC)
+extension NFCTagReaderSession {
     public func connectAsFeliCaTag(to tag: NFCTag) async throws -> any NFCFeliCaTag {
         guard case .feliCa(let feliCaTag) = tag else {
             throw NFCReaderError(.readerErrorInvalidParameter)
@@ -16,9 +14,5 @@ extension FeliCaTagReaderProtocol {
         try await connect(to: tag)
         return feliCaTag
     }
-    #endif
 }
-
-#if canImport(CoreNFC)
-extension NativeTag.Reader: FeliCaTagReaderProtocol {}
 #endif

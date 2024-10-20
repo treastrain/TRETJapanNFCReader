@@ -18,13 +18,12 @@ var products: [Product] = []
 var targets: [Target] = []
 
 @discardableResult
-@MainActor func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTest: Bool, swiftLanguageMode: SwiftLanguageMode) -> Target.Dependency {
+@MainActor func add(moduleName: String, dependencies: [Target.Dependency] = [], includesTest: Bool) -> Target.Dependency {
     let targetName = "\(packageName)_\(moduleName)"
     let target = Target.Dependency(stringLiteral: targetName)
     products.append(
         .library(name: targetName, targets: [targetName])
     )
-    let swiftSettings = swiftSettings + [.swiftLanguageMode(swiftLanguageMode)]
     targets.append(
         .target(name: targetName, dependencies: dependencies, path: "Sources/\(moduleName)", swiftSettings: swiftSettings)
     )
@@ -37,21 +36,19 @@ var targets: [Target] = []
 }
 
 // MARK: - Modules - Tools for DEBUG
-let assertServices = add(moduleName: "AssertServices", includesTest: false, swiftLanguageMode: .v6)
-let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false, swiftLanguageMode: .v6)
+let infoPListChecker = add(moduleName: "InfoPListChecker", includesTest: false)
 
 // MARK: - Modules - Primary
-let async = add(moduleName: "Async", includesTest: false, swiftLanguageMode: .v5)
-let core = add(moduleName: "Core", dependencies: [assertServices, infoPListChecker], includesTest: true, swiftLanguageMode: .v6)
-let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: true, swiftLanguageMode: .v6)
-add(moduleName: "NDEFMessage", dependencies: [core], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "NDEFTag", dependencies: [core], includesTest: true, swiftLanguageMode: .v5)
+let core = add(moduleName: "Core", dependencies: [infoPListChecker], includesTest: true)
+let nativeTag = add(moduleName: "NativeTag", dependencies: [core], includesTest: false)
+add(moduleName: "NDEFMessage", dependencies: [core], includesTest: false)
+add(moduleName: "NDEFTag", dependencies: [core], includesTest: false)
 
 // MARK: - Modules - Secondary
-add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "ISO7816", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "ISO15693", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
-add(moduleName: "MiFare", dependencies: [nativeTag], includesTest: true, swiftLanguageMode: .v5)
+add(moduleName: "FeliCa", dependencies: [nativeTag], includesTest: false)
+add(moduleName: "ISO7816", dependencies: [nativeTag], includesTest: false)
+add(moduleName: "ISO15693", dependencies: [nativeTag], includesTest: false)
+add(moduleName: "MiFare", dependencies: [nativeTag], includesTest: false)
 
 // MARK: - Package
 products.append(
@@ -63,8 +60,8 @@ targets.append(
 
 let package = Package(
     name: packageName,
-    defaultLocalization: "en",
     platforms: [.iOS(.v13), .macOS(.v10_15), .macCatalyst(.v13), .tvOS(.v13), .watchOS(.v6), .visionOS(.v1)],
     products: products,
-    targets: targets
+    targets: targets,
+    swiftLanguageModes: [.v6]
 )

@@ -6,130 +6,105 @@
 //
 
 #if canImport(SwiftUI) && canImport(CoreNFC)
-import Combine
 public import SwiftUI
 
-public struct NFCNDEFMessageReaderViewModifier: @unchecked Sendable {
-    private var isPresented: Binding<Bool>
+@available(iOS 15.0, *)
+private struct NFCNDEFMessageReaderViewModifier: ViewModifier {
+    @Binding private var isPresented: Bool
     private let invalidateAfterFirstRead: Bool
+    private let taskPriority: TaskPriority
     private let detectingAlertMessage: String
-    private let onBeginReadingError: @Sendable (any Error) -> Void
-    private let didBecomeActive: @Sendable (Object.TagType.Reader.AfterBeginProtocol) async -> Void
-    private let didInvalidate: @Sendable (NFCReaderError) -> Void
-    private let didDetectNDEFs: @Sendable (Object.TagType.ReaderProtocol, Object.TagType.ReaderDetectObject) async -> Object.TagType.DetectResult
+    private let terminatingAlertMessage: @Sendable () -> String
+    private let onDidBecomeActive: @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void
+    private let onDidDetect: @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void
+    private let onDidInvalidate: @Sendable (_ error: any Error) -> Void
     
-    private let object = Object()
-    
-    public init(
+    init(
         isPresented: Binding<Bool>,
         invalidateAfterFirstRead: Bool,
+        taskPriority: TaskPriority,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (_ error: any Error) -> Void = { _ in },
-        didBecomeActive: @escaping @Sendable (_ reader: NDEFMessage.Reader.AfterBeginProtocol) async -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
-        didDetectNDEFs: @escaping @Sendable (_ reader: NDEFMessage.ReaderProtocol, _ messages: NDEFMessage.ReaderDetectObject) async -> NDEFMessage.DetectResult
+        terminatingAlertMessage: @escaping @Sendable () -> String,
+        onDidBecomeActive: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void,
+        onDidDetect: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void,
+        onDidInvalidate: @escaping @Sendable (_ error: any Error) -> Void
     ) {
-        self.isPresented = isPresented
+        self._isPresented = isPresented
         self.invalidateAfterFirstRead = invalidateAfterFirstRead
+        self.taskPriority = taskPriority
         self.detectingAlertMessage = detectingAlertMessage
-        self.onBeginReadingError = onBeginReadingError
-        self.didBecomeActive = didBecomeActive
-        self.didInvalidate = didInvalidate
-        self.didDetectNDEFs = didDetectNDEFs
+        self.terminatingAlertMessage = terminatingAlertMessage
+        self.onDidBecomeActive = onDidBecomeActive
+        self.onDidDetect = onDidDetect
+        self.onDidInvalidate = onDidInvalidate
     }
-}
-
-extension NFCNDEFMessageReaderViewModifier {
-    private final class Object: @unchecked Sendable {
-        typealias TagType = NDEFMessage
-        private var reader: NFCReader<TagType>?
-        private var currentTask: Task<(), Never>?
-        
-        func read(invalidateAfterFirstRead: Bool, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (any Error) -> Void, didBecomeActive: @escaping @Sendable (TagType.Reader.AfterBeginProtocol) async -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetectNDEFs: @escaping @Sendable (TagType.ReaderProtocol, TagType.ReaderDetectObject) async -> TagType.DetectResult) {
-            cancel()
-            currentTask = Task {
-                await withTaskCancellationHandler {
-                    reader = .init()
-                    do {
-                        try await reader?.read(
-                            invalidateAfterFirstRead: invalidateAfterFirstRead,
-                            detectingAlertMessage: detectingAlertMessage,
-                            didBecomeActive: didBecomeActive,
-                            didInvalidate: didInvalidate,
-                            didDetectNDEFs: didDetectNDEFs
-                        )
-                    } catch {
-                        onBeginReadingError(error)
-                        reader = nil
-                    }
-                } onCancel: {
-                    reader = nil
+    
+    @State private var readerSession: NFCNDEFReaderSession?
+    
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: isPresented) {
+                readerSession = $0 ? NFCNDEFReaderSession(of: .messages, invalidateAfterFirstRead: invalidateAfterFirstRead) : nil
+            }
+            .task(
+                id: readerSession == nil,
+                priority: taskPriority
+            ) {
+                defer {
+                    readerSession = nil
+                    isPresented = false
                 }
+                guard let readerSession else { return }
+                guard NFCNDEFReaderSession.readingAvailable else {
+                    onDidInvalidate(NFCReaderError(.readerErrorUnsupportedFeature))
+                    return
+                }
+                readerSession.alertMessage = detectingAlertMessage
+                let invalidator = NFCReaderSessionInvalidator(readerSession)
+                await withTaskCancellationHandler(
+                    operation: {
+                        for await event in readerSession.messageEventStream {
+                            switch event {
+                            case .sessionBecomeActive:
+                                await onDidBecomeActive(readerSession)
+                            case .sessionDetected(let messages):
+                                await onDidDetect(readerSession, messages)
+                            case .sessionInvalidated(let reason):
+                                onDidInvalidate(reason)
+                            }
+                        }
+                    },
+                    onCancel: {
+                        invalidator.invalidate(errorMessage: terminatingAlertMessage())
+                        onDidInvalidate(CancellationError())
+                    }
+                )
             }
-        }
-        
-        func cancel() {
-            Task {
-                await reader?.invalidate()
-            }
-            currentTask?.cancel()
-            currentTask = nil
-        }
     }
 }
 
-extension NFCNDEFMessageReaderViewModifier: ViewModifier {
-    public func body(content: Content) -> some View {
-        if #available(iOS 14.0, *) {
-            content
-                .onChange(of: isPresented.wrappedValue, perform: action(_:))
-        } else {
-            content
-                .onReceive(Just(isPresented.wrappedValue), perform: action(_:))
-        }
-    }
-
-    func action(_ flag: Bool) {
-        if flag {
-            object.read(
-                invalidateAfterFirstRead: invalidateAfterFirstRead,
-                detectingAlertMessage: detectingAlertMessage,
-                onBeginReadingError: {
-                    isPresented.wrappedValue = false
-                    onBeginReadingError($0)
-                },
-                didBecomeActive: didBecomeActive,
-                didInvalidate: {
-                    isPresented.wrappedValue = false
-                    didInvalidate($0)
-                },
-                didDetectNDEFs: didDetectNDEFs
-            )
-        } else {
-            object.cancel()
-        }
-    }
-}
-
+@available(iOS 15.0, *)
 extension View {
     public func nfcNDEFMessageReader(
         isPresented: Binding<Bool>,
         invalidateAfterFirstRead: Bool,
+        taskPriority: TaskPriority = .userInitiated,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (_ error: any Error) -> Void = { _ in },
-        didBecomeActive: @escaping @Sendable (_ reader: NDEFMessage.Reader.AfterBeginProtocol) async -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
-        didDetectNDEFs: @escaping @Sendable (_ reader: NDEFMessage.ReaderProtocol, _ messages: NDEFMessage.ReaderDetectObject) async -> NDEFMessage.DetectResult
+        terminatingAlertMessage: @autoclosure @escaping @Sendable () -> String = "",
+        onDidBecomeActive: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession) async -> Void = { _ in },
+        onDidDetect: @escaping @MainActor @Sendable (_ readerSession: NFCNDEFReaderSession, _ messages: NFCNDEFReaderSession.DetectedMessages) async -> Void,
+        onDidInvalidate: @escaping @Sendable (_ error: any Error) -> Void = { _ in }
     ) -> some View {
         modifier(
             NFCNDEFMessageReaderViewModifier(
                 isPresented: isPresented,
                 invalidateAfterFirstRead: invalidateAfterFirstRead,
+                taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
-                onBeginReadingError: onBeginReadingError,
-                didBecomeActive: didBecomeActive,
-                didInvalidate: didInvalidate,
-                didDetectNDEFs: didDetectNDEFs
+                terminatingAlertMessage: terminatingAlertMessage,
+                onDidBecomeActive: onDidBecomeActive,
+                onDidDetect: onDidDetect,
+                onDidInvalidate: onDidInvalidate
             )
         )
     }

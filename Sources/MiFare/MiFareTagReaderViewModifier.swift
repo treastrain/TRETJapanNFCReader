@@ -6,130 +6,100 @@
 //
 
 #if canImport(SwiftUI) && canImport(CoreNFC)
-import Combine
 public import SwiftUI
 
-public struct MiFareTagReaderViewModifier: @unchecked Sendable {
-    private var isPresented: Binding<Bool>
-    private let taskPriority: TaskPriority?
+@available(iOS 15.0, *)
+private struct MiFareTagReaderViewModifier: ViewModifier {
+    @Binding private var isPresented: Bool
+    private let taskPriority: TaskPriority
     private let detectingAlertMessage: String
-    private let onBeginReadingError: @Sendable (any Error) -> Void
-    private let didBecomeActive: @Sendable (Object.TagType.Reader.AfterBeginProtocol) async -> Void
-    private let didInvalidate: @Sendable (NFCReaderError) -> Void
-    private let didDetect: @Sendable (MiFareTagReader.ReaderProtocol, Object.TagType.ReaderDetectObject) async throws -> Object.TagType.DetectResult
+    private let terminatingAlertMessage: @Sendable () -> String
+    private let onDidBecomeActive: @MainActor @Sendable (_ readerSession: NFCTagReaderSession) async -> Void
+    private let onDidDetect: @MainActor @Sendable (_ readerSession: NFCTagReaderSession, _ tags: NFCTagReaderSession.Event.DetectedTags) async -> Void
+    private let onDidInvalidate: @Sendable (_ error: any Error) -> Void
     
-    private let object = Object()
-    
-    public init(
+    init(
         isPresented: Binding<Bool>,
-        taskPriority: TaskPriority? = nil,
+        taskPriority: TaskPriority,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (_ error: any Error) -> Void = { _ in },
-        didBecomeActive: @escaping @Sendable (_ reader: NativeTag.Reader.AfterBeginProtocol) async -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
-        didDetect: @escaping @Sendable (_ reader: MiFareTagReader.ReaderProtocol, _ tags: NativeTag.ReaderDetectObject) async throws -> NativeTag.DetectResult
+        terminatingAlertMessage: @escaping @Sendable () -> String,
+        onDidBecomeActive: @escaping @MainActor @Sendable (NFCTagReaderSession) async -> Void,
+        onDidDetect: @escaping @MainActor @Sendable (NFCTagReaderSession, NFCTagReaderSession.Event.DetectedTags) async -> Void,
+        onDidInvalidate: @escaping @Sendable (any Error) -> Void
     ) {
-        self.isPresented = isPresented
+        self._isPresented = isPresented
         self.taskPriority = taskPriority
         self.detectingAlertMessage = detectingAlertMessage
-        self.onBeginReadingError = onBeginReadingError
-        self.didBecomeActive = didBecomeActive
-        self.didInvalidate = didInvalidate
-        self.didDetect = didDetect
-    }
-}
-
-extension MiFareTagReaderViewModifier {
-    private final class Object: @unchecked Sendable {
-        typealias TagType = NativeTag
-        private var reader: MiFareTagReader?
-        private var currentTask: Task<(), Never>?
-        
-        func read(taskPriority: TaskPriority?, detectingAlertMessage: String, onBeginReadingError: @escaping @Sendable (any Error) -> Void, didBecomeActive: @escaping @Sendable (TagType.Reader.AfterBeginProtocol) async -> Void, didInvalidate: @escaping @Sendable (NFCReaderError) -> Void, didDetect: @escaping @Sendable (MiFareTagReader.ReaderProtocol, TagType.ReaderDetectObject) async throws -> TagType.DetectResult) {
-            cancel()
-            currentTask = Task {
-                await withTaskCancellationHandler {
-                    reader = .init()
-                    do {
-                        try await reader?.read(
-                            taskPriority: taskPriority,
-                            detectingAlertMessage: detectingAlertMessage,
-                            didBecomeActive: didBecomeActive,
-                            didInvalidate: didInvalidate,
-                            didDetect: didDetect
-                        )
-                    } catch {
-                        onBeginReadingError(error)
-                        reader = nil
-                    }
-                } onCancel: {
-                    reader = nil
-                }
-            }
-        }
-        
-        func cancel() {
-            Task {
-                await reader?.invalidate()
-            }
-            currentTask?.cancel()
-            currentTask = nil
-        }
-    }
-}
-
-extension MiFareTagReaderViewModifier: ViewModifier {
-    public func body(content: Content) -> some View {
-        if #available(iOS 14.0, *) {
-            content
-                .onChange(of: isPresented.wrappedValue, perform: action(_:))
-        } else {
-            content
-                .onReceive(Just(isPresented.wrappedValue), perform: action(_:))
-        }
+        self.terminatingAlertMessage = terminatingAlertMessage
+        self.onDidBecomeActive = onDidBecomeActive
+        self.onDidDetect = onDidDetect
+        self.onDidInvalidate = onDidInvalidate
     }
     
-    private func action(_ flag: Bool) {
-        if flag {
-            object.read(
-                taskPriority: taskPriority,
-                detectingAlertMessage: detectingAlertMessage,
-                onBeginReadingError: {
-                    isPresented.wrappedValue = false
-                    onBeginReadingError($0)
-                },
-                didBecomeActive: didBecomeActive,
-                didInvalidate: {
-                    isPresented.wrappedValue = false
-                    didInvalidate($0)
-                },
-                didDetect: didDetect
-            )
-        } else {
-            object.cancel()
-        }
+    @State private var readerSession: NFCTagReaderSession?
+    
+    func body(content: Content) -> some View {
+        content
+            .onChange(of: isPresented) {
+                readerSession = $0 ? NFCTagReaderSession(pollingOption: .iso14443) : nil
+            }
+            .task(
+                id: readerSession == nil,
+                priority: taskPriority
+            ) {
+                defer {
+                    readerSession = nil
+                    isPresented = false
+                }
+                guard let readerSession else { return }
+                guard NFCTagReaderSession.readingAvailable else {
+                    onDidInvalidate(NFCReaderError(.readerErrorUnsupportedFeature))
+                    return
+                }
+                readerSession.alertMessage = detectingAlertMessage
+                let invalidator = NFCReaderSessionInvalidator(readerSession)
+                await withTaskCancellationHandler(
+                    operation: {
+                        for await event in readerSession.eventStream {
+                            switch event {
+                            case .sessionBecomeActive:
+                                await onDidBecomeActive(readerSession)
+                            case .sessionDetected(let tags):
+                                await onDidDetect(readerSession, tags)
+                            case .sessionInvalidated(let reason):
+                                onDidInvalidate(reason)
+                            }
+                        }
+                    },
+                    onCancel: {
+                        invalidator.invalidate(errorMessage: terminatingAlertMessage())
+                        onDidInvalidate(CancellationError())
+                    }
+                )
+            }
     }
 }
 
+@available(iOS 15.0, *)
 extension View {
     public func miFareTagReader(
         isPresented: Binding<Bool>,
-        taskPriority: TaskPriority? = nil,
+        taskPriority: TaskPriority = .userInitiated,
         detectingAlertMessage: String,
-        onBeginReadingError: @escaping @Sendable (_ error: any Error) -> Void = { _ in },
-        didBecomeActive: @escaping @Sendable (_ reader: NativeTag.Reader.AfterBeginProtocol) async -> Void = { _ in },
-        didInvalidate: @escaping @Sendable (_ error: NFCReaderError) -> Void = { _ in },
-        didDetect: @escaping @Sendable (_ reader: MiFareTagReader.ReaderProtocol, _ tags: NativeTag.ReaderDetectObject) async throws -> NativeTag.DetectResult
+        terminatingAlertMessage: @autoclosure @escaping @Sendable () -> String = "",
+        onDidBecomeActive: @escaping @MainActor @Sendable (_ readerSession: NFCTagReaderSession) async -> Void = { _ in },
+        onDidDetect: @escaping @MainActor @Sendable (_ readerSession: NFCTagReaderSession, _ tags: NFCTagReaderSession.Event.DetectedTags) async -> Void,
+        onDidInvalidate: @escaping @Sendable (_ error: any Error) -> Void = { _ in }
     ) -> some View {
         modifier(
             MiFareTagReaderViewModifier(
                 isPresented: isPresented,
                 taskPriority: taskPriority,
                 detectingAlertMessage: detectingAlertMessage,
-                onBeginReadingError: onBeginReadingError,
-                didBecomeActive: didBecomeActive,
-                didInvalidate: didInvalidate,
-                didDetect: didDetect
+                terminatingAlertMessage: terminatingAlertMessage,
+                onDidBecomeActive: onDidBecomeActive,
+                onDidDetect: onDidDetect,
+                onDidInvalidate: onDidInvalidate
             )
         )
     }
